@@ -2,8 +2,8 @@ import { useState } from 'react';
 
 // import { addDoc, collection } from 'firebase/firestore';
 import { ref, uploadString, getDownloadURL } from 'firebase/storage';
+import Link from 'next/link';
 import Papa from 'papaparse';
-import { decodeEventLog, parseGwei } from 'viem';
 import { useAccount, useWriteContract } from 'wagmi';
 
 import { AddCircleIcon, LoadingIcon, TrashIcon } from '@/assets/icons';
@@ -25,6 +25,8 @@ const MintPage = () => {
   const { address } = useAccount();
 
   const [openModelImportCSV, setOpenModelImportCSV] = useState<boolean>(false);
+  const [openModalSuccess, setOpenModalSuccess] = useState<boolean>(false);
+  const [txHash, setTxHash] = useState<string>('');
 
   const [formData, setFormData] = useState<any>([
     { id: '', name: '', owner: '' }, // Example initial data structure
@@ -110,7 +112,8 @@ const MintPage = () => {
             .waitForTransactionReceipt({ hash: txHash })
             .then(async (tx) => {
               if (tx.status === 'success' && tx.logs.length > 1) {
-                alert('Mint NFT certificates success');
+                setTxHash(txHash);
+                setOpenModalSuccess(true);
                 setLoading(false);
                 // const data = decodeEventLog({
                 //   abi: certificateNFTContractConfig.abi,
@@ -129,6 +132,8 @@ const MintPage = () => {
         .catch(() => {
           setLoading(false);
         });
+
+      setFormData([{ id: '', name: '', owner: '' }]);
     } catch (e) {
       setLoading(false);
     }
@@ -210,6 +215,20 @@ const MintPage = () => {
           </ButtonPrimary>
         </div>
       </form>
+
+      <Dialog open={openModalSuccess} onOpenChange={setOpenModalSuccess}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle>Mint NFT-Certificates successfully</DialogTitle>
+          </DialogHeader>
+          <div>
+            Transaction hash:{' '}
+            <Link href={`https://polygonscan.com/tx/${txHash}`} className="text-purple-500">
+              {txHash.slice(0, 7)}...{txHash.slice(-5)}
+            </Link>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

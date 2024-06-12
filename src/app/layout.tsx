@@ -10,8 +10,8 @@ import { config } from '@/config';
 import Web3ModalProvider from '@/context';
 
 export const metadata: Metadata = {
-  title: 'Basalwallet NFT',
-  description: 'Basalwallet NFT',
+  title: 'ABAII NFT-Certificate Platform',
+  description: 'ABAII NFT-Certificate Platform',
 };
 
 export default function RootLayout({

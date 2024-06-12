@@ -112,6 +112,7 @@ const MintPage = () => {
             .waitForTransactionReceipt({ hash: txHash })
             .then(async (tx) => {
               if (tx.status === 'success' && tx.logs.length > 1) {
+                setFormData([{ id: '', name: '', owner: '' }]);
                 setTxHash(txHash);
                 setOpenModalSuccess(true);
                 setLoading(false);
@@ -132,8 +133,6 @@ const MintPage = () => {
         .catch(() => {
           setLoading(false);
         });
-
-      setFormData([{ id: '', name: '', owner: '' }]);
     } catch (e) {
       setLoading(false);
     }

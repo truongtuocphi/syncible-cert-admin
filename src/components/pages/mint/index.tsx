@@ -110,6 +110,7 @@ const MintPage = () => {
             .waitForTransactionReceipt({ hash: txHash })
             .then(async (tx) => {
               if (tx.status === 'success' && tx.logs.length > 1) {
+                alert('Mint NFT certificates success');
                 setLoading(false);
                 // const data = decodeEventLog({
                 //   abi: certificateNFTContractConfig.abi,
@@ -121,27 +122,25 @@ const MintPage = () => {
                 throw new Error('Transaction failed');
               }
             })
-            .catch((e) => {
+            .catch(() => {
               setLoading(false);
-              console.log(e);
-              alert('Error minting NFT');
             });
         })
-        .catch((e) => {
+        .catch(() => {
           setLoading(false);
-          console.log(e);
-          alert('Error minting NFT');
         });
     } catch (e) {
       setLoading(false);
-      console.log(e);
     }
   };
 
   return (
     <div className="flex flex-col gap-8">
+      <div className="text-4xl font-semibold">ABAII NFT-Certificate Platform</div>
+
       <div className="flex flex-col justify-between gap-4 sm:flex-row">
-        <div className="text-4xl font-semibold">Create certificates</div>
+        {/* <div className="text-4xl font-semibold">ABAII NFT-Certificate Platform</div> */}
+        <div></div>
 
         <div className="flex items-center justify-end gap-4">
           <Dialog open={openModelImportCSV} onOpenChange={setOpenModelImportCSV}>
@@ -207,7 +206,7 @@ const MintPage = () => {
         ))}
         <div className="flex justify-center">
           <ButtonPrimary type="submit" disabled={loading} className="rounded-lg">
-            {loading ? <LoadingIcon /> : 'Mint NFT'}
+            {loading ? <LoadingIcon /> : 'Mint NFT-Certificate'}
           </ButtonPrimary>
         </div>
       </form>

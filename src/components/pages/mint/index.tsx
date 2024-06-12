@@ -78,7 +78,8 @@ const MintPage = () => {
         const metadata = {
           name: `ABAII_Certificate_${item.id}`,
           description: `Certificate ID: ${item.id}`,
-          external_url: ``,
+          external_url:
+            'https://firebasestorage.googleapis.com/v0/b/basal-nft.appspot.com/o/abaii.jpg?alt=media&token=c05e4021-b094-40d9-9e53-fe267274bdc3',
           image:
             'https://firebasestorage.googleapis.com/v0/b/basal-nft.appspot.com/o/abaii.jpg?alt=media&token=c05e4021-b094-40d9-9e53-fe267274bdc3',
           attributes: [
@@ -93,15 +94,14 @@ const MintPage = () => {
         const publicLink = await getDownloadURL(fileRef);
         publicLinks.push(publicLink);
       }
-      console.log(process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT);
 
       sendToken({
         ...certificateNFTContractConfig,
         functionName: 'mintBulk',
         args: [
           formData.map((item: any) => (!!item && item.owner.length > 0 ? item.owner : address)),
-          formData.map((item: any) => item.id),
           formData.map((item: any) => item.name),
+          formData.map((item: any) => item.id),
           publicLinks,
         ],
       })
@@ -109,31 +109,33 @@ const MintPage = () => {
           viemClient
             .waitForTransactionReceipt({ hash: txHash })
             .then(async (tx) => {
-              console.log('tx', tx);
               if (tx.status === 'success' && tx.logs.length > 1) {
+                setLoading(false);
                 // const data = decodeEventLog({
                 //   abi: certificateNFTContractConfig.abi,
                 //   data: tx.logs[1].data,
                 //   topics: tx.logs[1].topics,
                 // });
               } else {
+                setLoading(false);
                 throw new Error('Transaction failed');
               }
             })
             .catch((e) => {
+              setLoading(false);
               console.log(e);
               alert('Error minting NFT');
             });
         })
         .catch((e) => {
+          setLoading(false);
           console.log(e);
           alert('Error minting NFT');
         });
     } catch (e) {
+      setLoading(false);
       console.log(e);
     }
-
-    setLoading(false);
   };
 
   return (

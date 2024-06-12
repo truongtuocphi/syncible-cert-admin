@@ -1,0 +1,38 @@
+import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
+import { createPublicClient, http } from 'viem';
+import { cookieStorage, createStorage } from 'wagmi';
+import { polygon, polygonAmoy } from 'wagmi/chains';
+
+export const network = process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true' ? polygon : polygonAmoy;
+
+// export const decimals =
+//   10 ** (process.env.NEXT_PUBLIC_TOKEN_DECIMAL ? +process.env.NEXT_PUBLIC_TOKEN_DECIMAL : 6);
+
+// Get projectId at https://cloud.walletconnect.com
+export const projectId = process.env.NEXT_PUBLIC_PROJECT_ID;
+
+if (!projectId) throw new Error('Project ID is not defined');
+
+const metadata = {
+  name: 'Basalwallet',
+  description: 'Basalwallet',
+  url: '', // origin must match your domain & subdomain
+  icons: [],
+};
+
+// Create wagmiConfig
+// const chains = [mainnet, sepolia] as const;
+export const config = defaultWagmiConfig({
+  chains: [network],
+  projectId,
+  metadata,
+  ssr: true,
+  storage: createStorage({
+    storage: cookieStorage,
+  }),
+});
+
+export const viemClient = createPublicClient({
+  chain: network,
+  transport: http(),
+});

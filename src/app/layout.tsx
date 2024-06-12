@@ -1,0 +1,55 @@
+import './globals.css';
+import 'react-toastify/dist/ReactToastify.css';
+import type { Metadata } from 'next';
+import { headers } from 'next/headers';
+import { cookieToInitialState } from 'wagmi';
+
+import Footer from '@/components/layout/Footer';
+import Navbar from '@/components/layout/Navbar';
+import { config } from '@/config';
+import Web3ModalProvider from '@/context';
+
+export const metadata: Metadata = {
+  title: 'Basalwallet NFT',
+  description: 'Basalwallet NFT',
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  const initialState = cookieToInitialState(config, headers().get('cookie'));
+  return (
+    <html lang="en">
+      <body>
+        <Web3ModalProvider initialState={initialState}>
+          <main className="relative">
+            <div className="fixed z-10 w-full">
+              <Navbar />
+            </div>
+
+            <div className="flex justify-center pt-16">
+              <div className="min-h-[calc(100vh-8rem)] w-full max-w-screen-lg px-4 py-12 md:px-8 xl:px-12">
+                {children}
+              </div>
+            </div>
+
+            <Footer />
+
+            {/* <div className="absolute bottom-0 left-0 right-0 top-0 -z-10">
+              <div className="relative h-full w-full blur-3xl">
+                <div className="absolute left-[10%] top-20 flex aspect-square w-[40vw] max-w-96 items-center justify-center rounded-full bg-violet-500/30">
+                  <div className="aspect-square w-1/2 rounded-full bg-slate-950"></div>
+                </div>
+                <div className="absolute right-[15%] top-96 flex aspect-square w-[30vw] max-w-80 items-center justify-center rounded-full bg-fuchsia-500/30">
+                  <div className="aspect-square w-1/2 rounded-full bg-slate-950"></div>
+                </div>
+              </div>
+            </div> */}
+          </main>
+        </Web3ModalProvider>
+      </body>
+    </html>
+  );
+}

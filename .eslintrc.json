@@ -1,0 +1,38 @@
+{
+  "extends": ["next/core-web-vitals", "plugin:prettier/recommended"],
+  "rules": {
+    "react-hooks/exhaustive-deps": "off",
+    "no-console": "warn",
+    "no-unused-vars": ["warn", { "varsIgnorePattern": "^_|^I[A-Z]", "argsIgnorePattern": "^_" }],
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", ["parent", "index", "sibling"]],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ],
+    "prettier/prettier": [
+      "warn",
+      {
+        "semi": true,
+        "tabWidth": 2,
+        "printWidth": 100,
+        "singleQuote": true,
+        "trailingComma": "es5",
+        "endOfLine": "auto"
+      }
+    ]
+  }
+}

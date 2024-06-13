@@ -28,7 +28,7 @@ const Page = () => {
       <div className="absolute bottom-0 left-0 right-0 top-0 overflow-hidden">
         <Image src="/abaii-bg.webp" alt="hero" fit="cover" />
       </div>
-      <div className="relative flex min-h-[calc(100vh-8rem)] w-full items-center justify-center px-4 py-12 md:px-8 xl:px-12">
+      <div className="relative flex min-h-[calc(100vh-10rem)] w-full items-center justify-center px-4 py-12 md:px-8 xl:px-12">
         <div className="mb-20 flex flex-col items-center gap-8">
           <div className="text-center text-4xl font-semibold text-white sm:text-6xl">
             ABAII NFT-Certificate Platform
@@ -46,7 +46,7 @@ const Page = () => {
       </div>
 
       <div className="relative text-white">
-        <Footer />
+        <Footer white />
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const Navbar = () => {
     <div className="h-16">
       <div className="flex h-full w-full items-center justify-between px-4 md:px-8 xl:px-12">
         <Link href="/" className="h-fit">
-          <div className="h-10">
+          <div className="h-10 w-32">
             <Image src="/abaii.png" alt="Basalwallet" />
           </div>
         </Link>

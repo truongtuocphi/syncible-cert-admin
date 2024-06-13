@@ -8,7 +8,7 @@ const Footer = ({ white = false }: { white?: boolean }) => {
       <div>Copyright © {new Date().getFullYear()} ABAII. All rights reserved.</div>
       <div className="mt-2 flex items-center justify-center gap-1">
         Powered by{' '}
-        <Link href="https://alphatrue.com" className={white ? 'h-6' : 'h-8'}>
+        <Link href="https://alphatrue.com" className={white ? 'h-6 w-24' : 'h-8 w-32'}>
           {white ? <AlphaTrueLogoWhiteIcon className="ml-0.5" /> : <AlphaTrueLogoBlueIcon />}
         </Link>
       </div>

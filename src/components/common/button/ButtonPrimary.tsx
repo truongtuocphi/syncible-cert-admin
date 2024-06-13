@@ -9,7 +9,7 @@ const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonProps>(({ className, .
   return (
     <Button
       className={cn(
-        'rounded-lg bg-gradient-to-t from-brand-500 to-brand-300 hover:opacity-90',
+        'rounded-lg bg-gradient-to-t from-brand-600 to-brand-400 hover:opacity-90',
         className
       )}
       ref={ref}

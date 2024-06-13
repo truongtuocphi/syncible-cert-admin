@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { cookieToInitialState } from 'wagmi';
 
-import Footer from '@/components/layout/Footer';
+// import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import { config } from '@/config';
 import Web3ModalProvider from '@/context';
@@ -25,17 +25,11 @@ export default function RootLayout({
       <body>
         <Web3ModalProvider initialState={initialState}>
           <main className="relative">
-            <div className="fixed z-10 w-full">
+            <div className="fixed z-10 w-full bg-white/30 shadow backdrop-blur-sm">
               <Navbar />
             </div>
 
-            <div className="flex justify-center pt-16">
-              <div className="min-h-[calc(100vh-8rem)] w-full max-w-screen-lg px-4 py-12 md:px-8 xl:px-12">
-                {children}
-              </div>
-            </div>
-
-            <Footer />
+            {children}
 
             {/* <div className="absolute bottom-0 left-0 right-0 top-0 -z-10">
               <div className="relative h-full w-full blur-3xl">

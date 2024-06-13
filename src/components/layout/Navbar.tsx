@@ -1,54 +1,82 @@
 'use client';
 
-// import { useState } from 'react';
+import { useEffect } from 'react';
 
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import Link from 'next/link';
-// import { Hex } from 'viem';
+import { useRouter } from 'next/navigation';
 import { useAccount } from 'wagmi';
-
-import { BasalwalletFullIcon, BasalwalletIcon } from '@/assets/icons';
 
 import ButtonPrimary from '../common/button/ButtonPrimary';
 import Image from '../core/image';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '../ui/select';
 
 const Navbar = () => {
-  // const [openModal, setOpenModal] = useState<boolean>(false);
+  const router = useRouter();
 
   const { open } = useWeb3Modal();
 
   const { address, isConnected } = useAccount();
 
-  // const balance = useBalance({
-  //   address: address,
-  //   token: process.env.NEXT_PUBLIC_TOKEN_ADDRESS as Hex,
-  // });
+  useEffect(() => {
+    if (isConnected) {
+      router.push('/mint');
+    }
+  }, [isConnected]);
 
   return (
-    <div className="h-16 border-b shadow dark:border-gray-800">
+    <div className="h-16">
       <div className="flex h-full w-full items-center justify-between px-4 md:px-8 xl:px-12">
-        {/* <Link href="/" className="sm:hidden">
-          <BasalwalletIcon className="h-10" />
-        </Link> */}
-        {/* <Link href="/" className="hidden sm:block">
-          <BasalwalletFullIcon className="h-10" />
-        </Link> */}
         <Link href="/" className="h-fit">
           <div className="h-10">
             <Image src="/abaii.png" alt="Basalwallet" />
           </div>
         </Link>
         <div className="flex items-center gap-2 md:gap-4">
-          {/* <button
-            className="flex aspect-square h-10 items-center justify-center rounded-xl border border-slate-800 p-1 text-2xl hover:scale-105"
-            onClick={() => setOpenModal(true)}
-          >
-            ?
-          </button>
+          {isConnected ? (
+            <Select defaultValue="polygon">
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Select chain" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="polygon">
+                  <div className="flex gap-2">
+                    <div className="aspect-square h-5 w-5 rounded-full">
+                      <Image
+                        src="https://cryptologos.cc/logos/polygon-matic-logo.png?v=032"
+                        alt="polygon"
+                      />
+                    </div>
+                    Polygon
+                  </div>
+                </SelectItem>
+                <SelectItem value="ethereum" disabled>
+                  <div className="flex gap-2">
+                    <div className="aspect-square h-5 w-5 rounded-full">
+                      <Image
+                        src="https://cryptologos.cc/logos/ethereum-eth-logo.png?v=032"
+                        alt="ethereum"
+                      />
+                    </div>
+                    Ethereum
+                  </div>
+                </SelectItem>
+                <SelectItem value="bitcoin" disabled>
+                  <div className="flex gap-2">
+                    <div className="aspect-square h-5 w-5 rounded-full">
+                      <Image
+                        src="https://cryptologos.cc/logos/bitcoin-btc-logo.png"
+                        alt="bitcoin"
+                      />
+                    </div>
+                    Bitcoin
+                  </div>
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          ) : null}
 
-          <GuideCard open={openModal} onClose={() => setOpenModal(false)} /> */}
-
-          <ButtonPrimary onClick={() => open()} className="font-bold">
+          <ButtonPrimary onClick={() => open()}>
             {isConnected && address ? (
               `${address.slice(0, 4)}...${address.slice(-6)}`
             ) : (

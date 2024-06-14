@@ -140,7 +140,7 @@ const MintPage = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="text-4xl font-semibold">Nền Tảng Chứng Chỉ NFT ABAII</div>
+      <div className="text-4xl font-semibold">Nền tảng phát hành chứng chỉ NFT ABAII</div>
 
       <div className="flex flex-col justify-between gap-4 sm:flex-row">
         {/* <div className="text-4xl font-semibold">Nền tảng Chứng Chỉ NFT ABAII
@@ -212,7 +212,7 @@ const MintPage = () => {
         ))}
         <div className="flex justify-center">
           <ButtonPrimary type="submit" disabled={loading} className="rounded-lg">
-            {loading ? <LoadingIcon /> : 'Đúc Chứng Chỉ NFT'}
+            {loading ? <LoadingIcon /> : 'Phát hành chứng chỉ NFT'}
           </ButtonPrimary>
         </div>
       </form>
@@ -220,10 +220,10 @@ const MintPage = () => {
       <Dialog open={openModalSuccess} onOpenChange={setOpenModalSuccess}>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Mint NFT-Certificates successfully</DialogTitle>
+            <DialogTitle>Phát hành chứng chỉ NFT thành công</DialogTitle>
           </DialogHeader>
           <div>
-            Transaction hash:{' '}
+            Mã lệnh:{' '}
             <Link href={`https://polygonscan.com/tx/${txHash}`} className="text-purple-500">
               {txHash.slice(0, 7)}...{txHash.slice(-5)}
             </Link>

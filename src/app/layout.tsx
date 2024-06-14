@@ -4,14 +4,13 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import { cookieToInitialState } from 'wagmi';
 
-// import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import { config } from '@/config';
 import Web3ModalProvider from '@/context';
 
 export const metadata: Metadata = {
-  title: 'ABAII NFT-Certificate Platform',
-  description: 'ABAII NFT-Certificate Platform',
+  title: 'Nền Tảng Chứng Chỉ NFT ABAII',
+  description: 'Nền Tảng Chứng Chỉ NFT ABAII',
 };
 
 export default function RootLayout({
@@ -21,7 +20,7 @@ export default function RootLayout({
 }>) {
   const initialState = cookieToInitialState(config, headers().get('cookie'));
   return (
-    <html lang="en">
+    <html lang="vi">
       <body>
         <Web3ModalProvider initialState={initialState}>
           <main className="relative">

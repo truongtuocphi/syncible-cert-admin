@@ -81,7 +81,7 @@ const Navbar = () => {
               `${address.slice(0, 4)}...${address.slice(-6)}`
             ) : (
               <div>
-                <div>Connect Wallet</div>
+                <div>Kết Nối Ví</div>
               </div>
             )}
           </ButtonPrimary>

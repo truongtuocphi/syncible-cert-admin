@@ -63,7 +63,7 @@ const MintPage = () => {
           event.target.files = null;
         },
         error: () => {
-          alert('Error parsing CSV:');
+          alert('Chuyển đổi file CSV thất bại!');
         },
       });
     }
@@ -123,7 +123,7 @@ const MintPage = () => {
                 // });
               } else {
                 setLoading(false);
-                throw new Error('Transaction failed');
+                throw new Error('Giao dịch thất bại!');
               }
             })
             .catch(() => {
@@ -140,20 +140,22 @@ const MintPage = () => {
 
   return (
     <div className="flex flex-col gap-8">
-      <div className="text-4xl font-semibold">ABAII NFT-Certificate Platform</div>
+      <div className="text-4xl font-semibold">Nền Tảng Chứng Chỉ NFT ABAII</div>
 
       <div className="flex flex-col justify-between gap-4 sm:flex-row">
-        {/* <div className="text-4xl font-semibold">ABAII NFT-Certificate Platform</div> */}
+        {/* <div className="text-4xl font-semibold">Nền tảng Chứng Chỉ NFT ABAII
+
+</div> */}
         <div></div>
 
         <div className="flex items-center justify-end gap-4">
           <Dialog open={openModelImportCSV} onOpenChange={setOpenModelImportCSV}>
             <DialogTrigger asChild>
-              <Button variant="secondary">Import CSV</Button>
+              <Button variant="secondary">Nhập CSV</Button>
             </DialogTrigger>
             <DialogContent className="sm:max-w-[425px]">
               <DialogHeader>
-                <DialogTitle>Import CSV</DialogTitle>
+                <DialogTitle>Nhập CSV</DialogTitle>
               </DialogHeader>
               <div>
                 <Input type="file" accept=".csv" onChange={handleFileUpload} className="mb-4" />
@@ -166,7 +168,7 @@ const MintPage = () => {
             className="items-center gap-2 rounded-lg"
           >
             <AddCircleIcon />
-            Add
+            Thêm
           </Button>
         </div>
       </div>
@@ -178,7 +180,7 @@ const MintPage = () => {
               name="id"
               value={input.id}
               onChange={(event) => handleInputChange(index, event)}
-              placeholder="ID"
+              placeholder="Mã số chứng chỉ"
               className="sm:basis-1/3"
               required
             />
@@ -187,7 +189,7 @@ const MintPage = () => {
               name="name"
               value={input.name}
               onChange={(event) => handleInputChange(index, event)}
-              placeholder="Fullname"
+              placeholder="Họ và tên"
               required
             />
             <div className="flex gap-4 sm:basis-2/3">
@@ -196,7 +198,7 @@ const MintPage = () => {
                 name="owner"
                 value={input.owner}
                 onChange={(event) => handleInputChange(index, event)}
-                placeholder="Owner"
+                placeholder="Chủ sở hữu"
               />
               <Button
                 variant="ghost"
@@ -210,7 +212,7 @@ const MintPage = () => {
         ))}
         <div className="flex justify-center">
           <ButtonPrimary type="submit" disabled={loading} className="rounded-lg">
-            {loading ? <LoadingIcon /> : 'Mint NFT-Certificate'}
+            {loading ? <LoadingIcon /> : 'Đúc Chứng Chỉ NFT'}
           </ButtonPrimary>
         </div>
       </form>

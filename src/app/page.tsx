@@ -31,14 +31,14 @@ const Page = () => {
       <div className="relative flex min-h-[calc(100vh-10rem)] w-full items-center justify-center px-4 py-12 md:px-8 xl:px-12">
         <div className="mb-20 flex flex-col items-center gap-8">
           <div className="text-center text-4xl font-semibold text-white sm:text-6xl">
-            ABAII NFT-Certificate Platform
+            Nền tảng Chứng Chỉ NFT ABAII
           </div>
           <div>
             <ButtonPrimary onClick={() => open()} className="font-semibold">
               {isConnected && address ? (
                 `${address.slice(0, 4)}...${address.slice(-6)}`
               ) : (
-                <div>Connect Wallet</div>
+                <div>Kết Nối Ví</div>
               )}
             </ButtonPrimary>
           </div>

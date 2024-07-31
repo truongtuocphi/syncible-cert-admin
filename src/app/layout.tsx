@@ -9,8 +9,8 @@ import { config } from '@/config';
 import Web3ModalProvider from '@/context';
 
 export const metadata: Metadata = {
-  title: 'Nền Tảng Chứng Chỉ NFT ABAII',
-  description: 'Nền Tảng Chứng Chỉ NFT ABAII',
+  title: 'Nền Tảng Chứng Chỉ NFT Syncible',
+  description: 'Nền Tảng Chứng Chỉ NFT Syncible',
 };
 
 export default function RootLayout({
@@ -21,25 +21,13 @@ export default function RootLayout({
   const initialState = cookieToInitialState(config, headers().get('cookie'));
   return (
     <html lang="vi">
-      <body>
+      <body className={`bg-custom-image min-h-screen w-full bg-cover bg-center`}>
         <Web3ModalProvider initialState={initialState}>
           <main className="relative">
-            <div className="fixed z-10 w-full bg-white/30 shadow backdrop-blur-sm">
+            <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">
               <Navbar />
             </div>
-
             {children}
-
-            {/* <div className="absolute bottom-0 left-0 right-0 top-0 -z-10">
-              <div className="relative h-full w-full blur-3xl">
-                <div className="absolute left-[10%] top-20 flex aspect-square w-[40vw] max-w-96 items-center justify-center rounded-full bg-violet-500/30">
-                  <div className="aspect-square w-1/2 rounded-full bg-slate-950"></div>
-                </div>
-                <div className="absolute right-[15%] top-96 flex aspect-square w-[30vw] max-w-80 items-center justify-center rounded-full bg-fuchsia-500/30">
-                  <div className="aspect-square w-1/2 rounded-full bg-slate-950"></div>
-                </div>
-              </div>
-            </div> */}
           </main>
         </Web3ModalProvider>
       </body>

@@ -5,3 +5,8 @@
 img {
   position: static !important;
 }
+
+body {
+  background-image: url('/backgroundWeb.jpg');
+  color: white;
+}

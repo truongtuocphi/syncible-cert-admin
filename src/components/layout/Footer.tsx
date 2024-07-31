@@ -2,17 +2,33 @@ import Link from 'next/link';
 
 import { AlphaTrueLogoBlueIcon, AlphaTrueLogoWhiteIcon } from '@/assets/icons';
 
-const Footer = ({ white = false }: { white?: boolean }) => {
+import EmailIcon from '../icons/EmailIcon';
+import FacebookIcon from '../icons/FacebookIcon';
+import LinkedinlIcon from '../icons/LinkedinIcon';
+import TwitterIcon from '../icons/TwitterIcon';
+import WebIcon from '../icons/WebIcon';
+
+const listSocialMedia = [
+  { link: '/#', icon: <WebIcon /> },
+  { link: '/#', icon: <TwitterIcon /> },
+  { link: '/#', icon: <LinkedinlIcon /> },
+  { link: '/#', icon: <FacebookIcon /> },
+  { link: '/#', icon: <EmailIcon /> },
+];
+
+const Footer = () => {
   return (
-    <div className="px-4 text-center md:px-8 xl:px-12">
-      <div>Bản quyền © {new Date().getFullYear()} ABAII. Đã đăng ký bản quyền.</div>
-      <div className="mt-2 flex items-center justify-center gap-1">
-        Cung cấp bởi{' '}
-        <Link href="https://alphatrue.com" className={white ? 'h-6 w-24' : 'h-8 w-32'}>
-          {white ? <AlphaTrueLogoWhiteIcon className="ml-0.5" /> : <AlphaTrueLogoBlueIcon />}
-        </Link>
+    <footer className="mt-56 flex items-center px-4 py-4 md:px-8 xl:px-24">
+      <div className="flex items-center gap-5">
+        {listSocialMedia.map(({ link, icon }, index) => {
+          return (
+            <Link href={link} key={index}>
+              {icon}
+            </Link>
+          );
+        })}
       </div>
-    </div>
+    </footer>
   );
 };
 

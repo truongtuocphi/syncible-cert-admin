@@ -3,12 +3,19 @@
 import React, { useEffect } from 'react';
 
 import { useWeb3Modal } from '@web3modal/wagmi/react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useAccount } from 'wagmi';
 
-import ButtonPrimary from '@/components/common/button/ButtonPrimary';
-import Image from '@/components/core/image';
 import Footer from '@/components/layout/Footer';
+import SectionAbout from '@/components/pages/Home/SectionAbout';
+import SectionOurVision from '@/components/pages/Home/SectionOurVision';
+import SectionWhatWeBelieve from '@/components/pages/Home/SectionWhatWeBelieve';
+import { Button } from '@/components/ui/button';
+
+import BannerCertificate from '../../public/certificate.jpg';
+import ether from '../../public/ether.png';
+import polygon from '../../public/polygon.png';
 
 const Page = () => {
   const router = useRouter();
@@ -25,28 +32,51 @@ const Page = () => {
 
   return (
     <div className="relative flex min-h-screen flex-col items-center pt-16">
-      <div className="absolute bottom-0 left-0 right-0 top-0 overflow-hidden">
-        <Image src="/abaii-bg.webp" alt="hero" fit="cover" />
-      </div>
-      <div className="relative flex min-h-[calc(100vh-10rem)] w-full items-center justify-center px-4 py-12 md:px-8 xl:px-12">
-        <div className="mb-20 flex flex-col items-center gap-8">
-          <div className="text-center text-4xl font-semibold text-white sm:text-6xl">
-            Nền tảng phát hành chứng chỉ NFT ABAII
+      <div className="mt-0 grid w-full grid-cols-1 items-center justify-center gap-5 px-6 md:px-14 lg:mt-48 lg:grid-cols-2 lg:px-24 2xl:px-60">
+        <div className="w-fit">
+          <div className="col-span-1 text-2xl font-bold lg:text-3xl 2xl:text-4xl">
+            Using blockchain technology and NFTs, Syncible
+            <br className="hidden md:block xl:block" />
+            revolutionizes the way academic achievements are recognized.
           </div>
-          <div>
-            <ButtonPrimary onClick={() => open()} className="font-semibold">
-              {isConnected && address ? (
-                `${address.slice(0, 4)}...${address.slice(-6)}`
-              ) : (
-                <div>Kết nối Ví</div>
-              )}
-            </ButtonPrimary>
+          <div className="my-6 text-lg font-bold lg:text-base">Powered by</div>
+          <div className="flex flex-wrap items-center gap-6">
+            <Image
+              src={polygon}
+              alt="polygon"
+              width={130}
+              height={40}
+              loading="lazy"
+              style={{ width: '100px', height: 'auto' }}
+            />
+            <Image
+              src={ether}
+              alt="ether"
+              width={130}
+              loading="lazy"
+              style={{ width: '100px', height: 'auto' }}
+            />
           </div>
+          <Button className="mt-9 rounded-full bg-blue-500 px-16 py-6 text-base">Contact us</Button>
+        </div>
+        <div className="h-auto w-auto overflow-hidden rounded-lg">
+          <Image
+            src={BannerCertificate}
+            alt="/ảnh NFT Certificate"
+            className="col-span-1 h-full w-full rounded-lg"
+            priority={false}
+          />
         </div>
       </div>
 
+      <div>
+        <SectionAbout />
+        <SectionWhatWeBelieve />
+        <SectionOurVision />
+      </div>
+
       <div className="relative text-white">
-        <Footer white />
+        <Footer />
       </div>
     </div>
   );

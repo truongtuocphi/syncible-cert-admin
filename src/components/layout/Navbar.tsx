@@ -1,16 +1,12 @@
 'use client';
 
-import { useEffect } from 'react';
-
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { useAccount } from 'wagmi';
 
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-
-import ButtonPrimary from '../common/button/ButtonPrimary';
 
 const Menu = [
   { title: 'About Us', link: '#about' },
@@ -21,17 +17,9 @@ const Menu = [
 ];
 
 const Navbar = () => {
-  const router = useRouter();
-
   const { open } = useWeb3Modal();
 
   const { address, isConnected } = useAccount();
-
-  useEffect(() => {
-    if (isConnected) {
-      router.push('/');
-    }
-  }, [isConnected]);
 
   return (
     <div className="h-28">

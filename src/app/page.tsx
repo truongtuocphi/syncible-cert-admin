@@ -18,17 +18,17 @@ import ether from '../../public/ether.png';
 import polygon from '../../public/polygon.png';
 
 const Page = () => {
-  const router = useRouter();
+  // const router = useRouter();
 
   const { open } = useWeb3Modal();
 
   const { address, isConnected } = useAccount();
 
-  useEffect(() => {
-    if (isConnected) {
-      router.push('/mint');
-    }
-  }, [isConnected]);
+  // useEffect(() => {
+  //   if (isConnected) {
+  //     router.push('/mint');
+  //   }
+  // }, [isConnected]);
 
   return (
     <div className="relative flex min-h-screen flex-col items-center pt-16">

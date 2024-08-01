@@ -598,6 +598,60 @@ export const certificateNFTContractConfig = {
           name: 'fullName',
           type: 'string',
         },
+        {
+          indexed: false,
+          internalType: 'string',
+          name: 'organizationName',
+          type: 'string',
+        },
+        {
+          indexed: false,
+          internalType: 'string',
+          name: 'headName',
+          type: 'string',
+        },
+        {
+          indexed: false,
+          internalType: 'string',
+          name: 'headPosition',
+          type: 'string',
+        },
+        {
+          indexed: false,
+          internalType: 'string',
+          name: 'headSignature',
+          type: 'string',
+        },
+        {
+          indexed: false,
+          internalType: 'string',
+          name: 'description',
+          type: 'string',
+        },
+        {
+          indexed: false,
+          internalType: 'string',
+          name: 'position',
+          type: 'string',
+        },
+        {
+          indexed: false,
+          internalType: 'string',
+          name: 'date',
+          type: 'string',
+        },
+        {
+          indexed: false,
+          internalType: 'string',
+          name: 'blockchainType',
+          type: 'string',
+        },
+        {
+          indexed: false,
+          internalType: 'string',
+          name: 'templateURL',
+          type: 'string',
+        },
       ],
       name: 'CertificateMinted',
       type: 'event',
@@ -831,6 +885,72 @@ export const certificateNFTContractConfig = {
           type: 'uint256',
         },
       ],
+      name: 'getCertData',
+      outputs: [
+        {
+          components: [
+            {
+              internalType: 'string',
+              name: 'organizationName',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'headName',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'headPosition',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'headSignature',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'description',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'position',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'date',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'blockchainType',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'templateURL',
+              type: 'string',
+            },
+          ],
+          internalType: 'struct CertificateNFTV3.CertificateData',
+          name: '',
+          type: 'tuple',
+        },
+      ],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [
+        {
+          internalType: 'uint256',
+          name: 'tokenId',
+          type: 'uint256',
+        },
+      ],
       name: 'getCertId',
       outputs: [
         {
@@ -950,24 +1070,83 @@ export const certificateNFTContractConfig = {
     {
       inputs: [
         {
-          internalType: 'address[]',
-          name: 'owners',
-          type: 'address[]',
-        },
-        {
-          internalType: 'string[]',
-          name: 'fullNames',
-          type: 'string[]',
-        },
-        {
-          internalType: 'string[]',
-          name: 'certificateIds',
-          type: 'string[]',
-        },
-        {
-          internalType: 'string[]',
-          name: 'tokenURIs',
-          type: 'string[]',
+          components: [
+            {
+              internalType: 'address',
+              name: 'owner',
+              type: 'address',
+            },
+            {
+              internalType: 'string',
+              name: 'fullName',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'certificateId',
+              type: 'string',
+            },
+            {
+              internalType: 'string',
+              name: 'tokenURI',
+              type: 'string',
+            },
+            {
+              components: [
+                {
+                  internalType: 'string',
+                  name: 'organizationName',
+                  type: 'string',
+                },
+                {
+                  internalType: 'string',
+                  name: 'headName',
+                  type: 'string',
+                },
+                {
+                  internalType: 'string',
+                  name: 'headPosition',
+                  type: 'string',
+                },
+                {
+                  internalType: 'string',
+                  name: 'headSignature',
+                  type: 'string',
+                },
+                {
+                  internalType: 'string',
+                  name: 'description',
+                  type: 'string',
+                },
+                {
+                  internalType: 'string',
+                  name: 'position',
+                  type: 'string',
+                },
+                {
+                  internalType: 'string',
+                  name: 'date',
+                  type: 'string',
+                },
+                {
+                  internalType: 'string',
+                  name: 'blockchainType',
+                  type: 'string',
+                },
+                {
+                  internalType: 'string',
+                  name: 'templateURL',
+                  type: 'string',
+                },
+              ],
+              internalType: 'struct CertificateNFTV3.CertificateData',
+              name: 'certData',
+              type: 'tuple',
+            },
+          ],
+          internalType: 'struct CertificateNFTV3.MintData[]',
+          name: 'mintDataArray',
+          type: 'tuple[]',
         },
       ],
       name: 'mintBulk',

@@ -1,11 +1,21 @@
+/* eslint-disable no-unused-vars */
 import { useState } from 'react';
 
-import cert1 from '../../../../public/cert_1.png';
-import cert2 from '../../../../public/cert_2.png';
+import { uploadImageToPinata } from '@/lib/pinata';
 
 const predefinedTemplates = [
-  { id: 1, imageUrl: cert1.src, name: 'Certificate 1' },
-  { id: 2, imageUrl: cert2.src, name: 'Certificate 2' },
+  {
+    id: 1,
+    imageUrl:
+      'https://fuchsia-fancy-orangutan-869.mypinata.cloud/ipfs/QmUKNhE9wYgq4taG4CZN2gKaWvERgoUQo7Ms9SBhiPuZSy',
+    name: 'Certificate 1',
+  },
+  {
+    id: 2,
+    imageUrl:
+      'https://fuchsia-fancy-orangutan-869.mypinata.cloud/ipfs/QmRGhFiD5btgJn788WqTrtEDPNF6M2SxhMr4irZBVggSXF',
+    name: 'Certificate 2',
+  },
 ];
 
 const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
@@ -45,24 +55,34 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
     }
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!mediaSelected) {
       alert('Please select a media file or a template.');
       return;
     }
 
-    const data = {
-      template,
-      selectedTemplate,
-      nftName,
-      description,
-      authorizingOrgName,
-      headOrgName,
-      headOrgPosition,
-      headOrgSignature,
-    };
-    onNext(data);
+    try {
+      const templateIpfsHash = template ? await uploadImageToPinata(template) : null;
+      const signatureIpfsHash = headOrgSignature
+        ? await uploadImageToPinata(headOrgSignature)
+        : null;
+
+      const data = {
+        templateIpfsHash,
+        selectedTemplate,
+        nftName,
+        description,
+        authorizingOrgName,
+        headOrgName,
+        headOrgPosition,
+        signatureIpfsHash,
+      };
+      onNext(data);
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      alert('An error occurred while uploading images. Please try again.');
+    }
   };
 
   return (

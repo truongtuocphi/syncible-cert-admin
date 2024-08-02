@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
 import { ethers } from 'ethers';
+import { useRouter } from 'next/navigation';
 import Papa from 'papaparse';
 import { useAccount } from 'wagmi';
 
-import ABI from '@/contract/ABI.json'; // Đảm bảo đường dẫn đúng đến ABI của hợp đồng
-import { uploadMetadata } from '@/lib/pinata'; // Đảm bảo utility này đã được triển khai
+import ABI from '@/contract/ABI.json';
+import { uploadMetadata } from '@/lib/pinata';
 
 const contractAddress = '0x5Ae10131774eF0dc641eb608CB3ccA95DD96EcF8'; // Địa chỉ hợp đồng thông minh
 
 const CreateNFT = ({ templateData }: any) => {
+  const router = useRouter();
   const { address } = useAccount();
   const [fullName, setFullName] = useState(templateData?.fullName || '');
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [certificateNumber, setCertificateNumber] = useState('');
+  const [tokenLink, setTokenLink] = useState('');
   const [issuedDate, setIssuedDate] = useState(templateData?.issuedDate || '');
   const [quantity, setQuantity] = useState(templateData?.quantity || 1);
   const [blockchain, setBlockchain] = useState<'Polygon' | 'Ethereum'>(
@@ -24,7 +27,7 @@ const CreateNFT = ({ templateData }: any) => {
     templateData?.authorizingOrgName || ''
   );
   const [csvData, setCsvData] = useState<any[]>([]);
-  const [loading, setLoading] = useState(false); // New loading state
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (issuedDate && authorizingOrgName) {
@@ -32,6 +35,10 @@ const CreateNFT = ({ templateData }: any) => {
       setCertificateNumber(certificateNum);
     }
   }, [issuedDate, role, authorizingOrgName]);
+
+  useEffect(() => {
+    if (!loading) router.push(`/experience/${tokenLink}`);
+  }, [loading]);
 
   const generateCertificateNumber = () => {
     const randomString = Math.random().toString(36).substring(2, 7);
@@ -66,7 +73,7 @@ const CreateNFT = ({ templateData }: any) => {
     }
 
     if (address) {
-      setLoading(true); // Start loading
+      setLoading(true);
 
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
@@ -79,6 +86,7 @@ const CreateNFT = ({ templateData }: any) => {
           for (const data of csvData) {
             const metadata = {
               name: `Certificate for ${data.fullName}`,
+              tokenURI: tokenLink,
               attributes: [
                 { trait_type: 'Certificate ID', value: generateCertificateNumber() },
                 { trait_type: 'Role', value: data.role },
@@ -96,6 +104,7 @@ const CreateNFT = ({ templateData }: any) => {
             };
 
             const tokenURI = await uploadMetadata(metadata);
+            setTokenLink(tokenURI);
 
             mintDataArray.push({
               owner: address,
@@ -136,6 +145,7 @@ const CreateNFT = ({ templateData }: any) => {
             };
 
             const tokenURI = await uploadMetadata(metadata);
+            setTokenLink(tokenURI);
 
             mintDataArray.push({
               owner: address,
@@ -165,7 +175,7 @@ const CreateNFT = ({ templateData }: any) => {
         console.error('Error minting NFTs:', error);
         alert('Failed to mint NFTs.');
       } finally {
-        setLoading(false); // End loading
+        setLoading(false);
       }
     } else {
       alert('Please connect your wallet.');

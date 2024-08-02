@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
+
 import { ethers } from 'ethers';
-import { useAccount } from 'wagmi';
 import Papa from 'papaparse';
+import { useAccount } from 'wagmi';
+
 import ABI from '@/contract/ABI.json'; // Đảm bảo đường dẫn đúng đến ABI của hợp đồng
 import { uploadMetadata } from '@/lib/pinata'; // Đảm bảo utility này đã được triển khai
 
 const contractAddress = '0x5Ae10131774eF0dc641eb608CB3ccA95DD96EcF8'; // Địa chỉ hợp đồng thông minh
 
 const CreateNFT = ({ templateData }: any) => {
-  const { address, isConnected } = useAccount();
+  const { address } = useAccount();
   const [fullName, setFullName] = useState(templateData?.fullName || '');
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [certificateNumber, setCertificateNumber] = useState('');
@@ -84,7 +86,7 @@ const CreateNFT = ({ templateData }: any) => {
                 { trait_type: 'Organization Name', value: data.authorizingOrgName },
                 { trait_type: 'Head Name', value: data.headOrgName },
                 { trait_type: 'Head Position', value: data.headOrgPosition },
-                { trait_type: 'Head Signature', value: data.headOrgSignature },
+                { trait_type: 'Head Signature', value: data.signatureIpfsHash },
                 { trait_type: 'Description', value: data.description },
                 { trait_type: 'Position', value: data.role },
                 { trait_type: 'Date Issued', value: data.issuedDate },
@@ -104,7 +106,7 @@ const CreateNFT = ({ templateData }: any) => {
                 organizationName: data.authorizingOrgName,
                 headName: data.headOrgName,
                 headPosition: data.headOrgPosition,
-                headSignature: data.headOrgSignature,
+                headSignature: data.signatureIpfsHash,
                 description: data.description,
                 position: data.role,
                 date: data.issuedDate,
@@ -124,7 +126,7 @@ const CreateNFT = ({ templateData }: any) => {
                 { trait_type: 'Organization Name', value: authorizingOrgName },
                 { trait_type: 'Head Name', value: templateData?.headOrgName ?? 'N/A' },
                 { trait_type: 'Head Position', value: templateData?.headOrgPosition ?? 'N/A' },
-                { trait_type: 'Head Signature', value: templateData?.headOrgSignature ?? 'N/A' },
+                { trait_type: 'Head Signature', value: templateData?.signatureIpfsHash ?? 'N/A' },
                 { trait_type: 'Description', value: templateData?.description ?? 'N/A' },
                 { trait_type: 'Position', value: role },
                 { trait_type: 'Date Issued', value: issuedDate },
@@ -144,7 +146,7 @@ const CreateNFT = ({ templateData }: any) => {
                 organizationName: authorizingOrgName,
                 headName: templateData?.headOrgName ?? 'N/A',
                 headPosition: templateData?.headOrgPosition ?? 'N/A',
-                headSignature: templateData?.headOrgSignature ?? 'N/A',
+                headSignature: templateData?.signatureIpfsHash ?? 'N/A',
                 description: templateData?.description ?? 'N/A',
                 position: role,
                 date: issuedDate,
@@ -159,6 +161,7 @@ const CreateNFT = ({ templateData }: any) => {
         await tx.wait();
         alert('NFTs minted successfully!');
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error minting NFTs:', error);
         alert('Failed to mint NFTs.');
       } finally {

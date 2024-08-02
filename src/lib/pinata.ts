@@ -74,7 +74,7 @@ export const uploadMetadata = async (data: any) => {
     }
 
     const result = await response.json();
-    return `ipfs://${result.IpfsHash}`;
+    return result.IpfsHash;
   } catch (error) {
     console.error('Error uploading metadata to Pinata:', error);
     throw error;

@@ -1,7 +1,6 @@
 import { Hex } from 'viem';
 
 export const CERTIFICATE_NFT_CONTRACT = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT! as Hex;
-// export const ERC20_CONTRACT = process.env.NEXT_PUBLIC_ERC20_CONTRACT! as Hex;
 
 // export const usdtContractConfig = {
 //   address: ERC20_CONTRACT,

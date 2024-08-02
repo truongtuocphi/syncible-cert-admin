@@ -75,8 +75,8 @@ const MintPage = () => {
     setLoading(true);
 
     try {
-      const publicLinks = [];
-      for (const [_index, item] of formData.entries()) {
+      const publicLinks: string[] = [];
+      for (const item of formData) {
         const metadata = {
           name: `ABAII_Certificate_${item.id}`,
           description: `Certificate ID: ${item.id}`,
@@ -97,15 +97,15 @@ const MintPage = () => {
         publicLinks.push(publicLink);
       }
 
-      sendToken({
+      // Ensure that the arrays are properly formatted
+      const owners: string[] = formData.map((item: any) => item.owner || address);
+      const names: string[] = formData.map((item: any) => item.name);
+      const ids: string[] = formData.map((item: any) => item.id);
+
+      await sendToken({
         ...certificateNFTContractConfig,
         functionName: 'mintBulk',
-        args: [
-          formData.map((item: any) => (!!item && item.owner.length > 0 ? item.owner : address)),
-          formData.map((item: any) => item.name),
-          formData.map((item: any) => item.id),
-          publicLinks,
-        ],
+        args: [owners, names, ids, publicLinks] as [string[], string[], string[], string[]],
       })
         .then((txHash: `0x${string}`) => {
           viemClient

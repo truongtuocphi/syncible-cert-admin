@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
-
+import { ethers } from 'ethers';
 import { useAccount } from 'wagmi';
+import Papa from 'papaparse';
+import ABI from '@/contract/ABI.json'; // Đảm bảo đường dẫn đúng đến ABI của hợp đồng
+import { uploadMetadata } from '@/lib/pinata'; // Đảm bảo utility này đã được triển khai
+
+const contractAddress = '0x5Ae10131774eF0dc641eb608CB3ccA95DD96EcF8'; // Địa chỉ hợp đồng thông minh
 
 const CreateNFT = ({ templateData }: any) => {
-  const { address } = useAccount();
-
+  const { address, isConnected } = useAccount();
   const [fullName, setFullName] = useState(templateData?.fullName || '');
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [certificateNumber, setCertificateNumber] = useState('');
@@ -17,17 +21,8 @@ const CreateNFT = ({ templateData }: any) => {
   const [authorizingOrgName, setAuthorizingOrgName] = useState(
     templateData?.authorizingOrgName || ''
   );
-
-  useEffect(() => {
-    if (templateData) {
-      setFullName(templateData.fullName || '');
-      setIssuedDate(templateData.issuedDate || '');
-      setQuantity(templateData.quantity || 1);
-      setBlockchain(templateData.blockchain || 'Polygon');
-      setRole(templateData.role || 'Student');
-      setAuthorizingOrgName(templateData.authorizingOrgName || '');
-    }
-  }, [templateData]);
+  const [csvData, setCsvData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false); // New loading state
 
   useEffect(() => {
     if (issuedDate && authorizingOrgName) {
@@ -35,12 +30,6 @@ const CreateNFT = ({ templateData }: any) => {
       setCertificateNumber(certificateNum);
     }
   }, [issuedDate, role, authorizingOrgName]);
-
-  const handleCsvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setCsvFile(e.target.files[0]);
-    }
-  };
 
   const generateCertificateNumber = () => {
     const randomString = Math.random().toString(36).substring(2, 7);
@@ -50,26 +39,134 @@ const CreateNFT = ({ templateData }: any) => {
     return `${randomString}/${formattedDate}-${roleCode}-${authorizingOrgName}`;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleCsvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setCsvFile(e.target.files[0]);
+
+      // Parse CSV file
+      Papa.parse(e.target.files[0], {
+        header: true,
+        complete: (results) => {
+          setCsvData(results.data);
+        },
+        error: () => {
+          alert('Failed to parse CSV file!');
+        },
+      });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!csvFile && !fullName) {
       alert('Please select a CSV file or enter a full name.');
       return;
     }
 
-    // Handle form submission logic here...
-    const data = {
-      fullName,
-      csvFile,
-      issuedDate,
-      quantity,
-      blockchain,
-      role,
-      certificateNumber,
-      authorizingOrgName,
-      address,
-    };
-    // Call your submission function or API here
+    if (address) {
+      setLoading(true); // Start loading
+
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(contractAddress, ABI, signer);
+
+        const mintDataArray = [];
+
+        if (csvFile && csvData.length > 0) {
+          for (const data of csvData) {
+            const metadata = {
+              name: `Certificate for ${data.fullName}`,
+              attributes: [
+                { trait_type: 'Certificate ID', value: generateCertificateNumber() },
+                { trait_type: 'Role', value: data.role },
+                { trait_type: 'Date', value: data.issuedDate },
+                { trait_type: 'Organization Name', value: data.authorizingOrgName },
+                { trait_type: 'Head Name', value: data.headOrgName },
+                { trait_type: 'Head Position', value: data.headOrgPosition },
+                { trait_type: 'Head Signature', value: data.headOrgSignature },
+                { trait_type: 'Description', value: data.description },
+                { trait_type: 'Position', value: data.role },
+                { trait_type: 'Date Issued', value: data.issuedDate },
+                { trait_type: 'Blockchain Type', value: blockchain },
+                { trait_type: 'Template URL', value: data.templateIpfsHash },
+              ],
+            };
+
+            const tokenURI = await uploadMetadata(metadata);
+
+            mintDataArray.push({
+              owner: address,
+              fullName: data.fullName,
+              certificateId: generateCertificateNumber(),
+              tokenURI: tokenURI,
+              certData: {
+                organizationName: data.authorizingOrgName,
+                headName: data.headOrgName,
+                headPosition: data.headOrgPosition,
+                headSignature: data.headOrgSignature,
+                description: data.description,
+                position: data.role,
+                date: data.issuedDate,
+                blockchainType: blockchain,
+                templateURL: data.templateIpfsHash,
+              },
+            });
+          }
+        } else {
+          for (let i = 0; i < quantity; i++) {
+            const metadata = {
+              name: `Certificate for ${fullName}`,
+              attributes: [
+                { trait_type: 'Certificate ID', value: generateCertificateNumber() },
+                { trait_type: 'Role', value: role },
+                { trait_type: 'Date', value: issuedDate },
+                { trait_type: 'Organization Name', value: authorizingOrgName },
+                { trait_type: 'Head Name', value: templateData?.headOrgName ?? 'N/A' },
+                { trait_type: 'Head Position', value: templateData?.headOrgPosition ?? 'N/A' },
+                { trait_type: 'Head Signature', value: templateData?.headOrgSignature ?? 'N/A' },
+                { trait_type: 'Description', value: templateData?.description ?? 'N/A' },
+                { trait_type: 'Position', value: role },
+                { trait_type: 'Date Issued', value: issuedDate },
+                { trait_type: 'Blockchain Type', value: blockchain },
+                { trait_type: 'Template URL', value: templateData?.templateIpfsHash ?? 'N/A' },
+              ],
+            };
+
+            const tokenURI = await uploadMetadata(metadata);
+
+            mintDataArray.push({
+              owner: address,
+              fullName: fullName,
+              certificateId: generateCertificateNumber(),
+              tokenURI: tokenURI,
+              certData: {
+                organizationName: authorizingOrgName,
+                headName: templateData?.headOrgName ?? 'N/A',
+                headPosition: templateData?.headOrgPosition ?? 'N/A',
+                headSignature: templateData?.headOrgSignature ?? 'N/A',
+                description: templateData?.description ?? 'N/A',
+                position: role,
+                date: issuedDate,
+                blockchainType: blockchain,
+                templateURL: templateData?.templateIpfsHash ?? 'N/A',
+              },
+            });
+          }
+        }
+
+        const tx = await contract.mintBulk(mintDataArray);
+        await tx.wait();
+        alert('NFTs minted successfully!');
+      } catch (error) {
+        console.error('Error minting NFTs:', error);
+        alert('Failed to mint NFTs.');
+      } finally {
+        setLoading(false); // End loading
+      }
+    } else {
+      alert('Please connect your wallet.');
+    }
   };
 
   return (
@@ -113,68 +210,41 @@ const CreateNFT = ({ templateData }: any) => {
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            NFT Quantity:
+            Quantity:
             <input
               type="number"
+              min="1"
               value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
-              required
+              onChange={(e) => setQuantity(parseInt(e.target.value))}
               className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
             />
           </label>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Wallet address:
-            <input
-              type="text"
-              value={address}
-              disabled={true}
-              required
-              placeholder="Connect your wallet"
+            Blockchain:
+            <select
+              value={blockchain}
+              onChange={(e) => setBlockchain(e.target.value as 'Polygon' | 'Ethereum')}
               className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
+            >
+              <option value="Polygon">Polygon</option>
+              <option value="Ethereum">Ethereum</option>
+            </select>
           </label>
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Blockchain:</label>
-          <div className="mt-2 flex space-x-4">
-            <button
-              type="button"
-              onClick={() => setBlockchain('Polygon')}
-              className={`rounded-md px-4 py-2 ${blockchain === 'Polygon' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-            >
-              Polygon
-            </button>
-            <button
-              type="button"
-              onClick={() => setBlockchain('Ethereum')}
-              className={`rounded-md px-4 py-2 ${blockchain === 'Ethereum' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-            >
-              Ethereum
-            </button>
-          </div>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
-            Certificate specifically for:
+            Role:
+            <select
+              value={role}
+              onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
+              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            >
+              <option value="Teacher">Teacher</option>
+              <option value="Student">Student</option>
+            </select>
           </label>
-          <div className="mt-2 flex space-x-4">
-            <button
-              type="button"
-              onClick={() => setRole('Teacher')}
-              className={`rounded-md px-4 py-2 ${role === 'Teacher' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-            >
-              Teacher
-            </button>
-            <button
-              type="button"
-              onClick={() => setRole('Student')}
-              className={`rounded-md px-4 py-2 ${role === 'Student' ? 'bg-blue-600 text-white' : 'bg-gray-200'}`}
-            >
-              Student
-            </button>
-          </div>
         </div>
         <div>
           <label className="block text-sm font-medium text-gray-700">
@@ -189,9 +259,32 @@ const CreateNFT = ({ templateData }: any) => {
         </div>
         <button
           type="submit"
-          className="mt-4 inline-flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+          disabled={loading} // Disable button when loading
+          className="mt-4 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          Mint
+          {loading ? (
+            <span className="flex items-center">
+              <svg
+                className="mr-2 h-5 w-5 animate-spin text-white"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+              >
+                <circle
+                  className="opacity-25"
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="4"
+                ></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+              </svg>
+              Processing...
+            </span>
+          ) : (
+            'Mint'
+          )}
         </button>
       </form>
     </div>

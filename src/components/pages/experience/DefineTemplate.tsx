@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 import { useState } from 'react';
-
 import { uploadImageToPinata } from '@/lib/pinata';
 
 const predefinedTemplates = [
@@ -20,7 +18,7 @@ const predefinedTemplates = [
 
 const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
   const [template, setTemplate] = useState<File | null>(null);
-  const [selectedTemplate, setSelectedTemplate] = useState<number | null>(null);
+  const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [nftName, setNftName] = useState('');
   const [description, setDescription] = useState('');
   const [authorizingOrgName, setAuthorizingOrgName] = useState('');
@@ -30,6 +28,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
   const [mediaSelected, setMediaSelected] = useState(false);
+  const [loading, setLoading] = useState(false); // New loading state
 
   const handleTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -42,8 +41,8 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
     }
   };
 
-  const handleSelectTemplate = (templateId: number) => {
-    setSelectedTemplate(templateId);
+  const handleSelectTemplate = (templateURL: string) => {
+    setSelectedTemplate(templateURL);
     setTemplate(null);
     setPreviewImage(null);
     setMediaSelected(true);
@@ -61,6 +60,8 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
       alert('Please select a media file or a template.');
       return;
     }
+
+    setLoading(true); // Set loading to true when the form is submitted
 
     try {
       const templateIpfsHash = template ? await uploadImageToPinata(template) : null;
@@ -82,6 +83,8 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('An error occurred while uploading images. Please try again.');
+    } finally {
+      setLoading(false); // Reset loading state when done
     }
   };
 
@@ -131,9 +134,11 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                     <div
                       key={template.id}
                       className={`cursor-pointer rounded-lg border p-2 ${
-                        selectedTemplate === template.id ? 'border-blue-500' : 'border-gray-300'
+                        selectedTemplate === template.imageUrl
+                          ? 'border-blue-500'
+                          : 'border-gray-300'
                       }`}
-                      onClick={() => handleSelectTemplate(template.id)}
+                      onClick={() => handleSelectTemplate(template.imageUrl)}
                     >
                       <img
                         src={template.imageUrl}
@@ -150,18 +155,6 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
 
           {/* Right Section */}
           <div className="flex-1 space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                NFT Name:
-                <input
-                  type="text"
-                  value={nftName}
-                  onChange={(e) => setNftName(e.target.value)}
-                  required
-                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-              </label>
-            </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">
                 Authorizing Organization Name:
@@ -223,9 +216,10 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
             </div>
             <button
               type="submit"
-              className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              disabled={loading} // Disable button when loading
+              className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:opacity-50"
             >
-              Next
+              {loading ? 'Submitting...' : 'Next'} {/* Display loading text */}
             </button>
           </div>
         </div>

@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { uploadImageToPinata } from '@/lib/pinata';
 
+const headerURL = 'https://fuchsia-fancy-orangutan-869.mypinata.cloud';
+
 const predefinedTemplates = [
   {
     id: 1,
-    imageUrl:
-      'https://fuchsia-fancy-orangutan-869.mypinata.cloud/ipfs/QmUKNhE9wYgq4taG4CZN2gKaWvERgoUQo7Ms9SBhiPuZSy',
+    imageUrl: 'QmUKNhE9wYgq4taG4CZN2gKaWvERgoUQo7Ms9SBhiPuZSy',
     name: 'Certificate 1',
   },
   {
     id: 2,
-    imageUrl:
-      'https://fuchsia-fancy-orangutan-869.mypinata.cloud/ipfs/QmRGhFiD5btgJn788WqTrtEDPNF6M2SxhMr4irZBVggSXF',
+    imageUrl: 'QmRGhFiD5btgJn788WqTrtEDPNF6M2SxhMr4irZBVggSXF',
     name: 'Certificate 2',
   },
 ];
@@ -141,7 +141,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                       onClick={() => handleSelectTemplate(template.imageUrl)}
                     >
                       <img
-                        src={template.imageUrl}
+                        src={`${headerURL}/ipfs/${template.imageUrl}`}
                         alt={template.name}
                         className="h-24 w-full rounded-md object-cover"
                       />

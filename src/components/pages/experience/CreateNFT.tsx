@@ -29,6 +29,8 @@ const CreateNFT = ({ templateData }: any) => {
   const [csvData, setCsvData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
 
+  console.log(templateData);
+
   useEffect(() => {
     if (issuedDate && authorizingOrgName) {
       const certificateNum = generateCertificateNumber();
@@ -99,7 +101,10 @@ const CreateNFT = ({ templateData }: any) => {
                 { trait_type: 'Position', value: data.role },
                 { trait_type: 'Date Issued', value: data.issuedDate },
                 { trait_type: 'Blockchain Type', value: blockchain },
-                { trait_type: 'Template URL', value: data.templateIpfsHash },
+                {
+                  trait_type: 'Template URL',
+                  value: data.templateIpfsHash ?? data.selectedTemplate,
+                },
               ],
             };
 
@@ -120,7 +125,7 @@ const CreateNFT = ({ templateData }: any) => {
                 position: data.role,
                 date: data.issuedDate,
                 blockchainType: blockchain,
-                templateURL: data.templateIpfsHash,
+                templateURL: data.templateIpfsHash ?? data.selectedTemplate,
               },
             });
           }
@@ -140,7 +145,10 @@ const CreateNFT = ({ templateData }: any) => {
                 { trait_type: 'Position', value: role },
                 { trait_type: 'Date Issued', value: issuedDate },
                 { trait_type: 'Blockchain Type', value: blockchain },
-                { trait_type: 'Template URL', value: templateData?.templateIpfsHash ?? 'N/A' },
+                {
+                  trait_type: 'Template URL',
+                  value: templateData?.templateIpfsHash ?? templateData.selectedTemplate,
+                },
               ],
             };
 
@@ -161,7 +169,7 @@ const CreateNFT = ({ templateData }: any) => {
                 position: role,
                 date: issuedDate,
                 blockchainType: blockchain,
-                templateURL: templateData?.templateIpfsHash ?? 'N/A',
+                templateURL: templateData?.templateIpfsHash ?? templateData.selectedTemplate,
               },
             });
           }

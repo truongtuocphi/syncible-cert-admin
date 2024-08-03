@@ -2,7 +2,10 @@
 
 import { useEffect, useState } from 'react';
 
+import Image from 'next/image';
 import { useAccount } from 'wagmi';
+
+import configDate from '@/lib/configDate';
 
 const headerURL = 'https://fuchsia-fancy-orangutan-869.mypinata.cloud';
 
@@ -73,6 +76,7 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
             .value
         );
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Fetch error:', error);
       }
     };
@@ -91,18 +95,51 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
 
   return (
     <div className="w-full pt-16">
-      <div className="min-h-[calc(100vh-10rem)] w-full px-6 py-12 md:px-14 lg:px-24 2xl:px-60">
-        <div className="mx-auto max-w-full space-y-4 rounded-xl bg-white p-6 text-black shadow-md">
+      <div className="min-h-[calc(100vh-10rem)] w-full px-6 py-12 md:px-14 lg:px-14 2xl:px-60">
+        <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-6 text-black shadow-md">
           <h2 className="text-2xl font-bold">Verify</h2>
-          <div className="flex justify-between">
-            <div className="flex w-1/2 flex-col items-center">
-              <img
+          <div className="flex justify-between ">
+            <div className="relative w-9/12 overflow-hidden">
+              <Image
                 src={`${headerURL}/ipfs/${templateURL}`}
                 alt="Certificate Template"
-                className="h-auto w-full"
+                className="w-full"
+                width={500}
+                height={300}
               />
+              <div
+                className="absolute inset-0 flex flex-col items-center justify-center"
+                style={{ fontFamily: 'Times New Roman, serif' }}
+              >
+                <h1 className="text-4xl font-bold">CHỨNG NHẬN</h1>
+                <p className="mt-2 text-base">{`Số: ${certificateID}`}</p>
+
+                <h1 className="mt-2 text-4xl font-bold">{name.split('Certificate for')}</h1>
+                <p className="mt-2 text-center">
+                  Đã hoàn thành khóa đào tạo ngắn hạn
+                  <br />
+                  “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
+                </p>
+                <span className="mt-2">{configDate(date)}</span>
+
+                <div className="absolute bottom-14 left-16 flex flex-col items-center">
+                  <img
+                    src={`${headerURL}/ipfs/${headSignature}`}
+                    alt="Head Signature"
+                    className="w-32"
+                  />
+                  <div className="text-center">
+                    <p className="mt-2 text-sm">{`${headName}`}</p>
+                    <p className="text-sm">{`${headPosition} tổ chức ${organizationName}`}</p>
+                    {/* <p className="text-sm">{`${organizationName}`}</p> */}
+                    <p className="mt-2 text-sm">{`Giấy chứng nhận số: ${certificateID}`}</p>
+                    <p className="text-sm">{`của ${organizationName}, cấp ngày ${date}`}</p>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="w-1/2">
+
+            <div className="ml-4 w-4/12">
               <h3 className="text-3xl font-bold text-black">{name}</h3>
               <p className="mt-2 text-lg">Tên chứng nhận: abc</p>
               <textarea

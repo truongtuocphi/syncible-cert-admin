@@ -8,7 +8,7 @@ import { useAccount } from 'wagmi';
 import ABI from '@/contract/ABI.json';
 import { uploadMetadata } from '@/lib/pinata';
 
-const contractAddress = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT; // Địa chỉ hợp đồng thông minh
+const contractAddress = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;
 
 if (!contractAddress) {
   throw new Error('NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT is not defined');

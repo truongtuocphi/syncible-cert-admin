@@ -1,11 +1,6 @@
-'use client';
+import React from 'react';
 
-import React, { useEffect } from 'react';
-
-import { useWeb3Modal } from '@web3modal/wagmi/react';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { useAccount } from 'wagmi';
 
 import Footer from '@/components/layout/Footer';
 import SectionAbout from '@/components/pages/Home/SectionAbout';
@@ -18,18 +13,6 @@ import ether from '../../public/ether.png';
 import polygon from '../../public/polygon.png';
 
 const Page = () => {
-  // const router = useRouter();
-
-  const { open } = useWeb3Modal();
-
-  const { address, isConnected } = useAccount();
-
-  // useEffect(() => {
-  //   if (isConnected) {
-  //     router.push('/mint');
-  //   }
-  // }, [isConnected]);
-
   return (
     <div className="relative flex min-h-screen flex-col items-center pt-16">
       <div className="mt-0 grid w-full grid-cols-1 items-center justify-center gap-5 px-6 md:px-14 lg:mt-48 lg:grid-cols-2 lg:px-24 2xl:px-60">

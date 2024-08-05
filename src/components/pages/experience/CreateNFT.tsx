@@ -8,7 +8,11 @@ import { useAccount } from 'wagmi';
 import ABI from '@/contract/ABI.json';
 import { uploadMetadata } from '@/lib/pinata';
 
-const contractAddress = '0x5Ae10131774eF0dc641eb608CB3ccA95DD96EcF8'; // Địa chỉ hợp đồng thông minh
+const contractAddress = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT; // Địa chỉ hợp đồng thông minh
+
+if (!contractAddress) {
+  throw new Error('NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT is not defined');
+}
 
 const CreateNFT = ({ templateData }: any) => {
   const router = useRouter();
@@ -28,8 +32,6 @@ const CreateNFT = ({ templateData }: any) => {
   );
   const [csvData, setCsvData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-
-  console.log(templateData);
 
   useEffect(() => {
     if (issuedDate && authorizingOrgName) {
@@ -280,7 +282,7 @@ const CreateNFT = ({ templateData }: any) => {
         </div>
         <button
           type="submit"
-          disabled={loading} // Disable button when loading
+          disabled={loading}
           className="mt-4 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
           {loading ? (

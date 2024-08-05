@@ -1,16 +1,25 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { useAccount } from 'wagmi';
+
 import configDate from '@/lib/configDate';
 
-const headerURL = 'https://fuchsia-fancy-orangutan-869.mypinata.cloud';
+const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
+const AddressConrtact = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;
+
+if (!headerURL) {
+  // eslint-disable-next-line no-console
+  console.error('NEXT_PUBLIC_HEADER_URL không được định nghĩa');
+}
+
+if (!AddressConrtact) {
+  // eslint-disable-next-line no-console
+  console.error('NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT không được định nghĩa');
+}
 
 const IdExperience = ({ params }: { params: { slug: string } }) => {
   const slugPost = params.slug;
   const [data, setData] = useState(null);
-  const { address } = useAccount();
 
   const [name, setName] = useState('');
   const [certificateID, setCertificateID] = useState('');
@@ -126,7 +135,7 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
                   <img
                     src={`${headerURL}/ipfs/${headSignature}`}
                     alt="Head Signature"
-                    className="w-[4vw] md:w-[5vw] lg:w-[7vw]" // Adjusted size
+                    className="w-[4vw] md:w-[5vw] lg:w-[7vw]"
                   />
                   <div className="text-center">
                     <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headName}`}</p>
@@ -158,7 +167,7 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
               <h4 className="text-xl font-bold">Chain Information</h4>
               <p className="mt-2">{`Blockchain: ${blockchainType}`}</p>
               <p className="mt-2">{`Token ID: ${slugPost}`}</p>
-              <p className="mt-2">{`Contract address: 0x5Ae10131774eF0dc641eb608CB3ccA95DD96EcF8`}</p>
+              <p className="mt-2">{`Contract address: ${AddressConrtact}`}</p>
             </div>
           </div>
         </div>

@@ -1,7 +1,13 @@
 import { useState } from 'react';
+
 import { uploadImageToPinata } from '@/lib/pinata';
 
-const headerURL = 'https://fuchsia-fancy-orangutan-869.mypinata.cloud';
+const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
+
+if (!headerURL) {
+  // eslint-disable-next-line no-console
+  console.error('NEXT_PUBLIC_HEADER_URL không được định nghĩa');
+}
 
 const predefinedTemplates = [
   {

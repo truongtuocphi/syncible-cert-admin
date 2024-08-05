@@ -52,11 +52,11 @@ const Page = () => {
         </div>
       </div>
 
-      <div>
+      <>
         <SectionAbout />
         <SectionWhatWeBelieve />
         <SectionOurVision />
-      </div>
+      </>
 
       <div className="relative text-white">
         <Footer />

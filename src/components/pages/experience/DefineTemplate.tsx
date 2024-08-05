@@ -22,10 +22,10 @@ const predefinedTemplates = [
   },
 ];
 
+// eslint-disable-next-line no-unused-vars
 const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
   const [template, setTemplate] = useState<File | null>(null);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
-  const [nftName, setNftName] = useState('');
   const [description, setDescription] = useState('');
   const [authorizingOrgName, setAuthorizingOrgName] = useState('');
   const [headOrgName, setHeadOrgName] = useState('');
@@ -34,7 +34,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
   const [mediaSelected, setMediaSelected] = useState(false);
-  const [loading, setLoading] = useState(false); // New loading state
+  const [loading, setLoading] = useState(false);
 
   const handleTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -78,7 +78,6 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
       const data = {
         templateIpfsHash,
         selectedTemplate,
-        nftName,
         description,
         authorizingOrgName,
         headOrgName,
@@ -87,10 +86,11 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
       };
       onNext(data);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error submitting form:', error);
       alert('An error occurred while uploading images. Please try again.');
     } finally {
-      setLoading(false); // Reset loading state when done
+      setLoading(false);
     }
   };
 
@@ -222,10 +222,10 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
             </div>
             <button
               type="submit"
-              disabled={loading} // Disable button when loading
+              disabled={loading}
               className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:opacity-50"
             >
-              {loading ? 'Submitting...' : 'Next'} {/* Display loading text */}
+              {loading ? 'Submitting...' : 'Next'}
             </button>
           </div>
         </div>

@@ -37,13 +37,15 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   }, []);
 
   return (
-    <div className="relative flex items-center space-x-2">
+    <div
+      className="relative flex cursor-pointer items-center space-x-2"
+      onClick={() => setIsOpen(!isOpen)}
+    >
       {user.photoURL && (
         <img
           src={user.photoURL}
           alt={user.displayName || 'User Photo'}
-          className="h-10 w-10 transform cursor-pointer rounded-full transition-transform hover:scale-105"
-          onClick={() => setIsOpen(!isOpen)} // Mở dropdown khi nhấp vào ảnh
+          className="h-10 w-10 transform cursor-pointer rounded-full transition-transform hover:scale-105" // Mở dropdown khi nhấp vào ảnh
         />
       )}
       <div>
@@ -54,7 +56,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
       {/* Dropdown Menu */}
       {isOpen && (
         <div
-          className="absolute right-0 mt-2 w-48 rounded-lg border border-gray-300 bg-white shadow-lg ring-1 ring-black ring-opacity-5"
+          className="absolute left-0 mt-24 w-48 rounded-lg border border-gray-300 bg-white shadow-lg ring-1 ring-black ring-opacity-5"
           ref={dropdownRef} // Tham chiếu để kiểm tra nhấp chuột ngoài
         >
           <button

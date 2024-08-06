@@ -5,9 +5,11 @@ import { FaSearch } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 import { auth, onAuthStateChanged } from '@/lib/firebase';
 import UserInfo from '@/components/pages/admin/UserInfo';
+import { useRouter } from 'next/navigation';
 
 const AdminDashboard = () => {
   const [user, setUser] = useState<any>(null);
+  const router = useRouter(); // Khởi tạo router để điều hướng
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user: any) => {
@@ -15,14 +17,14 @@ const AdminDashboard = () => {
         // Người dùng đã đăng nhập
         setUser(user);
       } else {
-        // Không có người dùng đăng nhập
-        setUser(null);
+        // Không có người dùng đăng nhập, điều hướng đến trang login
+        router.push('/login');
       }
     });
 
     // Dọn dẹp khi component bị gỡ bỏ
     return () => unsubscribe();
-  }, []);
+  }, [router]);
 
   return (
     <div className="flex min-h-screen bg-gray-100">

@@ -2,13 +2,18 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { useSession } from 'next-auth/react';
 import { FaSearch } from 'react-icons/fa';
+import { useAccount } from 'wagmi';
 
 import UserInfo from '@/components/pages/admin/UserInfo';
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 
 const AdminDashboard = () => {
   const router = useRouter();
+  const { open } = useWeb3Modal();
+  const { address, isConnected } = useAccount();
   const { status, data: session } = useSession();
 
   if (status === 'loading') {
@@ -67,6 +72,15 @@ const AdminDashboard = () => {
                 Login
               </a>
             )}
+          </div>
+          <div className="flex items-center gap-2 md:gap-4">
+            <ButtonPrimary onClick={() => open()}>
+              {isConnected && address ? (
+                `${address.slice(0, 4)}...${address.slice(-6)}`
+              ) : (
+                <div>Signing</div>
+              )}
+            </ButtonPrimary>
           </div>
         </div>
 

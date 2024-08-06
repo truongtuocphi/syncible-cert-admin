@@ -1,10 +1,11 @@
 // pages/admin/index.tsx
 'use client';
 
-import { useSession, signOut } from 'next-auth/react';
-import UserInfo from '@/components/pages/admin/UserInfo';
-import { FaSearch, FaSignOutAlt } from 'react-icons/fa';
 import { useRouter } from 'next/navigation';
+import { useSession } from 'next-auth/react';
+import { FaSearch } from 'react-icons/fa';
+
+import UserInfo from '@/components/pages/admin/UserInfo';
 
 const AdminDashboard = () => {
   const router = useRouter();

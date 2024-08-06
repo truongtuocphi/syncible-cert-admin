@@ -1,7 +1,6 @@
-// pages/admin/index.tsx
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { useSession } from 'next-auth/react';
 import { FaSearch } from 'react-icons/fa';
@@ -9,9 +8,12 @@ import { useAccount } from 'wagmi';
 
 import UserInfo from '@/components/pages/admin/UserInfo';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import Experience from '../experience/page';
+import Link from 'next/link';
 
 const AdminDashboard = () => {
   const router = useRouter();
+  const pathname = usePathname(); // Get the current URL path
   const { open } = useWeb3Modal();
   const { address, isConnected } = useAccount();
   const { status, data: session } = useSession();
@@ -38,14 +40,17 @@ const AdminDashboard = () => {
         <nav className="mt-4">
           <ul className="space-y-2">
             <li>
-              <a href="/admin/" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">
+              <Link href="/admin/" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">
                 My Collection
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="/experience" className="block px-4 py-2 text-gray-700 hover:bg-gray-200">
+              <Link
+                href="/admin/experience"
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-200"
+              >
                 NFT Diploma
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
@@ -86,8 +91,14 @@ const AdminDashboard = () => {
 
         {/* Page content */}
         <div className="rounded-lg bg-white p-6 text-black shadow-md">
-          <h1 className="mb-4 text-2xl font-bold">Admin Dashboard</h1>
-          {/* Add your page content here */}
+          {pathname === '/admin/experience' ? (
+            <Experience />
+          ) : (
+            <div>
+              <h1 className="mb-4 text-2xl font-bold">Admin Dashboard</h1>
+              {/* Add your default page content here */}
+            </div>
+          )}
         </div>
       </div>
     </div>

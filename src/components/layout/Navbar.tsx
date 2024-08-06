@@ -11,7 +11,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 
 const Menu = [
   { title: 'About Us', link: '#about' },
-  { title: 'Experience', link: '/experience' },
+  { title: 'Tutorial', link: '/tutorial' },
   { title: 'Explorer', link: '/explorer' },
   { title: 'Pricing', link: '/pricing' },
   { title: 'Blog', link: '/blog' },

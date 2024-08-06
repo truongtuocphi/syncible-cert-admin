@@ -2,9 +2,9 @@ import { ReactNode } from 'react';
 
 import ClientSessionProvider from '@/components/layout/ClientSessionProvider';
 
+// Define only children prop
 interface AdminLayoutProps {
   children: ReactNode;
-  session: any;
 }
 
 const AdminLayout = ({ children }: AdminLayoutProps) => {

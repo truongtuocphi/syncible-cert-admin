@@ -76,7 +76,7 @@ const Navbar = () => {
               ))}
             </ul>
           </nav>
-          <div className="flex items-center gap-2 md:gap-4">
+          {/* <div className="flex items-center gap-2 md:gap-4">
             <ButtonPrimary onClick={() => open()}>
               {isConnected && address ? (
                 `${address.slice(0, 4)}...${address.slice(-6)}`
@@ -84,7 +84,7 @@ const Navbar = () => {
                 <div>Signing</div>
               )}
             </ButtonPrimary>
-          </div>
+          </div> */}
           <ButtonPrimary>
             <Link href={'/admin'} target={'_blank'}>
               Experience

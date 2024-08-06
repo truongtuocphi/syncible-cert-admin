@@ -4,8 +4,10 @@
 import { useSession, signOut } from 'next-auth/react';
 import UserInfo from '@/components/pages/admin/UserInfo';
 import { FaSearch, FaSignOutAlt } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
 
 const AdminDashboard = () => {
+  const router = useRouter();
   const { status, data: session } = useSession();
 
   if (status === 'loading') {
@@ -13,6 +15,7 @@ const AdminDashboard = () => {
   }
 
   if (status === 'unauthenticated') {
+    router.push('/login');
     return (
       <div className="flex min-h-screen items-center justify-center">
         Bạn cần đăng nhập để truy cập trang này.

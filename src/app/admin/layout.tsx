@@ -7,9 +7,9 @@ interface AdminLayoutProps {
   session: any;
 }
 
-const AdminLayout = ({ children, session }: AdminLayoutProps) => {
+const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
-    <ClientSessionProvider session={session}>
+    <ClientSessionProvider>
       <div>{children}</div>
     </ClientSessionProvider>
   );

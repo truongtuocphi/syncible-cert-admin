@@ -1,4 +1,3 @@
-// components/UserInfo.tsx
 import { useState } from 'react';
 import { useSession, signOut } from 'next-auth/react';
 
@@ -30,7 +29,7 @@ const UserInfo = () => {
       {showLogout && (
         <div className="absolute right-0 top-full mt-2 w-48 rounded-lg border border-gray-300 bg-white shadow-lg">
           <button
-            onClick={() => signOut({ callbackUrl: '/' })}
+            onClick={() => signOut()}
             className="block w-full rounded-b-lg px-4 py-2 text-left text-red-500 hover:bg-gray-100"
           >
             Đăng xuất

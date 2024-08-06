@@ -23,7 +23,7 @@ const AdminDashboard = () => {
   }
 
   if (status === 'unauthenticated') {
-    router.push('/login');
+    router.push('/');
     return (
       <div className="flex min-h-screen items-center justify-center">
         Bạn cần đăng nhập để truy cập trang này.

@@ -8,7 +8,11 @@ interface LoginLayoutProps {
 }
 
 const LoginLayout = ({ children, session }: LoginLayoutProps) => {
-  return <ClientSessionProvider session={session}>{children}</ClientSessionProvider>;
+  return (
+    <ClientSessionProvider session={session}>
+      <div>{children}</div>
+    </ClientSessionProvider>
+  );
 };
 
 export default LoginLayout;

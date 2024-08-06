@@ -8,7 +8,11 @@ interface AdminLayoutProps {
 }
 
 const AdminLayout = ({ children, session }: AdminLayoutProps) => {
-  return <ClientSessionProvider session={session}>{children}</ClientSessionProvider>;
+  return (
+    <ClientSessionProvider session={session}>
+      <div>{children}</div>
+    </ClientSessionProvider>
+  );
 };
 
 export default AdminLayout;

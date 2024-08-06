@@ -1,6 +1,5 @@
 // components/UserInfo.tsx
 import { useState } from 'react';
-
 import { useSession, signOut } from 'next-auth/react';
 
 const UserInfo = () => {
@@ -8,7 +7,7 @@ const UserInfo = () => {
   const [showLogout, setShowLogout] = useState(false);
 
   if (!session || !session.user) {
-    return null; // Nếu không có session hoặc session.user, không hiển thị gì
+    return null;
   }
 
   const toggleLogout = () => setShowLogout(!showLogout);
@@ -31,7 +30,7 @@ const UserInfo = () => {
       {showLogout && (
         <div className="absolute right-0 top-full mt-2 w-48 rounded-lg border border-gray-300 bg-white shadow-lg">
           <button
-            onClick={() => signOut()}
+            onClick={() => signOut({ callbackUrl: '/' })}
             className="block w-full rounded-b-lg px-4 py-2 text-left text-red-500 hover:bg-gray-100"
           >
             Đăng xuất

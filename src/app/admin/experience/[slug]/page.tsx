@@ -91,19 +91,12 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
     fetchData();
   }, [slugPost]);
 
-  if (!data)
-    return (
-      <div className="w-full pt-16">
-        <div className="min-h-[calc(100vh-10rem)] w-full px-6 py-12 md:px-14 lg:px-24 2xl:px-60">
-          <h1 className="text-center text-5xl text-white">Loading...</h1>
-        </div>
-      </div>
-    );
+  if (!data) return <h1 className="text-center text-5xl text-black">Loading...</h1>;
 
   return (
-    <div className="w-full pt-16">
-      <div className="min-h-[calc(100vh-10rem)] w-full px-6 py-12 md:px-14 lg:px-14 2xl:px-60">
-        <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-6 text-black shadow-md">
+    <>
+      <div>
+        <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white text-black">
           <h2 className="text-2xl font-bold">Verify</h2>
           <div className="flex flex-col justify-between md:flex-row">
             <div className="relative w-full overflow-hidden md:w-9/12">
@@ -116,8 +109,8 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
                 className="absolute inset-0 flex flex-col items-center justify-center"
                 style={{ fontFamily: 'Times New Roman, serif' }}
               >
-                <div className="absolute top-[22%] text-center">
-                  <h1 className="text-[1.5vw] font-bold md:text-[4vw]">CHỨNG NHẬN</h1>
+                <div className="absolute top-[15%] text-center">
+                  <h1 className="text-[1.5vw] font-bold md:text-[3vw]">CHỨNG NHẬN</h1>
                   <p className="text-[1.5vw] md:text-[1.5vw] lg:text-[1.2vw]">{`Số: ${certificateID}`}</p>
                   <h1 className="text-[2vw] font-bold md:text-[2.5vw] 2xl:text-[4vw]">
                     {name.split('Certificate for')}
@@ -172,7 +165,7 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

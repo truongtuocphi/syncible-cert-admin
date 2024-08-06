@@ -15,12 +15,12 @@ const Experience = () => {
   };
 
   return (
-    <div className="w-full pt-16">
-      <div className="min-h-[calc(100vh-10rem)] w-full px-6 py-12 md:px-14 lg:px-24 2xl:px-60">
+    <>
+      <div>
         {step === 0 && <DefineTemplate onNext={handleNextFromDefineTemplate} />}
         {step === 1 && <CreateNFT templateData={templateData} />}
       </div>
-    </div>
+    </>
   );
 };
 

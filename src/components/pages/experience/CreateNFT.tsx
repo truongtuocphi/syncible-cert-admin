@@ -41,7 +41,7 @@ const CreateNFT = ({ templateData }: any) => {
   }, [issuedDate, role, authorizingOrgName]);
 
   useEffect(() => {
-    if (!loading) router.push(`/experience/${tokenLink}`);
+    if (!loading) router.push(`/admin/experience/${tokenLink}`);
   }, [loading]);
 
   const generateCertificateNumber = () => {
@@ -193,7 +193,7 @@ const CreateNFT = ({ templateData }: any) => {
   };
 
   return (
-    <div className="mx-auto max-w-full space-y-4 rounded-xl bg-white p-6 text-black shadow-md">
+    <div className="mx-auto max-w-full space-y-4 rounded-xl bg-white text-black">
       <h2 className="text-2xl font-bold">Create NFT</h2>
       <form onSubmit={handleSubmit}>
         <div>

@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { signIn, useSession } from 'next-auth/react';
 import { FaGoogle } from 'react-icons/fa';
+import { auth, provider, signInWithPopup } from '@/lib/firebase'; // Adjust path as necessary
 
 const Loading = () => (
   <div className="flex min-h-screen items-center justify-center bg-gray-100">
@@ -13,20 +13,35 @@ const Loading = () => (
 
 export default function Login() {
   const [isClient, setIsClient] = useState(false);
-  const { data: session, status } = useSession();
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     setIsClient(true);
-  }, []);
 
-  useEffect(() => {
-    if (status === 'authenticated') {
-      router.push('/admin');
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        router.push('/admin');
+      }
+    });
+
+    // Clean up
+    return () => unsubscribe();
+  }, [router]);
+
+  const handleLogin = async () => {
+    setLoading(true);
+    try {
+      await signInWithPopup(auth, provider);
+      // You might want to redirect here or handle post-login logic
+    } catch (error) {
+      console.error('Error logging in:', error);
+    } finally {
+      setLoading(false);
     }
-  }, [status, router]);
+  };
 
-  if (!isClient || status === 'loading') {
+  if (!isClient) {
     return <Loading />;
   }
 
@@ -41,11 +56,12 @@ export default function Login() {
         <div className="w-full max-w-md">
           <h1 className="mb-4 text-2xl font-bold">Login</h1>
           <button
-            onClick={() => signIn('google')}
+            onClick={handleLogin}
             className="mb-2 flex w-full items-center justify-center rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
+            disabled={loading}
           >
             <FaGoogle className="mr-2" />
-            Sign in with Google
+            {loading ? 'Loading...' : 'Sign in with Google'}
           </button>
         </div>
       </div>

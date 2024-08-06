@@ -1,35 +1,28 @@
 'use client';
 
-import { useRouter, usePathname } from 'next/navigation';
-import { useWeb3Modal } from '@web3modal/wagmi/react';
-import { useSession } from 'next-auth/react';
-import { FaSearch } from 'react-icons/fa';
-import { useAccount } from 'wagmi';
-
-import UserInfo from '@/components/pages/admin/UserInfo';
-import ButtonPrimary from '@/components/common/button/ButtonPrimary';
-import Experience from '../experience/page';
 import Link from 'next/link';
+import { FaSearch } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
+import { auth, onAuthStateChanged } from '@/lib/firebase';
+import UserInfo from '@/components/pages/admin/UserInfo';
 
 const AdminDashboard = () => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const { open } = useWeb3Modal();
-  const { address, isConnected } = useAccount();
-  const { status, data: session } = useSession();
+  const [user, setUser] = useState<any>(null);
 
-  if (status === 'loading') {
-    return <div className="flex min-h-screen items-center justify-center">Loading...</div>;
-  }
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user: any) => {
+      if (user) {
+        // Người dùng đã đăng nhập
+        setUser(user);
+      } else {
+        // Không có người dùng đăng nhập
+        setUser(null);
+      }
+    });
 
-  if (status === 'unauthenticated') {
-    router.push('/login');
-    return (
-      <div className="flex min-h-screen items-center justify-center">
-        Bạn cần đăng nhập để truy cập trang này, vui lòng chờ để chuyển trang...
-      </div>
-    );
-  }
+    // Dọn dẹp khi component bị gỡ bỏ
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="flex min-h-screen bg-gray-100">
@@ -68,37 +61,22 @@ const AdminDashboard = () => {
           </div>
 
           <div className="flex items-center space-x-4">
-            {session && session.user ? (
-              <div className="flex items-center space-x-2">
-                <UserInfo />
-              </div>
+            {user ? (
+              <UserInfo user={user} />
             ) : (
               <a href="/login" className="text-blue-500 hover:text-blue-600">
                 Login
               </a>
             )}
           </div>
-          <div className="flex items-center gap-2 md:gap-4">
-            <ButtonPrimary onClick={() => open()}>
-              {isConnected && address ? (
-                `${address.slice(0, 4)}...${address.slice(-6)}`
-              ) : (
-                <div>Signing</div>
-              )}
-            </ButtonPrimary>
-          </div>
         </div>
 
         {/* Page content */}
         <div className="rounded-lg bg-white p-6 text-black shadow-md">
-          {pathname === '/admin/experience' ? (
-            <Experience />
-          ) : (
-            <div>
-              <h1 className="mb-4 text-2xl font-bold">Admin Dashboard</h1>
-              {/* Add your default page content here */}
-            </div>
-          )}
+          <div>
+            <h1 className="mb-4 text-2xl font-bold">Admin Dashboard</h1>
+            {/* Add your default page content here */}
+          </div>
         </div>
       </div>
     </div>

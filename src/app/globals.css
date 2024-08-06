@@ -6,7 +6,7 @@ img {
   position: static !important;
 }
 
-body {
+.backgroundCustom {
   background-image: url('/backgroundWeb.jpg');
   color: white;
 }

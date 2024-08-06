@@ -22,13 +22,13 @@ export default function RootLayout({
   const initialState = cookieToInitialState(config, headers().get('cookie'));
   return (
     <html lang="vi">
-      <body className={`bg-custom-image min-h-screen w-full bg-cover bg-center`}>
+      <body className={`backgroundCustom min-h-screen w-full bg-cover bg-center`}>
         <NextTopLoader showSpinner={false} color="#00B6DD" />
         <Web3ModalProvider initialState={initialState}>
           <main className="relative">
-            <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">
+            {/* <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">
               <Navbar />
-            </div>
+            </div> */}
             {children}
           </main>
         </Web3ModalProvider>

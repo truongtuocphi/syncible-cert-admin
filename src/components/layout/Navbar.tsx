@@ -2,6 +2,7 @@
 
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
@@ -17,7 +18,12 @@ const Menu = [
 ];
 
 const Navbar = () => {
+  const router = useRouter();
   const { open } = useWeb3Modal();
+
+  const changePage = () => {
+    router.push('/admin');
+  };
 
   const { address, isConnected } = useAccount();
 
@@ -79,6 +85,11 @@ const Navbar = () => {
               )}
             </ButtonPrimary>
           </div>
+          <ButtonPrimary>
+            <Link href={'/admin'} target={'_blank'}>
+              Experience
+            </Link>
+          </ButtonPrimary>
         </div>
       </div>
     </div>

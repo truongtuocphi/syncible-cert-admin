@@ -24,9 +24,6 @@ export default function Login() {
     if (status === 'authenticated') {
       router.push('/admin');
     }
-    if (status === 'unauthenticated') {
-      router.push('/login');
-    }
   }, [status, router]);
 
   if (!isClient || status === 'loading') {

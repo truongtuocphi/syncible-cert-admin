@@ -1,6 +1,5 @@
 // types/next-auth.d.ts
 import NextAuth from 'next-auth';
-import { DefaultSession } from 'next-auth';
 
 declare module 'next-auth' {
   interface Session {
@@ -9,7 +8,7 @@ declare module 'next-auth' {
     } & DefaultSession['user'];
   }
 
-  interface User {
+  interface JWT {
     id: string;
   }
 }

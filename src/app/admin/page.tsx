@@ -13,7 +13,7 @@ import Link from 'next/link';
 
 const AdminDashboard = () => {
   const router = useRouter();
-  const pathname = usePathname(); // Get the current URL path
+  const pathname = usePathname();
   const { open } = useWeb3Modal();
   const { address, isConnected } = useAccount();
   const { status, data: session } = useSession();

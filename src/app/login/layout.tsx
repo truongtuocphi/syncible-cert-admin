@@ -4,10 +4,9 @@ import ClientSessionProvider from '@/components/layout/ClientSessionProvider';
 
 interface LoginLayoutProps {
   children: ReactNode;
-  session: any;
 }
 
-const LoginLayout = ({ children, session }: LoginLayoutProps) => {
+const LoginLayout = ({ children }: LoginLayoutProps) => {
   return (
     <ClientSessionProvider>
       <div>{children}</div>

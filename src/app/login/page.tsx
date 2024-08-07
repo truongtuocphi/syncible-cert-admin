@@ -1,57 +1,62 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-
 import { GoogleIcon } from '@/assets/icons';
-import { auth, provider, signInWithPopup } from '@/lib/firebase';
-
+import {
+  auth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithPopup,
+  provider,
+} from '@/lib/firebase';
 import Banner_login from '../../../public/banner_login.png';
 
 const Loading = () => (
-  <div className="flex min-h-screen items-center justify-center bg-gray-100">
-    <div className="text-4xl font-bold text-slate-800">Loading...</div>
+  <div className="flex items-center justify-center">
+    <div className="h-8 w-8 animate-spin rounded-full border-t-4 border-blue-500"></div>
   </div>
 );
 
 export default function Login() {
-  const [isClient, setIsClient] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
-    setIsClient(true);
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        router.push('/admin');
+        router.push('/admin/');
       }
     });
-
     return () => unsubscribe();
   }, [router]);
 
-  const handleLogin = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setLoading(true);
     try {
-      await signInWithPopup(auth, provider);
-      router.push('/admin');
+      await signInWithEmailAndPassword(auth, email, password);
+      // Loading will be handled by the useEffect hook
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error('Error logging in:', error);
-    } finally {
       setLoading(false);
+      setError('Invalid credentials.');
     }
   };
 
-  if (!isClient) {
-    return <Loading />;
-  }
-
-  if (loading) {
-    return <Loading />;
-  }
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    try {
+      await signInWithPopup(auth, provider);
+      // Loading will be handled by the useEffect hook
+    } catch (error) {
+      setLoading(false);
+      setError('Failed to sign in with Google.');
+    }
+  };
 
   return (
     <div className="flex min-h-screen">
@@ -69,7 +74,9 @@ export default function Login() {
       <div className="flex w-full items-center justify-center bg-white p-3 text-black md:w-3/5 lg:p-6">
         <div className="mx-auto w-full max-w-lg p-6">
           <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+          {loading && <Loading />}
+          {error && <p className="text-red-500">{error}</p>}
+          <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-left font-semibold">
                 E-mail
@@ -78,7 +85,10 @@ export default function Login() {
                 id="email"
                 type="email"
                 placeholder="Enter E-mail"
+                required
                 className="w-full rounded-xl border border-gray-300 bg-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
@@ -89,40 +99,34 @@ export default function Login() {
                 id="password"
                 type="password"
                 placeholder="Enter Password"
+                required
                 className="w-full rounded-xl border border-gray-300 bg-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-            </div>
-            <div className="flex items-center justify-between">
-              <label className="flex items-center">
-                <input type="checkbox" className="form-checkbox text-orange-600" />
-                <span className="ml-2">Stay logged in</span>
-              </label>
-              <a href="/forgot-password" className="text-indigo-500 hover:underline">
-                Forgot Password?
-              </a>
             </div>
             <button
               type="submit"
               className="w-full rounded-full bg-indigo-500 py-2 text-white hover:bg-indigo-600"
             >
-              Sign In
+              Sign in
             </button>
           </form>
-          <button
-            onClick={handleLogin}
-            className={`mb-2 mt-4 flex w-full items-center justify-center rounded-full border-[1px] border-gray-300 px-4 py-2 text-black shadow-lg hover:bg-gray-200 ${
-              loading ? 'cursor-not-allowed opacity-50' : ''
-            }`}
-            disabled={loading}
-          >
-            <GoogleIcon className="mr-2 size-5" />
-            {loading ? 'Loading...' : 'Sign in with Google'}
-          </button>
+          <div className="mt-4 text-center">
+            <p className="text-sm">Or</p>
+            <button
+              onClick={handleGoogleSignIn}
+              className="mt-2 flex w-full items-center justify-center rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200"
+            >
+              <GoogleIcon className="mr-2 size-6" />
+              Sign in with Google
+            </button>
+          </div>
           <div className="mt-4 text-center">
             <p className="text-sm">
-              If you have not registered yet,{' '}
-              <a href="/sign-up" className="text-indigo-500 hover:underline">
-                Sign up today!
+              If you don’t have an account,{' '}
+              <a href="/register" className="text-indigo-500 hover:underline">
+                Sign up here!
               </a>
             </p>
           </div>

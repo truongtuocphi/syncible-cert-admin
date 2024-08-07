@@ -1,6 +1,13 @@
-// lib/firebase.ts
 import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithPopup,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { getDatabase, ref, get, child, set } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,5 +22,21 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+const db = getDatabase(
+  app,
+  'https://syncible-835c9-default-rtdb.asia-southeast1.firebasedatabase.app'
+); // Thay đổi từ Firestore sang Realtime Database
 
-export { auth, provider, signInWithPopup, onAuthStateChanged };
+export {
+  auth,
+  provider,
+  signInWithPopup,
+  onAuthStateChanged,
+  createUserWithEmailAndPassword,
+  db,
+  signInWithEmailAndPassword,
+  ref,
+  get,
+  child,
+  set,
+};

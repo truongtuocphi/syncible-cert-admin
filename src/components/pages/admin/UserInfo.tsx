@@ -5,6 +5,7 @@ import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/lib/firebase';
 import Link from 'next/link';
+import { FaUser } from 'react-icons/fa';
 
 interface UserInfoProps {
   user: any;
@@ -15,18 +16,17 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   const router = useRouter();
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Xử lý đăng xuất
+  // Handle sign out
   const handleSignOut = async () => {
     try {
-      await signOut(auth); // Đăng xuất người dùng
-      router.push('/'); // Điều hướng về trang chính
+      await signOut(auth);
+      router.push('/');
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error signing out: ', error);
     }
   };
 
-  // Đóng dropdown khi người dùng nhấp ra ngoài
+  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -45,12 +45,16 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
       className="relative flex cursor-pointer items-center space-x-2"
       onClick={() => setIsOpen(!isOpen)}
     >
-      {user.photoURL && (
+      {user.photoURL ? (
         <img
           src={user.photoURL}
           alt={user.displayName || 'User Photo'}
-          className="h-10 w-10 transform cursor-pointer rounded-full transition-transform hover:scale-105" // Mở dropdown khi nhấp vào ảnh
+          className="h-10 w-10 transform cursor-pointer rounded-full transition-transform hover:scale-105"
         />
+      ) : (
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">
+          <FaUser className="h-6 w-6 text-gray-500" />
+        </div>
       )}
       <div>
         <div className="font-semibold text-gray-800">{user.displayName || 'Anonymous'}</div>

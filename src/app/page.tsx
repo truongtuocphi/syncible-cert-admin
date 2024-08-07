@@ -20,7 +20,7 @@ const Page = () => {
         <Navbar />
       </div>
       <div className="relative flex min-h-screen flex-col items-center pt-16">
-        <div className="mt-0 grid w-full grid-cols-1 items-center justify-center gap-5 px-6 md:px-14 lg:mt-48 lg:grid-cols-2 lg:px-24 2xl:px-60">
+        <div className="mt-10 grid w-full grid-cols-1 items-center justify-center gap-5 px-6 md:px-14 lg:mt-48 lg:grid-cols-2 lg:px-24 2xl:px-60">
           <div className="w-fit">
             <div className="col-span-1 text-2xl font-bold lg:text-3xl 2xl:text-4xl">
               Using blockchain technology and NFTs, Syncible

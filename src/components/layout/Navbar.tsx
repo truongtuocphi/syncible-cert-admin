@@ -16,7 +16,7 @@ const Menu = [
 
 const Navbar = () => {
   return (
-    <div className="h-28">
+    <div className="h-20 lg:h-28">
       <div className="flex h-full w-full items-center justify-between px-6 md:px-8 xl:px-24">
         <div className="block lg:hidden">
           <Sheet>

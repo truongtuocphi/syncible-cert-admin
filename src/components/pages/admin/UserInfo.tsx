@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { signOut } from 'firebase/auth';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FaUser } from 'react-icons/fa';
@@ -49,10 +50,12 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
       onClick={() => setIsOpen(!isOpen)}
     >
       {user.photoURL ? (
-        <img
+        <Image
           src={user.photoURL}
           alt={user.displayName || 'User Photo'}
           className="h-10 w-10 transform cursor-pointer rounded-full transition-transform hover:scale-105"
+          width={40}
+          height={40}
         />
       ) : (
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">

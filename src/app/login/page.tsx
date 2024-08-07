@@ -12,7 +12,7 @@ import Banner_login from '../../../public/banner_login.png';
 
 const Loading = () => (
   <div className="flex min-h-screen items-center justify-center bg-gray-100">
-    <div className="text-2xl font-bold">Loading...</div>
+    <div className="text-4xl font-bold text-slate-800">Loading...</div>
   </div>
 );
 
@@ -23,7 +23,6 @@ export default function Login() {
 
   useEffect(() => {
     setIsClient(true);
-
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         router.push('/admin');
@@ -37,6 +36,7 @@ export default function Login() {
     setLoading(true);
     try {
       await signInWithPopup(auth, provider);
+      router.push('/admin');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error logging in:', error);
@@ -45,7 +45,11 @@ export default function Login() {
     }
   };
 
-  if (!isClient) {
+  if (isClient) {
+    return <Loading />;
+  }
+
+  if (loading) {
     return <Loading />;
   }
 
@@ -62,11 +66,10 @@ export default function Login() {
         </div>
       </div>
 
-      {/* Right login form */}
       <div className="flex w-full items-center justify-center bg-white p-3 text-black md:w-3/5 lg:p-6">
         <div className="mx-auto w-full max-w-lg p-6">
           <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>
-          <form className="space-y-4">
+          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
             <div>
               <label htmlFor="email" className="block text-left font-semibold">
                 E-mail

@@ -8,6 +8,7 @@ import UserInfo from '@/components/pages/admin/UserInfo';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth, onAuthStateChanged } from '@/lib/firebase';
+import { Skeleton } from '@/components/ui/skeleton';
 
 const Header = () => {
   const { open } = useWeb3Modal();
@@ -30,7 +31,7 @@ const Header = () => {
   }, [router]);
 
   return (
-    <div className="mb-4 flex items-center justify-between">
+    <div className="fixed left-0 right-0 top-0 z-40 ml-64 flex items-center justify-between bg-gray-100 p-6">
       <div className="relative max-w-md flex-1">
         <input
           type="text"
@@ -47,9 +48,13 @@ const Header = () => {
           {user ? (
             <UserInfo user={user} />
           ) : (
-            <a href="/login" className="text-blue-500 hover:text-blue-600">
-              Login
-            </a>
+            <div className="flex items-center space-x-4 ">
+              <Skeleton className="h-12 w-12 rounded-full bg-gray-400 " />
+              <div className="space-y-2">
+                <Skeleton className="h-4 w-[250px] bg-gray-400" />
+                <Skeleton className="h-4 w-[200px] bg-gray-400" />
+              </div>
+            </div>
           )}
         </div>
 

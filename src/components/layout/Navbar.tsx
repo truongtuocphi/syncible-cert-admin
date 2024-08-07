@@ -18,15 +18,6 @@ const Menu = [
 ];
 
 const Navbar = () => {
-  const router = useRouter();
-  const { open } = useWeb3Modal();
-
-  const changePage = () => {
-    router.push('/admin');
-  };
-
-  const { address, isConnected } = useAccount();
-
   return (
     <div className="h-28">
       <div className="flex h-full w-full items-center justify-between px-6 md:px-8 xl:px-24">
@@ -65,31 +56,16 @@ const Navbar = () => {
             <ul className="flex items-center gap-5 md:gap-7 lg:gap-9">
               {Menu.map(({ title, link }) => (
                 <li key={title}>
-                  <Link
-                    href={link}
-                    className="text-base"
-                    target={title === 'Experience' ? '_blank' : '_self'}
-                  >
+                  <Link href={link} className="text-base">
                     {title}
                   </Link>
                 </li>
               ))}
             </ul>
           </nav>
-          {/* <div className="flex items-center gap-2 md:gap-4">
-            <ButtonPrimary onClick={() => open()}>
-              {isConnected && address ? (
-                `${address.slice(0, 4)}...${address.slice(-6)}`
-              ) : (
-                <div>Signing</div>
-              )}
-            </ButtonPrimary>
-          </div> */}
-          <ButtonPrimary>
-            <Link href={'/admin'} target={'_blank'}>
-              Experience
-            </Link>
-          </ButtonPrimary>
+          <Link href={'/login'} target={'_blank'}>
+            <ButtonPrimary>Experience</ButtonPrimary>
+          </Link>
         </div>
       </div>
     </div>

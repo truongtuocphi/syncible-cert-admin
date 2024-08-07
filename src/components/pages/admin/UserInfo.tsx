@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { signOut } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/lib/firebase';
+import Link from 'next/link';
 
 interface UserInfoProps {
   user: any;
@@ -20,6 +21,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
       await signOut(auth); // Đăng xuất người dùng
       router.push('/'); // Điều hướng về trang chính
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error signing out: ', error);
     }
   };
@@ -59,14 +61,15 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
       {isOpen && (
         <div
           className="absolute left-0 mt-24 w-48 rounded-lg border border-gray-300 bg-white shadow-lg ring-1 ring-black ring-opacity-5"
-          ref={dropdownRef} // Tham chiếu để kiểm tra nhấp chuột ngoài
+          ref={dropdownRef}
         >
-          <button
+          <Link
+            href={'#'}
             onClick={handleSignOut}
             className="block w-full px-4 py-2 text-left text-black hover:bg-gray-200 focus:outline-none"
           >
             Sign Out
-          </button>
+          </Link>
         </div>
       )}
     </div>

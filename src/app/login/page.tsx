@@ -45,7 +45,7 @@ export default function Login() {
     }
   };
 
-  if (isClient) {
+  if (!isClient) {
     return <Loading />;
   }
 

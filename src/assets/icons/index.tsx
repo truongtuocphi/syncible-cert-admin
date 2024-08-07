@@ -5,8 +5,11 @@ import AlphaTrueLogoBlue from './AlphaTrueLogoBlue.svg';
 import AlphaTrueLogoWhite from './AlphaTrueLogoWhite.svg';
 import Basalwallet from './Basalwallet.svg';
 import BasalwalletFull from './BasalwalletFull.svg';
+import Google from './Google.svg';
 import Loading from './LoadingIcon.svg';
 import Trash from './TrashIcon.svg';
+
+export const GoogleIcon = (props: IIconProps) => <Google width="auto" height="auto" {...props} />;
 
 export const AlphaTrueLogoWhiteIcon = (props: IIconProps) => (
   <AlphaTrueLogoWhite width="auto" height="auto" {...props} />

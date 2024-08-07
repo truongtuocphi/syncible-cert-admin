@@ -24,6 +24,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
       await signOut(auth);
       router.push('/');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error signing out: ', error);
     }
   };

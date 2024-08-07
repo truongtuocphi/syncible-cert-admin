@@ -15,7 +15,7 @@ const Sidebar = () => {
 
   return (
     <div className="fixed left-0 top-0 z-50 h-full w-64 bg-[#F5F7FF] px-3 text-black shadow-md">
-      <div className="flex items-center justify-start px-3 py-4">
+      <div className="flex items-center justify-center px-3 py-4">
         <h1 className="text-4xl font-bold">Syncible</h1>
       </div>
       <nav className="mt-8">

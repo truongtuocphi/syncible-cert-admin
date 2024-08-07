@@ -1,8 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+
 import { GoogleIcon } from '@/assets/icons';
 import {
   auth,
@@ -11,6 +13,7 @@ import {
   signInWithPopup,
   provider,
 } from '@/lib/firebase';
+
 import Banner_login from '../../../public/banner_login.png';
 
 const Loading = () => (

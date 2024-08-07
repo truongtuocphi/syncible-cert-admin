@@ -1,11 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+
 import { FirebaseError } from 'firebase/app';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+
 import { auth, db, set, ref } from '@/lib/firebase';
+
 import Banner_login from '../../../public/banner_login.png';
 
 interface FormData {

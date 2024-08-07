@@ -1,11 +1,13 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
+
 import { signOut } from 'firebase/auth';
-import { useRouter } from 'next/navigation';
-import { auth } from '@/lib/firebase';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { FaUser } from 'react-icons/fa';
+
+import { auth } from '@/lib/firebase';
 
 interface UserInfoProps {
   user: any;

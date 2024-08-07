@@ -1,9 +1,6 @@
 'use client';
 
-import { useWeb3Modal } from '@web3modal/wagmi/react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { Button } from '@/components/ui/button';

@@ -3,6 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 
 import Footer from '@/components/layout/Footer';
+import Navbar from '@/components/layout/Navbar';
 import SectionAbout from '@/components/pages/Home/SectionAbout';
 import SectionOurVision from '@/components/pages/Home/SectionOurVision';
 import SectionWhatWeBelieve from '@/components/pages/Home/SectionWhatWeBelieve';
@@ -11,7 +12,6 @@ import { Button } from '@/components/ui/button';
 import BannerCertificate from '../../public/certificate.jpg';
 import ether from '../../public/ether.png';
 import polygon from '../../public/polygon.png';
-import Navbar from '@/components/layout/Navbar';
 
 const Page = () => {
   return (

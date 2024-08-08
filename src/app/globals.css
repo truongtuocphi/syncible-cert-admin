@@ -10,3 +10,9 @@ img {
   background-image: url('/backgroundWeb.jpg');
   color: white;
 }
+
+.backgroundCustomSidebar {
+  background-image: url('/Rectangle_35.jpg');
+  color: white;
+  background-size: cover;
+}

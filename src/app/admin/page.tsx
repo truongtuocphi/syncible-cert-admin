@@ -18,7 +18,7 @@ const listCard = [
     des: 'Manage your minted NFT Certificate here',
     icon: <MdCollectionsBookmark className="text-2xl text-white" />,
     titleButton: 'Enter',
-    link: '/admin',
+    link: '/admin/collection',
   },
   {
     title: 'Customized Certificate',

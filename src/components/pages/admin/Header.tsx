@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { FaWallet } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import UserInfo from '@/components/pages/admin/UserInfo';
 import { Skeleton } from '@/components/ui/skeleton';
@@ -33,7 +34,9 @@ const Header = () => {
 
   return (
     <div className="fixed left-0 right-0 top-0 z-40 ml-64 flex items-center justify-between bg-white p-6 text-black">
-      <div className="relative max-w-md flex-1 font-bold text-gray-700">Home</div>
+      <div className="relative max-w-md flex-1 font-bold text-gray-700">
+        <Breadcrumb />
+      </div>
 
       <div className="flex gap-5">
         <div className="flex items-center space-x-4">

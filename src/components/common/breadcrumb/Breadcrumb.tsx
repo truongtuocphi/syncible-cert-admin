@@ -7,7 +7,7 @@ import { MdNavigateNext } from 'react-icons/md';
 import capitalizeFirstLetter from '@/lib/capitalizeFirstLetter';
 
 const Breadcrumb = () => {
-  const pathname = usePathname(); // Use usePathname instead of useRouter
+  const pathname = usePathname();
   const paths = pathname.split('/').filter((path) => path);
 
   const breadcrumbItems = paths.map((path, index) => {
@@ -29,7 +29,7 @@ const Breadcrumb = () => {
               </div>
             ) : (
               <Link href={item.href} className="text-gray-700">
-                {capitalizeFirstLetter(item.label === 'admin' ? 'Home' : 'Admin')}
+                {capitalizeFirstLetter(item.label === 'admin' ? 'Home' : item.label)}
               </Link>
             )}
           </li>

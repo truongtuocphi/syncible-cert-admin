@@ -32,7 +32,7 @@ const listCard = [
     des: 'Create and mint  your NFT certificate',
     icon: <GiDiploma className="text-2xl text-white" />,
     titleButton: 'Mint here',
-    link: '/admin',
+    link: '/admin/mintnft',
   },
 ];
 

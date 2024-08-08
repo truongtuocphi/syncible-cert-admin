@@ -62,8 +62,8 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
         </div>
       )}
       <div>
-        <div className="font-semibold text-gray-800">{user.displayName || 'Anonymous'}</div>
-        <div className="text-sm text-gray-600">{user.email}</div>
+        <div className="font-bold text-gray-800">{user.displayName || 'Anonymous'}</div>
+        <div className="text-sm font-semibold text-gray-600">{user.email}</div>
       </div>
 
       {/* Dropdown Menu */}

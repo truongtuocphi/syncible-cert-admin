@@ -156,7 +156,7 @@ export const columns: ColumnDef<Collection>[] = [
   },
 ];
 
-export default function Page() {
+export default function Collection() {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});

@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { CaretSortIcon, ChevronDownIcon, DotsHorizontalIcon } from '@radix-ui/react-icons';
+
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -14,15 +14,13 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import Link from 'next/link';
+import { FaCopy } from 'react-icons/fa';
+import { IoEyeSharp } from 'react-icons/io5';
+import { RiShareBoxLine } from 'react-icons/ri';
+
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { Button } from '@/components/ui/button';
-import { Checkbox } from '@/components/ui/checkbox';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Input } from '@/components/ui/input';
 import {
   Table,
@@ -32,10 +30,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { IoEyeSharp } from 'react-icons/io5';
-import Link from 'next/link';
-import { RiShareBoxLine } from 'react-icons/ri';
-import { FaCopy } from 'react-icons/fa';
 import truncateAddress from '@/lib/truncateAddress';
 
 export type Collection = {
@@ -87,7 +81,7 @@ const data: Collection[] = [
   // Add more collections as needed
 ];
 
-export const columns: ColumnDef<Collection>[] = [
+const columns: ColumnDef<Collection>[] = [
   {
     accessorKey: 'id',
     header: 'No',

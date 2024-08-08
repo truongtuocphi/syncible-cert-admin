@@ -1,14 +1,16 @@
 'use client';
 
-import { FaSearch } from 'react-icons/fa';
-import ButtonPrimary from '@/components/common/button/ButtonPrimary';
-import { useWeb3Modal } from '@web3modal/wagmi/react';
-import { useAccount } from 'wagmi';
-import UserInfo from '@/components/pages/admin/UserInfo';
 import { useEffect, useState } from 'react';
+
+import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { useRouter } from 'next/navigation';
-import { auth, onAuthStateChanged } from '@/lib/firebase';
+import { FaSearch } from 'react-icons/fa';
+import { useAccount } from 'wagmi';
+
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import UserInfo from '@/components/pages/admin/UserInfo';
 import { Skeleton } from '@/components/ui/skeleton';
+import { auth, onAuthStateChanged } from '@/lib/firebase';
 
 const Header = () => {
   const { open } = useWeb3Modal();

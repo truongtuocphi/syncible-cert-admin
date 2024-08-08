@@ -30,7 +30,6 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
     }
   };
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {

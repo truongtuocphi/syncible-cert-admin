@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import { GoogleIcon } from '@/assets/icons';
+import Loading from '@/components/common/loading/Loading';
 import {
   auth,
   signInWithEmailAndPassword,
@@ -15,12 +16,6 @@ import {
 } from '@/lib/firebase';
 
 import Banner_login from '../../../public/banner_login.png';
-
-const Loading = () => (
-  <div className="flex items-center justify-center">
-    <div className="h-8 w-8 animate-spin rounded-full border-t-4 border-blue-500"></div>
-  </div>
-);
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');

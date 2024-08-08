@@ -1,7 +1,7 @@
 import { FaRegFileAlt } from 'react-icons/fa';
+import { GiDiploma } from 'react-icons/gi';
 import { MdCollectionsBookmark } from 'react-icons/md';
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
-import { GiDiploma } from 'react-icons/gi';
 
 import Card from '@/components/pages/admin/Card';
 
@@ -11,24 +11,28 @@ const listCard = [
     des: 'Efficiently manage your files here',
     icon: <FaRegFileAlt className="text-2xl text-white" />,
     titleButton: 'Enter',
+    link: '/admin/filestorage',
   },
   {
     title: 'NFT Collection',
     des: 'Manage your minted NFT Certificate here',
     icon: <MdCollectionsBookmark className="text-2xl text-white" />,
     titleButton: 'Enter',
+    link: '/admin',
   },
   {
     title: 'Customized Certificate',
     des: 'Edit the look and specialize your own theme. Add your logo, colors, and images to reflect your brand.',
     icon: <MdOutlineDashboardCustomize className="text-2xl text-white" />,
     titleButton: 'Customized here',
+    link: '/admin',
   },
   {
     title: 'Mint NFT',
     des: 'Create and mint  your NFT certificate',
     icon: <GiDiploma className="text-2xl text-white" />,
     titleButton: 'Mint here',
+    link: '/admin',
   },
 ];
 

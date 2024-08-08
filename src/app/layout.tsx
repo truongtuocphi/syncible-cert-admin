@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="vi">
       <body className={`backgroundCustom min-h-screen w-full bg-cover bg-center`}>
-        <NextTopLoader showSpinner={false} color="#00B6DD" />
+        <NextTopLoader showSpinner={false} color="blue" />
         <Web3ModalProvider initialState={initialState}>
           <main className="relative">
             {/* <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">

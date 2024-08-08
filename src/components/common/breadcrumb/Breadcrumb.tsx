@@ -1,8 +1,10 @@
 'use client';
 
-import { MdNavigateNext } from 'react-icons/md';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { MdNavigateNext } from 'react-icons/md';
+
+import capitalizeFirstLetter from '@/lib/capitalizeFirstLetter';
 
 const Breadcrumb = () => {
   const pathname = usePathname(); // Use usePathname instead of useRouter
@@ -21,13 +23,13 @@ const Breadcrumb = () => {
             {index < breadcrumbItems.length - 1 ? (
               <div className="flex items-center gap-2">
                 <Link href={item.href} className="text-blue-500 hover:text-blue-700">
-                  {item.label === 'admin' ? 'Home' : 'admin'}
+                  {item.label === 'admin' ? 'Home' : 'Home'}
                 </Link>
                 <MdNavigateNext className="text-xl" />
               </div>
             ) : (
               <Link href={item.href} className="text-gray-700">
-                {item.label}
+                {capitalizeFirstLetter(item.label === 'admin' ? 'Home' : 'Admin')}
               </Link>
             )}
           </li>

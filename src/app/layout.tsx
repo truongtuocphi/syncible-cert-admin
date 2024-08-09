@@ -5,7 +5,6 @@ import { headers } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
 import { cookieToInitialState } from 'wagmi';
 
-import Navbar from '@/components/layout/Navbar';
 import { config } from '@/config';
 import Web3ModalProvider from '@/context';
 

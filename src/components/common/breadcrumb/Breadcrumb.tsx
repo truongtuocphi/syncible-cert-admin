@@ -22,9 +22,7 @@ const Breadcrumb = () => {
           <li key={item.href} className="flex items-center">
             {index < breadcrumbItems.length - 1 ? (
               <div className="flex items-center gap-2">
-                <Link href={item.href} className="text-blue-500 hover:text-blue-700">
-                  {item.label === 'admin' ? 'Home' : 'Home'}
-                </Link>
+                <Link href={item.href}>{item.label === 'admin' ? 'Home' : item.label}</Link>
                 <MdNavigateNext className="text-xl" />
               </div>
             ) : (

@@ -16,6 +16,7 @@ export default function Card({ data }: any) {
           <p className="text-sm text-gray-500">{data.des}</p>
         </div>
       </div>
+
       <Link href={data.link}>
         <ButtonPrimary className="mt-5 w-full bg-blue-600">{data.titleButton}</ButtonPrimary>
       </Link>

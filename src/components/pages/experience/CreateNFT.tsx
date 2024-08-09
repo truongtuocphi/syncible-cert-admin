@@ -193,7 +193,7 @@ const CreateNFT = ({ templateData }: any) => {
   };
 
   return (
-    <div className="mx-auto max-w-full space-y-4 rounded-xl bg-white text-black">
+    <div className="mx-auto max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <h2 className="text-2xl font-bold">Create NFT</h2>
       <form onSubmit={handleSubmit}>
         <div>

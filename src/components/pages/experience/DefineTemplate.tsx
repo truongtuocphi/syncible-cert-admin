@@ -95,7 +95,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
   };
 
   return (
-    <div className="mx-auto max-w-full space-y-4 rounded-xl bg-white text-black">
+    <div className="mx-auto max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <h2 className="text-2xl font-bold">Define Template</h2>
       <form onSubmit={handleSubmit}>
         <div className="flex space-x-6">

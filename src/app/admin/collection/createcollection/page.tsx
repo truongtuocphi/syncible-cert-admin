@@ -72,7 +72,7 @@ const CreateCollection: React.FC = () => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault(); // Prevent page reload
+    e.preventDefault();
     if (!displayName || !contractName || !contractSymbol || !description) {
       alert('Please fill in all required fields.');
       return;

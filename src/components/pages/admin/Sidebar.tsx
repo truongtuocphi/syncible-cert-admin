@@ -12,7 +12,7 @@ const menuSidebar = [
   { name: 'Mint NFT', url: '/admin/mintnft', icon: <GiDiploma className="text-3xl" /> },
   {
     name: 'Customized ',
-    url: '/admin/customized ',
+    url: '/admin/customized',
     icon: <BiSolidCustomize className="text-3xl" />,
   },
 ];
@@ -26,13 +26,10 @@ const Sidebar = () => {
         <div className="flex items-center justify-center px-3 py-4">
           <h1 className="text-4xl font-bold">Syncible</h1>
         </div>
-
         <nav className="mt-8">
           <ul className="space-y-2">
             {menuSidebar.map((item) => {
               const isActive = pathname === item.url;
-              console.log('path', pathname);
-              console.log('item', item.url);
               return (
                 <li className="text-lg" key={item.name}>
                   <Link
@@ -48,7 +45,6 @@ const Sidebar = () => {
           </ul>
         </nav>
       </div>
-
       <div className="mb-3 text-lg">
         <Link
           href={'/admin/setting'}

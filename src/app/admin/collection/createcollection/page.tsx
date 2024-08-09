@@ -176,6 +176,9 @@ const CreateCollection: React.FC = () => {
 
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Display Name</label>
+            <p className="text-xs text-gray-400">
+              This is display name for collection on your store.
+            </p>
             <input
               type="text"
               value={displayName}
@@ -187,6 +190,9 @@ const CreateCollection: React.FC = () => {
 
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Contract Name</label>
+            <p className="text-xs text-gray-400">
+              This contract name can&apos;t be changed in the future.
+            </p>
             <input
               type="text"
               value={contractName}
@@ -198,6 +204,9 @@ const CreateCollection: React.FC = () => {
 
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Contract Symbol</label>
+            <p className="text-xs text-gray-400">
+              This contract symbol can&apos;t be changed in the future.
+            </p>
             <input
               type="text"
               value={contractSymbol}
@@ -209,10 +218,14 @@ const CreateCollection: React.FC = () => {
 
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Description</label>
+            <p className="text-xs text-gray-400">
+              In the collection details page, this description will be underneath the logo image.
+            </p>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="block w-full rounded-lg border px-4 py-2 focus:ring focus:ring-indigo-200"
+              placeholder="Provide a detailed description of your collection"
+              className="block w-full rounded-lg border px-4 py-2 text-base focus:ring focus:ring-indigo-200"
               rows={4}
               required
             />
@@ -229,7 +242,7 @@ const CreateCollection: React.FC = () => {
 
         {/* Preview Section */}
         <div className="h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-2/5">
-          <h2 className="mb-1 text-lg font-bold text-gray-500">Preview</h2>
+          <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
           <div className="h-fit w-full rounded-lg border-[0.5px] border-dashed border-gray-400 p-3">
             <div className="relative h-56">
               {bannerImage ? (

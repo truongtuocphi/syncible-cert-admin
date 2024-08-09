@@ -31,6 +31,8 @@ const Sidebar = () => {
           <ul className="space-y-2">
             {menuSidebar.map((item) => {
               const isActive = pathname === item.url;
+              console.log('path', pathname);
+              console.log('item', item.url);
               return (
                 <li className="text-lg" key={item.name}>
                   <Link

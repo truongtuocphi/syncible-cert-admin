@@ -187,7 +187,9 @@ export default function Collection() {
         {/* <Button variant="outline">
           Select type <ChevronDownIcon className="ml-2 h-4 w-4" />
         </Button> */}
-        <ButtonPrimary className="ml-auto">Create Collection</ButtonPrimary>
+        <Link href={'/admin/collection/createcollection'}>
+          <ButtonPrimary className="ml-auto">Create Collection</ButtonPrimary>
+        </Link>
       </div>
       <div className="overflow-hidden rounded-xl border">
         <Table>

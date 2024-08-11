@@ -1,6 +1,7 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useAccount } from 'wagmi'; // Import useAccount từ wagmi
 
 import {
   ColumnDef,
@@ -30,6 +31,7 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
+import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
 
 export type Collection = {
@@ -37,49 +39,9 @@ export type Collection = {
   displayName: string;
   contractName: string;
   contractSymbol: string;
-  totalItems: number;
-  totalOwners: number;
   interface: string;
   contractAddress: string;
-  status: string;
 };
-
-const data: Collection[] = [
-  {
-    id: '1',
-    displayName: 'CryptoPunks',
-    contractName: 'PunksContract',
-    contractSymbol: 'PUNK',
-    totalItems: 10000,
-    totalOwners: 3000,
-    interface: 'ERC721',
-    contractAddress: '0x123456789abcdef',
-    status: 'Active',
-  },
-  {
-    id: '2',
-    displayName: 'Bored Ape Yacht Club',
-    contractName: 'BAYCContract',
-    contractSymbol: 'BAYC',
-    totalItems: 10000,
-    totalOwners: 5000,
-    interface: 'ERC721',
-    contractAddress: '0xabcdef123456789',
-    status: 'Active',
-  },
-  {
-    id: '3',
-    displayName: 'Art Blocks',
-    contractName: 'ArtBlocksContract',
-    contractSymbol: 'ARTB',
-    totalItems: 15000,
-    totalOwners: 8000,
-    interface: 'ERC721',
-    contractAddress: '0x987654321fedcba',
-    status: 'Inactive',
-  },
-  // Add more collections as needed
-];
 
 const columns: ColumnDef<Collection>[] = [
   {
@@ -103,14 +65,9 @@ const columns: ColumnDef<Collection>[] = [
     cell: ({ row }) => <div>{row.getValue('contractSymbol')}</div>,
   },
   {
-    accessorKey: 'totalItems',
-    header: 'Total Items',
-    cell: ({ row }) => <div>{row.getValue('totalItems')}</div>,
-  },
-  {
-    accessorKey: 'interface',
+    accessorKey: 'Interface',
     header: 'Interface',
-    cell: ({ row }) => <div>{row.getValue('interface')}</div>,
+    cell: () => <div>ERC-721</div>,
   },
   {
     accessorKey: 'contractAddress',
@@ -120,7 +77,13 @@ const columns: ColumnDef<Collection>[] = [
         {truncateAddress(row.getValue('contractAddress'))}
         <div className="flex items-center gap-2">
           <FaCopy className="text-blue-500" />
-          <RiShareBoxLine className="text-blue-500" />
+          <Link
+            href={`https://polygonscan.com/address/${row.getValue('contractAddress')}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <RiShareBoxLine className="text-blue-500" />
+          </Link>
         </div>
       </div>
     ),
@@ -128,11 +91,7 @@ const columns: ColumnDef<Collection>[] = [
   {
     accessorKey: 'status',
     header: 'Status',
-    cell: ({ row }) => (
-      <div className={row.getValue('status') === 'Active' ? 'text-green-600' : 'text-red-600'}>
-        {row.getValue('status')}
-      </div>
-    ),
+    cell: () => <div className="text-green-600">Active</div>,
   },
   {
     id: 'actions',
@@ -151,10 +110,39 @@ const columns: ColumnDef<Collection>[] = [
 ];
 
 export default function Collection() {
+  const { address } = useAccount(); // Lấy địa chỉ ví của người dùng
+  const [data, setData] = useState<Collection[]>([]); // Khởi tạo state cho dữ liệu
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const dbRef = ref(db, 'collections');
+      const snapshot = await get(dbRef);
+      if (snapshot.exists()) {
+        const collections: Collection[] = [];
+        snapshot.forEach((childSnapshot: any) => {
+          const collection = childSnapshot.val();
+          // Kiểm tra nếu địa chỉ ví của người dùng khớp với địa chỉ trong dữ liệu Firebase
+          if (collection.address === address) {
+            collections.push({
+              id: childSnapshot.key || '',
+              displayName: collection.displayName,
+              contractName: collection.contractName,
+              contractSymbol: collection.contractSymbol,
+              interface: collection.interface,
+              contractAddress: collection.contractAddress,
+            });
+          }
+        });
+        setData(collections);
+      }
+    };
+
+    fetchData();
+  }, [address]); // Thêm address vào dependency array để khi địa chỉ ví thay đổi, dữ liệu sẽ được cập nhật
 
   const table = useReactTable<Collection>({
     data,

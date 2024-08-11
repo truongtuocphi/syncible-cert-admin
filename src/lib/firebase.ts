@@ -7,7 +7,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from 'firebase/auth';
-import { getDatabase, ref, get, child, set } from 'firebase/database';
+import { getDatabase, ref, get, child, set, query } from 'firebase/database';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -39,4 +39,5 @@ export {
   get,
   child,
   set,
+  query,
 };

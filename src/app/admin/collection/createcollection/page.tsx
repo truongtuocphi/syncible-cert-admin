@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-
 import { ref, set } from 'firebase/database';
 import Image from 'next/image';
 import { FaImage, FaTimes } from 'react-icons/fa';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { db } from '@/lib/firebase';
+import deployContract from '@/contract/deployContract'; // Adjust the import based on your file structure
+import { useAccount } from 'wagmi'; // Import useAccount from wagmi
 
 const CreateCollection: React.FC = () => {
+  const { address } = useAccount(); // Get wallet address from wagmi
   const [logoImage, setLogoImage] = useState<string | null>(null);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string>('');
@@ -17,6 +19,7 @@ const CreateCollection: React.FC = () => {
   const [contractSymbol, setContractSymbol] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const handleImageChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -71,29 +74,40 @@ const CreateCollection: React.FC = () => {
     setBannerImage(null);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!displayName || !contractName || !contractSymbol || !description) {
       alert('Please fill in all required fields.');
       return;
     }
-    const collectionRef = ref(db, 'collections/');
-    set(collectionRef, {
-      displayName,
-      contractName,
-      contractSymbol,
-      description,
-      logoImage,
-      bannerImage,
-    })
-      .then(() => {
-        alert('Collection created successfully!');
-      })
-      .catch((error) => {
-        // eslint-disable-next-line no-console
-        console.error('Error creating collection:', error);
-        alert('Failed to create collection. Please try again.');
+
+    try {
+      setIsLoading(true);
+
+      // Deploy the contract
+      const contractAddress = await deployContract();
+
+      // Save data to Firebase
+      const collectionRef = ref(db, `collections/${contractAddress}`);
+      await set(collectionRef, {
+        displayName,
+        contractName,
+        contractSymbol,
+        description,
+        logoImage,
+        bannerImage,
+        contractAddress,
+        address,
       });
+
+      alert('Collection created and contract deployed successfully!');
+    } catch (error) {
+      console.error('Error creating collection or deploying contract:', error);
+      alert('Failed to create collection or deploy contract. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -102,6 +116,7 @@ const CreateCollection: React.FC = () => {
       <div className="flex space-x-6">
         {/* Form Section */}
         <form onSubmit={handleSubmit} className="w-full space-y-4 rounded-lg bg-white p-4 sm:w-3/5">
+          {/* Logo Image */}
           <div className="flex items-center gap-4">
             {previewImage ? (
               <div className="relative h-40 w-40 overflow-hidden rounded-full bg-gray-300">
@@ -130,6 +145,7 @@ const CreateCollection: React.FC = () => {
             </div>
           </div>
 
+          {/* Banner Image */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Banner Image</label>
             <p className="text-xs text-gray-400">
@@ -174,6 +190,7 @@ const CreateCollection: React.FC = () => {
             </div>
           </div>
 
+          {/* Display Name */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Display Name</label>
             <p className="text-xs text-gray-400">
@@ -188,6 +205,7 @@ const CreateCollection: React.FC = () => {
             />
           </div>
 
+          {/* Contract Name */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Contract Name</label>
             <p className="text-xs text-gray-400">
@@ -202,6 +220,7 @@ const CreateCollection: React.FC = () => {
             />
           </div>
 
+          {/* Contract Symbol */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Contract Symbol</label>
             <p className="text-xs text-gray-400">
@@ -216,30 +235,26 @@ const CreateCollection: React.FC = () => {
             />
           </div>
 
+          {/* Description */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Description</label>
-            <p className="text-xs text-gray-400">
-              In the collection details page, this description will be underneath the logo image.
-            </p>
+            <p className="text-xs text-gray-400">A detailed description of your collection.</p>
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Provide a detailed description of your collection"
-              className="block w-full rounded-lg border px-4 py-2 text-base focus:ring focus:ring-indigo-200"
               rows={4}
+              className="block w-full rounded-lg border px-4 py-2 focus:ring focus:ring-indigo-200"
               required
             />
           </div>
 
-          <ButtonPrimary
-            disabled
-            type="submit"
-            className="w-full rounded-full bg-blue-500 py-2 text-white"
-          >
-            Create Collection
+          {/* Submit Button */}
+          <ButtonPrimary type="submit" className="w-full py-3 text-lg font-semibold">
+            {isLoading ? 'Creating...' : 'Create Collection'}
           </ButtonPrimary>
         </form>
 
+        {/* Preview Section */}
         {/* Preview Section */}
         <div className="h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-2/5">
           <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>

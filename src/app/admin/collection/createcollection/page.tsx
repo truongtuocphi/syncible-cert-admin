@@ -97,7 +97,7 @@ const CreateCollection: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 p-4">
+    <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-gray-600">Create ERC-721 Collection</h1>
       <div className="flex space-x-6">
         {/* Form Section */}
@@ -138,7 +138,7 @@ const CreateCollection: React.FC = () => {
               size: 1400 x 400 px. Supported formats: JPG, PNG, SVG. Maximum size: 3 MB.
             </p>
             <div
-              className="relative flex h-40 w-full items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
+              className="relative flex h-56 w-full items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
               onDrop={(e) => handleDrop(e, setBannerImage)}
               onDragOver={handleDragOver}
             >

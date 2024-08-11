@@ -184,9 +184,6 @@ export default function Collection() {
           onChange={(event) => table.getColumn('displayName')?.setFilterValue(event.target.value)}
           className="w-80 rounded-lg"
         />
-        {/* <Button variant="outline">
-          Select type <ChevronDownIcon className="ml-2 h-4 w-4" />
-        </Button> */}
         <Link href={'/admin/collection/createcollection'}>
           <ButtonPrimary className="ml-auto">Create Collection</ButtonPrimary>
         </Link>

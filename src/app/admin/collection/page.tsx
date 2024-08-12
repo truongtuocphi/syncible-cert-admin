@@ -205,7 +205,8 @@ export default function Collection() {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results.
+                  No results. Please connect your wallet or create a collection to display the
+                  results.
                 </TableCell>
               </TableRow>
             )}

@@ -111,7 +111,7 @@ const columns: ColumnDef<Collection>[] = [
 
 export default function Collection() {
   const { address } = useAccount(); // Lấy địa chỉ ví của người dùng
-  const [data, setData] = useState<Collection[]>([]); // Khởi tạo state cho dữ liệu
+  const [data, setData] = useState<Collection[]>([]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});

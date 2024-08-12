@@ -1,17 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+
 import { ref, set } from 'firebase/database';
 import Image from 'next/image';
 import { FaImage, FaTimes } from 'react-icons/fa';
+import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import deployContract from '@/contract/deployContract';
 import { db } from '@/lib/firebase';
-import deployContract from '@/contract/deployContract'; // Adjust the import based on your file structure
-import { useAccount } from 'wagmi'; // Import useAccount from wagmi
 
 const CreateCollection: React.FC = () => {
-  const { address } = useAccount(); // Get wallet address from wagmi
+  const { address } = useAccount();
   const [logoImage, setLogoImage] = useState<string | null>(null);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string>('');
@@ -103,6 +104,7 @@ const CreateCollection: React.FC = () => {
 
       alert('Collection created and contract deployed successfully!');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error creating collection or deploying contract:', error);
       alert('Failed to create collection or deploy contract. Please try again.');
     } finally {
@@ -114,9 +116,7 @@ const CreateCollection: React.FC = () => {
     <div className="space-y-6">
       <h1 className="text-2xl font-semibold text-gray-600">Create ERC-721 Collection</h1>
       <div className="flex space-x-6">
-        {/* Form Section */}
         <form onSubmit={handleSubmit} className="w-full space-y-4 rounded-lg bg-white p-4 sm:w-3/5">
-          {/* Logo Image */}
           <div className="flex items-center gap-4">
             {previewImage ? (
               <div className="relative h-40 w-40 overflow-hidden rounded-full bg-gray-300">
@@ -144,8 +144,6 @@ const CreateCollection: React.FC = () => {
               />
             </div>
           </div>
-
-          {/* Banner Image */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Banner Image</label>
             <p className="text-xs text-gray-400">
@@ -189,8 +187,6 @@ const CreateCollection: React.FC = () => {
               )}
             </div>
           </div>
-
-          {/* Display Name */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Display Name</label>
             <p className="text-xs text-gray-400">
@@ -204,8 +200,6 @@ const CreateCollection: React.FC = () => {
               required
             />
           </div>
-
-          {/* Contract Name */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Contract Name</label>
             <p className="text-xs text-gray-400">
@@ -219,8 +213,6 @@ const CreateCollection: React.FC = () => {
               required
             />
           </div>
-
-          {/* Contract Symbol */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Contract Symbol</label>
             <p className="text-xs text-gray-400">
@@ -234,8 +226,6 @@ const CreateCollection: React.FC = () => {
               required
             />
           </div>
-
-          {/* Description */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Description</label>
             <p className="text-xs text-gray-400">A detailed description of your collection.</p>
@@ -254,7 +244,6 @@ const CreateCollection: React.FC = () => {
           </ButtonPrimary>
         </form>
 
-        {/* Preview Section */}
         {/* Preview Section */}
         <div className="h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-2/5">
           <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>

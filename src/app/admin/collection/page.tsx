@@ -65,6 +65,11 @@ const columns: ColumnDef<Collection>[] = [
     cell: ({ row }) => <div>{row.getValue('contractSymbol')}</div>,
   },
   {
+    accessorKey: 'Total Owner',
+    header: 'Total Owner',
+    cell: () => <div>1</div>,
+  },
+  {
     accessorKey: 'Interface',
     header: 'Interface',
     cell: () => <div>ERC-721</div>,

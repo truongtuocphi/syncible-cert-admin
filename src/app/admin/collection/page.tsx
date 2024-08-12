@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useAccount } from 'wagmi'; // Import useAccount từ wagmi
 
 import {
   ColumnDef,
@@ -16,11 +15,12 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import Link from 'next/link';
-import { FaCopy } from 'react-icons/fa';
 import { IoEyeSharp } from 'react-icons/io5';
 import { RiShareBoxLine } from 'react-icons/ri';
+import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import CopyButton from '@/components/common/coppyText/CopyButton';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -33,7 +33,6 @@ import {
 } from '@/components/ui/table';
 import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
-import CopyButton from '@/components/common/coppyText/CopyButton';
 
 export type Collection = {
   id: string;
@@ -99,10 +98,10 @@ const columns: ColumnDef<Collection>[] = [
     header: 'Actions',
     cell: ({ row }) => (
       <div className="flex items-center space-x-2">
-        <Link href={`/admin/collection/${row.getValue('id')}`}>
+        <Link href={`/admin/collection`}>
           <RiShareBoxLine className="text-blue-500" />
         </Link>
-        <Link href={`/admin/collection/${row.getValue('id')}`}>
+        <Link href={`/admin/collection/collectiondetail/${row.getValue('id')}`} target="_blank">
           <IoEyeSharp className="text-blue-500" />
         </Link>
       </div>

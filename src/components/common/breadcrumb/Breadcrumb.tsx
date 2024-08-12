@@ -22,7 +22,11 @@ const Breadcrumb = () => {
     })
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
-      return { label: path, href };
+
+      // Truncate label if longer than 19 characters
+      const truncatedLabel = path.length > 19 ? `${path.slice(0, 4)}...${path.slice(-6)}` : path;
+
+      return { label: truncatedLabel, href };
     });
 
   return (

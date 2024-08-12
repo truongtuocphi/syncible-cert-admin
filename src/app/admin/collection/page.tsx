@@ -98,10 +98,10 @@ const columns: ColumnDef<Collection>[] = [
     header: 'Actions',
     cell: ({ row }) => (
       <div className="flex items-center space-x-2">
-        <Link href={`/admin/collection`}>
+        <Link href={`/admin/collection/collectiondetail/${row.getValue('id')}`} target="_blank">
           <RiShareBoxLine className="text-blue-500" />
         </Link>
-        <Link href={`/admin/collection/collectiondetail/${row.getValue('id')}`} target="_blank">
+        <Link href={`/admin/collection/contractdetail/${row.getValue('id')}`} target="_blank">
           <IoEyeSharp className="text-blue-500" />
         </Link>
       </div>

@@ -23,10 +23,9 @@ const Breadcrumb = () => {
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
 
-      // Get the custom label
       const label = getCustomLabel(path);
 
-      const truncatedLabel = path.length > 19 ? `${path.slice(0, 4)}...${path.slice(-6)}` : label;
+      const truncatedLabel = path.length > 19 ? `${path.slice(0, 3)}...${path.slice(-3)}` : label;
 
       return { label: truncatedLabel, href };
     });
@@ -38,11 +37,13 @@ const Breadcrumb = () => {
           <li key={item.href} className="flex items-center">
             {index < breadcrumbItems.length - 1 ? (
               <div className="flex items-center gap-2">
-                <Link href={item.href}>{capitalizeFirstLetter(item.label)}</Link>
+                <Link href={item.href} className="text-sm">
+                  {capitalizeFirstLetter(item.label)}
+                </Link>
                 <MdNavigateNext className="text-xl" />
               </div>
             ) : (
-              <Link href={item.href} className="text-gray-700">
+              <Link href={item.href} className="text-sm text-gray-700">
                 {capitalizeFirstLetter(item.label)}
               </Link>
             )}

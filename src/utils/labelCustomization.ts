@@ -8,6 +8,10 @@ const getCustomLabel = (path: string) => {
       return 'Create Collection';
     case 'admin':
       return 'Home';
+    case 'collectiondetail':
+      return 'Collection Detail';
+    case 'contractdetail':
+      return 'Contract Detail';
     default:
       return 'abc';
   }

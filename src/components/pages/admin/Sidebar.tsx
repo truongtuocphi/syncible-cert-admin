@@ -21,7 +21,7 @@ const Sidebar = () => {
   const pathname = usePathname() || '/admin';
 
   return (
-    <div className="backgroundCustomSidebar fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between px-3 shadow-md">
+    <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 px-3 shadow-md">
       <div>
         <div className="flex items-center justify-center px-3 py-4">
           <h1 className="text-4xl font-bold">Syncible</h1>

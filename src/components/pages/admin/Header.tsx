@@ -54,7 +54,10 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-2 md:gap-4">
-          <ButtonPrimary onClick={() => open()}>
+          <ButtonPrimary
+            onClick={() => open()}
+            className="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+          >
             {isConnected && address ? (
               `${address.slice(0, 4)}...${address.slice(-6)}`
             ) : (

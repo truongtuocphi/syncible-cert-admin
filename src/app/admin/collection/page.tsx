@@ -33,6 +33,7 @@ import {
 } from '@/components/ui/table';
 import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
+import CopyButton from '@/components/common/coppyText/CopyButton';
 
 export type Collection = {
   id: string;
@@ -76,7 +77,7 @@ const columns: ColumnDef<Collection>[] = [
       <div className="flex items-center gap-2">
         {truncateAddress(row.getValue('contractAddress'))}
         <div className="flex items-center gap-2">
-          <FaCopy className="text-blue-500" />
+          <CopyButton textToCopy={row.getValue('contractAddress')} />
           <Link
             href={`https://polygonscan.com/address/${row.getValue('contractAddress')}`}
             target="_blank"
@@ -142,7 +143,7 @@ export default function Collection() {
     };
 
     fetchData();
-  }, [address]); // Thêm address vào dependency array để khi địa chỉ ví thay đổi, dữ liệu sẽ được cập nhật
+  }, [address]);
 
   const table = useReactTable<Collection>({
     data,

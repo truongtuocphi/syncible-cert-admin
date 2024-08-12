@@ -4,16 +4,16 @@ import { useEffect, useState } from 'react';
 
 import { ref, get } from 'firebase/database';
 import Image from 'next/image';
+import Link from 'next/link';
+import { FaArrowLeft } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
+import { PiCertificateFill } from 'react-icons/pi';
+import { RiShareBoxLine } from 'react-icons/ri';
 
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import CopyButton from '@/components/common/coppyText/CopyButton';
 import Loading from '@/components/common/loading/Loading';
 import { db } from '@/lib/firebase';
-import CopyButton from '@/components/common/coppyText/CopyButton';
-import Link from 'next/link';
-import { RiShareBoxLine } from 'react-icons/ri';
-import ButtonPrimary from '@/components/common/button/ButtonPrimary';
-import { FaArrowLeft } from 'react-icons/fa';
-import { PiCertificateFill } from 'react-icons/pi';
-import { FaUser } from 'react-icons/fa';
 
 interface CollectionData {
   address: string;
@@ -52,19 +52,22 @@ export default function Page({ params }: { params: { slug: string } }) {
     getData();
   }, [slugPost]);
 
-  // eslint-disable-next-line no-console
-  console.log(data);
-
   if (!data) {
-    return <Loading />;
+    return (
+      <div className="flex items-center justify-center">
+        <Loading />
+      </div>
+    );
   }
 
   return (
     <div className="space-y-6">
       <div className="flex items-center gap-2">
-        <ButtonPrimary className="rounded-lg bg-white">
-          <FaArrowLeft className="text-xl text-gray-500" />
-        </ButtonPrimary>
+        <Link href={'/admin/collection'}>
+          <ButtonPrimary className="rounded-lg bg-white">
+            <FaArrowLeft className="text-xl text-gray-500" />
+          </ButtonPrimary>
+        </Link>
         <h1 className="text-2xl font-semibold text-gray-600">Collection Detail</h1>
       </div>
       <div className="flex space-x-6">

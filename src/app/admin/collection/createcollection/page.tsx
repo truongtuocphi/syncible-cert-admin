@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { ref, set } from 'firebase/database';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
@@ -12,6 +13,7 @@ import deployContract from '@/contract/deployContract';
 import { db } from '@/lib/firebase';
 
 const CreateCollection: React.FC = () => {
+  const router = useRouter();
   const { address } = useAccount();
   const [logoImage, setLogoImage] = useState<string | null>(null);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
@@ -103,6 +105,7 @@ const CreateCollection: React.FC = () => {
       });
 
       alert('Collection created and contract deployed successfully!');
+      router.push('/admin/collection');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error creating collection or deploying contract:', error);

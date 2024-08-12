@@ -12,8 +12,10 @@ const getCustomLabel = (path: string) => {
       return 'Collection Detail';
     case 'contractdetail':
       return 'Contract Detail';
+    case 'filestorage':
+      return 'File Storage';
     default:
-      return 'abc';
+      return path;
   }
 };
 

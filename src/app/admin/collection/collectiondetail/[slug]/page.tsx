@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from 'react';
 
+import Image from 'next/image';
+import { HiTemplate } from 'react-icons/hi';
+
 import Loading from '@/components/common/loading/Loading';
+import CopyAddressButton from '@/components/pages/admin/CopyAddressButton';
 import { CollectionData } from '@/types/function';
 import fetchDataCollectionById from '@/utils/fetchDataCollectionById';
-import Image from 'next/image';
-import CopyAddressButton from '@/components/pages/admin/CopyAddressButton';
-import { HiTemplate } from 'react-icons/hi';
 
 export default function CollectionDetail({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<CollectionData | null>(null);

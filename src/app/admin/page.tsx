@@ -40,8 +40,8 @@ const HomeAdmin = () => {
   return (
     <>
       <div>
-        <h1 className="mb-3 text-3xl font-bold text-gray-700">Welcome to Syncible, </h1>
-        <p className="text-sm font-semibold text-gray-400">
+        <h1 className="mb-3 text-3xl font-bold text-gray-700">Welcome to Syncible</h1>
+        <p className="text-sm font-semibold text-gray-500">
           Create your own certificate in an easier way with the steps below
         </p>
       </div>

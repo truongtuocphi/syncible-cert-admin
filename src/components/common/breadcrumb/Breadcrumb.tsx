@@ -4,13 +4,13 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MdNavigateNext } from 'react-icons/md';
 
-import capitalizeFirstLetter from '@/lib/capitalizeFirstLetter';
+import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
+import getCustomLabel from '@/utils/labelCustomization';
 
 const Breadcrumb = () => {
   const pathname = usePathname();
   const paths = pathname.split('/').filter((path) => path);
 
-  // Kiểm tra xem đường dẫn có phải là /admin/mintnft hay không
   const isAdminMintNFTPath = pathname === '/admin/mintnft';
 
   const breadcrumbItems = paths
@@ -23,8 +23,10 @@ const Breadcrumb = () => {
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
 
-      // Truncate label if longer than 19 characters
-      const truncatedLabel = path.length > 19 ? `${path.slice(0, 4)}...${path.slice(-6)}` : path;
+      // Get the custom label
+      const label = getCustomLabel(path);
+
+      const truncatedLabel = path.length > 19 ? `${path.slice(0, 4)}...${path.slice(-6)}` : label;
 
       return { label: truncatedLabel, href };
     });
@@ -36,14 +38,12 @@ const Breadcrumb = () => {
           <li key={item.href} className="flex items-center">
             {index < breadcrumbItems.length - 1 ? (
               <div className="flex items-center gap-2">
-                <Link href={item.href}>
-                  {`${item.label === 'admin' ? 'Home' : capitalizeFirstLetter(item.label)}`}
-                </Link>
+                <Link href={item.href}>{capitalizeFirstLetter(item.label)}</Link>
                 <MdNavigateNext className="text-xl" />
               </div>
             ) : (
               <Link href={item.href} className="text-gray-700">
-                {`${item.label === 'admin' ? 'Home' : capitalizeFirstLetter(item.label)}`}
+                {capitalizeFirstLetter(item.label)}
               </Link>
             )}
           </li>

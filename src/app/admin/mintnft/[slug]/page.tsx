@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import configDate from '@/lib/configDate';
+import configDate from '@/utils/configDate';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 const AddressConrtact = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;

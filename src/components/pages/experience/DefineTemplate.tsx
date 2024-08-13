@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { useState } from 'react';
 
 import { uploadImageToPinata } from '@/lib/pinata';
@@ -67,7 +68,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
       return;
     }
 
-    setLoading(true); // Set loading to true when the form is submitted
+    setLoading(true);
 
     try {
       const templateIpfsHash = template ? await uploadImageToPinata(template) : null;

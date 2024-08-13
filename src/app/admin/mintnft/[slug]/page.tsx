@@ -94,10 +94,7 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
   if (!data) return <h1 className="text-center text-5xl text-black">Loading...</h1>;
 
   return (
-    <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white text-black">
-      <h1 className="mb-4 text-sm text-gray-500">
-        NFT Diploma {'>'} Define Template {'>'} Create NFT {'>'} Verify
-      </h1>
+    <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <h2 className="text-2xl font-bold">Verify</h2>
       <div className="flex flex-col justify-between md:flex-row">
         <div className="relative w-full overflow-hidden md:w-9/12">

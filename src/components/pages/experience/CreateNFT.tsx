@@ -16,12 +16,12 @@ interface Collection {
   contractAddress: string;
 }
 
-const contractAddress = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;
-// const contractAddress = '0x84bb1FDFeEe8e7781a0817A6265A70d5CDED7d1D';
+// const contractAddress = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;
+// const contractAddress = '0xd6eb618eF044e821e7C9b7123825374889E1Cf85';
 
-if (!contractAddress) {
-  throw new Error('NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT is not defined');
-}
+// if (!contractAddress) {
+//   throw new Error('NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT is not defined');
+// }
 
 const CreateNFT = ({ templateData }: any) => {
   const router = useRouter();
@@ -45,6 +45,13 @@ const CreateNFT = ({ templateData }: any) => {
   );
   const [csvData, setCsvData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (selectedContract.length > 0) {
+      // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
+      setcollectionContractAddress(selectedContract[0].contractAddress);
+    }
+  }, [selectedContract]); // Chạy effect khi selectedContract thay đổi
 
   useEffect(() => {
     if (issuedDate && authorizingOrgName) {
@@ -129,7 +136,7 @@ const CreateNFT = ({ templateData }: any) => {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         console.log(signer);
-        const contract = new ethers.Contract(contractAddress, ABI, signer);
+        const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
         const mintDataArray = [];
 
@@ -319,7 +326,7 @@ const CreateNFT = ({ templateData }: any) => {
               ) : (
                 selectedContract.map((collection) => (
                   <option key={collection.id} value={collection.contractAddress}>
-                    {collection.contractAddress}
+                    {collection.displayName}
                   </option>
                 ))
               )}

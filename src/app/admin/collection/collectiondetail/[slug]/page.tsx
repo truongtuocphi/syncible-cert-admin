@@ -6,12 +6,14 @@ import Image from 'next/image';
 import { HiTemplate } from 'react-icons/hi';
 
 import Loading from '@/components/common/loading/Loading';
+import ContractData from '@/components/pages/admin/ContractData';
 import CopyAddressButton from '@/components/pages/admin/CopyAddressButton';
 import { CollectionData } from '@/types/function';
 import fetchDataCollectionById from '@/utils/fetchDataCollectionById';
 
 export default function CollectionDetail({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<CollectionData | null>(null);
+  const [itemsCount, setItemsCount] = useState<number>(0);
   const slugPost = params.slug;
 
   useEffect(() => {
@@ -22,6 +24,10 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
 
     getData();
   }, [slugPost]);
+
+  const handleItemsCountChange = (count: number) => {
+    setItemsCount(count);
+  };
 
   if (!data) {
     return (
@@ -66,7 +72,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
       <div className="flex items-center justify-center gap-16">
         <div className="flex flex-col text-center">
           <span className="text-xl font-bold text-gray-600">Items</span>
-          <span className="text-xl font-bold text-blue-500">0</span>
+          <span className="text-xl font-bold text-blue-500">{itemsCount}</span>
         </div>
 
         <div className="flex flex-col text-center">
@@ -75,11 +81,11 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
         </div>
       </div>
 
-      <div className="flex h-screen w-full items-center justify-center">
-        <div className="flex flex-col items-center gap-2">
-          <HiTemplate className="text-7xl text-gray-500" />
-          <div className="text-lg font-semibold text-gray-500">No Item</div>
-        </div>
+      <div className="mt-4 flex h-fit w-full items-center justify-center">
+        <ContractData
+          collectionContractAddress={slugPost}
+          onItemsCountChange={handleItemsCountChange}
+        />
       </div>
     </div>
   );

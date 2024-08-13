@@ -9,6 +9,7 @@ import { useAccount } from 'wagmi';
 import ABI from '@/contract/ABI.json';
 import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
+import { saveMintData } from '@/utils/saveMintData';
 
 interface Collection {
   id: string;
@@ -237,6 +238,9 @@ const CreateNFT = ({ templateData }: any) => {
 
         await tx.wait();
         alert('NFTs minted successfully!');
+
+        // Save mint data to Firebase
+        await saveMintData(mintDataArray, collectionContractAddress);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error minting NFTs:', error);

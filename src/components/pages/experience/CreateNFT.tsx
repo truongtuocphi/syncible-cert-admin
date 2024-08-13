@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from 'react';
 
 import { ethers } from 'ethers';
@@ -6,9 +7,17 @@ import Papa from 'papaparse';
 import { useAccount } from 'wagmi';
 
 import ABI from '@/contract/ABI.json';
+import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
 
+interface Collection {
+  id: string;
+  displayName: string;
+  contractAddress: string;
+}
+
 const contractAddress = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;
+// const contractAddress = '0x84bb1FDFeEe8e7781a0817A6265A70d5CDED7d1D';
 
 if (!contractAddress) {
   throw new Error('NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT is not defined');
@@ -17,6 +26,10 @@ if (!contractAddress) {
 const CreateNFT = ({ templateData }: any) => {
   const router = useRouter();
   const { address } = useAccount();
+
+  const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
+  const [collectionContractAddress, setcollectionContractAddress] = useState('');
+
   const [fullName, setFullName] = useState(templateData?.fullName || '');
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [certificateNumber, setCertificateNumber] = useState('');
@@ -41,8 +54,39 @@ const CreateNFT = ({ templateData }: any) => {
   }, [issuedDate, role, authorizingOrgName]);
 
   useEffect(() => {
-    if (!loading) router.push(`/admin/experience/${tokenLink}`);
+    if (!loading) router.push(`/admin/mintnft/${tokenLink}`);
   }, [loading]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dbRef = ref(db, 'collections');
+        const snapshot = await get(dbRef);
+
+        if (snapshot.exists()) {
+          const collections: Collection[] = [];
+          snapshot.forEach((childSnapshot) => {
+            const collection = childSnapshot.val();
+            // Kiểm tra nếu địa chỉ ví của người dùng khớp với địa chỉ trong dữ liệu Firebase
+            if (collection.address === address) {
+              collections.push({
+                id: childSnapshot.key || '',
+                displayName: collection.displayName,
+                contractAddress: collection.contractAddress,
+              });
+            }
+          });
+          setSelectedContract(collections);
+        } else {
+          console.log('No data available');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, [address]);
 
   const generateCertificateNumber = () => {
     const randomString = Math.random().toString(36).substring(2, 7);
@@ -69,6 +113,8 @@ const CreateNFT = ({ templateData }: any) => {
     }
   };
 
+  console.log(collectionContractAddress);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!csvFile && !fullName) {
@@ -82,6 +128,7 @@ const CreateNFT = ({ templateData }: any) => {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
+        console.log(signer);
         const contract = new ethers.Contract(contractAddress, ABI, signer);
 
         const mintDataArray = [];
@@ -177,13 +224,17 @@ const CreateNFT = ({ templateData }: any) => {
           }
         }
 
-        const tx = await contract.mintBulk(mintDataArray);
+        const tx = await contract.mintBulk(mintDataArray, {
+          gasLimit: 8000000, // Adjust the gas limit as needed
+        });
+
         await tx.wait();
         alert('NFTs minted successfully!');
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error minting NFTs:', error);
         alert('Failed to mint NFTs.');
+        router.push('/admin/mintnft');
       } finally {
         setLoading(false);
       }
@@ -253,6 +304,25 @@ const CreateNFT = ({ templateData }: any) => {
             >
               <option value="Polygon">Polygon</option>
               <option value="Ethereum">Ethereum</option>
+            </select>
+          </label>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">
+            Collection
+            <select
+              onChange={(e) => setcollectionContractAddress(e.target.value)}
+              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            >
+              {selectedContract.length === 0 ? (
+                <option value="">No contracts available</option>
+              ) : (
+                selectedContract.map((collection) => (
+                  <option key={collection.id} value={collection.contractAddress}>
+                    {collection.contractAddress}
+                  </option>
+                ))
+              )}
             </select>
           </label>
         </div>

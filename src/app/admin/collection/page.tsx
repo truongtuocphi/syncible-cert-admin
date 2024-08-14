@@ -69,7 +69,19 @@ const columns: ColumnDef<Collection>[] = [
   {
     accessorKey: 'itemsCount',
     header: 'Total Items',
-    cell: ({ row }) => <div>{row.getValue('itemsCount') || 'Loading...'}</div>,
+    cell: ({ row }) => {
+      let itemsCount = row.getValue('itemsCount');
+
+      if (itemsCount === undefined) {
+        const loadingDelay = 1000;
+        setTimeout(() => {
+          itemsCount = '0';
+        }, loadingDelay);
+        return 'Loading...';
+      }
+
+      return itemsCount || '0';
+    },
   },
   {
     accessorKey: 'interface',

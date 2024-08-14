@@ -135,7 +135,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                       type="file"
                       accept="image/jpeg, image/png"
                       onChange={handleTemplateChange}
-                      className="mt-1 block h-48 w-full cursor-pointer overflow-hidden border border-dashed border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:outline-none"
+                      className="mt-1 block h-48 w-full cursor-pointer overflow-hidden rounded-md border border-dashed border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:outline-none"
                       required={!mediaSelected}
                     />
                     {previewImage && (
@@ -143,7 +143,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                         <img
                           src={previewImage}
                           alt="Selected Media"
-                          className="h-56 w-full cursor-pointer rounded-md border border-gray-300 object-contain"
+                          className="h-48 w-full cursor-pointer rounded-md border border-gray-300 object-cover"
                         />
                       </div>
                     )}
@@ -167,7 +167,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                     {predefinedTemplates.map((template) => (
                       <div
                         key={template.id}
-                        className={`cursor-pointer rounded-lg border p-2 ${
+                        className={`cursor-pointer rounded-lg border p-1 ${
                           selectedTemplate === template.imageUrl
                             ? 'border-blue-500'
                             : 'border-gray-300'
@@ -179,7 +179,9 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                           alt={template.name}
                           className="h-20 w-full rounded-md object-cover"
                         />
-                        <p className="mt-1 text-center">{template.name}</p>
+                        <p className="mt-1 text-center text-sm font-semibold text-gray-600">
+                          {template.name}
+                        </p>
                       </div>
                     ))}
                   </div>
@@ -248,13 +250,15 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                   />
                 </label>
               </div>
-              <button
-                type="submit"
-                disabled={loading}
-                className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:opacity-50"
-              >
-                {loading ? 'Submitting...' : 'Next'}
-              </button>
+              <div className="flex w-full justify-center">
+                <button
+                  type="submit"
+                  disabled={loading}
+                  className="w-40 rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:opacity-50"
+                >
+                  {loading ? 'Submitting...' : 'Next'}
+                </button>
+              </div>
             </div>
           </div>
         </form>
@@ -267,7 +271,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
             <img
               src={previewImage ? previewImage : `${headerURL}/ipfs/${selectedTemplate}`}
               alt="Certificate Template"
-              className="w-full"
+              className="w-full rounded-lg"
             />
           ) : (
             <div className="flex h-96 w-full items-center justify-center rounded-lg bg-gray-100">
@@ -279,20 +283,19 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
             className="absolute inset-0 flex flex-col items-center justify-center"
             style={{ fontFamily: 'Times New Roman, serif' }}
           >
-            {previewImage ||
-              (selectedTemplate && (
-                <div className="absolute top-[15%] text-center">
-                  <h1 className="text-[2vw] font-bold">CHỨNG NHẬN</h1>
-                  <p className="text-[0.7vw]">{`Số: xxxxx-xxxxx`}</p>
-                  <h1 className="text-[1.8vw] font-bold">{`Full Name`}</h1>
-                  <p className="mt-0 text-center text-[1vw]">
-                    Đã hoàn thành khóa đào tạo ngắn hạn
-                    <br />
-                    “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
-                  </p>
-                  <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
-                </div>
-              ))}
+            {previewImage || selectedTemplate ? (
+              <div className="absolute top-[15%] text-center">
+                <h1 className="text-[2vw] font-bold">CHỨNG NHẬN</h1>
+                <p className="text-[0.7vw]">{`Số: xxxxx-xxxxx`}</p>
+                <h1 className="text-[1.8vw] font-bold">{`Full Name`}</h1>
+                <p className="mt-0 text-center text-[1vw]">
+                  Đã hoàn thành khóa đào tạo ngắn hạn
+                  <br />
+                  “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
+                </p>
+                <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
+              </div>
+            ) : null}
 
             <div className="absolute bottom-[10%] left-[7%] flex flex-col items-center">
               {authorizingOrgName && (

@@ -17,13 +17,6 @@ interface Collection {
   contractAddress: string;
 }
 
-// const contractAddress = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;
-// const contractAddress = '0xd6eb618eF044e821e7C9b7123825374889E1Cf85';
-
-// if (!contractAddress) {
-//   throw new Error('NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT is not defined');
-// }
-
 const CreateNFT = ({ templateData }: any) => {
   const router = useRouter();
   const { address } = useAccount();
@@ -46,13 +39,14 @@ const CreateNFT = ({ templateData }: any) => {
   );
   const [csvData, setCsvData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
+  const [loadingButton, setLoadingButton] = useState(false);
 
   useEffect(() => {
     if (selectedContract.length > 0) {
       // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
       setcollectionContractAddress(selectedContract[0].contractAddress);
     }
-  }, [selectedContract]); // Chạy effect khi selectedContract thay đổi
+  }, [selectedContract]);
 
   useEffect(() => {
     if (issuedDate && authorizingOrgName) {
@@ -62,7 +56,7 @@ const CreateNFT = ({ templateData }: any) => {
   }, [issuedDate, role, authorizingOrgName]);
 
   useEffect(() => {
-    if (!loading) router.push(`/admin/mintnft/${tokenLink}`);
+    if (loading) router.push(`/admin/collection/collectiondetail/${collectionContractAddress}`);
   }, [loading]);
 
   useEffect(() => {
@@ -131,8 +125,7 @@ const CreateNFT = ({ templateData }: any) => {
     }
 
     if (address) {
-      setLoading(true);
-
+      setLoadingButton(true);
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
@@ -233,19 +226,18 @@ const CreateNFT = ({ templateData }: any) => {
         }
 
         const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 8000000, // Adjust the gas limit as needed
+          gasLimit: 8000000,
         });
 
         await tx.wait();
         alert('NFTs minted successfully!');
+        setLoading(true);
 
-        // Save mint data to Firebase
         await saveMintData(mintDataArray, collectionContractAddress);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error minting NFTs:', error);
         alert('Failed to mint NFTs.');
-        router.push('/admin/mintnft');
       } finally {
         setLoading(false);
       }
@@ -363,10 +355,10 @@ const CreateNFT = ({ templateData }: any) => {
         </div>
         <button
           type="submit"
-          disabled={loading}
+          disabled={loadingButton}
           className="mt-4 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
         >
-          {loading ? (
+          {loadingButton ? (
             <span className="flex items-center">
               <svg
                 className="mr-2 h-5 w-5 animate-spin text-white"

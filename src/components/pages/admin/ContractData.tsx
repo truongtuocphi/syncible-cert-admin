@@ -73,7 +73,7 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
                   <img
                     src={`${headerURL}/ipfs/${item.mintData[0].certData.templateURL}`}
                     alt="Certificate Template"
-                    className="w-full"
+                    className="h-full w-full"
                   />
                   <div
                     className="absolute inset-0 flex flex-col items-center justify-center"

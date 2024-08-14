@@ -23,7 +23,6 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <Sidebar />
           <div className="ml-64 flex-1 p-6 pt-16">
             <Header />
-            {/* <div className="mt-10 rounded-lg bg-white p-6 text-black shadow-md">{children}</div> */}
             <div className="mt-10 text-black">{children}</div>
           </div>
         </div>

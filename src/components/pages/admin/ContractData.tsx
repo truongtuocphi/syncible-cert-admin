@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { db, ref, get } from '@/lib/firebase'; // Import your Firebase setup
+import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
 import { HiTemplate } from 'react-icons/hi';
 
@@ -19,7 +19,7 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const dbRef = ref(db, 'mintData'); // Reference to your 'mintData' node
+        const dbRef = ref(db, 'mintData');
         const snapshot = await get(dbRef);
 
         if (snapshot.exists()) {

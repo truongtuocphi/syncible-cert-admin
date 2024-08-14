@@ -58,13 +58,11 @@ const Page = () => {
             />
           </div>
         </div>
-
         <>
           <SectionAbout />
           <SectionWhatWeBelieve />
           <SectionOurVision />
         </>
-
         <div className="relative text-white">
           <Footer />
         </div>

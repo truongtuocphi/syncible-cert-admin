@@ -41,7 +41,6 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
     <div className="h-fit w-full rounded-lg bg-white p-6">
       <div className="w-full">
         <div className="relative h-80 w-full">
-          {/* Banner */}
           <Image
             src={data.bannerImage}
             width={500}
@@ -49,7 +48,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             alt={'Banner'}
             className="h-80 w-full rounded-xl object-cover "
           />
-          {/* avatar */}
+
           <div className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 translate-y-[40%] rounded-full border-[0.5px] border-gray-400 bg-white">
             <Image
               src={data.logoImage}

@@ -5,6 +5,7 @@ import { HiTemplate } from 'react-icons/hi';
 
 import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
+import Link from 'next/link';
 
 interface Props {
   collectionContractAddress: string;
@@ -67,44 +68,46 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
         <>
           {data.map((item, index) => {
             return (
-              <div className="relative w-full overflow-hidden" key={index}>
-                <img
-                  src={`${headerURL}/ipfs/${item.mintData[0].certData.templateURL}`}
-                  alt="Certificate Template"
-                  className="w-full"
-                />
-                <div
-                  className="absolute inset-0 flex flex-col items-center justify-center"
-                  style={{ fontFamily: 'Times New Roman, serif' }}
-                >
-                  <div className="absolute top-[15%] text-center">
-                    <h1 className="text-[1.5vw] font-bold">CHỨNG NHẬN</h1>
-                    <p className="text-[0.7vw]">{`Số: ${item.mintData[0].certificateId}`}</p>
-                    <h1 className="text-[2vw] font-bold">{item.mintData[0].fullName}</h1>
-                    <p className="mt-2 text-center text-[1vw]">
-                      Đã hoàn thành khóa đào tạo ngắn hạn
-                      <br />
-                      “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
-                    </p>
-                    <span className="mt-2 text-[0.8vw]">
-                      {configDate(item.mintData[0].certData.date)}
-                    </span>
-                  </div>
-                  <div className="absolute bottom-[10%] left-[7%] flex flex-col items-center">
-                    <img
-                      src={`${headerURL}/ipfs/${item.mintData[0].certData.headSignature}`}
-                      alt="Head Signature"
-                      className="w-[5vw]"
-                    />
-                    <div className="text-center">
-                      <p className="text-[0.8vw]">{item.mintData[0].certData.headName}</p>
-                      <p className="text-[0.8vw]">{`${item.mintData[0].certData.headPosition} tổ chức ${item.mintData[0].certData.organizationName}`}</p>
-                      <p className="text-[0.8vw]">{`Giấy chứng nhận số: ${item.mintData[0].certificateId}`}</p>
-                      <p className="text-[0.8vw]">{`của ${item.mintData[0].certData.organizationName}, cấp ngày ${item.mintData[0].certData.date}`}</p>
+              <Link href={`/admin/mintnft/${item.mintData[0].tokenURI}`} key={index}>
+                <div className="relative h-full w-full overflow-hidden">
+                  <img
+                    src={`${headerURL}/ipfs/${item.mintData[0].certData.templateURL}`}
+                    alt="Certificate Template"
+                    className="w-full"
+                  />
+                  <div
+                    className="absolute inset-0 flex flex-col items-center justify-center"
+                    style={{ fontFamily: 'Times New Roman, serif' }}
+                  >
+                    <div className="absolute top-[15%] text-center">
+                      <h1 className="text-[1.5vw] font-bold">CHỨNG NHẬN</h1>
+                      <p className="text-[0.7vw]">{`Số: ${item.mintData[0].certificateId}`}</p>
+                      <h1 className="text-[2vw] font-bold">{item.mintData[0].fullName}</h1>
+                      <p className="mt-2 text-center text-[1vw]">
+                        Đã hoàn thành khóa đào tạo ngắn hạn
+                        <br />
+                        “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
+                      </p>
+                      <span className="mt-2 text-[0.8vw]">
+                        {configDate(item.mintData[0].certData.date)}
+                      </span>
+                    </div>
+                    <div className="absolute bottom-[10%] left-[7%] flex flex-col items-center">
+                      <img
+                        src={`${headerURL}/ipfs/${item.mintData[0].certData.headSignature}`}
+                        alt="Head Signature"
+                        className="w-[5vw]"
+                      />
+                      <div className="text-center">
+                        <p className="text-[0.8vw]">{item.mintData[0].certData.headName}</p>
+                        <p className="text-[0.8vw]">{`${item.mintData[0].certData.headPosition} tổ chức ${item.mintData[0].certData.organizationName}`}</p>
+                        <p className="text-[0.8vw]">{`Giấy chứng nhận số: ${item.mintData[0].certificateId}`}</p>
+                        <p className="text-[0.8vw]">{`của ${item.mintData[0].certData.organizationName}, cấp ngày ${item.mintData[0].certData.date}`}</p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </>

@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
-import { HiTemplate } from 'react-icons/hi';
 
 import Loading from '@/components/common/loading/Loading';
 import ContractData from '@/components/pages/admin/ContractData';

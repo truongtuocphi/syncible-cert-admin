@@ -2,7 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
+import { useRouter } from 'next/navigation';
+import { FaArrowLeft } from 'react-icons/fa';
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import configDate from '@/utils/configDate';
+
+import { db, ref, get } from '@/lib/firebase';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 const AddressConrtact = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;
@@ -19,7 +24,10 @@ if (!AddressConrtact) {
 
 const IdExperience = ({ params }: { params: { slug: string } }) => {
   const slugPost = params.slug;
+  const router = useRouter();
   const [data, setData] = useState(null);
+  const [dataContract, setDataContract] = useState<any[]>([]);
+  const [error, setError] = useState<string | null>(null);
 
   const [name, setName] = useState('');
   const [certificateID, setCertificateID] = useState('');
@@ -32,6 +40,8 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
   const [date, setDate] = useState('');
   const [blockchainType, setBlockchainType] = useState('');
   const [templateURL, setTemplateURL] = useState('');
+
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,77 +101,122 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
     fetchData();
   }, [slugPost]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const dbRef = ref(db, 'mintData');
+        const snapshot = await get(dbRef);
+
+        if (snapshot.exists()) {
+          const dataFromFirebase = snapshot.val();
+          const matchingData = Object.values(dataFromFirebase).filter(
+            (item: any) => item.mintData[0].tokenURI === slugPost
+          );
+
+          if (matchingData) {
+            setDataContract(matchingData);
+          } else {
+            setError('No matching data found.');
+          }
+        } else {
+          setError('No data available in Firebase.');
+        }
+      } catch (err: any) {
+        setError(err.message || 'An error occurred while fetching data from Firebase.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (slugPost) {
+      fetchData();
+    }
+  }, [slugPost]);
+
+  const handleBack = () => {
+    router.back();
+  };
+
   if (!data) return <h1 className="text-center text-5xl text-black">Loading...</h1>;
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>error</p>;
 
   return (
-    <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
-      <h2 className="text-2xl font-bold">Verify</h2>
-      <div className="flex flex-col justify-between md:flex-row">
-        <div className="relative w-full overflow-hidden md:w-9/12">
-          <img
-            src={`${headerURL}/ipfs/${templateURL}`}
-            alt="Certificate Template"
-            className="w-full"
-          />
-          <div
-            className="absolute inset-0 flex flex-col items-center justify-center"
-            style={{ fontFamily: 'Times New Roman, serif' }}
-          >
-            <div className="absolute top-[15%] text-center">
-              <h1 className="text-[1.5vw] font-bold md:text-[3vw]">CHỨNG NHẬN</h1>
-              <p className="text-[1.5vw] md:text-[1.5vw] lg:text-[1.2vw]">{`Số: ${certificateID}`}</p>
-              <h1 className="text-[2vw] font-bold md:text-[2.5vw] 2xl:text-[4vw]">
-                {name.split('Certificate for')}
-              </h1>
-              <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[1.5vw]">
-                Đã hoàn thành khóa đào tạo ngắn hạn
-                <br />
-                “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
-              </p>
-              <span className="mt-2 text-[2.5vw] md:text-[1.5vw] lg:text-[1.2vw]">
-                {configDate(date)}
-              </span>
-            </div>
-            <div className="absolute bottom-[10%] left-[7%] flex flex-col items-center">
-              <img
-                src={`${headerURL}/ipfs/${headSignature}`}
-                alt="Head Signature"
-                className="w-[4vw] md:w-[5vw] lg:w-[7vw]"
-              />
-              <div className="text-center">
-                <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headName}`}</p>
-                <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headPosition} tổ chức ${organizationName}`}</p>
-                <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`Giấy chứng nhận số: ${certificateID}`}</p>
-                <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`của ${organizationName}, cấp ngày ${date}`}</p>
+    <>
+      <div className="flex items-center gap-2">
+        <ButtonPrimary className="rounded-lg bg-blue-500" onClick={handleBack}>
+          <FaArrowLeft className="text-xl text-white" />
+        </ButtonPrimary>
+        <h2 className="text-2xl font-bold text-gray-600">Verify</h2>
+      </div>
+      <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
+        <div className="flex flex-col justify-between md:flex-row">
+          <div className="relative w-full overflow-hidden md:w-9/12">
+            <img
+              src={`${headerURL}/ipfs/${templateURL}`}
+              alt="Certificate Template"
+              className="w-full rounded-lg"
+            />
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center"
+              style={{ fontFamily: 'Times New Roman, serif' }}
+            >
+              <div className="absolute top-[15%] text-center">
+                <h1 className="text-[1.5vw] font-bold md:text-[3vw]">CHỨNG NHẬN</h1>
+                <p className="text-[1.5vw] md:text-[1.5vw] lg:text-[1.2vw]">{`Số: ${certificateID}`}</p>
+                <h1 className="text-[2vw] font-bold md:text-[2.5vw] 2xl:text-[4vw]">
+                  {name.split('Certificate for')}
+                </h1>
+                <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[1.5vw]">
+                  Đã hoàn thành khóa đào tạo ngắn hạn
+                  <br />
+                  “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
+                </p>
+                <span className="mt-2 text-[2.5vw] md:text-[1.5vw] lg:text-[1.2vw]">
+                  {configDate(date)}
+                </span>
+              </div>
+              <div className="absolute bottom-[10%] left-[7%] flex flex-col items-center">
+                <img
+                  src={`${headerURL}/ipfs/${headSignature}`}
+                  alt="Head Signature"
+                  className="w-[4vw] md:w-[5vw] lg:w-[7vw]"
+                />
+                <div className="text-center">
+                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headName}`}</p>
+                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headPosition} tổ chức ${organizationName}`}</p>
+                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`Giấy chứng nhận số: ${certificateID}`}</p>
+                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`của ${organizationName}, cấp ngày ${date}`}</p>
+                </div>
               </div>
             </div>
           </div>
+          <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-4/12">
+            <h3 className="text-3xl font-bold text-black">{name}</h3>
+            <p className="mt-2 text-lg">Tên chứng nhận: {description}</p>
+            <textarea
+              className="mt-4 h-32 w-full rounded border border-gray-300 p-2"
+              value={description}
+              readOnly
+            />
+          </div>
         </div>
-        <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-4/12">
-          <h3 className="text-3xl font-bold text-black">{name}</h3>
-          <p className="mt-2 text-lg">Tên chứng nhận: {description}</p>
-          <textarea
-            className="mt-4 h-32 w-full rounded border border-gray-300 p-2"
-            value={description}
-            readOnly
-          />
+        <div className="mt-6 flex flex-col justify-between md:flex-row">
+          <div className="flex w-full flex-col items-start md:w-1/2">
+            <h4 className="text-xl font-bold">Full details</h4>
+            <p className="mt-2">Production location: VietNam</p>
+            <p className="mt-2">Dymension: 500x300</p>
+            <p className="mt-2">{`Certificate ID: ${certificateID}`}</p>
+          </div>
+          <div className="flex w-full flex-col items-start md:w-1/2">
+            <h4 className="text-xl font-bold">Chain Information</h4>
+            <p className="mt-2">{`Blockchain: ${blockchainType}`}</p>
+            <p className="mt-2">{`Token ID: ${slugPost}`}</p>
+            <p className="mt-2">{`Contract address: ${dataContract[0].collectionContractAddress}`}</p>
+          </div>
         </div>
       </div>
-      <div className="mt-6 flex flex-col justify-between md:flex-row">
-        <div className="flex w-full flex-col items-start md:w-1/2">
-          <h4 className="text-xl font-bold">Full details</h4>
-          <p className="mt-2">Production location: VietNam</p>
-          <p className="mt-2">Dymension: 500x300</p>
-          <p className="mt-2">{`Certificate ID: ${certificateID}`}</p>
-        </div>
-        <div className="flex w-full flex-col items-start md:w-1/2">
-          <h4 className="text-xl font-bold">Chain Information</h4>
-          <p className="mt-2">{`Blockchain: ${blockchainType}`}</p>
-          <p className="mt-2">{`Token ID: ${slugPost}`}</p>
-          <p className="mt-2">{`Contract address: ${AddressConrtact}`}</p>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

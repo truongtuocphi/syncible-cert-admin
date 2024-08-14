@@ -8,6 +8,9 @@ import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import configDate from '@/utils/configDate';
 
 import { db, ref, get } from '@/lib/firebase';
+import Link from 'next/link';
+import { RiShareBoxLine } from 'react-icons/ri';
+import CopyButton from '@/components/common/coppyText/CopyButton';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 const AddressConrtact = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;
@@ -211,8 +214,32 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
           <div className="flex w-full flex-col items-start md:w-1/2">
             <h4 className="text-xl font-bold">Chain Information</h4>
             <p className="mt-2">{`Blockchain: ${blockchainType}`}</p>
-            <p className="mt-2">{`Token ID: ${slugPost}`}</p>
-            <p className="mt-2">{`Contract address: ${dataContract[0].collectionContractAddress}`}</p>
+            <div className="mt-2 flex items-center gap-2">
+              <p>
+                {`Token ID: `}
+                <span className="text-blue-500 underline">
+                  {slugPost.slice(0, 4)}...{slugPost.slice(-6)}
+                </span>
+              </p>
+              <CopyButton textToCopy={slugPost} />
+            </div>
+            <div className="mt-2 flex items-center gap-2">
+              <p>
+                {`Contract address: `}
+                <span className="text-blue-500 underline">
+                  {dataContract[0].collectionContractAddress.slice(0, 4)}...
+                  {dataContract[0].collectionContractAddress.slice(-6)}
+                </span>
+              </p>
+              <CopyButton textToCopy={dataContract[0].collectionContractAddress} />
+              <Link
+                href={`https://polygonscan.com/address/${dataContract[0].collectionContractAddress}`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <RiShareBoxLine className="text-blue-500" />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

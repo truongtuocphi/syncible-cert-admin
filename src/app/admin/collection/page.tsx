@@ -21,6 +21,7 @@ import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import CopyButton from '@/components/common/coppyText/CopyButton';
+import ContractData from '@/components/pages/admin/ContractData';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -41,6 +42,7 @@ export type Collection = {
   contractSymbol: string;
   interface: string;
   contractAddress: string;
+  itemsCount?: number; // Add itemsCount as an optional property
 };
 
 const columns: ColumnDef<Collection>[] = [
@@ -65,12 +67,12 @@ const columns: ColumnDef<Collection>[] = [
     cell: ({ row }) => <div>{row.getValue('contractSymbol')}</div>,
   },
   {
-    accessorKey: 'Total Owner',
-    header: 'Total Owner',
-    cell: () => <div>1</div>,
+    accessorKey: 'itemsCount',
+    header: 'Total Items',
+    cell: ({ row }) => <div>{row.getValue('itemsCount') || 'Loading...'}</div>,
   },
   {
-    accessorKey: 'Interface',
+    accessorKey: 'interface',
     header: 'Interface',
     cell: () => <div>ERC-721</div>,
   },
@@ -115,7 +117,7 @@ const columns: ColumnDef<Collection>[] = [
 ];
 
 export default function Collection() {
-  const { address } = useAccount(); // Lấy địa chỉ ví của người dùng
+  const { address } = useAccount();
   const [data, setData] = useState<Collection[]>([]);
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -130,7 +132,6 @@ export default function Collection() {
         const collections: Collection[] = [];
         snapshot.forEach((childSnapshot: any) => {
           const collection = childSnapshot.val();
-          // Kiểm tra nếu địa chỉ ví của người dùng khớp với địa chỉ trong dữ liệu Firebase
           if (collection.address === address) {
             collections.push({
               id: childSnapshot.key || '',
@@ -148,6 +149,14 @@ export default function Collection() {
 
     fetchData();
   }, [address]);
+
+  const handleItemsCountChange = (id: string, count: number) => {
+    setData((prevData) =>
+      prevData.map((collection) =>
+        collection.id === id ? { ...collection, itemsCount: count } : collection
+      )
+    );
+  };
 
   const table = useReactTable<Collection>({
     data,
@@ -205,6 +214,14 @@ export default function Collection() {
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
+                  <div className="hidden">
+                    <ContractData
+                      collectionContractAddress={row.getValue('contractAddress')}
+                      onItemsCountChange={(count: number) =>
+                        handleItemsCountChange(row.getValue('id'), count)
+                      }
+                    />
+                  </div>
                 </TableRow>
               ))
             ) : (

@@ -45,7 +45,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             width={500}
             height={300}
             alt={'Banner'}
-            className="h-80 w-full rounded-xl object-cover "
+            className="h-80 w-full rounded-xl border-[0.5px] border-gray-200 object-cover"
           />
 
           <div className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 translate-y-[40%] rounded-full border-[0.5px] border-gray-400 bg-white">
@@ -65,7 +65,9 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
         </div>
       </div>
 
-      <div className="my-6 w-full border-[1px] border-gray-200 px-6"></div>
+      <div className="px-40">
+        <div className="my-6 w-full border-[0.5px] border-gray-200 px-6"></div>
+      </div>
 
       <div className="flex items-center justify-center gap-16">
         <div className="flex flex-col text-center">

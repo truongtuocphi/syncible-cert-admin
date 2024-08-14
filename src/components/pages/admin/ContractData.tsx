@@ -1,11 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
 
+import Link from 'next/link';
 import { HiTemplate } from 'react-icons/hi';
 
 import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
-import Link from 'next/link';
 
 interface Props {
   collectionContractAddress: string;

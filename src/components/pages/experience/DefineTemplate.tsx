@@ -158,7 +158,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                 <button
                   type="button"
                   onClick={() => setShowChooseTemplate(!showChooseTemplate)}
-                  className="rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+                  className="rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
                 >
                   Select template
                 </button>
@@ -264,6 +264,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
         </form>
       </div>
 
+      {/* Preview */}
       <div className="sticky h-fit w-[50%] rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
         <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
         <div className="relative h-full w-full overflow-hidden">

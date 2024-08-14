@@ -1,11 +1,14 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
+
+import { HiTemplate } from 'react-icons/hi';
 
 import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
-import { HiTemplate } from 'react-icons/hi';
 
 interface Props {
   collectionContractAddress: string;
+  // eslint-disable-next-line no-unused-vars
   onItemsCountChange: (count: number) => void;
 }
 
@@ -57,8 +60,6 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
         <div className="text-lg font-semibold text-gray-500">No Item</div>
       </div>
     );
-
-  console.log(data);
 
   return (
     <div className="grid grid-cols-2 gap-6">

@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode } from 'react';
 
 import { headers } from 'next/headers';
 import { cookieToInitialState } from 'wagmi';

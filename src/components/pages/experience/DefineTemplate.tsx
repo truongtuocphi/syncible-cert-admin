@@ -276,7 +276,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
             />
           ) : (
             <div className="flex h-96 w-full items-center justify-center rounded-lg bg-gray-100">
-              <p className="text-sm font-semibold text-gray-600">Preview of your collection</p>
+              <p className="text-sm font-semibold text-gray-600">Preview of your Template</p>
             </div>
           )}
 

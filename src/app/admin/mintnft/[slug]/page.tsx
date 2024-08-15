@@ -1,16 +1,18 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { useEffect, useState } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { FaArrowLeft } from 'react-icons/fa';
-import ButtonPrimary from '@/components/common/button/ButtonPrimary';
-import configDate from '@/utils/configDate';
-
-import { db, ref, get } from '@/lib/firebase';
-import Link from 'next/link';
 import { RiShareBoxLine } from 'react-icons/ri';
+
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import CopyButton from '@/components/common/coppyText/CopyButton';
+import Loading from '@/components/common/loading/Loading';
+import { db, ref, get } from '@/lib/firebase';
+import configDate from '@/utils/configDate';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 const AddressConrtact = process.env.NEXT_PUBLIC_CERTIFICATE_NFT_CONTRACT;
@@ -39,10 +41,10 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
   const [headPosition, setHeadPosition] = useState('');
   const [headSignature, setHeadSignature] = useState('');
   const [description, setDescription] = useState('');
-  const [position, setPosition] = useState('');
   const [date, setDate] = useState('');
   const [blockchainType, setBlockchainType] = useState('');
   const [templateURL, setTemplateURL] = useState('');
+  // const [position, setPosition] = useState('');
 
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -81,9 +83,9 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
         setDescription(
           attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Description').value
         );
-        setPosition(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Position').value
-        );
+        // setPosition(
+        //   attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Position').value
+        // );
         setDate(
           attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Date').value
         );
@@ -140,8 +142,8 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
     router.back();
   };
 
-  if (!data) return <h1 className="text-center text-5xl text-black">Loading...</h1>;
-  if (loading) return <p>Loading...</p>;
+  if (!data) return <Loading />;
+  if (loading) return <Loading />;
   if (error) return <p>error</p>;
 
   return (

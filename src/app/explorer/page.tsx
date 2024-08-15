@@ -5,13 +5,14 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 
+import { HiTemplate } from 'react-icons/hi';
+
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import { CollectionData } from '@/types/function';
 import configDate from '@/utils/configDate';
 import fetchDataFirebase from '@/utils/featDataFirebase';
-import { HiTemplate } from 'react-icons/hi';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 

@@ -1,4 +1,5 @@
 export interface CollectionData {
+  mintData?: any;
   address: string;
   bannerImage: string;
   contractAddress: string;

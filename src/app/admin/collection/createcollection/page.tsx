@@ -217,12 +217,15 @@ const CreateCollection: React.FC = () => {
             <input
               type="text"
               value={displayName}
-              onChange={(e) => setDisplayName(e.target.value)}
+              onChange={(e) => {
+                setDisplayName(e.target.value);
+                setContractName(e.target.value);
+              }}
               className="block w-full rounded-lg border px-4 py-2 focus:ring focus:ring-indigo-200"
               required
             />
           </div>
-          <div className="space-y-2">
+          {/* <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Contract Name</label>
             <p className="text-xs text-gray-400">
               This contract name can&apos;t be changed in the future.
@@ -234,7 +237,7 @@ const CreateCollection: React.FC = () => {
               className="block w-full rounded-lg border px-4 py-2 focus:ring focus:ring-indigo-200"
               required
             />
-          </div>
+          </div> */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Contract Symbol</label>
             <p className="text-xs text-gray-400">

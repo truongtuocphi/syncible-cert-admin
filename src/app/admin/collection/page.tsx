@@ -56,11 +56,11 @@ const columns: ColumnDef<Collection>[] = [
     header: 'Display Name',
     cell: ({ row }) => <div>{row.getValue('displayName')}</div>,
   },
-  {
-    accessorKey: 'contractName',
-    header: 'Contract Name',
-    cell: ({ row }) => <div>{row.getValue('contractName')}</div>,
-  },
+  // {
+  //   accessorKey: 'contractName',
+  //   header: 'Contract Name',
+  //   cell: ({ row }) => <div>{row.getValue('contractName')}</div>,
+  // },
   {
     accessorKey: 'contractSymbol',
     header: 'Contract Symbol',
@@ -83,11 +83,11 @@ const columns: ColumnDef<Collection>[] = [
       return itemsCount || '0';
     },
   },
-  {
-    accessorKey: 'interface',
-    header: 'Interface',
-    cell: () => <div>ERC-721</div>,
-  },
+  // {
+  //   accessorKey: 'interface',
+  //   header: 'Interface',
+  //   cell: () => <div>ERC-721</div>,
+  // },
   {
     accessorKey: 'contractAddress',
     header: 'Contract Address',

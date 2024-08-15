@@ -38,7 +38,6 @@ export default function Login() {
     setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      // Loading will be handled by the useEffect hook
     } catch (error) {
       setLoading(false);
       setError('Invalid credentials.');
@@ -49,7 +48,6 @@ export default function Login() {
     setLoading(true);
     try {
       await signInWithPopup(auth, provider);
-      // Loading will be handled by the useEffect hook
     } catch (error) {
       setLoading(false);
       setError('Failed to sign in with Google.');
@@ -73,7 +71,6 @@ export default function Login() {
         <div className="mx-auto w-full max-w-lg p-6">
           <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>
           {loading && <Loading />}
-          {error && <p className="text-red-500">{error}</p>}
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-left font-semibold">
@@ -103,9 +100,13 @@ export default function Login() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
+
+            {error && <p className="mt-2 text-center text-red-500">{error}</p>}
+
             <button
               type="submit"
-              className="w-full rounded-full bg-indigo-500 py-2 text-white hover:bg-indigo-600"
+              disabled={loading}
+              className="w-full rounded-full bg-indigo-500 py-2 text-white hover:bg-indigo-600 disabled:opacity-50"
             >
               Sign in
             </button>
@@ -114,7 +115,8 @@ export default function Login() {
             <p className="text-sm">Or</p>
             <button
               onClick={handleGoogleSignIn}
-              className="mt-2 flex w-full items-center justify-center rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200"
+              disabled={loading}
+              className="mt-2 flex w-full items-center justify-center rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
             >
               <GoogleIcon className="mr-2 size-6" />
               Sign in with Google

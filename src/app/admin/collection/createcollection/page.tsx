@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { ref, set } from 'firebase/database';
 import Image from 'next/image';
@@ -22,7 +22,9 @@ const CreateCollection: React.FC = () => {
   const [contractSymbol, setContractSymbol] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [top, setTop] = useState(20);
 
   const handleImageChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -114,6 +116,23 @@ const CreateCollection: React.FC = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 5) {
+        setTop(100);
+      } else {
+        setTop(20);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup khi component bị unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <div className="space-y-6">
@@ -248,7 +267,10 @@ const CreateCollection: React.FC = () => {
         </form>
 
         {/* Preview Section */}
-        <div className="h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-2/5">
+        <div
+          className="sticky h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-2/5"
+          style={{ top: `${top}px` }}
+        >
           <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
           <div className="h-fit w-full rounded-lg border-[0.5px] border-dashed border-gray-400 p-3">
             <div className="relative h-56">

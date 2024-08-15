@@ -140,7 +140,7 @@ const CreateNFT = ({ templateData }: any) => {
               name: `Certificate for ${data.fullName}`,
               tokenURI: tokenLink,
               attributes: [
-                { trait_type: 'Certificate ID', value: generateCertificateNumber() },
+                { trait_type: 'Certificate ID', value: certificateNumber },
                 { trait_type: 'Role', value: data.role },
                 { trait_type: 'Date', value: data.issuedDate },
                 { trait_type: 'Organization Name', value: data.authorizingOrgName },
@@ -164,7 +164,7 @@ const CreateNFT = ({ templateData }: any) => {
             mintDataArray.push({
               owner: address,
               fullName: data.fullName,
-              certificateId: generateCertificateNumber(),
+              certificateId: certificateNumber,
               tokenURI: tokenURI,
               certData: {
                 organizationName: data.authorizingOrgName,
@@ -184,7 +184,7 @@ const CreateNFT = ({ templateData }: any) => {
             const metadata = {
               name: `Certificate for ${fullName}`,
               attributes: [
-                { trait_type: 'Certificate ID', value: generateCertificateNumber() },
+                { trait_type: 'Certificate ID', value: certificateNumber },
                 { trait_type: 'Role', value: role },
                 { trait_type: 'Date', value: issuedDate },
                 { trait_type: 'Organization Name', value: authorizingOrgName },
@@ -208,7 +208,7 @@ const CreateNFT = ({ templateData }: any) => {
             mintDataArray.push({
               owner: address,
               fullName: fullName,
-              certificateId: generateCertificateNumber(),
+              certificateId: certificateNumber,
               tokenURI: tokenURI,
               certData: {
                 organizationName: authorizingOrgName,

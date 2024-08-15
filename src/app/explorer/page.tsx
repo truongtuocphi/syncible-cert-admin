@@ -11,6 +11,7 @@ import Navbar from '@/components/layout/Navbar';
 import { CollectionData } from '@/types/function';
 import configDate from '@/utils/configDate';
 import fetchDataFirebase from '@/utils/featDataFirebase';
+import { HiTemplate } from 'react-icons/hi';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -52,7 +53,7 @@ export default function Explorer() {
           </div>
 
           {/* Hiển thị dữ liệu */}
-          {data && (
+          {data ? (
             <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
               <div className="mx-auto mt-5 w-2/3 space-y-4 rounded-xl bg-white p-4 text-black">
                 <div className="relative w-full overflow-hidden">
@@ -97,6 +98,13 @@ export default function Explorer() {
                 </div>
               </div>
             </Link>
+          ) : (
+            <div className="flex h-screen w-full items-center justify-center">
+              <div className="flex flex-col items-center gap-2">
+                <HiTemplate className="text-7xl text-white" />
+                <div className="text-lg font-semibold text-white">No Item</div>
+              </div>
+            </div>
           )}
         </div>
       </div>

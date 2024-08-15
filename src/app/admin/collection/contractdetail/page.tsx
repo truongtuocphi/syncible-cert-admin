@@ -13,9 +13,5 @@ export default function ContractDetail() {
     router.push('/admin/collection');
   }, []);
 
-  return (
-    <>
-      <Loading />
-    </>
-  );
+  return <Loading />;
 }

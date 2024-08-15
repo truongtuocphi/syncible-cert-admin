@@ -16,10 +16,8 @@ const Experience = () => {
 
   return (
     <>
-      <div>
-        {step === 0 && <DefineTemplate onNext={handleNextFromDefineTemplate} />}
-        {step === 1 && <CreateNFT templateData={templateData} />}
-      </div>
+      {step === 0 && <DefineTemplate onNext={handleNextFromDefineTemplate} />}
+      {step === 1 && <CreateNFT templateData={templateData} />}
     </>
   );
 };

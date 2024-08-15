@@ -13,9 +13,5 @@ export default function CollectionDetail() {
     router.push('/admin/collection');
   }, []);
 
-  return (
-    <>
-      <Loading />
-    </>
-  );
+  return <Loading />;
 }

@@ -24,12 +24,7 @@ export default function RootLayout({
       <body className={`backgroundCustom min-h-screen w-full bg-cover bg-center`}>
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <Web3ModalProvider initialState={initialState}>
-          <main className="relative">
-            {/* <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">
-              <Navbar />
-            </div> */}
-            {children}
-          </main>
+          <main className="relative">{children}</main>
         </Web3ModalProvider>
       </body>
     </html>

@@ -54,8 +54,8 @@ export default function Explorer() {
 
           {/* Hiển thị dữ liệu */}
           {data ? (
-            <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
-              <div className="mx-auto mt-5 w-2/3 space-y-4 rounded-xl bg-white p-4 text-black">
+            <div className="mx-auto mt-5 w-2/3 space-y-4 rounded-xl bg-white p-4 text-black">
+              <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
                 <div className="relative w-full overflow-hidden">
                   <img
                     src={`${headerURL}/ipfs/${data.mintData[0].certData.templateURL}`}
@@ -96,8 +96,8 @@ export default function Explorer() {
                     </div>
                   </div>
                 </div>
-              </div>
-            </Link>
+              </Link>
+            </div>
           ) : (
             <div className="flex h-screen w-full items-center justify-center">
               <div className="flex flex-col items-center gap-2">

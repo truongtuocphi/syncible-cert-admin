@@ -174,7 +174,7 @@ const CreateCollection: React.FC = () => {
               size: 1400 x 400 px. Supported formats: JPG, PNG, SVG. Maximum size: 3 MB.
             </p>
             <div
-              className="relative flex h-56 w-full items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
+              className="relative flex h-56 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
               onDrop={(e) => handleDrop(e, setBannerImage)}
               onDragOver={handleDragOver}
             >

@@ -25,7 +25,7 @@ const listCard = [
     des: 'Edit the look and specialize your own theme. Add your logo, colors, and images to reflect your brand.',
     icon: <MdOutlineDashboardCustomize className="text-2xl text-white" />,
     titleButton: 'Customized here',
-    link: '/admin',
+    link: '/admin/customized',
   },
   {
     title: 'Mint NFT',

@@ -25,13 +25,13 @@ const predefinedTemplates = [
 ];
 
 const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
-  const [template, setTemplate] = useState<File | null>(null);
-  const [description, setDescription] = useState('');
   const [authorizingOrgName, setAuthorizingOrgName] = useState('');
   const [headOrgName, setHeadOrgName] = useState('');
   const [headOrgPosition, setHeadOrgPosition] = useState('');
   const [headOrgSignature, setHeadOrgSignature] = useState<File | null>(null);
+  const [description, setDescription] = useState('');
 
+  const [template, setTemplate] = useState<File | null>(null);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [mediaSelected, setMediaSelected] = useState(false);
 

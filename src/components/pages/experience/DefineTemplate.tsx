@@ -19,7 +19,7 @@ const predefinedTemplates = [
   },
   {
     id: 2,
-    imageUrl: 'QmRGhFiD5btgJn788WqTrtEDPNF6M2SxhMr4irZBVggSXF',
+    imageUrl: 'QmVu93iupu1Bq38y99rKK4vzSKa13VRfbWXiEeuDgeLDRn',
     name: 'Certificate 2',
   },
 ];
@@ -269,12 +269,12 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
       {/* Preview */}
       <div className="sticky h-fit w-[50%] rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
         <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
-        <div className="relative h-full w-full overflow-hidden">
+        <div className="relative h-[360px] w-full overflow-hidden">
           {previewImage || selectedTemplate ? (
             <img
               src={previewImage ? previewImage : `${headerURL}/ipfs/${selectedTemplate}`}
               alt="Certificate Template"
-              className="w-full rounded-lg"
+              className="h-full w-full rounded-lg"
             />
           ) : (
             <div className="flex h-96 w-full items-center justify-center rounded-lg bg-gray-100">

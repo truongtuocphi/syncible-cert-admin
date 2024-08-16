@@ -45,7 +45,6 @@ const HomeAdmin = () => {
           Create your own certificate in an easier way with the steps below
         </p>
       </div>
-
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {listCard.map((item, index) => {
           return <Card data={item} key={index} />;

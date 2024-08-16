@@ -266,7 +266,6 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
           </div>
         </form>
       </div>
-
       {/* Preview */}
       <div className="sticky h-fit w-[50%] rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
         <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>

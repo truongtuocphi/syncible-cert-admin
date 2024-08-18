@@ -59,7 +59,6 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
 
         return (
           <div key={index} className="sticky h-fit w-full rounded-xl bg-white p-4">
-            <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
             <div className="relative h-[360px] w-full overflow-hidden">
               <img
                 src={
@@ -80,9 +79,8 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
                   <p className="text-[0.7vw]">{`Số: ${certificateNumber || 'xxxxx-xxxxx'}`}</p>
                   <h1 className="text-[1.8vw] font-bold">{fullName || 'Full Name'}</h1>
                   <p className="mt-0 text-center text-[1vw]">
-                    {description || 'Đã hoàn thành khóa đào tạo ngắn hạn'}
-                    <br />
-                    “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
+                    Đã hoàn thành khóa đào tạo ngắn hạn
+                    <br />“{description}”
                   </p>
                   <span className="mt-2 text-[0.7vw]">{issueDate || 'xx-xx-xxxx'}</span>
                 </div>

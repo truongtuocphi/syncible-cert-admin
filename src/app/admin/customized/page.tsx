@@ -368,9 +368,8 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                 <p className="text-[0.7vw]">{`Số: xxxxx-xxxxx`}</p>
                 <h1 className="text-[1.8vw] font-bold">{`Full Name`}</h1>
                 <p className="mt-0 text-center text-[1vw]">
-                  Đã hoàn thành khóa đào tạo ngắn hạn
-                  <br />
-                  “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
+                  Đã hoàn thành khóa đào tạo
+                  <br />“{description}”
                 </p>
                 <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
               </div>

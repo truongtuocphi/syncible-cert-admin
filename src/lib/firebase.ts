@@ -8,6 +8,7 @@ import {
   signInWithEmailAndPassword,
 } from 'firebase/auth';
 import { getDatabase, ref, get, child, set, query } from 'firebase/database';
+import { doc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -40,4 +41,6 @@ export {
   child,
   set,
   query,
+  doc,
+  setDoc,
 };

@@ -20,6 +20,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { auth, db } from '@/lib/firebase';
+import Link from 'next/link';
 
 export default function FileStorage() {
   const [inputValue, setInputValue] = useState('');
@@ -144,10 +145,12 @@ export default function FileStorage() {
         {folders.length > 0 ? (
           <ul className="grid w-full grid-cols-6">
             {folders.map((folder) => (
-              <li key={folder.id} className="flex cursor-pointer flex-col items-center">
-                <FcOpenedFolder className="text-8xl" />
-                <span className="text-xl font-bold text-gray-500">{folder.name}</span>
-              </li>
+              <Link href={`/admin/filestorage/${folder.id}`} key={folder.id}>
+                <li className="flex cursor-pointer flex-col items-center">
+                  <FcOpenedFolder className="text-8xl" />
+                  <span className="text-xl font-bold text-gray-500">{folder.name}</span>
+                </li>
+              </Link>
             ))}
           </ul>
         ) : (

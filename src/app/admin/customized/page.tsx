@@ -3,14 +3,17 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { ref, onValue, query, orderByChild, equalTo, get } from 'firebase/database';
 
+import { auth, db, set } from '@/lib/firebase';
 import { uploadImageToPinata } from '@/lib/pinata';
+import { useRouter } from 'next/navigation';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
 if (!headerURL) {
-  // eslint-disable-next-line no-console
-  console.error('NEXT_PUBLIC_HEADER_URL không được định nghĩa');
+  console.error('NEXT_PUBLIC_HEADER_URL is not defined');
 }
 
 const predefinedTemplates = [
@@ -26,25 +29,29 @@ const predefinedTemplates = [
   },
 ];
 
+type Folder = {
+  id: string;
+  name: string;
+};
+
 const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
+  const router = useRouter();
   const [authorizingOrgName, setAuthorizingOrgName] = useState('');
   const [headOrgName, setHeadOrgName] = useState('');
   const [headOrgPosition, setHeadOrgPosition] = useState('');
   const [headOrgSignature, setHeadOrgSignature] = useState<File | null>(null);
   const [description, setDescription] = useState('');
-
   const [template, setTemplate] = useState<File | null>(null);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
   const [mediaSelected, setMediaSelected] = useState(false);
-
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [previewSignature, setPreviewSignature] = useState<string | null>(null);
-
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
-
   const [loading, setLoading] = useState(false);
-
   const [top, setTop] = useState(20);
+  const [user, setUser] = useState<User | null>(null);
+  const [folders, setFolders] = useState<Folder[]>([]);
+  const [selectedFolder, setSelectedFolder] = useState<string>('');
 
   const handleTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -68,8 +75,8 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
     if (e.target.files) {
       const file = e.target.files[0];
       setHeadOrgSignature(file);
-      const fileUrl = URL.createObjectURL(file); // Generate a preview URL for the signature
-      setPreviewSignature(fileUrl); // Set the preview URL for the signature
+      const fileUrl = URL.createObjectURL(file);
+      setPreviewSignature(fileUrl);
     }
   };
 
@@ -97,9 +104,29 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
         headOrgPosition,
         signatureIpfsHash,
       };
-      onNext(data);
+
+      if (selectedFolder) {
+        const folderRef = ref(db, `folders/${selectedFolder}/data_define`);
+
+        // Đọc dữ liệu hiện tại từ Firebase
+        const snapshot = await get(folderRef);
+        let currentData = snapshot.val() || [];
+
+        // Nếu currentData là một đối tượng thì chuyển nó thành mảng
+        if (typeof currentData === 'object' && !Array.isArray(currentData)) {
+          currentData = [currentData];
+        }
+
+        // Thêm dữ liệu mới vào mảng
+        currentData.push(data);
+
+        // Cập nhật dữ liệu vào Firebase
+        await set(folderRef, currentData);
+      }
+      alert('Created successfully');
+
+      router.push(`/admin/filestorage/${selectedFolder}`);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error submitting form:', error);
       alert('An error occurred while uploading images. Please try again.');
     } finally {
@@ -109,161 +136,207 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 5) {
-        setTop(100);
-      } else {
-        setTop(20);
-      }
+      setTop(window.scrollY > 5 ? 100 : 20);
     };
 
     window.addEventListener('scroll', handleScroll);
-
-    // Cleanup khi component bị unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      setUser(user);
+      setLoading(false);
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    if (user) {
+      const foldersRef = ref(db, 'folders');
+      const userFoldersQuery = query(foldersRef, orderByChild('createdBy'), equalTo(user.uid));
+
+      const unsubscribe = onValue(
+        userFoldersQuery,
+        (snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+            const folderList: Folder[] = Object.entries(data).map(([id, folderData]) => ({
+              id,
+              name: (folderData as { name: string }).name,
+            }));
+            setFolders(folderList);
+          } else {
+            setFolders([]);
+          }
+        },
+        (error) => {
+          console.error('Error fetching folders:', error);
+        }
+      );
+
+      return () => unsubscribe();
+    }
+  }, [user]);
 
   return (
     <div className="flex space-x-6">
       <div className="mx-auto w-[50%] space-y-4 rounded-xl bg-white p-4 text-black">
         <h2 className="text-2xl font-bold">Define Template</h2>
         <form onSubmit={handleSubmit}>
-          <div className="flex flex-col">
+          <div className="grid grid-cols-2 gap-4 space-y-4">
             {/* Left Section */}
-            <div className="grid grid-cols-2 gap-4 space-y-4">
-              <div className="relative w-full">
-                <label className="block text-sm font-medium text-gray-700">
-                  Select Media:
-                  <div className="relative">
-                    <input
-                      type="file"
-                      accept="image/jpeg, image/png"
-                      onChange={handleTemplateChange}
-                      className="mt-1 block h-48 w-full cursor-pointer overflow-hidden rounded-md border border-dashed border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:outline-none"
-                      required={!mediaSelected}
-                    />
-                    {previewImage && (
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <img
-                          src={previewImage}
-                          alt="Selected Media"
-                          className="h-48 w-full cursor-pointer rounded-md border border-gray-300 object-cover"
-                        />
-                      </div>
-                    )}
-                  </div>
-                  <p className="mt-4 text-xs">
-                    Note: The background color of the certificate is light
-                  </p>
-                </label>
-              </div>
-              <div className="w-full">
-                <h3 className="text-lg font-semibold">Choose Template:</h3>
-                <button
-                  type="button"
-                  onClick={() => setShowChooseTemplate(!showChooseTemplate)}
-                  className="rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-                >
-                  Select template
-                </button>
-                {showChooseTemplate && (
-                  <div className="mt-2 grid grid-cols-2 gap-4">
-                    {predefinedTemplates.map((template) => (
-                      <div
-                        key={template.id}
-                        className={`cursor-pointer rounded-lg border p-1 ${
-                          selectedTemplate === template.imageUrl
-                            ? 'border-blue-500'
-                            : 'border-gray-300'
-                        }`}
-                        onClick={() => handleSelectTemplate(template.imageUrl)}
-                      >
-                        <img
-                          src={`${headerURL}/ipfs/${template.imageUrl}`}
-                          alt={template.name}
-                          className="h-20 w-full rounded-md object-cover"
-                        />
-                        <p className="mt-1 text-center text-sm font-semibold text-gray-600">
-                          {template.name}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Right Section */}
-            <div className="mt-3 space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Authorizing Organization Name:
-                  <input
-                    type="text"
-                    value={authorizingOrgName}
-                    onChange={(e) => setAuthorizingOrgName(e.target.value)}
-                    required
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </label>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Head of Organization Name:
-                  <input
-                    type="text"
-                    value={headOrgName}
-                    onChange={(e) => setHeadOrgName(e.target.value)}
-                    required
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </label>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Head of Organization Position:
-                  <input
-                    type="text"
-                    value={headOrgPosition}
-                    onChange={(e) => setHeadOrgPosition(e.target.value)}
-                    required
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </label>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Head of Organization Signature:
+            <div className="relative w-full">
+              <label className="block text-sm font-medium text-gray-700">
+                Select Media:
+                <div className="relative">
                   <input
                     type="file"
                     accept="image/jpeg, image/png"
-                    onChange={handleHeadOrgSignatureChange}
-                    required
-                    className="mt-1 block w-full cursor-pointer border border-dotted border-gray-300 bg-gray-50 p-2 text-sm text-gray-900"
+                    onChange={handleTemplateChange}
+                    className="mt-1 block h-48 w-full cursor-pointer overflow-hidden rounded-md border border-dashed border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:outline-none"
+                    required={!mediaSelected}
                   />
-                </label>
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Description:
-                  <textarea
-                    value={description}
-                    onChange={(e) => setDescription(e.target.value)}
-                    required
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </label>
-              </div>
-              <div className="flex w-full justify-center">
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-40 rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 disabled:opacity-50"
+                  {previewImage && (
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <img
+                        src={previewImage}
+                        alt="Selected Media"
+                        className="h-48 w-full cursor-pointer rounded-md border border-gray-300 object-cover"
+                      />
+                    </div>
+                  )}
+                </div>
+                <p className="mt-4 text-xs">
+                  Note: The background color of the certificate is light
+                </p>
+              </label>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold">Choose Template:</h3>
+              <button
+                type="button"
+                onClick={() => setShowChooseTemplate(!showChooseTemplate)}
+                className="rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              >
+                Select template
+              </button>
+              {showChooseTemplate && (
+                <div className="mt-2 grid grid-cols-2 gap-4">
+                  {predefinedTemplates.map((template) => (
+                    <div
+                      key={template.id}
+                      className={`cursor-pointer rounded-lg border p-1 ${
+                        selectedTemplate === template.imageUrl
+                          ? 'border-blue-500'
+                          : 'border-gray-300'
+                      }`}
+                      onClick={() => handleSelectTemplate(template.imageUrl)}
+                    >
+                      <img
+                        src={`${headerURL}/ipfs/${template.imageUrl}`}
+                        alt={template.name}
+                        className="h-20 w-full rounded-md object-cover"
+                      />
+                      <p className="mt-1 text-center text-sm font-semibold text-gray-600">
+                        {template.name}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right Section */}
+          <div className="mt-3 space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Authorizing Organization Name:
+                <input
+                  type="text"
+                  value={authorizingOrgName}
+                  onChange={(e) => setAuthorizingOrgName(e.target.value)}
+                  required
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Head of Organization Name:
+                <input
+                  type="text"
+                  value={headOrgName}
+                  onChange={(e) => setHeadOrgName(e.target.value)}
+                  required
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Head of Organization Position:
+                <input
+                  type="text"
+                  value={headOrgPosition}
+                  onChange={(e) => setHeadOrgPosition(e.target.value)}
+                  required
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Head of Organization Signature:
+                <input
+                  type="file"
+                  accept="image/jpeg, image/png"
+                  onChange={handleHeadOrgSignatureChange}
+                  required
+                  className="mt-1 block w-full cursor-pointer rounded-md border border-dashed border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:outline-none"
+                />
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Select Folder:
+                <select
+                  value={selectedFolder}
+                  onChange={(e) => setSelectedFolder(e.target.value)}
+                  required
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 >
-                  {loading ? 'Submitting...' : 'Next'}
-                </button>
-              </div>
+                  <option value="">Select a folder</option>
+                  {folders.map((folder) => (
+                    <option key={folder.id} value={folder.id}>
+                      {folder.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Description:
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                  rows={4}
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </label>
+            </div>
+            <div className="flex justify-end space-x-2">
+              <button
+                type="submit"
+                disabled={loading}
+                className="rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+              >
+                {loading ? 'Submitting...' : 'Submit'}
+              </button>
             </div>
           </div>
         </form>

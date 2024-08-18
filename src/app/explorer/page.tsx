@@ -4,7 +4,6 @@
 import { useState } from 'react';
 
 import Link from 'next/link';
-
 import { HiTemplate } from 'react-icons/hi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
@@ -29,7 +28,7 @@ export default function Explorer() {
   };
 
   return (
-    <div>
+    <>
       <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">
         <Navbar />
       </div>
@@ -112,6 +111,6 @@ export default function Explorer() {
       <div className="relative text-white">
         <Footer />
       </div>
-    </div>
+    </>
   );
 }

@@ -5,9 +5,9 @@ interface EmailIconProps extends React.SVGProps<SVGSVGElement> {
 }
 
 const EmailIcon: React.FC<EmailIconProps> = ({
-  width = "1em",
-  height = "1em",
-  color = "currentColor",
+  width = '1em',
+  height = '1em',
+  color = 'currentColor',
   ...props
 }) => {
   return (

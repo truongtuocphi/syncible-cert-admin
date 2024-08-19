@@ -3,16 +3,18 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
+
 import { onAuthStateChanged, User } from 'firebase/auth';
 import { ref, onValue, query, orderByChild, equalTo, get } from 'firebase/database';
+import { useRouter } from 'next/navigation';
 
 import { auth, db, set } from '@/lib/firebase';
 import { uploadImageToPinata } from '@/lib/pinata';
-import { useRouter } from 'next/navigation';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
 if (!headerURL) {
+  // eslint-disable-next-line no-console
   console.error('NEXT_PUBLIC_HEADER_URL is not defined');
 }
 
@@ -127,6 +129,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
 
       router.push(`/admin/filestorage/${selectedFolder}`);
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error submitting form:', error);
       alert('An error occurred while uploading images. Please try again.');
     } finally {

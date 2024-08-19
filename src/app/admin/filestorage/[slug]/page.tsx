@@ -1,12 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+
 import { ref, get } from 'firebase/database';
+
 import { db } from '@/lib/firebase';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
 if (!headerURL) {
+  // eslint-disable-next-line no-console
   console.error('NEXT_PUBLIC_HEADER_URL is not defined');
 }
 

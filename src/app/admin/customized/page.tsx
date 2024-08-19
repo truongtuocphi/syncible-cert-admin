@@ -1,7 +1,5 @@
 'use client';
 
-/* eslint-disable no-unused-vars */
-/* eslint-disable @next/next/no-img-element */
 import { useEffect, useState } from 'react';
 
 import { onAuthStateChanged, User } from 'firebase/auth';
@@ -36,8 +34,10 @@ type Folder = {
   name: string;
 };
 
-const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
+const DefineTemplate = () => {
   const router = useRouter();
+
+  const [name, setName] = useState('');
   const [authorizingOrgName, setAuthorizingOrgName] = useState('');
   const [headOrgName, setHeadOrgName] = useState('');
   const [headOrgPosition, setHeadOrgPosition] = useState('');
@@ -45,15 +45,19 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
   const [description, setDescription] = useState('');
   const [template, setTemplate] = useState<File | null>(null);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
+
   const [mediaSelected, setMediaSelected] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [previewSignature, setPreviewSignature] = useState<string | null>(null);
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [top, setTop] = useState(20);
+
   const [user, setUser] = useState<User | null>(null);
+
   const [folders, setFolders] = useState<Folder[]>([]);
   const [selectedFolder, setSelectedFolder] = useState<string>('');
+
+  const [loading, setLoading] = useState(false);
+  const [top, setTop] = useState(20);
 
   const handleTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -98,6 +102,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
         : null;
 
       const data = {
+        name,
         templateIpfsHash,
         selectedTemplate,
         description,
@@ -256,6 +261,36 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
           <div className="mt-3 space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">
+                Select Folder:
+                <select
+                  value={selectedFolder}
+                  onChange={(e) => setSelectedFolder(e.target.value)}
+                  required
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                >
+                  <option value="">Select a folder</option>
+                  {folders.map((folder) => (
+                    <option key={folder.id} value={folder.id}>
+                      {folder.name}
+                    </option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
+                Name Template:
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                />
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
                 Authorizing Organization Name:
                 <input
                   type="text"
@@ -300,24 +335,6 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
                   required
                   className="mt-1 block w-full cursor-pointer rounded-md border border-dashed border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:outline-none"
                 />
-              </label>
-            </div>
-            <div>
-              <label className="block text-sm font-medium text-gray-700">
-                Select Folder:
-                <select
-                  value={selectedFolder}
-                  onChange={(e) => setSelectedFolder(e.target.value)}
-                  required
-                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                >
-                  <option value="">Select a folder</option>
-                  {folders.map((folder) => (
-                    <option key={folder.id} value={folder.id}>
-                      {folder.name}
-                    </option>
-                  ))}
-                </select>
               </label>
             </div>
             <div>

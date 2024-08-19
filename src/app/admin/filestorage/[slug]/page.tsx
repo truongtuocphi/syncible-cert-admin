@@ -22,7 +22,9 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
     if (id) {
       const fetchData = async () => {
         try {
-          const folderRef = ref(db, `folders/${id}/data_define`);
+          const decodedId = decodeURIComponent(id);
+
+          const folderRef = ref(db, `folders/${decodedId}/data_define`);
           const snapshot = await get(folderRef);
           if (snapshot.exists()) {
             setData(snapshot.val());

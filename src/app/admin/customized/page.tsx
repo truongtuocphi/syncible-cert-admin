@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 
 import { auth, db, set } from '@/lib/firebase';
 import { uploadImageToPinata } from '@/lib/pinata';
+import Link from 'next/link';
+import ButtonCreateFolder from '@/components/common/button/ButtonCreateFolder';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -222,7 +224,7 @@ const DefineTemplate = () => {
               </label>
             </div>
             <div>
-              <h3 className="text-lg font-semibold">Choose Template:</h3>
+              <h3 className="text-base font-semibold">Choose Template:</h3>
               <button
                 type="button"
                 onClick={() => setShowChooseTemplate(!showChooseTemplate)}
@@ -262,19 +264,25 @@ const DefineTemplate = () => {
             <div>
               <label className="block text-sm font-medium text-gray-700">
                 Select Folder:
-                <select
-                  value={selectedFolder}
-                  onChange={(e) => setSelectedFolder(e.target.value)}
-                  required
-                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                >
-                  <option value="">Select a folder</option>
-                  {folders.map((folder) => (
-                    <option key={folder.id} value={folder.id}>
-                      {folder.name}
-                    </option>
-                  ))}
-                </select>
+                <p className="my-1 text-xs text-gray-500">
+                  If you do not have a folder, you can click Create folder to create one.
+                </p>
+                <div className="flex items-center gap-2">
+                  <select
+                    value={selectedFolder}
+                    onChange={(e) => setSelectedFolder(e.target.value)}
+                    required
+                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  >
+                    <option value="">Select a folder</option>
+                    {folders.map((folder) => (
+                      <option key={folder.id} value={folder.id}>
+                        {folder.name}
+                      </option>
+                    ))}
+                  </select>
+                  <ButtonCreateFolder />
+                </div>
               </label>
             </div>
             <div>

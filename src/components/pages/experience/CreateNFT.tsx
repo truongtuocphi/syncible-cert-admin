@@ -13,6 +13,7 @@ import { uploadMetadata } from '@/lib/pinata';
 import { saveMintData } from '@/utils/saveMintData';
 import { User } from 'firebase/auth';
 import { onValue, query, orderByChild, equalTo } from 'firebase/database';
+import Link from 'next/link';
 
 interface Collection {
   id: string;
@@ -44,7 +45,7 @@ if (!headerURL) {
   console.error('NEXT_PUBLIC_HEADER_URL is not defined');
 }
 
-const CreateNFT = ({ templateData }: any) => {
+const CreateNFT = () => {
   const router = useRouter();
   const { address } = useAccount();
 
@@ -56,15 +57,10 @@ const CreateNFT = ({ templateData }: any) => {
   const [certificateNumber, setCertificateNumber] = useState('');
   const [issuedDate, setIssuedDate] = useState('');
   const [quantity, setQuantity] = useState(1);
-  const [blockchain, setBlockchain] = useState<'Polygon' | 'Ethereum'>(
-    templateData?.blockchain || 'Polygon'
-  );
+  const [blockchain, setBlockchain] = useState<'Polygon' | 'Ethereum'>('Polygon');
   const [role, setRole] = useState<'Teacher' | 'Student'>('Student');
   const [tokenLink, setTokenLink] = useState('');
 
-  const [authorizingOrgName, setAuthorizingOrgName] = useState(
-    templateData?.authorizingOrgName || ''
-  );
   const [csvData, setCsvData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingButton, setLoadingButton] = useState(false);
@@ -73,7 +69,7 @@ const CreateNFT = ({ templateData }: any) => {
   const [folders, setFolders] = useState<Folder[]>([]);
   const [selectedFolder, setSelectedFolder] = useState<string>('');
   const [selectedFolderTemplate, setSelectedFolderTemplate] = useState<string>('');
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<any[] | null>([]);
   const [dataTemplate, setDataTemplate] = useState<Template>();
 
   const [top, setTop] = useState(20);
@@ -333,8 +329,10 @@ const CreateNFT = ({ templateData }: any) => {
               id,
               ...data[id],
             }));
+            console.log(selectedFolder, dataWithId);
             setData(dataWithId);
           } else {
+            setData(null);
             console.log('No data available');
           }
         } catch (error) {
@@ -350,9 +348,11 @@ const CreateNFT = ({ templateData }: any) => {
 
   useEffect(() => {
     if (selectedFolderTemplate) {
-      data.map((item) => {
-        item.id === selectedFolderTemplate ? setDataTemplate(item) : null;
-      });
+      if (data) {
+        data.map((item) => {
+          item.id === selectedFolderTemplate ? setDataTemplate(item) : null;
+        });
+      }
     }
   }, [selectedFolderTemplate]);
 
@@ -365,14 +365,22 @@ const CreateNFT = ({ templateData }: any) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  console.log(dataTemplate);
+
   return (
     <div className="flex gap-4">
       <div className="mx-auto w-1/2 space-y-4 rounded-xl bg-white p-4 text-black">
         <h2 className="text-2xl font-bold">Create NFT</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
-              Select Folder:
+              Select Template:
+              <p className="my-1 text-xs text-gray-500">
+                If you do not have a folder or template, please click{' '}
+                <Link href={'/admin/customized'} className="text-blue-500 underline">
+                  here.
+                </Link>
+              </p>
               <div className="flex items-center justify-between gap-4">
                 <select
                   value={selectedFolder}
@@ -396,11 +404,15 @@ const CreateNFT = ({ templateData }: any) => {
                   className="mt-1 block w-1/2 rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 >
                   <option value="">Select a template</option>
-                  {data.map((temp) => (
-                    <option key={temp.id} value={temp.id}>
-                      {temp.name}
-                    </option>
-                  ))}
+                  {data ? (
+                    data.map((temp) => (
+                      <option key={temp.id} value={temp.id}>
+                        {temp.name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="">No template</option>
+                  )}
                 </select>
               </div>
             </label>

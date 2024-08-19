@@ -603,7 +603,7 @@ const CreateNFT = () => {
                   <img
                     src={`${headerURL}/ipfs/${dataTemplate?.signatureIpfsHash}`}
                     alt="Head Signature"
-                    className="w-[4vw]"
+                    className="w-[3vw] xl:w-[4vw]"
                   />
                   <div className="text-center">
                     <p className="text-[0.8vw]">{dataTemplate?.headOrgName}</p>

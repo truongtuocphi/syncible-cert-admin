@@ -157,9 +157,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, headerUR
                   {name.split('Certificate for')}
                 </h1>
                 <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[1.5vw]">
-                  Đã hoàn thành khóa đào tạo ngắn hạn
-                  <br />
-                  “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
+                  Đã hoàn thành khóa đào tạo
+                  <br />“{description}”
                 </p>
                 <span className="mt-2 text-[2.5vw] md:text-[1.5vw] lg:text-[1.2vw]">
                   {configDate(date)}
@@ -169,7 +168,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, headerUR
                 <img
                   src={`${headerURL}/ipfs/${headSignature}`}
                   alt="Head Signature"
-                  className="w-[4vw] md:w-[5vw] lg:w-[7vw]"
+                  className="w-[2vw] md:w-[3vw] lg:w-[7vw]"
                 />
                 <div className="text-center">
                   <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headName}`}</p>

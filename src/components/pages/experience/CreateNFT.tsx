@@ -14,6 +14,7 @@ import { saveMintData } from '@/utils/saveMintData';
 import { User } from 'firebase/auth';
 import { onValue, query, orderByChild, equalTo } from 'firebase/database';
 import Link from 'next/link';
+import configDate from '@/utils/configDate';
 
 interface Collection {
   id: string;
@@ -588,7 +589,11 @@ const CreateNFT = () => {
                   Đã hoàn thành khóa đào tạo
                   <br />“{dataTemplate?.description}”
                 </p>
-                <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
+                {issuedDate ? (
+                  <span className="mt-2 text-[0.7vw]">{configDate(issuedDate)}</span>
+                ) : (
+                  <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
+                )}
               </div>
             ) : null}
 

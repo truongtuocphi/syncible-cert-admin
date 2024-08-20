@@ -582,11 +582,11 @@ const CreateNFT = () => {
           >
             {dataTemplate?.selectedTemplate ? (
               <div className="absolute top-[15%] text-center">
-                <h1 className="text-[2vw] font-bold">CHỨNG NHẬN</h1>
-                <p className="text-[0.7vw]">{`Số: ${certificateNumber}`}</p>
-                <h1 className="text-[1.8vw] font-bold">{fullName}</h1>
-                <p className="mt-0 text-center text-[1vw]">
-                  Đã hoàn thành khóa đào tạo
+                <h1 className="text-[2.6vw] font-bold">Certification</h1>
+                <p className="text-[0.8vw]">{`Number: ${certificateNumber}`}</p>
+                <h1 className="text-[1.6vw] font-bold">{fullName}</h1>
+                <p className="mt-0 text-center text-[1.5vw]">
+                  Completed training course
                   <br />“{dataTemplate?.description}”
                 </p>
                 {issuedDate ? (
@@ -597,7 +597,7 @@ const CreateNFT = () => {
               </div>
             ) : null}
 
-            <div className="absolute bottom-[10%] left-[7%] flex flex-col items-center">
+            <div className="absolute bottom-[10%] left-[20%] flex flex-col items-center">
               {dataTemplate?.authorizingOrgName && (
                 <>
                   <img
@@ -607,9 +607,8 @@ const CreateNFT = () => {
                   />
                   <div className="text-center">
                     <p className="text-[0.8vw]">{dataTemplate?.headOrgName}</p>
-                    <p className="text-[0.8vw]">{`${dataTemplate?.headOrgPosition} tổ chức ${dataTemplate?.authorizingOrgName}`}</p>
-                    <p className="text-[0.8vw]">{`Giấy chứng nhận số: xxx-xxx`}</p>
-                    <p className="text-[0.8vw]">{`của ${dataTemplate?.authorizingOrgName}, cấp ngày xx-xx-xxxx`}</p>
+                    <p className="text-[0.8vw]">{`${dataTemplate?.headOrgPosition}`}</p>
+                    <p className="text-[0.8vw]">{`${dataTemplate?.authorizingOrgName}`}</p>
                   </div>
                 </>
               )}

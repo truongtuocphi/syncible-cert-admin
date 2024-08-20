@@ -2,8 +2,6 @@ import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
 
-const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
-
 export default function CertificateDetail({ params }: { params: { slug: string } }) {
   const slugPost = params.slug;
 
@@ -15,7 +13,7 @@ export default function CertificateDetail({ params }: { params: { slug: string }
       <div className="min-h-screen flex-col items-center pt-16">
         <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 lg:px-24 2xl:px-60">
           <div className="rounded-lg bg-white p-6">
-            <IdExperienceComponent slugPost={slugPost} headerURL={headerURL} />
+            <IdExperienceComponent slugPost={slugPost} />
           </div>
         </div>
         <div className="relative text-white">

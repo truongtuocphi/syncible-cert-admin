@@ -14,12 +14,18 @@ import Loading from '@/components/common/loading/Loading';
 import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
 
-interface IdExperienceProps {
-  slugPost: string;
-  headerURL: string;
+const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
+
+if (!headerURL) {
+  // eslint-disable-next-line no-console
+  console.error('NEXT_PUBLIC_HEADER_URL không được định nghĩa');
 }
 
-const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, headerURL }) => {
+interface IdExperienceProps {
+  slugPost: string;
+}
+
+const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
   const [data, setData] = useState<any>(null);
   const [dataContract, setDataContract] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -151,20 +157,20 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, headerUR
               style={{ fontFamily: 'Times New Roman, serif' }}
             >
               <div className="absolute top-[15%] text-center">
-                <h1 className="text-[1.5vw] font-bold md:text-[3vw]">CHỨNG NHẬN</h1>
-                <p className="text-[1.5vw] md:text-[1.5vw] lg:text-[1.2vw]">{`Số: ${certificateID}`}</p>
+                <h1 className="text-[1.5vw] font-bold md:text-[3vw]">Certification</h1>
+                <p className="text-[1.5vw] md:text-[1.5vw] lg:text-[1.2vw]">{`Number: ${certificateID}`}</p>
                 <h1 className="text-[2vw] font-bold md:text-[2.5vw] 2xl:text-[4vw]">
                   {name.split('Certificate for')}
                 </h1>
-                <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[1.5vw]">
-                  Đã hoàn thành khóa đào tạo
+                <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[1.8vw]">
+                  Completed training course
                   <br />“{description}”
                 </p>
                 <span className="mt-2 text-[2.5vw] md:text-[1.5vw] lg:text-[1.2vw]">
                   {configDate(date)}
                 </span>
               </div>
-              <div className="absolute bottom-[10%] left-[7%] flex flex-col items-center">
+              <div className="absolute bottom-[10%] left-[15%] flex flex-col items-center">
                 <img
                   src={`${headerURL}/ipfs/${headSignature}`}
                   alt="Head Signature"
@@ -172,9 +178,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, headerUR
                 />
                 <div className="text-center">
                   <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headName}`}</p>
-                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headPosition} tổ chức ${organizationName}`}</p>
-                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`Giấy chứng nhận số: ${certificateID}`}</p>
-                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`của ${organizationName}, cấp ngày ${date}`}</p>
+                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headPosition}`}</p>
+                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${organizationName}`}</p>
                 </div>
               </div>
             </div>

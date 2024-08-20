@@ -67,21 +67,20 @@ export default function Explorer() {
                     style={{ fontFamily: 'Times New Roman, serif' }}
                   >
                     <div className="absolute top-[15%] text-center">
-                      <h1 className="text-[1.5vw] font-bold md:text-[3vw]">CHỨNG NHẬN</h1>
+                      <h1 className="text-[1.5vw] font-bold md:text-[3vw]">Certification</h1>
                       <p className="text-[1.5vw] md:text-[1.5vw] lg:text-[1.2vw]">{`Số: ${data.mintData[0].certificateId}`}</p>
                       <h1 className="text-[2vw] font-bold md:text-[2.5vw] 2xl:text-[4vw]">
                         {data.mintData[0].fullName.split('Certificate for')}
                       </h1>
                       <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[1.5vw]">
-                        Đã hoàn thành khóa đào tạo ngắn hạn
-                        <br />
-                        “ỨNG DỤNG AI TRONG QUẢN LÝ HÀNH CHÍNH”
+                        Completed training course
+                        <br />“{data.mintData[0].certData.description}”
                       </p>
                       <span className="mt-2 text-[2.5vw] md:text-[1.5vw] lg:text-[1.2vw]">
                         {configDate(data.mintData[0].certData.date)}
                       </span>
                     </div>
-                    <div className="absolute bottom-[10%] left-[7%] flex flex-col items-center">
+                    <div className="absolute bottom-[10%] left-[20%] flex flex-col items-center">
                       <img
                         src={`${headerURL}/ipfs/${data.mintData[0].certData.headSignature}`}
                         alt="Head Signature"
@@ -89,9 +88,8 @@ export default function Explorer() {
                       />
                       <div className="text-center">
                         <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${data.mintData[0].certData.headName}`}</p>
-                        <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${data.mintData[0].certData.headPosition} tổ chức ${data.mintData[0].certData.organizationName}`}</p>
-                        <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`Giấy chứng nhận số: ${data.mintData[0].certificateId}`}</p>
-                        <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`của ${data.mintData[0].certData.organizationName}, cấp ngày ${data.mintData[0].certData.date}`}</p>
+                        <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${data.mintData[0].certData.headPosition}`}</p>
+                        <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${data.mintData[0].certData.organizationName}`}</p>
                       </div>
                     </div>
                   </div>

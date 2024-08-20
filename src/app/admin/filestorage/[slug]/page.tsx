@@ -49,13 +49,14 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
   return (
     <div className="grid grid-cols-2 gap-4 p-4">
       {data.map((item, index) => {
+        console.log(item);
         const {
           templateIpfsHash,
           selectedTemplate,
           authorizingOrgName,
           headOrgName,
           headOrgPosition,
-          previewSignature,
+          signatureIpfsHash,
           certificateNumber,
           issueDate,
           description,
@@ -80,27 +81,30 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
                 style={{ fontFamily: 'Times New Roman, serif' }}
               >
                 <div className="absolute top-[15%] text-center">
-                  <h1 className="text-[2vw] font-bold">CHỨNG NHẬN</h1>
-                  <p className="text-[0.7vw]">{`Số: ${certificateNumber || 'xxxxx-xxxxx'}`}</p>
+                  <h1 className="text-[2.6vw] font-bold">Certification</h1>
+                  <p className="text-[0.8vw]">{`Number: ${certificateNumber || 'xxxxx-xxxxx'}`}</p>
                   <h1 className="text-[1.8vw] font-bold">{fullName || 'Full Name'}</h1>
-                  <p className="mt-0 text-center text-[1vw]">
-                    Đã hoàn thành khóa đào tạo ngắn hạn
+                  <p className="mt-0 text-center text-[1.5vw]">
+                    Completed training course
                     <br />“{description}”
                   </p>
                   <span className="mt-2 text-[0.7vw]">{issueDate || 'xx-xx-xxxx'}</span>
                 </div>
 
-                <div className="absolute bottom-[10%] left-[7%] flex flex-col items-center">
+                <div className="absolute bottom-[10%] left-[20%] flex flex-col items-center">
                   {authorizingOrgName && (
                     <>
-                      {previewSignature && (
-                        <img src={previewSignature} alt="Head Signature" className="w-[4vw]" />
+                      {signatureIpfsHash && (
+                        <img
+                          src={`${headerURL}/ipfs/${signatureIpfsHash}`}
+                          alt="Head Signature"
+                          className="w-[4vw]"
+                        />
                       )}
                       <div className="text-center">
-                        <p className="text-[0.8vw]">{headOrgName || 'Head Name'}</p>
-                        <p className="text-[0.8vw]">{`${headOrgPosition || 'Position'} tổ chức ${authorizingOrgName}`}</p>
-                        <p className="text-[0.8vw]">{`Giấy chứng nhận số: ${certificateNumber || 'xxx-xxx'}`}</p>
-                        <p className="text-[0.8vw]">{`của ${authorizingOrgName}, cấp ngày ${issueDate || 'xx-xx-xxxx'}`}</p>
+                        <p className="text-[0.8vw]">{headOrgName}</p>
+                        <p className="text-[0.8vw]">{`${headOrgPosition}`}</p>
+                        <p className="text-[0.8vw]">{`${authorizingOrgName}`}</p>
                       </div>
                     </>
                   )}

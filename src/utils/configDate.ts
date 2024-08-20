@@ -8,7 +8,7 @@ function configDate(dateString: any) {
   const month = startDate.getMonth() + 1; // getMonth() returns 0-based index
   const year = startDate.getFullYear();
 
-  return `Hà Nội, ngày ${startDay} tháng ${month} năm ${year}`;
+  return `Ngày ${startDay} tháng ${month} năm ${year}`;
 }
 
 export default configDate;

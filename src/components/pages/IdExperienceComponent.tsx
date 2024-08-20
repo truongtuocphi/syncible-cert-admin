@@ -37,6 +37,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
   const [headName, setHeadName] = useState('');
   const [headPosition, setHeadPosition] = useState('');
   const [headSignature, setHeadSignature] = useState('');
+  const [headLogo, setHeadLogo] = useState('');
   const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [blockchainType, setBlockchainType] = useState('');
@@ -46,9 +47,11 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
     const fetchData = async () => {
       try {
         const response = await fetch(`${headerURL}/ipfs/${slugPost}`);
+
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
+
         const result = await response.json();
         setData(result);
 
@@ -73,6 +76,9 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
         setHeadSignature(
           attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Head Signature')
             .value
+        );
+        setHeadLogo(
+          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Position').value
         );
         setDescription(
           attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Description').value
@@ -136,6 +142,9 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
+  console.log(data);
+  console.log(headLogo);
+
   return (
     <>
       <div className="flex items-center gap-2">
@@ -152,6 +161,17 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
               alt="Certificate Template"
               className="w-full rounded-lg"
             />
+
+            <div className="absolute right-14 top-10">
+              {headLogo && (
+                <img
+                  src={`${headerURL}/ipfs/${headLogo}`}
+                  alt="Head Signature"
+                  className="w-[4vw]"
+                />
+              )}
+            </div>
+
             <div
               className="absolute inset-0 flex flex-col items-center justify-center"
               style={{ fontFamily: 'Times New Roman, serif' }}

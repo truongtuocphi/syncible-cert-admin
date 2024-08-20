@@ -77,6 +77,17 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
                     alt="Certificate Template"
                     className="h-full w-full"
                   />
+
+                  <div className="absolute right-14 top-10">
+                    {item.mintData[0].certData.organizationLogo && (
+                      <img
+                        src={`${headerURL}/ipfs/${item.mintData[0].certData.organizationLogo}`}
+                        alt="Head Signature"
+                        className="w-[4vw]"
+                      />
+                    )}
+                  </div>
+
                   <div
                     className="absolute inset-0 flex flex-col items-center justify-center"
                     style={{ fontFamily: 'Times New Roman, serif' }}

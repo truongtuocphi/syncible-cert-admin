@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -61,6 +62,7 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
           issueDate,
           description,
           fullName,
+          headLogoIpfsHash,
         } = item;
 
         return (
@@ -76,6 +78,15 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
                 className="h-full w-full rounded-lg"
               />
 
+              <div className="absolute right-14 top-10">
+                {headLogoIpfsHash && (
+                  <img
+                    src={`${headerURL}/ipfs/${headLogoIpfsHash}`}
+                    alt="Head Signature"
+                    className="w-[4vw]"
+                  />
+                )}
+              </div>
               <div
                 className="absolute inset-0 flex flex-col items-center justify-center"
                 style={{ fontFamily: 'Times New Roman, serif' }}

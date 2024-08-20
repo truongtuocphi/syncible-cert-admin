@@ -37,6 +37,7 @@ interface Template {
   selectedTemplate: string;
   signatureIpfsHash: string;
   templateIpfsHash: string;
+  headLogoIpfsHash: string;
 }
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
@@ -180,7 +181,7 @@ const CreateNFT = () => {
                 { trait_type: 'Head Position', value: data.headOrgPosition },
                 { trait_type: 'Head Signature', value: data.signatureIpfsHash },
                 { trait_type: 'Description', value: data.description },
-                { trait_type: 'Position', value: data.role },
+                { trait_type: 'organizationLogo', value: data.headLogoIpfsHash },
                 { trait_type: 'Date Issued', value: data.issuedDate },
                 { trait_type: 'Blockchain Type', value: blockchain },
                 {
@@ -204,7 +205,7 @@ const CreateNFT = () => {
                 headPosition: data.headOrgPosition,
                 headSignature: data.signatureIpfsHash,
                 description: data.description,
-                position: data.role,
+                organizationLogo: data.headLogoIpfsHash,
                 date: data.issuedDate,
                 blockchainType: blockchain,
                 templateURL: data.templateIpfsHash ?? data.selectedTemplate,
@@ -227,7 +228,7 @@ const CreateNFT = () => {
                 { trait_type: 'Head Position', value: dataTemplate?.headOrgPosition ?? 'N/A' },
                 { trait_type: 'Head Signature', value: dataTemplate?.signatureIpfsHash ?? 'N/A' },
                 { trait_type: 'Description', value: dataTemplate?.description ?? 'N/A' },
-                { trait_type: 'Position', value: role },
+                { trait_type: 'organizationLogo', value: dataTemplate?.headLogoIpfsHash },
                 { trait_type: 'Date Issued', value: issuedDate },
                 { trait_type: 'Blockchain Type', value: blockchain },
                 {
@@ -251,7 +252,7 @@ const CreateNFT = () => {
                 headPosition: dataTemplate?.headOrgPosition ?? 'N/A',
                 headSignature: dataTemplate?.signatureIpfsHash ?? 'N/A',
                 description: dataTemplate?.description ?? 'N/A',
-                position: role,
+                organizationLogo: dataTemplate?.headLogoIpfsHash,
                 date: issuedDate,
                 blockchainType: blockchain,
                 templateURL: dataTemplate?.templateIpfsHash ?? dataTemplate?.selectedTemplate,
@@ -575,6 +576,16 @@ const CreateNFT = () => {
               <p className="text-sm font-semibold text-gray-600">Preview of your Template</p>
             </div>
           )}
+
+          <div className="absolute right-14 top-10">
+            {dataTemplate?.headLogoIpfsHash && (
+              <img
+                src={`${headerURL}/ipfs/${dataTemplate?.headLogoIpfsHash}`}
+                alt="Head Signature"
+                className="w-[4vw]"
+              />
+            )}
+          </div>
 
           <div
             className="absolute inset-0 flex flex-col items-center justify-center"

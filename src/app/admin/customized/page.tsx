@@ -49,6 +49,7 @@ const DefineTemplate = () => {
   const [headOrgName, setHeadOrgName] = useState('');
   const [headOrgPosition, setHeadOrgPosition] = useState('');
   const [headOrgSignature, setHeadOrgSignature] = useState<File | null>(null);
+  const [headLogo, setHeadLogo] = useState<File | null>(null);
   const [description, setDescription] = useState('');
   const [template, setTemplate] = useState<File | null>(null);
   const [selectedTemplate, setSelectedTemplate] = useState<string | null>(null);
@@ -56,6 +57,7 @@ const DefineTemplate = () => {
   const [mediaSelected, setMediaSelected] = useState(false);
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [previewSignature, setPreviewSignature] = useState<string | null>(null);
+  const [previewHeadLogo, setPreviewHeadLogo] = useState<string | null>(null);
   const [showChooseTemplate, setShowChooseTemplate] = useState(false);
 
   const [user, setUser] = useState<User | null>(null);
@@ -93,6 +95,15 @@ const DefineTemplate = () => {
     }
   };
 
+  const handleHeadLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      setHeadLogo(file);
+      const fileUrl = URL.createObjectURL(file);
+      setPreviewHeadLogo(fileUrl);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!mediaSelected) {
@@ -107,6 +118,7 @@ const DefineTemplate = () => {
       const signatureIpfsHash = headOrgSignature
         ? await uploadImageToPinata(headOrgSignature)
         : null;
+      const headLogoIpfsHash = headLogo ? await uploadImageToPinata(headLogo) : null;
 
       const data = {
         name,
@@ -117,6 +129,7 @@ const DefineTemplate = () => {
         headOrgName,
         headOrgPosition,
         signatureIpfsHash,
+        headLogoIpfsHash,
       };
 
       if (selectedFolder) {
@@ -352,6 +365,18 @@ const DefineTemplate = () => {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700">
+                organization&apos;s symbol:
+                <input
+                  type="file"
+                  accept="image/jpeg, image/png"
+                  onChange={handleHeadLogoChange}
+                  required
+                  className="mt-1 block w-full cursor-pointer rounded-md border border-dashed border-gray-300 bg-gray-50 p-2 text-sm text-gray-900 focus:outline-none"
+                />
+              </label>
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">
                 Description:
                 <textarea
                   value={description}
@@ -391,6 +416,12 @@ const DefineTemplate = () => {
                 <p className="text-sm font-semibold text-gray-600">Preview of your Template</p>
               </div>
             )}
+
+            <div className="absolute right-14 top-10">
+              {previewHeadLogo && (
+                <img src={`${previewHeadLogo}`} alt="Head Signature" className="w-[4vw]" />
+              )}
+            </div>
 
             <div
               className="absolute inset-0 flex flex-col items-center justify-center"

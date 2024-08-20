@@ -310,7 +310,7 @@
         {
           "indexed": false,
           "internalType": "string",
-          "name": "position",
+          "name": "organizationLogo",
           "type": "string"
         },
         {
@@ -595,7 +595,7 @@
             },
             {
               "internalType": "string",
-              "name": "position",
+              "name": "organizationLogo",
               "type": "string"
             },
             {
@@ -799,7 +799,7 @@
                 },
                 {
                   "internalType": "string",
-                  "name": "position",
+                  "name": "organizationLogo",
                   "type": "string"
                 },
                 {

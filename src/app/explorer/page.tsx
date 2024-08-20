@@ -62,6 +62,17 @@ export default function Explorer() {
                     alt="Certificate Template"
                     className="w-full rounded-lg"
                   />
+
+                  <div className="absolute right-14 top-10">
+                    {data.mintData[0].certData.organizationLogo && (
+                      <img
+                        src={`${headerURL}/ipfs/${data.mintData[0].certData.organizationLogo}`}
+                        alt="Head Signature"
+                        className="w-[4vw]"
+                      />
+                    )}
+                  </div>
+
                   <div
                     className="absolute inset-0 flex flex-col items-center justify-center"
                     style={{ fontFamily: 'Times New Roman, serif' }}

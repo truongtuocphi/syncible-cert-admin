@@ -9,8 +9,12 @@ import { useRouter } from 'next/navigation';
 
 import { auth, db, set } from '@/lib/firebase';
 import { uploadImageToPinata } from '@/lib/pinata';
-import Link from 'next/link';
 import ButtonCreateFolder from '@/components/common/button/ButtonCreateFolder';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Textarea } from '@/components/ui/textarea';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -372,52 +376,119 @@ const DefineTemplate = () => {
       </div>
 
       {/* Preview */}
-      <div className="sticky h-fit w-[50%] rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
-        <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
-        <div className="relative h-[360px] w-full overflow-hidden">
-          {previewImage || selectedTemplate ? (
-            <img
-              src={previewImage ? previewImage : `${headerURL}/ipfs/${selectedTemplate}`}
-              alt="Certificate Template"
-              className="h-full w-full rounded-lg"
-            />
-          ) : (
-            <div className="flex h-96 w-full items-center justify-center rounded-lg bg-gray-100">
-              <p className="text-sm font-semibold text-gray-600">Preview of your Template</p>
-            </div>
-          )}
-
-          <div
-            className="absolute inset-0 flex flex-col items-center justify-center"
-            style={{ fontFamily: 'Times New Roman, serif' }}
-          >
+      <div className="flex w-[50%] flex-col items-center justify-between">
+        <div className="sticky h-fit w-full  rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
+          <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
+          <div className="relative h-[360px] w-full overflow-hidden">
             {previewImage || selectedTemplate ? (
-              <div className="absolute top-[15%] text-center">
-                <h1 className="text-[2.6vw] font-bold">Certification</h1>
-                <p className="text-[0.8vw]">{`Number: xxxxx-xxxxx`}</p>
-                <h1 className="text-[1.6vw] font-bold">{`Full Name`}</h1>
-                <p className="mt-0 text-center text-[1.5vw]">
-                  Completed training course
-                  <br />“{description}”
-                </p>
-                <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
+              <img
+                src={previewImage ? previewImage : `${headerURL}/ipfs/${selectedTemplate}`}
+                alt="Certificate Template"
+                className="h-full w-full rounded-lg"
+              />
+            ) : (
+              <div className="flex h-96 w-full items-center justify-center rounded-lg bg-gray-100">
+                <p className="text-sm font-semibold text-gray-600">Preview of your Template</p>
               </div>
-            ) : null}
+            )}
 
-            <div className="absolute bottom-[10%] left-[20%] flex flex-col items-center">
-              {authorizingOrgName && (
-                <>
-                  {previewSignature && (
-                    <img src={`${previewSignature}`} alt="Head Signature" className="w-[4vw]" />
-                  )}
-                  <div className="text-center">
-                    <p className="text-[0.8vw]">{headOrgName}</p>
-                    <p className="text-[0.8vw]">{`${headOrgPosition}`}</p>
-                    <p className="text-[0.8vw]">{`${authorizingOrgName}`}</p>
-                  </div>
-                </>
-              )}
+            <div
+              className="absolute inset-0 flex flex-col items-center justify-center"
+              style={{ fontFamily: 'Times New Roman, serif' }}
+            >
+              {previewImage || selectedTemplate ? (
+                <div className="absolute top-[15%] text-center">
+                  <h1 className="text-[2.6vw] font-bold">Certification</h1>
+                  <p className="text-[0.8vw]">{`Number: xxxxx-xxxxx`}</p>
+                  <h1 className="text-[1.6vw] font-bold">{`Full Name`}</h1>
+                  <p className="mt-0 text-center text-[1.5vw]">
+                    Completed training course
+                    <br />“{description}”
+                  </p>
+                  <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
+                </div>
+              ) : null}
+
+              <div className="absolute bottom-[10%] left-[20%] flex flex-col items-center">
+                {authorizingOrgName && (
+                  <>
+                    {previewSignature && (
+                      <img src={`${previewSignature}`} alt="Head Signature" className="w-[4vw]" />
+                    )}
+                    <div className="text-center">
+                      <p className="text-[0.8vw]">{headOrgName}</p>
+                      <p className="text-[0.8vw]">{`${headOrgPosition}`}</p>
+                      <p className="text-[0.8vw]">{`${authorizingOrgName}`}</p>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
+          </div>
+        </div>
+
+        <div className="flex w-full items-center justify-between gap-3 rounded-lg bg-gray-200 px-4 py-3">
+          <p className="font-semibold">Having trouble designing your template?</p>
+          <div>
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button variant="outline" className="bg-blue-500 text-white">
+                  Access here
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-96">
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium leading-none">NFT template</h4>
+                    <p className="text-muted-foreground text-sm">
+                      Allow us to assist you in designing your NFT template
+                    </p>
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="flex items-center gap-2">
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="Firstname">First name</Label>
+                        <Input id="Firstname" placeholder="First name" className="col-span-2 h-8" />
+                      </div>
+                      <div className="flex flex-col gap-2">
+                        <Label htmlFor="Lastname">Last name</Label>
+                        <Input id="Lastname" placeholder="Last name" className="col-span-2 h-8" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <Label htmlFor="Organizationname">
+                        Authorizing Organization name (option)
+                      </Label>
+                      <Input
+                        id="Organizationname"
+                        placeholder="Authorizing Organization name"
+                        className="col-span-2 h-8"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <Label htmlFor="Contact">Contact</Label>
+                      <Input id="Contact" placeholder="Contact" className="col-span-2 h-8" />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <Label htmlFor="Email">Email</Label>
+                      <Input
+                        type="email"
+                        id="Email"
+                        placeholder="Email"
+                        className="col-span-2 h-8"
+                      />
+                    </div>
+                    <div className="flex flex-col gap-2">
+                      <Label htmlFor="Email">How you intend to utilize this NFT template?</Label>
+                      <Textarea placeholder="Type your message here." />
+                    </div>
+                  </div>
+                  <Button variant="outline" className="bg-blue-500 text-white">
+                    Submit
+                  </Button>
+                </div>
+              </PopoverContent>
+            </Popover>
           </div>
         </div>
       </div>

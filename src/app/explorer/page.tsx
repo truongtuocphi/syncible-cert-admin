@@ -72,7 +72,7 @@ export default function Explorer() {
                       <h1 className="text-[2vw] font-bold md:text-[2.5vw] 2xl:text-[4vw]">
                         {data.mintData[0].fullName.split('Certificate for')}
                       </h1>
-                      <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[1.5vw]">
+                      <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[2vw]">
                         Completed training course
                         <br />“{data.mintData[0].certData.description}”
                       </p>

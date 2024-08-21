@@ -45,7 +45,7 @@ const CertificatePreview: React.FC<any> = ({
       >
         {previewImage || selectedTemplate ? (
           <div className="absolute top-[10%] text-center">
-            <span className="text-[0.7vw]">
+            <span className="text-[0.8vw]">
               {certificateNumber ? `Number ID: ${certificateNumber}` : `Number ID: xx-xx-xxxx`}
             </span>
             <h1 className="gap flex flex-col text-[2vw] font-bold">
@@ -64,7 +64,11 @@ const CertificatePreview: React.FC<any> = ({
               </p>
             </div>
 
-            <span className="mt-2 text-[0.7vw]">{date}</span>
+            {date ? (
+              <span className="mt-2 text-[0.8vw]">{date}</span>
+            ) : (
+              <span className="mt-2 text-[0.8vw]">xx-xx-xxxx</span>
+            )}
           </div>
         ) : null}
 

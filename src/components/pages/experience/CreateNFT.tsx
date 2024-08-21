@@ -372,8 +372,8 @@ const CreateNFT = () => {
   console.log(dataTemplate);
 
   return (
-    <div className="flex gap-4">
-      <div className="mx-auto w-1/2 space-y-4 rounded-xl bg-white p-4 text-black">
+    <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-2">
+      <div className="mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
         <h2 className="text-2xl font-bold">Create NFT</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -561,7 +561,7 @@ const CreateNFT = () => {
       </div>
 
       {headerURL && (
-        <div className="w-[60%]">
+        <div className="w-full">
           <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
             <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
             <CertificatePreview

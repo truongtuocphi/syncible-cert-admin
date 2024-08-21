@@ -23,7 +23,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <Sidebar />
           <div className="ml-64 flex-1 p-6 pt-16">
             <Header />
-            <div className="mt-10 text-black">{children}</div>
+            <div className="mx-auto mt-10 flex max-w-screen-xl justify-center text-black">
+              {children}
+            </div>
           </div>
         </div>
       </Web3ModalProvider>

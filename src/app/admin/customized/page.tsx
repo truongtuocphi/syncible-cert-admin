@@ -210,8 +210,8 @@ const DefineTemplate = () => {
   }, [user]);
 
   return (
-    <div className="flex space-x-6">
-      <div className="mx-auto w-[45%] space-y-4 rounded-xl bg-white p-4 text-black">
+    <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-2">
+      <div className="mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
         <h2 className="text-2xl font-bold">Define Template</h2>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4 space-y-4">
@@ -402,90 +402,25 @@ const DefineTemplate = () => {
       </div>
 
       {/* Preview */}
-      <div className="flex w-[55%] flex-col items-center justify-between">
+      <div className="flex w-full flex-col items-center justify-between gap-4">
         {headerURL && (
           <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
             <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
-            <CertificatePreview
-              headerURL={headerURL}
-              description={description}
-              previewImage={`${selectedTemplate ? `${headerURL}/ipfs/${selectedTemplate}` : ''}`}
-              selectedTemplate={previewImage && ''}
-              previewHeadLogo={previewHeadLogo}
-              authorizingOrgName={authorizingOrgName}
-              headOrgPosition={headOrgPosition}
-              headOrgName={headOrgName}
-              previewSignature={previewSignature}
-            />
+            <div className="h-[170px] sm:h-[270px] lg:h-[370px] 2xl:h-[470px]">
+              <CertificatePreview
+                headerURL={headerURL}
+                description={description}
+                previewImage={`${selectedTemplate ? `${headerURL}/ipfs/${selectedTemplate}` : ''}`}
+                selectedTemplate={previewImage && ''}
+                previewHeadLogo={previewHeadLogo}
+                authorizingOrgName={authorizingOrgName}
+                headOrgPosition={headOrgPosition}
+                headOrgName={headOrgName}
+                previewSignature={previewSignature}
+              />
+            </div>
           </div>
         )}
-
-        {/* <div className="sticky h-fit w-full  rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
-          <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
-          <div className="relative h-[400px] w-full overflow-hidden">
-            {previewImage || selectedTemplate ? (
-              <img
-                src={previewImage ? previewImage : `${headerURL}/ipfs/${selectedTemplate}`}
-                alt="Certificate Template"
-                className="h-full w-full rounded-lg"
-              />
-            ) : (
-              <div className="flex h-96 w-full items-center justify-center rounded-lg bg-gray-100">
-                <p className="text-sm font-semibold text-gray-600">Preview of your Template</p>
-              </div>
-            )}
-
-            <div className="absolute right-14 top-10">
-              {previewHeadLogo && (
-                <img src={`${previewHeadLogo}`} alt="Head Signature" className="w-[4vw]" />
-              )}
-            </div>
-
-            <div
-              className="absolute inset-0 flex flex-col items-center justify-center"
-              style={{ fontFamily: 'Times New Roman, serif' }}
-            >
-              {previewImage || selectedTemplate ? (
-                <div className="absolute top-[10%] text-center">
-                  <span className="text-[0.7vw]">Number ID: xx-xx-xxxx</span>
-                  <h1 className="gap flex flex-col text-[2vw] font-bold">
-                    <span>CERTIFICATE</span>
-                    <span className="text-[1vw]">OF APPRECIATION</span>
-                  </h1>
-                  <p className="mt-4 text-[0.8vw]">PROUDLY PRESENTED TO</p>
-                  <h1
-                    className="text-[1.6vw] font-bold"
-                    style={{ fontFamily: 'Brush Script MT, serif' }}
-                  >{`Full Name`}</h1>
-                  <div
-                    className="flex w-full justify-center"
-                    style={{ fontFamily: 'Garamond, serif' }}
-                  >
-                    <p className="mt-0 flex w-[70%] justify-center text-center text-[1.2vw] font-bold">
-                      for participating in {description}
-                    </p>
-                  </div>
-                  <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
-                </div>
-              ) : null}
-
-              <div className="absolute bottom-[10%] left-[14%] flex flex-col items-center">
-                {authorizingOrgName && (
-                  <>
-                    {previewSignature && (
-                      <img src={`${previewSignature}`} alt="Head Signature" className="w-[4vw]" />
-                    )}
-                    <div className="text-center">
-                      <p className="text-[0.8vw]">{headOrgName}</p>
-                      <p className="text-[0.8vw]">{`${headOrgPosition}`}</p>
-                      <p className="text-[0.8vw]">{`${authorizingOrgName}`}</p>
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </div> */}
 
         <div className="flex w-full items-center justify-between gap-3 rounded-lg bg-gray-200 px-4 py-3">
           <p className="font-semibold">Having trouble designing your template?</p>

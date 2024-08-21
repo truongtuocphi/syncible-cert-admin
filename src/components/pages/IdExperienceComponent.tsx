@@ -23,9 +23,10 @@ if (!headerURL) {
 
 interface IdExperienceProps {
   slugPost: string;
+  onDataContract?: (dataContract: any) => void;
 }
 
-const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
+const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataContract }) => {
   const [data, setData] = useState<any>(null);
   const [dataContract, setDataContract] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -138,8 +139,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
-  console.log(data);
-  console.log(headLogo);
+  console.log(dataContract);
+  onDataContract && onDataContract(dataContract[0].collectionContractAddress);
 
   return (
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">

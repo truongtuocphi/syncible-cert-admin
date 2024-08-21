@@ -5,21 +5,28 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
+import { useState } from 'react';
 
 const IdExperience = ({ params }: { params: { slug: string } }) => {
+  const [dataContract, setDataContract] = useState(null);
   const slugPost = params.slug;
+
+  // Callback function to handle dataContract received from child component
+  const handleDataContract = (data: any) => {
+    setDataContract(data);
+  };
 
   return (
     <>
       <div className="flex items-center gap-2">
-        <Link href={'/admin/collection'}>
+        <Link href={`/admin/collection/collectiondetail/${dataContract}`}>
           <ButtonPrimary className="rounded-lg bg-blue-500">
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
         </Link>
         <h2 className="text-2xl font-bold text-gray-600">Verify</h2>
       </div>
-      <IdExperienceComponent slugPost={slugPost} />
+      <IdExperienceComponent slugPost={slugPost} onDataContract={handleDataContract} />
     </>
   );
 };

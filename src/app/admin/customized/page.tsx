@@ -15,6 +15,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Textarea } from '@/components/ui/textarea';
+import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -210,7 +211,7 @@ const DefineTemplate = () => {
 
   return (
     <div className="flex space-x-6">
-      <div className="mx-auto w-[50%] space-y-4 rounded-xl bg-white p-4 text-black">
+      <div className="mx-auto w-[45%] space-y-4 rounded-xl bg-white p-4 text-black">
         <h2 className="text-2xl font-bold">Define Template</h2>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4 space-y-4">
@@ -401,10 +402,27 @@ const DefineTemplate = () => {
       </div>
 
       {/* Preview */}
-      <div className="flex w-[50%] flex-col items-center justify-between">
-        <div className="sticky h-fit w-full  rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
+      <div className="flex w-[55%] flex-col items-center justify-between">
+        {headerURL && (
+          <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
+            <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
+            <CertificatePreview
+              headerURL={headerURL}
+              description={description}
+              previewImage={`${selectedTemplate ? `${headerURL}/ipfs/${selectedTemplate}` : ''}`}
+              selectedTemplate={previewImage && ''}
+              previewHeadLogo={previewHeadLogo}
+              authorizingOrgName={authorizingOrgName}
+              headOrgPosition={headOrgPosition}
+              headOrgName={headOrgName}
+              previewSignature={previewSignature}
+            />
+          </div>
+        )}
+
+        {/* <div className="sticky h-fit w-full  rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
           <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
-          <div className="relative h-[360px] w-full overflow-hidden">
+          <div className="relative h-[400px] w-full overflow-hidden">
             {previewImage || selectedTemplate ? (
               <img
                 src={previewImage ? previewImage : `${headerURL}/ipfs/${selectedTemplate}`}
@@ -428,19 +446,30 @@ const DefineTemplate = () => {
               style={{ fontFamily: 'Times New Roman, serif' }}
             >
               {previewImage || selectedTemplate ? (
-                <div className="absolute top-[15%] text-center">
-                  <h1 className="text-[2.6vw] font-bold">Certification</h1>
-                  <p className="text-[0.8vw]">{`Number: xxxxx-xxxxx`}</p>
-                  <h1 className="text-[1.6vw] font-bold">{`Full Name`}</h1>
-                  <p className="mt-0 text-center text-[1.5vw]">
-                    Completed training course
-                    <br />“{description}”
-                  </p>
+                <div className="absolute top-[10%] text-center">
+                  <span className="text-[0.7vw]">Number ID: xx-xx-xxxx</span>
+                  <h1 className="gap flex flex-col text-[2vw] font-bold">
+                    <span>CERTIFICATE</span>
+                    <span className="text-[1vw]">OF APPRECIATION</span>
+                  </h1>
+                  <p className="mt-4 text-[0.8vw]">PROUDLY PRESENTED TO</p>
+                  <h1
+                    className="text-[1.6vw] font-bold"
+                    style={{ fontFamily: 'Brush Script MT, serif' }}
+                  >{`Full Name`}</h1>
+                  <div
+                    className="flex w-full justify-center"
+                    style={{ fontFamily: 'Garamond, serif' }}
+                  >
+                    <p className="mt-0 flex w-[70%] justify-center text-center text-[1.2vw] font-bold">
+                      for participating in {description}
+                    </p>
+                  </div>
                   <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
                 </div>
               ) : null}
 
-              <div className="absolute bottom-[10%] left-[20%] flex flex-col items-center">
+              <div className="absolute bottom-[10%] left-[14%] flex flex-col items-center">
                 {authorizingOrgName && (
                   <>
                     {previewSignature && (
@@ -456,7 +485,7 @@ const DefineTemplate = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <div className="flex w-full items-center justify-between gap-3 rounded-lg bg-gray-200 px-4 py-3">
           <p className="font-semibold">Having trouble designing your template?</p>

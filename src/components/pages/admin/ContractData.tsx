@@ -6,6 +6,7 @@ import { HiTemplate } from 'react-icons/hi';
 
 import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
+import CertificatePreview from './CertificatePreview';
 
 interface Props {
   collectionContractAddress: string;
@@ -62,16 +63,27 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
       </div>
     );
 
-  console.log(data);
-
   return (
-    <div className="grid grid-cols-2 gap-6">
+    <div className="grid grid-cols-2 gap-4">
       {data ? (
         <>
           {data.map((item, index) => {
             return (
               <Link href={`/admin/mintnft/${item.mintData[0].tokenURI}`} key={index}>
-                <div className="relative h-full w-full overflow-hidden rounded-lg">
+                <CertificatePreview
+                  headerURL={headerURL}
+                  description={item.mintData[0].certData.description}
+                  previewImage={`${headerURL}/ipfs/${item.mintData[0].certData.templateURL}`}
+                  previewHeadLogo={`${headerURL}/ipfs/${item.mintData[0].certData.organizationLogo}`}
+                  certificateNumber={item.mintData[0].certificateId}
+                  authorizingOrgName={item.mintData[0].certData.organizationName}
+                  headOrgPosition={item.mintData[0].certData.headPosition}
+                  headOrgName={item.mintData[0].certData.headName}
+                  previewSignature={`${headerURL}/ipfs/${item.mintData[0].certData.headSignature}`}
+                  name={item.mintData[0].fullName}
+                  date={configDate(item.mintData[0].certData.date)}
+                />
+                {/* <div className="relative h-full w-full overflow-hidden rounded-lg">
                   <img
                     src={`${headerURL}/ipfs/${item.mintData[0].certData.templateURL}`}
                     alt="Certificate Template"
@@ -117,7 +129,7 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </Link>
             );
           })}

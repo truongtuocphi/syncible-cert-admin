@@ -13,6 +13,7 @@ import CopyButton from '@/components/common/coppyText/CopyButton';
 import Loading from '@/components/common/loading/Loading';
 import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
+import CertificatePreview from './admin/CertificatePreview';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
 
@@ -155,55 +156,19 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
       </div>
       <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
         <div className="flex flex-col justify-between md:flex-row">
-          <div className="relative w-full overflow-hidden md:w-9/12">
-            <img
-              src={`${headerURL}/ipfs/${templateURL}`}
-              alt="Certificate Template"
-              className="w-full rounded-lg"
-            />
-
-            <div className="absolute right-14 top-10">
-              {headLogo && (
-                <img
-                  src={`${headerURL}/ipfs/${headLogo}`}
-                  alt="Head Signature"
-                  className="w-[4vw]"
-                />
-              )}
-            </div>
-
-            <div
-              className="absolute inset-0 flex flex-col items-center justify-center"
-              style={{ fontFamily: 'Times New Roman, serif' }}
-            >
-              <div className="absolute top-[15%] text-center">
-                <h1 className="text-[1.5vw] font-bold md:text-[3vw]">Certification</h1>
-                <p className="text-[1.5vw] md:text-[1.5vw] lg:text-[1.2vw]">{`Number: ${certificateID}`}</p>
-                <h1 className="text-[2vw] font-bold md:text-[2.5vw] 2xl:text-[4vw]">
-                  {name.split('Certificate for')}
-                </h1>
-                <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[1.8vw]">
-                  Completed training course
-                  <br />“{description}”
-                </p>
-                <span className="mt-2 text-[2.5vw] md:text-[1.5vw] lg:text-[1.2vw]">
-                  {configDate(date)}
-                </span>
-              </div>
-              <div className="absolute bottom-[10%] left-[15%] flex flex-col items-center">
-                <img
-                  src={`${headerURL}/ipfs/${headSignature}`}
-                  alt="Head Signature"
-                  className="w-[2vw] md:w-[3vw] lg:w-[7vw]"
-                />
-                <div className="text-center">
-                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headName}`}</p>
-                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${headPosition}`}</p>
-                  <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${organizationName}`}</p>
-                </div>
-              </div>
-            </div>
-          </div>
+          <CertificatePreview
+            headerURL={headerURL}
+            description={description}
+            previewImage={`${headerURL}/ipfs/${templateURL}`}
+            previewHeadLogo={`${headerURL}/ipfs/${headLogo}`}
+            certificateNumber={certificateID}
+            authorizingOrgName={organizationName}
+            headOrgPosition={headPosition}
+            headOrgName={headName}
+            previewSignature={`${headerURL}/ipfs/${headSignature}`}
+            name={name.split('Certificate for')[1].trim()}
+            date={configDate(date)}
+          />
           <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-4/12">
             <h3 className="text-3xl font-bold text-black">{name}</h3>
             <p className="mt-2 text-lg">Tên chứng nhận: {description}</p>

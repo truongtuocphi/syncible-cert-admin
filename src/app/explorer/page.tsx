@@ -12,6 +12,7 @@ import Navbar from '@/components/layout/Navbar';
 import { CollectionData } from '@/types/function';
 import configDate from '@/utils/configDate';
 import fetchDataFirebase from '@/utils/featDataFirebase';
+import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -54,57 +55,21 @@ export default function Explorer() {
 
           {/* Hiển thị dữ liệu */}
           {data ? (
-            <div className="mx-auto mt-5 w-2/3 space-y-4 rounded-xl bg-white p-4 text-black">
+            <div className="mx-auto mt-5 w-1/2 space-y-4 rounded-xl bg-white p-4 text-black">
               <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
-                <div className="relative w-full overflow-hidden">
-                  <img
-                    src={`${headerURL}/ipfs/${data.mintData[0].certData.templateURL}`}
-                    alt="Certificate Template"
-                    className="w-full rounded-lg"
-                  />
-
-                  <div className="absolute right-14 top-10">
-                    {data.mintData[0].certData.organizationLogo && (
-                      <img
-                        src={`${headerURL}/ipfs/${data.mintData[0].certData.organizationLogo}`}
-                        alt="Head Signature"
-                        className="w-[4vw]"
-                      />
-                    )}
-                  </div>
-
-                  <div
-                    className="absolute inset-0 flex flex-col items-center justify-center"
-                    style={{ fontFamily: 'Times New Roman, serif' }}
-                  >
-                    <div className="absolute top-[15%] text-center">
-                      <h1 className="text-[1.5vw] font-bold md:text-[3vw]">Certification</h1>
-                      <p className="text-[1.5vw] md:text-[1.5vw] lg:text-[1.2vw]">{`Số: ${data.mintData[0].certificateId}`}</p>
-                      <h1 className="text-[2vw] font-bold md:text-[2.5vw] 2xl:text-[4vw]">
-                        {data.mintData[0].fullName.split('Certificate for')}
-                      </h1>
-                      <p className="mt-2 text-center text-[1.2vw] md:text-[1.5vw] lg:text-[2vw]">
-                        Completed training course
-                        <br />“{data.mintData[0].certData.description}”
-                      </p>
-                      <span className="mt-2 text-[2.5vw] md:text-[1.5vw] lg:text-[1.2vw]">
-                        {configDate(data.mintData[0].certData.date)}
-                      </span>
-                    </div>
-                    <div className="absolute bottom-[10%] left-[20%] flex flex-col items-center">
-                      <img
-                        src={`${headerURL}/ipfs/${data.mintData[0].certData.headSignature}`}
-                        alt="Head Signature"
-                        className="w-[4vw] md:w-[5vw] lg:w-[7vw]"
-                      />
-                      <div className="text-center">
-                        <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${data.mintData[0].certData.headName}`}</p>
-                        <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${data.mintData[0].certData.headPosition}`}</p>
-                        <p className="text-[1vw] md:text-[1vw] lg:text-[0.8vw]">{`${data.mintData[0].certData.organizationName}`}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <CertificatePreview
+                  headerURL={headerURL}
+                  description={data.mintData[0].certData.description}
+                  previewImage={`${headerURL}/ipfs/${data.mintData[0].certData.templateURL}`}
+                  previewHeadLogo={`${headerURL}/ipfs/${data.mintData[0].certData.organizationLogo}`}
+                  certificateNumber={data.mintData[0].certificateId}
+                  authorizingOrgName={data.mintData[0].certData.organizationName}
+                  headOrgPosition={data.mintData[0].certData.headPosition}
+                  headOrgName={data.mintData[0].certData.headName}
+                  previewSignature={`${headerURL}/ipfs/${data.mintData[0].certData.organizationLogo}`}
+                  name={data.mintData[0].fullName.split('Certificate for')}
+                  date={configDate(data.mintData[0].certData.date)}
+                />
               </Link>
             </div>
           ) : (

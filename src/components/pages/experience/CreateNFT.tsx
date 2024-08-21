@@ -15,6 +15,7 @@ import { User } from 'firebase/auth';
 import { onValue, query, orderByChild, equalTo } from 'firebase/database';
 import Link from 'next/link';
 import configDate from '@/utils/configDate';
+import CertificatePreview from '../admin/CertificatePreview';
 
 interface Collection {
   id: string;
@@ -558,75 +559,27 @@ const CreateNFT = () => {
         </form>
       </div>
 
-      <div className="sticky h-fit w-[50%] rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
-        <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
-        <div className="relative h-[360px] w-full overflow-hidden">
-          {dataTemplate?.selectedTemplate || dataTemplate?.templateIpfsHash ? (
-            <img
-              src={
-                dataTemplate?.templateIpfsHash
-                  ? `${headerURL}/ipfs/${dataTemplate?.templateIpfsHash}`
-                  : `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}`
-              }
-              alt="Certificate Template"
-              className="h-full w-full rounded-lg"
+      {headerURL && (
+        <div className="w-[60%]">
+          <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
+            <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
+            <CertificatePreview
+              headerURL={headerURL}
+              description={`${dataTemplate?.description ? dataTemplate?.description : ''}`}
+              previewImage={`${dataTemplate ? `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}` : ''}`}
+              selectedTemplate={dataTemplate?.templateIpfsHash}
+              previewHeadLogo={`${headerURL}/ipfs/${dataTemplate?.headLogoIpfsHash}`}
+              certificateNumber={certificateNumber}
+              key={certificateNumber}
+              authorizingOrgName={dataTemplate?.authorizingOrgName}
+              headOrgPosition={dataTemplate?.headOrgPosition}
+              headOrgName={dataTemplate?.headOrgName}
+              previewSignature={`${dataTemplate?.signatureIpfsHash ? `${headerURL}/ipfs/${dataTemplate?.signatureIpfsHash}` : ''}`}
+              name={fullName}
             />
-          ) : (
-            <div className="flex h-96 w-full items-center justify-center rounded-lg bg-gray-100">
-              <p className="text-sm font-semibold text-gray-600">Preview of your Template</p>
-            </div>
-          )}
-
-          <div className="absolute right-14 top-10">
-            {dataTemplate?.headLogoIpfsHash && (
-              <img
-                src={`${headerURL}/ipfs/${dataTemplate?.headLogoIpfsHash}`}
-                alt="Head Signature"
-                className="w-[4vw]"
-              />
-            )}
-          </div>
-
-          <div
-            className="absolute inset-0 flex flex-col items-center justify-center"
-            style={{ fontFamily: 'Times New Roman, serif' }}
-          >
-            {dataTemplate?.selectedTemplate ? (
-              <div className="absolute top-[15%] text-center">
-                <h1 className="text-[2.6vw] font-bold">Certification</h1>
-                <p className="text-[0.8vw]">{`Number: ${certificateNumber}`}</p>
-                <h1 className="text-[1.6vw] font-bold">{fullName}</h1>
-                <p className="mt-0 text-center text-[1.5vw]">
-                  Completed training course
-                  <br />“{dataTemplate?.description}”
-                </p>
-                {issuedDate ? (
-                  <span className="mt-2 text-[0.7vw]">{configDate(issuedDate)}</span>
-                ) : (
-                  <span className="mt-2 text-[0.7vw]">xx-xx-xxxx</span>
-                )}
-              </div>
-            ) : null}
-
-            <div className="absolute bottom-[10%] left-[20%] flex flex-col items-center">
-              {dataTemplate?.authorizingOrgName && (
-                <>
-                  <img
-                    src={`${headerURL}/ipfs/${dataTemplate?.signatureIpfsHash}`}
-                    alt="Head Signature"
-                    className="w-[3vw] xl:w-[4vw]"
-                  />
-                  <div className="text-center">
-                    <p className="text-[0.8vw]">{dataTemplate?.headOrgName}</p>
-                    <p className="text-[0.8vw]">{`${dataTemplate?.headOrgPosition}`}</p>
-                    <p className="text-[0.8vw]">{`${dataTemplate?.authorizingOrgName}`}</p>
-                  </div>
-                </>
-              )}
-            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

@@ -37,10 +37,14 @@ const Breadcrumb = () => {
           <li key={item.href} className="flex items-center">
             {index < breadcrumbItems.length - 1 ? (
               <div className="flex items-center gap-2">
-                <Link href={item.href} className="text-sm">
-                  {capitalizeFirstLetter(item.label)}
-                </Link>
-                <MdNavigateNext className="text-xl" />
+                {item.label && (
+                  <>
+                    <Link href={item.href} className="text-sm">
+                      {capitalizeFirstLetter(item.label)}
+                    </Link>
+                    <MdNavigateNext className="text-xl" />
+                  </>
+                )}
               </div>
             ) : (
               <Link href={item.href} className="text-sm text-gray-700">

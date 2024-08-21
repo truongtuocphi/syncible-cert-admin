@@ -1,12 +1,17 @@
-function configDate(dateString: any) {
+function configDate(dateString: string) {
   const dates = dateString.split(' - ');
   const startDate = new Date(dates[0]);
 
-  const startDay = startDate.getDate();
-  const month = startDate.getMonth() + 1;
-  const year = startDate.getFullYear();
+  const options: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: '2-digit',
+  };
 
-  return `Day ${startDay} month ${month} year ${year}`;
+  // Chuyển đổi ngày thành chuỗi với định dạng "August 08, 2024"
+  const formattedDate = startDate.toLocaleDateString('en-US', options);
+
+  return formattedDate;
 }
 
 export default configDate;

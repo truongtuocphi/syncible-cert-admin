@@ -60,7 +60,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
         </div>
         <div className="mt-14 flex flex-col justify-center gap-3 text-center">
           <h2 className="text-2xl font-bold text-gray-700">{data.displayName}</h2>
-          <div>{<CopyAddressButton textToCopy={data.address} />}</div>
+          <div>{<CopyAddressButton textToCopy={slugPost} />}</div>
           <p className="text-base font-semibold text-gray-400">{data.description}</p>
         </div>
       </div>

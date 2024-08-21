@@ -16,7 +16,7 @@ const CertificatePreview: React.FC<any> = ({
   name,
 }) => {
   return (
-    <div className="relative h-[450px] w-full overflow-hidden">
+    <div className="relative h-[450px] w-full overflow-hidden 2xl:h-[700px]">
       {previewImage || selectedTemplate ? (
         <>
           <img
@@ -28,7 +28,9 @@ const CertificatePreview: React.FC<any> = ({
           <div className="absolute right-14 top-10">
             {previewHeadLogo != undefined &&
             previewHeadLogo != null &&
-            previewHeadLogo != `${headerURL}/ipfs/undefined` ? (
+            previewHeadLogo != `${headerURL}/ipfs/undefined` &&
+            previewHeadLogo != `${headerURL}/ipfs/Student` &&
+            previewHeadLogo != `${headerURL}/ipfs/Teacher` ? (
               <img src={`${previewHeadLogo}`} alt="Head Signature" className="w-[4vw]" />
             ) : null}
           </div>

@@ -9,7 +9,7 @@ const getCustomLabel = (path: string) => {
     case 'admin':
       return 'Home';
     case 'collectiondetail':
-      return 'Collection Detail';
+      return '';
     case 'contractdetail':
       return 'Contract Detail';
     case 'filestorage':

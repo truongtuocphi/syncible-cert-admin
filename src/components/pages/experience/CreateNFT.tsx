@@ -16,6 +16,7 @@ import { onValue, query, orderByChild, equalTo } from 'firebase/database';
 import Link from 'next/link';
 import configDate from '@/utils/configDate';
 import CertificatePreview from '../admin/CertificatePreview';
+import getAcronym from '@/utils/getAcronym';
 
 interface Collection {
   id: string;
@@ -92,7 +93,7 @@ const CreateNFT = () => {
   }, [issuedDate, role, dataTemplate?.authorizingOrgName]);
 
   useEffect(() => {
-    if (loading) router.push(`/admin/collection/collectiondetail/${collectionContractAddress}`);
+    if (loading) router.push(`/admin/collection/collectiondetail`);
   }, [loading]);
 
   useEffect(() => {
@@ -131,7 +132,7 @@ const CreateNFT = () => {
     const date = new Date(issuedDate);
     const formattedDate = `${String(date.getFullYear()).slice(2)}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
     const roleCode = role === 'Teacher' ? 'TC' : 'SC';
-    return `${randomString}/${formattedDate}-${roleCode}-${dataTemplate?.authorizingOrgName}`;
+    return `${randomString}/${formattedDate}-${roleCode}-${getAcronym(dataTemplate?.authorizingOrgName)}`;
   };
 
   const handleCsvChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -576,6 +577,7 @@ const CreateNFT = () => {
               headOrgName={dataTemplate?.headOrgName}
               previewSignature={`${dataTemplate?.signatureIpfsHash ? `${headerURL}/ipfs/${dataTemplate?.signatureIpfsHash}` : ''}`}
               name={fullName}
+              date={configDate(issuedDate)}
             />
           </div>
         </div>

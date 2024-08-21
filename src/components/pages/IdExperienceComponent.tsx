@@ -156,20 +156,22 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
       </div>
       <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
         <div className="flex flex-col justify-between md:flex-row">
-          <CertificatePreview
-            headerURL={headerURL}
-            description={description}
-            previewImage={`${headerURL}/ipfs/${templateURL}`}
-            previewHeadLogo={`${headerURL}/ipfs/${headLogo}`}
-            certificateNumber={certificateID}
-            authorizingOrgName={organizationName}
-            headOrgPosition={headPosition}
-            headOrgName={headName}
-            previewSignature={`${headerURL}/ipfs/${headSignature}`}
-            name={name.split('Certificate for')[1].trim()}
-            date={configDate(date)}
-          />
-          <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-4/12">
+          <div className="w-3/5">
+            <CertificatePreview
+              headerURL={headerURL}
+              description={description}
+              previewImage={`${headerURL}/ipfs/${templateURL}`}
+              previewHeadLogo={`${headerURL}/ipfs/${headLogo}`}
+              certificateNumber={certificateID}
+              authorizingOrgName={organizationName}
+              headOrgPosition={headPosition}
+              headOrgName={headName}
+              previewSignature={`${headerURL}/ipfs/${headSignature}`}
+              name={name.split('Certificate for')[1].trim()}
+              date={configDate(date)}
+            />
+          </div>
+          <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-[40%]">
             <h3 className="text-3xl font-bold text-black">{name}</h3>
             <p className="mt-2 text-lg">Tên chứng nhận: {description}</p>
             <textarea

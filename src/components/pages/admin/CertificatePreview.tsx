@@ -16,7 +16,7 @@ const CertificatePreview: React.FC<any> = ({
   name,
 }) => {
   return (
-    <div className="relative h-[450px] w-full overflow-hidden 2xl:h-[700px]">
+    <div className="relative h-[300px] w-full overflow-hidden sm:h-[350px] md:h-[400px] lg:h-[450px] 2xl:h-[500px]">
       {previewImage || selectedTemplate ? (
         <>
           <img

@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { ref, get } from 'firebase/database';
 
 import { db } from '@/lib/firebase';
+import CertificatePreview from '@/components/pages/admin/CertificatePreview';
+import configDate from '@/utils/configDate';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -48,9 +50,8 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
   if (data.length === 0) return <p>No data available</p>;
 
   return (
-    <div className="grid grid-cols-2 gap-4 p-4">
+    <div className="grid w-full grid-cols-2 gap-4">
       {data.map((item, index) => {
-        console.log(item);
         const {
           templateIpfsHash,
           selectedTemplate,
@@ -66,61 +67,22 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
         } = item;
 
         return (
-          <div key={index} className="sticky h-fit w-full rounded-xl bg-white p-4">
-            <div className="relative h-[360px] w-full overflow-hidden">
-              <img
-                src={
-                  templateIpfsHash
-                    ? `${headerURL}/ipfs/${templateIpfsHash}`
-                    : `${headerURL}/ipfs/${selectedTemplate}`
-                }
-                alt="Certificate Template"
-                className="h-full w-full rounded-lg"
+          <div key={index} className="sticky h-fit w-full rounded-xl">
+            <div className="h-[170px] sm:h-[270px] lg:h-[400px] 2xl:h-[500px]">
+              <CertificatePreview
+                headerURL={headerURL}
+                description={description}
+                previewImage={`${headerURL}/ipfs/${selectedTemplate}`}
+                selectedTemplate={`${headerURL}/ipfs/${templateIpfsHash}`}
+                previewHeadLogo={`${headerURL}/ipfs/${headLogoIpfsHash}`}
+                certificateNumber={certificateNumber}
+                authorizingOrgName={authorizingOrgName}
+                headOrgPosition={headOrgPosition}
+                headOrgName={headOrgName}
+                previewSignature={`${headerURL}/ipfs/${signatureIpfsHash}`}
+                name={fullName}
+                date={issueDate}
               />
-
-              <div className="absolute right-14 top-10">
-                {headLogoIpfsHash && (
-                  <img
-                    src={`${headerURL}/ipfs/${headLogoIpfsHash}`}
-                    alt="Head Signature"
-                    className="w-[4vw]"
-                  />
-                )}
-              </div>
-              <div
-                className="absolute inset-0 flex flex-col items-center justify-center"
-                style={{ fontFamily: 'Times New Roman, serif' }}
-              >
-                <div className="absolute top-[15%] text-center">
-                  <h1 className="text-[2.6vw] font-bold">Certification</h1>
-                  <p className="text-[0.8vw]">{`Number: ${certificateNumber || 'xxxxx-xxxxx'}`}</p>
-                  <h1 className="text-[1.8vw] font-bold">{fullName || 'Full Name'}</h1>
-                  <p className="mt-0 text-center text-[1.5vw]">
-                    Completed training course
-                    <br />“{description}”
-                  </p>
-                  <span className="mt-2 text-[0.7vw]">{issueDate || 'xx-xx-xxxx'}</span>
-                </div>
-
-                <div className="absolute bottom-[10%] left-[20%] flex flex-col items-center">
-                  {authorizingOrgName && (
-                    <>
-                      {signatureIpfsHash && (
-                        <img
-                          src={`${headerURL}/ipfs/${signatureIpfsHash}`}
-                          alt="Head Signature"
-                          className="w-[4vw]"
-                        />
-                      )}
-                      <div className="text-center">
-                        <p className="text-[0.8vw]">{headOrgName}</p>
-                        <p className="text-[0.8vw]">{`${headOrgPosition}`}</p>
-                        <p className="text-[0.8vw]">{`${authorizingOrgName}`}</p>
-                      </div>
-                    </>
-                  )}
-                </div>
-              </div>
             </div>
           </div>
         );

@@ -98,7 +98,7 @@ export default function FileStorage() {
   }
 
   return (
-    <>
+    <div className="flex w-full flex-col">
       <div className="flex items-start justify-between">
         <Command className="w-2/5 rounded-xl border-[0.5px] border-gray-300">
           <CommandInput
@@ -162,6 +162,6 @@ export default function FileStorage() {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 }

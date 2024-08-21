@@ -24,7 +24,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <div className="ml-64 flex-1 p-6 pt-16">
             <Header />
             <div className="mx-auto mt-10 flex max-w-screen-xl justify-center text-black">
-              {children}
+              <div className="w-full">{children}</div>
             </div>
           </div>
         </div>

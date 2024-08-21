@@ -571,7 +571,6 @@ const CreateNFT = () => {
               selectedTemplate={dataTemplate?.templateIpfsHash}
               previewHeadLogo={`${headerURL}/ipfs/${dataTemplate?.headLogoIpfsHash}`}
               certificateNumber={certificateNumber}
-              key={certificateNumber}
               authorizingOrgName={dataTemplate?.authorizingOrgName}
               headOrgPosition={dataTemplate?.headOrgPosition}
               headOrgName={dataTemplate?.headOrgName}

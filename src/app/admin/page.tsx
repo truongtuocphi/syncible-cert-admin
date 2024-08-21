@@ -38,7 +38,7 @@ const listCard = [
 
 const HomeAdmin = () => {
   return (
-    <>
+    <div className="flex w-full flex-col">
       <div>
         <h1 className="mb-3 text-3xl font-bold text-gray-700">Welcome to Syncible</h1>
         <p className="text-sm font-semibold text-gray-500">
@@ -50,7 +50,7 @@ const HomeAdmin = () => {
           return <Card data={item} key={index} />;
         })}
       </div>
-    </>
+    </div>
   );
 };
 

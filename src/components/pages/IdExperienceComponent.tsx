@@ -148,12 +148,12 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost }) => {
 
   return (
     <>
-      <div className="flex items-center gap-2">
+      {/* <div className="flex items-center gap-2">
         <ButtonPrimary className="rounded-lg bg-blue-500" onClick={handleBack}>
           <FaArrowLeft className="text-xl text-white" />
         </ButtonPrimary>
         <h2 className="text-2xl font-bold text-gray-600">Verify</h2>
-      </div>
+      </div> */}
       <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
         <div className="flex flex-col justify-between md:flex-row">
           <div className="w-3/5">

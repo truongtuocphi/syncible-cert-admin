@@ -165,7 +165,6 @@ const CreateNFT = () => {
       try {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
-        console.log(signer);
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
         const mintDataArray = [];

@@ -4,18 +4,18 @@
 import { useState } from 'react';
 
 import Link from 'next/link';
+import { BiSolidCommentError } from 'react-icons/bi';
 import { FaSearch } from 'react-icons/fa';
 import { HiTemplate } from 'react-icons/hi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import Loading from '@/components/common/loading/Loading';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { CollectionData } from '@/types/function';
 import configDate from '@/utils/configDate';
 import fetchDataFirebase from '@/utils/featDataFirebase';
-import Loading from '@/components/common/loading/Loading';
-import { BiSolidCommentError } from 'react-icons/bi';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 

@@ -3,15 +3,15 @@
 import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
+import { FaArrowLeft } from 'react-icons/fa';
 
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Loading from '@/components/common/loading/Loading';
 import ContractData from '@/components/pages/admin/ContractData';
 import CopyAddressButton from '@/components/pages/admin/CopyAddressButton';
 import { CollectionData } from '@/types/function';
 import fetchDataCollectionById from '@/utils/fetchDataCollectionById';
-import Link from 'next/link';
-import ButtonPrimary from '@/components/common/button/ButtonPrimary';
-import { FaArrowLeft } from 'react-icons/fa';
 
 export default function CollectionDetail({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<CollectionData | null>(null);

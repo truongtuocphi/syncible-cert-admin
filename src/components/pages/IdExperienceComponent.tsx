@@ -135,12 +135,11 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
     }
   }, [slugPost]);
 
+  onDataContract && onDataContract(dataContract[0].collectionContractAddress);
+
   if (!data) return <Loading />;
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
-
-  console.log(dataContract);
-  onDataContract && onDataContract(dataContract[0].collectionContractAddress);
 
   return (
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">

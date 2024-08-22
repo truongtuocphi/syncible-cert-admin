@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from 'react';
 
 import { ethers } from 'ethers';
+import { User } from 'firebase/auth';
+import { onValue, query, orderByChild, equalTo } from 'firebase/database';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Papa from 'papaparse';
 import { useAccount } from 'wagmi';
@@ -10,13 +13,11 @@ import { useAccount } from 'wagmi';
 import ABI from '@/contract/ABI.json';
 import { db, ref, get, onAuthStateChanged, auth } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
-import { saveMintData } from '@/utils/saveMintData';
-import { User } from 'firebase/auth';
-import { onValue, query, orderByChild, equalTo } from 'firebase/database';
-import Link from 'next/link';
 import configDate from '@/utils/configDate';
-import CertificatePreview from '../admin/CertificatePreview';
 import getAcronym from '@/utils/getAcronym';
+import { saveMintData } from '@/utils/saveMintData';
+
+import CertificatePreview from '../admin/CertificatePreview';
 
 interface Collection {
   id: string;
@@ -368,8 +369,6 @@ const CreateNFT = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  console.log(dataTemplate);
 
   return (
     <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-2">

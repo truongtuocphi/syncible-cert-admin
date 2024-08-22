@@ -3,11 +3,7 @@
 import CreateNFT from '@/components/pages/experience/CreateNFT';
 
 const Experience = () => {
-  return (
-    <>
-      <CreateNFT />
-    </>
-  );
+  return <CreateNFT />;
 };
 
 export default Experience;

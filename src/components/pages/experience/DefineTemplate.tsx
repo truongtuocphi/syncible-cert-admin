@@ -128,7 +128,6 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
         <h2 className="text-2xl font-bold">Define Template</h2>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col">
-            {/* Left Section */}
             <div className="grid grid-cols-2 gap-4 space-y-4">
               <div className="relative w-full">
                 <label className="block text-sm font-medium text-gray-700">
@@ -192,7 +191,7 @@ const DefineTemplate = ({ onNext }: { onNext: (data: any) => void }) => {
               </div>
             </div>
 
-            {/* Right Section */}
+            {/* Form Template */}
             <div className="mt-3 space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">

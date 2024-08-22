@@ -1,11 +1,12 @@
 'use client';
 
+import { useState } from 'react';
+
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
-import { useState } from 'react';
 
 const IdExperience = ({ params }: { params: { slug: string } }) => {
   const [dataContract, setDataContract] = useState(null);

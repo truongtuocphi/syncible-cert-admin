@@ -225,19 +225,6 @@ const CreateCollection: React.FC = () => {
               required
             />
           </div>
-          {/* <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Contract Name</label>
-            <p className="text-xs text-gray-400">
-              This contract name can&apos;t be changed in the future.
-            </p>
-            <input
-              type="text"
-              value={contractName}
-              onChange={(e) => setContractName(e.target.value)}
-              className="block w-full rounded-lg border px-4 py-2 focus:ring focus:ring-indigo-200"
-              required
-            />
-          </div> */}
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Contract Symbol</label>
             <p className="text-xs text-gray-400">

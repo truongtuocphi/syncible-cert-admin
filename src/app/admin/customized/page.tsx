@@ -7,15 +7,15 @@ import { onAuthStateChanged, User } from 'firebase/auth';
 import { ref, onValue, query, orderByChild, equalTo, get } from 'firebase/database';
 import { useRouter } from 'next/navigation';
 
-import { auth, db, set } from '@/lib/firebase';
-import { uploadImageToPinata } from '@/lib/pinata';
 import ButtonCreateFolder from '@/components/common/button/ButtonCreateFolder';
+import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Textarea } from '@/components/ui/textarea';
-import CertificatePreview from '@/components/pages/admin/CertificatePreview';
+import { auth, db, set } from '@/lib/firebase';
+import { uploadImageToPinata } from '@/lib/pinata';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -201,6 +201,7 @@ const DefineTemplate = () => {
           }
         },
         (error) => {
+          // eslint-disable-next-line no-console
           console.error('Error fetching folders:', error);
         }
       );

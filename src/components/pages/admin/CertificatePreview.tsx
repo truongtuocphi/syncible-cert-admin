@@ -76,19 +76,21 @@ const CertificatePreview: React.FC<any> = ({
               <span className="mt-2 text-base">xx-xx-xxxx</span>
             )}
 
-            <div className="flex flex-col items-start">
-              {authorizingOrgName && (
-                <>
-                  {previewSignature && (
-                    <img src={`${previewSignature}`} alt="Head Signature" className="h-14 w-20" />
-                  )}
-                  <div className="text-center">
-                    <p className="text-xs">{headOrgName}</p>
-                    <p className="text-xs">{`${headOrgPosition}`}</p>
-                    <p className="text-xs">{`${authorizingOrgName}`}</p>
-                  </div>
-                </>
-              )}
+            <div className="flex flex-col items-start text-center">
+              <div className="flex flex-col items-center">
+                {authorizingOrgName && (
+                  <>
+                    {previewSignature && (
+                      <img src={`${previewSignature}`} alt="Head Signature" className="h-14 w-20" />
+                    )}
+                    <div className="text-center">
+                      <p className="text-xs">{headOrgName}</p>
+                      <p className="text-xs">{`${headOrgPosition}`}</p>
+                      <p className="text-xs">{`${authorizingOrgName}`}</p>
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
           </div>
         ) : null}

@@ -203,8 +203,8 @@ const DefineTemplate = () => {
   }, [user]);
 
   return (
-    <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-2">
-      <div className="mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
+    <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-7">
+      <div className="col-span-3 mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
         <h2 className="text-2xl font-bold">Define Template</h2>
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4 space-y-4">
@@ -395,11 +395,11 @@ const DefineTemplate = () => {
       </div>
 
       {/* Preview */}
-      <div className="flex w-full flex-col items-center justify-between gap-4">
+      <div className="col-span-4 flex w-full flex-col items-center justify-between gap-4">
         {headerURL && (
           <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
             <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
-            <div className="h-[170px] sm:h-[270px] lg:h-[370px] 2xl:h-[470px]">
+            <div className="h-[170px] sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
               <CertificatePreview
                 headerURL={headerURL}
                 description={description}

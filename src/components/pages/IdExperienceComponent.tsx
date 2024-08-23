@@ -144,7 +144,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   return (
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <div className="flex flex-col justify-between md:flex-row">
-        <div className="w-3/5">
+        <div className="h-[170px] w-3/5 sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
           <CertificatePreview
             headerURL={headerURL}
             description={description}

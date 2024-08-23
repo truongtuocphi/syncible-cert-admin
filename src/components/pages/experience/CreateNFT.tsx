@@ -558,7 +558,7 @@ const CreateNFT = () => {
         <div className="col-span-4 w-full">
           <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
             <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
-            <div className="h-[170px] sm:h-[270px] lg:h-[400px] 2xl:h-[500px]">
+            <div className="h-[170px] sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
               <CertificatePreview
                 headerURL={headerURL}
                 description={`${dataTemplate?.description ? dataTemplate?.description : ''}`}

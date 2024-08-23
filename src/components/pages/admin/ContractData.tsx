@@ -64,13 +64,13 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
     );
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
       {data ? (
         <>
           {data.map((item, index) => {
             return (
               <Link href={`/admin/mintnft/${item.mintData[0].tokenURI}`} key={index}>
-                <div className="h-[170px] sm:h-[270px] lg:h-[370px] 2xl:h-[400px]">
+                <div className="h-[170px] w-full sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
                   <CertificatePreview
                     headerURL={headerURL}
                     description={item.mintData[0].certData.description}

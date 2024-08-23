@@ -87,7 +87,7 @@ export default function Explorer() {
               </div>
             </div>
           ) : data ? (
-            <div className="mx-auto mt-16 w-1/2 space-y-4 rounded-xl bg-white p-4 text-black">
+            <div className="mx-auto mt-16 h-[170px] w-1/2 space-y-4 rounded-xl bg-white p-4 text-black sm:h-[270px] lg:h-[450px] 2xl:h-[500px]">
               <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
                 <CertificatePreview
                   headerURL={headerURL}

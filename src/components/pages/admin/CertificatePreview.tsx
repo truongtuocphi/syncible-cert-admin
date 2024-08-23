@@ -36,7 +36,7 @@ const CertificatePreview: React.FC<any> = ({
           </div>
         </>
       ) : (
-        <div className="flex h-[170px] w-full items-center justify-center rounded-lg bg-gray-100 sm:h-[270px] lg:h-[370px] 2xl:h-[470px]">
+        <div className="flex h-[170px] w-full items-center justify-center rounded-lg bg-gray-100 sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
           <p className="text-sm font-semibold text-gray-600">Preview of your Template</p>
         </div>
       )}
@@ -46,7 +46,7 @@ const CertificatePreview: React.FC<any> = ({
         style={{ fontFamily: 'Times New Roman, serif' }}
       >
         {previewImage || selectedTemplate ? (
-          <div className="absolute top-[10%] space-y-2 text-center">
+          <div className="absolute top-[10%] flex h-[80%] w-[80%] flex-col justify-between space-y-2 text-center">
             <span className="text-xs">
               {certificateNumber ? `Number ID: ${certificateNumber}` : `Number ID: xx-xx-xxxx`}
             </span>
@@ -75,10 +75,25 @@ const CertificatePreview: React.FC<any> = ({
             ) : (
               <span className="mt-2 text-base">xx-xx-xxxx</span>
             )}
+
+            <div className="flex flex-col items-start">
+              {authorizingOrgName && (
+                <>
+                  {previewSignature && (
+                    <img src={`${previewSignature}`} alt="Head Signature" className="h-14 w-20" />
+                  )}
+                  <div className="text-center">
+                    <p className="text-xs">{headOrgName}</p>
+                    <p className="text-xs">{`${headOrgPosition}`}</p>
+                    <p className="text-xs">{`${authorizingOrgName}`}</p>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
         ) : null}
 
-        <div className="absolute bottom-[8%] left-[14%] flex flex-col items-center">
+        {/* <div className="absolute bottom-[8%] left-[14%] flex flex-col items-center">
           {authorizingOrgName && (
             <>
               {previewSignature && (
@@ -91,7 +106,7 @@ const CertificatePreview: React.FC<any> = ({
               </div>
             </>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );

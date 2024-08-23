@@ -21,6 +21,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { auth, db } from '@/lib/firebase';
 import Link from 'next/link';
+import { deleteDataById } from '@/utils/deleteDataFirebase';
 
 export default function FileStorage() {
   const [inputValue, setInputValue] = useState('');
@@ -28,6 +29,8 @@ export default function FileStorage() {
   const [folders, setFolders] = useState<any[]>([]);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
+  const [isDeleteMode, setIsDeleteMode] = useState(false); // New state variable for delete mode
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -59,7 +62,6 @@ export default function FileStorage() {
           }
         },
         (error) => {
-          // eslint-disable-next-line no-console
           console.error('Error fetching folders:', error);
         }
       );
@@ -87,9 +89,32 @@ export default function FileStorage() {
       setFolderName('');
       alert('Folder created successfully!');
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error creating folder:', error);
       alert('Failed to create folder.');
+    }
+  };
+
+  const handleSelectFolder = (folderId: string) => {
+    setSelectedFolders((prevSelected) =>
+      prevSelected.includes(folderId)
+        ? prevSelected.filter((id) => id !== folderId)
+        : [...prevSelected, folderId]
+    );
+  };
+
+  const handleDeleteSelected = async () => {
+    for (const folderId of selectedFolders) {
+      await deleteDataById('folders', folderId);
+    }
+    setSelectedFolders([]);
+    setIsDeleteMode(false);
+    alert('Selected folders deleted successfully.');
+  };
+
+  const toggleDeleteMode = () => {
+    setIsDeleteMode(!isDeleteMode);
+    if (!isDeleteMode) {
+      setSelectedFolders([]);
     }
   };
 
@@ -113,44 +138,73 @@ export default function FileStorage() {
         </Command>
 
         {user && (
-          <Dialog>
-            <DialogTrigger asChild>
-              <ButtonPrimary>Create folder</ButtonPrimary>
-            </DialogTrigger>
-            <DialogContent className="text-black sm:max-w-md">
-              <DialogHeader>
-                <DialogTitle>Create folder</DialogTitle>
-                <DialogDescription>Create folders for easy management.</DialogDescription>
-              </DialogHeader>
-              <form onSubmit={handleCreateFolder} className="flex items-center space-x-2">
-                <div className="grid flex-1 gap-2">
-                  <Label htmlFor="folderName" className="sr-only">
-                    Folder Name
-                  </Label>
-                  <Input
-                    id="folderName"
-                    placeholder="Name folder"
-                    value={folderName}
-                    onChange={(e) => setFolderName(e.target.value)}
-                    required
-                  />
-                </div>
-                <ButtonPrimary type="submit">Create folder</ButtonPrimary>
-              </form>
-            </DialogContent>
-          </Dialog>
+          <div className="flex items-center gap-2">
+            <Dialog>
+              <DialogTrigger asChild>
+                <ButtonPrimary>Create folder</ButtonPrimary>
+              </DialogTrigger>
+              <DialogContent className="text-black sm:max-w-md">
+                <DialogHeader>
+                  <DialogTitle>Create folder</DialogTitle>
+                  <DialogDescription>Create folders for easy management.</DialogDescription>
+                </DialogHeader>
+                <form onSubmit={handleCreateFolder} className="flex items-center space-x-2">
+                  <div className="grid flex-1 gap-2">
+                    <Label htmlFor="folderName" className="sr-only">
+                      Folder Name
+                    </Label>
+                    <Input
+                      id="folderName"
+                      placeholder="Name folder"
+                      value={folderName}
+                      onChange={(e) => setFolderName(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <ButtonPrimary type="submit">Create folder</ButtonPrimary>
+                </form>
+              </DialogContent>
+            </Dialog>
+
+            <button
+              onClick={toggleDeleteMode}
+              className={`rounded-full px-4 py-2 text-white ${isDeleteMode ? 'bg-gray-500' : 'bg-red-500'}`}
+            >
+              {isDeleteMode ? 'Cancel' : 'Delete'}
+            </button>
+
+            {isDeleteMode && selectedFolders.length > 0 && (
+              <button
+                onClick={handleDeleteSelected}
+                className="rounded-full bg-red-500 px-4 py-2 text-white"
+                disabled={selectedFolders.length === 0}
+              >
+                Confirm Delete
+              </button>
+            )}
+          </div>
         )}
       </div>
       <div className="mt-8">
         {folders.length > 0 ? (
-          <ul className="grid w-full grid-cols-6">
+          <ul className="grid w-full grid-cols-6 gap-4">
             {folders.map((folder) => (
-              <Link href={`/admin/filestorage/${folder.id}`} key={folder.id}>
-                <li className="flex cursor-pointer flex-col items-center">
-                  <FcOpenedFolder className="text-8xl" />
-                  <span className="text-xl font-bold text-gray-500">{folder.name}</span>
-                </li>
-              </Link>
+              <div key={folder.id} className="rounded-xl bg-white p-4 shadow-lg">
+                {isDeleteMode && (
+                  <input
+                    type="checkbox"
+                    className="mr-2"
+                    checked={selectedFolders.includes(folder.id)}
+                    onChange={() => handleSelectFolder(folder.id)}
+                  />
+                )}
+                <Link href={`/admin/filestorage/${folder.id}`}>
+                  <li className="flex cursor-pointer flex-col items-center">
+                    <FcOpenedFolder className="text-8xl" />
+                    <span className="text-xl font-bold text-gray-500">{folder.name}</span>
+                  </li>
+                </Link>
+              </div>
             ))}
           </ul>
         ) : (

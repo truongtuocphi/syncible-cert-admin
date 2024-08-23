@@ -76,11 +76,11 @@ const CertificatePreview: React.FC<any> = ({
           </div>
         ) : null}
 
-        <div className="absolute bottom-[10%] left-[14%] flex flex-col items-center">
+        <div className="absolute bottom-[8%] left-[14%] flex flex-col items-center">
           {authorizingOrgName && (
             <>
               {previewSignature && (
-                <img src={`${previewSignature}`} alt="Head Signature" className="w-14" />
+                <img src={`${previewSignature}`} alt="Head Signature" className="h-14" />
               )}
               <div className="text-center">
                 <p className="text-xs">{headOrgName}</p>

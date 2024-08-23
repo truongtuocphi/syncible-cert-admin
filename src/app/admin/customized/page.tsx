@@ -211,7 +211,7 @@ const DefineTemplate = () => {
             {/* Left Section */}
             <div className="relative w-full">
               <label className="block text-sm font-medium text-gray-700">
-                Select Media:
+                Select Media
                 <div className="relative">
                   <input
                     type="file"
@@ -236,7 +236,7 @@ const DefineTemplate = () => {
               </label>
             </div>
             <div>
-              <h3 className="text-base font-semibold">Choose Template:</h3>
+              <h3 className="text-base font-semibold">Choose Template</h3>
               <button
                 type="button"
                 onClick={() => setShowChooseTemplate(!showChooseTemplate)}
@@ -403,8 +403,8 @@ const DefineTemplate = () => {
               <CertificatePreview
                 headerURL={headerURL}
                 description={description}
-                previewImage={`${selectedTemplate ? `${headerURL}/ipfs/${selectedTemplate}` : ''}`}
-                selectedTemplate={previewImage && ''}
+                previewImage={previewImage}
+                selectedTemplate={selectedTemplate}
                 previewHeadLogo={previewHeadLogo}
                 authorizingOrgName={authorizingOrgName}
                 headOrgPosition={headOrgPosition}

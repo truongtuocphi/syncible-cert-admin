@@ -30,8 +30,11 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
           const folderRef = ref(db, `folders/${decodedId}/data_define`);
           const snapshot = await get(folderRef);
           if (snapshot.exists()) {
-            setData(snapshot.val());
+            const dataObj = snapshot.val();
+            const dataArray = Object.values(dataObj);
+            setData(dataArray);
           } else {
+            // eslint-disable-next-line no-console
             console.log('No data available');
           }
         } catch (error) {
@@ -47,7 +50,7 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
 
   if (loading) return <p>Loading...</p>;
 
-  if (data.length === 0) return <p>No data available</p>;
+  if (!data) return <p>No data available</p>;
 
   return (
     <div className="grid w-full grid-cols-2 gap-4">

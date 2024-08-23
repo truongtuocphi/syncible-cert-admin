@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import PinataClient from '@pinata/sdk';
 
 const pinata = new PinataClient(

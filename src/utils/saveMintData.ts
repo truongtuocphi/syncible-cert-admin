@@ -1,20 +1,18 @@
+/* eslint-disable no-console */
 import { ref, set } from 'firebase/database';
 
-import { db } from '@/lib/firebase'; // Thay đổi đường dẫn nếu cần
+import { db } from '@/lib/firebase';
 
 export const saveMintData = async (mintDataArray: any[], collectionContractAddress: string) => {
   try {
-    // Tạo một tham chiếu đến vị trí dữ liệu trong Firebase
     const timestamp = Date.now();
     const mintDataRef = ref(db, `mintData/${timestamp}`);
 
-    // Tạo dữ liệu để lưu
     const dataToSave = {
       collectionContractAddress,
       mintData: mintDataArray,
     };
 
-    // Lưu dữ liệu vào Firebase
     await set(mintDataRef, dataToSave);
 
     console.log('Mint data saved successfully.');

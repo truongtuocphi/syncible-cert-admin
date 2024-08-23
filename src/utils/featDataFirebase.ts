@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { ref, get } from 'firebase/database';
 
 import { db } from '@/lib/firebase';

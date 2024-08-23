@@ -8,7 +8,6 @@ function configDate(dateString: string) {
     day: '2-digit',
   };
 
-  // Chuyển đổi ngày thành chuỗi với định dạng "August 08, 2024"
   const formattedDate = startDate.toLocaleDateString('en-US', options);
 
   return formattedDate;

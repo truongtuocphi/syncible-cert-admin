@@ -12,7 +12,6 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
   const [dataContract, setDataContract] = useState(null);
   const slugPost = params.slug;
 
-  // Callback function to handle dataContract received from child component
   const handleDataContract = (data: any) => {
     setDataContract(data);
   };

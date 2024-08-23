@@ -98,7 +98,7 @@ export default function Explorer() {
                   authorizingOrgName={data.mintData[0].certData.organizationName}
                   headOrgPosition={data.mintData[0].certData.headPosition}
                   headOrgName={data.mintData[0].certData.headName}
-                  previewSignature={`${headerURL}/ipfs/${data.mintData[0].certData.organizationLogo}`}
+                  previewSignature={`${headerURL}/ipfs/${data.mintData[0].certData.headSignature}`}
                   name={data.mintData[0].fullName.split('Certificate for')}
                   date={configDate(data.mintData[0].certData.date)}
                 />

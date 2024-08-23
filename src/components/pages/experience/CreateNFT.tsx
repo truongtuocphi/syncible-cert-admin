@@ -365,8 +365,6 @@ const CreateNFT = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  console.log(dataTemplate);
-
   return (
     <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-7">
       <div className="col-span-3 mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
@@ -563,12 +561,10 @@ const CreateNFT = () => {
             <div className="h-[170px] sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
               <CertificatePreview
                 headerURL={headerURL}
-                description={`${dataTemplate?.description ? dataTemplate?.description : ''}`}
-                previewImage={`${dataTemplate?.selectedTemplate ? `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}` : ' '}`}
+                description={`${dataTemplate?.description ? dataTemplate?.description : null}`}
+                previewImage={`${dataTemplate?.selectedTemplate ? `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}` : null}`}
                 selectedTemplate={
-                  dataTemplate?.templateIpfsHash
-                    ? dataTemplate?.templateIpfsHash
-                    : 'templateIpfsHash'
+                  dataTemplate?.templateIpfsHash ? dataTemplate?.templateIpfsHash : null
                 }
                 previewHeadLogo={`${headerURL}/ipfs/${dataTemplate?.headLogoIpfsHash}`}
                 certificateNumber={certificateNumber}

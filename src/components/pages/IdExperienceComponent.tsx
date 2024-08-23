@@ -161,7 +161,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
         </div>
         <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-[40%]">
           <h3 className="text-3xl font-bold text-black">{name}</h3>
-          <p className="mt-2 text-lg">Tên chứng nhận: {description}</p>
+          <p className="mt-2 text-lg">Certificate name: {description}</p>
           <textarea
             className="mt-4 h-32 w-full rounded border border-gray-300 p-2"
             value={description}

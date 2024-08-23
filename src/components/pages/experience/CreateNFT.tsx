@@ -562,9 +562,9 @@ const CreateNFT = () => {
               <CertificatePreview
                 headerURL={headerURL}
                 description={`${dataTemplate?.description ? dataTemplate?.description : null}`}
-                previewImage={`${dataTemplate?.selectedTemplate ? `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}` : null}`}
+                previewImage={`${dataTemplate?.selectedTemplate ? `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}` : ''}`}
                 selectedTemplate={
-                  dataTemplate?.templateIpfsHash ? dataTemplate?.templateIpfsHash : null
+                  dataTemplate?.templateIpfsHash ? dataTemplate?.templateIpfsHash : ''
                 }
                 previewHeadLogo={`${headerURL}/ipfs/${dataTemplate?.headLogoIpfsHash}`}
                 certificateNumber={certificateNumber}

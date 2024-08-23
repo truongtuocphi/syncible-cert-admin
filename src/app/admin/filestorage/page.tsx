@@ -201,7 +201,9 @@ export default function FileStorage() {
                 <Link href={`/admin/filestorage/${folder.id}`}>
                   <li className="flex cursor-pointer flex-col items-center">
                     <FcOpenedFolder className="text-8xl" />
-                    <span className="text-xl font-bold text-gray-500">{folder.name}</span>
+                    <span className="line-clamp-1 text-xl font-bold text-gray-500">
+                      {folder.name}
+                    </span>
                   </li>
                 </Link>
               </div>

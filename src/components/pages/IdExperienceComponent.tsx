@@ -135,7 +135,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
     }
   }, [slugPost]);
 
-  onDataContract && onDataContract(dataContract[0].collectionContractAddress);
+  onDataContract && onDataContract(dataContract[0]?.collectionContractAddress);
 
   if (!data) return <Loading />;
   if (loading) return <Loading />;

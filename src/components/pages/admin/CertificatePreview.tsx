@@ -57,7 +57,7 @@ const CertificatePreview: React.FC<any> = ({
             <p className="mt-4 text-sm">PROUDLY PRESENTED TO</p>
             <h1
               className="text-5xl font-bold"
-              style={{ fontFamily: 'Brush Script MT, serif' }}
+              style={{ fontFamily: '"Dancing Script", cursive' }}
             >{`${name || 'Full Name'}`}</h1>
 
             <div className="flex w-full justify-center" style={{ fontFamily: 'Garamond, serif' }}>

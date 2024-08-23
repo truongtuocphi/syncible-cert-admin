@@ -69,14 +69,16 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
           headLogoIpfsHash,
         } = item;
 
+        console.log('temp:', templateIpfsHash);
+
         return (
           <div key={index} className="sticky h-fit w-full rounded-xl">
             <div className="h-[170px] sm:h-[270px] lg:h-[400px] 2xl:h-[500px]">
               <CertificatePreview
                 headerURL={headerURL}
                 description={description}
-                previewImage={`${headerURL}/ipfs/${selectedTemplate}`}
-                selectedTemplate={`${headerURL}/ipfs/${templateIpfsHash}`}
+                previewImage={`${templateIpfsHash ? `${headerURL}/ipfs/${templateIpfsHash}` : ''}`}
+                selectedTemplate={selectedTemplate ? selectedTemplate : 'templateIpfsHash'}
                 previewHeadLogo={`${headerURL}/ipfs/${headLogoIpfsHash}`}
                 certificateNumber={certificateNumber}
                 authorizingOrgName={authorizingOrgName}

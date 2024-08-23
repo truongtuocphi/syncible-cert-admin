@@ -365,6 +365,8 @@ const CreateNFT = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  console.log(dataTemplate);
+
   return (
     <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-7">
       <div className="col-span-3 mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
@@ -562,10 +564,10 @@ const CreateNFT = () => {
               <CertificatePreview
                 headerURL={headerURL}
                 description={`${dataTemplate?.description ? dataTemplate?.description : ''}`}
-                previewImage={`${dataTemplate ? `${headerURL}/ipfs/${dataTemplate?.templateIpfsHash}` : ''}`}
+                previewImage={`${dataTemplate?.selectedTemplate ? `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}` : ' '}`}
                 selectedTemplate={
-                  dataTemplate?.selectedTemplate
-                    ? dataTemplate?.selectedTemplate
+                  dataTemplate?.templateIpfsHash
+                    ? dataTemplate?.templateIpfsHash
                     : 'templateIpfsHash'
                 }
                 previewHeadLogo={`${headerURL}/ipfs/${dataTemplate?.headLogoIpfsHash}`}

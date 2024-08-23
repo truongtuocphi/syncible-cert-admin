@@ -46,7 +46,7 @@ const CertificatePreview: React.FC<any> = ({
         style={{ fontFamily: 'Times New Roman, serif' }}
       >
         {previewImage || selectedTemplate ? (
-          <div className="absolute top-[10%] text-center">
+          <div className="absolute top-[10%] space-y-2 text-center">
             <span className="text-xs">
               {certificateNumber ? `Number ID: ${certificateNumber}` : `Number ID: xx-xx-xxxx`}
             </span>
@@ -69,7 +69,9 @@ const CertificatePreview: React.FC<any> = ({
             </div>
 
             {date ? (
-              <span className="mt-2 text-base">{date}</span>
+              <span className="mt-2 text-base">
+                {date === 'Invalid Date' ? 'xx-xx-xxxx' : date}
+              </span>
             ) : (
               <span className="mt-2 text-base">xx-xx-xxxx</span>
             )}

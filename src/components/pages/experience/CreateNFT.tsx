@@ -366,8 +366,8 @@ const CreateNFT = () => {
   }, []);
 
   return (
-    <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-2">
-      <div className="mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
+    <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-7">
+      <div className="col-span-3 mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
         <h2 className="text-2xl font-bold">Create NFT</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
@@ -555,23 +555,25 @@ const CreateNFT = () => {
       </div>
 
       {headerURL && (
-        <div className="w-full">
+        <div className="col-span-4 w-full">
           <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
             <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
-            <CertificatePreview
-              headerURL={headerURL}
-              description={`${dataTemplate?.description ? dataTemplate?.description : ''}`}
-              previewImage={`${dataTemplate ? `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}` : ''}`}
-              selectedTemplate={dataTemplate?.templateIpfsHash}
-              previewHeadLogo={`${headerURL}/ipfs/${dataTemplate?.headLogoIpfsHash}`}
-              certificateNumber={certificateNumber}
-              authorizingOrgName={dataTemplate?.authorizingOrgName}
-              headOrgPosition={dataTemplate?.headOrgPosition}
-              headOrgName={dataTemplate?.headOrgName}
-              previewSignature={`${dataTemplate?.signatureIpfsHash ? `${headerURL}/ipfs/${dataTemplate?.signatureIpfsHash}` : ''}`}
-              name={fullName}
-              date={configDate(issuedDate)}
-            />
+            <div className="h-[170px] sm:h-[270px] lg:h-[400px] 2xl:h-[500px]">
+              <CertificatePreview
+                headerURL={headerURL}
+                description={`${dataTemplate?.description ? dataTemplate?.description : ''}`}
+                previewImage={`${dataTemplate ? `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}` : ''}`}
+                selectedTemplate={dataTemplate?.templateIpfsHash}
+                previewHeadLogo={`${headerURL}/ipfs/${dataTemplate?.headLogoIpfsHash}`}
+                certificateNumber={certificateNumber}
+                authorizingOrgName={dataTemplate?.authorizingOrgName}
+                headOrgPosition={dataTemplate?.headOrgPosition}
+                headOrgName={dataTemplate?.headOrgName}
+                previewSignature={`${dataTemplate?.signatureIpfsHash ? `${headerURL}/ipfs/${dataTemplate?.signatureIpfsHash}` : ''}`}
+                name={fullName}
+                date={configDate(issuedDate)}
+              />
+            </div>
           </div>
         </div>
       )}

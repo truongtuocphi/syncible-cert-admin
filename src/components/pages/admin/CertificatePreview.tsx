@@ -80,7 +80,7 @@ const CertificatePreview: React.FC<any> = ({
           {authorizingOrgName && (
             <>
               {previewSignature && (
-                <img src={`${previewSignature}`} alt="Head Signature" className="h-14" />
+                <img src={`${previewSignature}`} alt="Head Signature" className="h-14 w-20" />
               )}
               <div className="text-center">
                 <p className="text-xs">{headOrgName}</p>

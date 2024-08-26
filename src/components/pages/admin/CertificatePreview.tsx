@@ -82,7 +82,7 @@ const CertificatePreview: React.FC<any> = ({
               )}
             </div>
 
-            <div className="flex flex-col items-start text-center">
+            <div className="flex h-24 w-20 flex-col items-start text-center">
               <div className="flex flex-col items-center">
                 {authorizingOrgName && (
                   <>

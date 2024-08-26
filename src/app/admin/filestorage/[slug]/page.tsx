@@ -38,6 +38,7 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
             console.log('No data available');
           }
         } catch (error) {
+          // eslint-disable-next-line no-console
           console.error('Error fetching data:', error);
         } finally {
           setLoading(false);

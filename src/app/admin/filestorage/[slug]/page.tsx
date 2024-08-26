@@ -71,7 +71,7 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
 
         return (
           <div key={index} className="sticky h-fit w-full rounded-xl">
-            <div className="h-[170px] sm:h-[270px] lg:h-[400px] 2xl:h-[500px]">
+            <div className="h-[170px] sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
               <CertificatePreview
                 headerURL={headerURL}
                 description={description}

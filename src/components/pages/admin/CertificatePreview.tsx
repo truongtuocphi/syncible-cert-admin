@@ -25,13 +25,13 @@ const CertificatePreview: React.FC<any> = ({
             className="h-full w-full rounded-lg"
           />
 
-          <div className="absolute right-14 top-10">
+          <div className="absolute right-8 top-5">
             {previewHeadLogo != undefined &&
             previewHeadLogo != null &&
             previewHeadLogo != `${headerURL}/ipfs/undefined` &&
             previewHeadLogo != `${headerURL}/ipfs/Student` &&
             previewHeadLogo != `${headerURL}/ipfs/Teacher` ? (
-              <img src={`${previewHeadLogo}`} alt="Head Signature" className="w-14" />
+              <img src={`${previewHeadLogo}`} alt="Head Signature" className="h-20 w-20" />
             ) : null}
           </div>
         </>
@@ -60,7 +60,7 @@ const CertificatePreview: React.FC<any> = ({
               </div>
             </div>
 
-            <div className="mt-6 lg:mt-11">
+            <div className="mt-6 lg:mt-10">
               <h1
                 className="text-4xl font-bold"
                 style={{ fontFamily: '"Libre Baskerville", serif' }}

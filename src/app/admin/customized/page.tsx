@@ -10,6 +10,16 @@ import { useRouter } from 'next/navigation';
 import ButtonCreateFolder from '@/components/common/button/ButtonCreateFolder';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import NFTTemplateForm from '@/components/pages/NFTTemplateForm';
+import { Button } from '@/components/ui/button';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
 import { auth, db, set } from '@/lib/firebase';
 import { uploadImageToPinata } from '@/lib/pinata';
 import { Folder } from '@/types/variable';
@@ -31,6 +41,11 @@ const predefinedTemplates = [
     id: 2,
     imageUrl: 'QmVu93iupu1Bq38y99rKK4vzSKa13VRfbWXiEeuDgeLDRn',
     name: 'Certificate 2',
+  },
+  {
+    id: 3,
+    imageUrl: 'QmbR2aNgruFrn233dVZaG3pxXGrWoUfyvEtced9mr5bP9Y',
+    name: 'Certificate 3',
   },
 ];
 
@@ -207,7 +222,7 @@ const DefineTemplate = () => {
       <div className="col-span-3 mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
         <h2 className="text-2xl font-bold">Define Template</h2>
         <form onSubmit={handleSubmit}>
-          <div className="grid grid-cols-2 gap-4 space-y-4">
+          <div className="grid grid-cols-2 gap-4">
             {/* Left Section */}
             <div className="relative w-full">
               <label className="block text-sm font-medium text-gray-700">
@@ -235,9 +250,50 @@ const DefineTemplate = () => {
                 </p>
               </label>
             </div>
-            <div>
-              <h3 className="text-base font-semibold">Choose Template</h3>
-              <button
+            <div className="block h-full w-full text-sm font-medium text-gray-700">
+              Choose Template
+              <div className="flex h-2/3 w-full items-center justify-center">
+                <Drawer>
+                  <DrawerTrigger asChild>
+                    <Button className="rounded-full bg-blue-500 text-white">Open Template</Button>
+                  </DrawerTrigger>
+                  <DrawerContent>
+                    <div className="mx-auto w-full max-w-4xl text-gray-600">
+                      <DrawerHeader>
+                        <DrawerTitle>Choose Template</DrawerTitle>
+                      </DrawerHeader>
+                      <div className="mt-2 grid grid-cols-5 gap-4 px-4">
+                        {predefinedTemplates.map((template) => (
+                          <div
+                            key={template.id}
+                            className={`h-32 w-full cursor-pointer rounded-lg border p-1 ${
+                              selectedTemplate === template.imageUrl
+                                ? 'border-blue-500'
+                                : 'border-gray-300'
+                            }`}
+                            onClick={() => handleSelectTemplate(template.imageUrl)}
+                          >
+                            <img
+                              src={`${headerURL}/ipfs/${template.imageUrl}`}
+                              alt={template.name}
+                              className="h-full w-full rounded-md object-fill"
+                            />
+                            <p className="mt-2 text-center text-sm font-semibold text-gray-600">
+                              {template.name}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                      <DrawerFooter>
+                        <DrawerClose asChild>
+                          <Button className="mt-4 bg-blue-500 text-white">Submit</Button>
+                        </DrawerClose>
+                      </DrawerFooter>
+                    </div>
+                  </DrawerContent>
+                </Drawer>
+              </div>
+              {/* <button
                 type="button"
                 onClick={() => setShowChooseTemplate(!showChooseTemplate)}
                 className="rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
@@ -267,7 +323,7 @@ const DefineTemplate = () => {
                     </div>
                   ))}
                 </div>
-              )}
+              )} */}
             </div>
           </div>
 

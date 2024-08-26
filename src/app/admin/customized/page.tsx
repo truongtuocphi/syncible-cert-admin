@@ -34,7 +34,7 @@ if (!headerURL) {
 const predefinedTemplates = [
   {
     id: 1,
-    imageUrl: 'QmUKrKJpFnTFeKNiL3bKSwuj9uszuMBjUcCxVcTvPNp9wd',
+    imageUrl: 'QmbeHMgQXuDCkpPjpQRLb8D4xvFo5cm5QpsPaiZayXri8Y',
     name: 'Certificate 1',
   },
   {
@@ -257,7 +257,7 @@ const DefineTemplate = () => {
                     <Button className="rounded-full bg-blue-500 text-white">Open Template</Button>
                   </DrawerTrigger>
                   <DrawerContent>
-                    <div className="mx-auto w-full max-w-4xl text-gray-600">
+                    <div className="mx-auto w-full max-w-5xl text-gray-600">
                       <DrawerHeader>
                         <DrawerTitle>Choose Template</DrawerTitle>
                       </DrawerHeader>
@@ -401,7 +401,7 @@ const DefineTemplate = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   required
                   rows={4}
-                  maxLength={25}
+                  maxLength={40}
                   className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />
               </label>

@@ -44,7 +44,7 @@ const predefinedTemplates = [
   },
   {
     id: 3,
-    imageUrl: 'QmbR2aNgruFrn233dVZaG3pxXGrWoUfyvEtced9mr5bP9Y',
+    imageUrl: 'QmUYhqvfxXfNxNV8qaogDWqMVH4ga2MiYCz4Hc3nXQYRjH',
     name: 'Certificate 3',
   },
 ];

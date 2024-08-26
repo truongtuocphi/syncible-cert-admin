@@ -46,7 +46,7 @@ const CertificatePreview: React.FC<any> = ({
         style={{ fontFamily: '"Radley", serif' }}
       >
         {previewImage || selectedTemplate ? (
-          <div className="absolute top-[3%] flex h-[80%] w-[80%] flex-col justify-around text-center">
+          <div className="absolute top-[1%] flex h-[80%] w-[80%] flex-col justify-around text-center">
             <div>
               <span className="text-xs">
                 {certificateNumber ? `Number ID: ${certificateNumber}` : `Number ID: xx-xx-xxxx`}
@@ -67,12 +67,12 @@ const CertificatePreview: React.FC<any> = ({
               >{`${name || 'Full Name'}`}</h1>
 
               <div
-                className="mt-2 flex w-full justify-center"
+                className="mb-1 mt-2 flex w-full justify-center"
                 style={{ fontFamily: 'Garamond, serif' }}
               >
-                <p className="flex w-full max-w-[80%] items-center justify-center text-wrap break-words text-center text-lg">
+                <p className="flex w-full max-w-[80%] items-center justify-center text-wrap break-words text-center text-sm">
                   <div>
-                    For participating in <span className="font-bold">{description}</span>
+                    <div>For participating in</div> <span className="font-bold">{description}</span>
                   </div>
                 </p>
               </div>

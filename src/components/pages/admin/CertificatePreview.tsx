@@ -43,25 +43,27 @@ const CertificatePreview: React.FC<any> = ({
 
       <div
         className="absolute inset-0 flex flex-col items-center justify-center"
-        style={{ fontFamily: 'Times New Roman, serif' }}
+        style={{ fontFamily: '"Radley", serif' }}
       >
         {previewImage || selectedTemplate ? (
-          <div className="absolute top-[5%] flex h-[80%] w-[80%] flex-col justify-around text-center">
+          <div className="absolute top-[3%] flex h-[80%] w-[80%] flex-col justify-around text-center">
             <div>
               <span className="text-xs">
                 {certificateNumber ? `Number ID: ${certificateNumber}` : `Number ID: xx-xx-xxxx`}
               </span>
-              <h1 className="gap flex flex-col font-bold">
-                <span className="text-4xl">CERTIFICATE</span>
-                <span className="text-xl">OF APPRECIATION</span>
-              </h1>
-              <p className="mt-4 text-xs">PROUDLY PRESENTED TO</p>
+              <div style={{ fontFamily: '"Libre Baskerville", serif' }} className="mt-4">
+                <h1 className="gap flex flex-col font-bold">
+                  <span className="text-4xl">CERTIFICATE</span>
+                  <span className="text-xl">OF APPRECIATION</span>
+                </h1>
+                <p className="mt-4 text-xs">PROUDLY PRESENTED TO</p>
+              </div>
             </div>
 
-            <div className="mt-12">
+            <div className="mt-6 lg:mt-11">
               <h1
                 className="text-4xl font-bold"
-                style={{ fontFamily: '"Dancing Script", cursive' }}
+                style={{ fontFamily: '"Libre Baskerville", serif' }}
               >{`${name || 'Full Name'}`}</h1>
 
               <div

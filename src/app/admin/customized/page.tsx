@@ -34,12 +34,12 @@ if (!headerURL) {
 const predefinedTemplates = [
   {
     id: 1,
-    imageUrl: 'QmUKNhE9wYgq4taG4CZN2gKaWvERgoUQo7Ms9SBhiPuZSy',
+    imageUrl: 'QmUKrKJpFnTFeKNiL3bKSwuj9uszuMBjUcCxVcTvPNp9wd',
     name: 'Certificate 1',
   },
   {
     id: 2,
-    imageUrl: 'QmVu93iupu1Bq38y99rKK4vzSKa13VRfbWXiEeuDgeLDRn',
+    imageUrl: 'QmbXHL3ZpZ3xtBD8B3TfaL1Rp6GZrxcaiw1iizPLda4VvW',
     name: 'Certificate 2',
   },
   {
@@ -66,7 +66,6 @@ const DefineTemplate = () => {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [previewSignature, setPreviewSignature] = useState<string | null>(null);
   const [previewHeadLogo, setPreviewHeadLogo] = useState<string | null>(null);
-  const [showChooseTemplate, setShowChooseTemplate] = useState(false);
 
   const [user, setUser] = useState<User | null>(null);
 
@@ -293,37 +292,6 @@ const DefineTemplate = () => {
                   </DrawerContent>
                 </Drawer>
               </div>
-              {/* <button
-                type="button"
-                onClick={() => setShowChooseTemplate(!showChooseTemplate)}
-                className="rounded-full bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
-              >
-                Select template
-              </button>
-              {showChooseTemplate && (
-                <div className="mt-2 grid grid-cols-2 gap-4">
-                  {predefinedTemplates.map((template) => (
-                    <div
-                      key={template.id}
-                      className={`cursor-pointer rounded-lg border p-1 ${
-                        selectedTemplate === template.imageUrl
-                          ? 'border-blue-500'
-                          : 'border-gray-300'
-                      }`}
-                      onClick={() => handleSelectTemplate(template.imageUrl)}
-                    >
-                      <img
-                        src={`${headerURL}/ipfs/${template.imageUrl}`}
-                        alt={template.name}
-                        className="h-20 w-full rounded-md object-cover"
-                      />
-                      <p className="mt-1 text-center text-sm font-semibold text-gray-600">
-                        {template.name}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              )} */}
             </div>
           </div>
 
@@ -455,7 +423,7 @@ const DefineTemplate = () => {
       <div className="col-span-4 flex w-full flex-col items-center justify-between gap-4">
         {headerURL && (
           <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
-            <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
+            <h2 className="text-lg font-bold text-gray-600">Preview</h2>
             <div className="h-[170px] sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
               <CertificatePreview
                 headerURL={headerURL}

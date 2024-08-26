@@ -94,21 +94,6 @@ const CertificatePreview: React.FC<any> = ({
             </div>
           </div>
         ) : null}
-
-        {/* <div className="absolute bottom-[8%] left-[14%] flex flex-col items-center">
-          {authorizingOrgName && (
-            <>
-              {previewSignature && (
-                <img src={`${previewSignature}`} alt="Head Signature" className="h-14 w-20" />
-              )}
-              <div className="text-center">
-                <p className="text-xs">{headOrgName}</p>
-                <p className="text-xs">{`${headOrgPosition}`}</p>
-                <p className="text-xs">{`${authorizingOrgName}`}</p>
-              </div>
-            </>
-          )}
-        </div> */}
       </div>
     </div>
   );

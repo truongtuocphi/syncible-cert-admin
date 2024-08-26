@@ -257,11 +257,11 @@ const DefineTemplate = () => {
                     <Button className="rounded-full bg-blue-500 text-white">Open Template</Button>
                   </DrawerTrigger>
                   <DrawerContent>
-                    <div className="mx-auto w-full max-w-5xl text-gray-600">
+                    <div className="mx-auto w-full max-w-5xl text-gray-700">
                       <DrawerHeader>
-                        <DrawerTitle>Choose Template</DrawerTitle>
+                        <DrawerTitle className="text-2xl font-bold">Choose Template</DrawerTitle>
                       </DrawerHeader>
-                      <div className="mt-2 grid grid-cols-5 gap-4 px-4">
+                      <div className="my-6 grid grid-cols-5 gap-4 px-4">
                         {predefinedTemplates.map((template) => (
                           <div
                             key={template.id}
@@ -420,7 +420,7 @@ const DefineTemplate = () => {
       </div>
 
       {/* Preview */}
-      <div className="col-span-4 flex w-full flex-col items-center justify-between gap-4">
+      <div className="col-span-4 flex w-full max-w-[600px] flex-col items-center justify-between gap-4">
         {headerURL && (
           <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
             <h2 className="text-lg font-bold text-gray-600">Preview</h2>

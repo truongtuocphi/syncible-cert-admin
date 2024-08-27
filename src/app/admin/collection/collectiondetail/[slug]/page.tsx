@@ -78,11 +78,9 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             <p className="text-base font-semibold text-gray-400">{data.description}</p>
           </div>
         </div>
-
         <div className="px-40">
           <div className="my-6 w-full border-[0.5px] border-gray-200 px-6"></div>
         </div>
-
         <div className="flex items-center justify-center gap-16">
           <div className="flex flex-col text-center">
             <span className="text-xl font-bold text-gray-600">Items</span>

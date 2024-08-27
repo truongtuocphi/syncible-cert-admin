@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 
 import { onAuthStateChanged, User } from 'firebase/auth';
-import { ref, onValue, query, orderByChild, equalTo, get } from 'firebase/database';
+import { ref, onValue, query, orderByChild, equalTo } from 'firebase/database';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
 import ButtonCreateFolder from '@/components/common/button/ButtonCreateFolder';
@@ -19,7 +20,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from '@/components/ui/drawer';
-import { auth, db, set } from '@/lib/firebase';
+import { auth, db, set, get } from '@/lib/firebase';
 import { uploadImageToPinata } from '@/lib/pinata';
 import { Folder } from '@/types/variable';
 
@@ -196,7 +197,6 @@ const DefineTemplate = () => {
         (snapshot) => {
           const data = snapshot.val();
           if (data) {
-            // Convert non-array objects to arrays
             const folderList: Folder[] = Array.isArray(data)
               ? data
               : Object.entries(data).map(([id, folderData]) => ({
@@ -209,6 +209,7 @@ const DefineTemplate = () => {
           }
         },
         (error) => {
+          // eslint-disable-next-line no-console
           console.error('Error fetching folders:', error);
         }
       );
@@ -273,10 +274,12 @@ const DefineTemplate = () => {
                             }`}
                             onClick={() => handleSelectTemplate(template.imageUrl)}
                           >
-                            <img
+                            <Image
                               src={`${headerURL}/ipfs/${template.imageUrl}`}
                               alt={template.name}
                               className="h-full w-full rounded-md object-fill"
+                              width={120}
+                              height={80}
                             />
                             <p className="mt-2 text-center text-sm font-semibold text-gray-600">
                               {template.name}
@@ -312,11 +315,11 @@ const DefineTemplate = () => {
                     className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   >
                     <option value="">Select a folder</option>
-                    {folders.map((folder) => (
+                    {/* {folders.map((folder) => (
                       <option key={folder.id} value={folder.id}>
                         {folder.name}
                       </option>
-                    ))}
+                    ))} */}
                   </select>
                   <ButtonCreateFolder />
                 </div>

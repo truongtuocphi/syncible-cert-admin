@@ -74,7 +74,7 @@ export default function Explorer() {
             </div>
           </div>
 
-          {/* Hiển thị dữ liệu */}
+          {/* Show data */}
           {loading ? (
             <div className="flex h-screen w-full items-center justify-center">
               <Loading />

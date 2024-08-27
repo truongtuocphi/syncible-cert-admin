@@ -417,6 +417,31 @@ const CreateNFT = () => {
           </div>
           <div>
             <label className="block text-sm font-medium text-gray-700">
+              Role:
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
+                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              >
+                <option value="Teacher">Teacher</option>
+                <option value="Student">Student</option>
+              </select>
+            </label>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
+              Issued Date:
+              <input
+                type="date"
+                value={issuedDate}
+                onChange={(e) => setIssuedDate(e.target.value)}
+                required
+                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </label>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">
               Full Name:
               <input
                 type="text"
@@ -438,19 +463,7 @@ const CreateNFT = () => {
               />
             </label>
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Issued Date:
-              <input
-                type="date"
-                value={issuedDate}
-                onChange={(e) => setIssuedDate(e.target.value)}
-                required
-                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              />
-            </label>
-          </div>
-          <div>
+          {/* <div>
             <label className="block text-sm font-medium text-gray-700">
               Quantity:
               <input
@@ -461,7 +474,7 @@ const CreateNFT = () => {
                 className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </label>
-          </div>
+          </div> */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Blockchain:
@@ -491,19 +504,6 @@ const CreateNFT = () => {
                     </option>
                   ))
                 )}
-              </select>
-            </label>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Role:
-              <select
-                value={role}
-                onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
-                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              >
-                <option value="Teacher">Teacher</option>
-                <option value="Student">Student</option>
               </select>
             </label>
           </div>

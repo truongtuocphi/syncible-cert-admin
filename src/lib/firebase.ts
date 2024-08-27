@@ -26,7 +26,7 @@ const provider = new GoogleAuthProvider();
 const db = getDatabase(
   app,
   'https://syncible-f0d5a-default-rtdb.asia-southeast1.firebasedatabase.app/'
-); // Thay đổi từ Firestore sang Realtime Database
+);
 
 export {
   auth,

@@ -24,12 +24,12 @@ import { auth, db, set, get } from '@/lib/firebase';
 import { uploadImageToPinata } from '@/lib/pinata';
 import { Folder } from '@/types/variable';
 
-const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
-
-if (!headerURL) {
-  // eslint-disable-next-line no-console
-  console.error('NEXT_PUBLIC_HEADER_URL is not defined');
+interface FolderData {
+  name: string;
+  // Add other properties if necessary
 }
+
+const headerURL = 'https://fuchsia-fancy-orangutan-869.mypinata.cloud';
 
 const predefinedTemplates = [
   {
@@ -197,12 +197,14 @@ const DefineTemplate = () => {
         (snapshot) => {
           const data = snapshot.val();
           if (data) {
-            const folderList: Folder[] = Array.isArray(data)
-              ? data
-              : Object.entries(data).map(([id, folderData]) => ({
-                  id,
-                  name: (folderData as { name: string }).name,
-                }));
+            // Convert data to plain object if needed
+            const folderList =
+              typeof data === 'object' && !Array.isArray(data)
+                ? Object.entries(data).map(([id, folderData]) => ({
+                    id,
+                    name: (folderData as FolderData).name,
+                  }))
+                : [];
             setFolders(folderList);
           } else {
             setFolders([]);
@@ -217,6 +219,10 @@ const DefineTemplate = () => {
       return () => unsubscribe();
     }
   }, [user]);
+
+  if (!headerURL) {
+    return <div>No HeaderURL</div>;
+  }
 
   return (
     <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-7">
@@ -315,11 +321,11 @@ const DefineTemplate = () => {
                     className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   >
                     <option value="">Select a folder</option>
-                    {/* {folders.map((folder) => (
+                    {folders.map((folder) => (
                       <option key={folder.id} value={folder.id}>
                         {folder.name}
                       </option>
-                    ))} */}
+                    ))}
                   </select>
                   <ButtonCreateFolder />
                 </div>

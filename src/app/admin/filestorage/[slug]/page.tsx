@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react';
 
 import { ref, get } from 'firebase/database';
 
-import { db } from '@/lib/firebase';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
+import { db } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;

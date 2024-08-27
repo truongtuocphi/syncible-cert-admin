@@ -33,6 +33,7 @@ const Breadcrumb = () => {
   return (
     <nav aria-label="breadcrumb">
       <ol className="flex space-x-2 text-gray-500">
+        {/* show breadcrumb */}
         {breadcrumbItems.map((item, index) => (
           <li key={item.href} className="flex items-center">
             {index < breadcrumbItems.length - 1 ? (

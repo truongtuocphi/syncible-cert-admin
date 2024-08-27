@@ -196,17 +196,19 @@ const DefineTemplate = () => {
         (snapshot) => {
           const data = snapshot.val();
           if (data) {
-            const folderList: Folder[] = Object.entries(data).map(([id, folderData]) => ({
-              id,
-              name: (folderData as { name: string }).name,
-            }));
+            // Convert non-array objects to arrays
+            const folderList: Folder[] = Array.isArray(data)
+              ? data
+              : Object.entries(data).map(([id, folderData]) => ({
+                  id,
+                  name: (folderData as { name: string }).name,
+                }));
             setFolders(folderList);
           } else {
             setFolders([]);
           }
         },
         (error) => {
-          // eslint-disable-next-line no-console
           console.error('Error fetching folders:', error);
         }
       );

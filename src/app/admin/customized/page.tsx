@@ -1,6 +1,7 @@
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import { PinturaEditor } from '@pqina/react-pintura';
 
@@ -97,6 +98,8 @@ export default function DefineTemplate() {
     `${headerURL}/QmTu4V9dSaQB646ztpanTwzznJfvuhrR5mtfRPv7Xm5NzE`
   );
 
+  const previewRef = useRef<HTMLDivElement>(null);
+
   const handleTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const file = e.target.files[0];
@@ -107,6 +110,23 @@ export default function DefineTemplate() {
 
   const handleSelectTemplate = (templateURL: string) => {
     setSelectedTemplate(`${headerURL}/${templateURL}`);
+  };
+
+  useEffect(() => {
+    if (result && previewRef.current) {
+      previewRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [result]);
+
+  const handleDownload = () => {
+    if (result) {
+      const link = document.createElement('a');
+      link.href = result;
+      link.download = 'TemplateCertificate-image.png';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
   };
 
   return (
@@ -186,13 +206,22 @@ export default function DefineTemplate() {
           onLoad={(res) => console.log('load image', res)}
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
         />
-
-        {!!result.length && (
-          <p>
-            <Image src={result} alt="img" width={350} height={300} />
-          </p>
-        )}
       </div>
+
+      {result && (
+        <div className="mt-10 flex w-full flex-col items-center justify-center">
+          <div className="h-fit w-3/5 rounded-lg bg-white p-4">
+            <div className="mb-2 flex w-full items-center justify-between">
+              <p className="font-bold text-gray-700">Preview</p>
+              <ButtonPrimary onClick={handleDownload} className="bg-blue-500 text-white">
+                Download Image
+              </ButtonPrimary>
+            </div>
+            <img src={result} alt="img" className="h-full w-full" />
+          </div>
+          <div ref={previewRef}></div>
+        </div>
+      )}
     </>
   );
 }

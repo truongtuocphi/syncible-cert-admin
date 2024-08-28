@@ -31,6 +31,22 @@ import {
   LocaleMarkupEditor,
 } from '@pqina/pintura/locale/en_GB';
 import Image from 'next/image';
+import Link from 'next/link';
+import { FaArrowLeft } from 'react-icons/fa';
+
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import { Button } from '@/components/ui/button';
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@/components/ui/drawer';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 setPlugins(plugin_crop, plugin_filter, plugin_annotate, plugin_sticker);
 
@@ -53,26 +69,129 @@ const editorDefaults = {
   },
 };
 
+const headerURL = 'https://fuchsia-fancy-orangutan-869.mypinata.cloud/ipfs';
+
+const predefinedTemplates = [
+  {
+    id: 1,
+    imageUrl: 'QmTu4V9dSaQB646ztpanTwzznJfvuhrR5mtfRPv7Xm5NzE',
+    name: 'Certificate 1',
+  },
+  {
+    id: 2,
+    imageUrl: 'QmS8tsyzFHkt1rh5JBw6j6Rjued71NY6vrcdTqaLdceLvx',
+    name: 'Certificate 2',
+  },
+  {
+    id: 3,
+    imageUrl: 'QmQW65mTtMpbEpKM9bTDMvkLhthtXk3uGE2HPSbE8Gn5WH',
+    name: 'Certificate 3',
+  },
+];
+
 export default function DefineTemplate() {
   const [result, setResult] = useState('');
+  const [selectedTemplate, setSelectedTemplate] = useState<string>(
+    `${headerURL}/QmTu4V9dSaQB646ztpanTwzznJfvuhrR5mtfRPv7Xm5NzE`
+  );
+
+  const handleTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      const fileUrl = URL.createObjectURL(file);
+      setSelectedTemplate(fileUrl);
+    }
+  };
+
+  const handleSelectTemplate = (templateURL: string) => {
+    setSelectedTemplate(`${headerURL}/${templateURL}`);
+  };
 
   return (
-    <div className="h-screen w-full overflow-hidden rounded-lg">
-      <PinturaEditor
-        {...editorDefaults}
-        src={
-          'https://fuchsia-fancy-orangutan-869.mypinata.cloud/ipfs/QmbeHMgQXuDCkpPjpQRLb8D4xvFo5cm5QpsPaiZayXri8Y'
-        }
-        stickers={['🎉', '😄', '👍', '👎', '🍕']}
-        onLoad={(res) => console.log('load image', res)}
-        onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
-      />
+    <>
+      <div className="mb-4 flex w-full items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Link href={'/admin'}>
+            <ButtonPrimary className="size-10 rounded-lg p-2">
+              <FaArrowLeft />
+            </ButtonPrimary>
+          </Link>
+          <div className="text-lg font-bold text-gray-600">Back</div>
+        </div>
+        <div className="flex items-center gap-6">
+          <div className="grid w-44 max-w-sm items-center gap-1.5">
+            <Label htmlFor="picture">Upload Template</Label>
+            <Input
+              id="picture"
+              type="file"
+              className="rounded-full"
+              onChange={handleTemplateChange}
+            />
+          </div>
+          <div className="grid items-center gap-1.5">
+            <div className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+              Choose Template
+            </div>
+            <Drawer>
+              <DrawerTrigger asChild>
+                <Button className="rounded-full bg-blue-500 text-white">Open Template</Button>
+              </DrawerTrigger>
+              <DrawerContent>
+                <div className="mx-auto w-full max-w-5xl text-gray-700">
+                  <DrawerHeader>
+                    <DrawerTitle className="text-2xl font-bold">Choose Template</DrawerTitle>
+                  </DrawerHeader>
+                  <div className="my-6 grid grid-cols-5 gap-4 px-4">
+                    {predefinedTemplates.map((template) => (
+                      <div
+                        key={template.id}
+                        className={`h-32 w-full cursor-pointer rounded-lg border p-1 ${
+                          selectedTemplate === `${headerURL}/${template.imageUrl}`
+                            ? 'border-blue-500'
+                            : 'border-gray-300'
+                        }`}
+                        onClick={() => handleSelectTemplate(template.imageUrl)}
+                      >
+                        <Image
+                          src={`${headerURL}/${template.imageUrl}`}
+                          alt={template.name}
+                          className="h-full w-full rounded-md object-fill"
+                          width={120}
+                          height={80}
+                        />
+                        <p className="mt-2 text-center text-sm font-semibold text-gray-600">
+                          {template.name}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                  <DrawerFooter>
+                    <DrawerClose asChild>
+                      <Button className="mt-4 bg-blue-500 text-white">Submit</Button>
+                    </DrawerClose>
+                  </DrawerFooter>
+                </div>
+              </DrawerContent>
+            </Drawer>
+          </div>
+        </div>
+      </div>
+      <div className="h-dvh w-full overflow-hidden rounded-lg">
+        <PinturaEditor
+          {...editorDefaults}
+          src={selectedTemplate}
+          stickers={['/bath_1.png', '/bath_2.png']}
+          className="rounded-lg"
+          onLoad={(res) => console.log('load image', res)}
+          onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
+        />
 
-      {!!result.length && (
-        <p>
-          <Image src={result} alt="img" width={350} height={300} />
-        </p>
-      )}
-    </div>
+        {!!result.length && (
+          <p>
+            <Image src={result} alt="img" width={350} height={300} />
+          </p>
+        )}
+      </div>
+    </>
   );
 }

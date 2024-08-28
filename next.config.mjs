@@ -2,23 +2,12 @@
 const nextConfig = {
   images: { remotePatterns: [{ protocol: 'https', hostname: '*' }] },
 
-  // redirects: async () => {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: '/mint',
-  //       permanent: false,
-  //     },
-  //   ];
-  // },
-
   webpack: (config) => {
     config.experiments = {
       ...config.experiments,
       asyncWebAssembly: true,
     };
 
-    // config webpack for svgr to use icon as React component
     config.module.rules.push({
       test: /\.svg$/,
       use: [{ loader: '@svgr/webpack', options: { icon: true, typescript: true } }],

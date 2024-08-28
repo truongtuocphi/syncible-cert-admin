@@ -48,26 +48,9 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-setPlugins(plugin_crop, plugin_filter, plugin_annotate, plugin_sticker);
+import { getEditorDefaults } from '@pqina/pintura';
 
-const editorDefaults = {
-  utils: ['crop', 'filter', 'finetune', 'sticker', 'annotate'],
-  imageReader: createDefaultImageReader(),
-  imageWriter: createDefaultImageWriter(),
-  shapePreprocessor: createDefaultShapePreprocessor(),
-  ...plugin_filter_defaults,
-  ...plugin_sticker_locale_en_gb,
-  ...plugin_annotate,
-  ...markup_editor_defaults,
-  locale: {
-    ...LocaleCore,
-    ...LocaleCrop,
-    ...LocaleFilter,
-    ...LocaleAnnotate,
-    ...LocaleSticker,
-    ...LocaleMarkupEditor,
-  },
-};
+setPlugins(plugin_crop, plugin_filter, plugin_annotate, plugin_sticker);
 
 const headerURL = 'https://fuchsia-fancy-orangutan-869.mypinata.cloud/ipfs';
 
@@ -88,6 +71,25 @@ const predefinedTemplates = [
     name: 'Certificate 3',
   },
 ];
+
+const editorDefaults = {
+  utils: ['crop', 'filter', 'finetune', 'sticker', 'annotate'],
+  imageReader: createDefaultImageReader(),
+  imageWriter: createDefaultImageWriter(),
+  shapePreprocessor: createDefaultShapePreprocessor(),
+  ...plugin_filter_defaults,
+  ...plugin_sticker_locale_en_gb,
+  ...plugin_annotate,
+  ...markup_editor_defaults,
+  locale: {
+    ...LocaleCore,
+    ...LocaleCrop,
+    ...LocaleFilter,
+    ...LocaleAnnotate,
+    ...LocaleSticker,
+    ...LocaleMarkupEditor,
+  },
+};
 
 export default function DefineTemplate() {
   const [result, setResult] = useState('');
@@ -178,10 +180,9 @@ export default function DefineTemplate() {
       </div>
       <div className="h-dvh w-full overflow-hidden rounded-lg">
         <PinturaEditor
-          {...editorDefaults}
+          {...getEditorDefaults()}
           src={selectedTemplate}
           stickers={['/bath_1.png', '/bath_2.png']}
-          className="rounded-lg"
           onLoad={(res) => console.log('load image', res)}
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
         />

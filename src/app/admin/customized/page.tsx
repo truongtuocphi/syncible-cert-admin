@@ -228,6 +228,8 @@ const DefineTemplate = () => {
     <div className="grid w-full grid-cols-1 gap-4 xl:grid-cols-7">
       <div className="col-span-3 mx-auto w-full space-y-4 rounded-xl bg-white p-4 text-black">
         <h2 className="text-2xl font-bold">Define Template</h2>
+
+        {/* Bỏ form  */}
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-2 gap-4">
             {/* Left Section */}

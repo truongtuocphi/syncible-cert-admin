@@ -2,8 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-
 /* bright / dark mode */
 .index :global .pintura-editor {
   --color-background: 255, 255, 255;

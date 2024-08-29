@@ -213,6 +213,7 @@ export default function DefineTemplate() {
               ['Inria Serif, serif', 'Inria Serif'],
               ['Crimson Text, serif', 'Crimson Text'],
               ['Great Vibes, cursive', 'Great Vibes'],
+              ['Mingzat, sans-serif', 'Mingzat'],
               ...createDefaultFontFamilyOptions(),
             ],
             lineHeightOptions: createDefaultLineHeightOptions(),

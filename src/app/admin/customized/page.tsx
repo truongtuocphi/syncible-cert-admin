@@ -19,6 +19,8 @@ import {
   plugin_sticker,
   plugin_sticker_locale_en_gb,
   markup_editor_defaults,
+  createMarkupEditorToolStyles,
+  createMarkupEditorToolStyle,
 } from '@pqina/pintura';
 import { getEditorDefaults } from '@pqina/pintura';
 import {
@@ -200,6 +202,12 @@ export default function DefineTemplate() {
           {...getEditorDefaults()}
           src={selectedTemplate}
           stickers={['/bath_1.png', '/bath_2.png']}
+          markupEditorToolStyles={createMarkupEditorToolStyles({
+            text: createMarkupEditorToolStyle('text', {
+              color: [0, 0, 0],
+              fontSize: 50,
+            }),
+          })}
           onLoad={(res) => console.log('load image', res)}
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
         />

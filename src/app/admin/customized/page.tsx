@@ -1,9 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 'use client';
 
 import { useState, useRef, useEffect } from 'react';
-
-import { PinturaEditor } from '@pqina/react-pintura';
 
 import '@pqina/pintura/pintura.css';
 
@@ -23,6 +20,7 @@ import {
   plugin_sticker_locale_en_gb,
   markup_editor_defaults,
 } from '@pqina/pintura';
+import { getEditorDefaults } from '@pqina/pintura';
 import {
   LocaleCore,
   LocaleCrop,
@@ -31,6 +29,7 @@ import {
   LocaleSticker,
   LocaleMarkupEditor,
 } from '@pqina/pintura/locale/en_GB';
+import { PinturaEditor } from '@pqina/react-pintura';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
@@ -48,8 +47,6 @@ import {
 } from '@/components/ui/drawer';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-
-import { getEditorDefaults } from '@pqina/pintura';
 
 setPlugins(plugin_crop, plugin_filter, plugin_annotate, plugin_sticker);
 
@@ -138,11 +135,11 @@ export default function DefineTemplate() {
               <FaArrowLeft />
             </ButtonPrimary>
           </Link>
-          <div className="text-lg font-bold text-gray-600">Back</div>
+          <div className="text-lg font-bold text-gray-600">Trở lại</div>
         </div>
         <div className="flex items-center gap-6">
           <div className="grid w-44 max-w-sm items-center gap-1.5">
-            <Label htmlFor="picture">Upload Template</Label>
+            <Label htmlFor="picture">Tải mẫu lên</Label>
             <Input
               id="picture"
               type="file"
@@ -152,16 +149,16 @@ export default function DefineTemplate() {
           </div>
           <div className="grid items-center gap-1.5">
             <div className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Choose Template
+              Chọn mẫu Chứng chỉ
             </div>
             <Drawer>
               <DrawerTrigger asChild>
-                <Button className="rounded-full bg-blue-500 text-white">Open Template</Button>
+                <Button className="rounded-full bg-blue-500 text-white">Chọn mẫu</Button>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="mx-auto w-full max-w-5xl text-gray-700">
                   <DrawerHeader>
-                    <DrawerTitle className="text-2xl font-bold">Choose Template</DrawerTitle>
+                    <DrawerTitle className="text-2xl font-bold">Chọn mẫu Chứng chỉ</DrawerTitle>
                   </DrawerHeader>
                   <div className="my-6 grid grid-cols-5 gap-4 px-4">
                     {predefinedTemplates.map((template) => (
@@ -189,7 +186,7 @@ export default function DefineTemplate() {
                   </div>
                   <DrawerFooter>
                     <DrawerClose asChild>
-                      <Button className="mt-4 bg-blue-500 text-white">Submit</Button>
+                      <Button className="mt-4 bg-blue-500 text-white">Chọn</Button>
                     </DrawerClose>
                   </DrawerFooter>
                 </div>
@@ -212,9 +209,9 @@ export default function DefineTemplate() {
         <div className="mt-10 flex w-full flex-col items-center justify-center">
           <div className="h-fit w-3/5 rounded-lg bg-white p-4">
             <div className="mb-2 flex w-full items-center justify-between">
-              <p className="font-bold text-gray-700">Preview</p>
+              <p className="font-bold text-gray-700">Bản xem trước</p>
               <ButtonPrimary onClick={handleDownload} className="bg-blue-500 text-white">
-                Download Image
+                Tải mẫu xuống
               </ButtonPrimary>
             </div>
             <img src={result} alt="img" className="h-full w-full" />

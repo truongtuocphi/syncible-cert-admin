@@ -206,7 +206,7 @@ export default function DefineTemplate() {
           markupEditorShapeStyleControls={createMarkupEditorShapeStyleControls({
             fontSizeOptions: [...createDefaultFontSizeOptions(), 170],
             fontFamilyOptions: [
-              ['Dancing Script, cursive', 'Dancing Script'],
+              ['Dancing Script', 'Dancing Script'],
               ['Baskervville SC, serif', 'Baskervville SC'],
               ['MonteCarlo, cursive', 'MonteCarlo'],
               ['Noto Serif, serif', 'Noto Serif'],
@@ -228,15 +228,15 @@ export default function DefineTemplate() {
           <div className="h-fit w-full">
             <div className="mb-2 flex w-full items-center justify-between">
               <p className="font-bold text-gray-700">Bản xem trước</p>
-              <div onClick={handleDownload} className="cursor-pointer text-blue-500 underline">
-                Tải mẫu xuống
+              <div onClick={() => setResult('')} className="cursor-pointer text-blue-500 underline">
+                Đóng
               </div>
             </div>
             <img src={result} alt="img" className="h-full w-full border-[0.5px] border-gray-300" />
           </div>
           <DialogFooter>
-            <ButtonPrimary onClick={() => setResult('')} className="px-6">
-              Đóng
+            <ButtonPrimary onClick={handleDownload} className="px-6">
+              Tải mẫu xuống
             </ButtonPrimary>
           </DialogFooter>
         </DialogContent>

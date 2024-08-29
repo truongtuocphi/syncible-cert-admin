@@ -25,7 +25,6 @@ import {
   createMarkupEditorToolStyle,
   createMarkupEditorShapeStyleControls,
   createDefaultFontSizeOptions,
-  createDefaultLineHeightOptions,
   createDefaultFontFamilyOptions,
 } from '@pqina/pintura';
 import { getEditorDefaults } from '@pqina/pintura';
@@ -207,16 +206,12 @@ export default function DefineTemplate() {
             fontSizeOptions: [...createDefaultFontSizeOptions(), 170],
             fontFamilyOptions: [
               ['Dancing Script', 'Dancing Script'],
-              ['Baskervville SC, serif', 'Baskervville SC'],
-              ['MonteCarlo, cursive', 'MonteCarlo'],
-              ['Noto Serif, serif', 'Noto Serif'],
-              ['Inria Serif, serif', 'Inria Serif'],
-              ['Crimson Text, serif', 'Crimson Text'],
-              ['Great Vibes, cursive', 'Great Vibes'],
-              ['Mingzat, sans-serif', 'Mingzat'],
+              ['MonteCarlo', 'MonteCarlo'],
+              ['Noto Serif', 'Noto Serif'],
+              ['Crimson Text', 'Crimson Text'],
+              ['Great Vibes', 'Great Vibes'],
               ...createDefaultFontFamilyOptions(),
             ],
-            lineHeightOptions: createDefaultLineHeightOptions(),
           })}
           onLoad={(res) => console.log('load image', res)}
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}

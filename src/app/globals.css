@@ -6,6 +6,7 @@
 .index :global .pintura-editor {
   --color-background: 255, 255, 255;
   --color-foreground: 10, 10, 10;
+  font-family: 'Crimson Text', 'Dancing Script', 'Great Vibes', 'MonteCarlo', 'Noto Serif', cursive;
 }
 
 @media (prefers-color-scheme: dark) {

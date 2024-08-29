@@ -9,7 +9,7 @@ import { IoMdSettings } from 'react-icons/io';
 
 const menuSidebar = [
   { name: 'Trang Chủ', url: '/admin', icon: <FaHome className="text-2xl" /> },
-  { name: 'Đúc Chứng Chỉ Số', url: '/admin/mintnft', icon: <GiDiploma className="text-2xl" /> },
+  { name: 'Tạo Chứng Chỉ Số', url: '/admin/mintnft', icon: <GiDiploma className="text-2xl" /> },
   {
     name: 'Tùy Chỉnh Mẫu',
     url: '/admin/customized',

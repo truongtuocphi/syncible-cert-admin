@@ -1,4 +1,3 @@
-import { FaRegFileAlt } from 'react-icons/fa';
 import { GiDiploma } from 'react-icons/gi';
 import { MdCollectionsBookmark } from 'react-icons/md';
 import { MdOutlineDashboardCustomize } from 'react-icons/md';
@@ -28,10 +27,10 @@ const listCard = [
     link: '/admin/customized',
   },
   {
-    title: 'Đúc chứng chỉ số',
-    des: 'Tạo và đúc chứng chỉ số của bạn',
+    title: 'Tạo chứng chỉ số',
+    des: 'Tạo chứng chỉ số của bạn',
     icon: <GiDiploma className="text-2xl text-white" />,
-    titleButton: 'Đúc chứng chỉ',
+    titleButton: 'Tạo chứng chỉ',
     link: '/admin/mintnft',
   },
 ];

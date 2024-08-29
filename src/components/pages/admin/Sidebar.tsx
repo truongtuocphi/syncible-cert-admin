@@ -8,10 +8,10 @@ import { GiDiploma } from 'react-icons/gi';
 import { IoMdSettings } from 'react-icons/io';
 
 const menuSidebar = [
-  { name: 'Trang chủ', url: '/admin', icon: <FaHome className="text-3xl" /> },
-  { name: 'Đúc chứng chỉ số', url: '/admin/mintnft', icon: <GiDiploma className="text-3xl" /> },
+  { name: 'Trang Chủ', url: '/admin', icon: <FaHome className="text-3xl" /> },
+  { name: 'Đúc Chứng Chỉ Số', url: '/admin/mintnft', icon: <GiDiploma className="text-3xl" /> },
   {
-    name: 'Tùy chỉnh mẫu',
+    name: 'Tùy Chỉnh Mẫu',
     url: '/admin/customized',
     icon: <BiSolidCustomize className="text-3xl" />,
   },

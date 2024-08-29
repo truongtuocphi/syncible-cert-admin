@@ -212,7 +212,7 @@ export default function DefineTemplate() {
               ['Noto Serif, serif', 'Noto Serif'],
               ['Inria Serif, serif', 'Inria Serif'],
               ['Crimson Text, serif', 'Crimson Text'],
-              ['"Great Vibes", cursive', 'Great Vibes'],
+              ['Great Vibes, cursive', 'Great Vibes'],
               ...createDefaultFontFamilyOptions(),
             ],
             lineHeightOptions: createDefaultLineHeightOptions(),

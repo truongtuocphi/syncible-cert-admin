@@ -149,7 +149,7 @@ export default function DefineTemplate() {
           </div>
           <div className="grid items-center gap-1.5">
             <div className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Chọn mẫu Chứng chỉ
+              Mẫu Chứng chỉ
             </div>
             <Drawer>
               <DrawerTrigger asChild>

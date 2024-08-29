@@ -14,6 +14,8 @@ const getCustomLabel = (path: string) => {
       return 'Chi tiết hợp đồng';
     case 'filestorage':
       return 'Thư Mục Lưu Trữ';
+    case 'customized':
+      return 'Tùy Chỉnh Mẫu';
     default:
       return path;
   }

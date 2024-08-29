@@ -1,6 +1,8 @@
+/* eslint-disable no-console */
+/* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 
 import '@pqina/pintura/pintura.css';
 
@@ -21,6 +23,10 @@ import {
   markup_editor_defaults,
   createMarkupEditorToolStyles,
   createMarkupEditorToolStyle,
+  createMarkupEditorShapeStyleControls,
+  createDefaultFontSizeOptions,
+  createDefaultLineHeightOptions,
+  createDefaultFontFamilyOptions,
 } from '@pqina/pintura';
 import { getEditorDefaults } from '@pqina/pintura';
 import {
@@ -38,6 +44,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { Button } from '@/components/ui/button';
+import { Dialog, DialogContent, DialogFooter } from '@/components/ui/dialog';
 import {
   Drawer,
   DrawerClose,
@@ -72,32 +79,30 @@ const predefinedTemplates = [
   },
 ];
 
-const editorDefaults = {
-  utils: ['crop', 'filter', 'finetune', 'sticker', 'annotate'],
-  imageReader: createDefaultImageReader(),
-  imageWriter: createDefaultImageWriter(),
-  shapePreprocessor: createDefaultShapePreprocessor(),
-  ...plugin_filter_defaults,
-  ...plugin_sticker_locale_en_gb,
-  ...plugin_annotate,
-  ...markup_editor_defaults,
-  locale: {
-    ...LocaleCore,
-    ...LocaleCrop,
-    ...LocaleFilter,
-    ...LocaleAnnotate,
-    ...LocaleSticker,
-    ...LocaleMarkupEditor,
-  },
-};
+// const editorDefaults = {
+//   utils: ['crop', 'filter', 'finetune', 'sticker', 'annotate'],
+//   imageReader: createDefaultImageReader(),
+//   imageWriter: createDefaultImageWriter(),
+//   shapePreprocessor: createDefaultShapePreprocessor(),
+//   ...plugin_filter_defaults,
+//   ...plugin_sticker_locale_en_gb,
+//   ...plugin_annotate,
+//   ...markup_editor_defaults,
+//   locale: {
+//     ...LocaleCore,
+//     ...LocaleCrop,
+//     ...LocaleFilter,
+//     ...LocaleAnnotate,
+//     ...LocaleSticker,
+//     ...LocaleMarkupEditor,
+//   },
+// };
 
 export default function DefineTemplate() {
   const [result, setResult] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState<string>(
     `${headerURL}/QmTu4V9dSaQB646ztpanTwzznJfvuhrR5mtfRPv7Xm5NzE`
   );
-
-  const previewRef = useRef<HTMLDivElement>(null);
 
   const handleTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -106,16 +111,6 @@ export default function DefineTemplate() {
       setSelectedTemplate(fileUrl);
     }
   };
-
-  const handleSelectTemplate = (templateURL: string) => {
-    setSelectedTemplate(`${headerURL}/${templateURL}`);
-  };
-
-  useEffect(() => {
-    if (result && previewRef.current) {
-      previewRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
-  }, [result]);
 
   const handleDownload = () => {
     if (result) {
@@ -171,7 +166,7 @@ export default function DefineTemplate() {
                             ? 'border-blue-500'
                             : 'border-gray-300'
                         }`}
-                        onClick={() => handleSelectTemplate(template.imageUrl)}
+                        onClick={() => setSelectedTemplate(`${headerURL}/${template.imageUrl}`)}
                       >
                         <Image
                           src={`${headerURL}/${template.imageUrl}`}
@@ -205,28 +200,46 @@ export default function DefineTemplate() {
           markupEditorToolStyles={createMarkupEditorToolStyles({
             text: createMarkupEditorToolStyle('text', {
               color: [0, 0, 0],
-              fontSize: 50,
+              fontSize: 72,
             }),
+          })}
+          markupEditorShapeStyleControls={createMarkupEditorShapeStyleControls({
+            fontSizeOptions: [...createDefaultFontSizeOptions(), 170],
+            fontFamilyOptions: [
+              ['Dancing Script, cursive', 'Dancing Script'],
+              ['Baskervville SC, serif', 'Baskervville SC'],
+              ['MonteCarlo, cursive', 'MonteCarlo'],
+              ['Noto Serif, serif', 'Noto Serif'],
+              ['Inria Serif, serif', 'Inria Serif'],
+              ['Crimson Text, serif', 'Crimson Text'],
+              ['"Great Vibes", cursive', 'Great Vibes'],
+              ...createDefaultFontFamilyOptions(),
+            ],
+            lineHeightOptions: createDefaultLineHeightOptions(),
           })}
           onLoad={(res) => console.log('load image', res)}
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
         />
       </div>
 
-      {result && (
-        <div className="mt-10 flex w-full flex-col items-center justify-center">
-          <div className="h-fit w-3/5 rounded-lg bg-white p-4">
+      <Dialog open={result ? true : false}>
+        <DialogContent>
+          <div className="h-fit w-full">
             <div className="mb-2 flex w-full items-center justify-between">
               <p className="font-bold text-gray-700">Bản xem trước</p>
-              <ButtonPrimary onClick={handleDownload} className="bg-blue-500 text-white">
+              <div onClick={handleDownload} className="cursor-pointer text-blue-500 underline">
                 Tải mẫu xuống
-              </ButtonPrimary>
+              </div>
             </div>
-            <img src={result} alt="img" className="h-full w-full" />
+            <img src={result} alt="img" className="h-full w-full border-[0.5px] border-gray-300" />
           </div>
-          <div ref={previewRef}></div>
-        </div>
-      )}
+          <DialogFooter>
+            <ButtonPrimary onClick={() => setResult('')} className="px-6">
+              Đóng
+            </ButtonPrimary>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

@@ -13,14 +13,14 @@ const listCard = [
   //   link: '/admin/filestorage',
   // },
   {
-    title: 'Quản lý Chứng chỉ',
+    title: 'Quản lý Chứng chỉ Số',
     des: 'Quản lý chứng chỉ số được đúc của bạn tại đây',
     icon: <MdCollectionsBookmark className="text-2xl text-white" />,
     titleButton: 'Tạo ngay',
     link: '/admin/collection',
   },
   {
-    title: 'Tùy chỉnh mẫu chứng chỉ',
+    title: 'Tùy chỉnh mẫu chứng chỉ Số',
     des: 'Chỉnh sửa giao diện và chuyên về chủ đề của riêng bạn. Thêm logo, màu sắc và hình ảnh của bạn để phản ánh thương hiệu của bạn.',
     icon: <MdOutlineDashboardCustomize className="text-2xl text-white" />,
     titleButton: 'Tùy chỉnh ở đây',
@@ -30,7 +30,7 @@ const listCard = [
     title: 'Tạo chứng chỉ số',
     des: 'Tạo chứng chỉ số của bạn',
     icon: <GiDiploma className="text-2xl text-white" />,
-    titleButton: 'Tạo chứng chỉ',
+    titleButton: 'Tạo chứng chỉ số',
     link: '/admin/mintnft',
   },
 ];

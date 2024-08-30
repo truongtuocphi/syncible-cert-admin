@@ -44,7 +44,13 @@ import { FaArrowLeft } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogFooter } from '@/components/ui/dialog';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import {
   Drawer,
   DrawerClose,
@@ -192,7 +198,7 @@ export default function DefineTemplate() {
           </div>
         </div>
       </div>
-      <div className="h-dvh w-full overflow-hidden rounded-lg">
+      <div className="h-dvh w-full overflow-hidden rounded-xl">
         <PinturaEditor
           {...getEditorDefaults()}
           src={selectedTemplate}
@@ -221,13 +227,19 @@ export default function DefineTemplate() {
 
       <Dialog open={result ? true : false}>
         <DialogContent>
-          <div className="h-fit w-full">
-            <div className="mb-4 flex w-full items-center justify-between">
+          <DialogTitle>
+            <div className="mb-1 flex w-full items-center justify-between">
               <p className="font-bold text-gray-700">Bản xem trước</p>
-              <div onClick={() => setResult('')} className="cursor-pointer font-medium">
-                <IoClose className="text-2xl text-gray-700" />
-              </div>
+              <IoClose
+                onClick={() => setResult('')}
+                className="cursor-pointer text-3xl font-medium text-gray-700"
+              />
             </div>
+            <DialogDescription>
+              Đây là bản xem trước của mẫu chứng chỉ mà bạn đã tạo.
+            </DialogDescription>
+          </DialogTitle>
+          <div className="h-fit w-full">
             <img src={result} alt="img" className="h-full w-full border-[0.5px] border-gray-300" />
           </div>
           <DialogFooter>

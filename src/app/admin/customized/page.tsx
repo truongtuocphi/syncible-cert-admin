@@ -41,6 +41,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 
+import { IoClose } from 'react-icons/io5';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogFooter } from '@/components/ui/dialog';
@@ -221,10 +222,10 @@ export default function DefineTemplate() {
       <Dialog open={result ? true : false}>
         <DialogContent>
           <div className="h-fit w-full">
-            <div className="mb-2 flex w-full items-center justify-between">
+            <div className="mb-4 flex w-full items-center justify-between">
               <p className="font-bold text-gray-700">Bản xem trước</p>
-              <div onClick={() => setResult('')} className="cursor-pointer text-blue-500 underline">
-                Đóng
+              <div onClick={() => setResult('')} className="cursor-pointer font-medium">
+                <IoClose className="text-2xl text-gray-700" />
               </div>
             </div>
             <img src={result} alt="img" className="h-full w-full border-[0.5px] border-gray-300" />

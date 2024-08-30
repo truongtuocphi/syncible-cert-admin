@@ -94,8 +94,8 @@ const editorDefaults = getEditorDefaults({
         if (!shape.text) return shape;
 
         // Replace placeholders in text properties
-        shape.text = shape.text.replace(/{Họ Và Tên}/g, '');
-        shape.text = shape.text.replace(/{Mã chứng chỉ}/g, '');
+        shape.text = shape.text.replace(/Họ Và Tên/g, '');
+        shape.text = shape.text.replace(/Mã chứng chỉ/g, '');
 
         return shape;
       });
@@ -252,7 +252,7 @@ export default function DefineTemplate() {
               y: 680,
               fontSize: 96,
               color: [0, 0, 0],
-              text: '{Họ Và Tên}',
+              text: 'Họ Và Tên',
               disableMove: true,
             },
             {
@@ -260,7 +260,7 @@ export default function DefineTemplate() {
               y: 20,
               fontSize: 50,
               color: [0, 0, 0],
-              text: '{Mã chứng chỉ}',
+              text: 'Mã chứng chỉ',
               disableMove: true,
             },
           ]}

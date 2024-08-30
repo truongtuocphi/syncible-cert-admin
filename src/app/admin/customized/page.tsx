@@ -94,7 +94,7 @@ const editorDefaults = getEditorDefaults({
         if (!shape.text) return shape;
 
         // Replace placeholders in text properties
-        shape.text = shape.text.replace(/——————/g, '');
+        shape.text = shape.text.replace(/__________/g, '');
         shape.text = shape.text.replace(/ID chứng chỉ: xxxxxxxxx - xx - xx/g, '');
 
         return shape;
@@ -251,15 +251,15 @@ export default function DefineTemplate() {
               x: 750,
               y: 680,
               fontSize: 96,
-              color: [0, 0, 0],
-              text: '——————',
+              color: [128, 128, 128],
+              text: '__________',
               disableMove: true,
             },
             {
-              x: 680,
+              x: 750,
               y: 20,
-              fontSize: 50,
-              color: [0, 0, 0],
+              fontSize: 35,
+              color: [128, 128, 128],
               text: 'ID chứng chỉ: xxxxxxxxx - xx - xx',
               disableMove: true,
             },

@@ -1,7 +1,7 @@
 const getCustomLabel = (path: string) => {
   switch (path) {
     case 'mintnft':
-      return 'Đúc Chứng Chỉ Số';
+      return 'Tạo Chứng Chỉ Số';
     case 'collection':
       return 'Quản Lý Chứng Chỉ';
     case 'createcollection':

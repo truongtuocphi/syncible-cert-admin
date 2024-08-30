@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import '@pqina/pintura/pintura.css';
 
@@ -220,8 +220,32 @@ export default function DefineTemplate() {
               ...createDefaultFontFamilyOptions(),
             ],
           })}
-          onLoad={(res) => console.log('load image', res)}
+          onLoad={(res) => {
+            console.log('load image', res);
+          }}
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
+          imageAnnotation={[
+            {
+              x: 780,
+              y: 680,
+              fontSize: 96,
+              color: [0, 0, 0],
+
+              // We'll replace {name} when processing the image
+              text: 'Họ Và Tên',
+              disableMove: true,
+            },
+            {
+              x: 850,
+              y: 20,
+              fontSize: 50,
+              color: [0, 0, 0],
+
+              // We'll replace {name} when processing the image
+              text: 'Mã chứng chỉ',
+              disableMove: true,
+            },
+          ]}
         />
       </div>
 

@@ -231,7 +231,6 @@ export default function DefineTemplate() {
               fontSize: 96,
               color: [0, 0, 0],
 
-              // We'll replace {name} when processing the image
               text: 'Họ Và Tên',
               disableMove: true,
             },
@@ -241,7 +240,6 @@ export default function DefineTemplate() {
               fontSize: 50,
               color: [0, 0, 0],
 
-              // We'll replace {name} when processing the image
               text: 'Mã chứng chỉ',
               disableMove: true,
             },

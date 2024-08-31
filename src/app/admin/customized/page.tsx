@@ -83,6 +83,26 @@ const predefinedTemplates = [
     imageUrl: 'QmQW65mTtMpbEpKM9bTDMvkLhthtXk3uGE2HPSbE8Gn5WH',
     name: 'Certificate 3',
   },
+  {
+    id: 4,
+    imageUrl: 'QmcjRNfDYLp1L4RN7YzGX9nE6ECbet3MTEJanji8NUudnJ',
+    name: 'Certificate 4',
+  },
+  {
+    id: 5,
+    imageUrl: 'Qmc6xgr71Tn3wVqhdBixv5Ca62ysQXek8m92dEZGneKDPs',
+    name: 'Certificate 5',
+  },
+  {
+    id: 6,
+    imageUrl: 'QmRNQQgCRPSP54XUJH5P6aHJAoQGL53K1Mt9kowuDTtXA7',
+    name: 'Certificate 6',
+  },
+  {
+    id: 7,
+    imageUrl: 'QmX7X9Y4GLv6xhCfjR4a1LWbYiB1m8467asyCPpjDb5NDy',
+    name: 'Certificate 7',
+  },
 ];
 
 const editorDefaults = getEditorDefaults({
@@ -188,7 +208,7 @@ export default function DefineTemplate() {
                     {predefinedTemplates.map((template) => (
                       <div
                         key={template.id}
-                        className={`h-32 w-full cursor-pointer rounded-lg border p-1 ${
+                        className={`mb-3 h-32 w-full cursor-pointer rounded-lg border p-1 ${
                           selectedTemplate === `${headerURL}/${template.imageUrl}`
                             ? 'border-blue-500'
                             : 'border-gray-300'
@@ -224,7 +244,7 @@ export default function DefineTemplate() {
           {...getEditorDefaults()}
           {...editorDefaults}
           src={selectedTemplate}
-          stickers={['/bath_1.png', '/bath_2.png']}
+          stickers={['/bath_1.png', '/bath_2.png', '/batch_black.png', '/batch_red_white.png']}
           markupEditorToolStyles={createMarkupEditorToolStyles({
             text: createMarkupEditorToolStyle('text', {
               color: [0, 0, 0],

@@ -269,7 +269,7 @@ export default function DefineTemplate() {
           imageAnnotation={[
             {
               x: 550,
-              y: 650,
+              y: 600,
               fontSize: 96,
               color: [0, 0, 0],
               text: '_________________',

@@ -114,7 +114,7 @@ const editorDefaults = getEditorDefaults({
         if (!shape.text) return shape;
 
         // Replace placeholders in text properties
-        shape.text = shape.text.replace(/__________/g, '');
+        shape.text = shape.text.replace(/_________________/g, '');
         shape.text = shape.text.replace(/ID chứng chỉ: xxxxxxxxx - xx - xx/g, '');
 
         return shape;
@@ -244,7 +244,7 @@ export default function DefineTemplate() {
           {...getEditorDefaults()}
           {...editorDefaults}
           src={selectedTemplate}
-          stickers={['/bath_1.png', '/bath_2.png', '/batch_black.png', '/batch_red_white.png']}
+          stickers={['/batch_black.png', '/batch_red_white.png']}
           markupEditorToolStyles={createMarkupEditorToolStyles({
             text: createMarkupEditorToolStyle('text', {
               color: [0, 0, 0],
@@ -268,17 +268,17 @@ export default function DefineTemplate() {
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
           imageAnnotation={[
             {
-              x: 750,
-              y: 680,
+              x: 550,
+              y: 650,
               fontSize: 96,
               color: [0, 0, 0],
-              text: '__________',
+              text: '_________________',
               disableMove: true,
             },
             {
               x: 750,
-              y: 20,
-              fontSize: 35,
+              y: 40,
+              fontSize: 30,
               color: [0, 0, 0],
               text: 'ID chứng chỉ: xxxxxxxxx - xx - xx',
               disableMove: true,

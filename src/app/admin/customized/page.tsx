@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 import '@pqina/pintura/pintura.css';
 
@@ -40,8 +40,8 @@ import { PinturaEditor } from '@pqina/react-pintura';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
-
 import { IoClose } from 'react-icons/io5';
+
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { Button } from '@/components/ui/button';
 import {
@@ -115,7 +115,7 @@ const editorDefaults = getEditorDefaults({
 
         // Replace placeholders in text properties
         shape.text = shape.text.replace(/_________________/g, '');
-        shape.text = shape.text.replace(/ID chứng chỉ: xxxxxxxxx - xx - xx/g, '');
+        shape.text = shape.text.replace(/ID chứng chỉ: xxxxx - xx - xx/g, '');
 
         return shape;
       });
@@ -280,7 +280,7 @@ export default function DefineTemplate() {
               y: 40,
               fontSize: 30,
               color: [0, 0, 0],
-              text: 'ID chứng chỉ: xxxxxxxxx - xx - xx',
+              text: 'ID chứng chỉ: xxxxx - xx - xx',
               disableMove: true,
             },
           ]}

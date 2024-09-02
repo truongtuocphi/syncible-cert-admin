@@ -463,18 +463,6 @@ const CreateNFT = () => {
               />
             </label>
           </div>
-          {/* <div>
-            <label className="block text-sm font-medium text-gray-700">
-              Quantity:
-              <input
-                type="number"
-                min="1"
-                value={quantity}
-                onChange={(e) => setQuantity(parseInt(e.target.value))}
-                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-              />
-            </label>
-          </div> */}
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Blockchain:

@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* bright / dark mode */
+.index :global .pintura-editor {
+  --color-background: 255, 255, 255;
+  --color-foreground: 10, 10, 10;
+  font-family: 'Crimson Text', 'Dancing Script', 'Great Vibes', 'MonteCarlo', 'Noto Serif', cursive;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  .index :global .pintura-editor {
+    --color-background: 10, 10, 10;
+    --color-foreground: 255, 255, 255;
+  }
+}
+
 img {
   position: static !important;
 }

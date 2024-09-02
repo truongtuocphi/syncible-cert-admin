@@ -63,7 +63,7 @@ const Header = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <FaWallet />
-                <span>Connect Wallet</span>
+                <span>Kết nối ví</span>
               </div>
             )}
           </ButtonPrimary>

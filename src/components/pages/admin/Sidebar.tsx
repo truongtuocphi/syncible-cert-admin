@@ -8,12 +8,12 @@ import { GiDiploma } from 'react-icons/gi';
 import { IoMdSettings } from 'react-icons/io';
 
 const menuSidebar = [
-  { name: 'Home', url: '/admin', icon: <FaHome className="text-3xl" /> },
-  { name: 'Mint NFT', url: '/admin/mintnft', icon: <GiDiploma className="text-3xl" /> },
+  { name: 'Trang Chủ', url: '/admin', icon: <FaHome className="text-2xl" /> },
+  { name: 'Tạo Chứng Chỉ Số', url: '/admin/mintnft', icon: <GiDiploma className="text-2xl" /> },
   {
-    name: 'Customized ',
+    name: 'Tùy Chỉnh Mẫu',
     url: '/admin/customized',
-    icon: <BiSolidCustomize className="text-3xl" />,
+    icon: <BiSolidCustomize className="text-2xl" />,
   },
 ];
 
@@ -33,7 +33,7 @@ const Sidebar = () => {
             {menuSidebar.map((item) => {
               const isActive = pathname === item.url;
               return (
-                <li className="text-lg" key={item.name}>
+                <li className="text-base" key={item.name}>
                   <Link
                     href={item.url}
                     className={`flex items-center gap-4 rounded-xl px-4 py-4 font-bold ${isActive ? 'bg-purple-950/30' : 'hover:bg-purple-800/30'}`}
@@ -47,13 +47,13 @@ const Sidebar = () => {
           </ul>
         </nav>
       </div>
-      <div className="mb-3 text-lg">
+      <div className="mb-3 text-base">
         <Link
           href={'/admin/setting'}
           className={`flex items-center gap-4 rounded-xl px-4 py-4 font-bold hover:bg-purple-800/30`}
         >
-          <IoMdSettings className="text-3xl" />
-          Setting
+          <IoMdSettings className="text-2xl" />
+          Cài đặt
         </Link>
       </div>
     </div>

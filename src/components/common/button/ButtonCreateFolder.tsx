@@ -1,3 +1,8 @@
+import { useEffect, useState } from 'react';
+
+import { onAuthStateChanged, User } from 'firebase/auth';
+import { ref, set } from 'firebase/database';
+
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import {
   Dialog,
@@ -9,10 +14,7 @@ import {
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { useEffect, useState } from 'react';
 import { auth, db } from '@/lib/firebase';
-import { onAuthStateChanged, User } from 'firebase/auth';
-import { ref, set } from 'firebase/database';
 
 export default function ButtonCreateFolder() {
   const [folderName, setFolderName] = useState('');
@@ -53,6 +55,7 @@ export default function ButtonCreateFolder() {
       setIsOpen(false); // Đóng modal sau khi tạo thành công
       alert('Folder created successfully!');
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error('Error creating folder:', error);
       alert('Failed to create folder.');
     }

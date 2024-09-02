@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-page-custom-font */
 import './globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import type { Metadata } from 'next';
@@ -21,6 +22,12 @@ export default function RootLayout({
   const initialState = cookieToInitialState(config, headers().get('cookie'));
   return (
     <html lang="vi">
+      <head>
+        <link
+          href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Dancing+Script:wght@400..700&family=Great+Vibes&family=MonteCarlo&family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet"
+        />
+      </head>
       <body className={`backgroundCustom min-h-screen w-full bg-cover bg-center`}>
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <Web3ModalProvider initialState={initialState}>

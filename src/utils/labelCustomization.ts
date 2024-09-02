@@ -1,19 +1,21 @@
 const getCustomLabel = (path: string) => {
   switch (path) {
     case 'mintnft':
-      return 'Mint NFT';
+      return 'Tạo Chứng Chỉ Số';
     case 'collection':
-      return 'NFT Collection';
+      return 'Quản Lý Chứng Chỉ';
     case 'createcollection':
-      return 'Create Collection';
+      return 'Tạo Mục Quản Lý';
     case 'admin':
-      return 'Home';
+      return 'Trang Chủ';
     case 'collectiondetail':
       return '';
     case 'contractdetail':
-      return 'Contract Detail';
+      return 'Chi tiết hợp đồng';
     case 'filestorage':
-      return 'File Storage';
+      return 'Thư Mục Lưu Trữ';
+    case 'customized':
+      return 'Tùy Chỉnh Mẫu';
     default:
       return path;
   }

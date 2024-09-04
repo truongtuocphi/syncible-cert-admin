@@ -115,7 +115,7 @@ const editorDefaults = getEditorDefaults({
 
         // Replace placeholders in text properties
         shape.text = shape.text.replace(/_________________/g, '');
-        shape.text = shape.text.replace(/ID chứng chỉ: xxxxx - xx - xx/g, '');
+        shape.text = shape.text.replace(/ID chứng chỉ: xxxx - xx - xx/g, '');
 
         return shape;
       });
@@ -280,7 +280,7 @@ export default function DefineTemplate() {
               y: 40,
               fontSize: 30,
               color: [0, 0, 0],
-              text: 'ID chứng chỉ: xxxxx - xx - xx',
+              text: 'ID chứng chỉ: xxxx - xx - xx',
               disableMove: true,
             },
           ]}

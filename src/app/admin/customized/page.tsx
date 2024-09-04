@@ -115,7 +115,7 @@ const editorDefaults = getEditorDefaults({
 
         // Replace placeholders in text properties
         shape.text = shape.text.replace(/_________________/g, '');
-        shape.text = shape.text.replace(/ID chứng chỉ: xxxx - xx - xx/g, '');
+        shape.text = shape.text.replace(/ID chứng chỉ: xxxx - xx - xx/g, ' ');
 
         return shape;
       });
@@ -268,19 +268,25 @@ export default function DefineTemplate() {
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
           imageAnnotation={[
             {
-              x: 545,
+              x: 380,
               y: 600,
-              fontSize: 96,
-              color: [0, 0, 0],
-              text: '_________________',
+              // fontSize: 96,
+              // color: [0, 0, 0],
+              // text: '_________________',
+              width: 1250,
+              height: 200,
+              backgroundColor: [0.92, 0.92, 0.92],
               disableMove: true,
             },
             {
-              x: 840,
-              y: 40,
-              fontSize: 30,
-              color: [0, 0, 0],
-              text: 'ID chứng chỉ: xxxx - xx - xx',
+              x: 725,
+              y: 50,
+              // fontSize: 30,
+              // color: [0, 0, 0],
+              // text: 'ID chứng chỉ: xxxx - xx - xx',
+              width: 550,
+              height: 50,
+              backgroundColor: [0.92, 0.92, 0.92],
               disableMove: true,
             },
           ]}

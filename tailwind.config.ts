@@ -15,6 +15,7 @@ const config = {
     extend: {
       screens: { xs: '480px', '2xs': '375px', '3xs': '320px' },
       colors: {
+        customTeal: '#31CBBA',
         brand: {
           '50': '#eefbf3',
           '100': '#d6f5e1',

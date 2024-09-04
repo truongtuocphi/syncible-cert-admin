@@ -277,6 +277,8 @@ export default function DefineTemplate() {
               backgroundImage: '/batch_black.png',
               disableRemove: true,
               disableResize: true,
+              disableRotate: true,
+              disableMove: true,
             },
           ]}
         />

@@ -108,16 +108,8 @@ const predefinedTemplates = [
 const editorDefaults = getEditorDefaults({
   imageWriter: {
     preprocessImageState: (imageState: any) => {
-      // Create new annotation array
-      imageState.annotation = imageState.annotation.map((shape: any) => {
-        // This is not a text shape so skip
-        if (!shape.text) return shape;
-
-        // Replace placeholders in text properties
-        shape.text = shape.text.replace(/_________________/g, '');
-        shape.text = shape.text.replace(/ID chứng chỉ: xxxx - xx - xx/g, ' ');
-
-        return shape;
+      imageState.annotation = imageState.annotation.filter((shape: any) => {
+        return (shape.disableErase = false);
       });
 
       // Return updated image state
@@ -270,25 +262,11 @@ export default function DefineTemplate() {
             {
               x: 380,
               y: 600,
-              // fontSize: 96,
-              // color: [0, 0, 0],
-              // text: '_________________',
               width: 1250,
               height: 200,
               backgroundColor: [0.92, 0.92, 0.92],
               disableMove: true,
             },
-            // {
-            //   x: 725,
-            //   y: 50,
-            //   // fontSize: 30,
-            //   // color: [0, 0, 0],
-            //   // text: 'ID chứng chỉ: xxxx - xx - xx',
-            //   width: 550,
-            //   height: 50,
-            //   backgroundColor: [0.92, 0.92, 0.92],
-            //   disableMove: true,
-            // },
           ]}
         />
       </div>

@@ -278,17 +278,17 @@ export default function DefineTemplate() {
               backgroundColor: [0.92, 0.92, 0.92],
               disableMove: true,
             },
-            {
-              x: 725,
-              y: 50,
-              // fontSize: 30,
-              // color: [0, 0, 0],
-              // text: 'ID chứng chỉ: xxxx - xx - xx',
-              width: 550,
-              height: 50,
-              backgroundColor: [0.92, 0.92, 0.92],
-              disableMove: true,
-            },
+            // {
+            //   x: 725,
+            //   y: 50,
+            //   // fontSize: 30,
+            //   // color: [0, 0, 0],
+            //   // text: 'ID chứng chỉ: xxxx - xx - xx',
+            //   width: 550,
+            //   height: 50,
+            //   backgroundColor: [0.92, 0.92, 0.92],
+            //   disableMove: true,
+            // },
           ]}
         />
       </div>

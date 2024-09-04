@@ -276,7 +276,7 @@ export default function DefineTemplate() {
               disableMove: true,
             },
             {
-              x: 750,
+              x: 850,
               y: 40,
               fontSize: 30,
               color: [0, 0, 0],

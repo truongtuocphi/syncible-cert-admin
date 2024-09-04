@@ -108,9 +108,10 @@ const predefinedTemplates = [
 const editorDefaults = getEditorDefaults({
   imageWriter: {
     preprocessImageState: (imageState: any) => {
-      imageState.annotation = imageState.annotation.filter((shape: any) => {
-        return (shape.disableErase = false);
-      });
+      // imageState.annotation = imageState.annotation.filter((shape: any) => {
+      //   return (shape.disableErase = false);
+      // });
+      imageState.annotation = imageState.annotation.filter((_: any, index: any) => index !== 0);
 
       // Return updated image state
       return imageState;
@@ -266,6 +267,16 @@ export default function DefineTemplate() {
               height: 200,
               backgroundColor: [0.92, 0.92, 0.92],
               disableMove: true,
+              disableRemove: true,
+            },
+            {
+              x: 800,
+              y: 1000,
+              width: 400,
+              height: 400,
+              backgroundImage: '/batch_black.png',
+              disableRemove: true,
+              disableResize: true,
             },
           ]}
         />

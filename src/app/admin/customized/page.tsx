@@ -268,7 +268,7 @@ export default function DefineTemplate() {
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
           imageAnnotation={[
             {
-              x: 550,
+              x: 545,
               y: 600,
               fontSize: 96,
               color: [0, 0, 0],
@@ -276,7 +276,7 @@ export default function DefineTemplate() {
               disableMove: true,
             },
             {
-              x: 850,
+              x: 840,
               y: 40,
               fontSize: 30,
               color: [0, 0, 0],

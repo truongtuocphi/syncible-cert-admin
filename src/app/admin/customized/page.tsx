@@ -265,7 +265,7 @@ export default function DefineTemplate() {
               y: 600,
               width: 1250,
               height: 200,
-              backgroundColor: [0.92, 0.92, 0.92],
+              backgroundColor: [0.94, 0.94, 0.94],
               disableMove: true,
               disableRemove: true,
             },

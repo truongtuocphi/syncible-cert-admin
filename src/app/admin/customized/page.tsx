@@ -266,8 +266,10 @@ export default function DefineTemplate() {
               width: 1250,
               height: 200,
               backgroundColor: [0.94, 0.94, 0.94],
-              disableMove: true,
               disableRemove: true,
+              disableResize: true,
+              disableRotate: true,
+              disableMove: true,
             },
             {
               x: 800,

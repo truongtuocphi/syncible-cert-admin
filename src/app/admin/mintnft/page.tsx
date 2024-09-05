@@ -236,7 +236,7 @@ const Experience = () => {
             ) : (
               <>
                 <div className="flex items-center justify-between">
-                  <div className="block text-sm font-medium text-gray-700">Thông tin CSV</div>
+                  <div className="block text-lg font-medium text-gray-700">Thông tin CSV</div>
                   <div className="block cursor-pointer text-sm font-medium text-blue-700 underline">
                     Tải file CSV mẫu
                   </div>
@@ -248,7 +248,7 @@ const Experience = () => {
                 </p>
                 <div className="grid grid-cols-5 gap-2">
                   <div className="col-span-2 space-y-2">
-                    <label>ID chứng chỉ</label>
+                    <label className="block text-sm font-medium text-gray-700">ID chứng chỉ</label>
                     <input
                       type="text"
                       required
@@ -270,7 +270,7 @@ const Experience = () => {
                   </div>
 
                   <div className="col-span-3 space-y-2">
-                    <label>Họ và tên</label>
+                    <label className="block text-sm font-medium text-gray-700">Họ và tên</label>
                     <input
                       type="text"
                       required

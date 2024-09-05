@@ -12,6 +12,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+
 @media (prefers-color-scheme: dark) {
   .index :global .pintura-editor {
     --color-background: 10, 10, 10;

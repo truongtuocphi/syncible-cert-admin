@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
-    "@next/font": "^14.2.7",
     "@pinata/sdk": "^2.1.0",
     "@pqina/pintura": "^8.83.3",
     "@pqina/react-pintura": "^9.0.3",

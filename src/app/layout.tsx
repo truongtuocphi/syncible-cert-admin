@@ -6,6 +6,7 @@ import { headers } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
 import { cookieToInitialState } from 'wagmi';
 
+import { inter } from '@/components/ui/fonts';
 import { config } from '@/config';
 import Web3ModalProvider from '@/context';
 
@@ -28,7 +29,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`backgroundCustom min-h-screen w-full bg-cover bg-center`}>
+      <body className={`${inter.className} min-h-screen bg-brand-850`}>
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <Web3ModalProvider initialState={initialState}>
           <main>{children}</main>

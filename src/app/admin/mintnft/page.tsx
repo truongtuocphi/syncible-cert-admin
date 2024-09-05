@@ -129,80 +129,93 @@ const Experience = () => {
         <h1 className="text-2xl font-semibold text-gray-600">Quay lại</h1>
       </div>
       <div className="flex space-x-6">
-        <form className="w-full space-y-4 rounded-lg bg-white p-4 sm:w-1/2">
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Hình chứng chỉ</label>
-            <p className="text-xs text-gray-400">Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây</p>
-            <div
-              className="relative flex h-80 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
-              onDrop={(e) => handleDrop(e, setBannerImage)}
-              onDragOver={handleDragOver}
-            >
-              {bannerImage ? (
-                <div className="relative h-full w-full">
-                  <Image src={bannerImage} alt="Banner Image" fill className="rounded-md " />
-                  <button
-                    type="button"
-                    onClick={handleRemoveImage}
-                    className="absolute right-2 top-2 rounded-full bg-gray-700 p-1 text-white"
-                  >
-                    <FaTimes className="text-lg" />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center">
-                  <FaImage className="text-3xl text-gray-500" />
-                  <p className="mt-2 text-sm text-gray-500">Drag & drop or click to upload</p>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    required
-                    onChange={(e) => handleImageBannerChange(e, setBannerImage)}
-                    className="absolute inset-0 cursor-pointer opacity-0"
-                  />
-                </div>
-              )}
+        <form className="w-full sm:w-1/2">
+          <div className="w-full space-y-4 rounded-lg bg-white p-4">
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Hình chứng chỉ</label>
+              <p className="text-xs text-gray-400">Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây</p>
+              <div
+                className="relative flex h-80 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
+                onDrop={(e) => handleDrop(e, setBannerImage)}
+                onDragOver={handleDragOver}
+              >
+                {bannerImage ? (
+                  <div className="relative h-full w-full">
+                    <Image src={bannerImage} alt="Banner Image" fill className="rounded-md " />
+                    <button
+                      type="button"
+                      onClick={handleRemoveImage}
+                      className="absolute right-2 top-2 rounded-full bg-gray-700 p-1 text-white"
+                    >
+                      <FaTimes className="text-lg" />
+                    </button>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center">
+                    <FaImage className="text-3xl text-gray-500" />
+                    <p className="mt-2 text-sm text-gray-500">Drag & drop or click to upload</p>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      required
+                      onChange={(e) => handleImageBannerChange(e, setBannerImage)}
+                      className="absolute inset-0 cursor-pointer opacity-0"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">Chức vụ</label>
+              <select
+                value={role}
+                onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
+                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              >
+                <option value="Teacher">Teacher</option>
+                <option value="Student">Student</option>
+              </select>
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                Ngày phát hành chứng chỉ
+              </label>
+              <input
+                type="date"
+                value={issuedDate}
+                onChange={(e) => setIssuedDate(e.target.value)}
+                required
+                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="block text-sm font-medium text-gray-700">
+                {' '}
+                Lưu chứng chỉ số vào
+              </label>
+              <select
+                onChange={(e) => setcollectionContractAddress(e.target.value)}
+                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              >
+                {selectedContract.length === 0 ? (
+                  <option value="">No contracts available</option>
+                ) : (
+                  selectedContract.map((collection) => (
+                    <option key={collection.id} value={collection.contractAddress}>
+                      {collection.displayName}
+                    </option>
+                  ))
+                )}
+              </select>
             </div>
           </div>
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Chức vụ</label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            >
-              <option value="Teacher">Teacher</option>
-              <option value="Student">Student</option>
-            </select>
-          </div>
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
-              Ngày phát hành chứng chỉ
-            </label>
-            <input
-              type="date"
-              value={issuedDate}
-              onChange={(e) => setIssuedDate(e.target.value)}
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700"> Lưu chứng chỉ số vào</label>
-            <select
-              onChange={(e) => setcollectionContractAddress(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            >
-              {selectedContract.length === 0 ? (
-                <option value="">No contracts available</option>
-              ) : (
-                selectedContract.map((collection) => (
-                  <option key={collection.id} value={collection.contractAddress}>
-                    {collection.displayName}
-                  </option>
-                ))
-              )}
-            </select>
+
+          <div className="mt-4 w-full space-y-4 rounded-lg bg-white p-4">asdgasdgasdg</div>
+          <div className="mt-4 flex items-center justify-end gap-4">
+            <ButtonPrimary className="w-40 border-2 border-blue-500 bg-white text-blue-500">
+              Hủy
+            </ButtonPrimary>
+            <ButtonPrimary className="w-40">Tạo chứng chỉ</ButtonPrimary>
           </div>
         </form>
 

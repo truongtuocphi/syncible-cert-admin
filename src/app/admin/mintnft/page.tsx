@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { db, ref, get, onAuthStateChanged, auth } from '@/lib/firebase';
-
-import { FaImage, FaTimes } from 'react-icons/fa';
+import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
+
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import CreateNFT from '@/components/pages/experience/CreateNFT';
+import { db, ref, get } from '@/lib/firebase';
 
 interface Collection {
   id: string;
@@ -20,7 +22,6 @@ const Experience = () => {
   const pathname = useSearchParams();
   const { address } = useAccount();
 
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
   const [role, setRole] = useState<'Teacher' | 'Student'>('Student');
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
@@ -51,9 +52,11 @@ const Experience = () => {
           });
           setSelectedContract(collections);
         } else {
+          // eslint-disable-next-line no-console
           console.log('No data available');
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error fetching data:', error);
       }
     };
@@ -71,7 +74,6 @@ const Experience = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result as string);
-        setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -118,25 +120,27 @@ const Experience = () => {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-gray-600">Quay lại</h1>
+      <div className="flex items-center gap-2">
+        <Link href={'/admin'}>
+          <ButtonPrimary className="size-10 rounded-lg p-2">
+            <FaArrowLeft />
+          </ButtonPrimary>
+        </Link>
+        <h1 className="text-2xl font-semibold text-gray-600">Quay lại</h1>
+      </div>
       <div className="flex space-x-6">
-        <form className="w-full space-y-4 rounded-lg bg-white p-4 sm:w-3/5">
+        <form className="w-full space-y-4 rounded-lg bg-white p-4 sm:w-1/2">
           <div className="space-y-2">
             <label className="block text-sm font-medium text-gray-700">Hình chứng chỉ</label>
             <p className="text-xs text-gray-400">Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây</p>
             <div
-              className="relative flex h-56 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
+              className="relative flex h-80 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
               onDrop={(e) => handleDrop(e, setBannerImage)}
               onDragOver={handleDragOver}
             >
               {bannerImage ? (
                 <div className="relative h-full w-full">
-                  <Image
-                    src={bannerImage}
-                    alt="Banner Image"
-                    fill
-                    className="rounded-md object-cover"
-                  />
+                  <Image src={bannerImage} alt="Banner Image" fill className="rounded-md " />
                   <button
                     type="button"
                     onClick={handleRemoveImage}
@@ -204,10 +208,27 @@ const Experience = () => {
 
         {/* preview */}
         <div
-          className="sticky h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-2/5"
+          className="sticky h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-1/2"
           style={{ top: `${top}px` }}
         >
-          asdg
+          <h2 className="text-lg font-bold text-gray-600">Preview</h2>
+          <div className="h-fit w-full overflow-hidden rounded-lg border-[0.5px] border-dashed border-gray-400">
+            {bannerImage ? (
+              <Image
+                src={bannerImage}
+                alt="Logo Preview"
+                width={112}
+                height={112}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              <div className="relative h-96 bg-gray-50">
+                <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border-[0.5px] border-gray-200 bg-gray-100">
+                  <FaImage className="absolute left-1/2 top-[40%] -translate-x-1/2 text-3xl text-gray-500" />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

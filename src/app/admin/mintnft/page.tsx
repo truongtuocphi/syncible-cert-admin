@@ -219,7 +219,7 @@ const Experience = () => {
                 alt="Logo Preview"
                 width={112}
                 height={112}
-                className="h-full w-full object-cover"
+                className="h-96 w-full"
               />
             ) : (
               <div className="relative h-96 bg-gray-50">

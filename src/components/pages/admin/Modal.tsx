@@ -15,14 +15,14 @@ const datCard = [
   {
     title: 'Tạo chứng chỉ đơn lẻ',
     description: 'Mục này được thiết kế cho việc cung cấp bằng cấp đơn lẻ dành cho một người.',
-    link: '/#',
+    link: '/admin/mintnft?type=mintsingle',
     icon: <PiCertificateFill />,
   },
   {
     title: 'Tạo chứng chỉ hàng loạt',
     description:
       'Mục này được thiết kế cho việc cung cấp bằng cấp hàng loạt cho khoá học trên một học viên.',
-    link: '/#',
+    link: '/admin/mintnft?type=mintbulk',
     icon: (
       <div className="flex items-center">
         <PiCertificateFill />
@@ -63,14 +63,12 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                   <p className="mt-2 line-clamp-3 text-sm text-gray-600">{dataCard.description}</p>
                 </div>
               </div>
-              <Link href={dataCard.link}>
+              <Link href={dataCard.link} onClick={onClose}>
                 <ButtonPrimary className="w-full">Tạo chứng chỉ</ButtonPrimary>
               </Link>
             </div>
           ))}
         </div>
-
-        {/* Nút đóng */}
         <button
           onClick={onClose}
           className="absolute right-4 top-4 text-gray-500 hover:text-gray-700"

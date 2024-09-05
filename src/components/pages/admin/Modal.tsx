@@ -15,14 +15,14 @@ const datCard = [
   {
     title: 'Tạo chứng chỉ đơn lẻ',
     description: 'Mục này được thiết kế cho việc cung cấp bằng cấp đơn lẻ dành cho một người.',
-    link: '/admin',
+    link: '/#',
     icon: <PiCertificateFill />,
   },
   {
     title: 'Tạo chứng chỉ hàng loạt',
     description:
       'Mục này được thiết kế cho việc cung cấp bằng cấp hàng loạt cho khoá học trên một học viên.',
-    link: '/admin',
+    link: '/#',
     icon: (
       <div className="flex items-center">
         <PiCertificateFill />
@@ -53,14 +53,15 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
               className="flex flex-col justify-between rounded-lg border p-4 text-center shadow-lg md:h-80"
               key={index}
             >
-              {/* <div></div> */}
-              <div className="mx-auto flex items-center justify-start text-6xl text-blue-500">
-                {dataCard.icon}
-              </div>
-              <div className="text-start">
-                <h3 className="mt-4 text-lg font-bold text-gray-800">{dataCard.title}</h3>
-                <div className="my-4 w-1/5 border-[2px] border-blue-500 shadow-md shadow-blue-600"></div>
-                <p className="mt-2 line-clamp-3 text-sm text-gray-600">{dataCard.description}</p>
+              <div>
+                <div className="mx-auto flex items-center justify-start text-6xl text-blue-500">
+                  {dataCard.icon}
+                </div>
+                <div className="text-start">
+                  <h3 className="mt-4 text-lg font-bold text-gray-800">{dataCard.title}</h3>
+                  <div className="my-4 w-1/5 border-[2px] border-blue-500 shadow-md shadow-blue-600"></div>
+                  <p className="mt-2 line-clamp-3 text-sm text-gray-600">{dataCard.description}</p>
+                </div>
               </div>
               <Link href={dataCard.link}>
                 <ButtonPrimary className="w-full">Tạo chứng chỉ</ButtonPrimary>

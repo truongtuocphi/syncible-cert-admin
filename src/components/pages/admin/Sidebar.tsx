@@ -6,6 +6,8 @@ import { BiSolidCustomize } from 'react-icons/bi';
 import { FaHome } from 'react-icons/fa';
 import { GiDiploma } from 'react-icons/gi';
 import { IoMdSettings } from 'react-icons/io';
+import { useState } from 'react';
+import Modal from './Modal';
 
 const menuSidebar = [
   { name: 'Trang Chủ', url: '/admin', icon: <FaHome className="text-2xl" /> },
@@ -19,6 +21,7 @@ const menuSidebar = [
 
 const Sidebar = () => {
   const pathname = usePathname() || '/admin';
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-gradient-to-b from-indigo-500 via-purple-500 to-pink-500 px-3 shadow-md">
@@ -34,18 +37,31 @@ const Sidebar = () => {
               const isActive = pathname === item.url;
               return (
                 <li className="text-base" key={item.name}>
-                  <Link
-                    href={item.url}
-                    className={`flex items-center gap-4 rounded-xl px-4 py-4 font-bold ${isActive ? 'bg-purple-950/30' : 'hover:bg-purple-800/30'}`}
-                  >
-                    {item.icon}
-                    {item.name}
-                  </Link>
+                  {item.name !== 'Tạo Chứng Chỉ Số' ? (
+                    <Link
+                      href={item.url}
+                      className={`flex items-center gap-4 rounded-xl px-4 py-4 font-bold ${isActive ? 'bg-purple-950/30' : 'hover:bg-purple-800/30'}`}
+                    >
+                      {item.icon}
+                      {item.name}
+                    </Link>
+                  ) : (
+                    <div
+                      onClick={() => setIsModalOpen(true)}
+                      className={`flex cursor-pointer items-center gap-4 rounded-xl px-4 py-4 font-bold ${isActive ? 'bg-purple-950/30' : 'hover:bg-purple-800/30'}`}
+                    >
+                      {item.icon}
+                      {item.name}
+                    </div>
+                  )}
                 </li>
               );
             })}
           </ul>
         </nav>
+
+        {/* Modal */}
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
       <div className="mb-3 text-base">
         <Link

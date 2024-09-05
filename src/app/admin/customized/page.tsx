@@ -108,17 +108,10 @@ const predefinedTemplates = [
 const editorDefaults = getEditorDefaults({
   imageWriter: {
     preprocessImageState: (imageState: any) => {
-      // Create new annotation array
-      imageState.annotation = imageState.annotation.map((shape: any) => {
-        // This is not a text shape so skip
-        if (!shape.text) return shape;
-
-        // Replace placeholders in text properties
-        shape.text = shape.text.replace(/_________________/g, '');
-        shape.text = shape.text.replace(/ID chứng chỉ: xxxxx - xx - xx/g, '');
-
-        return shape;
-      });
+      // imageState.annotation = imageState.annotation.filter((shape: any) => {
+      //   return (shape.disableErase = false);
+      // });
+      imageState.annotation = imageState.annotation.filter((_: any, index: any) => index !== 0);
 
       // Return updated image state
       return imageState;
@@ -268,19 +261,25 @@ export default function DefineTemplate() {
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
           imageAnnotation={[
             {
-              x: 550,
+              x: 380,
               y: 600,
-              fontSize: 96,
-              color: [0, 0, 0],
-              text: '_________________',
+              width: 1250,
+              height: 200,
+              backgroundColor: [0.94, 0.94, 0.94],
+              disableRemove: true,
+              disableResize: true,
+              disableRotate: true,
               disableMove: true,
             },
             {
-              x: 750,
-              y: 40,
-              fontSize: 30,
-              color: [0, 0, 0],
-              text: 'ID chứng chỉ: xxxxx - xx - xx',
+              x: 800,
+              y: 1000,
+              width: 400,
+              height: 400,
+              backgroundImage: '/batch_black.png',
+              disableRemove: true,
+              disableResize: true,
+              disableRotate: true,
               disableMove: true,
             },
           ]}

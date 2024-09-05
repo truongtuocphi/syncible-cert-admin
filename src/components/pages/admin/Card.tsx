@@ -1,8 +1,16 @@
+'use client';
+
+import { useState } from 'react';
+
 import Link from 'next/link';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 
+import Modal from './Modal';
+
 export default function Card({ data }: any) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <div className="flex h-full w-full flex-col justify-between rounded-xl bg-white px-6 py-8 shadow-xl shadow-gray-300">
       <div>
@@ -17,11 +25,23 @@ export default function Card({ data }: any) {
         </div>
       </div>
 
-      <Link href={data.link}>
-        <ButtonPrimary className="mt-5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+      {data.title !== 'Tạo chứng chỉ số' ? (
+        <Link href={data.link}>
+          <ButtonPrimary className="mt-5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+            {data.titleButton}
+          </ButtonPrimary>
+        </Link>
+      ) : (
+        <ButtonPrimary
+          onClick={() => setIsModalOpen(true)}
+          className="mt-5 w-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500"
+        >
           {data.titleButton}
         </ButtonPrimary>
-      </Link>
+      )}
+
+      {/* Modal */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );
 }

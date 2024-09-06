@@ -9,7 +9,6 @@ import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
-import CreateNFT from '@/components/pages/experience/CreateNFT';
 import { db, ref, get } from '@/lib/firebase';
 
 interface Collection {

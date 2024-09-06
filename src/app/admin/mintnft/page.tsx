@@ -232,8 +232,8 @@ const Experience = () => {
           className="sticky h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-1/2"
           style={{ top: `${top}px` }}
         >
-          <h2 className="text-lg font-bold text-gray-600">Preview</h2>
-          <div className="h-fit w-full overflow-hidden rounded-lg border-[0.5px] border-dashed border-gray-400">
+          <h2 className="text-lg font-bold text-gray-600">Xem trước</h2>
+          <div className="mt-2 h-fit w-full overflow-hidden rounded-lg border-[0.5px] border-dashed border-gray-400">
             {bannerImage ? (
               <Image
                 src={bannerImage}

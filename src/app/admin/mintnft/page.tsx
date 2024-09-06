@@ -9,6 +9,8 @@ import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
+import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
 import { db, ref, get } from '@/lib/firebase';
 
 interface Collection {
@@ -169,6 +171,7 @@ const Experience = () => {
               <select
                 value={role}
                 onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
+                required
                 className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               >
                 <option value="Teacher">Teacher</option>
@@ -194,10 +197,11 @@ const Experience = () => {
               </label>
               <select
                 onChange={(e) => setcollectionContractAddress(e.target.value)}
+                required
                 className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               >
                 {selectedContract.length === 0 ? (
-                  <option value="">No contracts available</option>
+                  <option value="">Vui lòng kết nối ví để hiện thị dữ liệu</option>
                 ) : (
                   selectedContract.map((collection) => (
                     <option key={collection.id} value={collection.contractAddress}>
@@ -210,94 +214,15 @@ const Experience = () => {
           </div>
 
           <div className="mt-4 w-full space-y-2 rounded-lg bg-white p-4">
-            {typePage == 'mintsingle' ? (
-              <div className="grid grid-cols-5 gap-2">
-                <div className="col-span-2 space-y-2">
-                  <label>ID chứng chỉ</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Mã chứng chỉ"
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </div>
-
-                <div className="col-span-3 space-y-2">
-                  <label>Họ và tên</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Họ và tên của bạn"
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                  />
-                </div>
-              </div>
-            ) : (
-              <>
-                <div className="flex items-center justify-between">
-                  <div className="block text-lg font-medium text-gray-700">Thông tin CSV</div>
-                  <div className="block cursor-pointer text-sm font-medium text-blue-700 underline">
-                    Tải file CSV mẫu
-                  </div>
-                </div>
-                <p className="mt-1 text-xs text-gray-400">
-                  Định dạng tập tin slxs của bạn phải được định dạng theo trường định dạng tập tin
-                  của Syncible để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành
-                  tập tin CSV là dán vào mẫu dưới đây.
-                </p>
-                <div className="grid grid-cols-5 gap-2">
-                  <div className="col-span-2 space-y-2">
-                    <label className="block text-sm font-medium text-gray-700">ID chứng chỉ</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Mã chứng chỉ"
-                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                    <input
-                      type="text"
-                      required
-                      placeholder="Mã chứng chỉ"
-                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                    <input
-                      type="text"
-                      required
-                      placeholder="Mã chứng chỉ"
-                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-
-                  <div className="col-span-3 space-y-2">
-                    <label className="block text-sm font-medium text-gray-700">Họ và tên</label>
-                    <input
-                      type="text"
-                      required
-                      placeholder="Họ và tên của bạn"
-                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                    <input
-                      type="text"
-                      required
-                      placeholder="Họ và tên của bạn"
-                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                    <input
-                      type="text"
-                      required
-                      placeholder="Họ và tên của bạn"
-                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-              </>
-            )}
+            {typePage === 'mintsingle' ? <MintSingleForm /> : <MintBulk />}
           </div>
 
           <div className="mt-4 flex items-center justify-end gap-4">
-            <ButtonPrimary className="w-40 border-2 border-blue-500 bg-white text-blue-500">
-              Hủy
-            </ButtonPrimary>
+            <Link href={'/admin'}>
+              <ButtonPrimary className="w-40 border-2 border-blue-500 bg-white text-blue-500">
+                Hủy
+              </ButtonPrimary>
+            </Link>
             <ButtonPrimary className="w-40">Tạo chứng chỉ</ButtonPrimary>
           </div>
         </form>

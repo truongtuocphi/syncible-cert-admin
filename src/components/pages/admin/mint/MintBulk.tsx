@@ -1,6 +1,10 @@
+import { useState } from 'react';
+
 const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 
 export const MintBulk = () => {
+  const [csvFile, setCsvFile] = useState<File | null>(null);
+
   const handleDownload = async () => {
     const fileUrl = `${headerURLPinata}/ipfs/QmfCaendkwSjcKteBFL3Hct2isgCS77K5NAPh5qFCJy8HW`;
     const fileName = 'Convertio_input.xlsx';

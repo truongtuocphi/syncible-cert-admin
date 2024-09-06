@@ -1,11 +1,33 @@
-import React from 'react';
+const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 
 export const MintBulk = () => {
+  const handleDownload = async () => {
+    const fileUrl = `${headerURLPinata}/ipfs/QmfCaendkwSjcKteBFL3Hct2isgCS77K5NAPh5qFCJy8HW`;
+    const fileName = 'Convertio_input.xlsx';
+
+    try {
+      const response = await fetch(fileUrl);
+      const blob = await response.blob();
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', fileName);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Download failed:', error);
+    }
+  };
+
   return (
     <>
       <div className="flex items-center justify-between">
         <div className="block text-lg font-medium text-gray-700">Thông tin CSV</div>
-        <div className="block cursor-pointer text-sm font-medium text-blue-700 underline">
+        <div
+          onClick={handleDownload}
+          className="block cursor-pointer border-none bg-transparent text-sm font-medium text-blue-700 underline"
+        >
           Tải file CSV mẫu
         </div>
       </div>

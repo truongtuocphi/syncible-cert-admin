@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Separator } from '@/components/ui/separator';
 
 const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -36,10 +38,19 @@ export const MintBulk = () => {
         </div>
       </div>
       <p className="mt-1 text-xs text-gray-400">
-        Định dạng tập tin slxs của bạn phải được định dạng theo trường định dạng tập tin của
+        Định dạng tập tin xlsx của bạn phải được định dạng theo trường định dạng tập tin của
         Syncible để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành tập tin CSV và
         dán vào mẫu dưới đây.
       </p>
+      <div className="space-y-2">
+        <label className="block text-sm font-medium text-gray-700">Tải tệp CSV</label>
+        <input
+          type="file"
+          //   onChange={(e) => handleImageChange(e, setLogoImage)}
+          required
+          className="block w-full cursor-pointer rounded-lg border-[1px] text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-500 hover:file:bg-blue-100"
+        />
+      </div>
       <div className="grid grid-cols-5 gap-2">
         <div className="col-span-2 space-y-2">
           <label className="block text-sm font-medium text-gray-700">ID chứng chỉ</label>
@@ -47,18 +58,21 @@ export const MintBulk = () => {
             type="text"
             required
             placeholder="Mã chứng chỉ"
+            disabled
             className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
           <input
             type="text"
             required
             placeholder="Mã chứng chỉ"
+            disabled
             className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
           <input
             type="text"
             required
             placeholder="Mã chứng chỉ"
+            disabled
             className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
           />
         </div>

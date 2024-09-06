@@ -223,7 +223,7 @@ const Experience = () => {
                 </div>
               </div>
 
-              <div className="mt-4 w-full space-y-2 rounded-lg bg-white p-4">
+              <div className="mt-4 w-full space-y-3 rounded-lg bg-white p-4">
                 {typePage === 'mintsingle' ? <MintSingleForm /> : <MintBulk />}
               </div>
 

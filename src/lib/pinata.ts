@@ -35,20 +35,14 @@ export const uploadMetadata = async (data: any) => {
   try {
     // Define metadata structure with additional attributes
     const dataNFT = data.attributes;
-    console.log(dataNFT);
+
     const metadata = {
       name: data.name, // NFT Name
       attributes: [
         { trait_type: 'Certificate ID', value: dataNFT[0].value || '' },
-        { trait_type: 'Organization Name', value: dataNFT[3].value || 'N/a' },
-        { trait_type: 'Head Name', value: dataNFT[4].value || '' },
-        { trait_type: 'Head Position', value: dataNFT[5].value || '' },
-        { trait_type: 'Head Signature', value: dataNFT[6].value || '' },
-        { trait_type: 'Description', value: dataNFT[7].value || '' },
-        { trait_type: 'Position', value: dataNFT[8].value || '' },
-        { trait_type: 'Date', value: dataNFT[9].value || '' },
-        { trait_type: 'Blockchain Type', value: dataNFT[10].value || '' },
-        { trait_type: 'Template URL', value: dataNFT[11].value || '' },
+        { trait_type: 'role', value: dataNFT[1].value || '' },
+        { trait_type: 'Date', value: dataNFT[2].value || '' },
+        { trait_type: 'Template URL', value: dataNFT[3].value || '' },
       ],
     };
 

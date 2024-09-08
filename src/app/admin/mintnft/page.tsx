@@ -2,9 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
+import { ethers } from 'ethers';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
@@ -12,7 +14,10 @@ import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
 import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
 import Modal from '@/components/pages/admin/Modal';
+import ABI from '@/contract/ABI.json';
 import { db, ref, get } from '@/lib/firebase';
+import { uploadMetadata } from '@/lib/pinata';
+import { saveMintData } from '@/utils/saveMintData';
 
 interface Collection {
   id: string;
@@ -22,6 +27,7 @@ interface Collection {
 
 const Experience = () => {
   const pathname = useSearchParams();
+  const router = useRouter();
   const { address } = useAccount();
 
   const [isModalOpen, setIsModalOpen] = useState(true);
@@ -30,7 +36,11 @@ const Experience = () => {
   const [issuedDate, setIssuedDate] = useState('');
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
   const [collectionContractAddress, setcollectionContractAddress] = useState('');
+  const [csvDataFromChild, setCsvDataFromChild] = useState<any[]>([]);
   const [top, setTop] = useState(20);
+  const [loadingButton, setLoadingButton] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [tokenLink, setTokenLink] = useState('');
 
   const typePage = pathname.get('type');
 
@@ -104,6 +114,108 @@ const Experience = () => {
     }
   };
 
+  const handleCsvRead = (data: any[]) => {
+    setCsvDataFromChild(data);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!csvDataFromChild) {
+      alert('Please select a CSV file or enter a full name.');
+      return;
+    }
+
+    if (address) {
+      setLoadingButton(true);
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
+
+        const mintDataArray = [];
+
+        if (csvDataFromChild.length > 0) {
+          for (const data of csvDataFromChild) {
+            // Simplified metadata structure
+            const metadata = {
+              name: `Certificate for ${data.name}`,
+              tokenURI: tokenLink,
+              attributes: [
+                { trait_type: 'Certificate ID', value: data.certificateNumber },
+                { trait_type: 'Role', value: role },
+                { trait_type: 'Date', value: data.issuedDate },
+                {
+                  trait_type: 'Template URL',
+                  value: '',
+                },
+              ],
+            };
+
+            const tokenURI = await uploadMetadata(metadata);
+            setTokenLink(tokenURI);
+
+            mintDataArray.push({
+              owner: address,
+              name: data.name,
+              certificateId: data.certificateNumber,
+              tokenURI: tokenURI,
+              certData: {
+                role: data.role,
+                date: data.issuedDate,
+              },
+            });
+          }
+        } else {
+          // eslint-disable-next-line no-console
+          console.log('single');
+          // Simplified metadata structure
+          // const metadata = {
+          //   name: `Certificate for ${fullName}`,
+          //   attributes: [
+          //     { trait_type: 'Certificate ID', value: certificateNumber },
+          //     { trait_type: 'Role', value: role },
+          //     { trait_type: 'Date', value: issuedDate },
+          //   ],
+          // };
+          // const tokenURI = await uploadMetadata(metadata);
+          // setTokenLink(tokenURI);
+          // mintDataArray.push({
+          //   owner: address,
+          //   fullName: fullName,
+          //   certificateId: certificateNumber,
+          //   tokenURI: tokenURI,
+          //   certData: {
+          //     role: role,
+          //     date: issuedDate,
+          //   },
+          // });
+        }
+
+        const tx = await contract.mintBulk(mintDataArray, {
+          gasLimit: 9000000,
+        });
+
+        await tx.wait();
+        alert('NFTs minted successfully!');
+        setLoading(true);
+
+        await saveMintData(mintDataArray, collectionContractAddress);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error minting NFTs:', error);
+        alert('Failed to mint NFTs.');
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      alert('Please connect your wallet.');
+    }
+  };
+
+  useEffect(() => {
+    if (loading) router.push(`/admin/collection/collectiondetail`);
+  }, [loading]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 5) {
@@ -136,7 +248,7 @@ const Experience = () => {
             <h1 className="text-2xl font-semibold text-gray-600">Quay lại</h1>
           </div>
           <div className="flex space-x-6">
-            <form className="w-full sm:w-1/2">
+            <form onSubmit={handleSubmit} className="w-full sm:w-1/2">
               <div className="w-full space-y-4 rounded-lg bg-white p-4">
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700">Hình chứng chỉ</label>
@@ -227,7 +339,7 @@ const Experience = () => {
                 {typePage === 'mintsingle' ? (
                   <MintSingleForm />
                 ) : (
-                  <MintBulk DataIssuedDate={issuedDate} DataRole={role} />
+                  <MintBulk DataIssuedDate={issuedDate} DataRole={role} onCsvRead={handleCsvRead} />
                 )}
               </div>
 
@@ -237,7 +349,35 @@ const Experience = () => {
                     Hủy
                   </ButtonPrimary>
                 </Link>
-                <ButtonPrimary className="w-40">Tạo chứng chỉ</ButtonPrimary>
+                <ButtonPrimary type="submit" className="w-40">
+                  {loadingButton ? (
+                    <span className="flex items-center">
+                      <svg
+                        className="mr-2 h-5 w-5 animate-spin text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v8H4z"
+                        ></path>
+                      </svg>
+                      Đang sử lý...
+                    </span>
+                  ) : (
+                    'Tạo chứng chỉ'
+                  )}
+                </ButtonPrimary>
               </div>
             </form>
 

@@ -1,3 +1,5 @@
+'use client';
+
 import { useState } from 'react';
 
 import Papa from 'papaparse';
@@ -10,10 +12,17 @@ const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 interface MintBulkProps {
   DataIssuedDate: string;
   DataRole: string;
+  onCsvRead: (data: any[]) => void;
 }
 
-export const MintBulk = ({ DataIssuedDate, DataRole }: MintBulkProps) => {
-  const [csvData, setCsvData] = useState<string[]>([]);
+interface CertificateData {
+  certificateNumber: string;
+  name: string;
+  gmail: string;
+}
+
+export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps) => {
+  const [csvData, setCsvData] = useState<CertificateData[]>([]);
 
   const handleDownload = async () => {
     const fileUrl = `${headerURLPinata}/ipfs/QmfCaendkwSjcKteBFL3Hct2isgCS77K5NAPh5qFCJy8HW`;
@@ -41,7 +50,16 @@ export const MintBulk = ({ DataIssuedDate, DataRole }: MintBulkProps) => {
         header: true,
         encoding: 'UTF-8',
         complete: (results) => {
-          setCsvData(results.data);
+          // Prepare certificate data and pass it to the parent
+          const certificateData: CertificateData[] = results.data.map((data: any) => ({
+            certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
+            name: data.name,
+            gmail: data.gmail,
+          }));
+
+          // Pass certificate data to parent component
+          onCsvRead(certificateData);
+          setCsvData(certificateData);
         },
         error: () => {
           alert('Chuyển đổi file CSV thất bại!');
@@ -79,7 +97,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole }: MintBulkProps) => {
         <input
           type="file"
           onChange={(e) => handleCSVChange(e)}
-          accept=".csv, .xlsx"
+          accept=".csv"
           required
           className="block w-full cursor-pointer rounded-lg border-[1px] text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-500 hover:file:bg-blue-100"
         />
@@ -96,30 +114,33 @@ export const MintBulk = ({ DataIssuedDate, DataRole }: MintBulkProps) => {
 
       {csvData.length > 0 ? (
         <ScrollArea className="h-64 w-full rounded-md border-none">
-          {csvData.map((data: any, index) => (
-            <div className="grid grid-cols-5 gap-2" key={index}>
-              <div className="col-span-2 space-y-2">
-                <input
-                  type="text"
-                  required
-                  placeholder="Mã chứng chỉ"
-                  value={generateCertificateNumber(DataIssuedDate, DataRole)}
-                  disabled
-                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-              </div>
-              <div className="col-span-3 space-y-2">
-                <input
-                  type="text"
-                  required
-                  placeholder="Họ và tên của bạn"
-                  value={data.name}
-                  disabled
-                  className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                />
-              </div>
-            </div>
-          ))}
+          {csvData.map(
+            (data: any, index) =>
+              data.name && (
+                <div className="grid grid-cols-5 gap-2" key={index}>
+                  <div className="col-span-2 space-y-2">
+                    <input
+                      type="text"
+                      required
+                      placeholder="Mã chứng chỉ"
+                      value={data.certificateNumber}
+                      disabled
+                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                  <div className="col-span-3 space-y-2">
+                    <input
+                      type="text"
+                      required
+                      placeholder="Họ và tên của bạn"
+                      value={data.name}
+                      disabled
+                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    />
+                  </div>
+                </div>
+              )
+          )}
           <ScrollBar orientation="vertical" />
         </ScrollArea>
       ) : (

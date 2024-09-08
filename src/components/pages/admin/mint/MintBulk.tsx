@@ -3,11 +3,16 @@ import { useState } from 'react';
 import Papa from 'papaparse';
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
-import clsx from 'clsx';
+import getAcronym from '@/utils/getAcronym';
 
 const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 
-export const MintBulk = () => {
+interface MintBulkProps {
+  DataIssuedDate: string;
+  DataRole: string;
+}
+
+export const MintBulk = ({ DataIssuedDate, DataRole }: MintBulkProps) => {
   const [csvData, setCsvData] = useState<string[]>([]);
 
   const handleDownload = async () => {
@@ -45,7 +50,13 @@ export const MintBulk = () => {
     }
   };
 
-  console.log(csvData);
+  const generateCertificateNumber = (issuedDate: string, role: string) => {
+    const randomString = Math.random().toString(36).substring(2, 7);
+    const date = new Date(issuedDate);
+    const formattedDate = `${String(date.getFullYear()).slice(2)}${String(date.getMonth() + 1).padStart(2, '0')}${String(date.getDate()).padStart(2, '0')}`;
+    const roleCode = role === 'Teacher' ? 'TC' : 'SC';
+    return `${randomString}/${formattedDate}-${roleCode}-${getAcronym('Syn ci ble')}`;
+  };
 
   return (
     <>
@@ -84,7 +95,7 @@ export const MintBulk = () => {
       </div>
 
       {csvData.length > 0 ? (
-        <ScrollArea className="h-fit max-h-64 w-full rounded-md border-none">
+        <ScrollArea className="h-64 w-full rounded-md border-none">
           {csvData.map((data: any, index) => (
             <div className="grid grid-cols-5 gap-2" key={index}>
               <div className="col-span-2 space-y-2">
@@ -92,6 +103,7 @@ export const MintBulk = () => {
                   type="text"
                   required
                   placeholder="Mã chứng chỉ"
+                  value={generateCertificateNumber(DataIssuedDate, DataRole)}
                   disabled
                   className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                 />

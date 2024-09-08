@@ -27,9 +27,9 @@ const Experience = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
   const [role, setRole] = useState<'Teacher' | 'Student'>('Student');
+  const [issuedDate, setIssuedDate] = useState('');
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
   const [collectionContractAddress, setcollectionContractAddress] = useState('');
-  const [issuedDate, setIssuedDate] = useState('');
   const [top, setTop] = useState(20);
 
   const typePage = pathname.get('type');
@@ -224,7 +224,11 @@ const Experience = () => {
               </div>
 
               <div className="mt-4 w-full space-y-3 rounded-lg bg-white p-4">
-                {typePage === 'mintsingle' ? <MintSingleForm /> : <MintBulk />}
+                {typePage === 'mintsingle' ? (
+                  <MintSingleForm />
+                ) : (
+                  <MintBulk DataIssuedDate={issuedDate} DataRole={role} />
+                )}
               </div>
 
               <div className="mt-4 flex items-center justify-end gap-4">

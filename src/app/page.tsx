@@ -1,6 +1,9 @@
+'use client';
+
 import React from 'react';
 
 import Image from 'next/image';
+import Link from 'next/link';
 
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
@@ -12,16 +15,17 @@ import { Button } from '@/components/ui/button';
 import { playfair } from '@/components/ui/fonts';
 
 import BannerCertificate from '../../public/cert_example.png';
-import Link from 'next/link';
+import Background from '../../public/DoraBG.png';
+
 
 const Page = () => {
   return (
-    <div className="relative min-h-screen">
-      <div className="fixed top-0 z-20 mt-5 w-full">
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="fixed top-0 z-30 mt-5 w-full">
         <Navbar />
       </div>
-      <div className="relative z-10 mt-24 flex flex-col items-center gap-10">
-        <div className="max-w-[90rem] px-6 py-6 md:px-8 md:py-0 lg:mt-20 xl:px-24 ">
+      <div className="relative z-20 flex flex-col items-center gap-10 pt-24">
+        <div className="max-w-[90rem] px-6 py-6 md:px-8 md:py-0 lg:pt-20 xl:px-[6.5rem]">
           <div className="relative flex w-full flex-col items-stretch px-6 md:flex-row ">
             <div className="basis-1/2">
               <div className="flex h-[20rem] flex-col items-center justify-center gap-8 antialiased md:h-[30rem] md:items-start lg:h-[35rem]">
@@ -55,6 +59,8 @@ const Page = () => {
                 src={BannerCertificate}
                 alt="Certificate"
                 className="aspect-[3/2] w-full object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
               />
             </div>
           </div>
@@ -66,30 +72,26 @@ const Page = () => {
           <SectionOurVision />
         </div>
         <SectionNews />
-        <div className="relative w-full font-inter text-black">
+        <div className="font-inter relative w-full text-black">
           <Footer />
         </div>
-        <div className="absolute"></div>
       </div>
-      <div className="absolute bottom-0 left-0 right-0 top-0 z-0"></div>
-      {/* <div className="w-full h-[1000px] bg-slate-500"></div>
-      <div className="w-full h-[1000px] bg-slate-300"></div>  */}
+      <div className="absolute top-0 flex w-full justify-center">
+        {/* <Background className="h-[5056px] w-full object-cover" /> */}
+        <></>
+        {/* <Image
+          src={Background}
+          alt="The background image with star-like shapes a a single curvy line that extend to the botton of the image
+          "
+          className="h-[5080px] w-full object-contain"
+          fill
+          sizes="100vw"
+          priority
+        ></Image> */}
+      </div>
     </div>
   );
 };
 
 export default Page;
-{
-  /* <div className="flex flex-col gap-8">
-            <div
-              className={`${playfair.className} col-span-1 text-2xl font-bold lg:text-3xl xl:text-5xl`}
-            >
-              Nền tảng tiên phong trong việc chuyển đổi cách công
-              <br className="hidden md:block xl:block" />
-              nhận thành tựu học thuật qua chứng chỉ số hóa.
-            </div>
-            <Button className="custom-gradient shadow-[0_2px_16px_0px_rgba(0, 0, 0, 0.12)] h-[3rem] w-fit rounded-[.75rem] px-7 text-base">
-              Liên hệ với chúng tôi
-            </Button>
-          </div> */
-}
+

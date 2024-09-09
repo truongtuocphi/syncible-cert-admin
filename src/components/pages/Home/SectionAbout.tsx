@@ -4,8 +4,8 @@ import { inter, playfair } from '@/components/ui/fonts';
 
 export default function SectionAbout() {
   return (
-    <div className="px-6 py-6 md:px-8 md:py-0 xl:px-24" id="about">
-      <div className="flex flex-col items-center gap-8 px-6 py-6 lg:flex-row">
+    <div className="px-6 py-6 md:px-8 md:py-8 xl:px-16 xl:py-16" id="about">
+      <div className="flex flex-col items-center gap-8 rounded-t-[100px] border-t-2 border-white bg-gradient-to-b from-white/50 px-16 py-[6.6rem] lg:flex-row">
         <div className="w-full basis-1/2">
           <div className="flex flex-col gap-4 antialiased">
             <h1 className={`${playfair.className} text-[2rem] font-[600]`}>
@@ -21,12 +21,13 @@ export default function SectionAbout() {
           </div>
         </div>
         <div className="w-full basis-1/2">
-          <div className="flex h-[29rem] justify-center gap-4">
+          {/* <div className="flex h-[29rem] justify-center gap-4">
             <div className="aspect-[1/2] max-h-[80%] self-end overflow-hidden rounded-[1.25rem] shadow-combinedShadow2">
               <Image
                 src="/place_holder_photo_1.png"
                 alt="placeholder photo 1"
                 fill
+                sizes="100vw"
                 className="h-full object-cover"
                 priority
               />
@@ -36,6 +37,7 @@ export default function SectionAbout() {
                 src="/place_holder_photo_2.png"
                 alt="placeholder photo 2"
                 fill
+                sizes="100vw"
                 className="h-full object-cover"
                 priority
               />
@@ -45,11 +47,20 @@ export default function SectionAbout() {
                 src="/place_holder_photo_3.png"
                 alt="placeholder photo 3"
                 fill
+                sizes="100vw"
                 className="h-full object-cover"
                 priority
               />
             </div>
-          </div>
+          </div> */}
+          <Image
+            src="/img01.png"
+            alt="placeholder photo 1"
+            fill
+            sizes="100vw"
+            className="h-full object-cover"
+            priority
+          />
         </div>
       </div>
     </div>

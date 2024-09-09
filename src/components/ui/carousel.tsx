@@ -1,12 +1,13 @@
 'use client';
 
 import * as React from 'react';
-import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
-import ArrowNarrowLeft from "@/assets/icons/arrow-narrow-left.svg";
-import ArrowNarrowRight from "@/assets/icons/arrow-narrow-right.svg";
 
-import { cn } from '@/utils/classname';
+import useEmblaCarousel, { type UseEmblaCarouselType } from 'embla-carousel-react';
+
+import ArrowNarrowLeft from '@/assets/icons/arrow-narrow-left.svg';
+import ArrowNarrowRight from '@/assets/icons/arrow-narrow-right.svg';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/utils/classname';
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;

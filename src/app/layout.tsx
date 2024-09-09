@@ -29,7 +29,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${inter.className} min-h-screen bg-brand-850`}>
+      <body className={`${inter.className} min-h-screen bg-slate-400`}>
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <Web3ModalProvider initialState={initialState}>
           <main>{children}</main>

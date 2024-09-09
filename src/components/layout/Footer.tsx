@@ -44,7 +44,7 @@ const Footer = () => {
   return (
     <div className="relative flex flex-col items-center">
       <div className="w-full max-w-[90rem]">
-        <div className="px-6 md:px-8 xl:px-24">
+        <div className="px-6 md:px-8 xl:px-[6.5rem]">
           <div className="flex flex-col items-center justify-between px-6 py-6 lg:flex-row">
             <div>@ 2024 Syncible. All rights reserved</div>
             <div className="flex flex-col items-center gap-0 lg:flex-row lg:gap-6">

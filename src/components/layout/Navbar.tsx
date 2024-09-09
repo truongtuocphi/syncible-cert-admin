@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { inter } from '@/components/ui/fonts';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 import SyncibleLogo from '/public/syncible-logo.svg';
 import ArrowRightIcon from '@/assets/icons/arrow-badge-right.svg';
@@ -19,7 +19,7 @@ const Navbar = () => {
   return (
     <div className="relative w-full">
       <div className="flex flex-col items-center">
-        <div className="w-full max-w-[90rem] px-6 md:px-8 xl:px-24">
+        <div className="w-full max-w-[90rem] px-6 md:px-8 xl:px-[6.5rem]">
           <div className="flex w-full items-center justify-between rounded-3xl bg-white/50 px-6 py-4 backdrop-blur-sm">
             <div className="block lg:hidden">
               <Sheet>
@@ -30,6 +30,7 @@ const Navbar = () => {
                 </SheetTrigger>
 
                 <SheetContent side="left" className="text-black">
+                  <SheetTitle></SheetTitle>
                   <nav className="mr-5 md:mr-10 lg:mr-20">
                     <ul className="flex flex-col items-center gap-5 md:gap-11 lg:gap-16 ">
                       {Menu.map(({ title, link }) => (

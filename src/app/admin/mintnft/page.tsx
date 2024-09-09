@@ -37,6 +37,7 @@ const Experience = () => {
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
   const [collectionContractAddress, setcollectionContractAddress] = useState('');
   const [csvDataFromChild, setCsvDataFromChild] = useState<any[]>([]);
+  const [coppyCsvDataFromChild, setCoppyCsvDataFromChild] = useState<any[]>([]);
   const [top, setTop] = useState(20);
   const [loadingButton, setLoadingButton] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -118,9 +119,18 @@ const Experience = () => {
     setCsvDataFromChild(data);
   };
 
+  useEffect(() => {
+    if (csvDataFromChild.length > 0) {
+      const validData = csvDataFromChild.filter((data) => data.name && data.name.trim() !== '');
+      setCoppyCsvDataFromChild(validData);
+    } else {
+      setCoppyCsvDataFromChild([]);
+    }
+  }, [csvDataFromChild]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!csvDataFromChild) {
+    if (!coppyCsvDataFromChild || coppyCsvDataFromChild.length === 0) {
       alert('Please select a CSV file or enter a full name.');
       return;
     }
@@ -132,78 +142,51 @@ const Experience = () => {
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-        const mintDataArray = [];
+        const mintDataArray: any = [];
 
-        if (csvDataFromChild.length > 0) {
-          for (const data of csvDataFromChild) {
-            console.log(data.name && data.name.trim() !== '');
-            if (data.name && data.name.trim() !== '') {
-              console.log(data);
-              try {
-                const metadata = {
-                  fullname: `Certificate for ${data.name || 'Default Name'}`,
-                  tokenURI: tokenLink,
-                  attributes: [
-                    { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
-                    { trait_type: 'Role', value: role || '' },
-                    { trait_type: 'Date', value: issuedDate || '' },
-                    {
-                      trait_type: 'Template URL',
-                      value: bannerImage || '',
-                    },
-                  ],
-                };
+        if (coppyCsvDataFromChild.length > 0) {
+          for (const data of coppyCsvDataFromChild) {
+            const metadata = {
+              fullname: data.name ? `Certificate for ${data.name}` : 'Default Name',
+              tokenURI: tokenLink || 'Default tokenLink',
+              attributes: [
+                { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
+                { trait_type: 'Role', value: role || '' },
+                { trait_type: 'Date', value: issuedDate || '' },
+                {
+                  trait_type: 'Template URL',
+                  value: bannerImage || '',
+                },
+              ],
+            };
 
-                const tokenURI = await uploadMetadata(metadata);
-                setTokenLink(tokenURI);
+            const tokenURI = await uploadMetadata(metadata);
+            setTokenLink(tokenURI);
 
-                mintDataArray.push({
-                  owner: address,
-                  fullname: data.name || 'Default Name',
-                  certificateId: data.certificateNumber || '',
-                  tokenURI: tokenURI,
-                  certData: {
-                    role: data.role || '',
-                    date: issuedDate || '',
-                    templateURL: bannerImage || '',
-                  },
-                });
-              } catch (error) {
-                // eslint-disable-next-line no-console
-                console.error('Error uploading metadata:', error);
-                alert('Failed to upload metadata.');
-              }
-            }
+            console.log(data.name);
+
+            mintDataArray.push({
+              owner: address,
+              fullname: data.name ? `${data.name}` : 'Default Name',
+              certificateId: data.certificateNumber || 'NaN',
+              tokenURI: tokenURI || 'Default tokenLink',
+              certData: {
+                role: role || 'NaN',
+                date: issuedDate || 'NaN',
+                templateURL: bannerImage || 'NaN',
+              },
+            });
           }
         } else {
           // eslint-disable-next-line no-console
           console.log('single');
-          // Simplified metadata structure
-          // const metadata = {
-          //   name: `Certificate for ${fullName}`,
-          //   attributes: [
-          //     { trait_type: 'Certificate ID', value: certificateNumber },
-          //     { trait_type: 'Role', value: role },
-          //     { trait_type: 'Date', value: issuedDate },
-          //   ],
-          // };
-          // const tokenURI = await uploadMetadata(metadata);
-          // setTokenLink(tokenURI);
-          // mintDataArray.push({
-          //   owner: address,
-          //   fullName: fullName,
-          //   certificateId: certificateNumber,
-          //   tokenURI: tokenURI,
-          //   certData: {
-          //     role: role,
-          //     date: issuedDate,
-          //   },
-          // });
         }
 
-        if (mintDataArray.length === 0) {
+        if (mintDataArray.length < 0) {
           throw new Error('No valid mint data found.');
         }
+
+        console.log(mintDataArray);
 
         const tx = await contract.mintBulk(mintDataArray, {
           gasLimit: 9000000,
@@ -218,6 +201,7 @@ const Experience = () => {
         // eslint-disable-next-line no-console
         console.error('Error minting NFTs:', error);
         alert('Failed to mint NFTs.');
+        setLoadingButton(false);
       } finally {
         setLoading(false);
       }
@@ -328,7 +312,6 @@ const Experience = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700">
-                    {' '}
                     Lưu chứng chỉ số vào
                   </label>
                   <select
@@ -386,7 +369,7 @@ const Experience = () => {
                           d="M4 12a8 8 0 018-8v8H4z"
                         ></path>
                       </svg>
-                      Đang sử lý...
+                      Đang xử lý...
                     </span>
                   ) : (
                     'Tạo chứng chỉ'

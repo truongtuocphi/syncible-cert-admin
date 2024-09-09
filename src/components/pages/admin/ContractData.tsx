@@ -29,13 +29,14 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
 
         if (snapshot.exists()) {
           const dataFromFirebase = snapshot.val();
-          const matchingData = Object.values(dataFromFirebase).filter(
+          const matchingData: any[] = Object.values(dataFromFirebase).filter(
             (item: any) => item.collectionContractAddress === collectionContractAddress
           );
 
           if (matchingData) {
-            setData(matchingData);
-            onItemsCountChange(matchingData.length);
+            const arrayMatchingData: any[] = matchingData.flatMap((data) => data.mintData);
+            setData(arrayMatchingData);
+            onItemsCountChange(arrayMatchingData.length);
           } else {
             setError('No matching data found.');
           }
@@ -64,27 +65,17 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
     );
 
   return (
-    <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+    <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2">
       {data ? (
         <>
           {data.map((item, index) => {
-            console.log(item.mintData[0].tokenURI);
             return (
-              <Link href={`/admin/mintnft/${item.mintData[0].tokenURI}`} key={index}>
-                <div className="h-[170px] w-full sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
-                  {/* <CertificatePreview
-                    headerURL={headerURL}
-                    description={item.mintData[0].certData.description}
-                    previewImage={`${headerURL}/ipfs/${item.mintData[0].certData.templateURL}`}
-                    previewHeadLogo={`${headerURL}/ipfs/${item.mintData[0].certData.organizationLogo}`}
-                    certificateNumber={item.mintData[0].certificateId}
-                    authorizingOrgName={item.mintData[0].certData.organizationName}
-                    headOrgPosition={item.mintData[0].certData.headPosition}
-                    headOrgName={item.mintData[0].certData.headName}
-                    previewSignature={`${headerURL}/ipfs/${item.mintData[0].certData.headSignature}`}
-                    name={item.mintData[0].fullName}
-                    date={configDate(item.mintData[0].certData.date)}
-                  /> */}
+              <Link href={`/admin/mintnft/${item?.tokenURI}`} key={index}>
+                <div className="h-[170px] w-full sm:h-[270px] lg:h-[390px] 2xl:h-[500px]">
+                  <CertificatePreview
+                    previewImage={item.certData.templateURL}
+                    name={item.fullname}
+                  />
                 </div>
               </Link>
             );

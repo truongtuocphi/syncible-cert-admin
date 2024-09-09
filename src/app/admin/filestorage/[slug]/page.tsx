@@ -72,7 +72,7 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
         return (
           <div key={index} className="sticky h-fit w-full rounded-xl">
             <div className="h-[170px] sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
-              <CertificatePreview
+              {/* <CertificatePreview
                 headerURL={headerURL}
                 description={description}
                 previewImage={`${templateIpfsHash ? `${headerURL}/ipfs/${templateIpfsHash}` : ''}`}
@@ -85,7 +85,7 @@ const FolderDetail = ({ params }: { params: { slug: string } }) => {
                 previewSignature={`${headerURL}/ipfs/${signatureIpfsHash}`}
                 name={fullName}
                 date={issueDate}
-              />
+              /> */}
             </div>
           </div>
         );

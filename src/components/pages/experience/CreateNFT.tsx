@@ -547,7 +547,7 @@ const CreateNFT = () => {
           <div className="sticky h-fit w-full rounded-xl bg-white p-4" style={{ top: `${top}px` }}>
             <h2 className="mb-1 text-lg font-bold text-gray-600">Preview</h2>
             <div className="h-[170px] sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
-              <CertificatePreview
+              {/* <CertificatePreview
                 headerURL={headerURL}
                 description={`${dataTemplate?.description ? dataTemplate?.description : null}`}
                 previewImage={`${dataTemplate?.selectedTemplate ? `${headerURL}/ipfs/${dataTemplate?.selectedTemplate}` : ''}`}
@@ -562,7 +562,7 @@ const CreateNFT = () => {
                 previewSignature={`${dataTemplate?.signatureIpfsHash ? `${headerURL}/ipfs/${dataTemplate?.signatureIpfsHash}` : ''}`}
                 name={fullName}
                 date={configDate(issuedDate)}
-              />
+              /> */}
             </div>
           </div>
         </div>

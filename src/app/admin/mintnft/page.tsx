@@ -136,34 +136,44 @@ const Experience = () => {
 
         if (csvDataFromChild.length > 0) {
           for (const data of csvDataFromChild) {
-            // Simplified metadata structure
-            const metadata = {
-              name: `Certificate for ${data.name}`,
-              tokenURI: tokenLink,
-              attributes: [
-                { trait_type: 'Certificate ID', value: data.certificateNumber },
-                { trait_type: 'Role', value: role },
-                { trait_type: 'Date', value: data.issuedDate },
-                {
-                  trait_type: 'Template URL',
-                  value: '',
-                },
-              ],
-            };
+            console.log(data.name && data.name.trim() !== '');
+            if (data.name && data.name.trim() !== '') {
+              console.log(data);
+              try {
+                const metadata = {
+                  fullname: `Certificate for ${data.name || 'Default Name'}`,
+                  tokenURI: tokenLink,
+                  attributes: [
+                    { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
+                    { trait_type: 'Role', value: role || '' },
+                    { trait_type: 'Date', value: issuedDate || '' },
+                    {
+                      trait_type: 'Template URL',
+                      value: bannerImage || '',
+                    },
+                  ],
+                };
 
-            const tokenURI = await uploadMetadata(metadata);
-            setTokenLink(tokenURI);
+                const tokenURI = await uploadMetadata(metadata);
+                setTokenLink(tokenURI);
 
-            mintDataArray.push({
-              owner: address,
-              name: data.name,
-              certificateId: data.certificateNumber,
-              tokenURI: tokenURI,
-              certData: {
-                role: data.role,
-                date: data.issuedDate,
-              },
-            });
+                mintDataArray.push({
+                  owner: address,
+                  fullname: data.name || 'Default Name',
+                  certificateId: data.certificateNumber || '',
+                  tokenURI: tokenURI,
+                  certData: {
+                    role: data.role || '',
+                    date: issuedDate || '',
+                    templateURL: bannerImage || '',
+                  },
+                });
+              } catch (error) {
+                // eslint-disable-next-line no-console
+                console.error('Error uploading metadata:', error);
+                alert('Failed to upload metadata.');
+              }
+            }
           }
         } else {
           // eslint-disable-next-line no-console
@@ -189,6 +199,10 @@ const Experience = () => {
           //     date: issuedDate,
           //   },
           // });
+        }
+
+        if (mintDataArray.length === 0) {
+          throw new Error('No valid mint data found.');
         }
 
         const tx = await contract.mintBulk(mintDataArray, {

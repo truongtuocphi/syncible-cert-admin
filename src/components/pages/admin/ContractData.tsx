@@ -68,10 +68,11 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
       {data ? (
         <>
           {data.map((item, index) => {
+            console.log(item.mintData[0].tokenURI);
             return (
               <Link href={`/admin/mintnft/${item.mintData[0].tokenURI}`} key={index}>
                 <div className="h-[170px] w-full sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
-                  <CertificatePreview
+                  {/* <CertificatePreview
                     headerURL={headerURL}
                     description={item.mintData[0].certData.description}
                     previewImage={`${headerURL}/ipfs/${item.mintData[0].certData.templateURL}`}
@@ -83,7 +84,7 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
                     previewSignature={`${headerURL}/ipfs/${item.mintData[0].certData.headSignature}`}
                     name={item.mintData[0].fullName}
                     date={configDate(item.mintData[0].certData.date)}
-                  />
+                  /> */}
                 </div>
               </Link>
             );

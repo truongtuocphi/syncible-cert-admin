@@ -17,7 +17,7 @@ interface MintBulkProps {
 
 interface CertificateData {
   certificateNumber: string;
-  name: string;
+  fullname: string;
   gmail: string;
 }
 
@@ -48,12 +48,12 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
     if (file) {
       Papa.parse<string>(file, {
         header: true,
-        encoding: 'UTF-8',
+        // encoding: 'UTF-8',
         complete: (results) => {
           // Prepare certificate data and pass it to the parent
           const certificateData: CertificateData[] = results.data.map((data: any) => ({
             certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
-            name: data.name,
+            fullname: data.fullname,
             gmail: data.gmail,
           }));
 
@@ -113,10 +113,10 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
       </div>
 
       {csvData.length > 0 ? (
-        <ScrollArea className="h-64 w-full rounded-md border-none">
+        <ScrollArea className="h-56 w-full rounded-md border-none">
           {csvData.map(
             (data: any, index) =>
-              data.name && (
+              data.fullname && (
                 <div className="grid grid-cols-5 gap-2" key={index}>
                   <div className="col-span-2 space-y-2">
                     <input
@@ -133,7 +133,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
                       type="text"
                       required
                       placeholder="Họ và tên của bạn"
-                      value={data.name}
+                      value={data.fullname}
                       disabled
                       className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     />

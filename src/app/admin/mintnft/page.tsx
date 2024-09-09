@@ -121,7 +121,9 @@ const Experience = () => {
 
   useEffect(() => {
     if (csvDataFromChild.length > 0) {
-      const validData = csvDataFromChild.filter((data) => data.name && data.name.trim() !== '');
+      const validData = csvDataFromChild.filter(
+        (data) => data.fullname && data.fullname.trim() !== ''
+      );
       setCoppyCsvDataFromChild(validData);
     } else {
       setCoppyCsvDataFromChild([]);
@@ -145,9 +147,9 @@ const Experience = () => {
         const mintDataArray: any = [];
 
         if (coppyCsvDataFromChild.length > 0) {
-          for (const data of coppyCsvDataFromChild) {
+          coppyCsvDataFromChild.map(async (data) => {
             const metadata = {
-              fullname: data.name ? `Certificate for ${data.name}` : 'Default Name',
+              fullname: `Certificate for ${data.fullname}` || 'Default Name',
               tokenURI: tokenLink || 'Default tokenLink',
               attributes: [
                 { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
@@ -163,11 +165,9 @@ const Experience = () => {
             const tokenURI = await uploadMetadata(metadata);
             setTokenLink(tokenURI);
 
-            console.log(data.name);
-
             mintDataArray.push({
               owner: address,
-              fullname: data.name ? `${data.name}` : 'Default Name',
+              fullname: `${data.fullname}` || 'Default Name',
               certificateId: data.certificateNumber || 'NaN',
               tokenURI: tokenURI || 'Default tokenLink',
               certData: {
@@ -176,20 +176,14 @@ const Experience = () => {
                 templateURL: bannerImage || 'NaN',
               },
             });
-          }
+          });
         } else {
           // eslint-disable-next-line no-console
           console.log('single');
         }
 
-        if (mintDataArray.length < 0) {
-          throw new Error('No valid mint data found.');
-        }
-
-        console.log(mintDataArray);
-
         const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 9000000,
+          gasLimit: 20000000,
         });
 
         await tx.wait();
@@ -225,7 +219,6 @@ const Experience = () => {
 
     window.addEventListener('scroll', handleScroll);
 
-    // Cleanup khi component bị unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };

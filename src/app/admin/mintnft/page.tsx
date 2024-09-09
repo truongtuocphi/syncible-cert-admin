@@ -2,13 +2,22 @@
 
 import { useEffect, useState } from 'react';
 
+import { ethers } from 'ethers';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { db, ref, get, onAuthStateChanged, auth } from '@/lib/firebase';
-
-import { FaImage, FaTimes } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
+import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
-import CreateNFT from '@/components/pages/experience/CreateNFT';
+
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
+import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
+import Modal from '@/components/pages/admin/Modal';
+import ABI from '@/contract/ABI.json';
+import { db, ref, get } from '@/lib/firebase';
+import { uploadMetadata } from '@/lib/pinata';
+import { saveMintData } from '@/utils/saveMintData';
 
 interface Collection {
   id: string;
@@ -18,15 +27,20 @@ interface Collection {
 
 const Experience = () => {
   const pathname = useSearchParams();
+  const router = useRouter();
   const { address } = useAccount();
 
-  const [previewImage, setPreviewImage] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(true);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
   const [role, setRole] = useState<'Teacher' | 'Student'>('Student');
+  const [issuedDate, setIssuedDate] = useState('');
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
   const [collectionContractAddress, setcollectionContractAddress] = useState('');
-  const [issuedDate, setIssuedDate] = useState('');
+  const [csvDataFromChild, setCsvDataFromChild] = useState<any[]>([]);
   const [top, setTop] = useState(20);
+  const [loadingButton, setLoadingButton] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [tokenLink, setTokenLink] = useState('');
 
   const typePage = pathname.get('type');
 
@@ -51,9 +65,11 @@ const Experience = () => {
           });
           setSelectedContract(collections);
         } else {
+          // eslint-disable-next-line no-console
           console.log('No data available');
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Error fetching data:', error);
       }
     };
@@ -71,7 +87,6 @@ const Experience = () => {
       const reader = new FileReader();
       reader.onloadend = () => {
         setImage(reader.result as string);
-        setPreviewImage(reader.result as string);
       };
       reader.readAsDataURL(file);
     }
@@ -99,6 +114,122 @@ const Experience = () => {
     }
   };
 
+  const handleCsvRead = (data: any[]) => {
+    setCsvDataFromChild(data);
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!csvDataFromChild) {
+      alert('Please select a CSV file or enter a full name.');
+      return;
+    }
+
+    if (address) {
+      setLoadingButton(true);
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
+
+        const mintDataArray = [];
+
+        if (csvDataFromChild.length > 0) {
+          for (const data of csvDataFromChild) {
+            console.log(data.name && data.name.trim() !== '');
+            if (data.name && data.name.trim() !== '') {
+              console.log(data);
+              try {
+                const metadata = {
+                  fullname: `Certificate for ${data.name || 'Default Name'}`,
+                  tokenURI: tokenLink,
+                  attributes: [
+                    { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
+                    { trait_type: 'Role', value: role || '' },
+                    { trait_type: 'Date', value: issuedDate || '' },
+                    {
+                      trait_type: 'Template URL',
+                      value: bannerImage || '',
+                    },
+                  ],
+                };
+
+                const tokenURI = await uploadMetadata(metadata);
+                setTokenLink(tokenURI);
+
+                mintDataArray.push({
+                  owner: address,
+                  fullname: data.name || 'Default Name',
+                  certificateId: data.certificateNumber || '',
+                  tokenURI: tokenURI,
+                  certData: {
+                    role: data.role || '',
+                    date: issuedDate || '',
+                    templateURL: bannerImage || '',
+                  },
+                });
+              } catch (error) {
+                // eslint-disable-next-line no-console
+                console.error('Error uploading metadata:', error);
+                alert('Failed to upload metadata.');
+              }
+            }
+          }
+        } else {
+          // eslint-disable-next-line no-console
+          console.log('single');
+          // Simplified metadata structure
+          // const metadata = {
+          //   name: `Certificate for ${fullName}`,
+          //   attributes: [
+          //     { trait_type: 'Certificate ID', value: certificateNumber },
+          //     { trait_type: 'Role', value: role },
+          //     { trait_type: 'Date', value: issuedDate },
+          //   ],
+          // };
+          // const tokenURI = await uploadMetadata(metadata);
+          // setTokenLink(tokenURI);
+          // mintDataArray.push({
+          //   owner: address,
+          //   fullName: fullName,
+          //   certificateId: certificateNumber,
+          //   tokenURI: tokenURI,
+          //   certData: {
+          //     role: role,
+          //     date: issuedDate,
+          //   },
+          // });
+        }
+
+        if (mintDataArray.length === 0) {
+          throw new Error('No valid mint data found.');
+        }
+
+        const tx = await contract.mintBulk(mintDataArray, {
+          gasLimit: 9000000,
+        });
+
+        await tx.wait();
+        alert('NFTs minted successfully!');
+        setLoading(true);
+
+        await saveMintData(mintDataArray, collectionContractAddress);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error minting NFTs:', error);
+        alert('Failed to mint NFTs.');
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      alert('Please connect your wallet.');
+    }
+  };
+
+  useEffect(() => {
+    if (loading) router.push(`/admin/collection/collectiondetail`);
+  }, [loading]);
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 5) {
@@ -117,100 +248,181 @@ const Experience = () => {
   }, []);
 
   return (
-    <div className="space-y-6">
-      <h1 className="text-2xl font-semibold text-gray-600">Quay lại</h1>
-      <div className="flex space-x-6">
-        <form className="w-full space-y-4 rounded-lg bg-white p-4 sm:w-3/5">
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Hình chứng chỉ</label>
-            <p className="text-xs text-gray-400">Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây</p>
+    <>
+      {typePage == null ? (
+        <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      ) : (
+        <div className="space-y-6">
+          <div className="flex items-center gap-2">
+            <Link href={'/admin'}>
+              <ButtonPrimary className="size-10 rounded-lg p-2">
+                <FaArrowLeft />
+              </ButtonPrimary>
+            </Link>
+            <h1 className="text-2xl font-semibold text-gray-600">Quay lại</h1>
+          </div>
+          <div className="flex space-x-6">
+            <form onSubmit={handleSubmit} className="w-full sm:w-1/2">
+              <div className="w-full space-y-4 rounded-lg bg-white p-4">
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Hình chứng chỉ</label>
+                  <p className="text-xs text-gray-400">
+                    Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây
+                  </p>
+                  <div
+                    className="relative flex h-80 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
+                    onDrop={(e) => handleDrop(e, setBannerImage)}
+                    onDragOver={handleDragOver}
+                  >
+                    {bannerImage ? (
+                      <div className="relative h-full w-full">
+                        <Image src={bannerImage} alt="Banner Image" fill className="rounded-md " />
+                        <button
+                          type="button"
+                          onClick={handleRemoveImage}
+                          className="absolute right-2 top-2 rounded-full bg-gray-700 p-1 text-white"
+                        >
+                          <FaTimes className="text-lg" />
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center">
+                        <FaImage className="text-3xl text-gray-500" />
+                        <p className="mt-2 text-sm text-gray-500">
+                          Kéo & thả hoặc click để tải lên
+                        </p>
+                        <input
+                          type="file"
+                          accept="image/*"
+                          required
+                          onChange={(e) => handleImageBannerChange(e, setBannerImage)}
+                          className="absolute inset-0 cursor-pointer opacity-0"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Chức vụ</label>
+                  <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
+                    required
+                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  >
+                    <option value="Teacher">Teacher</option>
+                    <option value="Student">Student</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    Ngày phát hành chứng chỉ
+                  </label>
+                  <input
+                    type="date"
+                    value={issuedDate}
+                    onChange={(e) => setIssuedDate(e.target.value)}
+                    required
+                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">
+                    {' '}
+                    Lưu chứng chỉ số vào
+                  </label>
+                  <select
+                    onChange={(e) => setcollectionContractAddress(e.target.value)}
+                    required
+                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  >
+                    {selectedContract.length === 0 ? (
+                      <option value="">Vui lòng kết nối ví để hiện thị dữ liệu</option>
+                    ) : (
+                      selectedContract.map((collection) => (
+                        <option key={collection.id} value={collection.contractAddress}>
+                          {collection.displayName}
+                        </option>
+                      ))
+                    )}
+                  </select>
+                </div>
+              </div>
+
+              <div className="mt-4 w-full space-y-3 rounded-lg bg-white p-4">
+                {typePage === 'mintsingle' ? (
+                  <MintSingleForm />
+                ) : (
+                  <MintBulk DataIssuedDate={issuedDate} DataRole={role} onCsvRead={handleCsvRead} />
+                )}
+              </div>
+
+              <div className="mt-4 flex items-center justify-end gap-4">
+                <Link href={'/admin'}>
+                  <ButtonPrimary className="w-40 border-2 border-blue-500 bg-white text-blue-500">
+                    Hủy
+                  </ButtonPrimary>
+                </Link>
+                <ButtonPrimary type="submit" className="w-40">
+                  {loadingButton ? (
+                    <span className="flex items-center">
+                      <svg
+                        className="mr-2 h-5 w-5 animate-spin text-white"
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle
+                          className="opacity-25"
+                          cx="12"
+                          cy="12"
+                          r="10"
+                          stroke="currentColor"
+                          strokeWidth="4"
+                        ></circle>
+                        <path
+                          className="opacity-75"
+                          fill="currentColor"
+                          d="M4 12a8 8 0 018-8v8H4z"
+                        ></path>
+                      </svg>
+                      Đang sử lý...
+                    </span>
+                  ) : (
+                    'Tạo chứng chỉ'
+                  )}
+                </ButtonPrimary>
+              </div>
+            </form>
+
+            {/* preview */}
             <div
-              className="relative flex h-56 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
-              onDrop={(e) => handleDrop(e, setBannerImage)}
-              onDragOver={handleDragOver}
+              className="sticky h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-1/2"
+              style={{ top: `${top}px` }}
             >
-              {bannerImage ? (
-                <div className="relative h-full w-full">
+              <h2 className="text-lg font-bold text-gray-600">Xem trước</h2>
+              <div className="mt-2 h-fit w-full overflow-hidden rounded-lg border-[0.5px] border-dashed border-gray-400">
+                {bannerImage ? (
                   <Image
                     src={bannerImage}
-                    alt="Banner Image"
-                    fill
-                    className="rounded-md object-cover"
+                    alt="Logo Preview"
+                    width={112}
+                    height={112}
+                    className="h-96 w-full"
                   />
-                  <button
-                    type="button"
-                    onClick={handleRemoveImage}
-                    className="absolute right-2 top-2 rounded-full bg-gray-700 p-1 text-white"
-                  >
-                    <FaTimes className="text-lg" />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex flex-col items-center">
-                  <FaImage className="text-3xl text-gray-500" />
-                  <p className="mt-2 text-sm text-gray-500">Drag & drop or click to upload</p>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    required
-                    onChange={(e) => handleImageBannerChange(e, setBannerImage)}
-                    className="absolute inset-0 cursor-pointer opacity-0"
-                  />
-                </div>
-              )}
+                ) : (
+                  <div className="relative h-96 bg-gray-50">
+                    <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border-[0.5px] border-gray-200 bg-gray-100">
+                      <FaImage className="absolute left-1/2 top-[40%] -translate-x-1/2 text-3xl text-gray-500" />
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">Chức vụ</label>
-            <select
-              value={role}
-              onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            >
-              <option value="Teacher">Teacher</option>
-              <option value="Student">Student</option>
-            </select>
-          </div>
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700">
-              Ngày phát hành chứng chỉ
-            </label>
-            <input
-              type="date"
-              value={issuedDate}
-              onChange={(e) => setIssuedDate(e.target.value)}
-              required
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-          <div className="space-y-2">
-            <label className="block text-sm font-medium text-gray-700"> Lưu chứng chỉ số vào</label>
-            <select
-              onChange={(e) => setcollectionContractAddress(e.target.value)}
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            >
-              {selectedContract.length === 0 ? (
-                <option value="">No contracts available</option>
-              ) : (
-                selectedContract.map((collection) => (
-                  <option key={collection.id} value={collection.contractAddress}>
-                    {collection.displayName}
-                  </option>
-                ))
-              )}
-            </select>
-          </div>
-        </form>
-
-        {/* preview */}
-        <div
-          className="sticky h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-2/5"
-          style={{ top: `${top}px` }}
-        >
-          asdg
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

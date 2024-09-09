@@ -14,10 +14,6 @@ const config = {
     },
     extend: {
       screens: { xs: '480px', '2xs': '375px', '3xs': '320px' },
-      fontFamily: {
-        inter: ['Inter', 'sans-serif'],
-        playfair: ['Playfair Display', 'serif'],
-      },
       backgroundImage: {
         'custom-radial-gradient':
           'radial-gradient(circle at center, rgba(107, 228, 222, 0.65) 0%, rgba(255, 235, 226, 0.0) 70%)',
@@ -48,6 +44,7 @@ const config = {
           '950': '#07271b',
         },
         primary: {
+          '40': '#B1A5F9',
           '50': '#836EF9',
         },
       },

@@ -5,12 +5,14 @@ import Image from 'next/image';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import SectionAbout from '@/components/pages/Home/SectionAbout';
+import SectionNews from '@/components/pages/Home/SectionNews';
 import SectionOurVision from '@/components/pages/Home/SectionOurVision';
 import SectionWhatWeBelieve from '@/components/pages/Home/SectionWhatWeBelieve';
 import { Button } from '@/components/ui/button';
 import { playfair } from '@/components/ui/fonts';
 
 import BannerCertificate from '../../public/cert_example.png';
+import Link from 'next/link';
 
 const Page = () => {
   return (
@@ -19,8 +21,8 @@ const Page = () => {
         <Navbar />
       </div>
       <div className="relative z-10 mt-24 flex flex-col items-center gap-10">
-        <div className="px-6 py-6 md:px-8 md:py-0 lg:mt-20 xl:px-24 ">
-          <div className="relative flex w-full max-w-[90rem] flex-col items-stretch px-6 md:flex-row ">
+        <div className="max-w-[90rem] px-6 py-6 md:px-8 md:py-0 lg:mt-20 xl:px-24 ">
+          <div className="relative flex w-full flex-col items-stretch px-6 md:flex-row ">
             <div className="basis-1/2">
               <div className="flex h-[20rem] flex-col items-center justify-center gap-8 antialiased md:h-[30rem] md:items-start lg:h-[35rem]">
                 <div
@@ -28,12 +30,15 @@ const Page = () => {
                 >
                   Nền tảng tiên phong trong việc chuyển đổi cách công
                   <br className="hidden md:block lg:hidden xl:block" />
-                  <span className="inline md:hidden lg:inline xl:hidden">&nbsp;</span>nhận thành tựu học thuật qua chứng chỉ số hóa.
+                  <span className="inline md:hidden lg:inline xl:hidden">&nbsp;</span>nhận thành tựu
+                  học thuật qua chứng chỉ số hóa.
                 </div>
                 <div className="self-center md:self-start">
-                  <Button className="custom-gradient shadow-[0_2px_16px_0px_rgba(0, 0, 0, 0.12)] h-[3rem] w-fit rounded-[.75rem] px-10 text-base">
-                    Liên hệ với chúng tôi
-                  </Button>
+                  <Link href="/contact">
+                    <Button className="shadow- rounded-[1.25rem] bg-primary-50 px-10 py-7 text-base shadow-combinedShadow1 hover:bg-primary-40">
+                      Liên hệ với chúng tôi
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -60,7 +65,8 @@ const Page = () => {
           <SectionWhatWeBelieve />
           <SectionOurVision />
         </div>
-        <div className="relative text-white">
+        <SectionNews />
+        <div className="relative w-full font-inter text-black">
           <Footer />
         </div>
         <div className="absolute"></div>

@@ -70,12 +70,12 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'id',
-    header: 'No',
+    header: 'ID',
     cell: ({ row }) => <div>{row.index + 1}</div>,
   },
   {
     accessorKey: 'displayName',
-    header: 'Display Name',
+    header: 'Tên hiển thị',
     cell: ({ row }) => <div>{row.getValue('displayName')}</div>,
   },
   // {
@@ -85,12 +85,12 @@ const columns: ColumnDef<Collection>[] = [
   // },
   {
     accessorKey: 'contractSymbol',
-    header: 'Contract Symbol',
+    header: 'Biểu tượng hợp đồng',
     cell: ({ row }) => <div>{row.getValue('contractSymbol')}</div>,
   },
   {
     accessorKey: 'itemsCount',
-    header: 'Total Items',
+    header: 'Tổng số chứng chỉ',
     cell: ({ row }) => {
       let itemsCount = row.getValue('itemsCount');
 
@@ -107,7 +107,7 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'contractAddress',
-    header: 'Contract Address',
+    header: 'Địa chỉ hợp đồng',
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         {truncateAddress(row.getValue('contractAddress'))}
@@ -126,12 +126,12 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'status',
-    header: 'Status',
-    cell: () => <div className="text-green-600">Active</div>,
+    header: 'Trạng thái',
+    cell: () => <div className="text-green-600">Hoạt Động</div>,
   },
   {
     id: 'actions',
-    header: 'Actions',
+    header: 'Thao tác',
     cell: ({ row }) => (
       <div className="flex items-center space-x-2">
         <Link href={`/admin/collection/collectiondetail/${row.getValue('id')}`}>

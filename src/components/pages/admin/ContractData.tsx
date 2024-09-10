@@ -71,7 +71,7 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
           {data.map((item, index) => {
             return (
               <Link href={`/admin/mintnft/${item?.tokenURI}`} key={index}>
-                <div className="h-[170px] w-full sm:h-[270px] lg:h-[380px] 2xl:h-[500px]">
+                <div className="h-[170px] w-full sm:h-[270px] lg:h-[370px] 2xl:h-[400px]">
                   <CertificatePreview
                     previewImage={item.certData.templateURL}
                     name={item.fullname}

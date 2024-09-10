@@ -20,7 +20,7 @@ export default function SectionAbout() {
             </div>
           </div>
         </div>
-        <div className="w-full basis-1/2">
+        <div className="h-full w-full basis-1/2">
           {/* <div className="flex h-[29rem] justify-center gap-4">
             <div className="aspect-[1/2] max-h-[80%] self-end overflow-hidden rounded-[1.25rem] shadow-combinedShadow2">
               <Image
@@ -58,7 +58,7 @@ export default function SectionAbout() {
             alt="placeholder photo 1"
             fill
             sizes="100vw"
-            className="h-full object-cover"
+            className="h-[110%]  object-cover"
             priority
           />
         </div>

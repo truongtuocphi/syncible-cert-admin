@@ -11,6 +11,9 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { roboto, inter } from '@/components/ui/fonts';
+import SyncibleLogo from '/public/syncible-logo.svg';
+import PlaceholderPhoto from '/public/cert-template.png';
+import Image from 'next/image';
 
 const ListNews = [
   {
@@ -53,8 +56,7 @@ const ListNews = [
     title: 'Tin tức 4',
     agency_name: 'Thanh Niên',
     date: '2022-10-10',
-    content:
-      'Tuyệt vời.',
+    content: 'Tuyệt vời.',
     author: {
       name: 'Nguyễn Văn D',
       avatar: 'https://picsum.photos/200/300',
@@ -138,7 +140,7 @@ const ListNews = [
 export default function SectionNews() {
   return (
     <div className="w-full max-w-[90rem]" id="news">
-      <div className="flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-8 px-6 py-6 lg:px-16 lg:py-16 ">
         <div className=" text-4xl font-semibold">Tin tức</div>
         <Carousel
           opts={{ align: 'start', startIndex: 1, loop: false }}
@@ -155,10 +157,26 @@ export default function SectionNews() {
                 <CarouselItem key={index} className="basis-full md:basis-1/2 md:pl-6 lg:basis-1/3">
                   <Card className="h-full">
                     <CardHeader>
-                      <CardTitle>{entry.title}</CardTitle>
+                      <CardTitle className="max-w-28">
+                        <SyncibleLogo className="h-full max-h-8 w-full" />
+                      </CardTitle>
                     </CardHeader>
                     <CardContent className="">
-                      <div className="line-clamp-3 h-[4.5rem]">{entry.content}</div>
+                      <div className="flex flex-col gap-4">
+                        <div className="max-h-40 w-full overflow-hidden rounded-xl">
+                          <Image
+                            src={PlaceholderPhoto}
+                            alt="placeholder photo"
+                            priority
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="aspect-[2/1] object-cover"
+                          />
+                        </div>
+                        <div className={`${inter.className}`}>
+                          <div className="text-lg font-semibold">{entry.title}</div>
+                          <div className="line-clamp-3 h-[4.5rem] text-base">{entry.content}</div>
+                        </div>
+                      </div>
                     </CardContent>
                     <CardFooter>
                       <div className="flex w-full gap-4">

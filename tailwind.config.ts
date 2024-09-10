@@ -19,6 +19,7 @@ const config = {
           'radial-gradient(circle at center, rgba(107, 228, 222, 0.65) 0%, rgba(255, 235, 226, 0.0) 70%)',
       },
       blur: {
+        '4xl': '5px',
         '250px': '250px',
       },
       boxShadow: {
@@ -30,6 +31,7 @@ const config = {
       colors: {
         customTeal: '#31CBBA',
         brand: {
+          '10': 'rgba(246, 255, 247, 1)',
           '50': '#eefbf3',
           '100': '#d6f5e1',
           '200': '#b0eac8',
@@ -39,7 +41,6 @@ const config = {
           '600': '#168556',
           '700': '#116b46',
           '800': '#10553a',
-          '850': '#F6FFF7',
           '900': '#0e4630',
           '950': '#07271b',
         },

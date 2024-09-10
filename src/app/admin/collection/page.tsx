@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import {
   ColumnDef,
@@ -34,6 +34,7 @@ import {
 } from '@/components/ui/table';
 import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
+import { deleteDataById } from '@/utils/deleteDataFirebase';
 
 export type Collection = {
   id: string;
@@ -205,6 +206,57 @@ export default function Collection() {
     },
   });
 
+  // Memoize the selected rows count for performance
+  const selectedRowCount = useMemo(() => Object.keys(rowSelection).length, [rowSelection]);
+
+  // Delete handler
+  const handleDelete = async () => {
+    const dataSelect = Object.values(data);
+    const selectedIds = Object.keys(rowSelection);
+    const selectedData: any[] = [];
+
+    selectedIds.forEach((item: any) => {
+      const index = Number(item);
+      if (dataSelect[index]) {
+        selectedData.push(dataSelect[index]);
+      }
+    });
+
+    try {
+      await Promise.all(selectedData.map((data) => deleteDataById('collections', data.id)));
+
+      // Reset row selection after deletion
+      setRowSelection({});
+
+      // Reload table data
+      const dbRef = ref(db, 'collections');
+      const snapshot = await get(dbRef);
+      if (snapshot.exists()) {
+        const collections: Collection[] = [];
+        snapshot.forEach((childSnapshot: any) => {
+          const collection = childSnapshot.val();
+          if (collection.address === address) {
+            collections.push({
+              id: childSnapshot.key || '',
+              displayName: collection.displayName,
+              contractName: collection.contractName,
+              contractSymbol: collection.contractSymbol,
+              interface: collection.interface,
+              contractAddress: collection.contractAddress,
+            });
+          }
+        });
+        setData(collections);
+      }
+
+      alert('Tất cả đã được xóa thành công.');
+    } catch (error) {
+      alert('Đã xảy ra lỗi khi xóa dữ liệu.');
+      // eslint-disable-next-line no-console
+      console.error('Error deleting selected rows:', error);
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="flex items-center justify-between space-x-4 py-4">
@@ -214,9 +266,15 @@ export default function Collection() {
           onChange={(event) => table.getColumn('displayName')?.setFilterValue(event.target.value)}
           className="w-80 rounded-lg"
         />
-        <Link href={'/admin/collection/createcollection'}>
-          <ButtonPrimary className="ml-auto">Create Collection</ButtonPrimary>
-        </Link>
+        {selectedRowCount > 0 ? (
+          <ButtonPrimary onClick={handleDelete} className="bg-red-500">
+            Xóa đã chọn ({selectedRowCount})
+          </ButtonPrimary>
+        ) : (
+          <Link href={'/admin/collection/createcollection'}>
+            <ButtonPrimary className="ml-auto">Create Collection</ButtonPrimary>
+          </Link>
+        )}
       </div>
       <div className="overflow-hidden rounded-xl border">
         <Table>

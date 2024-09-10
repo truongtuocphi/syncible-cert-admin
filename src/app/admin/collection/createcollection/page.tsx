@@ -251,7 +251,11 @@ const CreateCollection: React.FC = () => {
           </div>
 
           {/* Submit Button */}
-          <ButtonPrimary type="submit" className="w-full py-3 text-lg font-semibold">
+          <ButtonPrimary
+            type="submit"
+            className="w-full py-3 text-lg font-semibold"
+            disabled={isLoading}
+          >
             {isLoading ? 'Creating...' : 'Create Collection'}
           </ButtonPrimary>
         </form>

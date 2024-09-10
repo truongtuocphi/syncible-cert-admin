@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import {
   ColumnDef,
@@ -34,6 +34,7 @@ import {
 } from '@/components/ui/table';
 import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
+import { deleteDataById } from '@/utils/deleteDataFirebase';
 
 export type Collection = {
   id: string;
@@ -47,13 +48,34 @@ export type Collection = {
 
 const columns: ColumnDef<Collection>[] = [
   {
+    accessorKey: 'check',
+    header: ({ table }) => (
+      <div>
+        <input
+          type="checkbox"
+          checked={table.getIsAllRowsSelected()}
+          onChange={table.getToggleAllRowsSelectedHandler()}
+        />
+      </div>
+    ),
+    cell: ({ row }) => (
+      <div>
+        <input
+          type="checkbox"
+          checked={row.getIsSelected()}
+          onChange={row.getToggleSelectedHandler()}
+        />
+      </div>
+    ),
+  },
+  {
     accessorKey: 'id',
-    header: 'No',
+    header: 'ID',
     cell: ({ row }) => <div>{row.index + 1}</div>,
   },
   {
     accessorKey: 'displayName',
-    header: 'Display Name',
+    header: 'Tên hiển thị',
     cell: ({ row }) => <div>{row.getValue('displayName')}</div>,
   },
   // {
@@ -63,12 +85,12 @@ const columns: ColumnDef<Collection>[] = [
   // },
   {
     accessorKey: 'contractSymbol',
-    header: 'Contract Symbol',
+    header: 'Biểu tượng hợp đồng',
     cell: ({ row }) => <div>{row.getValue('contractSymbol')}</div>,
   },
   {
     accessorKey: 'itemsCount',
-    header: 'Total Items',
+    header: 'Tổng số chứng chỉ',
     cell: ({ row }) => {
       let itemsCount = row.getValue('itemsCount');
 
@@ -83,14 +105,9 @@ const columns: ColumnDef<Collection>[] = [
       return itemsCount || '0';
     },
   },
-  // {
-  //   accessorKey: 'interface',
-  //   header: 'Interface',
-  //   cell: () => <div>ERC-721</div>,
-  // },
   {
     accessorKey: 'contractAddress',
-    header: 'Contract Address',
+    header: 'Địa chỉ hợp đồng',
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         {truncateAddress(row.getValue('contractAddress'))}
@@ -109,12 +126,12 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'status',
-    header: 'Status',
-    cell: () => <div className="text-green-600">Active</div>,
+    header: 'Trạng thái',
+    cell: () => <div className="text-green-600">Hoạt Động</div>,
   },
   {
     id: 'actions',
-    header: 'Actions',
+    header: 'Thao tác',
     cell: ({ row }) => (
       <div className="flex items-center space-x-2">
         <Link href={`/admin/collection/collectiondetail/${row.getValue('id')}`}>
@@ -189,6 +206,57 @@ export default function Collection() {
     },
   });
 
+  // Memoize the selected rows count for performance
+  const selectedRowCount = useMemo(() => Object.keys(rowSelection).length, [rowSelection]);
+
+  // Delete handler
+  const handleDelete = async () => {
+    const dataSelect = Object.values(data);
+    const selectedIds = Object.keys(rowSelection);
+    const selectedData: any[] = [];
+
+    selectedIds.forEach((item: any) => {
+      const index = Number(item);
+      if (dataSelect[index]) {
+        selectedData.push(dataSelect[index]);
+      }
+    });
+
+    try {
+      await Promise.all(selectedData.map((data) => deleteDataById('collections', data.id)));
+
+      // Reset row selection after deletion
+      setRowSelection({});
+
+      // Reload table data
+      const dbRef = ref(db, 'collections');
+      const snapshot = await get(dbRef);
+      if (snapshot.exists()) {
+        const collections: Collection[] = [];
+        snapshot.forEach((childSnapshot: any) => {
+          const collection = childSnapshot.val();
+          if (collection.address === address) {
+            collections.push({
+              id: childSnapshot.key || '',
+              displayName: collection.displayName,
+              contractName: collection.contractName,
+              contractSymbol: collection.contractSymbol,
+              interface: collection.interface,
+              contractAddress: collection.contractAddress,
+            });
+          }
+        });
+        setData(collections);
+      }
+
+      alert('Tất cả đã được xóa thành công.');
+    } catch (error) {
+      alert('Đã xảy ra lỗi khi xóa dữ liệu.');
+      // eslint-disable-next-line no-console
+      console.error('Error deleting selected rows:', error);
+    }
+  };
+
   return (
     <div className="w-full">
       <div className="flex items-center justify-between space-x-4 py-4">
@@ -198,9 +266,15 @@ export default function Collection() {
           onChange={(event) => table.getColumn('displayName')?.setFilterValue(event.target.value)}
           className="w-80 rounded-lg"
         />
-        <Link href={'/admin/collection/createcollection'}>
-          <ButtonPrimary className="ml-auto">Create Collection</ButtonPrimary>
-        </Link>
+        {selectedRowCount > 0 ? (
+          <ButtonPrimary onClick={handleDelete} className="bg-red-500">
+            Xóa đã chọn ({selectedRowCount})
+          </ButtonPrimary>
+        ) : (
+          <Link href={'/admin/collection/createcollection'}>
+            <ButtonPrimary className="ml-auto">Create Collection</ButtonPrimary>
+          </Link>
+        )}
       </div>
       <div className="overflow-hidden rounded-xl border">
         <Table>

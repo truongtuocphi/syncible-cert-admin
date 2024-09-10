@@ -145,7 +145,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <div className="flex flex-col justify-between md:flex-row">
         <div className="h-[170px] w-3/5 sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
-          <CertificatePreview
+          {/* <CertificatePreview
             headerURL={headerURL}
             description={description}
             previewImage={`${headerURL}/ipfs/${templateURL}`}
@@ -157,7 +157,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
             previewSignature={`${headerURL}/ipfs/${headSignature}`}
             name={name.split('Certificate for')[1].trim()}
             date={configDate(date)}
-          />
+          /> */}
         </div>
         <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-[40%]">
           <h3 className="text-3xl font-bold text-black">{name}</h3>

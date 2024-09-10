@@ -17,13 +17,8 @@ import Modal from '@/components/pages/admin/Modal';
 import ABI from '@/contract/ABI.json';
 import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
+import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
-
-interface Collection {
-  id: string;
-  displayName: string;
-  contractAddress: string;
-}
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -37,6 +32,8 @@ const Experience = () => {
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
   const [collectionContractAddress, setcollectionContractAddress] = useState('');
   const [csvDataFromChild, setCsvDataFromChild] = useState<any[]>([]);
+  const [dataFromMintSingle, setDataFromMintSingle] = useState<any[]>([]);
+  const [coppyCsvDataFromChild, setCoppyCsvDataFromChild] = useState<any[]>([]);
   const [top, setTop] = useState(20);
   const [loadingButton, setLoadingButton] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -54,7 +51,6 @@ const Experience = () => {
           const collections: Collection[] = [];
           snapshot.forEach((childSnapshot) => {
             const collection = childSnapshot.val();
-            // Kiểm tra nếu địa chỉ ví của người dùng khớp với địa chỉ trong dữ liệu Firebase
             if (collection.address === address) {
               collections.push({
                 id: childSnapshot.key || '',
@@ -118,12 +114,27 @@ const Experience = () => {
     setCsvDataFromChild(data);
   };
 
+  const handleGetDataMintSingle = (data: any[]) => {
+    setDataFromMintSingle(data);
+  };
+
+  useEffect(() => {
+    if (csvDataFromChild.length > 0) {
+      const validData = csvDataFromChild.filter(
+        (data) => data.fullname && data.fullname.trim() !== ''
+      );
+      setCoppyCsvDataFromChild(validData);
+    } else {
+      setCoppyCsvDataFromChild([]);
+    }
+  }, [csvDataFromChild]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!csvDataFromChild) {
-      alert('Please select a CSV file or enter a full name.');
-      return;
-    }
+    // if (!coppyCsvDataFromChild || coppyCsvDataFromChild.length === 0) {
+    //   alert('Please select a CSV file or enter a full name.');
+    //   return;
+    // }
 
     if (address) {
       setLoadingButton(true);
@@ -132,81 +143,74 @@ const Experience = () => {
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-        const mintDataArray = [];
+        const mintDataArray: any = [];
 
-        if (csvDataFromChild.length > 0) {
-          for (const data of csvDataFromChild) {
-            console.log(data.name && data.name.trim() !== '');
-            if (data.name && data.name.trim() !== '') {
-              console.log(data);
-              try {
-                const metadata = {
-                  fullname: `Certificate for ${data.name || 'Default Name'}`,
-                  tokenURI: tokenLink,
-                  attributes: [
-                    { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
-                    { trait_type: 'Role', value: role || '' },
-                    { trait_type: 'Date', value: issuedDate || '' },
-                    {
-                      trait_type: 'Template URL',
-                      value: bannerImage || '',
-                    },
-                  ],
-                };
+        if (coppyCsvDataFromChild.length > 0) {
+          coppyCsvDataFromChild.map(async (data) => {
+            const metadata = {
+              fullname: `Certificate for ${data.fullname}` || 'Default Name',
+              tokenURI: tokenLink || 'Default tokenLink',
+              attributes: [
+                { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
+                { trait_type: 'Role', value: role || '' },
+                { trait_type: 'Date', value: issuedDate || '' },
+                {
+                  trait_type: 'Template URL',
+                  value: bannerImage || '',
+                },
+              ],
+            };
 
-                const tokenURI = await uploadMetadata(metadata);
-                setTokenLink(tokenURI);
+            const tokenURI = await uploadMetadata(metadata);
+            setTokenLink(tokenURI);
 
-                mintDataArray.push({
-                  owner: address,
-                  fullname: data.name || 'Default Name',
-                  certificateId: data.certificateNumber || '',
-                  tokenURI: tokenURI,
-                  certData: {
-                    role: data.role || '',
-                    date: issuedDate || '',
-                    templateURL: bannerImage || '',
-                  },
-                });
-              } catch (error) {
-                // eslint-disable-next-line no-console
-                console.error('Error uploading metadata:', error);
-                alert('Failed to upload metadata.');
-              }
-            }
-          }
+            mintDataArray.push({
+              owner: address,
+              fullname: `${data.fullname}` || 'Default Name',
+              certificateId: data.certificateNumber || 'NaN',
+              tokenURI: tokenURI || 'Default tokenLink',
+              certData: {
+                role: role || 'NaN',
+                date: issuedDate || 'NaN',
+                templateURL: bannerImage || 'NaN',
+              },
+            });
+          });
         } else {
-          // eslint-disable-next-line no-console
-          console.log('single');
-          // Simplified metadata structure
-          // const metadata = {
-          //   name: `Certificate for ${fullName}`,
-          //   attributes: [
-          //     { trait_type: 'Certificate ID', value: certificateNumber },
-          //     { trait_type: 'Role', value: role },
-          //     { trait_type: 'Date', value: issuedDate },
-          //   ],
-          // };
-          // const tokenURI = await uploadMetadata(metadata);
-          // setTokenLink(tokenURI);
-          // mintDataArray.push({
-          //   owner: address,
-          //   fullName: fullName,
-          //   certificateId: certificateNumber,
-          //   tokenURI: tokenURI,
-          //   certData: {
-          //     role: role,
-          //     date: issuedDate,
-          //   },
-          // });
-        }
+          dataFromMintSingle.map(async (data) => {
+            const metadata = {
+              fullname: `Certificate for ${data.fullname}` || 'Default Name',
+              tokenURI: tokenLink || 'Default tokenLink',
+              attributes: [
+                { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
+                { trait_type: 'Role', value: role || '' },
+                { trait_type: 'Date', value: issuedDate || '' },
+                {
+                  trait_type: 'Template URL',
+                  value: bannerImage || '',
+                },
+              ],
+            };
 
-        if (mintDataArray.length === 0) {
-          throw new Error('No valid mint data found.');
+            const tokenURI = await uploadMetadata(metadata);
+            setTokenLink(tokenURI);
+
+            mintDataArray.push({
+              owner: address,
+              fullname: `${data.fullname}` || 'Default Name',
+              certificateId: data.certificateNumber || 'NaN',
+              tokenURI: tokenURI || 'Default tokenLink',
+              certData: {
+                role: role || 'NaN',
+                date: issuedDate || 'NaN',
+                templateURL: bannerImage || 'NaN',
+              },
+            });
+          });
         }
 
         const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 9000000,
+          gasLimit: 10000000,
         });
 
         await tx.wait();
@@ -218,6 +222,7 @@ const Experience = () => {
         // eslint-disable-next-line no-console
         console.error('Error minting NFTs:', error);
         alert('Failed to mint NFTs.');
+        setLoadingButton(false);
       } finally {
         setLoading(false);
       }
@@ -225,10 +230,6 @@ const Experience = () => {
       alert('Please connect your wallet.');
     }
   };
-
-  useEffect(() => {
-    if (loading) router.push(`/admin/collection/collectiondetail`);
-  }, [loading]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -241,11 +242,14 @@ const Experience = () => {
 
     window.addEventListener('scroll', handleScroll);
 
-    // Cleanup khi component bị unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  if (loading) router.push(`/admin/collection/collectiondetail`);
+
+  // console.log('cc', dataFromMintSingle);
 
   return (
     <>
@@ -328,7 +332,6 @@ const Experience = () => {
                 </div>
                 <div className="space-y-2">
                   <label className="block text-sm font-medium text-gray-700">
-                    {' '}
                     Lưu chứng chỉ số vào
                   </label>
                   <select
@@ -351,7 +354,11 @@ const Experience = () => {
 
               <div className="mt-4 w-full space-y-3 rounded-lg bg-white p-4">
                 {typePage === 'mintsingle' ? (
-                  <MintSingleForm />
+                  <MintSingleForm
+                    DataIssuedDate={issuedDate}
+                    DataRole={role}
+                    onGetData={handleGetDataMintSingle}
+                  />
                 ) : (
                   <MintBulk DataIssuedDate={issuedDate} DataRole={role} onCsvRead={handleCsvRead} />
                 )}
@@ -359,38 +366,15 @@ const Experience = () => {
 
               <div className="mt-4 flex items-center justify-end gap-4">
                 <Link href={'/admin'}>
-                  <ButtonPrimary className="w-40 border-2 border-blue-500 bg-white text-blue-500">
+                  <ButtonPrimary
+                    className="w-40 border-2 border-blue-500 bg-white text-blue-500"
+                    disabled={loadingButton}
+                  >
                     Hủy
                   </ButtonPrimary>
                 </Link>
-                <ButtonPrimary type="submit" className="w-40">
-                  {loadingButton ? (
-                    <span className="flex items-center">
-                      <svg
-                        className="mr-2 h-5 w-5 animate-spin text-white"
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                      >
-                        <circle
-                          className="opacity-25"
-                          cx="12"
-                          cy="12"
-                          r="10"
-                          stroke="currentColor"
-                          strokeWidth="4"
-                        ></circle>
-                        <path
-                          className="opacity-75"
-                          fill="currentColor"
-                          d="M4 12a8 8 0 018-8v8H4z"
-                        ></path>
-                      </svg>
-                      Đang sử lý...
-                    </span>
-                  ) : (
-                    'Tạo chứng chỉ'
-                  )}
+                <ButtonPrimary type="submit" className="w-40" disabled={loadingButton}>
+                  {loadingButton ? 'Đang xử lý...' : 'Tạo chứng chỉ'}
                 </ButtonPrimary>
               </div>
             </form>
@@ -408,7 +392,7 @@ const Experience = () => {
                     alt="Logo Preview"
                     width={112}
                     height={112}
-                    className="h-96 w-full"
+                    className="h-80 w-full"
                   />
                 ) : (
                   <div className="relative h-96 bg-gray-50">

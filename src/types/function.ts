@@ -9,3 +9,9 @@ export interface CollectionData {
   displayName: string;
   logoImage: string;
 }
+
+export interface Collection {
+  id: string;
+  displayName: string;
+  contractAddress: string;
+}

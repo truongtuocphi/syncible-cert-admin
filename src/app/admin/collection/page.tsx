@@ -47,6 +47,27 @@ export type Collection = {
 
 const columns: ColumnDef<Collection>[] = [
   {
+    accessorKey: 'check',
+    header: ({ table }) => (
+      <div>
+        <input
+          type="checkbox"
+          checked={table.getIsAllRowsSelected()}
+          onChange={table.getToggleAllRowsSelectedHandler()}
+        />
+      </div>
+    ),
+    cell: ({ row }) => (
+      <div>
+        <input
+          type="checkbox"
+          checked={row.getIsSelected()}
+          onChange={row.getToggleSelectedHandler()}
+        />
+      </div>
+    ),
+  },
+  {
     accessorKey: 'id',
     header: 'No',
     cell: ({ row }) => <div>{row.index + 1}</div>,
@@ -83,11 +104,6 @@ const columns: ColumnDef<Collection>[] = [
       return itemsCount || '0';
     },
   },
-  // {
-  //   accessorKey: 'interface',
-  //   header: 'Interface',
-  //   cell: () => <div>ERC-721</div>,
-  // },
   {
     accessorKey: 'contractAddress',
     header: 'Contract Address',

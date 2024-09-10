@@ -89,19 +89,10 @@ export default function Explorer() {
           ) : data ? (
             <div className="mx-auto mt-16 h-[170px] w-1/2 space-y-4 rounded-xl bg-white p-4 text-black sm:h-[270px] lg:h-[450px] 2xl:h-[500px]">
               <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
-                {/* <CertificatePreview
-                  headerURL={headerURL}
-                  description={data.mintData[0].certData.description}
-                  previewImage={`${headerURL}/ipfs/${data.mintData[0].certData.templateURL}`}
-                  previewHeadLogo={`${headerURL}/ipfs/${data.mintData[0].certData.organizationLogo}`}
-                  certificateNumber={data.mintData[0].certificateId}
-                  authorizingOrgName={data.mintData[0].certData.organizationName}
-                  headOrgPosition={data.mintData[0].certData.headPosition}
-                  headOrgName={data.mintData[0].certData.headName}
-                  previewSignature={`${headerURL}/ipfs/${data.mintData[0].certData.headSignature}`}
+                <CertificatePreview
+                  previewImage={data.mintData[0].certData.templateURL}
                   name={data.mintData[0].fullName.split('Certificate for')}
-                  date={configDate(data.mintData[0].certData.date)}
-                /> */}
+                />
               </Link>
             </div>
           ) : (

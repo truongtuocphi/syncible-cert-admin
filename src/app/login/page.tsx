@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import { GoogleIcon } from '@/assets/icons';
 import Loading from '@/components/common/loading/Loading';
@@ -14,7 +15,6 @@ import {
   signInWithPopup,
   provider,
 } from '@/lib/firebase';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
@@ -69,7 +69,7 @@ export default function Login() {
         muted
       ></video>
       <div
-        className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:p-10"
+        className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:p-10 2xl:h-[850px]"
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
       >
         <div className="p-3">

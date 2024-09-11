@@ -55,22 +55,22 @@ export default function Login() {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-start overflow-hidden px-8 py-4">
-      <video
-        className="absolute left-0 top-0 min-h-screen w-full object-cover"
+    <div className="relative flex min-h-screen items-center justify-start overflow-hidden px-8 py-5">
+      {/* <video
+        className="absolute left-0 top-0 h-full w-full object-cover"
         src="/video/Cubes_Diagonal_3840x2160.mp4"
         autoPlay
         loop
         muted
-      ></video>
+      ></video> */}
       <div
-        className="z-10 min-h-[700px] w-full p-10 text-black backdrop-blur-sm md:w-[500px] lg:p-10"
+        className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:p-10"
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
       >
-        <div>
+        <div className="p-3">
           <Image src="/SyncibleAdmin.png" alt="logo" width={100} height={30} />
         </div>
-        <div className="mx-auto mt-16 w-full max-w-lg p-5">
+        <div className="mx-auto mt-16 w-full max-w-lg p-3">
           <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>
           {loading && <Loading />}
           <form className="space-y-4" onSubmit={handleSubmit}>
@@ -108,13 +108,13 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="hover:bg-primary bg-primary w-full rounded-full py-2 text-white disabled:opacity-50"
+              className="w-full rounded-[20px] bg-primary py-2 text-white hover:bg-primary disabled:opacity-50"
             >
               Sign in
             </button>
           </form>
           <div className="mt-4 text-center">
-            <div className="my-4 flex items-center">
+            <div className="my-6 flex items-center">
               <div className="flex-grow border-t border-gray-300"></div>
               <span className="mx-4 text-gray-500">Or</span>
               <div className="flex-grow border-t border-gray-300"></div>
@@ -122,7 +122,7 @@ export default function Login() {
             <button
               onClick={handleGoogleSignIn}
               disabled={loading}
-              className="mt-2 flex w-full items-center justify-center rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
+              className="mt-2 flex w-full items-center justify-center rounded-[20px] border border-gray-300 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
             >
               <GoogleIcon className="mr-2 size-6" />
               Sign in with Google

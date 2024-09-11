@@ -108,7 +108,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-full bg-indigo-500 py-2 text-white hover:bg-indigo-600 disabled:opacity-50"
+              className="hover:bg-primary bg-primary w-full rounded-full py-2 text-white disabled:opacity-50"
             >
               Sign in
             </button>
@@ -131,7 +131,7 @@ export default function Login() {
           <div className="mt-4 text-center">
             <p className="text-sm">
               If you don’t have an account,{' '}
-              <a href="/register" className="text-indigo-500 hover:underline">
+              <a href="/register" className="text-primary hover:underline">
                 Sign up here!
               </a>
             </p>

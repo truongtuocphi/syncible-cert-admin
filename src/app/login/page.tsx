@@ -15,8 +15,6 @@ import {
   provider,
 } from '@/lib/firebase';
 
-import Banner_login from '../../../public/banner_login.png';
-
 export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -36,6 +34,7 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
@@ -83,27 +82,31 @@ export default function Login() {
                 type="email"
                 placeholder="Enter E-mail"
                 required
-                className="mt-2 w-full rounded-xl border border-gray-300 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className={`mt-2 w-full rounded-xl border ${error ? 'border-red-500' : 'border-gray-300'} bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
               <label htmlFor="password" className="block text-left font-semibold">
-                Password
+                <div className="flex items-center justify-between">
+                  <div>Password</div>
+                  <div className="font-normal text-primary">Forgot password?</div>
+                </div>
               </label>
               <input
                 id="password"
                 type="password"
                 placeholder="Enter Password"
                 required
-                className="mt-2 w-full rounded-xl border border-gray-300 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className={`mt-2 w-full rounded-xl border ${error ? 'border-red-500' : 'border-gray-300'} bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500`}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              {error && <p className="mt-2 text-red-500">{error}</p>}
             </div>
 
-            {error && <p className="mt-2 text-center text-red-500">{error}</p>}
+            {/* {error && <p className="mt-2 text-center text-red-500">{error}</p>} */}
 
             <button
               type="submit"

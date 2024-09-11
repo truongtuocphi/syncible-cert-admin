@@ -14,13 +14,19 @@ import {
   signInWithPopup,
   provider,
 } from '@/lib/firebase';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -94,16 +100,31 @@ export default function Login() {
                   <div className="font-normal text-primary">Forgot password?</div>
                 </div>
               </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Enter Password"
-                required
-                className={`mt-2 w-full rounded-xl border ${error ? 'border-red-500' : 'border-gray-300'} bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500`}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
-              {error && <p className="mt-2 text-red-500">{error}</p>}
+              <div className="relative w-full">
+                <input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Enter Password"
+                  required
+                  className={`mt-2 w-full rounded-xl border ${
+                    error ? 'border-red-500' : 'border-gray-300'
+                  } bg-white px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span
+                  className="absolute inset-y-0 right-4 top-2 flex cursor-pointer items-center"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash className="text-gray-500" />
+                  ) : (
+                    <FaEye className="text-gray-500" />
+                  )}
+                </span>
+
+                {error && <p className="mt-2 text-red-500">{error}</p>}
+              </div>
             </div>
 
             {/* {error && <p className="mt-2 text-center text-red-500">{error}</p>} */}

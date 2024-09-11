@@ -52,7 +52,7 @@ export default function Explorer() {
       <div className="min-h-screen flex-col items-center pt-16">
         <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
           <div className="relative flex h-72 w-full items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 to-indigo-500 shadow-lg">
-            <div className="text-5xl font-bold">Find your certificate.</div>
+            <div className="text-5xl font-bold">Tìm chứng chỉ của bạn.</div>
             <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-2">
               <input
                 type="text"
@@ -83,7 +83,7 @@ export default function Explorer() {
             <div className="flex h-screen w-full items-center justify-center">
               <div className="flex flex-col items-center gap-2">
                 <BiSolidCommentError className="text-7xl text-white" />
-                <div className="text-lg font-semibold text-white">No Data Found</div>
+                <div className="text-lg font-semibold text-white">Không tìm thấy dữ liệu</div>
               </div>
             </div>
           ) : data ? (
@@ -99,7 +99,7 @@ export default function Explorer() {
             <div className="flex h-screen w-full items-center justify-center">
               <div className="flex flex-col items-center gap-2">
                 <HiTemplate className="text-7xl text-white" />
-                <div className="text-lg font-semibold text-white">No Item</div>
+                <div className="text-lg font-semibold text-white">Không tìm thấy</div>
               </div>
             </div>
           )}

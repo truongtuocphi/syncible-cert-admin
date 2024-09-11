@@ -68,7 +68,7 @@ export default function Login() {
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
       >
         <div className="p-3">
-          <Image src="/SyncibleAdmin.png" alt="logo" width={100} height={30} />
+          <Image src="/SyncibleAdmin.png" alt="logo" width={110} height={30} />
         </div>
         <div className="mx-auto mt-16 w-full max-w-lg p-3">
           <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>
@@ -83,7 +83,7 @@ export default function Login() {
                 type="email"
                 placeholder="Enter E-mail"
                 required
-                className="w-full rounded-xl border border-gray-300 bg-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="mt-2 w-full rounded-xl border border-gray-300 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -97,7 +97,7 @@ export default function Login() {
                 type="password"
                 placeholder="Enter Password"
                 required
-                className="w-full rounded-xl border border-gray-300 bg-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="mt-2 w-full rounded-xl border border-gray-300 bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -108,7 +108,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-[20px] bg-primary py-2 text-white hover:bg-primary disabled:opacity-50"
+              className="w-full rounded-[20px] bg-primary py-3 text-white hover:bg-primary disabled:opacity-50"
             >
               Sign in
             </button>
@@ -122,7 +122,7 @@ export default function Login() {
             <button
               onClick={handleGoogleSignIn}
               disabled={loading}
-              className="mt-2 flex w-full items-center justify-center rounded-[20px] border border-gray-300 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
+              className="mt-2 flex w-full items-center justify-center rounded-[20px] border border-gray-300 bg-gray-100 px-4 py-3 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
             >
               <GoogleIcon className="mr-2 size-6" />
               Sign in with Google
@@ -131,7 +131,7 @@ export default function Login() {
           <div className="mt-4 text-center">
             <p className="text-sm">
               If you don’t have an account,{' '}
-              <a href="/register" className="text-primary hover:underline">
+              <a href="/register" className="font-bold text-primary hover:underline">
                 Sign up here!
               </a>
             </p>

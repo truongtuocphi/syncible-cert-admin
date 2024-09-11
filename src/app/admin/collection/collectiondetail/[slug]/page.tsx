@@ -51,11 +51,11 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
         </div>
       </Link>
 
-      {/* <div className="mt-4 h-fit w-full rounded-lg bg-white p-4">
+      <div className="mt-4 h-fit w-full rounded-lg bg-white p-4">
         <div className="w-full">
           <div className="relative h-80 w-full">
             <Image
-              src={data.bannerImage}
+              src={data.bannerImage || ''}
               width={500}
               height={300}
               alt={'Banner'}
@@ -64,7 +64,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
 
             <div className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 translate-y-[40%] rounded-full border-[0.5px] border-gray-400 bg-white">
               <Image
-                src={data.logoImage}
+                src={data.logoImage || ''}
                 width={144}
                 height={144}
                 alt={'Banner'}
@@ -99,7 +99,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             onItemsCountChange={handleItemsCountChange}
           />
         </div>
-      </div> */}
+      </div>
     </>
   );
 }

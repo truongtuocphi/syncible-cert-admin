@@ -12,9 +12,9 @@ import { RiShareBoxLine } from 'react-icons/ri';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import CopyButton from '@/components/common/coppyText/CopyButton';
 import Loading from '@/components/common/loading/Loading';
+import ContractData from '@/components/pages/admin/ContractData';
 import { CollectionData } from '@/types/function';
 import fetchDataCollectionById from '@/utils/fetchDataCollectionById';
-import ContractData from '@/components/pages/admin/ContractData';
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<CollectionData | null>(null);
@@ -108,7 +108,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <h2 className="text-lg font-bold text-gray-700">Contract Address</h2>
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-semibold text-gray-500">{data.contractAddress}</p>
-                  <CopyButton textToCopy={data.contractAddress} />
+                  <CopyButton textToCopy={data.contractAddress || ''} />
                   <Link
                     href={`https://polygonscan.com/address/${data.contractAddress}`}
                     target="_blank"
@@ -123,7 +123,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <h2 className="text-lg font-bold text-gray-700">Collection Owner</h2>
                 <div className="flex items-center gap-2">
                   <p className="text-sm font-semibold text-gray-500">{data.address}</p>
-                  <CopyButton textToCopy={data.address} />
+                  <CopyButton textToCopy={data.address || ''} />
                 </div>
               </div>
 
@@ -140,7 +140,7 @@ export default function Page({ params }: { params: { slug: string } }) {
             <div className="h-fit w-full rounded-lg border-[0.5px] border-dashed border-gray-400 p-3">
               <div className="relative h-56">
                 <Image
-                  src={data.bannerImage}
+                  src={data.bannerImage || ''}
                   alt="Banner Preview"
                   width={600}
                   height={200}
@@ -148,7 +148,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 />
                 <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border-[0.5px] border-gray-400 bg-white">
                   <Image
-                    src={data.logoImage}
+                    src={data.logoImage || ''}
                     alt="Logo Preview"
                     width={112}
                     height={112}

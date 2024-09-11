@@ -51,7 +51,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
         </div>
       </Link>
 
-      <div className="mt-4 h-fit w-full rounded-lg bg-white p-4">
+      {/* <div className="mt-4 h-fit w-full rounded-lg bg-white p-4">
         <div className="w-full">
           <div className="relative h-80 w-full">
             <Image
@@ -99,7 +99,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             onItemsCountChange={handleItemsCountChange}
           />
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

@@ -14,10 +14,7 @@ import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { CollectionData } from '@/types/function';
-import configDate from '@/utils/configDate';
 import fetchDataFirebase from '@/utils/featDataFirebase';
-
-const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
 export default function Explorer() {
   const [idCertificate, setIdCertificate] = useState<string>('');
@@ -56,14 +53,14 @@ export default function Explorer() {
             <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-2">
               <input
                 type="text"
-                placeholder="Your Certificate ID"
+                placeholder="Mã chứng chỉ của bạn"
                 value={idCertificate}
                 onChange={(e) => setIdCertificate(e.target.value)}
                 className="w-80 border-r-[0.5px] border-gray-300 px-4 py-6 text-black outline-none"
               />
               <input
                 type="text"
-                placeholder="Your Certificate Name"
+                placeholder="Họ và tên của bạn"
                 value={nameCertificate}
                 onChange={(e) => setNameCertificate(e.target.value)}
                 className="w-72 px-4 py-6 text-black outline-none"
@@ -83,7 +80,7 @@ export default function Explorer() {
             <div className="flex h-screen w-full items-center justify-center">
               <div className="flex flex-col items-center gap-2">
                 <BiSolidCommentError className="text-7xl text-white" />
-                <div className="text-lg font-semibold text-white">Không tìm thấy dữ liệu</div>
+                <div className="text-lg font-semibold text-white">Không tìm thấy</div>
               </div>
             </div>
           ) : data ? (
@@ -99,7 +96,7 @@ export default function Explorer() {
             <div className="flex h-screen w-full items-center justify-center">
               <div className="flex flex-col items-center gap-2">
                 <HiTemplate className="text-7xl text-white" />
-                <div className="text-lg font-semibold text-white">Không tìm thấy</div>
+                <div className="text-lg font-semibold text-white">Chứng chỉ sẽ hiện thị ở đây.</div>
               </div>
             </div>
           )}

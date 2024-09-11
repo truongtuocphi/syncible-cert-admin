@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable no-console */
 'use client';
@@ -34,12 +35,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
 
   const [name, setName] = useState('');
   const [certificateID, setCertificateID] = useState('');
-  const [organizationName, setOrganizationName] = useState('');
-  const [headName, setHeadName] = useState('');
-  const [headPosition, setHeadPosition] = useState('');
-  const [headSignature, setHeadSignature] = useState('');
-  const [headLogo, setHeadLogo] = useState('');
-  const [description, setDescription] = useState('');
   const [date, setDate] = useState('');
   const [blockchainType, setBlockchainType] = useState('');
   const [templateURL, setTemplateURL] = useState('');
@@ -56,44 +51,25 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
         const result = await response.json();
         setData(result);
 
+        console.log('result.name', result.name);
+
         setName(result.name);
 
         const attributes = result.attributes;
+
+        console.log(attributes);
+
         setCertificateID(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Certificate ID')
+          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Certificate ID')
             .value
         );
-        setOrganizationName(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Organization Name')
-            .value
-        );
-        setHeadName(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Head Name').value
-        );
-        setHeadPosition(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Head Position')
-            .value
-        );
-        setHeadSignature(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Head Signature')
-            .value
-        );
-        setHeadLogo(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Position').value
-        );
-        setDescription(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Description').value
-        );
-        setDate(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Date').value
-        );
+        setDate(attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Date').value);
         setBlockchainType(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Blockchain Type')
+          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Blockchain Type')
             .value
         );
         setTemplateURL(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type === 'Template URL')
-            .value
+          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Template URL').value
         );
       } catch (error) {
         console.error('Fetch error:', error);
@@ -101,7 +77,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
     };
 
     fetchData();
-  }, [slugPost, headerURL]);
+  }, [slugPost]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -145,28 +121,14 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <div className="flex flex-col justify-between md:flex-row">
         <div className="h-[170px] w-3/5 sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
-          {/* <CertificatePreview
-            headerURL={headerURL}
-            description={description}
-            previewImage={`${headerURL}/ipfs/${templateURL}`}
-            previewHeadLogo={`${headerURL}/ipfs/${headLogo}`}
-            certificateNumber={certificateID}
-            authorizingOrgName={organizationName}
-            headOrgPosition={headPosition}
-            headOrgName={headName}
-            previewSignature={`${headerURL}/ipfs/${headSignature}`}
-            name={name.split('Certificate for')[1].trim()}
-            date={configDate(date)}
-          /> */}
+          <CertificatePreview previewImage={templateURL} name={name} />
         </div>
         <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-[40%]">
-          <h3 className="text-3xl font-bold text-black">{name}</h3>
-          <p className="mt-2 text-lg">Certificate name: {description}</p>
-          <textarea
-            className="mt-4 h-32 w-full rounded border border-gray-300 p-2"
-            value={description}
-            readOnly
-          />
+          <h3 className="text-3xl font-bold text-black">
+            {name?.split('Certificate for')[1]?.trim()}
+          </h3>
+          {/* <p className="mt-2 text-lg">Certificate name: {description}</p> */}
+          <textarea className="mt-4 h-32 w-full rounded border border-gray-300 p-2" readOnly />
         </div>
       </div>
       <div className="mt-6 flex flex-col justify-between md:flex-row">

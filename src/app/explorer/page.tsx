@@ -41,6 +41,8 @@ export default function Explorer() {
     setLoading(false);
   };
 
+  console.log(data);
+
   return (
     <>
       <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">
@@ -88,7 +90,7 @@ export default function Explorer() {
               <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
                 <CertificatePreview
                   previewImage={data.mintData[0].certData.templateURL}
-                  name={data.mintData[0].fullName.split('Certificate for')}
+                  name={data.mintData[0].fullname}
                 />
               </Link>
             </div>

@@ -15,38 +15,46 @@ const fetchDataFirebase = async (
     const snapshot = await get(dataRef);
 
     if (snapshot.exists()) {
-      const data = snapshot.val();
+      const data = Object.values(snapshot.val());
 
-      // Nếu có idCertificate, lọc theo idCertificate trong lớp mintData
+      // Tìm kiếm theo certificateId nếu được cung cấp
       if (idCertificate) {
         for (const key in data) {
-          if (data[key].mintData) {
-            const filteredData = data[key].mintData.find(
-              (mint: any) => mint.certificateId === idCertificate
-            );
+          const entry = data[key];
 
-            if (filteredData) {
-              // Nếu có nameCertificate, tiếp tục lọc trong mintData
+          // Kiểm tra xem 'entry' có phải là object và có thuộc tính 'mintData'
+          if (typeof entry === 'object' && entry !== null && 'mintData' in entry) {
+            const entryWithMintData = entry as { mintData: any[] };
+
+            // Lọc các mintData theo certificateId
+            const filteredData = entryWithMintData.mintData.filter((mint: any) => {
+              return mint.certificateId === idCertificate;
+            });
+
+            if (filteredData.length > 0) {
+              // Nếu nameCertificate cũng được cung cấp, lọc tiếp theo tên
               if (nameCertificate) {
-                const nameFilteredData = data[key].mintData.find(
+                const nameFilteredData = filteredData.filter(
                   (mint: any) =>
-                    mint.fullName === nameCertificate ||
+                    mint.fullname === nameCertificate ||
                     mint.certData.description === nameCertificate
                 );
 
-                if (nameFilteredData) {
+                if (nameFilteredData.length > 0) {
                   return {
-                    ...data[key],
-                    mintData: [nameFilteredData], // Chỉ trả về kết quả phù hợp
+                    ...entryWithMintData,
+                    mintData: nameFilteredData, // Chỉ trả về các dữ liệu đã lọc
                   };
                 } else {
                   console.log('No data found for this certificate name within the specified ID');
                   return null;
                 }
               }
+
+              // Nếu không có nameCertificate, trả về các dữ liệu theo certificateId
               return {
-                ...data[key],
-                mintData: [filteredData], // Chỉ trả về kết quả phù hợp
+                ...entryWithMintData,
+                mintData: filteredData,
               } as CollectionData;
             }
           }
@@ -56,19 +64,25 @@ const fetchDataFirebase = async (
         return null;
       }
 
-      // Nếu chỉ có nameCertificate, lọc trong tất cả dữ liệu
+      // Nếu không có idCertificate, tìm kiếm theo nameCertificate
       if (nameCertificate) {
         for (const key in data) {
-          if (data[key].mintData) {
-            const nameFilteredData = data[key].mintData.find(
+          const entry = data[key];
+
+          // Kiểm tra xem 'entry' có phải là object và có thuộc tính 'mintData'
+          if (typeof entry === 'object' && entry !== null && 'mintData' in entry) {
+            const entryWithMintData = entry as { mintData: any[] };
+
+            // Tìm kiếm theo fullname hoặc description
+            const nameFilteredData = entryWithMintData.mintData.filter(
               (mint: any) =>
-                mint.fullName === nameCertificate || mint.certData.description === nameCertificate
+                mint.fullname === nameCertificate || mint.certData.description === nameCertificate
             );
 
-            if (nameFilteredData) {
+            if (nameFilteredData.length > 0) {
               return {
-                ...data[key],
-                mintData: [nameFilteredData], // Chỉ trả về kết quả phù hợp
+                ...entryWithMintData,
+                mintData: nameFilteredData, // Trả về các dữ liệu đã lọc theo tên
               } as CollectionData;
             }
           }
@@ -78,8 +92,8 @@ const fetchDataFirebase = async (
         return null;
       }
 
-      // Trả về tất cả dữ liệu nếu không có bộ lọc
-      return data as CollectionData;
+      // Nếu không có điều kiện nào được đưa ra, trả về toàn bộ dữ liệu
+      return data as unknown as CollectionData;
     } else {
       console.log('No data available');
       return null;

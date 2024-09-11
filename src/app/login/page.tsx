@@ -55,26 +55,28 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen">
-      <div className="hidden w-2/5 items-center justify-center bg-[#F5F7FF] p-4 md:flex md:flex-col">
-        <Image src={Banner_login} alt="Login Image" className="size-64 object-cover" priority />
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-black">Award students NFT Certificates!</h2>
-          <p className="mt-2 text-gray-500">
-            School members can initiate and approve the creation of NFT Certificates for qualified
-            students.
-          </p>
+    <div className="relative flex min-h-screen overflow-hidden p-4">
+      <video
+        className="absolute left-0 top-0 min-h-screen w-full object-cover"
+        src="/video/Cubes_Diagonal_3840x2160.mp4"
+        autoPlay
+        loop
+        muted
+      ></video>
+      <div
+        className="z-10 w-full p-10 text-black backdrop-blur-sm lg:w-1/3 lg:p-10"
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
+      >
+        <div>
+          <Image src="/SyncibleAdmin.png" alt="logo" width={100} height={30} />
         </div>
-      </div>
-
-      <div className="flex w-full items-center justify-center bg-white p-3 text-black md:w-3/5 lg:p-6">
-        <div className="mx-auto w-full max-w-lg p-6">
+        <div className="mx-auto mt-7 w-full max-w-lg p-5">
           <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>
           {loading && <Loading />}
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-left font-semibold">
-                E-mail
+                Email
               </label>
               <input
                 id="email"
@@ -112,7 +114,11 @@ export default function Login() {
             </button>
           </form>
           <div className="mt-4 text-center">
-            <p className="text-sm">Or</p>
+            <div className="my-4 flex items-center">
+              <div className="flex-grow border-t border-gray-300"></div>
+              <span className="mx-4 text-gray-500">Or</span>
+              <div className="flex-grow border-t border-gray-300"></div>
+            </div>
             <button
               onClick={handleGoogleSignIn}
               disabled={loading}

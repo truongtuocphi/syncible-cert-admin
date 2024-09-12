@@ -1,15 +1,17 @@
 'use client';
 
 import { useState } from 'react';
+
 import { FirebaseError } from 'firebase/app';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
-import { auth, db, set, ref } from '@/lib/firebase';
 import Link from 'next/link';
-import { IoIosArrowBack } from 'react-icons/io';
+import { useRouter } from 'next/navigation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { IoIosArrowBack } from 'react-icons/io';
+
 import { GoogleIcon } from '@/assets/icons';
+import { auth, db, set, ref } from '@/lib/firebase';
 import { signInWithPopup, provider } from '@/lib/firebase';
 
 interface FormData {
@@ -196,7 +198,7 @@ export default function Register() {
               </Link>
               <h1 className="text-center text-2xl font-bold">Sign up to Syncible!</h1>
             </div>
-            {/* {success && <p className="text-green-500">{success}</p>} */}
+            {success && <p className="text-green-500">{success}</p>}
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="flex items-start gap-4">
                 <div>

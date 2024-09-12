@@ -20,7 +20,7 @@ export default function Card({ data }: any) {
 
         <div className="mt-10 flex flex-col gap-6">
           <h2 className="text-lg font-bold text-gray-800">{data.title}</h2>
-          <div className="w-1/5 border-[2px] border-[#C9EAF3] shadow-md shadow-[#C9EAF3]"></div>
+          <div className="w-1/5 border-[2px] border-primary shadow-md shadow-primary"></div>
           <p className="text-sm text-gray-500">{data.des}</p>
         </div>
       </div>

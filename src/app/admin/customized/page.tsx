@@ -70,38 +70,33 @@ const headerURL = 'https://fuchsia-fancy-orangutan-869.mypinata.cloud/ipfs';
 const predefinedTemplates = [
   {
     id: 1,
-    imageUrl: 'QmTu4V9dSaQB646ztpanTwzznJfvuhrR5mtfRPv7Xm5NzE',
+    imageUrl: 'QmTSo1QyvYhb6csz2p46mkdVz7ZoHMwepDgDBTzkLeJBjh',
     name: 'Certificate 1',
   },
   {
     id: 2,
-    imageUrl: 'QmS8tsyzFHkt1rh5JBw6j6Rjued71NY6vrcdTqaLdceLvx',
+    imageUrl: 'QmPq7ZThe7BV6jD1TrvcXTbD8XLT7R9JPQtyRHKkcDbkSk',
     name: 'Certificate 2',
   },
   {
     id: 3,
-    imageUrl: 'QmQW65mTtMpbEpKM9bTDMvkLhthtXk3uGE2HPSbE8Gn5WH',
+    imageUrl: 'QmQuUeJXHpfmGaHbSEXX913Hyq8Nv8e4Fkojaw1KpJRk2B',
     name: 'Certificate 3',
   },
   {
     id: 4,
-    imageUrl: 'QmcjRNfDYLp1L4RN7YzGX9nE6ECbet3MTEJanji8NUudnJ',
+    imageUrl: 'QmPp9J3sYw4pcSU1qPYnTpAFGbwyUWFkUDtAF1Cb8hU2ao',
     name: 'Certificate 4',
   },
   {
     id: 5,
-    imageUrl: 'Qmc6xgr71Tn3wVqhdBixv5Ca62ysQXek8m92dEZGneKDPs',
+    imageUrl: 'QmbNVR9u4KPxu5DygVLpR18bRo1Ar2b47waUNFykgZRz3P',
     name: 'Certificate 5',
   },
   {
     id: 6,
-    imageUrl: 'QmRNQQgCRPSP54XUJH5P6aHJAoQGL53K1Mt9kowuDTtXA7',
+    imageUrl: 'QmPtdg862USmusjyKc2rcgCyv6sXVMamjoMNuxXEpTeXeN',
     name: 'Certificate 6',
-  },
-  {
-    id: 7,
-    imageUrl: 'QmX7X9Y4GLv6xhCfjR4a1LWbYiB1m8467asyCPpjDb5NDy',
-    name: 'Certificate 7',
   },
 ];
 

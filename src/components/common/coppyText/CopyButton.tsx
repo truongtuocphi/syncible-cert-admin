@@ -19,7 +19,7 @@ const CopyButton = ({ textToCopy }: { textToCopy: string }) => {
 
   return (
     <div onClick={handleCopy} className="cursor-pointer">
-      {copied ? <LuCopyCheck className="text-blue-500" /> : <LuCopy className="text-blue-500" />}
+      {copied ? <LuCopyCheck className="text-primary" /> : <LuCopy className="text-primary" />}
     </div>
   );
 };

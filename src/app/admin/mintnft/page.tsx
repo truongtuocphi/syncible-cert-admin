@@ -267,11 +267,11 @@ const Experience = () => {
         <div className="space-y-6">
           <div className="flex items-center gap-2">
             <Link href={'/admin'}>
-              <ButtonPrimary className="size-10 rounded-lg p-2">
+              <ButtonPrimary className="size-10 rounded-lg p-2 text-white">
                 <FaArrowLeft />
               </ButtonPrimary>
             </Link>
-            <h1 className="text-2xl font-semibold text-white">Quay lại</h1>
+            <h1 className="text-2xl font-semibold">Quay lại</h1>
           </div>
           <div className="flex space-x-6">
             <form onSubmit={handleSubmit} className="w-full sm:w-1/2">

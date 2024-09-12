@@ -74,6 +74,13 @@ const Experience = () => {
     fetchData();
   }, [address]);
 
+  useEffect(() => {
+    if (selectedContract.length > 0) {
+      // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
+      setcollectionContractAddress(selectedContract[0].contractAddress);
+    }
+  }, [selectedContract]);
+
   const handleDrop = (
     e: React.DragEvent<HTMLDivElement>,
     setImage: React.Dispatch<React.SetStateAction<string | null>>
@@ -154,12 +161,12 @@ const Experience = () => {
               fullname: `Certificate for ${data.fullname}` || 'Default Name',
               tokenURI: tokenLink || 'Default tokenLink',
               attributes: [
-                { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
-                { trait_type: 'Role', value: role || '' },
-                { trait_type: 'Date', value: issuedDate || '' },
+                { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
+                { trait_type: 'Role', value: role || 'NaN' },
+                { trait_type: 'Date', value: issuedDate || 'NaN' },
                 {
                   trait_type: 'Template URL',
-                  value: bannerImage || '',
+                  value: bannerImage || 'NaN',
                 },
               ],
             };
@@ -264,7 +271,7 @@ const Experience = () => {
                 <FaArrowLeft />
               </ButtonPrimary>
             </Link>
-            <h1 className="text-2xl font-semibold text-gray-600">Quay lại</h1>
+            <h1 className="text-2xl font-semibold text-white">Quay lại</h1>
           </div>
           <div className="flex space-x-6">
             <form onSubmit={handleSubmit} className="w-full sm:w-1/2">
@@ -374,7 +381,7 @@ const Experience = () => {
                     Hủy
                   </ButtonPrimary>
                 </Link>
-                <ButtonPrimary type="submit" className="w-40" disabled={loadingButton}>
+                <ButtonPrimary type="submit" className="w-40 text-white" disabled={loadingButton}>
                   {loadingButton ? 'Đang xử lý...' : 'Tạo chứng chỉ'}
                 </ButtonPrimary>
               </div>

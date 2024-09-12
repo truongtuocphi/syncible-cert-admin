@@ -83,7 +83,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
         <div className="block text-lg font-medium text-gray-700">Thông tin CSV</div>
         <div
           onClick={handleDownload}
-          className="block cursor-pointer border-none bg-transparent text-sm font-medium text-blue-700 underline"
+          className="block cursor-pointer border-none bg-transparent text-sm font-medium text-primary underline"
         >
           Tải file CSV mẫu
         </div>
@@ -100,7 +100,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
           onChange={(e) => handleCSVChange(e)}
           accept=".csv"
           required
-          className="block w-full cursor-pointer rounded-lg border-[1px] text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-500 hover:file:bg-blue-100"
+          className="block w-full cursor-pointer rounded-lg border-[1px] text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-primary hover:file:bg-blue-100"
         />
       </div>
 

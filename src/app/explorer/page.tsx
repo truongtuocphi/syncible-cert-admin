@@ -14,10 +14,7 @@ import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { CollectionData } from '@/types/function';
-import configDate from '@/utils/configDate';
 import fetchDataFirebase from '@/utils/featDataFirebase';
-
-const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
 
 export default function Explorer() {
   const [idCertificate, setIdCertificate] = useState<string>('');
@@ -44,6 +41,8 @@ export default function Explorer() {
     setLoading(false);
   };
 
+  console.log(data);
+
   return (
     <>
       <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">
@@ -52,18 +51,18 @@ export default function Explorer() {
       <div className="min-h-screen flex-col items-center pt-16">
         <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
           <div className="relative flex h-72 w-full items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 to-indigo-500 shadow-lg">
-            <div className="text-5xl font-bold">Find your certificate.</div>
+            <div className="text-5xl font-bold">Tìm chứng chỉ của bạn.</div>
             <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-2">
               <input
                 type="text"
-                placeholder="Your Certificate ID"
+                placeholder="Mã chứng chỉ của bạn"
                 value={idCertificate}
                 onChange={(e) => setIdCertificate(e.target.value)}
                 className="w-80 border-r-[0.5px] border-gray-300 px-4 py-6 text-black outline-none"
               />
               <input
                 type="text"
-                placeholder="Your Certificate Name"
+                placeholder="Họ và tên của bạn"
                 value={nameCertificate}
                 onChange={(e) => setNameCertificate(e.target.value)}
                 className="w-72 px-4 py-6 text-black outline-none"
@@ -83,7 +82,7 @@ export default function Explorer() {
             <div className="flex h-screen w-full items-center justify-center">
               <div className="flex flex-col items-center gap-2">
                 <BiSolidCommentError className="text-7xl text-white" />
-                <div className="text-lg font-semibold text-white">No Data Found</div>
+                <div className="text-lg font-semibold text-white">Không tìm thấy</div>
               </div>
             </div>
           ) : data ? (
@@ -91,7 +90,7 @@ export default function Explorer() {
               <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
                 <CertificatePreview
                   previewImage={data.mintData[0].certData.templateURL}
-                  name={data.mintData[0].fullName.split('Certificate for')}
+                  name={data.mintData[0].fullname}
                 />
               </Link>
             </div>
@@ -99,7 +98,7 @@ export default function Explorer() {
             <div className="flex h-screen w-full items-center justify-center">
               <div className="flex flex-col items-center gap-2">
                 <HiTemplate className="text-7xl text-white" />
-                <div className="text-lg font-semibold text-white">No Item</div>
+                <div className="text-lg font-semibold text-white">Chứng chỉ sẽ hiện thị ở đây.</div>
               </div>
             </div>
           )}

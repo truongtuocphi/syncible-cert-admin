@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import { GoogleIcon } from '@/assets/icons';
 import Loading from '@/components/common/loading/Loading';
@@ -15,14 +16,17 @@ import {
   provider,
 } from '@/lib/firebase';
 
-import Banner_login from '../../../public/banner_login.png';
-
 export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -36,6 +40,7 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
     try {
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
@@ -55,68 +60,93 @@ export default function Login() {
   };
 
   return (
-    <div className="flex min-h-screen">
-      <div className="hidden w-2/5 items-center justify-center bg-[#F5F7FF] p-4 md:flex md:flex-col">
-        <Image src={Banner_login} alt="Login Image" className="size-64 object-cover" priority />
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-black">Award students NFT Certificates!</h2>
-          <p className="mt-2 text-gray-500">
-            School members can initiate and approve the creation of NFT Certificates for qualified
-            students.
-          </p>
+    <div className="relative flex min-h-screen items-center justify-start overflow-hidden px-8 py-5">
+      <video
+        className="absolute left-0 top-0 h-full w-full object-cover"
+        src="/video/Cubes_Diagonal_3840x2160.mp4"
+        autoPlay
+        loop
+        muted
+      ></video>
+      <div
+        className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:p-10 2xl:h-[850px]"
+        style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
+      >
+        <div className="p-3">
+          <Image src="/SyncibleAdmin.png" alt="logo" width={110} height={30} />
         </div>
-      </div>
-
-      <div className="flex w-full items-center justify-center bg-white p-3 text-black md:w-3/5 lg:p-6">
-        <div className="mx-auto w-full max-w-lg p-6">
+        <div className="mx-auto mt-16 w-full max-w-lg p-3">
           <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>
           {loading && <Loading />}
           <form className="space-y-4" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="email" className="block text-left font-semibold">
-                E-mail
+                Email
               </label>
               <input
                 id="email"
                 type="email"
                 placeholder="Enter E-mail"
                 required
-                className="w-full rounded-xl border border-gray-300 bg-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className={`mt-2 w-full rounded-xl border ${error ? 'border-red-500' : 'border-gray-300'} bg-white px-4 py-3 focus:outline-none focus:ring-2 focus:ring-indigo-500`}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
             <div>
               <label htmlFor="password" className="block text-left font-semibold">
-                Password
+                <div className="flex items-center justify-between">
+                  <div>Password</div>
+                  <div className="font-normal text-primary">Forgot password?</div>
+                </div>
               </label>
-              <input
-                id="password"
-                type="password"
-                placeholder="Enter Password"
-                required
-                className="w-full rounded-xl border border-gray-300 bg-gray-100 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <div className="relative w-full">
+                <input
+                  id="password"
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder="Enter Password"
+                  required
+                  className={`mt-2 w-full rounded-xl border ${
+                    error ? 'border-red-500' : 'border-gray-300'
+                  } bg-white px-4 py-3 pr-10 focus:outline-none focus:ring-2 focus:ring-indigo-500`}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <span
+                  className="absolute inset-y-0 right-4 top-2 flex cursor-pointer items-center"
+                  onClick={togglePasswordVisibility}
+                >
+                  {showPassword ? (
+                    <FaEyeSlash className="text-gray-500" />
+                  ) : (
+                    <FaEye className="text-gray-500" />
+                  )}
+                </span>
+
+                {error && <p className="mt-2 text-red-500">{error}</p>}
+              </div>
             </div>
 
-            {error && <p className="mt-2 text-center text-red-500">{error}</p>}
+            {/* {error && <p className="mt-2 text-center text-red-500">{error}</p>} */}
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-full bg-indigo-500 py-2 text-white hover:bg-indigo-600 disabled:opacity-50"
+              className="w-full rounded-[20px] bg-primary py-3 text-white hover:bg-primary disabled:opacity-50"
             >
               Sign in
             </button>
           </form>
           <div className="mt-4 text-center">
-            <p className="text-sm">Or</p>
+            <div className="my-6 flex items-center">
+              <div className="flex-grow border-t border-gray-300"></div>
+              <span className="mx-4 text-gray-500">Or</span>
+              <div className="flex-grow border-t border-gray-300"></div>
+            </div>
             <button
               onClick={handleGoogleSignIn}
               disabled={loading}
-              className="mt-2 flex w-full items-center justify-center rounded-full border border-gray-300 bg-gray-100 px-4 py-2 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
+              className="mt-2 flex w-full items-center justify-center rounded-[20px] border border-gray-300 bg-gray-100 px-4 py-3 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
             >
               <GoogleIcon className="mr-2 size-6" />
               Sign in with Google
@@ -124,8 +154,8 @@ export default function Login() {
           </div>
           <div className="mt-4 text-center">
             <p className="text-sm">
-              If you don’t have an account,{' '}
-              <a href="/register" className="text-indigo-500 hover:underline">
+              Don&rsquo;t have an account?{' '}
+              <a href="/register" className="font-bold text-primary hover:underline">
                 Sign up here!
               </a>
             </p>

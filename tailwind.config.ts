@@ -29,6 +29,9 @@ const config = {
           '0px 0px 10px 0px rgba(0, 0, 0, 0.07), 0px 20px 25px -5px rgba(0, 0, 0, 0.1)',
       },
       colors: {
+        blueCustom: '#b3e6f7',
+        firstWhiteCustom: '#dff5fb',
+        whiteCustom: '#f4faf7',
         customTeal: '#31CBBA',
         brand: {
           '10': 'rgba(246, 255, 247, 1)',

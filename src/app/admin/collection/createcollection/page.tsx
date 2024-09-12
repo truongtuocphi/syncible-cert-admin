@@ -162,7 +162,7 @@ const CreateCollection: React.FC = () => {
                 accept="image/*"
                 onChange={(e) => handleImageChange(e, setLogoImage)}
                 required
-                className="block w-full cursor-pointer text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-500 hover:file:bg-blue-100"
+                className="block w-full cursor-pointer text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-primary hover:file:bg-blue-100"
               />
             </div>
           </div>
@@ -253,7 +253,7 @@ const CreateCollection: React.FC = () => {
           {/* Submit Button */}
           <ButtonPrimary
             type="submit"
-            className="w-full py-3 text-lg font-semibold"
+            className="w-full py-3 text-lg font-semibold text-white"
             disabled={isLoading}
           >
             {isLoading ? 'Creating...' : 'Create Collection'}

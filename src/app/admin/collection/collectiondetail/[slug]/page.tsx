@@ -43,7 +43,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
     <>
       <Link href={`/admin/collection/`}>
         <div className="flex items-center gap-2">
-          <ButtonPrimary className="rounded-lg bg-blue-500">
+          <ButtonPrimary className="rounded-lg">
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
 
@@ -55,7 +55,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
         <div className="w-full">
           <div className="relative h-80 w-full">
             <Image
-              src={data.bannerImage}
+              src={data.bannerImage || ''}
               width={500}
               height={300}
               alt={'Banner'}
@@ -64,7 +64,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
 
             <div className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 translate-y-[40%] rounded-full border-[0.5px] border-gray-400 bg-white">
               <Image
-                src={data.logoImage}
+                src={data.logoImage || ''}
                 width={144}
                 height={144}
                 alt={'Banner'}
@@ -84,12 +84,12 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
         <div className="flex items-center justify-center gap-16">
           <div className="flex flex-col text-center">
             <span className="text-xl font-bold text-gray-600">Items</span>
-            <span className="text-xl font-bold text-blue-500">{itemsCount}</span>
+            <span className="text-xl font-bold text-primary">{itemsCount}</span>
           </div>
 
           <div className="flex flex-col text-center">
             <span className="text-xl font-bold text-gray-600">Owner</span>
-            <span className="text-xl font-bold text-blue-500">1</span>
+            <span className="text-xl font-bold text-primary">1</span>
           </div>
         </div>
 

@@ -11,6 +11,7 @@ import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
 import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
 import Modal from '@/components/pages/admin/Modal';
@@ -116,6 +117,7 @@ const Experience = () => {
 
   const handleGetDataMintSingle = (data: any[]) => {
     setDataFromMintSingle(data);
+    setCoppyCsvDataFromChild([]);
   };
 
   useEffect(() => {
@@ -124,6 +126,7 @@ const Experience = () => {
         (data) => data.fullname && data.fullname.trim() !== ''
       );
       setCoppyCsvDataFromChild(validData);
+      setDataFromMintSingle([]);
     } else {
       setCoppyCsvDataFromChild([]);
     }
@@ -249,8 +252,6 @@ const Experience = () => {
 
   if (loading) router.push(`/admin/collection/collectiondetail`);
 
-  // console.log('cc', dataFromMintSingle);
-
   return (
     <>
       {typePage == null ? (
@@ -367,7 +368,7 @@ const Experience = () => {
               <div className="mt-4 flex items-center justify-end gap-4">
                 <Link href={'/admin'}>
                   <ButtonPrimary
-                    className="w-40 border-2 border-blue-500 bg-white text-blue-500"
+                    className="w-40 border-2 border-primary bg-white text-primary"
                     disabled={loadingButton}
                   >
                     Hủy
@@ -387,12 +388,13 @@ const Experience = () => {
               <h2 className="text-lg font-bold text-gray-600">Xem trước</h2>
               <div className="mt-2 h-fit w-full overflow-hidden rounded-lg border-[0.5px] border-dashed border-gray-400">
                 {bannerImage ? (
-                  <Image
-                    src={bannerImage}
-                    alt="Logo Preview"
-                    width={112}
-                    height={112}
-                    className="h-80 w-full"
+                  <CertificatePreview
+                    previewImage={bannerImage}
+                    name={
+                      typePage === 'mintbulk'
+                        ? coppyCsvDataFromChild[0]?.fullname
+                        : dataFromMintSingle[0]?.fullname
+                    }
                   />
                 ) : (
                   <div className="relative h-96 bg-gray-50">

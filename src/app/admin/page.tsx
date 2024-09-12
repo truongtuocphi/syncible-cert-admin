@@ -13,23 +13,23 @@ const listCard = [
   //   link: '/admin/filestorage',
   // },
   {
-    title: 'Quản lý Chứng chỉ Số',
-    des: 'Quản lý chứng chỉ số được đúc của bạn tại đây',
-    icon: <MdCollectionsBookmark className="text-2xl text-white" />,
-    titleButton: 'Tạo ngay',
-    link: '/admin/collection',
-  },
-  {
-    title: 'Tùy chỉnh mẫu chứng chỉ Số',
+    title: 'Tùy chỉnh mẫu chứng chỉ',
     des: 'Chỉnh sửa giao diện và chuyên về chủ đề của riêng bạn. Thêm logo, màu sắc và hình ảnh của bạn để phản ánh thương hiệu của bạn.',
-    icon: <MdOutlineDashboardCustomize className="text-2xl text-white" />,
+    icon: <MdOutlineDashboardCustomize className="text-2xl text-gray-600" />,
     titleButton: 'Tùy chỉnh ở đây',
     link: '/admin/customized',
   },
   {
-    title: 'Tạo chứng chỉ số',
+    title: 'Quản lý Chứng chỉ',
+    des: 'Quản lý chứng chỉ số được đúc của bạn tại đây',
+    icon: <MdCollectionsBookmark className="text-2xl text-gray-600" />,
+    titleButton: 'Tạo ngay',
+    link: '/admin/collection',
+  },
+  {
+    title: 'Tạo chứng chỉ',
     des: 'Tạo chứng chỉ số của bạn',
-    icon: <GiDiploma className="text-2xl text-white" />,
+    icon: <GiDiploma className="text-2xl text-gray-600" />,
     titleButton: 'Tạo chứng chỉ số',
     link: '/admin/mintnft',
   },
@@ -44,7 +44,7 @@ const HomeAdmin = () => {
           Tạo chứng chỉ của riêng bạn một cách dễ dàng hơn với các bước bên dưới
         </p>
       </div>
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 ">
+      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {listCard.map((item, index) => {
           return <Card data={item} key={index} />;
         })}

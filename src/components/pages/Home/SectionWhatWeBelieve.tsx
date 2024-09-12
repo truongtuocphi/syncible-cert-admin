@@ -24,18 +24,18 @@ export default function SectionWhatWeBelieve() {
             </div>
           </div>
         </div>
-        <div className="relative z-30 flex flex-col items-center gap-10 p-20 lg:flex-row">
-          <div className="h-full w-full basis-1/2">
+        <div className="relative z-30 flex flex-col items-center gap-10 lg:gap-20 p-20 lg:flex-row">
+          <div className="h-full w-full basis-1/2 lg:basis-[45%]">
             <Image
               src="/img02.png"
               alt="placeholder photo 4"
               sizes="100vw"
               fill
-              className="h-full object-cover"
+              className="h-full object-contain"
               priority
             />
           </div>
-          <div className="w-full basis-1/2">
+          <div className="w-full basis-1/2 lg:basis-[55%]">
             <div className="flex flex-col gap-4 antialiased">
               <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>What we believe</h1>
               <div className={`${montserrat.className} font-inter w-full text-wrap`}>

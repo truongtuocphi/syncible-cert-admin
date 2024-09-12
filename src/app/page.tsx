@@ -24,13 +24,11 @@ import PolygonLogoSVG from '../../public/polygon-logo.svg';
 const Page = () => {
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <div className="fixed top-0 z-30 mt-6 w-full">
+      <div className="fixed top-0 z-30 w-full md:mt-6">
         <Navbar />
       </div>
       <div className="relative z-20 flex flex-col items-center gap-10 overflow-hidden">
-        <div
-          className={`${montserrat.className} relative w-full max-w-[90rem] `}
-        >
+        <div className={`${montserrat.className} relative w-full max-w-[90rem] `}>
           <div className="flex min-h-dvh flex-col px-6 py-6 md:px-8 md:py-10 xl:px-[6.5rem] xl:py-12">
             <div className="relative flex h-full w-full flex-col justify-center px-6 lg:flex-row lg:pt-0 flex-grow">
               <div className="flex items-center justify-center lg:basis-1/2">

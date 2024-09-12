@@ -50,6 +50,30 @@ const config = {
         },
       },
       keyframes: {
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
+        'fade-out': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+        'swipe-up-fadein': {
+          '0%': { opacity: '0', transform: 'translateY(25%)' },
+          '100%': { opacity: '1', transform: 'translateY(0px)' },
+        },
+        'swipe-down-fadein': {
+          '0%': { opacity: '0', transform: 'translateY(-25%)' },
+          '100%': { opacity: '1', transform: 'translateY(0px)' },
+        },
+        'arrow-slide': {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0)' },
+        },
+        'button-expand': {
+          '0%': { transform: 'scale(1)' },
+          '100%': { transform: 'scale(1.1)' },
+        },
         'accordion-down': {
           from: { height: '0' },
           to: { height: 'var(--radix-accordion-content-height)' },
@@ -60,8 +84,14 @@ const config = {
         },
       },
       animation: {
+        'fade-in': 'fade-in 1s ease-in-out',
+        'fade-out': 'fade-out 1s ease-in-out',
+        'swipe-up-fadein': 'swipe-up-fadein 1s ease-in-out',
+        'swipe-down-fadein': 'swipe-down-fadein 1s ease-in-out',
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
+        'arrow-slide': 'arrowSlide 0.5s ease-out',
+        'button-expand': 'buttonExpand 0.5s ease-out',
       },
     },
   },

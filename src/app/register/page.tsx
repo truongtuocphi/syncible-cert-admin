@@ -196,7 +196,7 @@ export default function Register() {
               </Link>
               <h1 className="text-center text-2xl font-bold">Sign up to Syncible!</h1>
             </div>
-            {success && <p className="text-green-500">{success}</p>}
+            {/* {success && <p className="text-green-500">{success}</p>} */}
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="flex items-start gap-4">
                 <div>

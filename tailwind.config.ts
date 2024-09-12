@@ -16,6 +16,9 @@ const config = {
       screens: { xs: '480px', '2xs': '375px', '3xs': '320px' },
       colors: {
         primary: '#836EF9',
+        blueCustom: '#b3e6f7',
+        firstWhiteCustom: '#dff5fb',
+        whiteCustom: '#f4faf7',
         customTeal: '#31CBBA',
         brand: {
           '50': '#eefbf3',

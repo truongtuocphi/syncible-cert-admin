@@ -66,7 +66,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </div>
 
                 <div className="flex w-1/2 items-center gap-2">
-                  <FaUser className="text-5xl text-blue-500" />
+                  <FaUser className="text-5xl text-primary" />
                   <div className="flex flex-col">
                     <div className="text-base text-gray-400">Owner</div>
                     <div className="text-lg font-bold text-gray-500">1</div>
@@ -114,7 +114,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <RiShareBoxLine className="text-blue-500" />
+                    <RiShareBoxLine className="text-primary" />
                   </Link>
                 </div>
               </div>

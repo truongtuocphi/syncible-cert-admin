@@ -64,7 +64,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                 </div>
               </div>
               <Link href={dataCard.link} onClick={onClose}>
-                <ButtonPrimary className="w-full">Tạo chứng chỉ</ButtonPrimary>
+                <ButtonPrimary className="w-full text-white">Tạo chứng chỉ</ButtonPrimary>
               </Link>
             </div>
           ))}

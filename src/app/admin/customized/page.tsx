@@ -169,7 +169,7 @@ export default function DefineTemplate() {
         <div className="flex items-center gap-2">
           <Link href={'/admin'}>
             <ButtonPrimary className="size-10 rounded-lg p-2">
-              <FaArrowLeft />
+              <FaArrowLeft className="text-white" />
             </ButtonPrimary>
           </Link>
           <div className="text-lg font-bold text-gray-600">Trở lại</div>
@@ -190,7 +190,7 @@ export default function DefineTemplate() {
             </div>
             <Drawer>
               <DrawerTrigger asChild>
-                <Button className="rounded-full bg-blue-500 text-white">Chọn mẫu</Button>
+                <Button className="rounded-full bg-primary text-white">Chọn mẫu</Button>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="mx-auto w-full max-w-5xl text-gray-700">
@@ -223,7 +223,7 @@ export default function DefineTemplate() {
                   </div>
                   <DrawerFooter>
                     <DrawerClose asChild>
-                      <Button className="mt-4 bg-blue-500 text-white">Chọn</Button>
+                      <Button className="mt-4 bg-primary text-white">Chọn</Button>
                     </DrawerClose>
                   </DrawerFooter>
                 </div>

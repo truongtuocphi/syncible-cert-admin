@@ -118,7 +118,7 @@ const columns: ColumnDef<Collection>[] = [
             target="_blank"
             rel="noopener noreferrer"
           >
-            <RiShareBoxLine className="text-blue-500" />
+            <RiShareBoxLine className="text-primary" />
           </Link>
         </div>
       </div>
@@ -135,10 +135,10 @@ const columns: ColumnDef<Collection>[] = [
     cell: ({ row }) => (
       <div className="flex items-center space-x-2">
         <Link href={`/admin/collection/collectiondetail/${row.getValue('id')}`}>
-          <RiShareBoxLine className="text-blue-500" />
+          <RiShareBoxLine className="text-primary" />
         </Link>
         <Link href={`/admin/collection/contractdetail/${row.getValue('id')}`}>
-          <IoEyeSharp className="text-blue-500" />
+          <IoEyeSharp className="text-primary" />
         </Link>
       </div>
     ),
@@ -272,7 +272,7 @@ export default function Collection() {
           </ButtonPrimary>
         ) : (
           <Link href={'/admin/collection/createcollection'}>
-            <ButtonPrimary className="ml-auto">Create Collection</ButtonPrimary>
+            <ButtonPrimary className="ml-auto text-white">Tạo mục</ButtonPrimary>
           </Link>
         )}
       </div>

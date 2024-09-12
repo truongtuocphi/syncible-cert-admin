@@ -35,9 +35,9 @@ const listSocialMedia = [
 ];
 
 const Links = [
-  { link_name: 'Điều khoản', url: '/' },
-  { link_name: 'Bảo mật', url: '/' },
-  { link_name: 'Liên hệ', url: '/contact' },
+  { link_name: 'Terms', url: '/terms' },
+  { link_name: 'Privacy', url: '/privacy' },
+  { link_name: 'Contact', url: '/contact' },
 ];
 
 const Footer = () => {
@@ -50,7 +50,7 @@ const Footer = () => {
             <div className="flex flex-col items-center gap-0 lg:flex-row lg:gap-6">
               {Links.map(({ link_name, url }) => (
                 <Link href={url} key={link_name}>
-                  <div className="py-3 text-xs md:text-base">{link_name}</div>
+                  <div className="py-3 text-xs md:text-base active:text-">{link_name}</div>
                 </Link>
               ))}
               <div className="hidden h-4 border-l border-[#2C2C2C] lg:block"></div>

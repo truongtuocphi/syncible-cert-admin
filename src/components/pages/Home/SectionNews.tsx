@@ -10,14 +10,14 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
-import { roboto, inter } from '@/components/ui/fonts';
+import { montserrat } from '@/components/ui/fonts';
 import SyncibleLogo from '/public/syncible-logo.svg';
 import PlaceholderPhoto from '/public/cert-template.png';
 import Image from 'next/image';
 
 const ListNews = [
   {
-    title: 'Tin tức 1',
+    title: 'Course content',
     agency_name: 'VnExpress',
     date: '2022-10-10',
     content:
@@ -29,7 +29,7 @@ const ListNews = [
     },
   },
   {
-    title: 'Tin tức 2',
+    title: 'Course content',
     agency_name: 'Soha',
     date: '2022-10-10',
     content:
@@ -41,7 +41,7 @@ const ListNews = [
     },
   },
   {
-    title: 'Tin tức 3',
+    title: 'Course content',
     agency_name: 'BBC VN',
     date: '2022-10-10',
     content:
@@ -53,10 +53,10 @@ const ListNews = [
     },
   },
   {
-    title: 'Tin tức 4',
+    title: 'Course content',
     agency_name: 'Thanh Niên',
     date: '2022-10-10',
-    content: 'Tuyệt vời.',
+    content: 'Tham gia khóa học đã giúp tôi hiểu rõ hơn về cách áp dụng kiến thức vào thực tế. Các bài giảng chi tiết và phần thực hành rất bổ ích, khiến tôi cảm thấy tự tin hơn trong công việc.',
     author: {
       name: 'Nguyễn Văn D',
       avatar: 'https://picsum.photos/200/300',
@@ -64,7 +64,7 @@ const ListNews = [
     },
   },
   {
-    title: 'Tin tức 5',
+    title: 'Course content',
     agency_name: 'Người Lao Động',
     date: '2022-10-10',
     content:
@@ -76,7 +76,7 @@ const ListNews = [
     },
   },
   {
-    title: 'Tin tức 6',
+    title: 'Course content',
     agency_name: 'Tuổi Trẻ',
     date: '2022-11-12',
     content:
@@ -88,7 +88,7 @@ const ListNews = [
     },
   },
   {
-    title: 'Tin tức 7',
+    title: 'TCourse content',
     agency_name: 'VTC News',
     date: '2022-11-15',
     content:
@@ -100,7 +100,7 @@ const ListNews = [
     },
   },
   {
-    title: 'Tin tức 8',
+    title: 'Course content',
     agency_name: 'Zing News',
     date: '2022-11-18',
     content:
@@ -112,7 +112,7 @@ const ListNews = [
     },
   },
   {
-    title: 'Tin tức 9',
+    title: 'Course content',
     agency_name: 'Công An Nhân Dân',
     date: '2022-11-20',
     content:
@@ -124,7 +124,7 @@ const ListNews = [
     },
   },
   {
-    title: 'Tin tức 10',
+    title: 'Course content',
     agency_name: 'Báo Mới',
     date: '2022-11-22',
     content:
@@ -139,9 +139,9 @@ const ListNews = [
 
 export default function SectionNews() {
   return (
-    <div className="w-full max-w-[90rem]" id="news">
+    <div className={`${montserrat.className} w-full max-w-[90rem]`} id="news">
       <div className="flex flex-col items-center gap-8 px-6 py-6 lg:px-16 lg:py-16 ">
-        <div className=" text-4xl font-semibold">Tin tức</div>
+        <div className=" text-4xl font-semibold">News</div>
         <Carousel
           opts={{ align: 'start', startIndex: 1, loop: false }}
           // plugins={[
@@ -172,9 +172,9 @@ export default function SectionNews() {
                             className="aspect-[2/1] object-cover"
                           />
                         </div>
-                        <div className={`${inter.className}`}>
-                          <div className="text-lg font-semibold">{entry.title}</div>
-                          <div className="line-clamp-3 h-[4.5rem] text-base">{entry.content}</div>
+                        <div className={``}>
+                          <div className="text-2xl font-bold">{entry.title}</div>
+                          <div className="line-clamp-3 text-lg text-[#A2A3A9]">{entry.content}</div>
                         </div>
                       </div>
                     </CardContent>
@@ -184,9 +184,11 @@ export default function SectionNews() {
                           <AvatarImage src={entry.author.avatar} />
                           <AvatarFallback>CN</AvatarFallback>
                         </Avatar>
-                        <div className={`${roboto.className} flex w-full flex-col justify-center`}>
-                          <div className="text-lg">{entry.author.name}</div>
-                          <div className="text-base text-[#A2A3A9]">{entry.author.position}</div>
+                        <div className={` flex w-full flex-col justify-center`}>
+                          <div className="text-lg font-bold">{entry.author.name}</div>
+                          <div className="text-base font-medium text-[#A2A3A9]">
+                            {entry.author.position}
+                          </div>
                         </div>
                       </div>
                     </CardFooter>

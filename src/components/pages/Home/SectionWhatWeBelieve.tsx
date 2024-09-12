@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { inter, playfair } from '@/components/ui/fonts';
+import { montserrat } from '@/components/ui/fonts';
 
 import SyncibleLogoOnly from '../../../../public/SyncileLogoOnly.svg';
 
@@ -37,13 +37,23 @@ export default function SectionWhatWeBelieve() {
           </div>
           <div className="w-full basis-1/2">
             <div className="flex flex-col gap-4 antialiased">
-              <h1 className={`${playfair.className} text-[2rem] font-[600]`}>Chúng tôi tin rằng</h1>
-              <div className={`${inter.className} font-inter w-full text-wrap`}>
-                Bằng cách mã hóa các bằng cấp, chứng chỉ và thành tích giáo dục, chúng tôi giúp học
-                sinh xây dựng <span className="font-bold">&nbsp;một hồ sơ số xác thực,</span> có thể
-                kiểm chứng, cung cấp cái nhìn toàn diện về kỹ năng và kiến thức của họ. Syncible rút
-                ngắn thời gian cấp chứng chỉ, giảm chi phí in ấn và phí giáo dục, đồng thời loại bỏ
-                nhu cầu thu hồi tài liệu vật lý hoặc gửi chúng qua đường bưu điện.
+              <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>What we believe</h1>
+              <div className={`${montserrat.className} font-inter w-full text-wrap`}>
+                By tokenizing diplomas, certificates, and educational accomplishments, we help
+                students build an
+                <span className="font-bold">
+                  &nbsp;authentic, verifiable digital portfolio
+                </span>{' '}
+                provides a comprehensive view of their skills and knowledge.
+                <br />
+                <br /> Syncible reduces the time to issue certificates, printing costs, and
+                educational fees, while eliminating the need to retrieve physical documents or send
+                them by mail.
+                <br />
+                <br />
+                We ensure that each certificate is stored on the blockchain with encrypted
+                information, protecting the integrity and security of the records and minimizing
+                fraud risks.
               </div>
             </div>
           </div>

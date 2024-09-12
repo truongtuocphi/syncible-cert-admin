@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { inter, playfair } from '@/components/ui/fonts';
+import { montserrat } from '@/components/ui/fonts';
 
 export default function SectionOurVision() {
   return (
@@ -8,12 +8,12 @@ export default function SectionOurVision() {
       <div className="flex flex-col items-center gap-20 rounded-b-[100px] border-b-2 border-white bg-gradient-to-t from-white/50 px-16 py-28 lg:flex-row">
         <div className="w-full basis-1/2">
           <div className="flex flex-col gap-4 antialiased">
-            <h1 className={`${playfair.className} text-[2rem] font-[600]`}>Tầm nhìn</h1>
-            <div className={`${inter.className} font-inter w-full text-wrap lg:w-[85%]`}>
-              Syncible nhằm tạo ra một sự thay đổi toàn diện trong việc công nhận thành tích học
-              tập, vượt qua các ranh giới địa lý và thủ tục hành chính, cho phép sinh viên trình bày
-              kỹ năng của mình một cách minh bạch và đáng tin cậy với các nhà tuyển dụng và cơ sở
-              giáo dục.
+            <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>Vision</h1>
+            <div className={`${montserrat.className} font-inter w-full text-wrap lg:w-[85%]`}>
+              Syncible aims to create a comprehensive shift in the recognition of academic
+              achievements, transcending geographical boundaries and administrative procedures,
+              allowing students to transparently and reliably demonstrate their skills to employers
+              and educational institutions.
             </div>
           </div>
         </div>

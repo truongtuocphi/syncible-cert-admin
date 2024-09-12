@@ -27,7 +27,7 @@ export default function Card({ data }: any) {
 
       {data.title !== 'Tạo chứng chỉ số' ? (
         <Link href={data.link}>
-          <ButtonPrimary className="mt-5 w-full bg-primary text-gray-800">
+          <ButtonPrimary className="mt-5 w-full bg-primary text-white">
             {data.titleButton}
           </ButtonPrimary>
         </Link>

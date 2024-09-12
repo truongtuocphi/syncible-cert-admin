@@ -14,7 +14,7 @@ export default function Card({ data }: any) {
   return (
     <div className="flex h-full w-full flex-col justify-between rounded-xl bg-white px-6 py-8 shadow-xl shadow-gray-300">
       <div>
-        <div className="flex size-14 items-center justify-center rounded-full bg-gradient-to-b from-[#C9EAF3] via-[#bfedfa] to-[#f9fafa]">
+        <div className="flex size-14 items-center justify-center rounded-full bg-primary">
           {data.icon}
         </div>
 

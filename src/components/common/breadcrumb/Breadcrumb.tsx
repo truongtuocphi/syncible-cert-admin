@@ -40,7 +40,7 @@ const Breadcrumb = () => {
               <div className="flex items-center gap-2">
                 {item.label && (
                   <>
-                    <Link href={item.href} className="text-sm">
+                    <Link href={item.href} className="line-clamp-1 text-sm">
                       {capitalizeFirstLetter(item.label)}
                     </Link>
                     <MdNavigateNext className="text-xl" />

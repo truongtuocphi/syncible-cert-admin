@@ -45,7 +45,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 text-black">
-      <div className="relative w-11/12 rounded-lg bg-white p-6 md:w-1/2">
+      <div className="relative w-11/12 rounded-lg bg-white p-6 md:max-w-2xl">
         <h2 className="text-center text-xl font-bold text-gray-700">Tạo chứng chỉ</h2>
         <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
           {datCard.map((dataCard, index) => (
@@ -54,12 +54,12 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
               key={index}
             >
               <div>
-                <div className="mx-auto flex items-center justify-start text-6xl text-blue-500">
+                <div className="mx-auto flex items-center justify-start text-6xl text-primary">
                   {dataCard.icon}
                 </div>
                 <div className="text-start">
                   <h3 className="mt-4 text-lg font-bold text-gray-800">{dataCard.title}</h3>
-                  <div className="my-4 w-1/5 border-[2px] border-blue-500 shadow-md shadow-blue-600"></div>
+                  <div className="my-4 w-1/5 border-[2px] border-primary shadow-md shadow-primary"></div>
                   <p className="mt-2 line-clamp-3 text-sm text-gray-600">{dataCard.description}</p>
                 </div>
               </div>

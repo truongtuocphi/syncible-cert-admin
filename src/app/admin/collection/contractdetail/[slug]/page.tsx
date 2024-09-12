@@ -47,8 +47,8 @@ export default function Page({ params }: { params: { slug: string } }) {
       <div className="space-y-6">
         <div className="flex items-center gap-2">
           <Link href={'/admin/collection'}>
-            <ButtonPrimary className="rounded-lg bg-white">
-              <FaArrowLeft className="text-xl text-gray-500" />
+            <ButtonPrimary className="rounded-lg">
+              <FaArrowLeft className="text-xl text-white" />
             </ButtonPrimary>
           </Link>
           <h1 className="text-2xl font-semibold text-gray-600">Collection Detail</h1>

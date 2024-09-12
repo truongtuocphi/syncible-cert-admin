@@ -13,6 +13,8 @@ import Loading from '@/components/common/loading/Loading';
 import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
 
+import replaceData from '@/utils/replaceData';
+
 import CertificatePreview from './admin/CertificatePreview';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
@@ -36,7 +38,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   const [name, setName] = useState('');
   const [certificateID, setCertificateID] = useState('');
   const [date, setDate] = useState('');
-  const [blockchainType, setBlockchainType] = useState('');
+  const [blockchainType, setBlockchainType] = useState('Polygon');
   const [templateURL, setTemplateURL] = useState('');
 
   useEffect(() => {
@@ -49,27 +51,28 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
         }
 
         const result = await response.json();
+
         setData(result);
-
-        console.log('result.name', result.name);
-
-        setName(result.name);
+        setName(result.fullname);
 
         const attributes = result.attributes;
 
         console.log(attributes);
+        const getCertificateID = attributes.find(
+          (attr: { trait_type: string }) => attr.trait_type == 'Certificate ID'
+        ).value;
+        const getDate = attributes.find(
+          (attr: { trait_type: string }) => attr.trait_type == 'Date'
+        ).value;
 
-        setCertificateID(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Certificate ID')
-            .value
+        setCertificateID(replaceData(getCertificateID, getDate));
+        setTemplateURL(
+          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Template URL').value
         );
         setDate(attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Date').value);
         setBlockchainType(
           attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Blockchain Type')
             .value
-        );
-        setTemplateURL(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Template URL').value
         );
       } catch (error) {
         console.error('Fetch error:', error);
@@ -111,7 +114,11 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
     }
   }, [slugPost]);
 
-  onDataContract && onDataContract(dataContract[0]?.collectionContractAddress);
+  useEffect(() => {
+    if (dataContract.length > 0 && onDataContract) {
+      onDataContract(dataContract[0]?.collectionContractAddress);
+    }
+  }, [dataContract, onDataContract]);
 
   if (!data) return <Loading />;
   if (loading) return <Loading />;
@@ -121,14 +128,17 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <div className="flex flex-col justify-between md:flex-row">
         <div className="h-[170px] w-3/5 sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
-          <CertificatePreview previewImage={templateURL} name={name} />
+          <CertificatePreview
+            previewImage={templateURL}
+            name={name?.split('Certificate for')[1]?.trim()}
+          />
         </div>
         <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-[40%]">
           <h3 className="text-3xl font-bold text-black">
             {name?.split('Certificate for')[1]?.trim()}
           </h3>
           {/* <p className="mt-2 text-lg">Certificate name: {description}</p> */}
-          <textarea className="mt-4 h-32 w-full rounded border border-gray-300 p-2" readOnly />
+          {/* <textarea className="mt-4 h-32 w-full rounded border border-gray-300 p-2" readOnly /> */}
         </div>
       </div>
       <div className="mt-6 flex flex-col justify-between md:flex-row">
@@ -163,6 +173,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
               href={`https://polygonscan.com/address/${dataContract[0].collectionContractAddress}`}
               target="_blank"
               rel="noopener noreferrer"
+              as="style"
             >
               <RiShareBoxLine className="text-blue-500" />
             </Link>

@@ -1,22 +1,30 @@
 'use client';
 
+import { useState } from 'react';
+
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BiSolidCustomize } from 'react-icons/bi';
 import { FaHome } from 'react-icons/fa';
 import { GiDiploma } from 'react-icons/gi';
 import { IoMdSettings } from 'react-icons/io';
-import { useState } from 'react';
+import { MdCollectionsBookmark } from 'react-icons/md';
+
 import Modal from './Modal';
 
 const menuSidebar = [
   { name: 'Trang Chủ', url: '/admin', icon: <FaHome className="text-2xl" /> },
-  { name: 'Tạo Chứng Chỉ Số', url: '/admin/mintnft', icon: <GiDiploma className="text-2xl" /> },
   {
     name: 'Tùy Chỉnh Mẫu',
     url: '/admin/customized',
     icon: <BiSolidCustomize className="text-2xl" />,
   },
+  {
+    name: 'Quản lý Chứng Chỉ',
+    url: '/admin/collection',
+    icon: <MdCollectionsBookmark className="text-2xl" />,
+  },
+  { name: 'Tạo Chứng Chỉ Số', url: '/admin/mintnft', icon: <GiDiploma className="text-2xl" /> },
 ];
 
 const Sidebar = () => {

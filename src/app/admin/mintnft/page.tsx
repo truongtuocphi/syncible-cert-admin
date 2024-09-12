@@ -19,6 +19,7 @@ import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
 import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
+import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -249,7 +250,7 @@ const Experience = () => {
 
   if (loading) router.push(`/admin/collection/collectiondetail`);
 
-  // console.log('cc', dataFromMintSingle);
+  // console.log(coppyCsvDataFromChild[0].fullname);
 
   return (
     <>
@@ -387,12 +388,20 @@ const Experience = () => {
               <h2 className="text-lg font-bold text-gray-600">Xem trước</h2>
               <div className="mt-2 h-fit w-full overflow-hidden rounded-lg border-[0.5px] border-dashed border-gray-400">
                 {bannerImage ? (
-                  <Image
-                    src={bannerImage}
-                    alt="Logo Preview"
-                    width={112}
-                    height={112}
-                    className="h-80 w-full"
+                  // <Image
+                  //   src={bannerImage}
+                  //   alt="Logo Preview"
+                  //   width={112}
+                  //   height={112}
+                  //   className="h-80 w-full"
+                  // />
+                  <CertificatePreview
+                    previewImage={bannerImage}
+                    name={
+                      coppyCsvDataFromChild[0]?.fullname
+                        ? coppyCsvDataFromChild[0]?.fullname
+                        : dataFromMintSingle[0]?.fullname
+                    }
                   />
                 ) : (
                   <div className="relative h-96 bg-gray-50">

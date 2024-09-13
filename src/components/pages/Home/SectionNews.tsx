@@ -140,7 +140,7 @@ const ListNews = [
 export default function SectionNews() {
   return (
     <div className={`${montserrat.className} w-full max-w-[90rem]`} id="news">
-      <div className="flex flex-col items-center gap-8 px-6 py-6 lg:px-16 lg:py-16 ">
+      <div className="flex flex-col items-center gap-8 px-4 py-4 lg:px-16 lg:py-16 ">
         <div className=" text-4xl font-semibold">News</div>
         <Carousel
           opts={{ align: 'start', startIndex: 1, loop: false }}

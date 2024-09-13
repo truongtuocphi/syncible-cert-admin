@@ -47,10 +47,10 @@ const Footer = () => {
         <div className="px-6 md:px-8 xl:px-[6.5rem]">
           <div className="flex flex-col items-center justify-between px-6 py-6 lg:flex-row">
             <div>@ 2024 Syncible. All rights reserved</div>
-            <div className="flex flex-col items-center gap-0 lg:flex-row lg:gap-6">
+            <div className="flex flex-row items-center gap-0 lg:gap-6">
               {Links.map(({ link_name, url }) => (
                 <Link href={url} key={link_name}>
-                  <div className="py-3 text-xs md:text-base active:text-">{link_name}</div>
+                  <div className="active:text- py-3 text-xs md:text-base">{link_name}</div>
                 </Link>
               ))}
               <div className="hidden h-4 border-l border-[#2C2C2C] lg:block"></div>

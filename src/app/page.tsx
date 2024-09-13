@@ -22,6 +22,7 @@ import EthereumLogoSVG from '../../public/ethereum-logo.svg';
 import PolygonLogoSVG from '../../public/polygon-logo.svg';
 
 const Page = () => {
+  
   return (
     <div className="relative min-h-screen overflow-hidden">
       <div className="fixed top-0 z-30 w-full md:mt-6">
@@ -29,22 +30,22 @@ const Page = () => {
       </div>
       <div className="relative z-20 flex flex-col items-center gap-10 overflow-hidden">
         <div className={`${montserrat.className} relative w-full max-w-[90rem] `}>
-          <div className="flex min-h-dvh flex-col px-6 py-6 md:px-8 md:py-10 xl:px-[6.5rem] xl:py-12">
-            <div className="relative flex h-full w-full flex-col justify-center px-6 lg:flex-row lg:pt-0 flex-grow">
+          <div className="flex min-h-dvh flex-col px-4 py-4 md:px-8 md:py-10 xl:px-[6.5rem] xl:py-12">
+            <div className="relative flex h-full w-full flex-grow flex-col justify-center md:px-6 lg:flex-row lg:pt-0">
               <div className="flex items-center justify-center lg:basis-1/2">
-                <div className="flex h-[20rem] flex-col items-center justify-center gap-8 antialiased lg:h-[30rem] lg:items-start animate-swipe-up-fadein">
+                <div className="flex h-[20rem] animate-swipe-up-fadein flex-col items-center justify-center gap-8 antialiased lg:h-[30rem] lg:items-start">
                   <div
-                    className={`text-md col-span-1 w-full text-wrap text-center font-bold sm:text-xl md:text-2xl lg:text-left lg:text-3xl xl:text-5xl xl:leading-[4rem]`}
+                    className={`text-md col-span-1 w-full text-wrap text-left sm:text-center text-[2.5rem] font-bold leading-none lg:text-left lg:text-5xl lg:leading-[4rem]`}
                   >
                     Empower your institution and enrich student success
                   </div>
-                  <div className="w-[70%] text-center text-lg text-[#6C6D71] lg:w-full lg:text-left">
+                  <div className="w-full text-left text-[#6C6D71] sm:w-[70%] sm:text-center sm:text-lg md:text-base lg:w-full lg:text-left">
                     Using blockchain technology and NFTs, Syncible enhance your institution’s
                     reputation and revolutionizes the way academic achievements are recognized.
                   </div>
                   <div className="self-center lg:self-start">
                     <Link href="/contact">
-                      <Button className="shadow- rounded-[1.25rem] bg-primary-50 px-10 py-7 text-base shadow-combinedShadow1 hover:bg-primary-40">
+                      <Button className="w-full rounded-[1.25rem] bg-primary-50 px-10 py-7 text-base shadow-combinedShadow1 hover:bg-primary-40">
                         Contact us
                       </Button>
                     </Link>
@@ -84,7 +85,7 @@ const Page = () => {
           </div>
         </div>
 
-        <div className="relative z-20 flex max-w-[90rem] flex-col items-center gap-40">
+        <div className="relative z-20 flex max-w-[90rem] flex-col items-center gap-8 sm:gap-40">
           <SectionAbout />
           <SectionWhatWeBelieve />
           <SectionOurVision />
@@ -95,20 +96,20 @@ const Page = () => {
         </div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 top-0 flex w-full flex-col items-center overflow-hidden">
-        <div className="relative h-full w-full max-w-[90rem] mx-auto">
-          <div className="absolute -z-10 -top-[15%] left-[-40%] h-[125rem] w-[125rem]">
+        <div className="relative mx-auto h-full w-full max-w-[90rem]">
+          <div className="absolute -left-[170%] -top-[15%] -z-10 h-[125rem] w-[125rem] sm:-top-[15%] sm:left-[-40%]">
             <LightBlueGradientEllipse className="h-full w-full" />
           </div>
-          <div className="absolute -z-10 top-1/2 -right-1/2 -translate-y-[30%] h-[115rem] w-[115rem]">
+          <div className="absolute -right-1/2 top-1/2 -z-10 h-[115rem] w-[115rem] -translate-y-[30%]">
             <LightBlueGradientEllipse className="h-full w-full" />
           </div>
-          <div className="absolute -z-10 -bottom-1/2 -left-1/2 -translate-y-[140%] h-[100rem] w-[100rem]">
+          <div className="absolute -bottom-1/2 -left-1/2 -z-10 h-[100rem] w-[100rem] -translate-y-[140%]">
             <LightBlueGradientEllipse className="h-full w-full" />
           </div>
           <Image
             src={Background}
             alt="The background image with star-like shapes a a single curvy line that extend to the botton of the image"
-            className="z-20 w-full object-cover object-top"
+            className="z-20 object-contain h-full object-top sm:w-full sm:object-cover"
             fill
             sizes="100vw"
             priority

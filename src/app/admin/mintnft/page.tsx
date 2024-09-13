@@ -315,7 +315,7 @@ const Experience = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">Chức vụ</label>
+                  <label className="block text-sm font-medium text-gray-700">Vai trò</label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}

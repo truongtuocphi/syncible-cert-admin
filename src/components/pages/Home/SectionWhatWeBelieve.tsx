@@ -1,3 +1,6 @@
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+
 import Image from 'next/image';
 
 import { montserrat } from '@/components/ui/fonts';
@@ -5,21 +8,64 @@ import { montserrat } from '@/components/ui/fonts';
 import SyncibleLogoOnly from '../../../../public/SyncileLogoOnly.svg';
 
 export default function SectionWhatWeBelieve() {
+  const logoRef1 = useRef<HTMLDivElement>(null);
+  const logoRef2 = useRef<HTMLDivElement>(null);
+  const logoRef3 = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      // Floating animation for logo 1 (vertical float)
+      gsap.to(logoRef1.current, {
+        y: 20, // Move up and down by 20px
+        duration: 2, // Time for one complete float
+        repeat: -1, // Infinite loop
+        yoyo: true, // Move back to original position
+        ease: 'power1.inOut', // Smooth floating
+      });
+
+      // Floating animation for logo 2 (circular float)
+      gsap.to(logoRef2.current, {
+        x: 20, // Move horizontally by 20px
+        y: 30, // Move vertically by 30px
+        duration: 3, // Time for one complete float
+        repeat: -1, // Infinite loop
+        yoyo: true, // Move back to original position
+        ease: 'power1.inOut',
+      });
+
+      // Floating animation for logo 3 (vertical float)
+      gsap.to(logoRef3.current, {
+        y: 25, // Move up and down by 25px
+        duration: 2.5, // Time for one complete float
+        repeat: -1, // Infinite loop
+        yoyo: true, // Move back to original position
+        ease: 'power1.inOut',
+      });
+    }
+  }, []);
   return (
     <div className="relativeb px-4 py-[3.125rem] md:px-8 md:py-0 xl:px-[6.5rem]">
       <div className="relative">
         <div className="absolute left-0 right-0 top-0 z-0 h-full w-full md:px-6 md:py-6">
           <div className="relative h-full w-full">
-            <div className="absolute -left-[26%] -top-[9%] z-0 h-[12.5rem] sm:-left-[5.9rem] sm:-top-[6rem] lg:h-[12.5rem]">
+            <div
+              ref={logoRef1}
+              className="absolute -left-[26%] -top-[9%] z-0 h-[12.5rem] sm:-left-[5.9rem] sm:-top-[6rem] lg:h-[12.5rem]"
+            >
               <SyncibleLogoOnly className="h-full w-full" />
             </div>
-            <div className="absolute -bottom-[7%] -right-[11%] z-0 h-[8.625rem] sm:-right-[5.3rem] sm:top-1/2 lg:h-[8.625rem] ">
+            <div
+              ref={logoRef2}
+              className="absolute -bottom-[7%] -right-[11%] z-0 h-[8.625rem] sm:-right-[5.3rem] sm:top-1/2 lg:h-[8.625rem] "
+            >
               <SyncibleLogoOnly className="h-full w-full blur-[2px]" />
             </div>
             <div className="absolute left-0 right-0 top-0 z-10 h-full w-full overflow-hidden rounded-[2rem] border border-[#F0F0F0]">
               <div className="h-full w-full  overflow-hidden bg-white/50 backdrop-blur-[25px]"></div>
             </div>
-            <div className="invisible absolute bottom-0 left-1/2 z-10 h-[6.375rem] -translate-x-1/2 translate-y-1/2 sm:visible">
+            <div
+              ref={logoRef3}
+              className="invisible absolute bottom-0 left-1/2 z-10 h-[6.375rem] -translate-x-1/2 translate-y-1/2 sm:visible"
+            >
               <SyncibleLogoOnly className="h-full w-full" />
             </div>
           </div>

@@ -22,7 +22,6 @@ import EthereumLogoSVG from '../../public/ethereum-logo.svg';
 import PolygonLogoSVG from '../../public/polygon-logo.svg';
 
 const Page = () => {
-  
   return (
     <div className="relative min-h-screen overflow-hidden">
       <div className="fixed top-0 z-30 w-full md:mt-6">
@@ -35,7 +34,7 @@ const Page = () => {
               <div className="flex items-center justify-center lg:basis-1/2">
                 <div className="flex h-[20rem] animate-swipe-up-fadein flex-col items-center justify-center gap-8 antialiased lg:h-[30rem] lg:items-start">
                   <div
-                    className={`text-md col-span-1 w-full text-wrap text-left sm:text-center text-[2.5rem] font-bold leading-none lg:text-left lg:text-5xl lg:leading-[4rem]`}
+                    className={`text-md col-span-1 w-full text-wrap text-left text-[2.5rem] font-bold leading-none sm:text-center lg:text-left lg:text-5xl lg:leading-[4rem]`}
                   >
                     Empower your institution and enrich student success
                   </div>
@@ -52,7 +51,7 @@ const Page = () => {
                   </div>
                 </div>
               </div>
-              <div className="relative h-fit w-full self-center lg:basis-1/2  animate-swipe-up-fadein">
+              <div className="relative h-fit w-full animate-swipe-up-fadein self-center  lg:basis-1/2">
                 <div className="absolute left-auto top-auto h-fit w-full lg:left-[-19%] lg:top-[-19%] lg:h-[130%] lg:w-[130%] xl:left-[-27%] xl:top-[-30%] xl:h-[160%] xl:w-[160%]">
                   <Image
                     src={BannerCertificate}
@@ -103,13 +102,13 @@ const Page = () => {
           <div className="absolute -right-[130%] top-1/2 -z-10 h-[115rem] w-[115rem] -translate-y-[70%] sm:-right-1/2 sm:-translate-y-[40%]">
             <LightBlueGradientEllipse className="h-full w-full" />
           </div>
-          <div className="absolute -bottom-[10%] -left-[150%] sm:-bottom-1/2 sm:-left-1/2 -z-10 h-[125rem] w-[125rem] sm:-translate-y-[95%]">
+          <div className="absolute -bottom-[10%] -left-[150%] -z-10 h-[125rem] w-[125rem] sm:-bottom-1/2 sm:-left-1/2 sm:-translate-y-[95%]">
             <LightBlueGradientEllipse className="h-full w-full" />
           </div>
           <Image
             src={Background}
             alt="The background image with star-like shapes a a single curvy line that extend to the botton of the image"
-            className="z-20 h-full object-cover object-top w-full"
+            className="z-20 h-full w-full object-cover object-top"
             fill
             sizes="100vw"
             priority

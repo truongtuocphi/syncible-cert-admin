@@ -23,7 +23,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
           <Sidebar />
           <div className="ml-64 flex-1 p-6 pt-16">
             <Header />
-            <div className="mx-auto mt-10 flex max-w-screen-lg justify-center text-black">
+            <div className="mx-auto mt-10 flex max-w-screen-lg justify-center text-black 2xl:max-w-screen-xl">
               <div className="w-full">{children}</div>
             </div>
           </div>

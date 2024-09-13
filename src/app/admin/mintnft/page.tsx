@@ -141,10 +141,6 @@ const Experience = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // if (!coppyCsvDataFromChild || coppyCsvDataFromChild.length === 0) {
-    //   alert('Please select a CSV file or enter a full name.');
-    //   return;
-    // }
 
     if (address) {
       setLoadingButton(true);

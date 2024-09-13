@@ -32,6 +32,15 @@ export const MintSingleForm = ({ DataIssuedDate, DataRole, onGetData }: MintBulk
     return `${randomString}/${formattedDate}-${roleCode}-${getAcronym('Syn ci ble')}`;
   };
 
+  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newName = e.target.value;
+    setName(newName);
+    const certificateData: CertificateData[] = [
+      { certificateNumber: certificateNumber, fullname: newName },
+    ];
+    onGetData(certificateData);
+  };
+
   return (
     <div className="grid grid-cols-5 gap-2">
       <div className="col-span-2 space-y-2">
@@ -52,14 +61,7 @@ export const MintSingleForm = ({ DataIssuedDate, DataRole, onGetData }: MintBulk
           required
           placeholder="Họ và tên của bạn"
           value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-            const certificateData: CertificateData[] = [
-              { certificateNumber: certificateNumber, fullname: name },
-            ];
-
-            onGetData(certificateData);
-          }}
+          onChange={handleNameChange}
           className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
       </div>

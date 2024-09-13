@@ -39,6 +39,7 @@ const Experience = () => {
   const [loadingButton, setLoadingButton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tokenLink, setTokenLink] = useState('');
+  const [fullName, setFullName] = useState('');
 
   const typePage = pathname.get('type');
 

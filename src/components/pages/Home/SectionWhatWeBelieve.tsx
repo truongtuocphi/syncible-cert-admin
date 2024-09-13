@@ -14,13 +14,32 @@ export default function SectionWhatWeBelieve() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       // Floating animation for logo 1 (vertical float)
-      gsap.to(logoRef1.current, {
-        y: 20, // Move up and down by 20px
-        duration: 2, // Time for one complete float
+      const tl = gsap.timeline({
         repeat: -1, // Infinite loop
-        yoyo: true, // Move back to original position
-        ease: 'power1.inOut', // Smooth floating
+        
       });
+
+      // Diamond pattern movement
+      tl.to(logoRef1.current, {
+        x: 20, // Move right
+        y: -20, // Move up
+        duration: 1, // Adjust duration for smoothness
+      })
+        .to(logoRef1.current, {
+          x: 40, // Move further right
+          y: 20, // Move down
+          duration: 1,
+        })
+        .to(logoRef1.current, {
+          x: 20, // Move back to left
+          y: 40, // Move further down
+          duration: 1,
+        })
+        .to(logoRef1.current, {
+          x: 0, // Move left
+          y: 0, // Move back up to complete the diamond
+          duration: 1,
+        });
 
       // Floating animation for logo 2 (circular float)
       gsap.to(logoRef2.current, {

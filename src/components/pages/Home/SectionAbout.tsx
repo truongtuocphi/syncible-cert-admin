@@ -1,11 +1,42 @@
+import React, { useRef, useEffect } from 'react';
+
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 
 import { montserrat } from '@/components/ui/fonts';
 
 export default function SectionAbout() {
+
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.fromTo(
+        ref.current,
+        { opacity: 0, y: 100 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: ref.current,
+            start: 'top 80%', // Start animation when top of section is 80% of the viewport
+            toggleActions: 'play none none reverse', // Trigger animation on scroll
+          },
+        }
+      )
+    }
+  }, []);
+
   return (
     <div className=" md:px-8 md:py-8 xl:px-16 xl:py-16" id="about">
-      <div className="flex flex-col items-center gap-8 rounded-t-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 px-4 py-[4rem] sm:rounded-t-[6.25rem] sm:px-16 sm:py-[6.6rem] lg:flex-row">
+      <div
+        ref={ref}
+        className="flex flex-col items-center gap-8 rounded-t-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 px-4 py-[4rem] sm:rounded-t-[6.25rem] sm:px-16 sm:py-[6.6rem] lg:flex-row"
+      >
         <div className="w-full basis-1/2">
           <div className="flex flex-col gap-4 antialiased">
             <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>About us</h1>

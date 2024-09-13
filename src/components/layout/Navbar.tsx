@@ -2,6 +2,11 @@
 
 import Link from 'next/link';
 
+import { useEffect } from 'react';
+
+import { gsap } from 'gsap';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+
 import ArrowRightIcon from '@/assets/icons/arrow-badge-right.svg';
 import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
@@ -16,6 +21,45 @@ const Menu = [
 ];
 
 const Navbar = () => {
+  useEffect(() => {
+    gsap.registerPlugin(ScrollToPlugin);
+
+    const handleNavClick = (e: any, target: string) => {
+      e.preventDefault();
+      gsap.to(window, {
+        duration: 1.5,
+        scrollTo: {
+          y: target,
+          autoKill: true, // Automatically stops if the user interacts
+        },
+        ease: 'power3.inOut',
+      });
+    };
+
+    // Add event listeners for the links
+    const links = document.querySelectorAll('.nav-link');
+    links.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        const target = link.getAttribute('href');
+        if (target) {
+          handleNavClick(e, target);
+        }
+      });
+    });
+
+    // Clean up event listeners when the component unmounts
+    return () => {
+      links.forEach((link) => {
+        link.removeEventListener('click', (e) => {
+          const target = link.getAttribute('href');
+          if (target) {
+            handleNavClick(e, target);
+          }
+        });
+      });
+    };
+  }, []);
+  
   return (
     <div className={`${montserrat.className} "relative w-full`}>
       <div className="flex flex-col items-center">
@@ -73,7 +117,7 @@ const Navbar = () => {
                     <li key={title}>
                       <Link
                         href={link}
-                        className="text-base font-semibold text-[#A2A3A9] hover:text-[#2C2C2C] active:text-[#2C2C2C]"
+                        className="nav-link text-base font-semibold text-[#A2A3A9] hover:text-[#2C2C2C] active:text-[#2C2C2C]"
                       >
                         {title}
                       </Link>

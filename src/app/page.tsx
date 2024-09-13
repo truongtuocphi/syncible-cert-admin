@@ -29,9 +29,9 @@ const Page = () => {
       </div>
       <div className="relative z-20 mt-5 flex flex-col items-center gap-10 overflow-hidden md:mt-20">
         <div
-          className={`${montserrat.className} mt-32 grid max-w-[90rem] grid-rows-2 items-center px-8 lg:grid-cols-2 lg:gap-6 xl:px-[6.5rem] 2xl:items-start`}
+          className={`${montserrat.className} mt-32 grid max-w-[90rem] grid-rows-2 items-center px-4 lg:grid-cols-2 lg:gap-6 xl:px-[6.5rem] 2xl:items-start`}
         >
-          <div className="col-span-1 flex flex-col items-start gap-6">
+          <div className="col-span-1 flex flex-col items-start gap-6 px-4">
             <h1 className="text-5xl font-bold text-[#2C2C2C]">
               Empower your institution and enrich student success
             </h1>
@@ -48,7 +48,7 @@ const Page = () => {
             </div>
           </div>
 
-          <div className="col-span-1 h-full w-full">
+          <div className="col-span-1 h-full w-full px-4">
             <Image
               src={BannerCertificate}
               alt="BannerCertificate"
@@ -56,9 +56,9 @@ const Page = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-8 pb-10">
+          <div className="flex flex-col gap-8 px-4 pb-10">
             <div className="text-md font-bold md:text-2xl lg:text-4xl">Powered By</div>
-            <div className="flex gap-20">
+            <div className="flex gap-10 lg:gap-20">
               <div className="h-11 w-44">
                 <EthereumLogoSVG className="h-full w-full" />
               </div>

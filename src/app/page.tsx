@@ -14,7 +14,7 @@ import SectionWhatWeBelieve from '@/components/pages/Home/SectionWhatWeBelieve';
 import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
 
-import BannerCertificate from '../../public/cert_example.png';
+import BannerCertificate from '../../public/cert_example_ENG.png';
 
 import Background from '../../public/DoraBG.png';
 import LightBlueGradientEllipse from '../../public/Ellipse_1.svg';
@@ -29,7 +29,7 @@ const Page = () => {
       </div>
       <div className="relative z-20 mt-5 flex flex-col items-center gap-10 overflow-hidden md:mt-20">
         <div
-          className={`${montserrat.className} mt-32 grid grid-rows-2 items-center px-8 lg:grid-cols-2 lg:gap-6 xl:px-[6.5rem]`}
+          className={`${montserrat.className} mt-32 grid max-w-[90rem] grid-rows-2 items-center px-8 lg:grid-cols-2 lg:gap-6 xl:px-[6.5rem] 2xl:items-start`}
         >
           <div className="col-span-1 flex flex-col items-start gap-6">
             <h1 className="text-5xl font-bold text-[#2C2C2C]">
@@ -52,7 +52,7 @@ const Page = () => {
             <Image
               src={BannerCertificate}
               alt="BannerCertificate"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-scale-down"
             />
           </div>
 

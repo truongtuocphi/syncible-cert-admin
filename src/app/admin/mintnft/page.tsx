@@ -141,10 +141,6 @@ const Experience = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // if (!coppyCsvDataFromChild || coppyCsvDataFromChild.length === 0) {
-    //   alert('Please select a CSV file or enter a full name.');
-    //   return;
-    // }
 
     if (address) {
       setLoadingButton(true);
@@ -315,7 +311,7 @@ const Experience = () => {
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">Chức vụ</label>
+                  <label className="block text-sm font-medium text-gray-700">Vai trò</label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}

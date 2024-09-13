@@ -154,7 +154,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
           <div className="mt-2 flex items-center gap-2">
             <p>
               {`Token ID: `}
-              <span className="text-blue-500 underline">
+              <span className="text-primary underline">
                 {slugPost.slice(0, 4)}...{slugPost.slice(-6)}
               </span>
             </p>
@@ -163,7 +163,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
           <div className="mt-2 flex items-center gap-2">
             <p>
               {`Contract address: `}
-              <span className="text-blue-500 underline">
+              <span className="text-primary underline">
                 {dataContract[0].collectionContractAddress.slice(0, 4)}...
                 {dataContract[0].collectionContractAddress.slice(-6)}
               </span>
@@ -172,10 +172,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
             <Link
               href={`https://polygonscan.com/address/${dataContract[0].collectionContractAddress}`}
               target="_blank"
-              rel="noopener noreferrer"
-              as="style"
             >
-              <RiShareBoxLine className="text-blue-500" />
+              <RiShareBoxLine className="text-primary" />
             </Link>
           </div>
         </div>

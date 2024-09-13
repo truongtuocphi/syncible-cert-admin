@@ -126,9 +126,8 @@ export default function Login() {
                     <FaEye className="text-gray-500" />
                   )}
                 </span>
-
-                {error && <p className="mt-2 text-red-500">{error}</p>}
               </div>
+              {error && <p className="mt-2 text-red-500">{error}</p>}
             </div>
 
             {/* {error && <p className="mt-2 text-center text-red-500">{error}</p>} */}

@@ -25,7 +25,7 @@ export default function SectionOurVision() {
             trigger: ref.current,
             start: 'top 50%', // Start animation when top of section is 50% of the viewport
             toggleActions: 'play none none reverse', // Trigger animation on scroll
-            markers: true,
+            markers: false,
           },
         }
       )

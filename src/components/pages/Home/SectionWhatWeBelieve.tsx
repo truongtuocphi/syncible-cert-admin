@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
 
+import { gsap } from 'gsap';
 import Image from 'next/image';
 
 import { montserrat } from '@/components/ui/fonts';
@@ -8,15 +8,34 @@ import { montserrat } from '@/components/ui/fonts';
 import SyncibleLogoOnly from '../../../../public/SyncileLogoOnly.svg';
 
 export default function SectionWhatWeBelieve() {
+
+  const ref = useRef<HTMLDivElement>(null);
   const logoRef1 = useRef<HTMLDivElement>(null);
   const logoRef2 = useRef<HTMLDivElement>(null);
   const logoRef3 = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
+      gsap.fromTo(
+        ref.current,
+        { opacity: 0, y: 100 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: ref.current,
+            start: 'top 50%', // Start animation when top of section is 50% of the viewport
+            toggleActions: 'play none none reverse', // Trigger animation on scroll
+            markers: false,
+          },
+        }
+      )
+
       // Floating animation for logo 1 (vertical float)
       const tl = gsap.timeline({
         repeat: -1, // Infinite loop
-        
       });
 
       // Diamond pattern movement
@@ -62,7 +81,7 @@ export default function SectionWhatWeBelieve() {
     }
   }, []);
   return (
-    <div className="relativeb px-4 py-[3.125rem] md:px-8 md:py-0 xl:px-[6.5rem]">
+    <div ref={ref} className="relativeb px-4 py-[3.125rem] md:px-8 md:py-0 xl:px-[6.5rem]">
       <div className="relative">
         <div className="absolute left-0 right-0 top-0 z-0 h-full w-full md:px-6 md:py-6">
           <div className="relative h-full w-full">

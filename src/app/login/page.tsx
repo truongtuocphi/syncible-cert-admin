@@ -14,7 +14,9 @@ import {
   onAuthStateChanged,
   signInWithPopup,
   provider,
+  browserSessionPersistence,
 } from '@/lib/firebase';
+import { setPersistence } from 'firebase/auth';
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
@@ -42,6 +44,7 @@ export default function Login() {
     setLoading(true);
     setError('');
     try {
+      await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error) {
       setLoading(false);
@@ -52,6 +55,7 @@ export default function Login() {
   const handleGoogleSignIn = async () => {
     setLoading(true);
     try {
+      await setPersistence(auth, browserSessionPersistence);
       await signInWithPopup(auth, provider);
     } catch (error) {
       setLoading(false);

@@ -6,6 +6,7 @@ import {
   onAuthStateChanged,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  browserSessionPersistence,
 } from 'firebase/auth';
 import { getDatabase, ref, get, child, set, query } from 'firebase/database';
 import { doc, setDoc } from 'firebase/firestore';
@@ -43,4 +44,5 @@ export {
   query,
   doc,
   setDoc,
+  browserSessionPersistence,
 };

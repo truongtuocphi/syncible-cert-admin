@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
+import { setPersistence } from 'firebase/auth';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -16,7 +17,6 @@ import {
   provider,
   browserSessionPersistence,
 } from '@/lib/firebase';
-import { setPersistence } from 'firebase/auth';
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');

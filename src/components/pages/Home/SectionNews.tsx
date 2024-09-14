@@ -140,7 +140,7 @@ const ListNews = [
 export default function SectionNews() {
   return (
     <div className={`${montserrat.className} w-full max-w-[90rem]`} id="news">
-      <div className="flex flex-col items-center gap-8 px-4 py-4 lg:px-16 lg:py-16 ">
+      <div className="flex flex-col items-center gap-8 px-4 py-4 md:px-8 md:py-8 xl:px-16 xl:py-16 ">
         <div className=" text-4xl font-semibold">News</div>
         <Carousel
           opts={{ align: 'start', startIndex: 1, loop: false }}
@@ -155,7 +155,7 @@ export default function SectionNews() {
             <CarouselContent className="pb-8 md:-ml-6">
               {ListNews.map((entry, index) => (
                 <CarouselItem key={index} className="basis-full md:basis-1/2 md:pl-6 lg:basis-1/3">
-                  <Card className="h-full">
+                  <Card className="h-full rounded-[1.25rem] shadow-combinedShadow2">
                     <CardHeader>
                       <CardTitle className="max-w-28">
                         <SyncibleLogo className="h-full max-h-8 w-full" />
@@ -197,8 +197,8 @@ export default function SectionNews() {
               ))}
             </CarouselContent>
             <div className="flex justify-center gap-4">
-              <CarouselPrevious className="static right-auto top-auto h-12 w-12 translate-y-0 rounded-xl" />
-              <CarouselNext className="static left-auto top-auto h-12 w-12 translate-y-0 rounded-xl" />
+              <CarouselPrevious className="static right-auto top-auto h-12 w-12 translate-y-0 rounded-xl border-none shadow-combinedShadow2" />
+              <CarouselNext className="static left-auto top-auto h-12 w-12 translate-y-0 rounded-xl border-none shadow-combinedShadow2" />
             </div>
           </div>
         </Carousel>

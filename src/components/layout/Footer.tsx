@@ -47,7 +47,7 @@ const Footer = () => {
         <div className="px-4 py-4 pb-8 md:px-8 md:py-8 xl:px-[6.5rem]">
           <div className="flex flex-col justify-between sm:items-center md:flex-row">
             <div>@ 2024 Syncible. All rights reserved</div>
-            <div className="flex flex-col sm:items-center gap-4 md:flex-row lg:gap-6">
+            <div className="flex flex-col gap-4 sm:items-center md:flex-row lg:gap-6">
               <div className="flex gap-8">
                 {Links.map(({ link_name, url }) => (
                   <Link href={url} key={link_name}>

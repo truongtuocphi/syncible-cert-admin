@@ -101,7 +101,7 @@ export default function Login() {
               <label htmlFor="password" className="block text-left font-semibold">
                 <div className="flex items-center justify-between">
                   <div>Password</div>
-                  <div className="font-normal text-primary">Forgot password?</div>
+                  <div className="font-normal text-primary-50">Forgot password?</div>
                 </div>
               </label>
               <div className="relative w-full">
@@ -135,7 +135,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full rounded-[20px] bg-primary py-3 text-white hover:bg-primary disabled:opacity-50"
+              className="w-full rounded-[20px] bg-primary-50 py-3 text-white hover:bg-primary-50 disabled:opacity-50"
             >
               Sign in
             </button>
@@ -158,7 +158,7 @@ export default function Login() {
           <div className="mt-4 text-center">
             <p className="text-sm">
               Don&rsquo;t have an account?{' '}
-              <a href="/register" className="font-bold text-primary hover:underline">
+              <a href="/register" className="font-bold text-primary-50 hover:underline">
                 Sign up here!
               </a>
             </p>

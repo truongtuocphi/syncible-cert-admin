@@ -372,7 +372,7 @@ const Experience = () => {
               <div className="mt-4 flex items-center justify-end gap-4">
                 <Link href={'/admin'}>
                   <ButtonPrimary
-                    className="w-40 border-2 border-primary bg-white text-primary"
+                    className="w-40 border-2 border-primary-50 bg-white text-primary-50"
                     disabled={loadingButton}
                   >
                     Hủy

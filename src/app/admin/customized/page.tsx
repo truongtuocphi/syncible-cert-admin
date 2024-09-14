@@ -185,7 +185,7 @@ export default function DefineTemplate() {
             </div>
             <Drawer>
               <DrawerTrigger asChild>
-                <Button className="rounded-full bg-primary text-white">Chọn mẫu</Button>
+                <Button className="rounded-full bg-primary-50 text-white">Chọn mẫu</Button>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="mx-auto w-full max-w-5xl text-gray-700">
@@ -218,7 +218,7 @@ export default function DefineTemplate() {
                   </div>
                   <DrawerFooter>
                     <DrawerClose asChild>
-                      <Button className="mt-4 bg-primary text-white">Chọn</Button>
+                      <Button className="mt-4 bg-primary-50 text-white">Chọn</Button>
                     </DrawerClose>
                   </DrawerFooter>
                 </div>

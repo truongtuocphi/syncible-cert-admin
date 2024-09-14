@@ -54,12 +54,12 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
               key={index}
             >
               <div>
-                <div className="mx-auto flex items-center justify-start text-6xl text-primary">
+                <div className="mx-auto flex items-center justify-start text-6xl text-primary-50">
                   {dataCard.icon}
                 </div>
                 <div className="text-start">
                   <h3 className="mt-4 text-lg font-bold text-gray-800">{dataCard.title}</h3>
-                  <div className="my-4 w-1/5 border-[2px] border-primary shadow-md shadow-primary"></div>
+                  <div className="my-4 w-1/5 border-[2px] border-primary-50 shadow-md shadow-primary-50"></div>
                   <p className="mt-2 line-clamp-3 text-sm text-gray-600">{dataCard.description}</p>
                 </div>
               </div>

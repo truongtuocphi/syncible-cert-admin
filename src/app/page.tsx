@@ -28,57 +28,46 @@ const Page = () => {
         <Navbar />
       </div>
       <div className="relative z-20 flex flex-col items-center gap-10 overflow-hidden">
-        <div className={`${montserrat.className} relative w-full max-w-[90rem] `}>
-          <div className="flex min-h-dvh flex-col px-4 py-4 md:px-8 md:py-10 xl:px-[6.5rem] xl:py-12">
-            <div className="relative flex h-full w-full flex-grow flex-col justify-center md:px-6 lg:flex-row lg:pt-0">
-              <div className="flex items-center justify-center lg:basis-1/2">
-                <div className="flex h-[20rem] animate-swipe-up-fadein flex-col items-center justify-center gap-8 antialiased lg:h-[30rem] lg:items-start">
-                  <div
-                    className={`text-md col-span-1 w-full text-wrap text-left text-[2.5rem] font-bold leading-none sm:text-center lg:text-left lg:text-5xl lg:leading-[4rem]`}
-                  >
-                    Empower your institution and enrich student success
-                  </div>
-                  <div className="w-full text-left text-[#6C6D71] sm:w-[70%] sm:text-center sm:text-lg md:text-base lg:w-full lg:text-left">
-                    Using blockchain technology and NFTs, Syncible enhance your institution’s
-                    reputation and revolutionizes the way academic achievements are recognized.
-                  </div>
-                  <div className="self-center lg:self-start">
-                    <Link href="/contact">
-                      <Button className="w-full rounded-[1.25rem] bg-primary-50 px-10 py-7 text-base shadow-combinedShadow1 hover:bg-primary-40">
-                        Contact us
-                      </Button>
-                    </Link>
-                  </div>
+        <div
+          className={`${montserrat.className} mt-40 w-full max-w-[90rem] px-4 md:px-8 md:py-8 lg:mt-52 xl:px-[6.5rem] xl:py-16`}
+        >
+          <div className="grid items-center justify-between gap-2 lg:grid-cols-2">
+            <div className="flex items-center justify-center lg:basis-1/2">
+              <div className="flex h-[20rem] animate-swipe-up-fadein flex-col items-center justify-center gap-8 antialiased lg:h-[30rem] lg:items-start">
+                <div className="text-md w-full text-wrap text-left text-[2.5rem] font-bold leading-none sm:text-center lg:text-left lg:text-5xl lg:leading-[4rem]">
+                  Empower your institution and enrich student success
                 </div>
-              </div>
-              <div className="relative h-fit w-full animate-swipe-up-fadein self-center  lg:basis-1/2">
-                <div className="absolute left-auto top-auto h-fit w-full lg:left-[-19%] lg:top-[-19%] lg:h-[130%] lg:w-[130%] xl:left-[-27%] xl:top-[-30%] xl:h-[160%] xl:w-[160%]">
-                  <Image
-                    src={BannerCertificate}
-                    alt="Certificate"
-                    fill
-                    className="block h-full w-full object-contain"
-                  />
+                <div className="w-full text-left text-[#6C6D71] sm:w-[70%] sm:text-center sm:text-lg md:text-base lg:w-full lg:text-left">
+                  Using blockchain technology and NFTs, Syncible enhances your institution’s
+                  reputation and revolutionizes the way academic achievements are recognized.
                 </div>
-                <div className="hidden md:block ">
-                  <Image
-                    src={BannerCertificate}
-                    alt="Certificate placeholder"
-                    className="invisible min-h-[30rem] w-full object-cover md:min-h-full"
-                    priority
-                  />
+                <div className="w-full self-center sm:w-fit lg:self-start">
+                  <Link href="/contact">
+                    <Button className="w-full rounded-[1.25rem] bg-primary-50 px-10 py-7 text-base shadow-combinedShadow1 hover:bg-primary-40">
+                      Contact us
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
-            <div className="flex flex-col gap-8 pb-10">
-              <div className="text-md font-bold md:text-2xl lg:text-4xl">Powered By</div>
-              <div className="flex gap-20">
-                <div className="h-11 w-44">
-                  <EthereumLogoSVG className="h-full w-full" />
-                </div>
-                <div className="h-11 w-44">
-                  <PolygonLogoSVG className="h-full w-full" />
-                </div>
+
+            <div className="mt-6 flex w-full items-center justify-center md:mt-0">
+              <Image
+                src={BannerCertificate}
+                alt="banner"
+                className="h-auto max-w-full object-cover"
+              />
+            </div>
+          </div>
+
+          <div className="mt-10 flex flex-col gap-8 pb-10 md:mt-40">
+            <div className="text-md font-bold md:text-2xl lg:text-4xl">Powered By</div>
+            <div className="flex gap-20">
+              <div className="h-11 w-44">
+                <EthereumLogoSVG className="h-full w-full" />
+              </div>
+              <div className="h-11 w-44">
+                <PolygonLogoSVG className="h-full w-full" />
               </div>
             </div>
           </div>

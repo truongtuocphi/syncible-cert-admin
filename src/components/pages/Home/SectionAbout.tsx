@@ -48,7 +48,7 @@ export default function SectionAbout() {
   }, []);
 
   return (
-    <div className=" md:px-8 md:py-8 xl:px-16 xl:py-16" id="about">
+    <div className="px-4 md:px-8 md:py-8 xl:px-16 xl:py-16" id="about">
       <div className="flex flex-col items-center gap-8 rounded-t-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 px-4 py-[4rem] sm:rounded-t-[6.25rem] sm:px-16 sm:py-[6.6rem] lg:flex-row">
         <div ref={leftRef} className="w-full basis-1/2">
           <div className="flex flex-col gap-4 antialiased">

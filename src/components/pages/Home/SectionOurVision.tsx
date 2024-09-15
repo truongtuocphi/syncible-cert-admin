@@ -51,7 +51,7 @@ export default function SectionOurVision() {
         <div className="w-full max-w-[30rem] basis-1/2">
           <Image
             src="/img03.png"
-            alt="placeholder photo 5"
+            alt="Image of a globe"
             sizes="100vw"
             fill
             className="h-full object-cover "

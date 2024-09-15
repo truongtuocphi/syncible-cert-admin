@@ -1,6 +1,8 @@
 'use client';
 import Autoplay from 'embla-carousel-autoplay';
 
+import Image from 'next/image';
+
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import {
@@ -11,9 +13,9 @@ import {
   CarouselPrevious,
 } from '@/components/ui/carousel';
 import { montserrat } from '@/components/ui/fonts';
+
 import SyncibleLogo from '/public/syncible-logo.svg';
 import PlaceholderPhoto from '/public/cert-template.png';
-import Image from 'next/image';
 
 const ListNews = [
   {
@@ -56,7 +58,8 @@ const ListNews = [
     title: 'Course content',
     agency_name: 'Thanh Niên',
     date: '2022-10-10',
-    content: 'Tham gia khóa học đã giúp tôi hiểu rõ hơn về cách áp dụng kiến thức vào thực tế. Các bài giảng chi tiết và phần thực hành rất bổ ích, khiến tôi cảm thấy tự tin hơn trong công việc.',
+    content:
+      'Tham gia khóa học đã giúp tôi hiểu rõ hơn về cách áp dụng kiến thức vào thực tế. Các bài giảng chi tiết và phần thực hành rất bổ ích, khiến tôi cảm thấy tự tin hơn trong công việc.',
     author: {
       name: 'Nguyễn Văn D',
       avatar: 'https://picsum.photos/200/300',

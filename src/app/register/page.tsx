@@ -161,7 +161,7 @@ export default function Register() {
               <h1 className="text-center text-2xl font-bold">Sign up to Syncible!</h1>
               <button
                 onClick={() => setShowContinueSignUp(true)}
-                className="mt-6 w-full rounded-xl bg-primary py-3 text-white"
+                className="mt-6 w-full rounded-xl bg-primary-50 py-3 text-white"
               >
                 Continue with email
               </button>
@@ -181,7 +181,7 @@ export default function Register() {
               <div className="mt-4 text-center">
                 <p className="text-sm">
                   Already have an account?{' '}
-                  <a href="/login" className="font-bold text-primary hover:underline">
+                  <a href="/login" className="font-bold text-primary-50 hover:underline">
                     Sign in today!
                   </a>
                 </p>
@@ -328,13 +328,13 @@ export default function Register() {
                   <p className="text-sm text-red-500">{formErrors.confirmPassword}</p>
                 )}
               </div>
-              <button type="submit" className="w-full rounded-xl bg-primary py-3 text-white">
+              <button type="submit" className="w-full rounded-xl bg-primary-50 py-3 text-white">
                 Create account
               </button>
               <div className="mt-4 text-center">
                 <p className="text-sm">
                   Already have an account?{' '}
-                  <a href="/login" className="font-bold text-primary hover:underline">
+                  <a href="/login" className="font-bold text-primary-50 hover:underline">
                     Sign in today!
                   </a>
                 </p>

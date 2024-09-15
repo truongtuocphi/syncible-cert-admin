@@ -54,7 +54,7 @@ const Header = () => {
         </div>
 
         <div className="flex items-center gap-2 md:gap-4">
-          <ButtonPrimary onClick={() => open()} className="bg-primary text-white">
+          <ButtonPrimary onClick={() => open()} className="bg-primary-50 text-white">
             {isConnected && address ? (
               `${address.slice(0, 4)}...${address.slice(-6)}`
             ) : (

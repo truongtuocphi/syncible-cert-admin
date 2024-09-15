@@ -6,6 +6,7 @@ import { useEffect } from 'react';
 
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { useRouter } from 'next/navigation';
 
 import ArrowRightIcon from '@/assets/icons/arrow-badge-right.svg';
 import { Button } from '@/components/ui/button';
@@ -21,41 +22,61 @@ const Menu = [
 ];
 
 const Navbar = () => {
+  const router = useRouter();
+
   useEffect(() => {
     gsap.registerPlugin(ScrollToPlugin);
 
-    const handleNavClick = (e: any, target: string) => {
+    const handleNavClick = async (e: any, target: string) => {
       e.preventDefault();
-      gsap.to(window, {
-        duration: 1.5,
-        scrollTo: {
-          y: target,
-          autoKill: true, // Dừng tự động nếu người dùng tương tác
-        },
-        ease: 'power3.inOut',
-      });
+      const currentPath = window.location.pathname;
+
+      if (target.startsWith('#')) {
+        if (currentPath === '/') {
+          gsap.to(window, {
+            duration: 1.5,
+            scrollTo: {
+              y: target,
+              autoKill: true,
+            },
+            ease: 'power3.inOut',
+          });
+        } else {
+          await router.push('/');
+
+          setTimeout(() => {
+            gsap.to(window, {
+              duration: 1.5,
+              scrollTo: {
+                y: target,
+                autoKill: true,
+              },
+              ease: 'power3.inOut',
+            });
+          }, 500);
+        }
+      } else {
+        await router.push(target);
+      }
     };
 
-    // Thêm event listener cho các liên kết
     const links = document.querySelectorAll('.nav-link');
     links.forEach((link) => {
       const target = link.getAttribute('href');
-      if (target && target.startsWith('#')) {
-        // Chỉ áp dụng cho các liên kết nội bộ
+      if (target) {
         link.addEventListener('click', (e) => handleNavClick(e, target));
       }
     });
 
-    // Xóa event listener khi component bị gỡ bỏ
     return () => {
       links.forEach((link) => {
         const target = link.getAttribute('href');
-        if (target && target.startsWith('#')) {
+        if (target) {
           link.removeEventListener('click', (e) => handleNavClick(e, target));
         }
       });
     };
-  }, []);
+  }, [router]);
 
   return (
     <div className={`${montserrat.className} "relative w-full`}>

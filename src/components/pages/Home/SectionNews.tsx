@@ -155,47 +155,51 @@ export default function SectionNews() {
           className="w-full"
         >
           <div className="flex flex-col justify-center">
-            <CarouselContent className="pb-8 md:-ml-6">
+            <CarouselContent className="pb-10 md:-ml-6">
               {ListNews.map((entry, index) => (
                 <CarouselItem key={index} className="basis-full md:basis-1/2 md:pl-6 lg:basis-1/3">
-                  <Card className="h-full rounded-[1.25rem] shadow-combinedShadow2">
-                    <CardHeader>
-                      <CardTitle className="max-w-28">
-                        <SyncibleLogo className="h-full max-h-8 w-full" />
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="">
-                      <div className="flex flex-col gap-4">
-                        <div className="max-h-40 w-full overflow-hidden rounded-xl">
-                          <Image
-                            src={PlaceholderPhoto}
-                            alt="placeholder photo"
-                            priority
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="aspect-[2/1] object-cover"
-                          />
-                        </div>
-                        <div className={``}>
-                          <div className="text-2xl font-bold">{entry.title}</div>
-                          <div className="line-clamp-3 text-lg text-[#A2A3A9]">{entry.content}</div>
-                        </div>
-                      </div>
-                    </CardContent>
-                    <CardFooter>
-                      <div className="flex w-full gap-4">
-                        <Avatar className="h-16 w-16">
-                          <AvatarImage src={entry.author.avatar} />
-                          <AvatarFallback>CN</AvatarFallback>
-                        </Avatar>
-                        <div className={` flex w-full flex-col justify-center`}>
-                          <div className="text-lg font-bold">{entry.author.name}</div>
-                          <div className="text-base font-medium text-[#A2A3A9]">
-                            {entry.author.position}
+                  <div className="rounded-[1.25rem] shadow-combinedShadow2">
+                    <Card className="h-full rounded-[1.25rem] shadow-none">
+                      <CardHeader>
+                        <CardTitle className="max-w-28">
+                          <SyncibleLogo className="h-full max-h-8 w-full" />
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="">
+                        <div className="flex flex-col gap-4">
+                          <div className="max-h-40 w-full overflow-hidden rounded-xl">
+                            <Image
+                              src={PlaceholderPhoto}
+                              alt="placeholder photo"
+                              priority
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              className="aspect-[2/1] object-cover"
+                            />
+                          </div>
+                          <div className={``}>
+                            <div className="text-2xl font-bold">{entry.title}</div>
+                            <div className="line-clamp-3 text-lg text-[#A2A3A9]">
+                              {entry.content}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </CardFooter>
-                  </Card>
+                      </CardContent>
+                      <CardFooter>
+                        <div className="flex w-full gap-4">
+                          <Avatar className="h-16 w-16">
+                            <AvatarImage src={entry.author.avatar} />
+                            <AvatarFallback>CN</AvatarFallback>
+                          </Avatar>
+                          <div className={` flex w-full flex-col justify-center`}>
+                            <div className="text-lg font-bold">{entry.author.name}</div>
+                            <div className="text-base font-medium text-[#A2A3A9]">
+                              {entry.author.position}
+                            </div>
+                          </div>
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  </div>
                 </CarouselItem>
               ))}
             </CarouselContent>

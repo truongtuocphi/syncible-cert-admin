@@ -30,36 +30,33 @@ const Navbar = () => {
         duration: 1.5,
         scrollTo: {
           y: target,
-          autoKill: true, // Automatically stops if the user interacts
+          autoKill: true, // Dừng tự động nếu người dùng tương tác
         },
         ease: 'power3.inOut',
       });
     };
 
-    // Add event listeners for the links
+    // Thêm event listener cho các liên kết
     const links = document.querySelectorAll('.nav-link');
     links.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const target = link.getAttribute('href');
-        if (target) {
-          handleNavClick(e, target);
-        }
-      });
+      const target = link.getAttribute('href');
+      if (target && target.startsWith('#')) {
+        // Chỉ áp dụng cho các liên kết nội bộ
+        link.addEventListener('click', (e) => handleNavClick(e, target));
+      }
     });
 
-    // Clean up event listeners when the component unmounts
+    // Xóa event listener khi component bị gỡ bỏ
     return () => {
       links.forEach((link) => {
-        link.removeEventListener('click', (e) => {
-          const target = link.getAttribute('href');
-          if (target) {
-            handleNavClick(e, target);
-          }
-        });
+        const target = link.getAttribute('href');
+        if (target && target.startsWith('#')) {
+          link.removeEventListener('click', (e) => handleNavClick(e, target));
+        }
       });
     };
   }, []);
-  
+
   return (
     <div className={`${montserrat.className} "relative w-full`}>
       <div className="flex flex-col items-center">

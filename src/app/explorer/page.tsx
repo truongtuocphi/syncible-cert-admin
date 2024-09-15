@@ -45,14 +45,14 @@ export default function Explorer() {
 
   return (
     <>
-      <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">
+      <div className="fixed z-10 w-full backdrop-blur-sm">
         <Navbar />
       </div>
       <div className="min-h-screen flex-col items-center pt-16">
         <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
-          <div className="relative flex h-72 w-full items-center justify-center rounded-xl bg-gradient-to-r from-pink-500 to-indigo-500 shadow-lg">
-            <div className="text-5xl font-bold">Tìm chứng chỉ của bạn.</div>
-            <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 overflow-hidden rounded-full bg-white px-2">
+          <div className="relative flex h-72 w-full items-center justify-center rounded-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 shadow-lg">
+            <div className="text-5xl font-bold text-gray-700">Tìm chứng chỉ của bạn.</div>
+            <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2">
               <input
                 type="text"
                 placeholder="Mã chứng chỉ của bạn"
@@ -68,7 +68,7 @@ export default function Explorer() {
                 className="w-72 px-4 py-6 text-black outline-none"
               />
               <ButtonPrimary onClick={handleSearch} className="size-14 p-1">
-                <FaSearch className="text-xl" />
+                <FaSearch className="text-xl text-white" />
               </ButtonPrimary>
             </div>
           </div>
@@ -81,8 +81,8 @@ export default function Explorer() {
           ) : notFound ? (
             <div className="flex h-screen w-full items-center justify-center">
               <div className="flex flex-col items-center gap-2">
-                <BiSolidCommentError className="text-7xl text-white" />
-                <div className="text-lg font-semibold text-white">Không tìm thấy</div>
+                <BiSolidCommentError className="text-7xl text-gray-700" />
+                <div className="text-lg font-semibold text-gray-700">Không tìm thấy</div>
               </div>
             </div>
           ) : data ? (
@@ -97,14 +97,16 @@ export default function Explorer() {
           ) : (
             <div className="flex h-screen w-full items-center justify-center">
               <div className="flex flex-col items-center gap-2">
-                <HiTemplate className="text-7xl text-white" />
-                <div className="text-lg font-semibold text-white">Chứng chỉ sẽ hiện thị ở đây.</div>
+                <HiTemplate className="text-7xl text-gray-700" />
+                <div className="text-lg font-semibold text-gray-700">
+                  Chứng chỉ sẽ hiện thị ở đây.
+                </div>
               </div>
             </div>
           )}
         </div>
       </div>
-      <div className="relative text-white">
+      <div className="relative">
         <Footer />
       </div>
     </>

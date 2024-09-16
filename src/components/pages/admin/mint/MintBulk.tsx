@@ -26,7 +26,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
   const [csvData, setCsvData] = useState<CertificateData[]>([]);
 
   const handleDownload = async () => {
-    const fileUrl = `${headerURLPinata}/ipfs/QmfCaendkwSjcKteBFL3Hct2isgCS77K5NAPh5qFCJy8HW`;
+    const fileUrl = `${headerURLPinata}/ipfs/QmSusJoDdDnAr5AVocRzLBPhb7yHmeSXCBTJUyGLPekg7R`;
     const fileName = 'Convertio_input.xlsx';
 
     try {

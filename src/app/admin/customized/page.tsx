@@ -136,7 +136,7 @@ const editorDefaults = getEditorDefaults({
 export default function DefineTemplate() {
   const [result, setResult] = useState('');
   const [selectedTemplate, setSelectedTemplate] = useState<string>(
-    `${headerURL}/QmTu4V9dSaQB646ztpanTwzznJfvuhrR5mtfRPv7Xm5NzE`
+    `${headerURL}/QmTSo1QyvYhb6csz2p46mkdVz7ZoHMwepDgDBTzkLeJBjh`
   );
 
   const handleTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -282,7 +282,7 @@ export default function DefineTemplate() {
       </div>
 
       <Dialog open={result ? true : false}>
-        <DialogContent>
+        <DialogContent className="text-white">
           <DialogTitle>
             <div className="mb-1 flex w-full items-center justify-between">
               <p className="font-bold text-gray-700">Bản xem trước</p>
@@ -299,7 +299,7 @@ export default function DefineTemplate() {
             <img src={result} alt="img" className="h-full w-full border-[0.5px] border-gray-300" />
           </div>
           <DialogFooter>
-            <ButtonPrimary onClick={handleDownload} className="px-6">
+            <ButtonPrimary onClick={handleDownload} className="px-6 text-white">
               Tải mẫu xuống
             </ButtonPrimary>
           </DialogFooter>

@@ -162,7 +162,7 @@ const CreateCollection: React.FC = () => {
                 accept="image/*"
                 onChange={(e) => handleImageChange(e, setLogoImage)}
                 required
-                className="block w-full cursor-pointer text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-primary hover:file:bg-blue-100"
+                className="block w-full cursor-pointer text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-primary-50 hover:file:bg-blue-100"
               />
             </div>
           </div>

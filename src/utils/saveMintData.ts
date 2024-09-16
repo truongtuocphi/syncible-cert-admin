@@ -15,7 +15,7 @@ export const saveMintData = async (mintDataArray: any[], collectionContractAddre
 
     await set(mintDataRef, dataToSave);
 
-    console.log('Mint data saved successfully.');
+    console.log('Mint data saved successfully');
   } catch (error) {
     console.error('Error saving mint data:', error);
     throw new Error('Failed to save mint data.');

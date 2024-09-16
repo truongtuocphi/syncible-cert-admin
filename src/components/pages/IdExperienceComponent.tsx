@@ -1,6 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable no-console */
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -11,8 +9,6 @@ import { RiShareBoxLine } from 'react-icons/ri';
 import CopyButton from '@/components/common/coppyText/CopyButton';
 import Loading from '@/components/common/loading/Loading';
 import { db, ref, get } from '@/lib/firebase';
-import configDate from '@/utils/configDate';
-
 import replaceData from '@/utils/replaceData';
 
 import CertificatePreview from './admin/CertificatePreview';
@@ -57,6 +53,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
 
         const attributes = result.attributes;
 
+        // eslint-disable-next-line no-console
         console.log(attributes);
         const getCertificateID = attributes.find(
           (attr: { trait_type: string }) => attr.trait_type == 'Certificate ID'

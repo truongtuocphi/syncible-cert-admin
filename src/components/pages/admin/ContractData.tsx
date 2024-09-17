@@ -14,8 +14,6 @@ interface Props {
   onItemsCountChange: (count: number) => void;
 }
 
-const headerURL = process.env.NEXT_PUBLIC_HEADER_URL;
-
 const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCountChange }) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -69,12 +67,15 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
       {data ? (
         <>
           {data.map((item, index) => {
+            console.log(item);
             return (
               <Link href={`/admin/mintnft/${item?.tokenURI}`} key={index}>
                 <div className="h-[170px] w-full sm:h-[270px] lg:h-[370px] 2xl:h-[400px]">
                   <CertificatePreview
                     previewImage={item.certData.templateURL}
                     name={item.fullname}
+                    fontSize={item.fontSize}
+                    fontFamily={item.fontFamily}
                   />
                 </div>
               </Link>

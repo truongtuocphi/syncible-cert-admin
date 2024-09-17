@@ -1,7 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 
-const CertificatePreview: React.FC<any> = ({ previewImage, name, fontFamily, fontSize }) => {
+const CertificatePreview: React.FC<any> = ({
+  previewImage,
+  name,
+  fontFamily = 'Dancing Script',
+  fontSize = 40,
+}) => {
   return (
     <div className="relative h-full w-full overflow-hidden rounded-lg border-[0.5px]">
       <img src={previewImage} alt="Certificate_Image" className="h-full w-full rounded-lg" />

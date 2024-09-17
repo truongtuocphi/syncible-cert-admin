@@ -40,7 +40,7 @@ const Experience = () => {
   const [loading, setLoading] = useState(false);
   const [tokenLink, setTokenLink] = useState('');
   const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
-  const [fontSize, setFontSize] = useState<string>('16');
+  const [fontSize, setFontSize] = useState<string>('40');
 
   const typePage = pathname.get('type');
 
@@ -196,7 +196,7 @@ const Experience = () => {
                 { trait_type: 'Role', value: role || '' },
                 { trait_type: 'Date', value: issuedDate || '' },
                 { trait_type: 'Font', value: fontFamily || 'Dancing Script' },
-                { trait_type: 'Font Size', value: fontSize || '16' },
+                { trait_type: 'Font Size', value: fontSize || '40' },
                 {
                   trait_type: 'Template URL',
                   value: bannerImage || '',
@@ -229,7 +229,7 @@ const Experience = () => {
         alert('NFTs minted successfully!');
         setLoading(true);
 
-        await saveMintData(mintDataArray, collectionContractAddress);
+        await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error minting NFTs:', error);

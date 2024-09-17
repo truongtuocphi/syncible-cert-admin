@@ -70,30 +70,30 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">
             <CgProfile className="mr-2" />
-            Profile
+            Hồ sơ
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
             <FaRegMoneyBillAlt className="mr-2" />
-            Billing
+            Thanh toán
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
             <IoSettingsOutline className="mr-2" />
-            Settings
+            Cài đặt
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem className="cursor-pointer">
           <MdOutlineContactSupport className="mr-2" />
-          Support
+          Hỗ trợ
         </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" onClick={handleSignOut}>
           <FiLogOut className="mr-2" />
-          Log out
+          Đăng xuất
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

@@ -166,8 +166,8 @@ const Experience = () => {
                   trait_type: 'Template URL',
                   value: bannerImage || 'NaN',
                 },
-                { trait_type: 'Font', value: fontFamily || 'Dancing Script' },
-                { trait_type: 'Font Size', value: fontSize || '16' },
+                { trait_type: 'Font', value: fontFamily || 'NaN' },
+                { trait_type: 'Font Size', value: fontSize || 'Nan' },
               ],
             };
 
@@ -195,12 +195,12 @@ const Experience = () => {
                 { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
                 { trait_type: 'Role', value: role || 'NaN' },
                 { trait_type: 'Date', value: issuedDate || 'NaN' },
-                { trait_type: 'Font', value: fontFamily || 'Dancing Script' },
-                { trait_type: 'Font Size', value: fontSize || '40' },
                 {
                   trait_type: 'Template URL',
                   value: bannerImage || 'NaN',
                 },
+                { trait_type: 'Font', value: fontFamily || 'NaN' },
+                { trait_type: 'Font Size', value: fontSize || 'NaN' },
               ],
             };
 

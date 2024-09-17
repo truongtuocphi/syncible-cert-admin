@@ -36,6 +36,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   const [date, setDate] = useState('');
   const [blockchainType, setBlockchainType] = useState('Polygon');
   const [templateURL, setTemplateURL] = useState('');
+  const [fontFamily, setFontFamily] = useState<string>('');
+  const [fontSize, setFontSize] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -71,7 +73,14 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
           attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Blockchain Type')
             .value
         );
+        setFontFamily(
+          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Font').value
+        );
+        setFontSize(
+          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Font Size').value
+        );
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Fetch error:', error);
       }
     };
@@ -128,6 +137,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
           <CertificatePreview
             previewImage={templateURL}
             name={name?.split('Certificate for')[1]?.trim()}
+            fontFamily={fontFamily}
+            fontSize={fontSize}
           />
         </div>
         <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-[40%]">

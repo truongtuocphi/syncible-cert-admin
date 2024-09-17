@@ -39,6 +39,8 @@ const Experience = () => {
   const [loadingButton, setLoadingButton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tokenLink, setTokenLink] = useState('');
+  const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
+  const [fontSize, setFontSize] = useState<string>('16');
 
   const typePage = pathname.get('type');
 
@@ -366,6 +368,35 @@ const Experience = () => {
                 ) : (
                   <MintBulk DataIssuedDate={issuedDate} DataRole={role} onCsvRead={handleCsvRead} />
                 )}
+              </div>
+
+              <div className="mt-4 grid grid-cols-2 items-center gap-5 rounded-lg bg-white p-4">
+                <div className="col-span-1 space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Phông chữ</label>
+                  <select
+                    value={fontFamily}
+                    onChange={(e) => setFontFamily(e.target.value)}
+                    required
+                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  >
+                    <option value="MonteCarlo">MonteCarlo</option>
+                    <option value="Noto Serif">Noto Serif</option>
+                    <option value="Crimson Text">Crimson Text</option>
+                    <option value="Great Vibes">Great Vibes</option>
+                  </select>
+                </div>
+
+                <div className="col-span-1 space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Cỡ chữ</label>
+                  <input
+                    type="number"
+                    value={fontSize}
+                    onChange={(e) => setFontSize(e.target.value)}
+                    required
+                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    placeholder="Nhập cỡ chữ (vd: 16)"
+                  />
+                </div>
               </div>
 
               <div className="mt-4 flex items-center justify-end gap-4">

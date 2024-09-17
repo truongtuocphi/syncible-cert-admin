@@ -5,9 +5,5 @@
 import PhotoEditorSDK from '@/components/pages/admin/editor/PhotoEditorSDK';
 
 export default function DefineTemplate() {
-  return (
-    <div className="h-full w-full">
-      <PhotoEditorSDK />
-    </div>
-  );
+  return <PhotoEditorSDK />;
 }

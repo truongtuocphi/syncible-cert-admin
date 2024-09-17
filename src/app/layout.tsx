@@ -13,9 +13,6 @@ import Web3ModalProvider from '@/context';
 export const metadata: Metadata = {
   title: 'Nền Tảng Chứng Chỉ NFT Syncible',
   description: 'Nền Tảng Chứng Chỉ NFT Syncible',
-  icons: {
-    icon: { url: '/src/app/icon.ico', sizes: '10x26', type: 'image/x-icon' },
-  },
 };
 
 export default function RootLayout({

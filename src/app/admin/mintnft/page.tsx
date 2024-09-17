@@ -280,13 +280,13 @@ const Experience = () => {
                     Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây
                   </p>
                   <div
-                    className="relative flex h-80 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
+                    className="relative flex h-[22rem] w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
                     onDrop={(e) => handleDrop(e, setBannerImage)}
                     onDragOver={handleDragOver}
                   >
                     {bannerImage ? (
                       <div className="relative h-full w-full">
-                        <Image src={bannerImage} alt="Banner Image" fill className="rounded-md " />
+                        <Image src={bannerImage} alt="Banner Image" fill className="rounded-md" />
                         <button
                           type="button"
                           onClick={handleRemoveImage}
@@ -429,6 +429,8 @@ const Experience = () => {
                         ? coppyCsvDataFromChild[0]?.fullname
                         : dataFromMintSingle[0]?.fullname
                     }
+                    fontFamily={fontFamily}
+                    fontSize={fontSize}
                   />
                 ) : (
                   <div className="relative h-96 bg-gray-50">

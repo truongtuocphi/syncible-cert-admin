@@ -7,20 +7,11 @@ import { useState } from 'react';
 import '@pqina/pintura/pintura.css';
 
 import {
-  // editor
-  createDefaultImageReader,
-  createDefaultImageWriter,
-  createDefaultShapePreprocessor,
-
-  // plugins
   setPlugins,
   plugin_crop,
   plugin_filter,
-  plugin_filter_defaults,
   plugin_annotate,
   plugin_sticker,
-  plugin_sticker_locale_en_gb,
-  markup_editor_defaults,
   createMarkupEditorToolStyles,
   createMarkupEditorToolStyle,
   createMarkupEditorShapeStyleControls,
@@ -28,14 +19,6 @@ import {
   createDefaultFontFamilyOptions,
 } from '@pqina/pintura';
 import { getEditorDefaults } from '@pqina/pintura';
-import {
-  LocaleCore,
-  LocaleCrop,
-  LocaleFilter,
-  LocaleAnnotate,
-  LocaleSticker,
-  LocaleMarkupEditor,
-} from '@pqina/pintura/locale/en_GB';
 import { PinturaEditor } from '@pqina/react-pintura';
 import Image from 'next/image';
 import Link from 'next/link';

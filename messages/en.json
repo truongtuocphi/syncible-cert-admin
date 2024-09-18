@@ -67,5 +67,12 @@
         }
       }
     }
+  },
+  "Localization": {
+    "label": "Language",
+    "options": {
+      "en": "English",
+      "vi": "Vietnamese"
+    }
   }
 }

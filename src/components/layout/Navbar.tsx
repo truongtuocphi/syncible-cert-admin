@@ -16,6 +16,8 @@ import { montserrat } from '@/components/ui/fonts';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 import SyncibleLogo from '/public/syncible-logo.svg';
+import LocaleSwitcher from '../common/switcher/LocaleSwitcher';
+
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -153,6 +155,9 @@ const Navbar = () => {
                       </Link>
                     </li>
                   ))}
+                  <li>
+                    <LocaleSwitcher />
+                  </li>
                 </ul>
               </nav>
             </div>
@@ -163,7 +168,7 @@ const Navbar = () => {
             >
               <Button className="group flex w-[10rem] items-center rounded-[1.25rem] bg-primary-50 px-10 py-6 shadow-combinedShadow1 transition-all duration-500 hover:bg-primary-40">
                 <span className="relative inline-block text-base font-semibold transition-all duration-500 group-hover:pr-[25px]">
-                {t('buttons.access.label')}
+                  {t('buttons.access.label')}
                   <ArrowRightIcon className="absolute right-[-20px] top-0 h-6 w-6 pl-1 opacity-0 transition-all duration-500 group-hover:right-0 group-hover:opacity-100" />
                 </span>
               </Button>

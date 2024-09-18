@@ -56,7 +56,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
         const attributes = result.attributes;
 
         // eslint-disable-next-line no-console
-        console.log(attributes);
+        console.log('attributes', attributes);
         const getCertificateID = attributes.find(
           (attr: { trait_type: string }) => attr.trait_type == 'Certificate ID'
         ).value;
@@ -130,7 +130,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
-  console.log(dataContract);
+  console.log('font', fontFamily);
 
   return (
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">

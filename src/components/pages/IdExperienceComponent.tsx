@@ -130,6 +130,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
+  console.log(dataContract);
+
   return (
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <div className="flex flex-col justify-between md:flex-row">
@@ -170,13 +172,13 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
             <p>
               {`Contract address: `}
               <span className="text-primary-50 underline">
-                {dataContract[0].collectionContractAddress.slice(0, 4)}...
-                {dataContract[0].collectionContractAddress.slice(-6)}
+                {dataContract[0]?.collectionContractAddress.slice(0, 4)}...
+                {dataContract[0]?.collectionContractAddress.slice(-6)}
               </span>
             </p>
-            <CopyButton textToCopy={dataContract[0].collectionContractAddress} />
+            <CopyButton textToCopy={dataContract[0]?.collectionContractAddress} />
             <Link
-              href={`https://polygonscan.com/address/${dataContract[0].collectionContractAddress}`}
+              href={`https://polygonscan.com/address/${dataContract[0]?.collectionContractAddress}`}
               target="_blank"
             >
               <RiShareBoxLine className="text-primary-50" />

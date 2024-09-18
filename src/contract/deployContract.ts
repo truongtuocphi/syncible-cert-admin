@@ -19,22 +19,18 @@ const deployContract = async () => {
   const bytecode = bytecodeJson.bytecode;
   const factory = new ethers.ContractFactory(abi, bytecode, await signer);
 
-  // Triển khai hợp đồng
   const contract = await factory.deploy({
     gasLimit: 7000000,
     gasPrice: ethers.parseUnits('70', 'gwei'),
   });
 
-  // Chờ cho giao dịch triển khai hợp đồng được khai thác
   const receipt = await contract.deploymentTransaction()?.wait();
   if (!receipt) {
     throw new Error('Transaction receipt is null');
   }
 
-  // Tạo một hợp đồng mới với ABI và địa chỉ triển khai
   const deployedContract = new ethers.Contract(await contract.getAddress(), abi, await signer);
 
-  // Gọi hàm initialize
   const tx = await deployedContract.initialize();
   await tx.wait();
 

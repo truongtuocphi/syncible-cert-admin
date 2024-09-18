@@ -81,6 +81,11 @@ const predefinedTemplates = [
     imageUrl: 'QmPtdg862USmusjyKc2rcgCyv6sXVMamjoMNuxXEpTeXeN',
     name: 'Certificate 6',
   },
+  {
+    id: 7,
+    imageUrl: 'QmarbPAFtg1Ejo4jjgEe9owrMEmkgiekLgFux2LtpsDUDh',
+    name: 'Certificate 7',
+  },
 ];
 
 const editorDefaults = getEditorDefaults({

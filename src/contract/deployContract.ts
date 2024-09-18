@@ -21,8 +21,8 @@ const deployContract = async () => {
 
   // Triển khai hợp đồng
   const contract = await factory.deploy({
-    gasLimit: 5000000,
-    gasPrice: ethers.parseUnits('50', 'gwei'),
+    gasLimit: 7000000,
+    gasPrice: ethers.parseUnits('70', 'gwei'),
   });
 
   // Chờ cho giao dịch triển khai hợp đồng được khai thác

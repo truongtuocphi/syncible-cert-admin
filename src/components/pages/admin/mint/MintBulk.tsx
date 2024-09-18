@@ -26,7 +26,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
   const [csvData, setCsvData] = useState<CertificateData[]>([]);
 
   const handleDownload = async () => {
-    const fileUrl = `${headerURLPinata}/ipfs/QmfCaendkwSjcKteBFL3Hct2isgCS77K5NAPh5qFCJy8HW`;
+    const fileUrl = `${headerURLPinata}/ipfs/QmSusJoDdDnAr5AVocRzLBPhb7yHmeSXCBTJUyGLPekg7R`;
     const fileName = 'Convertio_input.xlsx';
 
     try {
@@ -49,16 +49,13 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
     if (file) {
       Papa.parse<string>(file, {
         header: true,
-        // encoding: 'UTF-8',
         complete: (results) => {
-          // Prepare certificate data and pass it to the parent
           const certificateData: CertificateData[] = results.data.map((data: any) => ({
             certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
             fullname: data.fullname,
             gmail: data.gmail,
           }));
 
-          // Pass certificate data to parent component
           onCsvRead(certificateData);
           setCsvData(certificateData);
         },

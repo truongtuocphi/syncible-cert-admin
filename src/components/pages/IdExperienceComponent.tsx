@@ -1,6 +1,4 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable no-console */
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -11,8 +9,6 @@ import { RiShareBoxLine } from 'react-icons/ri';
 import CopyButton from '@/components/common/coppyText/CopyButton';
 import Loading from '@/components/common/loading/Loading';
 import { db, ref, get } from '@/lib/firebase';
-import configDate from '@/utils/configDate';
-
 import replaceData from '@/utils/replaceData';
 
 import CertificatePreview from './admin/CertificatePreview';
@@ -40,6 +36,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   const [date, setDate] = useState('');
   const [blockchainType, setBlockchainType] = useState('Polygon');
   const [templateURL, setTemplateURL] = useState('');
+  const [fontFamily, setFontFamily] = useState<string>('');
+  const [fontSize, setFontSize] = useState<string>('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -57,6 +55,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
 
         const attributes = result.attributes;
 
+        // eslint-disable-next-line no-console
         console.log(attributes);
         const getCertificateID = attributes.find(
           (attr: { trait_type: string }) => attr.trait_type == 'Certificate ID'
@@ -74,7 +73,14 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
           attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Blockchain Type')
             .value
         );
+        setFontFamily(
+          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Font').value
+        );
+        setFontSize(
+          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Font Size').value
+        );
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Fetch error:', error);
       }
     };
@@ -124,6 +130,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
+  console.log(dataContract);
+
   return (
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <div className="flex flex-col justify-between md:flex-row">
@@ -131,14 +139,14 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
           <CertificatePreview
             previewImage={templateURL}
             name={name?.split('Certificate for')[1]?.trim()}
+            fontFamily={fontFamily}
+            fontSize={fontSize}
           />
         </div>
         <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-[40%]">
           <h3 className="text-3xl font-bold text-black">
             {name?.split('Certificate for')[1]?.trim()}
           </h3>
-          {/* <p className="mt-2 text-lg">Certificate name: {description}</p> */}
-          {/* <textarea className="mt-4 h-32 w-full rounded border border-gray-300 p-2" readOnly /> */}
         </div>
       </div>
       <div className="mt-6 flex flex-col justify-between md:flex-row">
@@ -164,13 +172,13 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
             <p>
               {`Contract address: `}
               <span className="text-primary-50 underline">
-                {dataContract[0].collectionContractAddress.slice(0, 4)}...
-                {dataContract[0].collectionContractAddress.slice(-6)}
+                {dataContract[0]?.collectionContractAddress.slice(0, 4)}...
+                {dataContract[0]?.collectionContractAddress.slice(-6)}
               </span>
             </p>
-            <CopyButton textToCopy={dataContract[0].collectionContractAddress} />
+            <CopyButton textToCopy={dataContract[0]?.collectionContractAddress} />
             <Link
-              href={`https://polygonscan.com/address/${dataContract[0].collectionContractAddress}`}
+              href={`https://polygonscan.com/address/${dataContract[0]?.collectionContractAddress}`}
               target="_blank"
             >
               <RiShareBoxLine className="text-primary-50" />

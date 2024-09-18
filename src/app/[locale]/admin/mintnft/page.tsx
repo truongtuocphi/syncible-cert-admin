@@ -39,7 +39,8 @@ const Experience = () => {
   const [loadingButton, setLoadingButton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [tokenLink, setTokenLink] = useState('');
-  const [fullName, setFullName] = useState('');
+  const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
+  const [fontSize, setFontSize] = useState<string>('40');
 
   const typePage = pathname.get('type');
 
@@ -165,6 +166,8 @@ const Experience = () => {
                   trait_type: 'Template URL',
                   value: bannerImage || 'NaN',
                 },
+                { trait_type: 'Font', value: fontFamily || 'NaN' },
+                { trait_type: 'Font Size', value: fontSize || 'Nan' },
               ],
             };
 
@@ -189,13 +192,15 @@ const Experience = () => {
               fullname: `Certificate for ${data.fullname}` || 'Default Name',
               tokenURI: tokenLink || 'Default tokenLink',
               attributes: [
-                { trait_type: 'Certificate ID', value: data.certificateNumber || '' },
-                { trait_type: 'Role', value: role || '' },
-                { trait_type: 'Date', value: issuedDate || '' },
+                { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
+                { trait_type: 'Role', value: role || 'NaN' },
+                { trait_type: 'Date', value: issuedDate || 'NaN' },
                 {
                   trait_type: 'Template URL',
-                  value: bannerImage || '',
+                  value: bannerImage || 'NaN',
                 },
+                { trait_type: 'Font', value: fontFamily || 'NaN' },
+                { trait_type: 'Font Size', value: fontSize || 'NaN' },
               ],
             };
 
@@ -217,14 +222,14 @@ const Experience = () => {
         }
 
         const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 10000000,
+          gasLimit: 5000000,
         });
 
         await tx.wait();
         alert('NFTs minted successfully!');
         setLoading(true);
 
-        await saveMintData(mintDataArray, collectionContractAddress);
+        await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error minting NFTs:', error);
@@ -279,13 +284,13 @@ const Experience = () => {
                     Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây
                   </p>
                   <div
-                    className="relative flex h-80 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
+                    className="relative flex h-[22rem] w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
                     onDrop={(e) => handleDrop(e, setBannerImage)}
                     onDragOver={handleDragOver}
                   >
                     {bannerImage ? (
                       <div className="relative h-full w-full">
-                        <Image src={bannerImage} alt="Banner Image" fill className="rounded-md " />
+                        <Image src={bannerImage} alt="Banner Image" fill className="rounded-md" />
                         <button
                           type="button"
                           onClick={handleRemoveImage}
@@ -369,6 +374,35 @@ const Experience = () => {
                 )}
               </div>
 
+              <div className="mt-4 grid grid-cols-2 items-center gap-5 rounded-lg bg-white p-4">
+                <div className="col-span-1 space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Phông chữ</label>
+                  <select
+                    value={fontFamily}
+                    onChange={(e) => setFontFamily(e.target.value)}
+                    required
+                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                  >
+                    <option value="MonteCarlo">MonteCarlo</option>
+                    <option value="Noto Serif">Noto Serif</option>
+                    <option value="Crimson Text">Crimson Text</option>
+                    <option value="Great Vibes">Great Vibes</option>
+                  </select>
+                </div>
+
+                <div className="col-span-1 space-y-2">
+                  <label className="block text-sm font-medium text-gray-700">Cỡ chữ</label>
+                  <input
+                    type="number"
+                    value={fontSize}
+                    onChange={(e) => setFontSize(e.target.value)}
+                    required
+                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    placeholder="Nhập cỡ chữ (vd: 16)"
+                  />
+                </div>
+              </div>
+
               <div className="mt-4 flex items-center justify-end gap-4">
                 <Link href={'/admin'}>
                   <ButtonPrimary
@@ -399,6 +433,8 @@ const Experience = () => {
                         ? coppyCsvDataFromChild[0]?.fullname
                         : dataFromMintSingle[0]?.fullname
                     }
+                    fontFamily={fontFamily}
+                    fontSize={fontSize}
                   />
                 ) : (
                   <div className="relative h-96 bg-gray-50">

@@ -24,7 +24,7 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
         </Link>
-        <h2 className="text-2xl font-bold text-gray-600">Verify</h2>
+        <h2 className="text-2xl font-bold text-gray-600">Xác minh</h2>
       </div>
       <IdExperienceComponent slugPost={slugPost} onDataContract={handleDataContract} />
     </>

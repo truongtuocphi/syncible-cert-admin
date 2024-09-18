@@ -26,7 +26,7 @@ const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
 const db = getDatabase(
   app,
-  'https://syncible-f0d5a-default-rtdb.asia-southeast1.firebasedatabase.app/'
+  'https://syncible-65204-default-rtdb.asia-southeast1.firebasedatabase.app/'
 );
 
 export {

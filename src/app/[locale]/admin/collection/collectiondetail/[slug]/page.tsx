@@ -84,12 +84,12 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
         <div className="flex items-center justify-center gap-16">
           <div className="flex flex-col text-center">
             <span className="text-xl font-bold text-gray-600">Items</span>
-            <span className="text-xl font-bold text-primary">{itemsCount}</span>
+            <span className="text-xl font-bold text-primary-50">{itemsCount}</span>
           </div>
 
           <div className="flex flex-col text-center">
             <span className="text-xl font-bold text-gray-600">Owner</span>
-            <span className="text-xl font-bold text-primary">1</span>
+            <span className="text-xl font-bold text-primary-50">1</span>
           </div>
         </div>
 

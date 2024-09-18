@@ -68,7 +68,6 @@ const Navbar = () => {
       // }
     };
 
-    // Add event listeners for the links
     const links = document.querySelectorAll('.nav-link');
     links.forEach((link) => {
       link.addEventListener('click', (e) => {
@@ -79,7 +78,6 @@ const Navbar = () => {
       });
     });
 
-    // Clean up event listeners when the component unmounts
     return () => {
       links.forEach((link) => {
         link.removeEventListener('click', (e) => {
@@ -90,7 +88,7 @@ const Navbar = () => {
         });
       });
     };
-  }, []);
+  }, [router]);
 
   return (
     <div className={`${montserrat.className} "relative w-full`}>

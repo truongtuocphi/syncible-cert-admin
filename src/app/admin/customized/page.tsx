@@ -83,7 +83,7 @@ const predefinedTemplates = [
   },
   {
     id: 7,
-    imageUrl: 'QmarbPAFtg1Ejo4jjgEe9owrMEmkgiekLgFux2LtpsDUDh',
+    imageUrl: 'QmPtdg862USmusjyKc2rcgCyv6sXVMamjoMNuxXEpTeXeN',
     name: 'Certificate 7',
   },
 ];

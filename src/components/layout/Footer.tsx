@@ -1,10 +1,12 @@
 import Link from 'next/link';
 
+import { useTranslations } from 'next-intl';
 import FacebookIcon from '@/assets/icons/FacebookIcon.svg';
 import InstagramIcon from '@/assets/icons/InstagramIcon.svg';
 import LinkedInIcon from '@/assets/icons/LinkedinIcon.svg';
 import TwitterIcon from '@/assets/icons/TwitterIcon.svg';
 import YoutubeIcon from '@/assets/icons/YoutubeIcon.svg';
+
 
 const listSocialMedia = [
   {
@@ -34,19 +36,29 @@ const listSocialMedia = [
   },
 ];
 
-const Links = [
-  { link_name: 'Terms', url: '/terms' },
-  { link_name: 'Privacy', url: '/privacy' },
-  { link_name: 'Contact', url: '/contact' },
-];
-
 const Footer = () => {
+  const t = useTranslations('HomePage');
+  const Links = [
+    {
+      link_name: t('navigation.footer.links.term_of_service.label'),
+      url: t('navigation.footer.links.term_of_service.href'),
+    },
+    {
+      link_name: t('navigation.footer.links.privacy_policy.label'),
+      url: t('navigation.footer.links.privacy_policy.href'),
+    },
+    {
+      link_name: t('navigation.footer.links.contact.label'),
+      url: t('navigation.footer.links.contact.href'),
+    },
+  ];
+
   return (
     <div className="relative flex flex-col items-center">
       <div className="w-full max-w-[90rem]">
         <div className="px-4 py-4 pb-8 md:px-8 md:py-8 xl:px-[6.5rem]">
           <div className="flex flex-col justify-between sm:items-center md:flex-row">
-            <div>@ 2024 Syncible. All rights reserved</div>
+            <div>{t('footer_section.copy_right')}</div>
             <div className="flex flex-col gap-4 sm:items-center md:flex-row lg:gap-6">
               <div className="flex gap-8">
                 {Links.map(({ link_name, url }) => (

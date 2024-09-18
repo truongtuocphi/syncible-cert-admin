@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 
 import { gsap } from 'gsap';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import { montserrat } from '@/components/ui/fonts';
 
@@ -13,6 +14,7 @@ export default function SectionWhatWeBelieve() {
   const logoRef1 = useRef<HTMLDivElement>(null);
   const logoRef2 = useRef<HTMLDivElement>(null);
   const logoRef3 = useRef<HTMLDivElement>(null);
+  const t = useTranslations('HomePage.believe_section');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -127,20 +129,16 @@ export default function SectionWhatWeBelieve() {
           </div>
           <div className="w-full basis-1/2 lg:basis-[55%]">
             <div className="flex flex-col gap-4 antialiased">
-              <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>What we believe</h1>
+              <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>{t('header')}</h1>
               <div className={`${montserrat.className} font-inter w-full text-wrap text-[#6C6D71]`}>
-                By tokenizing diplomas, certificates, and educational accomplishments, we help
-                students build an authentic, verifiable digital portfolio provides a comprehensive
-                view of their skills and knowledge.
-                <br />
-                <br /> Syncible reduces the time to issue certificates, printing costs, and
-                educational fees, while eliminating the need to retrieve physical documents or send
-                them by mail.
-                <br />
-                <br />
-                We ensure that each certificate is stored on the blockchain with encrypted
-                information, protecting the integrity and security of the records and minimizing
-                fraud risks.
+                {t.rich('content', {
+                  breakline: () => (
+                    <>
+                      <br />
+                      <br />
+                    </>
+                  ),
+                })}
               </div>
             </div>
           </div>

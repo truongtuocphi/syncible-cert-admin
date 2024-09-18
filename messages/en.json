@@ -1,0 +1,71 @@
+{
+  "HomePage": {
+    "title_section": {
+      "label_1": "Empower your institution and enrich student success",
+      "label_2": "Using blockchain technology and NFTs, Syncible enhance your institution’s reputation and revolutionizes the way academic achievements are recognized.",
+      "label_3": "Powered By",
+      "contact_button": {
+        "label": "Contact Us",
+        "href": "/contact"
+      }
+    },
+    "about_section": {
+      "header": "About us",
+      "content": "Syncible a pioneering platform that provides secure and transparent NFT certificates for across various sectors, including education, business, and non-profit organizations. Syncible ensures the authenticity and integrity of digital certificates, helping to minimize the risk of counterfeiting and enhancing the credibility of certificate-issuing organizations."
+    },
+    "believe_section": {
+      "header": "What we believe",
+      "content": "By tokenizing diplomas, certificates, and educational accomplishments, we help students build an authentic, verifiable digital portfolio provides a comprehensive view of their skills and knowledge.<breakline></breakline> Syncible reduces the time to issue certificates, printing costs, and educational fees, while eliminating the need to retrieve physical documents or send them by mail.<breakline></breakline> We ensure that each certificate is stored on the blockchain with encrypted information, protecting the integrity and security of the records and minimizing fraud risks."
+    },
+    "vision_section": {
+      "header": "Vision",
+      "content": "Syncible aims to create a comprehensive shift in the recognition of academic achievements, transcending geographical boundaries and administrative procedures, allowing students to transparently and reliably demonstrate their skills to employers and educational institutions."
+    },
+    "blogs_section": {
+      "header": "Blogs"
+    },
+    "footer_section": {
+      "copy_right": "© 2024 All rights reserved by Syncible."
+    },
+    "navigation": {
+      "top_nav": {
+        "links": {
+          "about": {
+            "label": "About",
+            "href": "#about"
+          },
+          "blogs": {
+            "label": "Blogs",
+            "href": "#blogs"
+          },
+          "explorer": {
+            "label": "Explorer",
+            "href": "/explorer"
+          }
+        },
+        "buttons": {
+          "access": {
+            "label": "Access",
+            "href": "/login"
+          }
+        }
+      },
+      "footer": {
+        "links": {
+          "term_of_service": {
+            "label": "Terms",
+            "href": "/terms"
+          },
+          "privacy_policy": {
+            "label": "Privacy",
+            "href": "/privacy"
+          },
+          "contact": {
+            "label": "Contact",
+            "href": "/contact"
+          }
+        }
+      }
+    }
+  }
+}

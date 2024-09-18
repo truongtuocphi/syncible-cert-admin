@@ -2,13 +2,14 @@ import React, { useRef, useEffect } from 'react';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import { montserrat } from '@/components/ui/fonts';
 
 export default function SectionOurVision() {
   const ref = useRef<HTMLDivElement>(null);
+  const t = useTranslations('HomePage.vision_section');
   useEffect(() => {
     if (typeof window !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
@@ -39,12 +40,9 @@ export default function SectionOurVision() {
       >
         <div className="w-full basis-1/2">
           <div className="flex flex-col gap-4 antialiased">
-            <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>Vision</h1>
+            <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>{t('header')}</h1>
             <div className={`${montserrat.className} font-inter w-full text-wrap lg:w-[85%]`}>
-              Syncible aims to create a comprehensive shift in the recognition of academic
-              achievements, transcending geographical boundaries and administrative procedures,
-              allowing students to transparently and reliably demonstrate their skills to employers
-              and educational institutions.
+              {t('content')}
             </div>
           </div>
         </div>

@@ -1,0 +1,71 @@
+{
+  "HomePage": {
+    "title_section": {
+      "label_1": "Trao quyền cho tổ chức của bạn và nâng cao thành công của sinh viên",
+      "label_2": "Sử dụng công nghệ blockchain và NFT, Syncible nâng cao uy tín của tổ chức của bạn và cách mạng hóa cách công nhận thành tựu học thuật.",
+      "label_3": "Được hỗ trợ bởi",
+      "contact_button": {
+        "label": "Liên hệ với chúng tôi",
+        "href": "/contact"
+      }
+    },
+    "about_section": {
+      "header": "Giới thiệu về chúng tôi",
+      "content": "Syncible là một nền tảng tiên phong cung cấp chứng chỉ NFT an toàn và minh bạch cho các đối tác như trong nhiều lĩnh vực khác nhau, bao gồm giáo dục, doanh nghiệp và các tổ chức phi lợi nhuận. Syncible đảm bảo tính xác thực và toàn vẹn của các chứng chỉ số, giúp giảm thiểu nguy cơ làm giả và nâng cao uy tín của các tổ chức cấp chứng chỉ."
+    },
+    "believe_section": {
+      "header": "Chúng tôi tin rằng",
+      "content": "Bằng cách mã hóa các bằng cấp, chứng chỉ và thành tích giáo dục, chúng tôi giúp học sinh xây dựng một hồ sơ số xác thực, có thể kiểm chứng, cung cấp cái nhìn toàn diện về kỹ năng và kiến thức của họ.<breakline></breakline> Syncible rút ngắn thời gian cấp chứng chỉ, giảm chi phí in ấn và phí giáo dục, đồng thời loại bỏ nhu cầu thu hồi tài liệu vật lý hoặc gửi chúng qua đường bưu điện."
+    },
+    "vision_section": {
+      "header": "Tầm nhìn",
+      "content": "Syncible nhằm tạo ra một sự thay đổi toàn diện trong việc công nhận thành tích học tập, vượt qua các ranh giới địa lý và thủ tục hành chính, cho phép sinh viên trình bày kỹ năng của mình một cách minh bạch và đáng tin cậy với các nhà tuyển dụng và cơ sở giáo dục."
+    },
+    "blogs_section": {
+      "header": "Tin tức"
+    },
+    "footer_section": {
+      "copy_right": "© 2024 Bản quyền thuộc về Syncible."
+    },
+    "navigation": {
+      "top_nav": {
+        "links": {
+          "about": {
+            "label": "Giới thiệu",
+            "href": "#about"
+          },
+          "blogs": {
+            "label": "Tin tức",
+            "href": "#blogs"
+          },
+          "explorer": {
+            "label": "Tìm kiếm",
+            "href": "/explorer"
+          }
+        },
+        "buttons": {
+          "access": {
+            "label": "Truy cập",
+            "href": "/login"
+          }
+        }
+      },
+      "footer": {
+        "links": {
+          "term_of_service": {
+            "label": "Điều khoản",
+            "href": "/terms"
+          },
+          "privacy_policy": {
+            "label": "Bảo mật",
+            "href": "/privacy"
+          },
+          "contact": {
+            "label": "Liên hệ",
+            "href": "/contact"
+          }
+        }
+      }
+    }
+  }
+}

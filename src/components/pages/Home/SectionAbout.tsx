@@ -3,12 +3,14 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 import { montserrat } from '@/components/ui/fonts';
 
 export default function SectionAbout() {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
+  const t = useTranslations('HomePage.about_section');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -52,15 +54,11 @@ export default function SectionAbout() {
       <div className="flex flex-col items-center gap-8 rounded-t-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 px-4 py-[4rem] sm:rounded-t-[6.25rem] sm:px-16 sm:py-[6.6rem] lg:flex-row">
         <div ref={leftRef} className="w-full basis-1/2">
           <div className="flex flex-col gap-4 antialiased">
-            <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>About us</h1>
+            <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>{t('header')}</h1>
             <div
               className={`${montserrat.className}w-full font-inter text-wrap text-[#6C6D71] lg:w-[85%]`}
             >
-              Syncible a pioneering platform that provides secure and transparent NFT certificates
-              for across various sectors, including education, business, and non-profit
-              organizations. Syncible ensures the authenticity and integrity of digital
-              certificates, helping to minimize the risk of counterfeiting and enhancing the
-              credibility of certificate-issuing organizations.
+              {t('content')}
             </div>
           </div>
         </div>

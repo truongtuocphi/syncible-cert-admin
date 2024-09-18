@@ -67,5 +67,12 @@
         }
       }
     }
+  },
+  "Localization": {
+    "label": "Ngôn ngữ",
+    "options": {
+      "en": "Tiếng Anh",
+      "vi": "Tiếng Việt"
+    }
   }
 }

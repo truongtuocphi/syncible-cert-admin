@@ -1,25 +1,40 @@
-import {useLocale, useTranslations} from 'next-intl';
-import {routing} from '@/i18n/routing';
-import {useRouter} from 'next/router';
+import { useLocale, useTranslations } from 'next-intl';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { routing, useRouter, usePathname } from '@/i18n/routing';
 
-const LocaleSwitcher: React.FC = () => {
+export default function LocaleSwitcher() {
+  const t = useTranslations('Localization');
+  const locale = useLocale();
   const router = useRouter();
-  const { locale, locales } = router;
+  const pathname = usePathname();
 
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const locale = e.target.value;
-    router.push(router.pathname, router.asPath, { locale });
+  const handleLanguageChange = async (value: 'en' | 'vi') => {
+    router.replace(pathname, { locale: value });
   };
 
   return (
-    <select value={locale} onChange={handleChange}>
-      {locales?.map((loc) => (
-        <option key={loc} value={loc}>
-          {loc}
-        </option>
-      ))}
-    </select>
+    <>
+      <Select value={locale} onValueChange={handleLanguageChange}>
+        <SelectTrigger className="w-full">
+          <SelectValue placeholder={t('label')} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {routing.locales.map((loc) => (
+              <SelectItem key={loc} value={loc}>
+                {t(`options.${loc}`)}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </>
   );
-};
-
-export default LocaleSwitcher;
+}

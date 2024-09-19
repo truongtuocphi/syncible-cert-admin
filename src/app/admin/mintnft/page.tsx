@@ -216,7 +216,7 @@ const Experience = () => {
         const tx = await signer.sendTransaction({
           to: collectionContractAddress,
           data: encodedData,
-          gasLimit: 4000000,
+          gasLimit: 7000000,
         });
 
         await tx.wait();

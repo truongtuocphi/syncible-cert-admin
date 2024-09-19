@@ -12,7 +12,8 @@ import Web3ModalProvider from '@/context';
 
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
-
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 export const metadata: Metadata = {
   title: 'Nền Tảng Chứng Chỉ NFT Syncible',
   description: 'Nền Tảng Chứng Chỉ NFT Syncible',
@@ -42,7 +43,17 @@ export default async function RootLayout({
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <NextIntlClientProvider messages={messages}>
           <Web3ModalProvider initialState={initialState}>
-            <main>{children}</main>
+            <main>
+              <div className="relative min-h-screen overflow-hidden">
+                <div className="fixed top-0 z-30 w-screen md:mt-6">
+                  <Navbar />
+                </div>
+                {children}
+                <div className="font-inter relative w-full text-black">
+                  <Footer />
+                </div>
+              </div>
+            </main>
           </Web3ModalProvider>
         </NextIntlClientProvider>
       </body>

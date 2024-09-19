@@ -26,10 +26,10 @@ import PolygonLogoSVG from '../../../public/polygon-logo.svg';
 const Page = () => {
   const t = useTranslations('HomePage.title_section');
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <div className="fixed top-0 z-30 w-full md:mt-6">
+    <>
+      {/* <div className="fixed top-0 z-30 w-screen md:mt-6">
         <Navbar />
-      </div>
+      </div> */}
       <div className="relative z-20 flex flex-col items-center gap-10 overflow-hidden">
         <div className={`${montserrat.className} w-full max-w-[90rem]`}>
           <div className="flex flex-col justify-center px-4 pb-4 sm:min-h-dvh md:px-8 md:pb-10 xl:px-32">
@@ -114,9 +114,7 @@ const Page = () => {
           <SectionOurVision />
         </div>
         <SectionBlogs />
-        <div className="font-inter relative w-full text-black">
-          <Footer />
-        </div>
+        
       </div>
       <div className="absolute bottom-0 left-0 right-0 top-0 flex w-full flex-col items-center overflow-hidden">
         <div className="relative mx-auto h-full w-full max-w-[90rem]">
@@ -139,7 +137,7 @@ const Page = () => {
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

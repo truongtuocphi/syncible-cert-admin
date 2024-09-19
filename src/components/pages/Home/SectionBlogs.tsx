@@ -146,7 +146,7 @@ export default function SectionBlogs() {
   const t = useTranslations('HomePage.blogs_section');
   return (
     <div className={`${montserrat.className} w-full max-w-[90rem]`} id="blogs">
-      <div className="flex flex-col items-center gap-8 px-4 py-4 md:px-8 md:py-8 xl:px-16 xl:py-16 ">
+      <div className="flex flex-col items-center gap-8 px-4 py-16 md:px-8 xl:px-16 xl:py-32 ">
         <div className=" text-4xl font-semibold">{t('header')}</div>
         <Carousel
           opts={{ align: 'start', startIndex: 1, loop: false }}

@@ -20,6 +20,8 @@ import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
 import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
+import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
+import Loading from '@/components/common/loading/Loading';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -38,6 +40,7 @@ const Experience = () => {
   const [top, setTop] = useState(20);
   const [loadingButton, setLoadingButton] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingBanner, setLoadingBanner] = useState<boolean>(false);
   const [tokenLink, setTokenLink] = useState('');
   const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
   const [fontSize, setFontSize] = useState<string>('40');
@@ -106,17 +109,25 @@ const Experience = () => {
     setBannerImage(null);
   };
 
-  const handleImageBannerChange = (
+  const handleImageBannerChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
-    setImage: React.Dispatch<React.SetStateAction<string | null>>
+    setImage: React.Dispatch<React.SetStateAction<string | null>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      setLoading(true);
+
+      try {
+        // Gọi hàm uploadImageToPinata để tải ảnh lên Pinata
+        const imageUrl = await uploadImageToPinata(file);
+        setImage(imageUrl);
+      } catch (error) {
+        console.error('Failed to upload image', error);
+        // Có thể thêm thông báo lỗi ở đây nếu cần
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -178,7 +189,7 @@ const Experience = () => {
               data.fullname,
               data.certificateNumber,
               tokenURI,
-              [issuedDate, 'https://example.com/template/1'],
+              [issuedDate, bannerImage],
             ];
           }
         )
@@ -186,7 +197,7 @@ const Experience = () => {
 
       if (mintDataArray) {
         const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 5000000,
+          gasLimit: 4000000,
         });
 
         await tx.wait();
@@ -249,7 +260,11 @@ const Experience = () => {
                     onDrop={(e) => handleDrop(e, setBannerImage)}
                     onDragOver={handleDragOver}
                   >
-                    {bannerImage ? (
+                    {loadingBanner ? (
+                      <div className="flex h-full w-full items-center justify-center">
+                        <Loading />
+                      </div>
+                    ) : bannerImage ? (
                       <div className="relative h-full w-full">
                         <Image src={bannerImage} alt="Banner Image" fill className="rounded-md" />
                         <button
@@ -270,7 +285,9 @@ const Experience = () => {
                           type="file"
                           accept="image/*"
                           required
-                          onChange={(e) => handleImageBannerChange(e, setBannerImage)}
+                          onChange={(e) =>
+                            handleImageBannerChange(e, setBannerImage, setLoadingBanner)
+                          }
                           className="absolute inset-0 cursor-pointer opacity-0"
                         />
                       </div>

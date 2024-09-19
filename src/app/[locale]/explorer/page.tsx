@@ -10,8 +10,6 @@ import { HiTemplate } from 'react-icons/hi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Loading from '@/components/common/loading/Loading';
-import Footer from '@/components/layout/Footer';
-import Navbar from '@/components/layout/Navbar';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { CollectionData } from '@/types/function';
 import fetchDataFirebase from '@/utils/featDataFirebase';

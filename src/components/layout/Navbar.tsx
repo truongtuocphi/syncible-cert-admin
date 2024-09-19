@@ -127,6 +127,7 @@ const Navbar = () => {
                           </SheetClose>
                         </div>
                       ))}
+                      <LocaleSwitcher />
                     </div>
                     <Link href={t('buttons.access.href')} target={'_blank'}>
                       <Button className="group flex w-full items-center rounded-[1.25rem] bg-primary-50 px-10 py-6 shadow-combinedShadow1 transition-all hover:bg-primary-40">
@@ -153,9 +154,6 @@ const Navbar = () => {
                       </Link>
                     </li>
                   ))}
-                  <li>
-                    <LocaleSwitcher />
-                  </li>
                 </ul>
               </nav>
             </div>

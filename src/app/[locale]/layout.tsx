@@ -43,17 +43,7 @@ export default async function RootLayout({
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <NextIntlClientProvider messages={messages}>
           <Web3ModalProvider initialState={initialState}>
-            <main>
-              <div className="relative min-h-screen overflow-hidden">
-                <div className="fixed top-0 z-30 w-screen md:mt-6">
-                  <Navbar />
-                </div>
-                {children}
-                <div className="font-inter relative w-full text-black">
-                  <Footer />
-                </div>
-              </div>
-            </main>
+            <main>{children}</main>
           </Web3ModalProvider>
         </NextIntlClientProvider>
       </body>

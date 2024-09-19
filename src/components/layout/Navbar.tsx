@@ -15,7 +15,7 @@ import { montserrat } from '@/components/ui/fonts';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 
 import SyncibleLogo from '/public/syncible-logo.svg';
-import LocaleSwitcher from '../common/switcher/LocaleSwitcher';
+import { LocaleCollapsible, LocaleSelect } from '../common/switcher/LocaleSwitcher';
 
 gsap.registerPlugin(ScrollToPlugin);
 
@@ -108,7 +108,11 @@ const Navbar = () => {
                   </Button>
                 </SheetTrigger>
 
-                <SheetContent side="top" className="h-full p-4 text-black">
+                <SheetContent
+                  side="top"
+                  className="h-full p-4 text-black"
+                  aria-describedby="Navigation modal for Syncible landing page"
+                >
                   <SheetTitle className="pb-4">
                     <Link href="/" className="">
                       <div className="h-8 w-28 md:h-10 md:w-40">
@@ -127,9 +131,9 @@ const Navbar = () => {
                           </SheetClose>
                         </div>
                       ))}
-                      <LocaleSwitcher />
+                      <LocaleCollapsible />
                     </div>
-                    <Link href={t('buttons.access.href')} target={'_blank'}>
+                    <Link href={t('buttons.access.href')} target={'_blank'} className="z-0">
                       <Button className="group flex w-full items-center rounded-[1.25rem] bg-primary-50 px-10 py-6 shadow-combinedShadow1 transition-all hover:bg-primary-40">
                         <span className="relative inline-block text-base font-semibold">
                           {t('buttons.access.label')}
@@ -159,7 +163,7 @@ const Navbar = () => {
             </div>
             <div className="hidden lg:block">
               <div className="flex items-center gap-3">
-                <LocaleSwitcher />
+                <LocaleSelect />
                 <Link href={t('buttons.access.href')} target={'_blank'} className="h-fit">
                   <Button className="group flex w-[10rem] items-center rounded-[1.25rem] bg-primary-50 px-10 py-6 shadow-combinedShadow1 transition-all duration-500 hover:bg-primary-40">
                     <span className="relative inline-block text-base font-semibold transition-all duration-500 group-hover:pr-[25px]">

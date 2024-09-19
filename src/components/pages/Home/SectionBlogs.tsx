@@ -158,7 +158,7 @@ export default function SectionBlogs() {
           className="w-full"
         >
           <div className="flex flex-col justify-center">
-            <CarouselContent className="pb-10 md:-ml-6">
+            <CarouselContent className="pb-10 md:-ml-6 pt-7">
               {ListNews.map((entry, index) => (
                 <CarouselItem key={index} className="basis-full md:basis-1/2 md:pl-6 lg:basis-1/3">
                   <div className="rounded-[1.25rem] shadow-combinedShadow2">

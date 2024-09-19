@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-
+import OurVision from '../../../../public/OurVision.svg';
 import { montserrat } from '@/components/ui/fonts';
 
 export default function SectionOurVision() {
@@ -47,14 +47,15 @@ export default function SectionOurVision() {
           </div>
         </div>
         <div className="w-full max-w-[30rem] basis-1/2">
-          <Image
+          {/* <Image
             src="/img03.png"
             alt="Image of a globe"
             sizes="100vw"
             fill
             className="h-full object-cover "
             priority
-          />
+          /> */}
+          <OurVision className="h-full w-full" alt="Image of a globe" />
         </div>
       </div>
     </div>

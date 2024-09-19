@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import { montserrat } from '@/components/ui/fonts';
 
 import SyncibleLogoOnly from '../../../../public/SyncileLogoOnly.svg';
+import WeBelieveSVG from '../../../../public/WeBelieve.svg';
 
 export default function SectionWhatWeBelieve() {
 
@@ -118,13 +119,9 @@ export default function SectionWhatWeBelieve() {
         </div>
         <div className="relative z-30 flex flex-col-reverse items-center gap-8 px-4 py-8 md:p-20 lg:flex-row lg:gap-20">
           <div className="h-full w-full basis-1/2 lg:basis-[45%]">
-            <Image
-              src="/img02.png"
+            <WeBelieveSVG
+              className="h-full w-full"
               alt="2D image of a graduation cap, a medal and a certificate"
-              sizes="100vw"
-              fill
-              className="h-full object-contain"
-              priority
             />
           </div>
           <div className="w-full basis-1/2 lg:basis-[55%]">

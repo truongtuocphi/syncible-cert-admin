@@ -2,9 +2,8 @@ import React, { useRef, useEffect } from 'react';
 
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-
+import AboutUsSVG from '../../../../public/AboutUs.svg';
 import { montserrat } from '@/components/ui/fonts';
 
 export default function SectionAbout() {
@@ -63,14 +62,15 @@ export default function SectionAbout() {
           </div>
         </div>
         <div ref={rightRef} className="h-full w-full basis-1/2">
-          <Image
+          {/* <Image
             src="/img01.png"
             alt="Image with 2 hands shaking"
             fill
             sizes="100vw"
             className="h-[110%]  object-cover"
             priority
-          />
+          /> */}
+          <AboutUsSVG className="w-full h-full" />
         </div>
       </div>
     </div>

@@ -13,6 +13,7 @@ import Loading from '@/components/common/loading/Loading';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { CollectionData } from '@/types/function';
 import fetchDataFirebase from '@/utils/featDataFirebase';
+import Navbar from '@/components/layout/Navbar';
 
 export default function Explorer() {
   const [idCertificate, setIdCertificate] = useState<string>('');
@@ -41,28 +42,55 @@ export default function Explorer() {
 
   return (
     <>
-      <div className="min-h-screen flex-col items-center pt-16">
+      <div className="relative min-h-screen flex-col items-center pt-16">
+        <div className="fixed top-0 z-30 w-screen md:mt-6">
+          <Navbar />
+        </div>
         <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
-          <div className="relative flex h-72 w-full items-center justify-center rounded-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 shadow-lg">
-            <div className="text-5xl font-bold text-gray-700">Find your certificate.</div>
-            <div className="absolute -bottom-8 left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2">
-              <input
-                type="text"
-                placeholder="Your certificate code"
-                value={idCertificate}
-                onChange={(e) => setIdCertificate(e.target.value)}
-                className="w-80 border-r-[0.5px] border-gray-300 px-4 py-6 text-black outline-none"
-              />
-              <input
-                type="text"
-                placeholder="Your full name"
-                value={nameCertificate}
-                onChange={(e) => setNameCertificate(e.target.value)}
-                className="w-72 px-4 py-6 text-black outline-none"
-              />
-              <ButtonPrimary onClick={handleSearch} className="size-14 p-1">
-                <FaSearch className="text-xl text-white" />
-              </ButtonPrimary>
+          <div className="relative flex flex-col gap-3 h-72 w-full items-center justify-center rounded-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 shadow-lg">
+            <div className="md:text-5xl font-bold text-gray-700 ">Find your certificate.</div> 
+            <div className="block md:hidden w-full px-6">
+              <div className="flex flex-col items-center justify-center gap-2 overflow-hidden px-2">
+                <input
+                  type="text"
+                  placeholder="Your certificate code"
+                  value={idCertificate}
+                  onChange={(e) => setIdCertificate(e.target.value)}
+                  className="w-full px-4 py-3 sm:py-6 text-black outline-none border border-slate-200 rounded-xl"
+                />
+                <input
+                  type="text"
+                  placeholder="Your full name"
+                  value={nameCertificate}
+                  onChange={(e) => setNameCertificate(e.target.value)}
+                  className="w-full px-4 py-3 sm:py-6 text-black outline-none border border-slate-200 rounded-xl"
+                />
+                <ButtonPrimary onClick={handleSearch} className="flex w-full p-1 sm:w-fit px-8 py-4">
+                  <span className="pr-2 text-white">Search</span>
+                  <FaSearch className="text-xl text-white" />
+                </ButtonPrimary>
+              </div>
+            </div>
+            <div className="absolute -bottom-1/2 -translate-y-[150%] left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2 md:block hidden">
+              <div className="flex flex-col md:flex-row items-center justify-center gap-2 divide-y md:divide-y-0 md:divide-x">
+                <input
+                  type="text"
+                  placeholder="Your certificate code"
+                  value={idCertificate}
+                  onChange={(e) => setIdCertificate(e.target.value)}
+                  className="w-80  px-4 py-6 text-black outline-none"
+                />
+                <input
+                  type="text"
+                  placeholder="Your full name"
+                  value={nameCertificate}
+                  onChange={(e) => setNameCertificate(e.target.value)}
+                  className="w-72 px-4 py-6 text-black outline-none"
+                />
+                <ButtonPrimary onClick={handleSearch} className="size-14 p-1">
+                  <FaSearch className="text-xl text-white" />
+                </ButtonPrimary>
+              </div>
             </div>
           </div>
 
@@ -79,7 +107,7 @@ export default function Explorer() {
               </div>
             </div>
           ) : data ? (
-            <div className="mx-auto mt-16 h-[170px] w-1/2 space-y-4 rounded-xl bg-white p-4 text-black sm:h-[270px] lg:h-[450px] 2xl:h-[500px]">
+            <div className="mx-auto mt-16 aspect-[4/3] w-[80%] md:w-1/2 space-y-4 rounded-xl bg-white p-4 text-black ">
               <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
                 <CertificatePreview
                   previewImage={data.mintData[0].certData.templateURL}

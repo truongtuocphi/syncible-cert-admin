@@ -217,6 +217,7 @@ const Experience = () => {
         console.log('mintDataArray', mintDataArray);
         const encodedData = contract.interface.encodeFunctionData('mintBulk', [mintDataArray]);
 
+        //endcoded
         console.log('encodedData', encodedData);
 
         const tx = await signer.sendTransaction({

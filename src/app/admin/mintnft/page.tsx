@@ -143,18 +143,20 @@ const Experience = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!address) {
+      alert('Please connect your wallet.');
+      return;
+    }
 
-    if (address) {
-      setLoadingButton(true);
-      try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
+    setLoadingButton(true);
+    try {
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-        const mintDataArray: any[] = [];
-
-        if (coppyCsvDataFromChild.length > 0) {
-          for (const data of dataFromMintSingle) {
+      const mintDataArray = await Promise.all(
+        (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
+          async (data) => {
             const metadata = {
               fullname: `Certificate for ${data.fullname}` || 'Default Name',
               tokenURI: tokenLink || 'Default tokenLink',
@@ -171,69 +173,34 @@ const Experience = () => {
             const tokenURI = await uploadMetadata(metadata);
             setTokenLink(tokenURI);
 
-            mintDataArray.push([
+            return [
               address,
               data.fullname,
               data.certificateNumber,
               tokenURI,
-              [issuedDate, bannerImage],
-            ]);
+              [issuedDate, 'https://example.com/template/1'],
+            ];
           }
-        } else {
-          for (const data of dataFromMintSingle) {
-            const metadata = {
-              fullname: `Certificate for ${data.fullname}` || 'Default Name',
-              tokenURI: tokenLink || 'Default tokenLink',
-              attributes: [
-                { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
-                { trait_type: 'Role', value: role || 'NaN' },
-                { trait_type: 'Date', value: issuedDate || 'NaN' },
-                { trait_type: 'Template URL', value: bannerImage || 'NaN' },
-                { trait_type: 'Font', value: fontFamily || 'NaN' },
-                { trait_type: 'Font Size', value: fontSize || 'NaN' },
-              ],
-            };
+        )
+      );
 
-            const tokenURI = await uploadMetadata(metadata);
-            setTokenLink(tokenURI);
-
-            mintDataArray.push([
-              address,
-              data.fullname,
-              data.certificateNumber,
-              tokenURI,
-              [issuedDate, bannerImage],
-            ]);
-          }
-        }
-
-        console.log('mintDataArray', mintDataArray);
-        const encodedData = contract.interface.encodeFunctionData('mintBulk', [mintDataArray]);
-
-        //endcoded
-        console.log('encodedData', encodedData);
-
-        const tx = await signer.sendTransaction({
-          to: collectionContractAddress,
-          data: encodedData,
-          gasLimit: 7000000,
+      if (mintDataArray) {
+        const tx = await contract.mintBulk(mintDataArray, {
+          gasLimit: 5000000,
         });
 
         await tx.wait();
         alert('NFTs minted successfully!');
         setLoading(true);
-
         await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error minting NFTs:', error);
-        alert('Failed to mint NFTs.');
-        setLoadingButton(false);
-      } finally {
-        setLoading(false);
       }
-    } else {
-      alert('Please connect your wallet.');
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error minting NFTs:', error);
+      alert('Failed to mint NFTs.');
+      setLoadingButton(false);
+    } finally {
+      setLoading(false);
     }
   };
 

@@ -153,6 +153,9 @@ const Navbar = () => {
                       </Link>
                     </li>
                   ))}
+                  <li>
+                    <LocaleSwitcher />
+                  </li>
                 </ul>
               </nav>
             </div>

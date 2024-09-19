@@ -1,6 +1,6 @@
 'use client';
 
-import { Link } from '@/i18n/routing';
+import { Link,useRouter } from '@/i18n/routing';
 
 import { useTranslations, useLocale } from 'next-intl';
 
@@ -8,8 +8,6 @@ import { useEffect } from 'react';
 
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { useRouter } from 'next/navigation';
-import { useRouter } from 'next/navigation';
 
 import ArrowRightIcon from '@/assets/icons/arrow-badge-right.svg';
 import { Button } from '@/components/ui/button';

@@ -154,7 +154,6 @@ const Experience = () => {
         const mintDataArray: any[] = [];
 
         if (coppyCsvDataFromChild.length > 0) {
-          // Xử lý dữ liệu từ form đơn
           for (const data of dataFromMintSingle) {
             const metadata = {
               fullname: `Certificate for ${data.fullname}` || 'Default Name',
@@ -172,16 +171,13 @@ const Experience = () => {
             const tokenURI = await uploadMetadata(metadata);
             setTokenLink(tokenURI);
 
-            mintDataArray.push({
-              owner: address,
-              fullName: data.fullname,
-              certificateId: data.certificateNumber,
-              tokenURI: tokenURI,
-              certData: {
-                date: issuedDate,
-                templateURL: bannerImage,
-              },
-            });
+            mintDataArray.push([
+              address,
+              data.fullname,
+              data.certificateNumber,
+              tokenURI,
+              [issuedDate, bannerImage],
+            ]);
           }
         } else {
           for (const data of dataFromMintSingle) {
@@ -201,16 +197,13 @@ const Experience = () => {
             const tokenURI = await uploadMetadata(metadata);
             setTokenLink(tokenURI);
 
-            mintDataArray.push({
-              owner: address,
-              fullName: data.fullname,
-              certificateId: data.certificateNumber,
-              tokenURI: tokenURI,
-              certData: {
-                date: issuedDate,
-                templateURL: bannerImage,
-              },
-            });
+            mintDataArray.push([
+              address,
+              data.fullname,
+              data.certificateNumber,
+              tokenURI,
+              [issuedDate, bannerImage],
+            ]);
           }
         }
 
@@ -223,7 +216,7 @@ const Experience = () => {
         const tx = await signer.sendTransaction({
           to: collectionContractAddress,
           data: encodedData,
-          gasLimit: 3000000,
+          gasLimit: 4000000,
         });
 
         await tx.wait();

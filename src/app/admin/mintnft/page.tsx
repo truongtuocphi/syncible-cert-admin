@@ -152,10 +152,10 @@ const Experience = () => {
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
         const mintDataArray: any[] = [];
-        let encodedData: any = '';
 
         if (coppyCsvDataFromChild.length > 0) {
-          coppyCsvDataFromChild.map(async (data) => {
+          // Xử lý dữ liệu từ form đơn
+          for (const data of dataFromMintSingle) {
             const metadata = {
               fullname: `Certificate for ${data.fullname}` || 'Default Name',
               tokenURI: tokenLink || 'Default tokenLink',
@@ -163,39 +163,7 @@ const Experience = () => {
                 { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
                 { trait_type: 'Role', value: role || 'NaN' },
                 { trait_type: 'Date', value: issuedDate || 'NaN' },
-                {
-                  trait_type: 'Template URL',
-                  value: bannerImage || 'NaN',
-                },
-                { trait_type: 'Font', value: fontFamily || 'NaN' },
-                { trait_type: 'Font Size', value: fontSize || 'Nan' },
-              ],
-            };
-
-            const tokenURI = await uploadMetadata(metadata);
-            setTokenLink(tokenURI);
-
-            mintDataArray.push([
-              address,
-              data.fullname,
-              data.certificateNumber,
-              tokenURI,
-              [issuedDate, bannerImage],
-            ]);
-          });
-        } else {
-          dataFromMintSingle.map(async (data) => {
-            const metadata = {
-              fullname: `Certificate for ${data.fullname}` || 'Default Name',
-              tokenURI: tokenLink || 'Default tokenLink',
-              attributes: [
-                { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
-                { trait_type: 'Role', value: role || 'NaN' },
-                { trait_type: 'Date', value: issuedDate || 'NaN' },
-                {
-                  trait_type: 'Template URL',
-                  value: bannerImage || 'NaN',
-                },
+                { trait_type: 'Template URL', value: bannerImage || 'NaN' },
                 { trait_type: 'Font', value: fontFamily || 'NaN' },
                 { trait_type: 'Font Size', value: fontSize || 'NaN' },
               ],
@@ -204,25 +172,57 @@ const Experience = () => {
             const tokenURI = await uploadMetadata(metadata);
             setTokenLink(tokenURI);
 
-            mintDataArray.push([
-              address,
-              data.fullname,
-              data.certificateNumber,
-              tokenURI,
-              [issuedDate, bannerImage],
-            ]);
+            mintDataArray.push({
+              owner: address,
+              fullName: data.fullname,
+              certificateId: data.certificateNumber,
+              tokenURI: tokenURI,
+              certData: {
+                date: issuedDate,
+                templateURL: bannerImage,
+              },
+            });
+          }
+        } else {
+          for (const data of dataFromMintSingle) {
+            const metadata = {
+              fullname: `Certificate for ${data.fullname}` || 'Default Name',
+              tokenURI: tokenLink || 'Default tokenLink',
+              attributes: [
+                { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
+                { trait_type: 'Role', value: role || 'NaN' },
+                { trait_type: 'Date', value: issuedDate || 'NaN' },
+                { trait_type: 'Template URL', value: bannerImage || 'NaN' },
+                { trait_type: 'Font', value: fontFamily || 'NaN' },
+                { trait_type: 'Font Size', value: fontSize || 'NaN' },
+              ],
+            };
 
-            console.log('mintDataArray', mintDataArray);
-            encodedData = contract.interface.encodeFunctionData('mintBulk', [mintDataArray]);
-          });
+            const tokenURI = await uploadMetadata(metadata);
+            setTokenLink(tokenURI);
+
+            mintDataArray.push({
+              owner: address,
+              fullName: data.fullname,
+              certificateId: data.certificateNumber,
+              tokenURI: tokenURI,
+              certData: {
+                date: issuedDate,
+                templateURL: bannerImage,
+              },
+            });
+          }
         }
+
+        console.log('mintDataArray', mintDataArray);
+        const encodedData = contract.interface.encodeFunctionData('mintBulk', [mintDataArray]);
 
         console.log('encodedData', encodedData);
 
         const tx = await signer.sendTransaction({
           to: collectionContractAddress,
           data: encodedData,
-          gasLimit: 2000000,
+          gasLimit: 3000000,
         });
 
         await tx.wait();

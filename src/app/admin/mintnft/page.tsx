@@ -151,7 +151,8 @@ const Experience = () => {
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-        const mintDataArray: any = [];
+        const mintDataArray: any[] = [];
+        let encodedData: any = '';
 
         if (coppyCsvDataFromChild.length > 0) {
           coppyCsvDataFromChild.map(async (data) => {
@@ -174,17 +175,13 @@ const Experience = () => {
             const tokenURI = await uploadMetadata(metadata);
             setTokenLink(tokenURI);
 
-            mintDataArray.push({
-              owner: address,
-              fullname: `${data.fullname}` || 'Default Name',
-              certificateId: data.certificateNumber || 'NaN',
-              tokenURI: tokenURI || 'Default tokenLink',
-              certData: {
-                role: role || 'NaN',
-                date: issuedDate || 'NaN',
-                templateURL: bannerImage || 'NaN',
-              },
-            });
+            mintDataArray.push([
+              address,
+              data.fullname,
+              data.certificateNumber,
+              tokenURI,
+              [issuedDate, bannerImage],
+            ]);
           });
         } else {
           dataFromMintSingle.map(async (data) => {
@@ -207,22 +204,25 @@ const Experience = () => {
             const tokenURI = await uploadMetadata(metadata);
             setTokenLink(tokenURI);
 
-            mintDataArray.push({
-              owner: address,
-              fullname: `${data.fullname}` || 'Default Name',
-              certificateId: data.certificateNumber || 'NaN',
-              tokenURI: tokenURI || 'Default tokenLink',
-              certData: {
-                role: role || 'NaN',
-                date: issuedDate || 'NaN',
-                templateURL: bannerImage || 'NaN',
-              },
-            });
+            mintDataArray.push([
+              address,
+              data.fullname,
+              data.certificateNumber,
+              tokenURI,
+              [issuedDate, bannerImage],
+            ]);
+
+            console.log('mintDataArray', mintDataArray);
+            encodedData = contract.interface.encodeFunctionData('mintBulk', [mintDataArray]);
           });
         }
 
-        const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 5000000,
+        console.log('encodedData', encodedData);
+
+        const tx = await signer.sendTransaction({
+          to: collectionContractAddress,
+          data: encodedData,
+          gasLimit: 2000000,
         });
 
         await tx.wait();

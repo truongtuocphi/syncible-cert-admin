@@ -67,15 +67,15 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
       {data ? (
         <>
           {data.map((item, index) => {
-            console.log(item);
+            // console.log(item);
             return (
               <Link href={`/admin/mintnft/${item?.tokenURI}`} key={index}>
                 <div className="h-[170px] w-full sm:h-[270px] lg:h-[370px] 2xl:h-[400px]">
                   <CertificatePreview
-                    previewImage={item.certData.templateURL}
-                    name={item.fullname}
-                    fontSize={item.fontSize}
-                    fontFamily={item.fontFamily}
+                    previewImage={item.certData?.templateURL || 'default-image-url'}
+                    name={item.fullname || 'Unknown Name'}
+                    fontSize={item.fontSize || 'default-size'}
+                    fontFamily={item.fontFamily || 'default-font'}
                   />
                 </div>
               </Link>

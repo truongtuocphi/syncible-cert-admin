@@ -36,7 +36,7 @@ export const uploadMetadata = async (data: any) => {
     // Define metadata structure with additional attributes
     const dataNFT = data.attributes;
 
-    console.log(dataNFT);
+    // console.log(dataNFT);
 
     const metadata = {
       fullname: data.fullname ? data.fullname : 'Default Name',

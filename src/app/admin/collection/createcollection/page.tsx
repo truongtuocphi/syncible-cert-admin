@@ -91,7 +91,7 @@ const CreateCollection: React.FC = () => {
       setIsLoading(true);
 
       // Deploy the contract
-      const contractAddress = await deployContract();
+      const contractAddress = await deployContract(displayName, address);
 
       // Save data to Firebase
       const collectionRef = ref(db, `collections/${contractAddress}`);

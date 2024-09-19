@@ -20,7 +20,6 @@ import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
 import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
-import { uploadImageToPinata } from '@/utils/uploadImageToPinata';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -107,18 +106,17 @@ const Experience = () => {
     setBannerImage(null);
   };
 
-  const handleImageBannerChange = async (
+  const handleImageBannerChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     setImage: React.Dispatch<React.SetStateAction<string | null>>
   ) => {
     const file = e.target.files?.[0];
     if (file) {
-      try {
-        const imageUrl = await uploadImageToPinata(file);
-        setImage(imageUrl);
-      } catch (error) {
-        console.error('Error handling image banner change', error);
-      }
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImage(reader.result as string);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -180,7 +178,7 @@ const Experience = () => {
               data.fullname,
               data.certificateNumber,
               tokenURI,
-              [issuedDate, bannerImage],
+              [issuedDate, 'https://example.com/template/1'],
             ];
           }
         )

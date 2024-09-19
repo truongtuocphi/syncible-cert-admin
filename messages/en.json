@@ -66,6 +66,18 @@
           }
         }
       }
+    },
+    "explorer_section": {
+      "header": "Find your certificate",
+      "input_1": {
+        "placeholder": "Your certificate code"
+      },
+      "input_2": {
+        "placeholder": "Your full name"
+      },
+      "search_button": {
+        "label": "Search"
+      }
     }
   },
   "Localization": {

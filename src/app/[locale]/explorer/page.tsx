@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { BiSolidCommentError } from 'react-icons/bi';
 import { FaSearch } from 'react-icons/fa';
 import { HiTemplate } from 'react-icons/hi';
+import { useTranslations } from 'next-intl';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Loading from '@/components/common/loading/Loading';
@@ -21,7 +22,7 @@ export default function Explorer() {
   const [data, setData] = useState<CollectionData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
-
+  const t = useTranslations('HomePage.explorer_section');
   const handleSearch = async () => {
     setLoading(true);
     setNotFound(false);
@@ -48,25 +49,25 @@ export default function Explorer() {
         </div>
         <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
           <div className="relative flex flex-col gap-3 h-72 w-full items-center justify-center rounded-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 shadow-lg">
-            <div className="md:text-5xl font-bold text-gray-700 ">Find your certificate.</div> 
+            <div className="md:text-5xl font-bold text-gray-700 ">{t('header')}</div> 
             <div className="block md:hidden w-full px-6">
               <div className="flex flex-col items-center justify-center gap-2 overflow-hidden px-2">
                 <input
                   type="text"
-                  placeholder="Your certificate code"
+                  placeholder={t('input_1.placeholder')}
                   value={idCertificate}
                   onChange={(e) => setIdCertificate(e.target.value)}
                   className="w-full px-4 py-3 sm:py-6 text-black outline-none border border-slate-200 rounded-xl"
                 />
                 <input
                   type="text"
-                  placeholder="Your full name"
+                  placeholder={t('input_2.placeholder')}
                   value={nameCertificate}
                   onChange={(e) => setNameCertificate(e.target.value)}
                   className="w-full px-4 py-3 sm:py-6 text-black outline-none border border-slate-200 rounded-xl"
                 />
                 <ButtonPrimary onClick={handleSearch} className="flex w-full p-1 sm:w-fit px-8 py-4">
-                  <span className="pr-2 text-white">Search</span>
+                  <span className="pr-2 text-white">{t('search_button.label')}</span>
                   <FaSearch className="text-xl text-white" />
                 </ButtonPrimary>
               </div>
@@ -107,7 +108,7 @@ export default function Explorer() {
               </div>
             </div>
           ) : data ? (
-            <div className="mx-auto mt-16 aspect-[4/3] w-[80%] md:w-1/2 space-y-4 rounded-xl bg-white p-4 text-black ">
+            <div className="mx-auto mt-16 aspect-[4/3] w-full md:w-1/2 space-y-4 rounded-xl bg-white p-4 text-black ">
               <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
                 <CertificatePreview
                   previewImage={data.mintData[0].certData.templateURL}

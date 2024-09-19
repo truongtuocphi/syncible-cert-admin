@@ -66,6 +66,18 @@
           }
         }
       }
+    },
+    "explorer_section": {
+      "header": "Tim kiếm chứng chỉ của bạn",
+      "input_1": {
+        "placeholder": "Nhập mã chứng chỉ"
+      },
+      "input_2": {
+        "placeholder": "Nhập tên"
+      },
+      "search_button": {
+        "label": "Truy vấn"
+      }
     }
   },
   "Localization": {

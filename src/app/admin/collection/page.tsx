@@ -300,8 +300,8 @@ export default function Collection() {
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
                   <Loading />
-                  Không có kết quả. Vui lòng kết nối ví của bạn hoặc tạo một mục quản lý để hiển thị
-                  kết quả.
+                  Không có kết quả. Vui lòng chờ hoặc kết nối ví của bạn hoặc tạo một mục quản lý để
+                  hiện kết quả.
                 </TableCell>
               </TableRow>
             )}

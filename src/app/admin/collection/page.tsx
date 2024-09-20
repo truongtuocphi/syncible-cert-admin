@@ -35,6 +35,7 @@ import {
 import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
 import { deleteDataById } from '@/utils/deleteDataFirebase';
+import ContractData from '@/components/pages/admin/ContractData';
 
 export type Collection = {
   id: string;
@@ -174,13 +175,13 @@ export default function Collection() {
     fetchData();
   }, [address]);
 
-  // const handleItemsCountChange = (id: string, count: number) => {
-  //   setData((prevData) =>
-  //     prevData.map((collection) =>
-  //       collection.id === id ? { ...collection, itemsCount: count } : collection
-  //     )
-  //   );
-  // };
+  const handleItemsCountChange = (id: string, count: number) => {
+    setData((prevData) =>
+      prevData.map((collection) =>
+        collection.id === id ? { ...collection, itemsCount: count } : collection
+      )
+    );
+  };
 
   const table = useReactTable<Collection>({
     data,
@@ -294,6 +295,14 @@ export default function Collection() {
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
+                  <td className="hidden">
+                    <ContractData
+                      collectionContractAddress={row.getValue('contractAddress')}
+                      onItemsCountChange={(count: number) =>
+                        handleItemsCountChange(row.getValue('id'), count)
+                      }
+                    />
+                  </td>
                 </TableRow>
               ))
             ) : (

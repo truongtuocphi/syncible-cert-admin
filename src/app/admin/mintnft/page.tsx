@@ -11,6 +11,7 @@ import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import Loading from '@/components/common/loading/Loading';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
 import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
@@ -21,7 +22,6 @@ import { uploadMetadata } from '@/lib/pinata';
 import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
-import Loading from '@/components/common/loading/Loading';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -119,12 +119,11 @@ const Experience = () => {
       setLoading(true);
 
       try {
-        // Gọi hàm uploadImageToPinata để tải ảnh lên Pinata
         const imageUrl = await uploadImageToPinata(file);
         setImage(imageUrl);
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error('Failed to upload image', error);
-        // Có thể thêm thông báo lỗi ở đây nếu cần
       } finally {
         setLoading(false);
       }

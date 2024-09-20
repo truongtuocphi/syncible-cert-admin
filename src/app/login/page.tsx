@@ -33,7 +33,7 @@ export default function Login() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        router.push('/admin/');
+        router.push(`${process.env.NEXT_PUBLIC_ADMIN_URL}/`);
       }
     });
     return () => unsubscribe();

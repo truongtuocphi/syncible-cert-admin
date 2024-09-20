@@ -79,7 +79,7 @@ export default function Login() {
         <div className="p-3">
           <Image
             src="/SyncibleAdmin.png"
-            style={{ width: '100%', height: 'auto' }}
+            style={{ width: '110px', height: 'auto' }}
             alt="logo"
             width={110}
             height={30}

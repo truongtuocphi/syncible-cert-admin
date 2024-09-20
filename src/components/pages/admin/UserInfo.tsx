@@ -45,7 +45,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button className="h-fit w-fit rounded-full border-none p-0 text-left outline-none focus-visible:ring-0">
-          <div className="flex cursor-pointer items-center space-x-4 rounded-3xl bg-white py-2 pl-2 pr-4 hover:bg-gray-100">
+          <div className="flex cursor-pointer items-center space-x-4 rounded-3xl bg-white py-2 pl-2 pr-4">
             <div className="flex items-center gap-2">
               {user.photoURL ? (
                 <Image

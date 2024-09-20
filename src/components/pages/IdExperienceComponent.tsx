@@ -96,8 +96,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
         if (snapshot.exists()) {
           const dataFromFirebase = snapshot.val();
           const matchingData = Object.values(dataFromFirebase)
-            .filter((item: any) => item)
-            .flatMap((childItem: any) => childItem.mintData);
+            .filter((item: any) => item.mintData.some((child: any) => child[3] === slugPost))
+            .map((item: any) => item.collectionContractAddress);
 
           if (matchingData) {
             setDataContract(matchingData);
@@ -121,7 +121,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
 
   useEffect(() => {
     if (dataContract.length > 0 && onDataContract) {
-      onDataContract(dataContract[0]?.collectionContractAddress);
+      onDataContract(dataContract[0]);
     }
   }, [dataContract, onDataContract]);
 
@@ -152,6 +152,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
           <p className="mt-2">Production location: VietNam</p>
           <p className="mt-2">Dymension: 500x300</p>
           <p className="mt-2">{`Certificate ID: ${certificateID}`}</p>
+          <p className="mt-2">{`Date: ${date}`}</p>
         </div>
         <div className="flex w-full flex-col items-start md:w-1/2">
           <h4 className="text-xl font-bold">Chain Information</h4>
@@ -169,15 +170,12 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
             <p>
               {`Contract address: `}
               <span className="text-primary-50 underline">
-                {dataContract[0]?.collectionContractAddress.slice(0, 4)}...
-                {dataContract[0]?.collectionContractAddress.slice(-6)}
+                {dataContract[0].slice(0, 4)}...
+                {dataContract[0].slice(-6)}
               </span>
             </p>
-            <CopyButton textToCopy={dataContract[0]?.collectionContractAddress} />
-            <Link
-              href={`https://polygonscan.com/address/${dataContract[0]?.collectionContractAddress}`}
-              target="_blank"
-            >
+            <CopyButton textToCopy={dataContract[0]} />
+            <Link href={`https://polygonscan.com/address/${dataContract[0]}`} target="_blank">
               <RiShareBoxLine className="text-primary-50" />
             </Link>
           </div>

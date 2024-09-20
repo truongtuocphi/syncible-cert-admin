@@ -153,7 +153,13 @@ export default function Register() {
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
       >
         <div className="p-3">
-          <Image src="/SyncibleAdmin.png" alt="logo" width={110} height={30} />
+          <Image
+            src="/SyncibleAdmin.png"
+            style={{ width: '110px', height: 'auto' }}
+            alt="logo"
+            width={110}
+            height={30}
+          />
         </div>
         {!showContinueSignUp ? (
           <div className="flex h-full w-full items-center justify-center">

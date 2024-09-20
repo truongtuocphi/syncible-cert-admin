@@ -11,6 +11,7 @@ import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import Loading from '@/components/common/loading/Loading';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
 import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
@@ -20,6 +21,7 @@ import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
 import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
+import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -38,6 +40,7 @@ const Experience = () => {
   const [top, setTop] = useState(20);
   const [loadingButton, setLoadingButton] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [loadingBanner, setLoadingBanner] = useState<boolean>(false);
   const [tokenLink, setTokenLink] = useState('');
   const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
   const [fontSize, setFontSize] = useState<string>('40');
@@ -106,17 +109,24 @@ const Experience = () => {
     setBannerImage(null);
   };
 
-  const handleImageBannerChange = (
+  const handleImageBannerChange = async (
     e: React.ChangeEvent<HTMLInputElement>,
-    setImage: React.Dispatch<React.SetStateAction<string | null>>
+    setImage: React.Dispatch<React.SetStateAction<string | null>>,
+    setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     const file = e.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImage(reader.result as string);
-      };
-      reader.readAsDataURL(file);
+      setLoading(true);
+
+      try {
+        const imageUrl = await uploadImageToPinata(file);
+        setImage(imageUrl);
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Failed to upload image', error);
+      } finally {
+        setLoading(false);
+      }
     }
   };
 
@@ -143,19 +153,20 @@ const Experience = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!address) {
+      alert('Please connect your wallet.');
+      return;
+    }
 
-    if (address) {
-      setLoadingButton(true);
-      try {
-        const provider = new ethers.BrowserProvider(window.ethereum);
-        const signer = await provider.getSigner();
-        const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
+    setLoadingButton(true);
+    try {
+      const provider = new ethers.BrowserProvider(window.ethereum);
+      const signer = await provider.getSigner();
+      const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-        const mintDataArray: any[] = [];
-
-        if (coppyCsvDataFromChild.length > 0) {
-          // Xử lý dữ liệu từ form đơn
-          for (const data of dataFromMintSingle) {
+      const mintDataArray = await Promise.all(
+        (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
+          async (data) => {
             const metadata = {
               fullname: `Certificate for ${data.fullname}` || 'Default Name',
               tokenURI: tokenLink || 'Default tokenLink',
@@ -172,74 +183,34 @@ const Experience = () => {
             const tokenURI = await uploadMetadata(metadata);
             setTokenLink(tokenURI);
 
-            mintDataArray.push({
-              owner: address,
-              fullName: data.fullname,
-              certificateId: data.certificateNumber,
-              tokenURI: tokenURI,
-              certData: {
-                date: issuedDate,
-                templateURL: bannerImage,
-              },
-            });
+            return [
+              address,
+              data.fullname,
+              data.certificateNumber,
+              tokenURI,
+              [issuedDate, bannerImage],
+            ];
           }
-        } else {
-          for (const data of dataFromMintSingle) {
-            const metadata = {
-              fullname: `Certificate for ${data.fullname}` || 'Default Name',
-              tokenURI: tokenLink || 'Default tokenLink',
-              attributes: [
-                { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
-                { trait_type: 'Role', value: role || 'NaN' },
-                { trait_type: 'Date', value: issuedDate || 'NaN' },
-                { trait_type: 'Template URL', value: bannerImage || 'NaN' },
-                { trait_type: 'Font', value: fontFamily || 'NaN' },
-                { trait_type: 'Font Size', value: fontSize || 'NaN' },
-              ],
-            };
+        )
+      );
 
-            const tokenURI = await uploadMetadata(metadata);
-            setTokenLink(tokenURI);
-
-            mintDataArray.push({
-              owner: address,
-              fullName: data.fullname,
-              certificateId: data.certificateNumber,
-              tokenURI: tokenURI,
-              certData: {
-                date: issuedDate,
-                templateURL: bannerImage,
-              },
-            });
-          }
-        }
-
-        console.log('mintDataArray', mintDataArray);
-        const encodedData = contract.interface.encodeFunctionData('mintBulk', [mintDataArray]);
-
-        console.log('encodedData', encodedData);
-
-        const tx = await signer.sendTransaction({
-          to: collectionContractAddress,
-          data: encodedData,
-          gasLimit: 3000000,
+      if (mintDataArray) {
+        const tx = await contract.mintBulk(mintDataArray, {
+          gasLimit: 4000000,
         });
 
         await tx.wait();
-        alert('NFTs minted successfully!');
+        alert('Chứng chỉ được tạo thành công!');
         setLoading(true);
-
         await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error minting NFTs:', error);
-        alert('Failed to mint NFTs.');
-        setLoadingButton(false);
-      } finally {
-        setLoading(false);
       }
-    } else {
-      alert('Please connect your wallet.');
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error minting NFTs:', error);
+      alert('lỗi tạo chứng chỉ.');
+      setLoadingButton(false);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -288,7 +259,11 @@ const Experience = () => {
                     onDrop={(e) => handleDrop(e, setBannerImage)}
                     onDragOver={handleDragOver}
                   >
-                    {bannerImage ? (
+                    {loadingBanner ? (
+                      <div className="flex h-full w-full items-center justify-center">
+                        <Loading />
+                      </div>
+                    ) : bannerImage ? (
                       <div className="relative h-full w-full">
                         <Image src={bannerImage} alt="Banner Image" fill className="rounded-md" />
                         <button
@@ -309,7 +284,9 @@ const Experience = () => {
                           type="file"
                           accept="image/*"
                           required
-                          onChange={(e) => handleImageBannerChange(e, setBannerImage)}
+                          onChange={(e) =>
+                            handleImageBannerChange(e, setBannerImage, setLoadingBanner)
+                          }
                           className="absolute inset-0 cursor-pointer opacity-0"
                         />
                       </div>

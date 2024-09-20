@@ -33,7 +33,7 @@ const Header = () => {
   }, [router]);
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-40 ml-64 flex items-center justify-between border-b-[0.5px] border-gray-200 bg-white p-6 py-3 text-black">
+    <div className="bg-bgPageAdmin fixed left-0 right-0 top-0 z-40 ml-64 flex items-center justify-between p-6 py-3 text-black">
       <div className="relative max-w-md flex-1 font-bold text-gray-700">
         <Breadcrumb />
       </div>

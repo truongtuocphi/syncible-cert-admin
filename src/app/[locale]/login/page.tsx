@@ -77,7 +77,13 @@ export default function Login() {
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
       >
         <div className="p-3">
-          <Image src="/SyncibleAdmin.png" alt="logo" width={110} height={30} />
+          <Image
+            src="/SyncibleAdmin.png"
+            style={{ width: '110px', height: 'auto' }}
+            alt="logo"
+            width={110}
+            height={30}
+          />
         </div>
         <div className="mx-auto mt-16 w-full max-w-lg p-3">
           <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>

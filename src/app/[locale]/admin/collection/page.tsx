@@ -21,6 +21,7 @@ import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import CopyButton from '@/components/common/coppyText/CopyButton';
+import Loading from '@/components/common/loading/Loading';
 import ContractData from '@/components/pages/admin/ContractData';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -43,7 +44,7 @@ export type Collection = {
   contractSymbol: string;
   interface: string;
   contractAddress: string;
-  itemsCount?: number; // Add itemsCount as an optional property
+  itemsCount?: number;
 };
 
 const columns: ColumnDef<Collection>[] = [
@@ -78,11 +79,6 @@ const columns: ColumnDef<Collection>[] = [
     header: 'Tên hiển thị',
     cell: ({ row }) => <div>{row.getValue('displayName')}</div>,
   },
-  // {
-  //   accessorKey: 'contractName',
-  //   header: 'Contract Name',
-  //   cell: ({ row }) => <div>{row.getValue('contractName')}</div>,
-  // },
   {
     accessorKey: 'contractSymbol',
     header: 'Biểu tượng hợp đồng',
@@ -206,10 +202,8 @@ export default function Collection() {
     },
   });
 
-  // Memoize the selected rows count for performance
   const selectedRowCount = useMemo(() => Object.keys(rowSelection).length, [rowSelection]);
 
-  // Delete handler
   const handleDelete = async () => {
     const dataSelect = Object.values(data);
     const selectedIds = Object.keys(rowSelection);
@@ -225,10 +219,8 @@ export default function Collection() {
     try {
       await Promise.all(selectedData.map((data) => deleteDataById('collections', data.id)));
 
-      // Reset row selection after deletion
       setRowSelection({});
 
-      // Reload table data
       const dbRef = ref(db, 'collections');
       const snapshot = await get(dbRef);
       if (snapshot.exists()) {
@@ -258,10 +250,10 @@ export default function Collection() {
   };
 
   return (
-    <div className="w-full">
+    <>
       <div className="flex items-center justify-between space-x-4 py-4">
         <Input
-          placeholder="Search by name, symbol, contract address"
+          placeholder="Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng"
           value={(table.getColumn('displayName')?.getFilterValue() as string) ?? ''}
           onChange={(event) => table.getColumn('displayName')?.setFilterValue(event.target.value)}
           className="w-80 rounded-lg"
@@ -276,6 +268,7 @@ export default function Collection() {
           </Link>
         )}
       </div>
+
       <div className="overflow-hidden rounded-xl border">
         <Table>
           <TableHeader className="bg-[#E6E7F4]">
@@ -300,21 +293,22 @@ export default function Collection() {
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
-                  <div className="hidden">
+                  <td className="hidden">
                     <ContractData
                       collectionContractAddress={row.getValue('contractAddress')}
                       onItemsCountChange={(count: number) =>
                         handleItemsCountChange(row.getValue('id'), count)
                       }
                     />
-                  </div>
+                  </td>
                 </TableRow>
               ))
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                  No results. Please connect your wallet or create a collection to display the
-                  results.
+                  <Loading />
+                  Không có kết quả. Vui lòng chờ hoặc kết nối ví của bạn hoặc tạo một mục quản lý để
+                  hiện kết quả.
                 </TableCell>
               </TableRow>
             )}
@@ -322,10 +316,6 @@ export default function Collection() {
         </Table>
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="text-muted-foreground flex-1 text-sm">
-          {table.getFilteredSelectedRowModel().rows.length} of{' '}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
         <div className="space-x-2">
           <Button
             variant="outline"
@@ -333,7 +323,7 @@ export default function Collection() {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Previous
+            Trước
           </Button>
           <Button
             variant="outline"
@@ -341,10 +331,10 @@ export default function Collection() {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
+            Kế tiếp
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

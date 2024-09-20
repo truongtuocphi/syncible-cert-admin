@@ -21,6 +21,29 @@
       "header": "Vision",
       "content": "Syncible aims to create a comprehensive shift in the recognition of academic achievements, transcending geographical boundaries and administrative procedures, allowing students to transparently and reliably demonstrate their skills to employers and educational institutions."
     },
+    "faq_section": {
+      "header": "Frequently Asked Questions",
+      "question_1": {
+        "header": "What is Blockchain?",
+        "answer": "Blockchain is a secure, decentralized digital ledger used to record economic transactions or virtually any valuable data. Once data is written to the blockchain, it becomes permanent and cannot be altered by any party. Syncible utilizes the Bitcoin blockchain to store permanent records of credentials, allowing issuers to verify these records on the blockchain and reduce the risk of credential fraud."
+      },
+      "question_2": {
+        "header": "How Does Blockchain Prevent Credential Fraud?",
+        "answer": "The security of blockchain relies on its decentralized nature, where digital ledgers—referred to as nodes—each hold a copy of the blockchain. To alter information on the blockchain, the majority of these nodes would need to be simultaneously changed, a task as difficult as compromising thousands of banks at once. When creating blockchain-based credentials, Syncible generates a unique series of numbers from the credential data and sends this to the blockchain for storage. For verification, Syncible compares the stored series of numbers with the current credential information to confirm they match."
+      },
+      "question_3": {
+        "header": "Is Private Information Available on the Blockchain?",
+        "answer": "No personal or sensitive data is stored on the blockchain. Only a series of numbers, mathematically generated from the credential information, is recorded. This allows Syncible to ensure the displayed credentials match the original, without compromising personal data."
+      },
+      "question_4": {
+        "header": "What is Non-Fungible Token (NFT)?",
+        "answer": "Non-Fungible Token (NFT) is a type of digital asset that represents ownership or proof of authenticity of a unique item or piece of content, often stored on a blockchain. Unlike cryptocurrencies such as Bitcoin, which are fungible and can be exchanged on a one-to-one basis, NFTs are distinct and cannot be interchanged with one another. Each NFT holds specific information, making it valuable as it verifies the uniqueness and originality of digital assets, including art, music, collectibles, and even virtual real estate. The ownership and transfer history of an NFT are securely recorded on the blockchain, ensuring transparency and traceability."
+      },
+      "question_5": {
+        "header": "What is Tokenized Certificate?",
+        "answer": "A Tokenized Certificate is a digital credential that has been converted into a blockchain-based non-fungible token (NFT) to enhance security, authenticity, and verification processes. Unlike traditional paper certificates, tokenized certificates exist as a secure digital record, immutably stored on the blockchain. Each certificate is represented by a unique token, which allows instant and transparent verification by any third party, without the risk of forgery or tampering. Tokenized certificates are increasingly used for educational credentials, professional certifications, and other records, offering a modern solution to ensure the integrity and authenticity of the information they represent."
+      }
+    },
     "blogs_section": {
       "header": "Blogs"
     },
@@ -31,7 +54,7 @@
       "top_nav": {
         "links": {
           "about": {
-            "label": "About",
+            "label": "About us",
             "href": "#about"
           },
           "blogs": {
@@ -81,10 +104,7 @@
     }
   },
   "Localization": {
-    "label": "Language",
-    "options": {
-      "en": "English",
-      "vi": "Vietnamese"
-    }
+    "header": "Language",
+    "label": "{locale, select, en {EN} vi {VI} other {Unknown}}"  
   }
 }

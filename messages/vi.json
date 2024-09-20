@@ -21,6 +21,29 @@
       "header": "Tầm nhìn",
       "content": "Syncible nhằm tạo ra một sự thay đổi toàn diện trong việc công nhận thành tích học tập, vượt qua các ranh giới địa lý và thủ tục hành chính, cho phép sinh viên trình bày kỹ năng của mình một cách minh bạch và đáng tin cậy với các nhà tuyển dụng và cơ sở giáo dục."
     },
+    "faq_section": {
+      "header": "Câu hỏi thường gặp",
+      "question_1": {
+        "header": "Blockchain là gì?",
+        "answer": "Blockchain là một sổ cái kỹ thuật số an toàn và phi tập trung, dùng để ghi lại các giao dịch kinh tế hoặc bất kỳ loại dữ liệu có giá trị nào. Khi dữ liệu đã được ghi vào blockchain, nó trở nên cố định và không thể bị thay đổi bởi bất kỳ bên nào. Syncible tận dụng blockchain của Bitcoin để lưu trữ các hồ sơ chứng nhận vĩnh viễn, cho phép các bên phát hành có thể xác minh các thông tin này trực tiếp trên blockchain, giúp giảm thiểu nguy cơ gian lận chứng chỉ."
+      },
+      "question_2": {
+        "header": "Blockchain ngăn chặn gian lận chứng chỉ như thế nào?",
+        "answer": "Tính an toàn của blockchain xuất phát từ cấu trúc phi tập trung, nơi các sổ cái kỹ thuật số – được gọi là các \"nút\" – đều lưu trữ một bản sao của blockchain. Để thay đổi bất kỳ thông tin nào trên blockchain, phần lớn các nút này phải được thay đổi đồng thời, một việc khó như tấn công hàng ngàn ngân hàng cùng một lúc. Khi tạo chứng chỉ dựa trên blockchain, Syncible tạo ra một chuỗi số duy nhất từ dữ liệu chứng chỉ và lưu trữ chuỗi số này trên blockchain. Khi cần xác minh, Syncible sẽ so sánh chuỗi số đã lưu với thông tin chứng chỉ hiện tại để đảm bảo sự khớp nhau."
+      },
+      "question_3": {
+        "header": "Thông tin cá nhân có được lưu trữ trên blockchain không?",
+        "answer": "Không có dữ liệu cá nhân hay nhạy cảm nào được lưu trữ trên blockchain. Chỉ có một chuỗi số được tạo ra từ thông tin của chứng chỉ thông qua thuật toán toán học. Điều này cho phép Syncible đảm bảo rằng các chứng chỉ được hiển thị khớp với bản gốc, mà không làm lộ thông tin cá nhân."
+      },
+      "question_4": {
+        "header": "Non-Fungible Token (NFT) là gì?",
+        "answer": "NFT là một loại tài sản kỹ thuật số đại diện cho quyền sở hữu hoặc bằng chứng xác thực của một vật phẩm hoặc nội dung độc nhất, thường được lưu trữ trên blockchain. Khác với tiền mã hóa như Bitcoin – có thể thay thế và trao đổi theo tỷ lệ 1:1 – mỗi NFT là duy nhất và không thể thay thế cho nhau. NFT chứa đựng thông tin đặc biệt, giúp nó có giá trị trong việc xác thực tính độc đáo và nguyên bản của các tài sản kỹ thuật số như nghệ thuật, âm nhạc, đồ sưu tầm và thậm chí cả bất động sản ảo. Lịch sử quyền sở hữu và chuyển nhượng của NFT được ghi lại an toàn trên blockchain, đảm bảo tính minh bạch và khả năng truy xuất nguồn gốc."
+      },
+      "question_5": {
+        "header": "Chứng chỉ mã hóa là gì?",
+        "answer": "Chứng chỉ mã hóa là một dạng chứng chỉ kỹ thuật số được chuyển đổi thành NFT dựa trên blockchain, nhằm tăng cường tính bảo mật, xác thực và khả năng xác minh. Không giống như các chứng chỉ giấy truyền thống, chứng chỉ mã hóa tồn tại dưới dạng một bản ghi kỹ thuật số an toàn, được lưu trữ vĩnh viễn trên blockchain. Mỗi chứng chỉ được đại diện bởi một token duy nhất, cho phép bên thứ ba có thể xác minh nhanh chóng và minh bạch, giảm thiểu nguy cơ giả mạo hoặc chỉnh sửa. Chứng chỉ mã hóa ngày càng được sử dụng trong các lĩnh vực như chứng chỉ giáo dục, chứng nhận chuyên môn, mang đến giải pháp hiện đại đảm bảo tính toàn vẹn và độ xác thực cho thông tin được cung cấp."
+      }
+    },
     "blogs_section": {
       "header": "Tin tức"
     },
@@ -35,7 +58,7 @@
             "href": "#about"
           },
           "blogs": {
-            "label": "Tin tức",
+            "label": "Blog",
             "href": "#blogs"
           },
           "explorer": {
@@ -81,10 +104,7 @@
     }
   },
   "Localization": {
-    "label": "Ngôn ngữ",
-    "options": {
-      "en": "Tiếng Anh",
-      "vi": "Tiếng Việt"
-    }
+    "header": "Ngôn ngữ",
+    "label": "{locale, select, en {EN} vi {VI} other {Không xác định}}"
   }
 }

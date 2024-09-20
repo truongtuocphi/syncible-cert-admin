@@ -3,8 +3,8 @@ import React, { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useTranslations } from 'next-intl';
+
 import AboutUsSVG from '../../../../public/AboutUs.svg';
-import { montserrat } from '@/components/ui/fonts';
 
 export default function SectionAbout() {
   const leftRef = useRef<HTMLDivElement>(null);
@@ -53,10 +53,8 @@ export default function SectionAbout() {
       <div className="flex flex-col items-center gap-8 rounded-t-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 px-4 py-[4rem] sm:rounded-t-[6.25rem] sm:px-16 sm:py-[6.6rem] lg:flex-row">
         <div ref={leftRef} className="w-full basis-1/2">
           <div className="flex flex-col gap-4 antialiased">
-            <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>{t('header')}</h1>
-            <div
-              className={`${montserrat.className}w-full font-inter text-wrap text-[#6C6D71] lg:w-[85%]`}
-            >
+            <h1 className="text-[2rem] font-[700]">{t('header')}</h1>
+            <div className="font-inter w-full text-wrap text-[#6C6D71] lg:w-[85%]">
               {t('content')}
             </div>
           </div>
@@ -70,7 +68,7 @@ export default function SectionAbout() {
             className="h-[110%]  object-cover"
             priority
           /> */}
-          <AboutUsSVG className="w-full h-full" />
+          <AboutUsSVG className="h-full w-full" />
         </div>
       </div>
     </div>

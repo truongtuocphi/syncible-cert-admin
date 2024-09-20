@@ -4,8 +4,6 @@ import { gsap } from 'gsap';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import { montserrat } from '@/components/ui/fonts';
-
 import SyncibleLogoOnly from '../../../../public/SyncileLogoOnly.svg';
 import WeBelieveSVG from '../../../../public/WeBelieve.svg';
 
@@ -126,8 +124,8 @@ export default function SectionWhatWeBelieve() {
           </div>
           <div className="w-full basis-1/2 lg:basis-[55%]">
             <div className="flex flex-col gap-4 antialiased">
-              <h1 className={`${montserrat.className} text-[2rem] font-[700]`}>{t('header')}</h1>
-              <div className={`${montserrat.className} font-inter w-full text-wrap text-[#6C6D71]`}>
+              <h1 className="text-[2rem] font-[700]">{t('header')}</h1>
+              <div className="font-inter w-full text-wrap text-[#6C6D71]">
                 {t.rich('content', {
                   breakline: () => (
                     <>

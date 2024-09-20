@@ -63,7 +63,7 @@ const Footer = () => {
               <div className="flex gap-8">
                 {Links.map(({ link_name, url }) => (
                   <Link href={url} key={link_name}>
-                    <div className="active:text- py-3 text-base">{link_name}</div>
+                    <div className="active:text- py-3 text-lg">{link_name}</div>
                   </Link>
                 ))}
               </div>
@@ -72,7 +72,7 @@ const Footer = () => {
               <div className="flex items-center gap-5">
                 {listSocialMedia.map(({ link_name, url, icon }) => {
                   return (
-                    <Link key={link_name} href={url}>
+                    <Link key={link_name} href={url} target='_blank'>
                       <div className="aspect-square h-6 cursor-pointer">{icon}</div>
                     </Link>
                   );

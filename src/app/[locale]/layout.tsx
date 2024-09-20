@@ -12,13 +12,12 @@ import Web3ModalProvider from '@/context';
 
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
-import Navbar from '@/components/layout/Navbar';
 
 export const metadata: Metadata = {
   title: 'Nền Tảng Chứng Chỉ NFT Syncible',
   description: 'Nền Tảng Chứng Chỉ NFT Syncible',
   icons: {
-    icon: { url: '/src/app/icon.ico', sizes: '10x26', type: 'image/x-icon' },
+    icon: { url: 'src/app/icon.ico', sizes: '10x26', type: 'image/x-icon' },
   },
 };
 

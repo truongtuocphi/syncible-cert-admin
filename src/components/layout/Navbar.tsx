@@ -1,6 +1,6 @@
 'use client';
 
-import { Link,useRouter } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
 
 import { useTranslations, useLocale } from 'next-intl';
 
@@ -94,13 +94,16 @@ const Navbar = () => {
     <div className={`${montserrat.className} "relative w-full`}>
       <div className="flex flex-col items-center">
         <div className="w-full md:px-8 xl:px-[6.5rem]">
-          <div className="flex w-full items-center justify-between rounded-3xl p-4 backdrop-blur-sm lg:bg-white/50">
-            <Link href="/" className="">
-              <div className="h-8 w-28 md:h-10 md:w-40">
-                <SyncibleLogo className="h-full w-full" />
-              </div>
-            </Link>
-            <div className="block lg:hidden">
+          {/* switch to grid tomorrow*/}
+          <div className="grid w-full grid-cols-12 justify-items-center items-center rounded-3xl p-4 backdrop-blur-sm lg:bg-white/50">
+            <div className="md:col-span-4 col-span-6 justify-self-start">
+              <Link href="/" className="">
+                <div className="h-8 w-28 md:h-10 md:w-40">
+                  <SyncibleLogo className="h-full w-full" />
+                </div>
+              </Link>
+            </div>
+            <div className="block lg:hidden col-span-6 col-end-13 justify-self-end">
               <Sheet>
                 <SheetTrigger asChild className="text-black">
                   <Button className="border-none bg-transparent px-0 text-2xl hover:bg-transparent hover:text-white active:bg-none">
@@ -121,17 +124,22 @@ const Navbar = () => {
                     </Link>
                   </SheetTitle>
                   <div className="flex flex-col gap-6">
-                    <div className="flex flex-col px-4 py-4 font-semibold text-[#A2A3A9] hover:text-[#2C2C2C] active:text-[#2C2C2C]">
+                    <div className="flex flex-col px-4 py-4 font-semibold">
                       {links.map(({ label, href }) => (
-                        <div key={label} className="py-4 ">
+                        <div key={label} className="py-4">
                           <SheetClose asChild>
-                            <Link href={href} className="nav-link *:text-base">
+                            <Link
+                              href={href}
+                              className="nav-link text-base text-[#A2A3A9] hover:text-[#2C2C2C]"
+                            >
                               {label}
                             </Link>
                           </SheetClose>
                         </div>
                       ))}
-                      <LocaleCollapsible />
+                      <div className="py-2">
+                        <LocaleCollapsible />
+                      </div>
                     </div>
                     <Link href={t('buttons.access.href')} target={'_blank'} className="z-0">
                       <Button className="group flex w-full items-center rounded-[1.25rem] bg-primary-50 px-10 py-6 shadow-combinedShadow1 transition-all hover:bg-primary-40">
@@ -145,14 +153,14 @@ const Navbar = () => {
                 </SheetContent>
               </Sheet>
             </div>
-            <div className="hidden items-center gap-2 md:gap-4 lg:block">
+            <div className="hidden items-center gap-2 md:gap-4 lg:block md:col-span-4 col-auto">
               <nav className="mx-5 text-base font-semibold text-[#A2A3A9]">
                 <ul className="flex items-center gap-5 md:gap-7 lg:gap-9">
                   {links.map(({ label, href }) => (
                     <li key={label}>
                       <Link
                         href={href}
-                        className="nav-link hover:text-[#2C2C2C] active:text-[#2C2C2C]"
+                        className="nav-link hover:text-[#2C2C2C] hover:underline active:text-[#2C2C2C]"
                       >
                         {label}
                       </Link>
@@ -161,9 +169,10 @@ const Navbar = () => {
                 </ul>
               </nav>
             </div>
-            <div className="hidden lg:block">
+            <div className="hidden lg:block md:col-span-4 col-auto justify-self-end">
               <div className="flex items-center gap-3">
                 <LocaleSelect />
+                
                 <Link href={t('buttons.access.href')} target={'_blank'} className="h-fit">
                   <Button className="group flex w-[10rem] items-center rounded-[1.25rem] bg-primary-50 px-10 py-6 shadow-combinedShadow1 transition-all duration-500 hover:bg-primary-40">
                     <span className="relative inline-block text-base font-semibold transition-all duration-500 group-hover:pr-[25px]">

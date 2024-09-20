@@ -22,6 +22,7 @@ import StarAndLineBG from '../../../public/dora.svg';
 import LightBlueGradientEllipse from '../../../public/Ellipse_1.svg';
 import EthereumLogoSVG from '../../../public/ethereum-logo.svg';
 import PolygonLogoSVG from '../../../public/polygon-logo.svg';
+import SectionFAQ from '@/components/pages/Home/SectionFAQ';
 // import ContactButton from '@/components/common/button/ContactButton';
 
 const Page = () => {
@@ -32,8 +33,10 @@ const Page = () => {
         <div className="fixed top-0 z-30 w-screen md:mt-6">
           <Navbar />
         </div>
-        <div className="relative z-20 flex flex-col items-center gap-10 overflow-hidden">
-          <div className={`${montserrat.className} w-full max-w-[90rem]`}>
+        <div
+          className={`${montserrat.className} relative z-20 flex flex-col items-center gap-10 overflow-hidden`}
+        >
+          <div className="w-full max-w-[90rem]">
             <div className="flex flex-col justify-center px-4 pb-4 sm:min-h-dvh md:px-8 md:pb-10 xl:px-32">
               <div className="mt-24 flex h-full w-full flex-col justify-center md:mt-[8.25rem] lg:mt-40 lg:flex-row xl:mt-44">
                 <div className="flex items-center justify-center lg:basis-1/2">
@@ -81,7 +84,7 @@ const Page = () => {
                     <Image
                       src={BannerCertificate}
                       alt="Certificate"
-                      sizes="(max-width: 768px) 100vw, 768px"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       priority
                       className="block h-full w-full object-contain"
                     />
@@ -114,6 +117,7 @@ const Page = () => {
             <SectionAbout />
             <SectionWhatWeBelieve />
             <SectionOurVision />
+            <SectionFAQ />
           </div>
           <SectionBlogs />
           <div className="font-inter relative w-full text-black">
@@ -122,13 +126,13 @@ const Page = () => {
         </div>
         <div className="absolute bottom-0 left-0 right-0 top-0 flex w-full flex-col items-center overflow-hidden">
           <div className="relative mx-auto h-full w-full max-w-[90rem]">
-            <div className="absolute -left-[170%] -top-[15%] -z-10 h-[125rem] w-[125rem] sm:-top-[15%] sm:left-[-40%]">
+            <div className="absolute -left-[170%] -top-[15%] -z-10 w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>
-            <div className="absolute -right-[130%] top-1/2 -z-10 h-[115rem] w-[115rem] -translate-y-[70%] sm:-right-1/2 sm:-translate-y-[35%]">
+            <div className="absolute -right-[130%] top-1/2 -z-10 w-[125rem] sm:w-[150%] -translate-y-[50%] sm:-right-1/2 sm:-translate-y-[70%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>
-            <div className="absolute -bottom-[10%] -left-[150%] -z-10 h-[125rem] w-[125rem] sm:-bottom-1/2 sm:-left-1/2 sm:-translate-y-[95%]">
+            <div className="absolute -bottom-[10%] -left-[150%] -z-10 w-[125rem] sm:w-[150%] sm:-bottom-1/2 sm:-left-1/2 sm:-translate-y-[150%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>
             <Image

@@ -1,3 +1,4 @@
+import { ChevronsUpDown } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import {
   Select,
@@ -9,9 +10,10 @@ import {
 } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { routing, useRouter, usePathname, Link } from '@/i18n/routing';
-import { ChevronsUpDown } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import GlobeIconSVG from '../../../../public/globe-svgrepo-com.svg';
 
 export function LocaleSelect() {
   const t = useTranslations('Localization');
@@ -26,14 +28,21 @@ export function LocaleSelect() {
   return (
     <>
       <Select defaultValue={locale} onValueChange={handleLanguageChange}>
-        <SelectTrigger className="w-full border-none bg-transparent">
-          <SelectValue placeholder={t('label')} />
+        <SelectTrigger className="justify-none rounded-[2rem] border-none bg-slate-100 text-[#A2A3A9] hover:text-[#2C2C2C] focus:ring-0 active:text-[#2C2C2C]">
+          <div className="flex items-center pr-4">
+            <GlobeIconSVG className="h-[18px] w-[18px]" />
+          </div>
+          <SelectValue placeholder={t('label', { locale: locale })} />
         </SelectTrigger>
-        <SelectContent className="z-50">
+        <SelectContent className="">
           <SelectGroup>
             {routing.locales.map((loc) => (
-              <SelectItem key={loc} value={loc}>
-                {t(`options.${loc}`)}
+              <SelectItem
+                key={loc}
+                value={loc}
+                className="text-[#A2A3A9] hover:text-[#2C2C2C] active:text-[#2C2C2C]"
+              >
+                {t('label', { locale: loc })}
               </SelectItem>
             ))}
           </SelectGroup>
@@ -50,23 +59,9 @@ export function LocaleCollapsible() {
 
   return (
     <>
-      {/* <Select defaultValue={locale} onValueChange={handleLanguageChange}>
-        <SelectTrigger className="w-full border-none bg-transparent">
-          <SelectValue placeholder={t('label')} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup className="z-50">
-            {routing.locales.map((loc) => (
-              <SelectItem key={loc} value={loc}>
-                {t(`options.${loc}`)}
-              </SelectItem>
-            ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select> */}
       <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-        <div className="flex items-center justify-between">
-          <div>{t('label')}</div>
+        <div className="flex items-center justify-between text-[#A2A3A9]">
+          <div>{t('header')}</div>
           <CollapsibleTrigger asChild>
             <Button variant="link" size="sm" className="w-9 p-0">
               <ChevronsUpDown className="h-4 w-4" />
@@ -76,9 +71,9 @@ export function LocaleCollapsible() {
         </div>
         <CollapsibleContent className="space-y-2">
           {routing.locales.map((loc) => (
-            <div key={loc} className="px-4 py-3 text-sm">
+            <div key={loc} className="px-4 py-3 text-sm hover:text-[#2C2C2C] active:text-[#2C2C2C]">
               <Link href={`${pathname}`} locale={loc}>
-                {t(`options.${loc}`)}
+                {t('label', { locale: loc })}
               </Link>
             </div>
           ))}

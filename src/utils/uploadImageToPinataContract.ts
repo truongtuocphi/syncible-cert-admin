@@ -31,6 +31,7 @@ export async function uploadImageToPinata(file: any) {
     const data = await response.json();
     return `https://gateway.pinata.cloud/ipfs/${data.IpfsHash}`;
   } catch (error) {
+    // eslint-disable-next-line no-console
     console.error('Error uploading image to Pinata:', error);
     throw error;
   }

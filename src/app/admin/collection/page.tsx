@@ -22,6 +22,7 @@ import { useAccount } from 'wagmi';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import CopyButton from '@/components/common/coppyText/CopyButton';
 import Loading from '@/components/common/loading/Loading';
+import ContractData from '@/components/pages/admin/ContractData';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
@@ -35,7 +36,6 @@ import {
 import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
 import { deleteDataById } from '@/utils/deleteDataFirebase';
-import ContractData from '@/components/pages/admin/ContractData';
 
 export type Collection = {
   id: string;
@@ -202,10 +202,8 @@ export default function Collection() {
     },
   });
 
-  // Memoize the selected rows count for performance
   const selectedRowCount = useMemo(() => Object.keys(rowSelection).length, [rowSelection]);
 
-  // Delete handler
   const handleDelete = async () => {
     const dataSelect = Object.values(data);
     const selectedIds = Object.keys(rowSelection);

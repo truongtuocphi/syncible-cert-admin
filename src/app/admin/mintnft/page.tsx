@@ -196,18 +196,18 @@ const Experience = () => {
 
       if (mintDataArray) {
         const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 5000000,
+          gasLimit: 4000000,
         });
 
         await tx.wait();
-        alert('NFTs minted successfully!');
+        alert('Chứng chỉ được tạo thành công!');
         setLoading(true);
         await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
       }
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error minting NFTs:', error);
-      alert('Failed to mint NFTs.');
+      alert('lỗi tạo chứng chỉ.');
       setLoadingButton(false);
     } finally {
       setLoading(false);

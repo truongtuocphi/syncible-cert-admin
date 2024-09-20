@@ -19,7 +19,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <ClientSessionProvider>
       <Web3ModalProvider initialState={initialState}>
-        <div className="flex min-h-screen bg-gray-100">
+        <div className="bg-bgPageAdmin flex min-h-screen">
           <Sidebar />
           <div className="ml-64 flex-1 p-6 pt-16">
             <Header />

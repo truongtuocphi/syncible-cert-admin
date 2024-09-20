@@ -55,11 +55,10 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
 
         const attributes = result.attributes;
 
-        // eslint-disable-next-line no-console
-        console.log('attributes', attributes);
         const getCertificateID = attributes.find(
           (attr: { trait_type: string }) => attr.trait_type == 'Certificate ID'
         ).value;
+
         const getDate = attributes.find(
           (attr: { trait_type: string }) => attr.trait_type == 'Date'
         ).value;
@@ -96,9 +95,9 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
 
         if (snapshot.exists()) {
           const dataFromFirebase = snapshot.val();
-          const matchingData = Object.values(dataFromFirebase).filter(
-            (item: any) => item.mintData[0].tokenURI === slugPost
-          );
+          const matchingData = Object.values(dataFromFirebase)
+            .filter((item: any) => item)
+            .flatMap((childItem: any) => childItem.mintData);
 
           if (matchingData) {
             setDataContract(matchingData);
@@ -129,8 +128,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   if (!data) return <Loading />;
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
-
-  console.log('font', fontFamily);
 
   return (
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">

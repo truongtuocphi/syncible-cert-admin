@@ -53,7 +53,6 @@ export default function Page({ params }: { params: { slug: string } }) {
           <h1 className="text-2xl font-semibold text-gray-600">Trở về</h1>
         </div>
 
-        {/* Khu vực xem trước */}
         <div className="h-fit w-full rounded-xl border-[0.5px] border-gray-200 bg-white p-4">
           <div className="h-fit w-full">
             <div className="relative h-56">

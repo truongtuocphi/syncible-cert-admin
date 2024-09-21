@@ -63,8 +63,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
           (attr: { trait_type: string }) => attr.trait_type == 'Date'
         ).value;
 
-        console.log('attributes', attributes);
-
         const fontAtribute = attributes.find(
           (attr: { trait_type: string }) => attr.trait_type == 'Font'
         ).value;

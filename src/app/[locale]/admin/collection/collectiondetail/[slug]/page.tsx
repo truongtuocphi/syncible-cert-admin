@@ -41,17 +41,17 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
 
   return (
     <>
-      <Link href={`/admin/collection/`}>
-        <div className="flex items-center gap-2">
-          <ButtonPrimary className="rounded-lg">
+      <div className="flex items-center gap-2">
+        <Link href={`/admin/collection/`}>
+          <ButtonPrimary className="rounded-lg py-2">
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
+        </Link>
 
-          <div className="text-xl font-semibold text-gray-500">Collection Details</div>
-        </div>
-      </Link>
+        <div className="text-xl font-semibold text-gray-500">Trở về</div>
+      </div>
 
-      <div className="mt-4 h-fit w-full rounded-lg bg-white p-4">
+      <div className="mt-4 h-fit w-full">
         <div className="w-full">
           <div className="relative h-80 w-full">
             <Image
@@ -72,28 +72,25 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
               />
             </div>
           </div>
-          <div className="mt-14 flex flex-col justify-center gap-3 text-center">
+          <div className="mt-14 flex flex-col justify-center gap-2 text-center">
             <h2 className="text-2xl font-bold text-gray-700">{data.displayName}</h2>
             <div>{<CopyAddressButton textToCopy={slugPost} />}</div>
-            <p className="text-base font-semibold text-gray-400">{data.description}</p>
-          </div>
-        </div>
-        <div className="px-40">
-          <div className="my-6 w-full border-[0.5px] border-gray-200 px-6"></div>
-        </div>
-        <div className="flex items-center justify-center gap-16">
-          <div className="flex flex-col text-center">
-            <span className="text-xl font-bold text-gray-600">Items</span>
-            <span className="text-xl font-bold text-primary-50">{itemsCount}</span>
-          </div>
+            <div className="flex items-center justify-center gap-5">
+              <div className="text-center">
+                <span className="text-base font-bold text-black">{itemsCount} </span>
+                <span className="text-base text-gray-600">Items</span>
+              </div>
 
-          <div className="flex flex-col text-center">
-            <span className="text-xl font-bold text-gray-600">Owner</span>
-            <span className="text-xl font-bold text-primary-50">1</span>
+              <div className="text-center">
+                <span className="text-base font-bold text-black">1 </span>
+                <span className="text-base text-gray-600">Owner</span>
+              </div>
+            </div>
+            <p className="mt-4 text-base text-gray-600">{data.description}</p>
           </div>
         </div>
 
-        <div className="mt-4 flex h-fit w-full items-center justify-center">
+        <div className="mt-6 flex h-fit w-full items-center justify-center">
           <ContractData
             collectionContractAddress={slugPost}
             onItemsCountChange={handleItemsCountChange}

@@ -1,28 +1,27 @@
-import { GiDiploma } from 'react-icons/gi';
-import { MdCollectionsBookmark } from 'react-icons/md';
-import { MdOutlineDashboardCustomize } from 'react-icons/md';
-
 import Card from '@/components/pages/admin/Card';
+import { BiFile } from 'react-icons/bi';
+import { BiCustomize } from 'react-icons/bi';
+import { GrCertificate } from 'react-icons/gr';
 
 const listCard = [
   {
     title: 'Tùy chỉnh mẫu chứng chỉ',
     des: 'Chỉnh sửa giao diện và chuyên về chủ đề của riêng bạn. Thêm logo, màu sắc và hình ảnh của bạn để phản ánh thương hiệu của bạn.',
-    icon: <MdOutlineDashboardCustomize className="text-2xl text-white" />,
+    icon: <BiFile className="text-2xl text-gray-800" />,
     titleButton: 'Tùy chỉnh ở đây',
     link: '/admin/customized',
   },
   {
     title: 'Quản lý Chứng chỉ',
     des: 'Quản lý chứng chỉ số được đúc của bạn tại đây',
-    icon: <MdCollectionsBookmark className="text-2xl text-white" />,
+    icon: <BiCustomize className="text-2xl text-gray-800" />,
     titleButton: 'Tạo ngay',
     link: '/admin/collection',
   },
   {
     title: 'Tạo chứng chỉ',
-    des: 'Tạo chứng chỉ số của bạn',
-    icon: <GiDiploma className="text-2xl text-white" />,
+    des: 'Tạo chứng chỉ của bạn',
+    icon: <GrCertificate className="text-2xl text-gray-800" />,
     titleButton: 'Tạo chứng chỉ số',
     link: '/admin/mintnft',
   },

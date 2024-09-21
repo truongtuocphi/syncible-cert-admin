@@ -15,7 +15,8 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import Link from 'next/link';
-import { IoEyeSharp } from 'react-icons/io5';
+import { BiCollection, BiPlusCircle, BiSearch } from 'react-icons/bi';
+import { LuEye } from 'react-icons/lu';
 import { RiShareBoxLine } from 'react-icons/ri';
 import { useAccount } from 'wagmi';
 
@@ -114,7 +115,7 @@ const columns: ColumnDef<Collection>[] = [
             target="_blank"
             rel="noopener noreferrer"
           >
-            <RiShareBoxLine className="text-primary-50" />
+            <RiShareBoxLine className="text-lg text-black" />
           </Link>
         </div>
       </div>
@@ -123,7 +124,9 @@ const columns: ColumnDef<Collection>[] = [
   {
     accessorKey: 'status',
     header: 'Trạng thái',
-    cell: () => <div className="text-green-600">Hoạt Động</div>,
+    cell: () => (
+      <div className="rounded-full bg-green-500 p-2 text-center text-white">Hoạt Động</div>
+    ),
   },
   {
     id: 'actions',
@@ -131,10 +134,10 @@ const columns: ColumnDef<Collection>[] = [
     cell: ({ row }) => (
       <div className="flex items-center space-x-2">
         <Link href={`/admin/collection/collectiondetail/${row.getValue('id')}`}>
-          <RiShareBoxLine className="text-primary-50" />
+          <BiCollection className="text-lg text-black" />
         </Link>
         <Link href={`/admin/collection/contractdetail/${row.getValue('id')}`}>
-          <IoEyeSharp className="text-primary-50" />
+          <LuEye className="text-lg text-black" />
         </Link>
       </div>
     ),
@@ -252,30 +255,36 @@ export default function Collection() {
   return (
     <>
       <div className="flex items-center justify-between space-x-4 py-4">
-        <Input
-          placeholder="Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng"
-          value={(table.getColumn('displayName')?.getFilterValue() as string) ?? ''}
-          onChange={(event) => table.getColumn('displayName')?.setFilterValue(event.target.value)}
-          className="w-80 rounded-lg"
-        />
+        <div className="flex items-center rounded-2xl border-[1px] border-gray-200 bg-white px-4 py-1">
+          <BiSearch className="text-2xl text-gray-500" />
+          <Input
+            placeholder="Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng"
+            value={(table.getColumn('displayName')?.getFilterValue() as string) ?? ''}
+            onChange={(event) => table.getColumn('displayName')?.setFilterValue(event.target.value)}
+            className="w-80 border-none bg-transparent"
+          />
+        </div>
         {selectedRowCount > 0 ? (
           <ButtonPrimary onClick={handleDelete} className="bg-red-500">
             Xóa đã chọn ({selectedRowCount})
           </ButtonPrimary>
         ) : (
           <Link href={'/admin/collection/createcollection'}>
-            <ButtonPrimary className="ml-auto text-white">Tạo mục</ButtonPrimary>
+            <ButtonPrimary className="ml-auto flex items-center gap-2 border-[1px] border-gray-400 bg-transparent font-bold text-gray-600 hover:bg-primary-50 hover:text-white">
+              <BiPlusCircle className="text-2xl" />
+              Tạo mục
+            </ButtonPrimary>
           </Link>
         )}
       </div>
 
       <div className="overflow-hidden rounded-xl border">
         <Table>
-          <TableHeader className="bg-[#E6E7F4]">
+          <TableHeader className="bg-gray-100">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead key={header.id} className="font-bold text-black">
                     {header.isPlaceholder
                       ? null
                       : flexRender(header.column.columnDef.header, header.getContext())}
@@ -284,12 +293,12 @@ export default function Collection() {
               </TableRow>
             ))}
           </TableHeader>
-          <TableBody className="bg-white">
+          <TableBody className="bg-white hover:bg-white">
             {table.getRowModel().rows.length > 0 ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="text-gray-600">
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -305,7 +314,7 @@ export default function Collection() {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={columns.length} className="h-24 text-center">
+                <TableCell colSpan={columns.length} className="h-48 text-center">
                   <Loading />
                   Không có kết quả. Vui lòng chờ hoặc kết nối ví của bạn hoặc tạo một mục quản lý để
                   hiện kết quả.

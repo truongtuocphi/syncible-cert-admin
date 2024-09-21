@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import { SiPolygon } from 'react-icons/si';
 
 export default function CopyAddressButton({ textToCopy }: { textToCopy: string }) {
   const [copied, setCopied] = useState(false);
@@ -19,12 +20,17 @@ export default function CopyAddressButton({ textToCopy }: { textToCopy: string }
   return (
     <ButtonPrimary
       onClick={handleCopy}
-      className="w-fit cursor-pointer border-2 border-gray-200 bg-transparent hover:bg-transparent"
+      className="w-fit cursor-pointer bg-transparent hover:bg-transparent"
     >
       {copied ? (
-        <div className="font-bold text-purple-500">Copied!</div>
+        <div className="text-purple-500">Copied!</div>
       ) : (
-        <div className="font-bold text-gray-500">{`${textToCopy.slice(0, 4)}...${textToCopy.slice(-6)}`}</div>
+        <div className="flex items-center gap-2 text-gray-700">
+          <div className="rounded-full bg-[#EDF0F4] p-2">
+            <SiPolygon className="text-lg text-primary-50" />
+          </div>
+          {`${textToCopy.slice(0, 4)}...${textToCopy.slice(-6)}`}
+        </div>
       )}
     </ButtonPrimary>
   );

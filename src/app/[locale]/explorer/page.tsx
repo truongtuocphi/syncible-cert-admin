@@ -22,7 +22,7 @@ export default function Explorer() {
   const [data, setData] = useState<CollectionData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
-  const t = useTranslations('HomePage.explorer_section');
+  const t = useTranslations('ExplorerPage');
   const handleSearch = async () => {
     setLoading(true);
     setNotFound(false);
@@ -48,32 +48,35 @@ export default function Explorer() {
           <Navbar />
         </div>
         <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
-          <div className="relative flex flex-col gap-3 h-72 w-full items-center justify-center rounded-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 shadow-lg">
-            <div className="md:text-5xl font-bold text-gray-700 ">{t('header')}</div> 
-            <div className="block md:hidden w-full px-6">
+          <div className="relative flex h-72 w-full flex-col items-center justify-center gap-3 rounded-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 shadow-lg">
+            <div className="font-bold text-gray-700 md:text-5xl ">{t('header')}</div>
+            <div className="block w-full px-6 md:hidden">
               <div className="flex flex-col items-center justify-center gap-2 overflow-hidden px-2">
                 <input
                   type="text"
                   placeholder={t('input_1.placeholder')}
                   value={idCertificate}
                   onChange={(e) => setIdCertificate(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-6 text-black outline-none border border-slate-200 rounded-xl"
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-black outline-none sm:py-6"
                 />
                 <input
                   type="text"
                   placeholder={t('input_2.placeholder')}
                   value={nameCertificate}
                   onChange={(e) => setNameCertificate(e.target.value)}
-                  className="w-full px-4 py-3 sm:py-6 text-black outline-none border border-slate-200 rounded-xl"
+                  className="w-full rounded-xl border border-slate-200 px-4 py-3 text-black outline-none sm:py-6"
                 />
-                <ButtonPrimary onClick={handleSearch} className="flex w-full p-1 sm:w-fit px-8 py-4">
+                <ButtonPrimary
+                  onClick={handleSearch}
+                  className="flex w-full p-1 px-8 py-4 sm:w-fit"
+                >
                   <span className="pr-2 text-white">{t('search_button.label')}</span>
                   <FaSearch className="text-xl text-white" />
                 </ButtonPrimary>
               </div>
             </div>
-            <div className="absolute -bottom-1/2 -translate-y-[150%] left-1/2 flex -translate-x-1/2 items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2 md:block hidden">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-2 divide-y md:divide-y-0 md:divide-x">
+            <div className="absolute -bottom-1/2 left-1/2 flex hidden -translate-x-1/2 -translate-y-[150%] items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2 md:block">
+              <div className="flex flex-col items-center justify-center gap-2 divide-y md:flex-row md:divide-x md:divide-y-0">
                 <input
                   type="text"
                   placeholder="Your certificate code"
@@ -108,7 +111,7 @@ export default function Explorer() {
               </div>
             </div>
           ) : data ? (
-            <div className="mx-auto mt-16 aspect-[4/3] w-full md:w-1/2 space-y-4 rounded-xl bg-white p-4 text-black ">
+            <div className="mx-auto mt-16 aspect-[4/3] w-full space-y-4 rounded-xl bg-white p-4 text-black md:w-1/2 ">
               <Link href={`/certificatedetail/${data.mintData[0].tokenURI}`}>
                 <CertificatePreview
                   previewImage={data.mintData[0].certData.templateURL}

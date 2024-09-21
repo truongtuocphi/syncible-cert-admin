@@ -58,8 +58,8 @@
             "href": "#about"
           },
           "blogs": {
-            "label": "Blog",
-            "href": "#blogs"
+            "label": "Blogs",
+            "href": "/blogs"
           },
           "explorer": {
             "label": "Tìm kiếm",
@@ -89,18 +89,43 @@
           }
         }
       }
-    },
-    "explorer_section": {
-      "header": "Tim kiếm chứng chỉ của bạn",
-      "input_1": {
-        "placeholder": "Nhập mã chứng chỉ"
+    }
+  },
+  "BlogPage": {
+    "header": "Syncible Certificate và Syncible Qualified Batch là gì?",
+    "navigation": {
+      "link_1": {
+        "label": "Syncible Certificate là gì?",
+        "href": "#syncible-certificate"
       },
-      "input_2": {
-        "placeholder": "Nhập tên"
+      "link_2": {
+        "label": "Credential Comparison Table",
+        "href": "#credential-comparison-table"
       },
-      "search_button": {
-        "label": "Truy vấn"
+      "link_3": {
+        "label": "Syncible Qualified Batch là gì?",
+        "href": "#syncible-qualified-batch"
+      },
+      "link_4": {
+        "label": "Design a Syncible Certificate template",
+        "href": "#design-a-syncible-certificate-template"
+      },
+      "link_5": {
+        "label": "Why Switch to Syncible for Custom Digital Certificates?",
+        "href": "#why-switch-to-syncible-for-custom-digital-certificates"
       }
+    }
+  },
+  "ExplorerPage": {
+    "header": "Tim kiếm chứng chỉ của bạn",
+    "input_1": {
+      "placeholder": "Nhập mã chứng chỉ"
+    },
+    "input_2": {
+      "placeholder": "Nhập tên"
+    },
+    "search_button": {
+      "label": "Truy vấn"
     }
   },
   "Localization": {

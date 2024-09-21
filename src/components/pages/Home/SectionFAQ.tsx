@@ -1,4 +1,3 @@
-import { CustomAccordionTrigger } from '@/components/common/miscellaneus/CustomAccordionTrggier';
 import {
   Accordion,
   AccordionContent,

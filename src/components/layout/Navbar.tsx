@@ -1,23 +1,21 @@
 'use client';
 
-import { Link, useRouter } from '@/i18n/routing';
-
-import { useTranslations, useLocale } from 'next-intl';
-
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import { useTranslations, useLocale } from 'next-intl';
 
 import ArrowRightIcon from '@/assets/icons/arrow-badge-right.svg';
 import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Link, usePathname } from '@/i18n/routing';
 
 import SyncibleLogo from '/public/syncible-logo.svg';
 import { LocaleCollapsible, LocaleSelect } from '../common/switcher/LocaleSwitcher';
-
-gsap.registerPlugin(ScrollToPlugin);
 
 const scrollToTarget = (target: string) => {
   gsap.to(window, {
@@ -31,43 +29,35 @@ const scrollToTarget = (target: string) => {
 };
 
 const Navbar = () => {
+  gsap.registerPlugin(ScrollToPlugin);
   const t = useTranslations('HomePage.navigation.top_nav');
   const router = useRouter();
   const locale = useLocale();
-  // const keys = ['about', 'blogs', 'explorer'] as const;
-
+  
   const links = [
     { label: t('links.about.label'), href: t('links.about.href') },
     { label: t('links.blogs.label'), href: t('links.blogs.href') },
     { label: t('links.explorer.label'), href: t('links.explorer.href') },
   ];
+  const currentPath = usePathname();
+  const handleNavClick = async (e: any, target: string) => {
+    e.preventDefault();
+    if (target.startsWith('#')) {
+      if (currentPath === '/') {
+        scrollToTarget(target);
+      } else {
+        console.log("it's here");
+        await router.push(`/${locale}`);
+        setTimeout(() => {
+          scrollToTarget(target);
+        }, 500);
+      }
+    } else {
+      await router.push(target);
+    }
+  };
 
   useEffect(() => {
-    const handleNavClick = async (e: any, target: string) => {
-      const currentPath = window.location.pathname;
-      if (target.startsWith('#')) {
-        if (currentPath === `/${locale}`) {
-          e.preventDefault();
-          scrollToTarget(target);
-        } else {
-          router.push(`/${locale}`);
-          setTimeout(() => {
-            scrollToTarget(target);
-          }, 500);
-        }
-      } else {
-        // If the target is not a hash, navigate directly
-        router.push(target);
-      }
-      // const element = document.querySelector(target);
-      // if (element) {
-      //   element.scrollIntoView({
-      //     behavior: 'smooth',
-      //     block: 'start',
-      //   });
-      // }
-    };
-
     const links = document.querySelectorAll('.nav-link');
     links.forEach((link) => {
       link.addEventListener('click', (e) => {
@@ -88,22 +78,21 @@ const Navbar = () => {
         });
       });
     };
-  }, []);
+  }, [router]);
 
   return (
     <div className={`${montserrat.className} "relative w-full`}>
       <div className="flex flex-col items-center">
         <div className="w-full md:px-8 xl:px-[6.5rem]">
-          {/* switch to grid tomorrow*/}
-          <div className="grid w-full grid-cols-12 justify-items-center items-center rounded-3xl p-4 backdrop-blur-sm lg:bg-white/50">
-            <div className="md:col-span-4 col-span-6 justify-self-start">
+          <div className="grid w-full grid-cols-12 items-center justify-items-center rounded-3xl p-4 backdrop-blur-sm lg:bg-white/50">
+            <div className="col-span-6 justify-self-start md:col-span-4">
               <Link href="/" className="">
                 <div className="h-8 w-28 md:h-10 md:w-40">
                   <SyncibleLogo className="h-full w-full" />
                 </div>
               </Link>
             </div>
-            <div className="block lg:hidden col-span-6 col-end-13 justify-self-end">
+            <div className="col-span-6 col-end-13 block justify-self-end lg:hidden">
               <Sheet>
                 <SheetTrigger asChild className="text-black">
                   <Button className="border-none bg-transparent px-0 text-2xl hover:bg-transparent hover:text-white active:bg-none">
@@ -124,15 +113,18 @@ const Navbar = () => {
                     </Link>
                   </SheetTitle>
                   <div className="flex flex-col gap-6">
-                    <div className="flex flex-col px-4 py-4 font-semibold">
+                    <div className="flex flex-col px-4 py-4 font-semibold text-[#A2A3A9]">
                       {links.map(({ label, href }) => (
-                        <div key={label} className="py-4">
+                        <div key={label}>
                           <SheetClose asChild>
                             <Link
                               href={href}
-                              className="nav-link text-base text-[#A2A3A9] hover:text-[#2C2C2C]"
+                              className={clsx(
+                                'nav-link w-full text-base hover:text-[#2C2C2C]',
+                                currentPath === href && 'text-[#2C2C2C]'
+                              )}
                             >
-                              {label}
+                              <div className="py-4"> {label}</div>
                             </Link>
                           </SheetClose>
                         </div>
@@ -153,14 +145,17 @@ const Navbar = () => {
                 </SheetContent>
               </Sheet>
             </div>
-            <div className="hidden items-center gap-2 md:gap-4 lg:block md:col-span-4 col-auto">
+            <div className="col-auto hidden items-center gap-2 md:col-span-4 md:gap-4 lg:block">
               <nav className="mx-5 text-base font-semibold text-[#A2A3A9]">
-                <ul className="flex items-center gap-5 md:gap-7 lg:gap-9">
+                <ul className="flex items-center gap-5 whitespace-nowrap md:gap-7 lg:gap-9">
                   {links.map(({ label, href }) => (
                     <li key={label}>
                       <Link
                         href={href}
-                        className="nav-link hover:text-[#2C2C2C] hover:underline active:text-[#2C2C2C]"
+                        className={clsx(
+                          'nav-link hover:text-[#2C2C2C] hover:underline ',
+                          currentPath === href && 'text-[#2C2C2C]'
+                        )}
                       >
                         {label}
                       </Link>
@@ -169,10 +164,9 @@ const Navbar = () => {
                 </ul>
               </nav>
             </div>
-            <div className="hidden lg:block md:col-span-4 col-auto justify-self-end">
+            <div className="col-auto hidden justify-self-end md:col-span-4 lg:block">
               <div className="flex items-center gap-3">
                 <LocaleSelect />
-                
                 <Link href={t('buttons.access.href')} target={'_blank'} className="h-fit">
                   <Button className="group flex w-[10rem] items-center rounded-[1.25rem] bg-primary-50 px-10 py-6 shadow-combinedShadow1 transition-all duration-500 hover:bg-primary-40">
                     <span className="relative inline-block text-base font-semibold transition-all duration-500 group-hover:pr-[25px]">

@@ -55,16 +55,16 @@ export default function SectionOurVision() {
             <div className="font-inter w-full text-wrap lg:w-[85%] text-[#6C6D71]">{t('content')}</div>
           </div>
         </div>
-        <div className="w-full max-w-[30rem] basis-1/2" ref={rightRef}>
-          {/* <Image
+        <div className="h-full w-full basis-1/2" ref={rightRef}>
+          <Image
             src="/img03.png"
             alt="Image of a globe"
             sizes="100vw"
             fill
             className="h-full object-cover "
             priority
-          /> */}
-          <OurVision className="h-full w-full" alt="Image of a globe" />
+          />
+          {/* <OurVision className="h-full w-full" alt="Image of a globe" /> // hình svg này có vấn đề nên a chưa fix dc, chắc để sau*/}
         </div>
       </div>
     </div>

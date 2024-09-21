@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
 import createNextIntlPlugin from 'next-intl/plugin';
+import createMDX from '@next/mdx';
+
 const withNextIntl = createNextIntlPlugin();
+const withMDX = createMDX({
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+    // Additional MDX-specific configurations
+  },
+});
+
 const nextConfig = {
   images: { remotePatterns: [{ protocol: 'https', hostname: '*' }] },
   webpack: (config) => {
@@ -20,7 +30,8 @@ const nextConfig = {
 
     return config;
   },
+  pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   productionBrowserSourceMaps: false,
 };
 
-export default withNextIntl(nextConfig);
+export default withNextIntl(withMDX(nextConfig));

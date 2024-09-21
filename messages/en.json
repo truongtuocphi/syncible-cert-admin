@@ -29,7 +29,7 @@
       },
       "question_2": {
         "header": "How Does Blockchain Prevent Credential Fraud?",
-        "answer": "The security of blockchain relies on its decentralized nature, where digital ledgers—referred to as nodes—each hold a copy of the blockchain. To alter information on the blockchain, the majority of these nodes would need to be simultaneously changed, a task as difficult as compromising thousands of banks at once. When creating blockchain-based credentials, Syncible generates a unique series of numbers from the credential data and sends this to the blockchain for storage. For verification, Syncible compares the stored series of numbers with the current credential information to confirm they match."
+        "answer": "The security of blockchain relies on its decentralized nature, where digital ledgers - referred to as nodes - each hold a copy of the blockchain. To alter information on the blockchain, the majority of these nodes would need to be simultaneously changed, a task as difficult as compromising thousands of banks at once. When creating blockchain-based credentials, Syncible generates a unique series of numbers from the credential data and sends this to the blockchain for storage. For verification, Syncible compares the stored series of numbers with the current credential information to confirm they match."
       },
       "question_3": {
         "header": "Is Private Information Available on the Blockchain?",
@@ -59,7 +59,7 @@
           },
           "blogs": {
             "label": "Blogs",
-            "href": "#blogs"
+            "href": "/blogs"
           },
           "explorer": {
             "label": "Explorer",
@@ -89,22 +89,47 @@
           }
         }
       }
+    }
+  },
+  "ExplorerPage": {
+    "header": "Find your certificate",
+    "input_1": {
+      "placeholder": "Your certificate code"
     },
-    "explorer_section": {
-      "header": "Find your certificate",
-      "input_1": {
-        "placeholder": "Your certificate code"
+    "input_2": {
+      "placeholder": "Your full name"
+    },
+    "search_button": {
+      "label": "Search"
+    }
+  },
+  "BlogPage": {
+    "header": "What is a Syncible Certificate and Syncible Qualified Batch?",
+    "navigation": {
+      "link_1": {
+        "label": "What is a Syncible Certificate?",
+        "href": "#syncible-certificate"
       },
-      "input_2": {
-        "placeholder": "Your full name"
+      "link_2": {
+        "label": "Credential Comparison Table",
+        "href": "#credential-comparison-table"
       },
-      "search_button": {
-        "label": "Search"
+      "link_3": {
+        "label": "What is a Syncible Qualified Batch?",
+        "href": "#syncible-qualified-batch"
+      },
+      "link_4": {
+        "label": "Design a Syncible Certificate template",
+        "href": "#design-a-syncible-certificate-template"
+      },
+      "link_5": {
+        "label": "Why Switch to Syncible for Custom Digital Certificates?",
+        "href": "#why-switch-to-syncible-for-custom-digital-certificates"
       }
     }
   },
   "Localization": {
     "header": "Language",
-    "label": "{locale, select, en {EN} vi {VI} other {Unknown}}"  
+    "label": "{locale, select, en {EN} vi {VI} other {Unknown}}"
   }
 }

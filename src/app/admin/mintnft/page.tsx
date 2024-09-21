@@ -23,6 +23,7 @@ import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
 import { BiImageAdd } from 'react-icons/bi';
+import { GrCertificate } from 'react-icons/gr';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -418,13 +419,18 @@ const Experience = () => {
               <div className="mt-4 flex items-center justify-end gap-4">
                 <Link href={'/admin'}>
                   <ButtonPrimary
-                    className="w-40 border-2 border-primary-50 bg-white text-primary-50"
+                    className="w-40 border-2 border-gray-800 bg-white text-gray-800"
                     disabled={loadingButton}
                   >
                     Hủy
                   </ButtonPrimary>
                 </Link>
-                <ButtonPrimary type="submit" className="w-40 text-white" disabled={loadingButton}>
+                <ButtonPrimary
+                  type="submit"
+                  className="flex items-center gap-2 text-white"
+                  disabled={loadingButton}
+                >
+                  <GrCertificate className="text-lg text-white" />
                   {loadingButton ? 'Đang xử lý...' : 'Tạo chứng chỉ'}
                 </ButtonPrimary>
               </div>

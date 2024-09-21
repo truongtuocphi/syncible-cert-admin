@@ -22,6 +22,7 @@ import { uploadMetadata } from '@/lib/pinata';
 import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
+import { BiImageAdd } from 'react-icons/bi';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -30,6 +31,7 @@ const Experience = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
+  const [fileBannerImage, setFileBannerImage] = useState<string | null>(null);
   const [role, setRole] = useState<'Teacher' | 'Student'>('Student');
   const [issuedDate, setIssuedDate] = useState('');
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
@@ -117,7 +119,7 @@ const Experience = () => {
     const file = e.target.files?.[0];
     if (file) {
       setLoading(true);
-
+      setFileBannerImage(file.name);
       try {
         const imageUrl = await uploadImageToPinata(file);
         setImage(imageUrl);
@@ -246,67 +248,100 @@ const Experience = () => {
             </Link>
             <h1 className="text-2xl font-semibold">Quay lại</h1>
           </div>
-          <div className="flex space-x-6">
-            <form onSubmit={handleSubmit} className="w-full sm:w-1/2">
-              <div className="w-full space-y-4 rounded-lg bg-white p-4">
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">Hình chứng chỉ</label>
-                  <p className="text-xs text-gray-400">
-                    Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây
-                  </p>
-                  <div
-                    className="relative flex h-[22rem] w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
-                    onDrop={(e) => handleDrop(e, setBannerImage)}
-                    onDragOver={handleDragOver}
-                  >
-                    {loadingBanner ? (
-                      <div className="flex h-full w-full items-center justify-center">
-                        <Loading />
-                      </div>
-                    ) : bannerImage ? (
-                      <div className="relative h-full w-full">
-                        <Image src={bannerImage} alt="Banner Image" fill className="rounded-md" />
-                        <button
-                          type="button"
-                          onClick={handleRemoveImage}
-                          className="absolute right-2 top-2 rounded-full bg-gray-700 p-1 text-white"
-                        >
-                          <FaTimes className="text-lg" />
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center">
-                        <FaImage className="text-3xl text-gray-500" />
-                        <p className="mt-2 text-sm text-gray-500">
-                          Kéo & thả hoặc click để tải lên
-                        </p>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          required
-                          onChange={(e) =>
-                            handleImageBannerChange(e, setBannerImage, setLoadingBanner)
+          <div className="flex space-x-6 rounded-xl bg-white p-4">
+            <form onSubmit={handleSubmit} className="w-full">
+              <div className="w-full space-y-4 rounded-lg bg-white">
+                <div className="flex items-start justify-start gap-4">
+                  <div className="w-1/2 space-y-2 ">
+                    <label className="block text-sm font-medium text-gray-700">
+                      Hình chứng chỉ
+                    </label>
+                    <p className="text-xs text-gray-400">
+                      Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây
+                    </p>
+                    <div
+                      className="relative flex w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 py-10 text-gray-600 hover:border-gray-400"
+                      onDrop={(e) => handleDrop(e, setBannerImage)}
+                      onDragOver={handleDragOver}
+                    >
+                      {loadingBanner ? (
+                        <div className="flex h-full w-full items-center justify-center">
+                          <Loading />
+                        </div>
+                      ) : bannerImage ? (
+                        <div className="flex h-full w-full items-center justify-center gap-3">
+                          {`${fileBannerImage?.slice(0, 7)}...${fileBannerImage?.slice(-6)}`}
+                          <button
+                            type="button"
+                            onClick={handleRemoveImage}
+                            className="rounded-full bg-gray-700 p-1 text-white"
+                          >
+                            <FaTimes className="text-sm" />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center">
+                          <BiImageAdd className="text-3xl text-black" />
+                          <p className="mt-2 text-sm text-gray-500">
+                            Kéo & thả hoặc click để tải lên
+                          </p>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            required
+                            onChange={(e) =>
+                              handleImageBannerChange(e, setBannerImage, setLoadingBanner)
+                            }
+                            className="absolute inset-0 cursor-pointer opacity-0"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  {/* preview */}
+                  <div className="sticky h-fit w-1/2" style={{ top: `${top}px` }}>
+                    <div className="block text-sm font-medium text-gray-700">
+                      Bản xem trước chứng chỉ
+                    </div>
+                    <p className="mt-2 text-xs text-gray-400">
+                      Sau khi tải mẫu chứng chỉ sẽ hiện ở đây
+                    </p>
+                    <div className="mt-2 h-fit w-full overflow-hidden rounded-lg border-[0.5px] border-dashed border-gray-400">
+                      {bannerImage ? (
+                        <CertificatePreview
+                          previewImage={bannerImage}
+                          name={
+                            typePage === 'mintbulk'
+                              ? coppyCsvDataFromChild[0]?.fullname
+                              : dataFromMintSingle[0]?.fullname
                           }
-                          className="absolute inset-0 cursor-pointer opacity-0"
+                          fontFamily={fontFamily}
+                          fontSize={fontSize}
                         />
-                      </div>
-                    )}
+                      ) : (
+                        <div className="relative h-96 bg-gray-50">
+                          <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border-[0.5px] border-gray-200 bg-gray-100">
+                            <FaImage className="absolute left-1/2 top-[40%] -translate-x-1/2 text-3xl text-gray-500" />
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">Vai trò</label>
+                <div className="flex items-center gap-4 space-y-2">
+                  <label className="block w-1/2 text-sm font-medium text-gray-700">Vai trò</label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
                     required
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   >
                     <option value="Teacher">Teacher</option>
                     <option value="Student">Student</option>
                   </select>
                 </div>
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+                <div className="flex items-center gap-4 space-y-2">
+                  <label className="block w-1/2 text-sm font-medium text-gray-700">
                     Ngày phát hành chứng chỉ
                   </label>
                   <input
@@ -314,17 +349,17 @@ const Experience = () => {
                     value={issuedDate}
                     onChange={(e) => setIssuedDate(e.target.value)}
                     required
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   />
                 </div>
-                <div className="space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">
+                <div className="flex items-center gap-4 space-y-2">
+                  <label className="block w-1/2 text-sm font-medium text-gray-700">
                     Lưu chứng chỉ số vào
                   </label>
                   <select
                     onChange={(e) => setcollectionContractAddress(e.target.value)}
                     required
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   >
                     {selectedContract.length === 0 ? (
                       <option value="">Vui lòng kết nối ví để hiện thị dữ liệu</option>
@@ -339,7 +374,7 @@ const Experience = () => {
                 </div>
               </div>
 
-              <div className="mt-4 w-full space-y-3 rounded-lg bg-white p-4">
+              <div className="mt-4 w-full space-y-3">
                 {typePage === 'mintsingle' ? (
                   <MintSingleForm
                     DataIssuedDate={issuedDate}
@@ -351,14 +386,14 @@ const Experience = () => {
                 )}
               </div>
 
-              <div className="mt-4 grid grid-cols-2 items-center gap-5 rounded-lg bg-white p-4">
-                <div className="col-span-1 space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">Phông chữ</label>
+              <div className="mt-4">
+                <div className="flex items-center gap-4 space-y-2">
+                  <label className="block w-1/2 text-sm font-medium text-gray-700">Phông chữ</label>
                   <select
                     value={fontFamily}
                     onChange={(e) => setFontFamily(e.target.value)}
                     required
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                   >
                     <option value="MonteCarlo">MonteCarlo</option>
                     <option value="Noto Serif">Noto Serif</option>
@@ -367,14 +402,14 @@ const Experience = () => {
                   </select>
                 </div>
 
-                <div className="col-span-1 space-y-2">
-                  <label className="block text-sm font-medium text-gray-700">Cỡ chữ</label>
+                <div className="flex items-center gap-4 space-y-2">
+                  <label className="block w-1/2 text-sm font-medium text-gray-700">Cỡ chữ</label>
                   <input
                     type="number"
                     value={fontSize}
                     onChange={(e) => setFontSize(e.target.value)}
                     required
-                    className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                     placeholder="Nhập cỡ chữ (vd: 16)"
                   />
                 </div>
@@ -394,34 +429,6 @@ const Experience = () => {
                 </ButtonPrimary>
               </div>
             </form>
-
-            {/* preview */}
-            <div
-              className="sticky h-fit w-full rounded-lg bg-white p-4 shadow-md sm:w-1/2"
-              style={{ top: `${top}px` }}
-            >
-              <h2 className="text-lg font-bold text-gray-600">Xem trước</h2>
-              <div className="mt-2 h-fit w-full overflow-hidden rounded-lg border-[0.5px] border-dashed border-gray-400">
-                {bannerImage ? (
-                  <CertificatePreview
-                    previewImage={bannerImage}
-                    name={
-                      typePage === 'mintbulk'
-                        ? coppyCsvDataFromChild[0]?.fullname
-                        : dataFromMintSingle[0]?.fullname
-                    }
-                    fontFamily={fontFamily}
-                    fontSize={fontSize}
-                  />
-                ) : (
-                  <div className="relative h-96 bg-gray-50">
-                    <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border-[0.5px] border-gray-200 bg-gray-100">
-                      <FaImage className="absolute left-1/2 top-[40%] -translate-x-1/2 text-3xl text-gray-500" />
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
           </div>
         </div>
       )}

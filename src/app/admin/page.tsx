@@ -20,7 +20,7 @@ const listCard = [
   },
   {
     title: 'Tạo chứng chỉ',
-    des: 'Tạo chứng chỉ số của bạn',
+    des: 'Tạo chứng chỉ của bạn',
     icon: <GrCertificate className="text-2xl text-gray-800" />,
     titleButton: 'Tạo chứng chỉ số',
     link: '/admin/mintnft',

@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { ref, set } from 'firebase/database';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { BiCollection, BiImageAdd } from 'react-icons/bi';
+import { BiCloudUpload, BiCollection, BiImageAdd } from 'react-icons/bi';
 import { FaImage, FaTimes } from 'react-icons/fa';
 import { LuEye } from 'react-icons/lu';
 import { useAccount } from 'wagmi';
@@ -13,9 +13,7 @@ import { useAccount } from 'wagmi';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
@@ -154,7 +152,7 @@ const CreateCollection: React.FC = () => {
                   />
                 </div>
               ) : (
-                <div className="flex h-36 w-36 items-center justify-center rounded-full border-[0.5px] border-dashed border-gray-300 bg-gray-50">
+                <div className="flex h-36 w-36 items-center justify-center rounded-full border-[0.5px] border-dashed border-gray-300">
                   <FaImage className="text-3xl text-gray-500" />
                 </div>
               )}
@@ -191,7 +189,7 @@ const CreateCollection: React.FC = () => {
               </p>
             </div>
             <div
-              className="relative flex h-56 w-1/2 items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 bg-gray-50 text-gray-600 hover:border-gray-400"
+              className="relative flex h-56 w-1/2 items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 text-gray-600 hover:border-gray-400"
               onDrop={(e) => handleDrop(e, setBannerImage)}
               onDragOver={handleDragOver}
             >
@@ -206,14 +204,16 @@ const CreateCollection: React.FC = () => {
                   <button
                     type="button"
                     onClick={handleRemoveImage}
-                    className="absolute right-2 top-2 rounded-full bg-gray-700 p-1 text-white"
+                    className="absolute right-2 top-2 rounded-full bg-gray-500 p-1 text-white"
                   >
                     <FaTimes className="text-lg" />
                   </button>
                 </div>
               ) : (
                 <div className="flex flex-col items-center">
-                  <FaImage className="text-3xl text-gray-500" />
+                  <div className="text flex size-14 items-center justify-center rounded-full bg-gray-100">
+                    <BiCloudUpload className=" text-center text-3xl text-gray-500" />
+                  </div>
                   <p className="mt-2 text-base text-gray-500">Kéo và thả hoặc nhấp để tải lên</p>
                   <input
                     type="file"

@@ -41,15 +41,15 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
 
   return (
     <>
-      <Link href={`/admin/collection/`}>
-        <div className="flex items-center gap-2">
-          <ButtonPrimary className="rounded-lg">
+      <div className="flex items-center gap-2">
+        <Link href={`/admin/collection/`}>
+          <ButtonPrimary className="rounded-lg py-2">
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
+        </Link>
 
-          <div className="text-xl font-semibold text-gray-500">Collection Details</div>
-        </div>
-      </Link>
+        <div className="text-xl font-semibold text-gray-500">Trở về</div>
+      </div>
 
       <div className="mt-4 h-fit w-full">
         <div className="w-full">

@@ -374,7 +374,7 @@ const Experience = () => {
                 </div>
               </div>
 
-              <div className="mt-4 w-full space-y-3">
+              <div className="mt-4 w-full">
                 {typePage === 'mintsingle' ? (
                   <MintSingleForm
                     DataIssuedDate={issuedDate}

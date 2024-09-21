@@ -7,6 +7,7 @@ import Papa from 'papaparse';
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import getAcronym from '@/utils/getAcronym';
+import { BiFolderPlus, BiImageAdd } from 'react-icons/bi';
 
 const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -24,6 +25,7 @@ interface CertificateData {
 
 export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps) => {
   const [csvData, setCsvData] = useState<CertificateData[]>([]);
+  const [fileNameCSV, setFileNameCSV] = useState<string | null>('');
 
   const handleDownload = async () => {
     const fileUrl = `${headerURLPinata}/ipfs/QmSusJoDdDnAr5AVocRzLBPhb7yHmeSXCBTJUyGLPekg7R`;
@@ -47,6 +49,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
   const handleCSVChange = (event: any) => {
     const file = event.target.files[0];
     if (file) {
+      setFileNameCSV(file.name);
       Papa.parse<string>(file, {
         header: true,
         complete: (results) => {
@@ -76,93 +79,121 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
 
   return (
     <>
-      <div className="flex items-center justify-between">
-        <div className="block text-lg font-medium text-gray-700">Thông tin CSV</div>
-        <div
-          onClick={handleDownload}
-          className="block cursor-pointer border-none bg-transparent text-sm font-medium text-primary-50 underline"
-        >
-          Tải file CSV mẫu
-        </div>
-      </div>
-      <p className="mt-1 text-xs text-gray-400">
+      <div className="my-6 w-full border-[0.5px] border-gray-100"></div>
+
+      <div className="block text-sm font-medium text-gray-700">Thông tin CSV</div>
+      <p className="mt-3 text-xs text-gray-400">
         Định dạng tập tin csv của bạn phải được định dạng theo trường định dạng tập tin của Syncible
         để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành tập tin CSV và dán vào
         mẫu dưới đây.
       </p>
-      <div className="space-y-2">
-        <label className="block text-sm font-medium text-gray-700">Tải tệp CSV</label>
-        <input
+      <div
+        onClick={handleDownload}
+        className="mt-3 block cursor-pointer border-none bg-transparent text-sm font-medium text-primary-50 underline"
+      >
+        Tải file CSV mẫu
+      </div>
+
+      <div className="my-6 w-full border-[0.5px] border-gray-100"></div>
+
+      <div className="flex items-center justify-between">
+        <label className="block text-sm font-medium text-gray-900">Tải tệp CSV</label>
+        {/* <input
           type="file"
           onChange={(e) => handleCSVChange(e)}
           accept=".csv"
           required
           className="block w-full cursor-pointer rounded-lg border-[1px] text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-primary-50 hover:file:bg-blue-100"
-        />
-      </div>
-
-      <div className="grid grid-cols-5 gap-2">
-        <div className="col-span-2 space-y-2">
-          <label className="block text-sm font-medium text-gray-700">ID chứng chỉ</label>
-        </div>
-        <div className="col-span-3 space-y-2">
-          <label className="block text-sm font-medium text-gray-700">Họ và tên</label>
-        </div>
-      </div>
-
-      {csvData.length > 0 ? (
-        <ScrollArea className="h-56 w-full rounded-md border-none">
-          {csvData.map(
-            (data: any, index) =>
-              data.fullname && (
-                <div className="grid grid-cols-5 gap-2" key={index}>
-                  <div className="col-span-2 space-y-2">
-                    <input
-                      type="text"
-                      required
-                      placeholder="Mã chứng chỉ"
-                      value={data.certificateNumber}
-                      disabled
-                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                  <div className="col-span-3 space-y-2">
-                    <input
-                      type="text"
-                      required
-                      placeholder="Họ và tên của bạn"
-                      value={data.fullname}
-                      disabled
-                      className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                    />
-                  </div>
-                </div>
-              )
-          )}
-          <ScrollBar orientation="vertical" />
-        </ScrollArea>
-      ) : (
-        <div className="grid grid-cols-5 gap-2">
-          <div className="col-span-2 space-y-2">
-            <input
-              type="text"
-              required
-              placeholder="Mã chứng chỉ"
-              disabled
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
-          </div>
-          <div className="col-span-3 space-y-2">
-            <input
-              type="text"
-              required
-              placeholder="Họ và tên của bạn"
-              disabled
-              className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            />
+        /> */}
+        <div className="space-y-2">
+          <input
+            type="file"
+            onChange={(e) => handleCSVChange(e)}
+            accept=".csv .xlsx"
+            required
+            className="hidden"
+            id="file-upload"
+          />
+          <div className="flex items-center gap-4">
+            <label
+              htmlFor="file-upload"
+              className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-800 hover:bg-gray-100"
+            >
+              <BiFolderPlus className="text-2xl text-gray-800" />
+              Chọn tệp
+            </label>
+            {fileNameCSV && `${fileNameCSV?.slice(0, 4)}...${fileNameCSV?.slice(-8)}`}
           </div>
         </div>
-      )}
+      </div>
+
+      <div className="mt-5 w-full overflow-hidden rounded-3xl bg-gray-100">
+        <div className="flex gap-2 bg-gray-200 px-6 py-4">
+          <div className="w-1/2 space-y-2">
+            <label className="block text-sm font-medium text-gray-800">ID chứng chỉ</label>
+          </div>
+          <div className="w-1/2 space-y-2">
+            <label className="block text-sm font-medium text-gray-800">Họ và tên</label>
+          </div>
+        </div>
+
+        {csvData.length > 0 ? (
+          <ScrollArea className="h-56 w-full rounded-md border-none">
+            {csvData.map(
+              (data: any, index) =>
+                data.fullname && (
+                  <div
+                    className="flex items-center gap-2 border-b-[0.5px] border-gray-200"
+                    key={index}
+                  >
+                    <div className="w-1/2">
+                      <input
+                        type="text"
+                        required
+                        placeholder="Mã chứng chỉ"
+                        value={data.certificateNumber}
+                        disabled
+                        className="mt-1 block w-full bg-transparent px-6 py-4 sm:text-sm"
+                      />
+                    </div>
+                    <div className="w-1/2">
+                      <input
+                        type="text"
+                        required
+                        placeholder="Họ và tên của bạn"
+                        value={data.fullname}
+                        disabled
+                        className="mt-1 block w-full bg-transparent py-4 sm:text-sm"
+                      />
+                    </div>
+                  </div>
+                )
+            )}
+            <ScrollBar orientation="vertical" />
+          </ScrollArea>
+        ) : (
+          <div className="grid grid-cols-5 gap-2">
+            <div className="col-span-2 space-y-2">
+              <input
+                type="text"
+                required
+                placeholder="Mã chứng chỉ"
+                disabled
+                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+            <div className="col-span-3 space-y-2">
+              <input
+                type="text"
+                required
+                placeholder="Họ và tên của bạn"
+                disabled
+                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+              />
+            </div>
+          </div>
+        )}
+      </div>
     </>
   );
 };

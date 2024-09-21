@@ -8,7 +8,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonProps>(({ className, ...props }, ref) => {
   return (
     <Button
-      className={cn('rounded-full bg-primary-50 text-gray-800 hover:opacity-90', className)}
+      className={cn(
+        'rounded-2xl bg-primary-50 px-5 py-6 text-gray-800 hover:opacity-90',
+        className
+      )}
       ref={ref}
       {...props}
     />

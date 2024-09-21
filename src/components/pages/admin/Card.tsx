@@ -12,15 +12,14 @@ export default function Card({ data }: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="flex h-full w-full flex-col justify-between rounded-xl bg-white px-6 py-8 shadow-xl shadow-gray-300">
+    <div className="flex h-full w-full flex-col justify-between rounded-3xl border-[0.5px] border-gray-200 bg-white px-6 py-8">
       <div>
-        <div className="flex size-14 items-center justify-center rounded-full bg-primary-50">
+        <div className="flex size-14 items-center justify-center rounded-full border-[0.5px] border-gray-200">
           {data.icon}
         </div>
 
-        <div className="mt-10 flex flex-col gap-6">
-          <h2 className="text-lg font-bold text-gray-800">{data.title}</h2>
-          <div className="w-1/5 border-[2px] border-primary-50 shadow-md shadow-primary-50"></div>
+        <div className="mt-5 flex flex-col gap-3">
+          <h2 className="text-2xl font-bold text-gray-800">{data.title}</h2>
           <p className="text-sm text-gray-500">{data.des}</p>
         </div>
       </div>

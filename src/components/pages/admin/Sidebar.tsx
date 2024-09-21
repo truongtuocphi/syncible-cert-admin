@@ -5,27 +5,27 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { BiSolidCustomize } from 'react-icons/bi';
-import { FaHome } from 'react-icons/fa';
-import { GiDiploma } from 'react-icons/gi';
-import { IoMdSettings } from 'react-icons/io';
-import { MdCollectionsBookmark } from 'react-icons/md';
+import { BiCustomize } from 'react-icons/bi';
+import { BiHome } from 'react-icons/bi';
+import { BiFile } from 'react-icons/bi';
+import { BiCog } from 'react-icons/bi';
+import { GrCertificate } from 'react-icons/gr';
 
 import Modal from './Modal';
 
 const menuSidebar = [
-  { name: 'Trang Chủ', url: '/admin', icon: <FaHome className="text-2xl" /> },
+  { name: 'Trang Chủ', url: '/admin', icon: <BiHome className="text-2xl" /> },
   {
     name: 'Tùy Chỉnh Mẫu',
     url: '/admin/customized',
-    icon: <BiSolidCustomize className="text-2xl" />,
+    icon: <BiFile className="text-2xl" />,
   },
   {
     name: 'Quản lý Chứng Chỉ',
     url: '/admin/collection',
-    icon: <MdCollectionsBookmark className="text-2xl" />,
+    icon: <BiCustomize className="text-2xl" />,
   },
-  { name: 'Tạo Chứng Chỉ Số', url: '/admin/mintnft', icon: <GiDiploma className="text-2xl" /> },
+  { name: 'Tạo Chứng Chỉ Số', url: '/admin/mintnft', icon: <GrCertificate className="text-2xl" /> },
 ];
 
 const Sidebar = () => {
@@ -55,7 +55,7 @@ const Sidebar = () => {
                   {item.name !== 'Tạo Chứng Chỉ Số' ? (
                     <Link
                       href={item.url}
-                      className={`flex items-center gap-4 rounded-xl px-4 py-4 font-bold text-gray-500 ${isActive ? 'rounded-lg bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 text-gray-700' : 'rounded-lg from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 hover:bg-gradient-to-r hover:text-gray-700'}`}
+                      className={`flex items-center gap-4 rounded-xl px-4 py-4 font-bold text-gray-500 ${isActive ? 'rounded-2xl bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 text-gray-700' : 'rounded-2xl from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 hover:bg-gradient-to-r hover:text-gray-700'}`}
                     >
                       {item.icon}
                       {item.name}
@@ -63,7 +63,7 @@ const Sidebar = () => {
                   ) : (
                     <div
                       onClick={() => setIsModalOpen(true)}
-                      className={`flex cursor-pointer items-center gap-4 rounded-xl px-4 py-4 font-bold text-gray-500 ${isActive ? 'rounded-lg bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 text-gray-700' : 'rounded-lg from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 hover:bg-gradient-to-r hover:text-gray-700'}`}
+                      className={`flex cursor-pointer items-center gap-4 rounded-xl px-4 py-4 font-bold text-gray-500 ${isActive ? 'rounded-2xl bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 text-gray-700' : 'rounded-2xl from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 hover:bg-gradient-to-r hover:text-gray-700'}`}
                     >
                       {item.icon}
                       {item.name}
@@ -83,7 +83,7 @@ const Sidebar = () => {
           href={'/admin/setting'}
           className={`flex items-center gap-4 rounded-lg from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 px-4 py-4 font-bold text-gray-500 hover:bg-gradient-to-r hover:text-gray-700`}
         >
-          <IoMdSettings className="text-2xl" />
+          <BiCog className="text-2xl" />
           Cài đặt
         </Link>
       </div>

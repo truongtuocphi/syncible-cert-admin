@@ -63,7 +63,19 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
           (attr: { trait_type: string }) => attr.trait_type == 'Date'
         ).value;
 
+        const fontAtribute = attributes.find(
+          (attr: { trait_type: string }) => attr.trait_type == 'Font'
+        ).value;
+
+        const fontSize = attributes.find(
+          (attr: { trait_type: string }) => attr.trait_type == 'Font Size'
+        ).value;
+
+        fontAtribute && setFontFamily(fontAtribute);
+        fontSize && setFontSize(fontSize);
+
         setCertificateID(replaceData(getCertificateID, getDate));
+
         setTemplateURL(
           attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Template URL').value
         );
@@ -71,12 +83,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
         setBlockchainType(
           attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Blockchain Type')
             .value
-        );
-        setFontFamily(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Font').value
-        );
-        setFontSize(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Font Size').value
         );
       } catch (error) {
         // eslint-disable-next-line no-console
@@ -128,6 +134,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   if (!data) return <Loading />;
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
+
+  console.log(fontFamily);
 
   return (
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">

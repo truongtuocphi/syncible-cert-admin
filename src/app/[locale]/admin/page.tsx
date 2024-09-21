@@ -5,13 +5,6 @@ import { MdOutlineDashboardCustomize } from 'react-icons/md';
 import Card from '@/components/pages/admin/Card';
 
 const listCard = [
-  // {
-  //   title: 'File Storage',
-  //   des: 'Efficiently manage your files here',
-  //   icon: <FaRegFileAlt className="text-2xl text-white" />,
-  //   titleButton: 'Enter',
-  //   link: '/admin/filestorage',
-  // },
   {
     title: 'Tùy chỉnh mẫu chứng chỉ',
     des: 'Chỉnh sửa giao diện và chuyên về chủ đề của riêng bạn. Thêm logo, màu sắc và hình ảnh của bạn để phản ánh thương hiệu của bạn.',

@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import '@pqina/pintura/pintura.css';
 
@@ -21,8 +21,8 @@ import {
 import { getEditorDefaults } from '@pqina/pintura';
 import { PinturaEditor } from '@pqina/react-pintura';
 import Image from 'next/image';
-import Link from 'next/link';
-import { FaArrowLeft } from 'react-icons/fa';
+import { BiCategory } from 'react-icons/bi';
+import { FaRegFileImage } from 'react-icons/fa';
 import { IoClose } from 'react-icons/io5';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
@@ -44,7 +44,6 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 
 setPlugins(plugin_crop, plugin_filter, plugin_annotate, plugin_sticker);
 
@@ -123,6 +122,7 @@ const editorDefaults = getEditorDefaults({
 
 export default function DefineTemplate() {
   const [result, setResult] = useState('');
+  const [fileName, setFileName] = useState<string>('Tải mẫu lên');
   const [selectedTemplate, setSelectedTemplate] = useState<string>(
     `${headerURL}/QmTSo1QyvYhb6csz2p46mkdVz7ZoHMwepDgDBTzkLeJBjh`
   );
@@ -132,6 +132,7 @@ export default function DefineTemplate() {
       const file = e.target.files[0];
       const fileUrl = URL.createObjectURL(file);
       setSelectedTemplate(fileUrl);
+      setFileName(file.name);
     }
   };
 
@@ -149,31 +150,30 @@ export default function DefineTemplate() {
   return (
     <>
       <div className="mb-4 flex w-full items-center justify-between">
-        <div className="flex items-center gap-2">
-          <Link href={'/admin'}>
-            <ButtonPrimary className="size-10 rounded-lg p-2">
-              <FaArrowLeft className="text-white" />
-            </ButtonPrimary>
-          </Link>
-          <div className="text-lg font-bold text-gray-600">Trở lại</div>
-        </div>
+        <h2 className="text-2xl font-bold">Tùy chỉnh mẫu</h2>
         <div className="flex items-center gap-6">
-          <div className="grid w-44 max-w-sm items-center gap-1.5">
-            <Label htmlFor="picture">Tải mẫu lên</Label>
+          <>
             <Input
               id="picture"
               type="file"
-              className="rounded-full"
+              className="hidden rounded-full"
               onChange={handleTemplateChange}
             />
-          </div>
+            <ButtonPrimary
+              className="flex items-center gap-2 border-2 border-primary-50 bg-white text-primary-50"
+              onClick={() => document.getElementById('picture')?.click()}
+            >
+              <FaRegFileImage className="text-2xl" />
+              {fileName.slice(0, 12)}
+            </ButtonPrimary>
+          </>
           <div className="grid items-center gap-1.5">
-            <div className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Mẫu Chứng chỉ
-            </div>
             <Drawer>
               <DrawerTrigger asChild>
-                <Button className="rounded-full bg-primary-50 text-white">Chọn mẫu</Button>
+                <ButtonPrimary className="flex items-center gap-2 text-white">
+                  <BiCategory className="text-2xl" />
+                  Chọn mẫu
+                </ButtonPrimary>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="mx-auto w-full max-w-5xl text-gray-700">
@@ -206,7 +206,7 @@ export default function DefineTemplate() {
                   </div>
                   <DrawerFooter>
                     <DrawerClose asChild>
-                      <Button className="mt-4 bg-primary-50 text-white">Chọn</Button>
+                      <Button className="mt-4 bg-primary-50 text-white">Xong</Button>
                     </DrawerClose>
                   </DrawerFooter>
                 </div>

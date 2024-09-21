@@ -16,7 +16,7 @@ import {
 } from '@tanstack/react-table';
 import Link from 'next/link';
 import { BiCollection, BiPlusCircle, BiSearch } from 'react-icons/bi';
-import { IoEyeOutline } from 'react-icons/io5';
+import { LuEye } from 'react-icons/lu';
 import { RiShareBoxLine } from 'react-icons/ri';
 import { useAccount } from 'wagmi';
 
@@ -137,7 +137,7 @@ const columns: ColumnDef<Collection>[] = [
           <BiCollection className="text-lg text-black" />
         </Link>
         <Link href={`/admin/collection/contractdetail/${row.getValue('id')}`}>
-          <IoEyeOutline className="text-lg text-black" />
+          <LuEye className="text-lg text-black" />
         </Link>
       </div>
     ),
@@ -270,7 +270,7 @@ export default function Collection() {
           </ButtonPrimary>
         ) : (
           <Link href={'/admin/collection/createcollection'}>
-            <ButtonPrimary className="ml-auto flex items-center gap-2 border-[1px] border-gray-400 bg-transparent font-bold text-gray-600">
+            <ButtonPrimary className="ml-auto flex items-center gap-2 border-[1px] border-gray-400 bg-transparent font-bold text-gray-600 hover:bg-primary-50 hover:text-white">
               <BiPlusCircle className="text-2xl" />
               Tạo mục
             </ButtonPrimary>

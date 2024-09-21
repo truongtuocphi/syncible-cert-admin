@@ -33,7 +33,7 @@ const Sidebar = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-white px-3 text-gray-800 shadow-md 2xl:w-80">
+    <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-white px-3 text-gray-800 shadow-md">
       <div>
         <div className="flex items-center justify-start p-4">
           <Link href={'/admin'} className="h-auto w-auto">

@@ -15,7 +15,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import Link from 'next/link';
-import { BiCollection, BiSearch } from 'react-icons/bi';
+import { BiCollection, BiPlusCircle, BiSearch } from 'react-icons/bi';
 import { IoEyeOutline } from 'react-icons/io5';
 import { RiShareBoxLine } from 'react-icons/ri';
 import { useAccount } from 'wagmi';
@@ -270,7 +270,10 @@ export default function Collection() {
           </ButtonPrimary>
         ) : (
           <Link href={'/admin/collection/createcollection'}>
-            <ButtonPrimary className="ml-auto text-white">Tạo mục</ButtonPrimary>
+            <ButtonPrimary className="ml-auto flex items-center gap-2 border-[1px] border-gray-400 bg-transparent font-bold text-gray-600">
+              <BiPlusCircle className="text-2xl" />
+              Tạo mục
+            </ButtonPrimary>
           </Link>
         )}
       </div>

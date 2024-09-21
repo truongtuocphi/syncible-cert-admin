@@ -132,13 +132,15 @@ const CreateCollection: React.FC = () => {
 
   return (
     <div className="space-y-6 rounded-lg bg-white p-6">
-      <h1 className="text-2xl font-semibold text-gray-600">Create ERC-721 Collection</h1>
+      <h1 className="text-2xl font-semibold text-gray-600">Tạo mục quản lý lưu trữ</h1>
       <div className="flex space-x-6">
         <form onSubmit={handleSubmit} className="w-full space-y-6">
           <div className="flex items-center justify-between gap-4">
             <div className="w-1/2">
-              <label className="block text-base font-medium text-gray-900">Logo Image</label>
-              <p className="text-xs text-gray-400">Update your logo collection.</p>
+              <label className="block text-base font-medium text-gray-900">
+                Hình ảnh biểu tượng
+              </label>
+              <p className="text-xs text-gray-400">Cập nhật bộ sưu tập logo của bạn.</p>
             </div>
             <div className="flex w-1/2 items-center gap-4">
               {previewImage ? (
@@ -171,7 +173,7 @@ const CreateCollection: React.FC = () => {
                     className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-500 hover:bg-gray-100"
                   >
                     <BiImageAdd className="text-2xl text-black" />
-                    Choose file
+                    Chọn tệp
                   </label>
                   {fileLogoImage && `${fileLogoImage?.slice(0, 4)}...${fileLogoImage?.slice(-4)}`}
                 </div>
@@ -180,12 +182,12 @@ const CreateCollection: React.FC = () => {
           </div>
           <div className="flex items-center gap-4 space-y-2">
             <div className="w-1/2">
-              <label className="block text-base font-medium text-gray-900">Banner Image</label>
+              <label className="block text-base font-medium text-gray-900">Hình ảnh biểu ngữ</label>
               <p className="text-xs text-gray-400">
-                This image will appear at the top of your collection page. Avoid including too much
-                text in this banner image, as the dimension changes on different devices.
-                Recommended size: 1400 x 400 px. Supported formats: JPG, PNG, SVG. Maximum size: 3
-                MB.
+                Hình ảnh này sẽ xuất hiện ở đầu trang bộ sưu tập của bạn. Tránh bao gồm quá nhiều
+                văn bản trong hình ảnh biểu ngữ này khi kích thước thay đổi trên các thiết bị khác
+                nhau. Kích thước đề xuất: 1400 x 400 px. Các định dạng được hỗ trợ: JPG, PNG, SVG.
+                Kích thước tối đa: 3 MB.
               </p>
             </div>
             <div
@@ -212,7 +214,7 @@ const CreateCollection: React.FC = () => {
               ) : (
                 <div className="flex flex-col items-center">
                   <FaImage className="text-3xl text-gray-500" />
-                  <p className="mt-2 text-base text-gray-500">Drag & drop or click to upload</p>
+                  <p className="mt-2 text-base text-gray-500">Kéo và thả hoặc nhấp để tải lên</p>
                   <input
                     type="file"
                     accept="image/*"
@@ -226,9 +228,9 @@ const CreateCollection: React.FC = () => {
           </div>
           <div className="flex items-center gap-4 space-y-2">
             <div className="w-1/2">
-              <label className="block text-base font-medium text-gray-900">Display Name</label>
+              <label className="block text-base font-medium text-gray-900">Tên hiển thị</label>
               <p className="text-xs text-gray-400">
-                This is display name for collection on your store.
+                Đây là tên hiển thị cho bộ sưu tập trên mục quản lý của bạn.
               </p>
             </div>
             <div className="w-1/2">
@@ -247,9 +249,11 @@ const CreateCollection: React.FC = () => {
           </div>
           <div className="flex items-center gap-4 space-y-2">
             <div className="w-1/2">
-              <label className="block text-base font-medium text-gray-900">Contract Symbol</label>
+              <label className="block text-base font-medium text-gray-900">
+                Biểu tượng hợp đồng
+              </label>
               <p className="text-xs text-gray-400">
-                This contract symbol can&apos;t be changed in the future.
+                Biểu tượng hợp đồng này không được thay đổi trong tương lai.
               </p>
             </div>
             <div className="w-1/2">
@@ -265,8 +269,8 @@ const CreateCollection: React.FC = () => {
           </div>
           <div className="flex items-start gap-4 space-y-2">
             <div className="w-1/2">
-              <label className="block text-base font-medium text-gray-900">Description</label>
-              <p className="text-xs text-gray-400">A detailed description of your collection.</p>
+              <label className="block text-base font-medium text-gray-900">Mô tả</label>
+              <p className="text-xs text-gray-400">Một mô tả chi tiết về bộ sưu tập của bạn.</p>
             </div>
             <div className="w-1/2">
               <textarea
@@ -285,13 +289,15 @@ const CreateCollection: React.FC = () => {
               <DrawerTrigger asChild>
                 <ButtonPrimary className="flex items-center gap-2 border-[0.5px] border-gray-200 bg-transparent text-gray-800 hover:bg-primary-50 hover:text-white">
                   <LuEye className="text-lg" />
-                  Preview
+                  Bản xem thử
                 </ButtonPrimary>
               </DrawerTrigger>
               <DrawerContent className="mx-auto h-[80%] w-full rounded-lg">
                 <div className="mx-auto h-full w-[70%] text-gray-700">
                   <DrawerHeader>
-                    <DrawerTitle className="text-center text-2xl font-bold">Preview</DrawerTitle>
+                    <DrawerTitle className="text-center text-2xl font-bold">
+                      Bản xem thử
+                    </DrawerTitle>
                   </DrawerHeader>
                   <ScrollArea className="h-[80%] w-full rounded-md bg-gray-100 pb-4">
                     <div className="h-fit w-full rounded-lg bg-gray-100 p-5">
@@ -328,12 +334,12 @@ const CreateCollection: React.FC = () => {
                             <div className="flex items-center justify-center gap-5">
                               <div className="text-center">
                                 <span className="text-base font-bold text-black">0</span>
-                                <span className="text-base text-gray-600">Items</span>
+                                <span className="text-base text-gray-600">Chứng chỉ</span>
                               </div>
 
                               <div className="text-center">
                                 <span className="text-base font-bold text-black">1 </span>
-                                <span className="text-base text-gray-600">Owner</span>
+                                <span className="text-base text-gray-600">Chủ sở hữu</span>
                               </div>
                             </div>
                             <p className="mt-4 text-base text-gray-600">{description}</p>
@@ -352,18 +358,13 @@ const CreateCollection: React.FC = () => {
                         ) : (
                           <div className="mt-24 text-center">
                             <p className="text-base font-semibold text-gray-600">
-                              Preview of your collection
+                              Xem trước mục quản lý của bạn
                             </p>
                           </div>
                         )}
                       </div>
                     </div>
                   </ScrollArea>
-                  <DrawerFooter>
-                    <DrawerClose asChild>
-                      <ButtonPrimary className="mt-4 text-white">Đóng</ButtonPrimary>
-                    </DrawerClose>
-                  </DrawerFooter>
                 </div>
               </DrawerContent>
             </Drawer>
@@ -374,7 +375,7 @@ const CreateCollection: React.FC = () => {
               disabled={isLoading}
             >
               <BiCollection className="text-lg" />
-              {isLoading ? 'Creating...' : 'Create Collection'}
+              {isLoading ? 'Đang tạo...' : 'Tạo mục quản lý'}
             </ButtonPrimary>
           </div>
         </form>

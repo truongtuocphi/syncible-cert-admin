@@ -1,12 +1,13 @@
 /** @type {import('next').NextConfig} */
-import createNextIntlPlugin from 'next-intl/plugin';
 import createMDX from '@next/mdx';
+import createNextIntlPlugin from 'next-intl/plugin';
+import rehypeSlug from 'rehype-slug';
 
 const withNextIntl = createNextIntlPlugin();
 const withMDX = createMDX({
   options: {
     remarkPlugins: [],
-    rehypePlugins: [],
+    rehypePlugins: [rehypeSlug],
     // Additional MDX-specific configurations
   },
 });

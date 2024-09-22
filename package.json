@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.6.0",
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@next/mdx": "^14.2.13",
     "@pinata/sdk": "^2.1.0",
     "@pqina/pintura": "^8.83.3",
     "@pqina/react-pintura": "^9.0.3",
@@ -68,6 +71,7 @@
     "react-icons": "^5.2.1",
     "react-resizable-panels": "^2.0.19",
     "react-toastify": "^10.0.5",
+    "rehype-slug": "^6.0.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",

@@ -21,7 +21,19 @@ export default function Blogs() {
   const pathname = usePathname();
   const locale = useLocale();
   const [toggleBlogNav, setToggleBlogNav] = useState(false);
-  const [Content, setContent] = useState<React.ComponentType | null>(null);
+  const [Content, setContent] = useState<any>(null);
+
+  function CustomH2({ children }: { children: React.ReactNode }) {
+    return <div className="text-2xl font-bold pb-4">{children}</div>;
+  }
+
+  function CustomP({ children }: { children: React.ReactNode }) {
+    return <div className="text-lg text-[#6C6D71] pb-4">{children}</div>;
+  };
+  const overrideComponents = {
+    h2: CustomH2,
+    p: CustomP,
+  };
 
   useEffect(() => {
     const loadContent = async () => {
@@ -159,7 +171,7 @@ export default function Blogs() {
                       </div>
                     </div>
                   </div>
-                  <div>{Content && <Content />}</div>
+                  <div>{Content && <Content components={overrideComponents} />}</div>
                 </div>
               </div>
             </div>

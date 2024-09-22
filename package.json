@@ -72,6 +72,7 @@
     "react-resizable-panels": "^2.0.19",
     "react-toastify": "^10.0.5",
     "rehype-slug": "^6.0.0",
+    "remark-gfm": "^4.0.0",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",

@@ -93,13 +93,30 @@
   },
   "BlogPage": {
     "header": "Syncible Certificate và Syncible Qualified Batch là gì?",
+    "nav_select_placeholder": {
+      "label" : "Trên trang này"
+    },
+    "author_profile": {
+      "name": "Ryan",
+      "role": "Thành viên"
+    },
+    "blog_info" : {
+      "date_created": {
+        "label" : "Ngày tạo:",
+        "value" : "2024-01-01"
+      },
+      "read_time": { 
+        "label" : "Thời gian đọc:",
+        "value" : "8 phút"
+      }
+    },
     "navigation": {
       "link_1": {
         "label": "Syncible Certificate là gì?",
         "href": "#syncible-certificate"
       },
       "link_2": {
-        "label": "Credential Comparison Table",
+        "label": "Bảng So Sánh Chứng Chỉ",
         "href": "#credential-comparison-table"
       },
       "link_3": {
@@ -107,11 +124,11 @@
         "href": "#syncible-qualified-batch"
       },
       "link_4": {
-        "label": "Design a Syncible Certificate template",
+        "label": "Thiết kế mẫu Syncible Certificate",
         "href": "#design-a-syncible-certificate-template"
       },
       "link_5": {
-        "label": "Why Switch to Syncible for Custom Digital Certificates?",
+        "label": "Tại sao nên chuyển sang Syncible để tạo chứng chỉ kỹ thuật số?",
         "href": "#why-switch-to-syncible-for-custom-digital-certificates"
       }
     }

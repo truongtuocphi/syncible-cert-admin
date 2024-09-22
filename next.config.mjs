@@ -2,11 +2,12 @@
 import createMDX from '@next/mdx';
 import createNextIntlPlugin from 'next-intl/plugin';
 import rehypeSlug from 'rehype-slug';
+import remaerkGfm from 'remark-gfm';
 
 const withNextIntl = createNextIntlPlugin();
 const withMDX = createMDX({
   options: {
-    remarkPlugins: [],
+    remarkPlugins: [remaerkGfm],
     rehypePlugins: [rehypeSlug],
     // Additional MDX-specific configurations
   },

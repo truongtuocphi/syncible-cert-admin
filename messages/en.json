@@ -91,20 +91,25 @@
       }
     }
   },
-  "ExplorerPage": {
-    "header": "Find your certificate",
-    "input_1": {
-      "placeholder": "Your certificate code"
-    },
-    "input_2": {
-      "placeholder": "Your full name"
-    },
-    "search_button": {
-      "label": "Search"
-    }
-  },
   "BlogPage": {
     "header": "What is a Syncible Certificate and Syncible Qualified Batch?",
+    "nav_select_placeholder": {
+      "label" : "On this page"
+    },
+    "author_profile": {
+      "name": "Ryan",
+      "role": "Member"
+    },
+    "blog_info" : {
+      "date_created": {
+        "label" : "Date Created:",
+        "value" : "2024-01-01"
+      },
+      "read_time": { 
+        "label" : "Read Time:",
+        "value" : "8 minutes"
+      }
+    },
     "navigation": {
       "link_1": {
         "label": "What is a Syncible Certificate?",
@@ -126,6 +131,18 @@
         "label": "Why Switch to Syncible for Custom Digital Certificates?",
         "href": "#why-switch-to-syncible-for-custom-digital-certificates"
       }
+    }
+  },
+  "ExplorerPage": {
+    "header": "Find your certificate",
+    "input_1": {
+      "placeholder": "Your certificate code"
+    },
+    "input_2": {
+      "placeholder": "Your full name"
+    },
+    "search_button": {
+      "label": "Search"
     }
   },
   "Localization": {

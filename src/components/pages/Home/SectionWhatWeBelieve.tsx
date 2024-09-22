@@ -124,8 +124,8 @@ export default function SectionWhatWeBelieve() {
           </div>
           <div className="w-full basis-1/2 lg:basis-[55%]">
             <div className="flex flex-col gap-4 antialiased">
-              <h1 className="text-[2rem] font-[700]">{t('header')}</h1>
-              <div className="font-inter w-full text-wrap text-[#6C6D71]">
+              <h1 className="text-[2rem] font-bold">{t('header')}</h1>
+              <div className="w-full text-wrap text-lg font-medium text-[#6C6D71]">
                 {t.rich('content', {
                   breakline: () => (
                     <>

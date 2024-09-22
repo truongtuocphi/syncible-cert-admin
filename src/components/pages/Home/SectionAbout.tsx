@@ -53,8 +53,8 @@ export default function SectionAbout() {
       <div className="flex flex-col items-center gap-8 rounded-t-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 px-4 py-[4rem] sm:rounded-t-[6.25rem] sm:px-16 sm:py-[6.6rem] lg:flex-row">
         <div ref={leftRef} className="w-full basis-1/2">
           <div className="flex flex-col gap-4 antialiased">
-            <h1 className="text-[2rem] font-[700]">{t('header')}</h1>
-            <div className="font-inter w-full text-wrap text-[#6C6D71] lg:w-[85%]">
+            <h1 className="text-[2rem] font-bold">{t('header')}</h1>
+            <div className="w-full text-wrap text-lg font-medium text-[#6C6D71] lg:w-[85%]">
               {t('content')}
             </div>
           </div>

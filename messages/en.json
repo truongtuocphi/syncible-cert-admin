@@ -22,7 +22,7 @@
       "content": "Syncible aims to create a comprehensive shift in the recognition of academic achievements, transcending geographical boundaries and administrative procedures, allowing students to transparently and reliably demonstrate their skills to employers and educational institutions."
     },
     "faq_section": {
-      "header": "Frequently Asked Questions",
+      "header": "FAQs",
       "question_1": {
         "header": "What is Blockchain?",
         "answer": "Blockchain is a secure, decentralized digital ledger used to record economic transactions or virtually any valuable data. Once data is written to the blockchain, it becomes permanent and cannot be altered by any party. Syncible utilizes the Bitcoin blockchain to store permanent records of credentials, allowing issuers to verify these records on the blockchain and reduce the risk of credential fraud."

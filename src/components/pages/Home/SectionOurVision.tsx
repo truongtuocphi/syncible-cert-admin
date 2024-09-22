@@ -52,7 +52,9 @@ export default function SectionOurVision() {
         <div className="w-full basis-1/2" ref={leftRef}>
           <div className="flex flex-col gap-4 antialiased">
             <h1 className="text-[2rem] font-[700]">{t('header')}</h1>
-            <div className="font-inter w-full text-wrap lg:w-[85%] text-[#6C6D71]">{t('content')}</div>
+            <div className="w-full text-wrap text-lg font-medium text-[#6C6D71] lg:w-[85%]">
+              {t('content')}
+            </div>
           </div>
         </div>
         <div className="h-full w-full basis-1/2" ref={rightRef}>

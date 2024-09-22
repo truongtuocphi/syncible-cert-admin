@@ -135,8 +135,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
-  console.log(fontFamily);
-
   return (
     <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
       <div className="flex flex-col justify-between md:flex-row">
@@ -184,7 +182,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
             </p>
             <CopyButton textToCopy={dataContract[0]} />
             <Link href={`https://polygonscan.com/address/${dataContract[0]}`} target="_blank">
-              <RiShareBoxLine className="text-primary-50" />
+              <RiShareBoxLine className="text-black" />
             </Link>
           </div>
         </div>

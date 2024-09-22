@@ -16,6 +16,10 @@ const getCustomLabel = (path: string) => {
       return 'Thư Mục Lưu Trữ';
     case 'customized':
       return 'Tùy Chỉnh Mẫu';
+    case 'vi':
+      return '';
+    case 'en':
+      return '';
     default:
       return path;
   }

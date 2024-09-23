@@ -12,6 +12,7 @@ import ContractData from '@/components/pages/admin/ContractData';
 import CopyAddressButton from '@/components/pages/admin/CopyAddressButton';
 import { CollectionData } from '@/types/function';
 import fetchDataCollectionById from '@/utils/fetchDataCollectionById';
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 
 export default function CollectionDetail({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<CollectionData | null>(null);
@@ -41,6 +42,9 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
 
   return (
     <>
+      <div className="mb-4">
+        <Breadcrumb displayName={data.displayName} />
+      </div>
       <div className="flex items-center gap-2">
         <Link href={`/admin/collection/`}>
           <ButtonPrimary className="rounded-lg py-2">

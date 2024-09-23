@@ -24,6 +24,7 @@ import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
 import { BiImageAdd } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -237,6 +238,9 @@ const Experience = () => {
 
   return (
     <>
+      <div className='mb-4'>
+        <Breadcrumb />
+      </div>
       {typePage == null ? (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       ) : (

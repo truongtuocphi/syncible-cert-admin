@@ -7,7 +7,12 @@ import { MdNavigateNext } from 'react-icons/md';
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 import getCustomLabel from '@/utils/labelCustomization';
 
-const Breadcrumb = () => {
+interface propData {
+  displayName?: string;
+  nameCertificate?: string;
+}
+
+const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
   const pathname = usePathname();
 
   const paths = pathname.split('/').filter((path) => path);
@@ -26,9 +31,9 @@ const Breadcrumb = () => {
 
       let label;
       if (path.length === 42) {
-        label = 'Quản Lý Chi Tiết';
-      } else if(path.length === 46) {
-        label = 'Chứng Chỉ'
+        label = displayName || '';
+      } else if (path.length === 46) {
+        label = nameCertificate || '';
       } else {
         label = getCustomLabel(path);
       }
@@ -40,22 +45,22 @@ const Breadcrumb = () => {
 
   return (
     <nav aria-label="breadcrumb">
-      <ol className="flex space-x-2 text-gray-500">
+      <ol className="flex text-gray-400">
         {breadcrumbItems.map((item, index) => (
-          <li key={item.href} className="flex items-center">
+          <li key={item.href} className="flex items-center text-xs">
             {index < breadcrumbItems.length - 1 ? (
               <div className="flex items-center gap-2">
                 {item.label && (
                   <>
-                    <Link href={item.href} className="line-clamp-1 text-sm">
+                    <Link href={item.href} className="line-clamp-1 text-xs hover:text-gray-800">
                       {capitalizeFirstLetter(item.label)}
                     </Link>
-                    <MdNavigateNext className="text-xl" />
+                    <MdNavigateNext className="mr-2 text-xl" />
                   </>
                 )}
               </div>
             ) : (
-              <Link href={item.href} className="text-sm text-gray-700">
+              <Link href={item.href} className="text-xs text-gray-400 hover:text-gray-800">
                 {capitalizeFirstLetter(item.label)}
               </Link>
             )}

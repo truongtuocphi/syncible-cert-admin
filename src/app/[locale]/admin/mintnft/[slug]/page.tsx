@@ -7,17 +7,21 @@ import { FaArrowLeft } from 'react-icons/fa';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 
 const IdExperience = ({ params }: { params: { slug: string } }) => {
   const [dataContract, setDataContract] = useState(null);
   const slugPost = params.slug;
 
-  const handleDataContract = (data: any) => {
+  const handleDataContract = (data[]: any) => {
     setDataContract(data);
   };
 
   return (
     <>
+      <div className="mb-4">
+        <Breadcrumb />
+      </div>
       <div className="flex items-center gap-2">
         <Link href={`/admin/collection/collectiondetail/${dataContract}`}>
           <ButtonPrimary className="rounded-lg bg-blue-500">

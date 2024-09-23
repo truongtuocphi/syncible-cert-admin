@@ -44,6 +44,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Input } from '@/components/ui/input';
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 
 setPlugins(plugin_crop, plugin_filter, plugin_annotate, plugin_sticker);
 
@@ -169,6 +170,9 @@ export default function DefineTemplate() {
 
   return (
     <>
+      <div className="mb-4">
+        <Breadcrumb />
+      </div>
       <div className="mb-4 flex w-full items-center justify-between">
         <h2 className="text-2xl font-bold">Tùy chỉnh mẫu</h2>
         <div className="flex items-center gap-6">

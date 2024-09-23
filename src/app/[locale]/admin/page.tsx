@@ -1,3 +1,4 @@
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import Card from '@/components/pages/admin/Card';
 import { BiFile } from 'react-icons/bi';
 import { BiCustomize } from 'react-icons/bi';
@@ -30,7 +31,8 @@ const listCard = [
 const HomeAdmin = () => {
   return (
     <div className="flex w-full flex-col">
-      <div>
+      <Breadcrumb />
+      <div className="mt-3">
         <h1 className="mb-3 text-3xl font-bold text-gray-700">Chào mừng bạn đến với Syncible</h1>
         <p className="text-sm font-semibold text-gray-500">
           Tạo chứng chỉ của riêng bạn một cách dễ dàng hơn với các bước bên dưới

@@ -69,7 +69,7 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
         <>
           {data.map((item, index) => {
             return (
-              <Link href={`/admin/collection/collectiondetail/${item[3]}/${slug}`} key={index}>
+              <Link href={`/admin/collection/collectiondetail/${slug}/${item[3]}`} key={index}>
                 <div className="h-[170px] w-full sm:h-[270px] lg:h-[370px] 2xl:h-[400px]">
                   <CertificatePreview
                     previewImage={item[4][1] || 'default-image-url'}

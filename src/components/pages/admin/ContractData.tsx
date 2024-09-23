@@ -10,7 +10,7 @@ import CertificatePreview from './CertificatePreview';
 
 interface Props {
   collectionContractAddress: string;
-  slug: string;
+  slug?: string;
   // eslint-disable-next-line no-unused-vars
   onItemsCountChange: (count: number) => void;
 }

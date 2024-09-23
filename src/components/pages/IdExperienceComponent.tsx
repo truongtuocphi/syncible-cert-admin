@@ -58,6 +58,10 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         setData(result);
         setName(result.fullname);
 
+        if (name && onDataNameCertificate) {
+          onDataNameCertificate(name);
+        }
+
         const attributes = result.attributes;
 
         const getCertificateID = attributes.find(
@@ -133,10 +137,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   useEffect(() => {
     if (dataContract.length > 0 && onDataContract) {
       onDataContract(dataContract[0]);
-    }
-
-    if (name && onDataNameCertificate) {
-      onDataNameCertificate(name);
     }
   }, [dataContract, onDataContract]);
 

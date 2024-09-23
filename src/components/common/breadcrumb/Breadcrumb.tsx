@@ -35,15 +35,15 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
         label = displayName || '';
       }
 
-      // Thêm nhãn cho path.length === 46
-      if (path.length === 46) {
-        label = nameCertificate || 'abc';
-      } else {
+      // Chỉ thêm nhãn cho path.length === 46 nếu nameCertificate đã được load
+      if (path.length === 46 && nameCertificate) {
+        label = nameCertificate;
+      } else if (label === '') {
         label = getCustomLabel(path);
       }
 
-      // Kết hợp và cắt nhãn nếu cần
-      const truncatedLabel = label.length > 45 ? `${label.slice(0, 3)}...${label.slice(-3)}` : label;
+      // Truncated label nếu cần
+      const truncatedLabel = label.length > 45 ? `${displayName}` : `${nameCertificate}`;
 
       return { label: truncatedLabel, href };
     });

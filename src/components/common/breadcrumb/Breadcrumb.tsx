@@ -28,20 +28,24 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
     })
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
+      let labels: string[] = [];
 
-      let label = '';
+      // Thêm nhãn cho path.length === 46
       if (path.length === 46) {
-        label += displayName ? `${displayName} ` : '';
+        labels.push(nameCertificate || 'abc');
       }
 
+      // Thêm nhãn cho path.length === 42
       if (path.length === 42) {
-        label += displayName || '';
+        labels.push(displayName || '');
       } else {
-        label += getCustomLabel(path);
+        labels.push(getCustomLabel(path));
       }
 
-      // const truncatedLabel = path.length > 45 ? `${path.slice(0, 3)}...${path.slice(-3)}` : label;
-      const truncatedLabel = '';
+      // Kết hợp các nhãn thành một chuỗi
+      const label = labels.join(' ').trim();
+      const truncatedLabel =
+        label.length > 45 ? `${label.slice(0, 3)}...${label.slice(-3)}` : label;
 
       return { label: truncatedLabel, href };
     });

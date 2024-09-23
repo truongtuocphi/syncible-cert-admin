@@ -26,7 +26,9 @@ const Breadcrumb = () => {
 
       let label;
       if (path.length === 42) {
-        label = 'Quản Lý Chi Tiết'; // Sử dụng nameContract nếu path có độ dài 42
+        label = 'Quản Lý Chi Tiết';
+      } else if(path.length === 46) {
+        label = 'Chứng Chỉ'
       } else {
         label = getCustomLabel(path);
       }

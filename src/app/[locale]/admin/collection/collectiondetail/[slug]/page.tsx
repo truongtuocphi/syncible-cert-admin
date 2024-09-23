@@ -86,7 +86,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
                 <span className="text-base text-gray-600">Owner</span>
               </div>
             </div>
-        <p className="mt-4 text-base text-gray-600">{data.description}</p>
+            <p className="mt-4 text-base text-gray-600">{data.description}</p>
           </div>
         </div>
 

@@ -1,18 +1,22 @@
 'use client';
 
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { useSearchParams } from 'next/navigation'; // Import hook from Next.js
 
 const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
   const [dataContract, setDataContract] = useState(null);
   const [nameCertificate, setNameCertificate] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const slugPost = params.mintSlug;
+
+  const searchParams = useSearchParams();
+  const someQueryParam = searchParams.get('nameCollection');
 
   const handleDataContract = (data: any) => {
     setDataContract(data);
@@ -22,10 +26,21 @@ const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
     setNameCertificate(dataName);
   };
 
+  useEffect(() => {
+    if (someQueryParam) {
+      setDisplayName(someQueryParam);
+    }
+  }, [someQueryParam]);
+
+  console.log('nameCertificate', nameCertificate);
+
   return (
     <>
       <div className="mb-4">
-        <Breadcrumb nameCertificate={nameCertificate} />
+        <Breadcrumb
+          nameCertificate={nameCertificate?.split('Certificate for')[1]?.trim() || 'Loading...'}
+          displayName={displayName}
+        />
       </div>
       <div className="flex items-center gap-2">
         <Link href={`/admin/collection/collectiondetail/${dataContract}`}>

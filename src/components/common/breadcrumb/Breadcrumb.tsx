@@ -28,21 +28,19 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
     })
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
+
       let label = '';
 
-      // Thêm nhãn cho path.length === 42
       if (path.length === 42) {
-        label = displayName || '';
+        label = displayName || 'Loadding...';
       }
 
-      // Thêm nhãn cho path.length === 46
-      if (path.length === 46) {
-        label = nameCertificate || 'abc';
+      if (path.length === 46 && nameCertificate) {
+        label = nameCertificate || 'Loading...';
       } else {
         label = getCustomLabel(path);
       }
 
-      // Kết hợp và cắt nhãn nếu cần
       const truncatedLabel = label.length > 41 ? `${displayName}` : label;
 
       return { label: truncatedLabel, href };

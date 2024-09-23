@@ -57,10 +57,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
 
         setData(result);
         setName(result.fullname);
-
-        if (name && onDataNameCertificate) {
-          onDataNameCertificate(name);
-        }
+        onDataNameCertificate && onDataNameCertificate(result.fullname);
 
         const attributes = result.attributes;
 

@@ -99,6 +99,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             collectionContractAddress={slugPost}
             onItemsCountChange={handleItemsCountChange}
             slug={slugPost}
+            displayName={data.displayName}
           />
         </div>
       </div>

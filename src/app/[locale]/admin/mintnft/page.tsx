@@ -400,6 +400,12 @@ const Experience = () => {
                     <option value="Noto Serif">Noto Serif</option>
                     <option value="Crimson Text">Crimson Text</option>
                     <option value="Great Vibes">Great Vibes</option>
+                    <option value="Dancing Script">Dancing Script</option>
+                    <option value="EB Garamond">EB Garamond</option>
+                    <option value="Montserrat">Montserrat</option>
+                    <option value="Open Sans">Open Sans</option>
+                    <option value="Playfair Display">Playfair Display</option>
+                    <option value="Roboto">Roboto</option>
                   </select>
                 </div>
 

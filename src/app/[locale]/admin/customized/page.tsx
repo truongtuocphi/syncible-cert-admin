@@ -255,6 +255,11 @@ export default function DefineTemplate() {
               ['Noto Serif', 'Noto Serif'],
               ['Crimson Text', 'Crimson Text'],
               ['Great Vibes', 'Great Vibes'],
+              ['EB Garamond', 'EB Garamond'],
+              ['Montserrat', 'Montserrat'],
+              ['Open Sans', 'Open Sans'],
+              ['Playfair Display', 'Playfair Display'],
+              ['Roboto', 'Roboto'],
               ...createDefaultFontFamilyOptions(),
             ],
           })}

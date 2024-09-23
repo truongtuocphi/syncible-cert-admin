@@ -10,11 +10,12 @@ import CertificatePreview from './CertificatePreview';
 
 interface Props {
   collectionContractAddress: string;
+  slug: string;
   // eslint-disable-next-line no-unused-vars
   onItemsCountChange: (count: number) => void;
 }
 
-const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCountChange }) => {
+const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCountChange, slug }) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -68,7 +69,7 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
         <>
           {data.map((item, index) => {
             return (
-              <Link href={`/admin/mintnft/${item[3]}`} key={index}>
+              <Link href={`/admin/collection/collectiondetail/${slug}/${item[3]}`} key={index}>
                 <div className="h-[170px] w-full sm:h-[270px] lg:h-[370px] 2xl:h-[400px]">
                   <CertificatePreview
                     previewImage={item[4][1] || 'default-image-url'}

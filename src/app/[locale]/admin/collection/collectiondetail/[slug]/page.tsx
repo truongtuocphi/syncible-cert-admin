@@ -94,6 +94,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
           <ContractData
             collectionContractAddress={slugPost}
             onItemsCountChange={handleItemsCountChange}
+            slug={slugPost}
           />
         </div>
       </div>

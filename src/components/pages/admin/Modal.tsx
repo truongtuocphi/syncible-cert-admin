@@ -58,7 +58,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
         <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
           {datCard.map((dataCard, index) => (
             <div
-              className={`flex rotate-[259deg] cursor-pointer flex-col justify-between rounded-lg border bg-gradient-to-r from-[#FFEBE2] to-[#E49D6B] p-4 text-center shadow-lg blur-[50px] filter transition ${
+              className={`flex rotate-[259deg] cursor-pointer flex-col justify-between rounded-lg border p-4 text-center ${
                 selectedOption === index ? 'border-indigo-500 bg-indigo-50' : 'hover:bg-gray-50'
               }`}
               key={index}

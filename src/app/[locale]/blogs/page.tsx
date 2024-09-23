@@ -182,7 +182,7 @@ export default function Blogs() {
                         <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
                       </div>
                     </div>
-                    <div className="sticky top-[9rem] flex flex-col gap-2 text-base font-bold text-[#A2A3A9]">
+                    <div className="sticky top-[9rem] flex flex-col gap-6 text-base font-bold text-[#A2A3A9]">
                       {keys.map((key) => (
                         <Link
                           key={key}

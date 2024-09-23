@@ -163,7 +163,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
         <div className="flex w-full flex-col items-start md:w-1/2">
           <h4 className="text-xl font-bold">Chain Information</h4>
           <p className="mt-2">{`Blockchain: ${blockchainType}`}</p>
-          <div className="mt-2 flex items-center gap-2">
+          {/* <div className="mt-2 flex items-center gap-2">
             <p>
               {`Token ID: `}
               <span className="text-primary-50 underline">
@@ -171,7 +171,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
               </span>
             </p>
             <CopyButton textToCopy={slugPost} />
-          </div>
+          </div> */}
           <div className="mt-2 flex items-center gap-2">
             <p>
               {`Contract address: `}

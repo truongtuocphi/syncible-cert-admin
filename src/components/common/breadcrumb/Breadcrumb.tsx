@@ -43,7 +43,7 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
       }
 
       // Kết hợp và cắt nhãn nếu cần
-      const truncatedLabel = label.length > 45 ? `${displayName}` : label;
+      const truncatedLabel = label.length > 41 ? `${displayName}` : label;
 
       return { label: truncatedLabel, href };
     });

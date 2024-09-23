@@ -85,6 +85,26 @@ const predefinedTemplates = [
     imageUrl: 'QmV8R2Dz1Y7GKNSj2bJ5keN4X4LUwJuRpMbs3sxiws1Kso',
     name: 'Certificate 7',
   },
+  {
+    id: 8,
+    imageUrl: 'Qmf2oFMiKV884XY2bGFSH7KjgcQGhHHK472xTBUmp6ELzd',
+    name: 'Certificate 8',
+  },
+  {
+    id: 9,
+    imageUrl: 'Qmcw543Aor4DGVp4GYirxZBmS4e3Xef4wi1vsqDDs6cM4m',
+    name: 'Certificate 9',
+  },
+  {
+    id: 10,
+    imageUrl: 'Qmez1NiNoeKiKhdLiQpRwgstubsGf43yCRXYmwC8pVRN9G',
+    name: 'Certificate 10',
+  },
+  {
+    id: 11,
+    imageUrl: 'QmTPnETa5dMbP28mZc2gQWaLCJXHxViuGpynWdsgHuM35R',
+    name: 'Certificate 11',
+  },
 ];
 
 const editorDefaults = getEditorDefaults({

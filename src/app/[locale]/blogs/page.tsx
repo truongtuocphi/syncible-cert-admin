@@ -101,7 +101,7 @@ export default function Blogs() {
       <div className="fixed top-0 z-30 w-screen md:mt-6">
         <Navbar />
       </div>
-      <div className={`${montserrat.className}  z-20 flex flex-col items-center gap-10`}>
+      <div className={`${montserrat.className} z-20 flex flex-col items-center gap-10`}>
         <div className="w-full max-w-[90rem]">
           <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
             <div className="flex flex-col px-4 pb-4 md:px-8 md:pb-10 xl:px-32">

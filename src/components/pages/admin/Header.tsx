@@ -13,7 +13,11 @@ import UserInfo from '@/components/pages/admin/UserInfo';
 import { Skeleton } from '@/components/ui/skeleton';
 import { auth, onAuthStateChanged } from '@/lib/firebase';
 
-const Header = () => {
+type propNameBread = {
+  displayName?: string;
+};
+
+const Header = ({ displayName }: propNameBread) => {
   const { open } = useWeb3Modal();
   const { address, isConnected } = useAccount();
 

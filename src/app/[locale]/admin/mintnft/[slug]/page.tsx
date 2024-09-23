@@ -13,7 +13,7 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
   const [dataContract, setDataContract] = useState(null);
   const slugPost = params.slug;
 
-  const handleDataContract = (data[]: any) => {
+  const handleDataContract = (data: any) => {
     setDataContract(data);
   };
 

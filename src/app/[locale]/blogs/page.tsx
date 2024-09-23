@@ -29,7 +29,7 @@ export default function Blogs() {
   }
 
   function CustomP({ children }: { children: React.ReactNode }) {
-    return <div className="text-base text-[#6C6D71] 2xl:text-lg">{children}</div>;
+    return <div className="text-base text-[#6C6D71]">{children}</div>;
   }
 
   function CustomUl({ children }: { children: React.ReactNode }) {
@@ -37,7 +37,7 @@ export default function Blogs() {
   }
 
   function CustomLi({ children }: { children: React.ReactNode }) {
-    return <li className="ps-1 text-base text-[#6C6D71] 2xl:text-lg">{children}</li>;
+    return <li className="ps-1 text-base text-[#6C6D71]">{children}</li>;
   }
 
   function CustomTable({ children }: { children: React.ReactNode }) {
@@ -112,7 +112,7 @@ export default function Blogs() {
                 <SyncibleBanner className="aspect-[24/9] h-full w-full" />
               </div>
             </div>
-            <div className="flex flex-col gap-8 md:flex-row">
+            <div className="flex flex-col gap-12 md:flex-row">
               <div className="w-full overflow-hidden rounded-xl bg-white/50 text-[#A2A3A9] md:hidden">
                 <Button
                   className={clsx(

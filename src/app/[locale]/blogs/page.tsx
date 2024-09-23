@@ -29,7 +29,7 @@ export default function Blogs() {
   }
 
   function CustomP({ children }: { children: React.ReactNode }) {
-    return <div className="text-lg text-[#6C6D71]">{children}</div>;
+    return <div className="text-base text-[#6C6D71] 2xl:text-lg">{children}</div>;
   }
 
   function CustomUl({ children }: { children: React.ReactNode }) {
@@ -37,7 +37,7 @@ export default function Blogs() {
   }
 
   function CustomLi({ children }: { children: React.ReactNode }) {
-    return <li className="ps-1 text-lg text-[#6C6D71]">{children}</li>;
+    return <li className="ps-1 text-base text-[#6C6D71] 2xl:text-lg">{children}</li>;
   }
 
   function CustomTable({ children }: { children: React.ReactNode }) {
@@ -177,7 +177,7 @@ export default function Blogs() {
                       <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
                     </div>
                   </div>
-                  <div className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]">
+                  <div className="sticky top-[9rem] flex flex-col gap-2 text-base font-bold text-[#A2A3A9] 2xl:text-lg">
                     {keys.map((key) => (
                       <Link
                         key={key}
@@ -216,10 +216,14 @@ export default function Blogs() {
                         <div className="text-base font-medium text-[#A2A3A9]">
                           {t('blog_info.date_created.label')}
                         </div>
-                        <div className="text-lg font-medium">{t('blog_info.date_created.value')}</div>
+                        <div className="text-lg font-medium">
+                          {t('blog_info.date_created.value')}
+                        </div>
                       </div>
                       <div className="flex w-full flex-col gap-2">
-                        <div className="text-base font-medium text-[#A2A3A9]">{t('blog_info.read_time.label')}</div>
+                        <div className="text-base font-medium text-[#A2A3A9]">
+                          {t('blog_info.read_time.label')}
+                        </div>
                         <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
                       </div>
                     </div>

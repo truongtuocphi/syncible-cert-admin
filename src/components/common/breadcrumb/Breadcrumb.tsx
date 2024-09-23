@@ -28,24 +28,22 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
     })
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
-      let labels: string[] = [];
-
-      // Thêm nhãn cho path.length === 46
-      if (path.length === 46) {
-        labels.push(nameCertificate || 'abc');
-      }
+      let label = '';
 
       // Thêm nhãn cho path.length === 42
       if (path.length === 42) {
-        labels.push(displayName || '');
-      } else {
-        labels.push(getCustomLabel(path));
+        label = displayName || '';
       }
 
-      // Kết hợp các nhãn thành một chuỗi
-      const label = labels.join(' ').trim();
-      const truncatedLabel =
-        label.length > 45 ? `${label.slice(0, 3)}...${label.slice(-3)}` : label;
+      // Thêm nhãn cho path.length === 46
+      if (path.length === 46) {
+        label = nameCertificate || 'abc';
+      } else {
+        label = getCustomLabel(path);
+      }
+
+      // Kết hợp và cắt nhãn nếu cần
+      const truncatedLabel = label.length > 45 ? `${label.slice(0, 3)}...${label.slice(-3)}` : label;
 
       return { label: truncatedLabel, href };
     });

@@ -97,7 +97,7 @@ export default function Blogs() {
   };
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen max-w-[90rem]">
       <div className="fixed top-0 z-30 w-screen md:mt-6">
         <Navbar />
       </div>

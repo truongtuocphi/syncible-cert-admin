@@ -9,18 +9,23 @@ import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 
-const IdExperience = ({ params }: { params: { slug: string } }) => {
+const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
   const [dataContract, setDataContract] = useState(null);
-  const slugPost = params.slug;
+  const [nameCertificate, setNameCertificate] = useState('');
+  const slugPost = params.mintSlug;
 
   const handleDataContract = (data: any) => {
     setDataContract(data);
   };
 
+  const handleDataNameCertificate = (dataName: any) => {
+    setNameCertificate(dataName);
+  };
+
   return (
     <>
       <div className="mb-4">
-        <Breadcrumb />
+        <Breadcrumb nameCertificate={nameCertificate} />
       </div>
       <div className="flex items-center gap-2">
         <Link href={`/admin/collection/collectiondetail/${dataContract}`}>
@@ -30,7 +35,11 @@ const IdExperience = ({ params }: { params: { slug: string } }) => {
         </Link>
         <h2 className="text-2xl font-bold text-gray-600">Chi tiết chứng chỉ</h2>
       </div>
-      <IdExperienceComponent slugPost={slugPost} onDataContract={handleDataContract} />
+      <IdExperienceComponent
+        slugPost={slugPost}
+        onDataContract={handleDataContract}
+        onDataNameCertificate={handleDataNameCertificate}
+      />
     </>
   );
 };

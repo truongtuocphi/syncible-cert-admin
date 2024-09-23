@@ -23,9 +23,14 @@ if (!headerURL) {
 interface IdExperienceProps {
   slugPost: string;
   onDataContract?: (dataContract: any) => void;
+  onDataNameCertificate?: (name: any) => void;
 }
 
-const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataContract }) => {
+const IdExperienceComponent: React.FC<IdExperienceProps> = ({
+  slugPost,
+  onDataContract,
+  onDataNameCertificate,
+}) => {
   const [data, setData] = useState<any>(null);
   const [dataContract, setDataContract] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
@@ -128,6 +133,10 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({ slugPost, onDataCo
   useEffect(() => {
     if (dataContract.length > 0 && onDataContract) {
       onDataContract(dataContract[0]);
+    }
+
+    if (name && onDataNameCertificate) {
+      onDataNameCertificate(name);
     }
   }, [dataContract, onDataContract]);
 

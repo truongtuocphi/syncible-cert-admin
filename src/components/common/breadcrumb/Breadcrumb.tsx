@@ -29,11 +29,13 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
 
-      let label;
+      let label = '';
+      if (path.length === 46) {
+        label += displayName ? `${displayName} ` : '';
+      }
+
       if (path.length === 42) {
         label = displayName || '';
-      } else if (path.length === 46) {
-        label = nameCertificate || '';
       } else {
         label = getCustomLabel(path);
       }

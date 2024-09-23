@@ -160,8 +160,8 @@ export default function SectionBlogs() {
           <div className="flex flex-col justify-center">
             <CarouselContent className="pb-10 md:-ml-6 pt-7">
               {ListNews.map((entry, index) => (
-                <Link href={'/blogs'} key={index}>
-                  <CarouselItem className="basis-full md:basis-1/2 md:pl-6 lg:basis-1/3">
+                <CarouselItem className="basis-full md:basis-1/2 md:pl-6 lg:basis-1/3" key={index}>
+                  <Link href={'/blogs'} >
                     <div className="rounded-[1.25rem] shadow-combinedShadow2">
                       <Card className="h-full rounded-[1.25rem] shadow-none">
                         <CardHeader>
@@ -206,8 +206,8 @@ export default function SectionBlogs() {
                         </CardFooter>
                       </Card>
                     </div>
-                  </CarouselItem>
-                </Link>
+                  </Link>
+                </CarouselItem>
               ))}
             </CarouselContent>
             <div className="flex justify-center gap-4">

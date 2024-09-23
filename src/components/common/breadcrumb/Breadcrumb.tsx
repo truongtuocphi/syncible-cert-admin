@@ -35,12 +35,13 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
       }
 
       if (path.length === 42) {
-        label = displayName || '';
+        label += displayName || '';
       } else {
-        label = getCustomLabel(path);
+        label += getCustomLabel(path);
       }
 
-      const truncatedLabel = path.length > 45 ? `${path.slice(0, 3)}...${path.slice(-3)}` : label;
+      // const truncatedLabel = path.length > 45 ? `${path.slice(0, 3)}...${path.slice(-3)}` : label;
+      const truncatedLabel = '';
 
       return { label: truncatedLabel, href };
     });

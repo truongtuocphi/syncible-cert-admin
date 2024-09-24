@@ -16,6 +16,16 @@ import { FaFacebookF } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 import { FaLinkedinIn } from 'react-icons/fa';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import ButtonPrimary from '../common/button/ButtonPrimary';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
 
@@ -27,7 +37,7 @@ if (!headerURL) {
 const listSocialMedia = [
   {
     link_name: 'LinkedIn',
-    url: 'https://www.linkedin.com/',
+    url: '#',
     icon: <FaLinkedinIn className="text-2xl" />,
   },
   {
@@ -198,6 +208,35 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     return initials;
   }
 
+  const shareOnLinkedIn = (title: string, summary: string, url: string) => {
+    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(summary)}`;
+    window.open(linkedInUrl, '_blank');
+  };
+
+  const addToLinkedInProfile = (
+    name: string,
+    organization: string,
+    issueDate: string, // Chuỗi định dạng year/dd/mm
+    expirationDate: string | null, // null nếu chứng chỉ vô thời hạn
+    certificateUrl: string,
+    certificateId: string
+  ): void => {
+    // Tách year và month từ issueDate
+    const [issueYear, , issueMonth] = issueDate.split('/');
+
+    // Khởi tạo URL cơ bản
+    let linkedInProfileUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(name)}&organizationId=${encodeURIComponent(organization)}&issueYear=${encodeURIComponent(issueYear)}&issueMonth=${encodeURIComponent(issueMonth)}&certUrl=${encodeURIComponent(certificateUrl)}&certId=${encodeURIComponent(certificateId)}`;
+
+    // Nếu có expirationDate, thêm expirationYear và expirationMonth vào URL
+    if (expirationDate) {
+      const [expirationYear, , expirationMonth] = expirationDate.split('/');
+      linkedInProfileUrl += `&expirationYear=${encodeURIComponent(expirationYear)}&expirationMonth=${encodeURIComponent(expirationMonth)}`;
+    }
+
+    // Mở URL trên LinkedIn
+    window.open(linkedInProfileUrl, '_blank');
+  };
+
   if (!data) return <Loading />;
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
@@ -273,25 +312,93 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               </div>
             </div>
           </div>
-          <div className="col-span-4 h-fit rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
+          <div className="col-span-4 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl">
             <h4 className="mb-4 text-xl font-bold">Chia sẽ chứng chỉ</h4>
             <p className="text-[#A2A3A9]">
               Hiển thị thông tin xác thực này trên mạng xã hội của bạn
             </p>
             <div className="mt-4 flex items-center justify-around">
               {listSocialMedia.map((social, index) => (
-                <Link href={social.url} className="rounded-xl px-6 py-4 shadow-lg">
-                  <div className="" key={index}>
-                    {social.icon}
-                  </div>
-                </Link>
+                <>
+                  {index === 0 ? (
+                    <Dialog>
+                      <DialogTrigger asChild>
+                        <div className="cursor-pointer rounded-xl px-6 py-4 shadow-lg" key={index}>
+                          {social.icon}
+                        </div>
+                      </DialogTrigger>
+                      <DialogContent className="sm:max-w-[576px]">
+                        <div>
+                          <div className="text-center">
+                            <h1 className="text-4xl font-bold">Add to LinkedIn profile</h1>
+                            <p className="mt-3 text-base text-gray-500">
+                              Add your certification to your 
+                              <span className="font-bold text-black">LinkedIn</span> profile with 1
+                              click
+                            </p>
+                          </div>
+
+                          <ButtonPrimary
+                            onClick={() =>
+                              addToLinkedInProfile(
+                                'Chứng chỉ',
+                                'Nền Tảng Chứng Chỉ NFT Syncible',
+                                date,
+                                'Vô thời hạn',
+                                linkWeb,
+                                certificateID
+                              )
+                            }
+                            className="mt-10 w-full rounded-full"
+                          >
+                            Add to my profile
+                          </ButtonPrimary>
+
+                          <nav className="list mt-10">
+                            <ul className="list-disc text-gray-400">
+                              <li className="mt-2 list-inside">
+                                No expiration date: 
+                                <span className="font-bold text-black">
+                                  Click 'this certification does not expire' on LinkedIn
+                                </span>
+                              </li>
+                              <li className="mt-2 list-inside">
+                                LinkedIn no longer shares profile updates to your network. Click the
+                                share button below to share your credential instead.
+                              </li>
+                            </ul>
+                          </nav>
+
+                          <ButtonPrimary
+                            className="mt-10 w-full rounded-full"
+                            onClick={() =>
+                              shareOnLinkedIn(
+                                'Chứng chỉ Khóa Học',
+                                'Đã hoàn thành chứng chỉ Khoa học',
+                                linkWeb
+                              )
+                            }
+                          >
+                            Share
+                          </ButtonPrimary>
+                        </div>
+                      </DialogContent>
+                    </Dialog>
+                  ) : (
+                    <Link href={social.url} className="rounded-xl px-6 py-4 shadow-lg">
+                      <div className="" key={index}>
+                        {social.icon}
+                      </div>
+                    </Link>
+                  )}
+                </>
               ))}
             </div>
             <div className="mt-4 flex items-center justify-between overflow-hidden rounded-xl border-[1px] bg-white pr-6">
               <input
                 type="text"
                 value={linkWeb}
-                className="border-r-[1px] border-gray-200 py-3 pl-3 pr-6"
+                className="border-r-[1px] border-gray-100 py-3 pl-3 pr-6"
                 disabled
               />
               <div className="text-center">

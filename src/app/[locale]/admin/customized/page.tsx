@@ -184,7 +184,7 @@ export default function DefineTemplate() {
               onChange={handleTemplateChange}
             />
             <ButtonPrimary
-              className="flex items-center gap-2 border-2 border-primary-50 bg-white text-primary-50"
+              className="flex items-center gap-2 border-2 border-primary-50 bg-white text-primary-50 hover:bg-primary-50 hover:text-white"
               onClick={() => document.getElementById('picture')?.click()}
             >
               <FaRegFileImage className="text-2xl" />
@@ -268,7 +268,7 @@ export default function DefineTemplate() {
             ],
           })}
           onLoad={(res) => {
-            console.log('load image', res);
+            // console.log('load image', res);
           }}
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
           imageAnnotation={[

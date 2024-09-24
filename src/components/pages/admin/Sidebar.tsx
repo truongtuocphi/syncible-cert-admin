@@ -32,6 +32,14 @@ const Sidebar = () => {
   const pathname = usePathname() || '/admin';
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Active
+  const baseLinkClasses =
+    'flex items-center gap-4 rounded-xl px-4 py-4 font-bold text-gray-500 transition-colors duration-300';
+  const activeLinkClasses =
+    'bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] text-gray-700';
+  const inactiveLinkClasses =
+    'hover:bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] hover:text-gray-700';
+
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-white px-3 text-gray-800 shadow-md">
       <div>
@@ -40,7 +48,7 @@ const Sidebar = () => {
             <Image
               src={'/SyncibleAdmin.png'}
               alt="logo"
-              style={{ width: '100%', height: 'auto' }}
+              className="h-auto w-full"
               width={140}
               height={30}
             />
@@ -49,13 +57,16 @@ const Sidebar = () => {
         <nav className="mt-8">
           <ul className="space-y-2">
             {menuSidebar.map((item) => {
-              const isActive = pathname === item.url;
+              const isActive = pathname.replace(/^\/(en|vi)/, '') === item.url;
+
               return (
                 <li className="text-base" key={item.name}>
                   {item.name !== 'Tạo Chứng Chỉ Số' ? (
                     <Link
                       href={item.url}
-                      className={`flex items-center gap-4 rounded-xl px-4 py-4 font-bold text-gray-500 ${isActive ? 'rounded-2xl bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 text-gray-700' : 'rounded-2xl from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 hover:bg-gradient-to-r hover:text-gray-700'}`}
+                      className={`${baseLinkClasses} ${
+                        isActive ? activeLinkClasses : inactiveLinkClasses
+                      }`}
                     >
                       {item.icon}
                       {item.name}
@@ -63,7 +74,9 @@ const Sidebar = () => {
                   ) : (
                     <div
                       onClick={() => setIsModalOpen(true)}
-                      className={`flex cursor-pointer items-center gap-4 rounded-xl px-4 py-4 font-bold text-gray-500 ${isActive ? 'rounded-2xl bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 text-gray-700' : 'rounded-2xl from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 hover:bg-gradient-to-r hover:text-gray-700'}`}
+                      className={`${baseLinkClasses} ${
+                        isActive ? activeLinkClasses : inactiveLinkClasses
+                      } cursor-pointer`}
                     >
                       {item.icon}
                       {item.name}

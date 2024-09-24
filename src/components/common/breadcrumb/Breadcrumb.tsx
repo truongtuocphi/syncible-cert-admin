@@ -50,12 +50,12 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
     <nav aria-label="breadcrumb">
       <ol className="flex text-gray-400">
         {breadcrumbItems.map((item, index) => (
-          <li key={item.href} className="flex items-center text-xs">
+          <li key={item.href} className="flex items-center text-sm">
             {index < breadcrumbItems.length - 1 ? (
               <div className="flex items-center gap-2">
                 {item.label && (
                   <>
-                    <Link href={item.href} className="line-clamp-1 text-xs hover:text-gray-800">
+                    <Link href={item.href} className="line-clamp-1 text-sm hover:text-gray-800">
                       {capitalizeFirstLetter(item.label)}
                     </Link>
                     <MdNavigateNext className="mr-2 text-xl" />
@@ -63,7 +63,7 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
                 )}
               </div>
             ) : (
-              <Link href={item.href} className="text-xs text-gray-400 hover:text-gray-800">
+              <Link href={item.href} className="text-sm text-gray-400 hover:text-gray-800">
                 {capitalizeFirstLetter(item.label)}
               </Link>
             )}

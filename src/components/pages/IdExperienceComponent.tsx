@@ -230,7 +230,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
-  console.log(templateURL);
+  console.log(linkWeb);
 
   return (
     <>

@@ -71,7 +71,7 @@ export default function Explorer() {
                 </ButtonPrimary>
               </div>
             </div>
-            <div className="absolute -bottom-1/2 left-1/2 flex -translate-x-1/2 -translate-y-[150%] items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2 md:block">
+            <div className="absolute -bottom-1/2 left-1/2 flex hidden -translate-x-1/2 -translate-y-[150%] items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2 md:block">
               <div className="flex flex-col items-center justify-center gap-2 divide-y md:flex-row md:divide-x md:divide-y-0">
                 <input
                   type="text"

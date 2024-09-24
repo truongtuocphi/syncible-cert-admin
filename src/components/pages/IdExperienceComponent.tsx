@@ -16,15 +16,7 @@ import { FaFacebookF } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import { MdEmail } from 'react-icons/md';
 import { FaLinkedinIn } from 'react-icons/fa';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ButtonPrimary from '../common/button/ButtonPrimary';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
@@ -42,17 +34,17 @@ const listSocialMedia = [
   },
   {
     link_name: 'Facebook',
-    url: 'https://www.facebook.com/',
+    url: 'https://www.facebook.com/sharer/sharer.php?u=',
     icon: <FaFacebookF className="text-2xl" />,
   },
   {
     link_name: 'Twitter',
-    url: 'https://twitter.com/',
+    url: 'https://twitter.com/intent/tweet?url=',
     icon: <FaXTwitter className="text-2xl" />,
   },
   {
-    link_name: 'Instagram',
-    url: 'https://www.instagram.com/',
+    link_name: 'Email',
+    url: 'mailto:?subject=Check%20this%20out&body=',
     icon: <MdEmail className="text-2xl" />,
   },
 ];
@@ -209,7 +201,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   }
 
   const shareOnLinkedIn = (title: string, summary: string, url: string) => {
-    const linkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(summary)}`;
+    const linkedInUrl = `https://www.linkedin.com/feed/?shareActive=true&shareUrl=${encodeURIComponent(url)}&title=${encodeURIComponent(title)}&summary=${encodeURIComponent(summary)}`;
     window.open(linkedInUrl, '_blank');
   };
 
@@ -241,33 +233,205 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
+  console.log(templateURL);
+
   return (
-    <div className="mx-auto mt-5 max-w-full">
-      <div className="flex flex-col justify-center md:flex-row">
-        <div className="h-[170px] w-3/5 sm:h-[270px] lg:h-[420px] 2xl:h-[550px]">
-          <CertificatePreview
-            previewImage={templateURL}
-            name={name?.split('Certificate for')[1]?.trim()}
-            fontFamily={fontFamily}
-            fontSize={fontSize}
-          />
-        </div>
-      </div>
-
-      <div className="my-12 flex w-full items-center justify-center text-black">
-        <div className="flex items-center gap-4">
-          <div className="flex size-12 items-center justify-center rounded-full bg-primary-50 text-lg text-white">
-            {getInitialsFromCertificateName(name?.split('Certificate for')[1]?.trim())}
+    <>
+      <head>
+        <title>Nền Tảng Chứng Chỉ NFT Syncible</title>
+        <meta property="og:title" content={'Nền Tảng Chứng Chỉ NFT Syncible'} />
+        <meta
+          property="og:description"
+          content={'website cung cấp Chứng Chỉ NFT được Syncible phát hành'}
+        />
+        <meta
+          property="og:image"
+          content={
+            'https://gateway.pinata.cloud/ipfs/QmVQUxa7ERzgnpqhFzXo9SyUKGs3wEieDLBaqpgig7fP7J'
+          }
+        />
+        <meta
+          property="og:url"
+          content={`https://syncible-cert-admin.vercel.app/en/certificatedetail/${slugPost}`}
+        />
+      </head>
+      <div className="mx-auto mt-5 max-w-full">
+        <div className="flex flex-col justify-center md:flex-row">
+          <div className="h-[170px] w-3/5 sm:h-[270px] lg:h-[420px] 2xl:h-[550px]">
+            <CertificatePreview
+              previewImage={templateURL}
+              name={name?.split('Certificate for')[1]?.trim()}
+              fontFamily={fontFamily}
+              fontSize={fontSize}
+            />
           </div>
-          <p className="text-2xl font-bold">{name?.split('Certificate for')[1]?.trim()}</p>
         </div>
-      </div>
 
-      {changeLayout ? (
-        <div className="grid grid-cols-12 gap-6 bg-gradient-to-b from-white/50">
-          <div className="col-span-8 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
+        <div className="my-12 flex w-full items-center justify-center text-black">
+          <div className="flex items-center gap-4">
+            <div className="flex size-12 items-center justify-center rounded-full bg-primary-50 text-lg text-white">
+              {getInitialsFromCertificateName(name?.split('Certificate for')[1]?.trim())}
+            </div>
+            <p className="text-2xl font-bold">{name?.split('Certificate for')[1]?.trim()}</p>
+          </div>
+        </div>
+
+        {changeLayout ? (
+          <div className="grid grid-cols-12 gap-6 bg-gradient-to-b from-white/50">
+            <div className="col-span-8 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
+              <div className="items-star flex w-full flex-col md:w-1/2">
+                <h4 className="mb-4 text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
+                <div className="space-y-4">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold">Vị trí phát hành</p>
+                    <p>Việt Nam</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold">Kích thước chứng chỉ</p>
+                    <p> 500x300</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold">Ngày phát hành</p>
+                    <p>{`${date}`}</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold">Ngày hết hạn</p>
+                    <p>Vô thời hạn</p>
+                  </div>
+                </div>
+
+                <div className="mt-4 space-y-4">
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold">Blockchain</p>
+                    <p>Polygon</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold">ID chứng chỉ</p>
+                    <p>{`${certificateID}`}</p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <p className="font-bold">Địa chỉ hợp đồng</p>
+                    <div className="mt-2 flex items-center gap-2">
+                      {`${dataContract}`}
+                      <CopyButton textToCopy={dataContract[0]} />
+                      <Link
+                        href={`https://polygonscan.com/address/${dataContract[0]}`}
+                        target="_blank"
+                      >
+                        <RiShareBoxLine className="text-black" />
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="col-span-4 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl">
+              <h4 className="mb-4 text-xl font-bold">Chia sẽ chứng chỉ</h4>
+              <p className="text-[#A2A3A9]">
+                Hiển thị thông tin xác thực này trên mạng xã hội của bạn
+              </p>
+              <div className="mt-4 flex items-center justify-around">
+                {listSocialMedia.map((social, index) => (
+                  <>
+                    {index === 0 ? (
+                      <Dialog>
+                        <DialogTrigger asChild>
+                          <div
+                            className="cursor-pointer rounded-xl px-6 py-4 shadow-lg"
+                            key={index}
+                          >
+                            {social.icon}
+                          </div>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-[576px]">
+                          <div>
+                            <div className="text-center">
+                              <h1 className="text-4xl font-bold">Add to LinkedIn profile</h1>
+                              <p className="mt-3 text-base text-gray-500">
+                                Add your certification to your 
+                                <span className="font-bold text-black">LinkedIn</span> profile with
+                                1 click
+                              </p>
+                            </div>
+
+                            <ButtonPrimary
+                              onClick={() =>
+                                addToLinkedInProfile(
+                                  'Chứng chỉ Blockchain', // Tên chứng chỉ
+                                  'Syncible Cert Organization', // Tên tổ chức
+                                  date, // Ngày cấp
+                                  null, // Vô thời hạn
+                                  'https://syncible-cert-admin.vercel.app/en/certificatedetail/QmVX7TRubJkFjnkirLTdFMU5ReNfBuLSUchHu8d7Quzvyj', // URL chứng chỉ
+                                  'QmVX7TRubJkFjnkirLTdFMU5ReNfBuLSUchHu8d7Quzvyj' // ID chứng chỉ
+                                )
+                              }
+                              className="mt-10 w-full rounded-full"
+                            >
+                              Add to my profile
+                            </ButtonPrimary>
+
+                            <nav className="list mt-10">
+                              <ul className="list-disc text-gray-400">
+                                <li className="mt-2 list-inside">
+                                  No expiration date: 
+                                  <span className="font-bold text-black">
+                                    Click 'this certification does not expire' on LinkedIn
+                                  </span>
+                                </li>
+                                <li className="mt-2 list-inside">
+                                  LinkedIn no longer shares profile updates to your network. Click
+                                  the share button below to share your credential instead.
+                                </li>
+                              </ul>
+                            </nav>
+
+                            <ButtonPrimary
+                              className="mt-10 w-full rounded-full"
+                              onClick={() =>
+                                shareOnLinkedIn(
+                                  'Chứng chỉ blockchain',
+                                  'Chứng chỉ về blockchain được cấp bởi tổ chức Syncible',
+                                  'https://syncible-cert-admin.vercel.app/en/certificatedetail/QmVX7TRubJkFjnkirLTdFMU5ReNfBuLSUchHu8d7Quzvyj'
+                                )
+                              }
+                            >
+                              Share
+                            </ButtonPrimary>
+                          </div>
+                        </DialogContent>
+                      </Dialog>
+                    ) : (
+                      <Link
+                        href={`${social.url}${`https://syncible-cert-admin.vercel.app/en/certificatedetail/QmVX7TRubJkFjnkirLTdFMU5ReNfBuLSUchHu8d7Quzvyj`}`}
+                        className="rounded-xl px-6 py-4 shadow-lg"
+                        target={'_blank'}
+                      >
+                        <div className="" key={index}>
+                          {social.icon}
+                        </div>
+                      </Link>
+                    )}
+                  </>
+                ))}
+              </div>
+              <div className="mt-4 flex items-center justify-between overflow-hidden rounded-xl border-[1px] bg-white pr-6">
+                <input
+                  type="text"
+                  value={linkWeb}
+                  className="border-r-[1px] border-gray-100 py-3 pl-3 pr-6"
+                  disabled
+                />
+                <div className="text-center">
+                  <CopyButton textToCopy={linkWeb} />
+                </div>
+              </div>
+            </div>
+          </div>
+        ) : (
+          <div className="mt-6 flex flex-col justify-between gap-8 rounded-3xl bg-white p-6 md:flex-row">
             <div className="items-star flex w-full flex-col md:w-1/2">
-              <h4 className="mb-4 text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
+              <h4 className="text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
+              <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
               <div className="space-y-4">
                 <div className="flex flex-col gap-2">
                   <p className="font-bold">Vị trí phát hành</p>
@@ -286,8 +450,11 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   <p>Vô thời hạn</p>
                 </div>
               </div>
-
-              <div className="mt-4 space-y-4">
+            </div>
+            <div className="flex w-full flex-col items-start md:w-1/2">
+              <h4 className="text-xl font-bold">Thông tin Blockchain</h4>
+              <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
+              <div className="space-y-4">
                 <div className="flex flex-col gap-2">
                   <p className="font-bold">Blockchain</p>
                   <p>Polygon</p>
@@ -312,152 +479,9 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               </div>
             </div>
           </div>
-          <div className="col-span-4 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl">
-            <h4 className="mb-4 text-xl font-bold">Chia sẽ chứng chỉ</h4>
-            <p className="text-[#A2A3A9]">
-              Hiển thị thông tin xác thực này trên mạng xã hội của bạn
-            </p>
-            <div className="mt-4 flex items-center justify-around">
-              {listSocialMedia.map((social, index) => (
-                <>
-                  {index === 0 ? (
-                    <Dialog>
-                      <DialogTrigger asChild>
-                        <div className="cursor-pointer rounded-xl px-6 py-4 shadow-lg" key={index}>
-                          {social.icon}
-                        </div>
-                      </DialogTrigger>
-                      <DialogContent className="sm:max-w-[576px]">
-                        <div>
-                          <div className="text-center">
-                            <h1 className="text-4xl font-bold">Add to LinkedIn profile</h1>
-                            <p className="mt-3 text-base text-gray-500">
-                              Add your certification to your 
-                              <span className="font-bold text-black">LinkedIn</span> profile with 1
-                              click
-                            </p>
-                          </div>
-
-                          <ButtonPrimary
-                            onClick={() =>
-                              addToLinkedInProfile(
-                                'Chứng chỉ',
-                                'Nền Tảng Chứng Chỉ NFT Syncible',
-                                date,
-                                'Vô thời hạn',
-                                linkWeb,
-                                certificateID
-                              )
-                            }
-                            className="mt-10 w-full rounded-full"
-                          >
-                            Add to my profile
-                          </ButtonPrimary>
-
-                          <nav className="list mt-10">
-                            <ul className="list-disc text-gray-400">
-                              <li className="mt-2 list-inside">
-                                No expiration date: 
-                                <span className="font-bold text-black">
-                                  Click 'this certification does not expire' on LinkedIn
-                                </span>
-                              </li>
-                              <li className="mt-2 list-inside">
-                                LinkedIn no longer shares profile updates to your network. Click the
-                                share button below to share your credential instead.
-                              </li>
-                            </ul>
-                          </nav>
-
-                          <ButtonPrimary
-                            className="mt-10 w-full rounded-full"
-                            onClick={() =>
-                              shareOnLinkedIn(
-                                'Chứng chỉ Khóa Học',
-                                'Đã hoàn thành chứng chỉ Khoa học',
-                                linkWeb
-                              )
-                            }
-                          >
-                            Share
-                          </ButtonPrimary>
-                        </div>
-                      </DialogContent>
-                    </Dialog>
-                  ) : (
-                    <Link href={social.url} className="rounded-xl px-6 py-4 shadow-lg">
-                      <div className="" key={index}>
-                        {social.icon}
-                      </div>
-                    </Link>
-                  )}
-                </>
-              ))}
-            </div>
-            <div className="mt-4 flex items-center justify-between overflow-hidden rounded-xl border-[1px] bg-white pr-6">
-              <input
-                type="text"
-                value={linkWeb}
-                className="border-r-[1px] border-gray-100 py-3 pl-3 pr-6"
-                disabled
-              />
-              <div className="text-center">
-                <CopyButton textToCopy={linkWeb} />
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : (
-        <div className="mt-6 flex flex-col justify-between gap-8 rounded-3xl bg-white p-6 md:flex-row">
-          <div className="items-star flex w-full flex-col md:w-1/2">
-            <h4 className="text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
-            <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
-            <div className="space-y-4">
-              <div className="flex flex-col gap-2">
-                <p className="font-bold">Vị trí phát hành</p>
-                <p>Việt Nam</p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="font-bold">Kích thước chứng chỉ</p>
-                <p> 500x300</p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="font-bold">Ngày phát hành</p>
-                <p>{`${date}`}</p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="font-bold">Ngày hết hạn</p>
-                <p>Vô thời hạn</p>
-              </div>
-            </div>
-          </div>
-          <div className="flex w-full flex-col items-start md:w-1/2">
-            <h4 className="text-xl font-bold">Thông tin Blockchain</h4>
-            <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
-            <div className="space-y-4">
-              <div className="flex flex-col gap-2">
-                <p className="font-bold">Blockchain</p>
-                <p>Polygon</p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="font-bold">ID chứng chỉ</p>
-                <p>{`${certificateID}`}</p>
-              </div>
-              <div className="flex flex-col gap-2">
-                <p className="font-bold">Địa chỉ hợp đồng</p>
-                <div className="mt-2 flex items-center gap-2">
-                  {`${dataContract}`}
-                  <CopyButton textToCopy={dataContract[0]} />
-                  <Link href={`https://polygonscan.com/address/${dataContract[0]}`} target="_blank">
-                    <RiShareBoxLine className="text-black" />
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
+        )}
+      </div>
+    </>
   );
 };
 

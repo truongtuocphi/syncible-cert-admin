@@ -91,7 +91,7 @@ const ContractData: React.FC<Props> = ({
                   <CertificatePreview
                     previewImage={item[4][1] || 'default-image-url'}
                     name={item[1] || 'Unknown Name'}
-                    fontSize={responsiveFontSize} // Pass responsive font size.
+                    fontSize={responsiveFontSize}
                     fontFamily={item.fontFamily || 'default-font'}
                   />
                 </div>

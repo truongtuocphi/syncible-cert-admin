@@ -278,7 +278,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
             <p className="text-[#A2A3A9]">
               Hiển thị thông tin xác thực này trên mạng xã hội của bạn
             </p>
-            <div className="mt-2 flex items-center justify-around">
+            <div className="mt-4 flex items-center justify-around">
               {listSocialMedia.map((social, index) => (
                 <Link href={social.url} className="rounded-xl px-6 py-4 shadow-lg">
                   <div className="" key={index}>
@@ -287,9 +287,16 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                 </Link>
               ))}
             </div>
-            <div className="mt-4 flex items-center justify-between overflow-hidden rounded-xl border-[1px] bg-white">
-              <input type="text" value={linkWeb} className="border-r-[1px] border-gray-200 p-3" />
-              <CopyButton textToCopy={linkWeb} />
+            <div className="mt-4 flex items-center justify-between overflow-hidden rounded-xl border-[1px] bg-white pr-6">
+              <input
+                type="text"
+                value={linkWeb}
+                className="border-r-[1px] border-gray-200 py-3 pl-3 pr-6"
+                disabled
+              />
+              <div className="text-center">
+                <CopyButton textToCopy={linkWeb} />
+              </div>
             </div>
           </div>
         </div>

@@ -271,7 +271,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         </div>
 
         {changeLayout ? (
-          <div className="grid grid-cols-12 gap-6 bg-gradient-to-b from-white/50">
+          <div className="grid grid-rows-12 gap-6 bg-gradient-to-b from-white/50 xl:grid-cols-12">
             <div className="col-span-8 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
               <div className="items-star flex w-full flex-col md:w-1/2">
                 <h4 className="mb-4 text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>

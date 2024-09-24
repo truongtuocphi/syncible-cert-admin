@@ -70,7 +70,7 @@ const ContractData: React.FC<Props> = ({
     );
 
   return (
-    <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2">
+    <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
       {data ? (
         <>
           {data.map((item, index) => {
@@ -79,7 +79,7 @@ const ContractData: React.FC<Props> = ({
                 href={`/admin/collection/collectiondetail/${slug}/${item[3]}?nameCollection=${displayName}`}
                 key={index}
               >
-                <div className="h-[170px] w-full sm:h-[270px] lg:h-[370px] 2xl:h-[400px]">
+                <div className="h-[170px] w-full sm:h-[270px] lg:h-[360px] 2xl:h-[380px]">
                   <CertificatePreview
                     previewImage={item[4][1] || 'default-image-url'}
                     name={item[1] || 'Unknown Name'}

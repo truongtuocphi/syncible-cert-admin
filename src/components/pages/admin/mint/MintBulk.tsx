@@ -172,23 +172,23 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
             <ScrollBar orientation="vertical" />
           </ScrollArea>
         ) : (
-          <div className="grid grid-cols-5 gap-2">
-            <div className="col-span-2 space-y-2">
+          <div className="flex items-center gap-2">
+            <div className="w-1/2">
               <input
                 type="text"
                 required
                 placeholder="Mã chứng chỉ"
                 disabled
-                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border-none px-6 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
-            <div className="col-span-3 space-y-2">
+            <div className="w-1/2">
               <input
                 type="text"
                 required
                 placeholder="Họ và tên của bạn"
                 disabled
-                className="mt-1 block w-full rounded-md border border-gray-300 p-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border-none py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
           </div>

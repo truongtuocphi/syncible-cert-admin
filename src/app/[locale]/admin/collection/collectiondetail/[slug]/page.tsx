@@ -51,7 +51,6 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
         </Link>
-
         <div className="text-xl font-semibold text-gray-500">Trở về</div>
       </div>
 

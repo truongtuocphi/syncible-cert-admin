@@ -31,7 +31,6 @@ const listCard = [
 const HomeAdmin = () => {
   return (
     <div className="flex w-full flex-col">
-      <Breadcrumb />
       <div className="mt-3">
         <h1 className="mb-3 text-3xl font-bold text-gray-700 2xl:text-4xl">
           Chào mừng bạn đến với Syncible

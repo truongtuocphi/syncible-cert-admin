@@ -81,15 +81,15 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
     <>
       <div className="my-6 w-full border-[0.5px] border-gray-100"></div>
 
-      <div className="block text-sm font-medium text-gray-700">Thông tin CSV</div>
-      <p className="mt-3 text-xs text-gray-400">
+      <div className="block text-base font-medium text-gray-700">Thông tin CSV</div>
+      <p className="mt-3 text-sm text-gray-400">
         Định dạng tập tin csv của bạn phải được định dạng theo trường định dạng tập tin của Syncible
         để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành tập tin CSV và dán vào
         mẫu dưới đây.
       </p>
       <div
         onClick={handleDownload}
-        className="mt-3 block cursor-pointer border-none bg-transparent text-sm font-medium text-primary-50 underline"
+        className="mt-3 block cursor-pointer border-none bg-transparent text-base font-medium text-primary-50 underline"
       >
         Tải file CSV mẫu
       </div>
@@ -97,13 +97,13 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
       <div className="my-6 w-full border-[0.5px] border-gray-100"></div>
 
       <div className="flex items-center justify-between">
-        <label className="block text-sm font-medium text-gray-900">Tải tệp CSV</label>
+        <label className="block text-base font-medium text-gray-900">Tải tệp CSV</label>
         {/* <input
           type="file"
           onChange={(e) => handleCSVChange(e)}
           accept=".csv"
           required
-          className="block w-full cursor-pointer rounded-lg border-[1px] text-sm text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-primary-50 hover:file:bg-blue-100"
+          className="block w-full cursor-pointer rounded-lg border-[1px] text-base text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-base file:font-semibold file:text-primary-50 hover:file:bg-blue-100"
         /> */}
         <div className="space-y-2">
           <input
@@ -130,10 +130,10 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
       <div className="mt-5 w-full overflow-hidden rounded-3xl bg-gray-100">
         <div className="flex gap-2 bg-gray-200 px-6 py-4">
           <div className="w-1/2 space-y-2">
-            <label className="block text-sm font-medium text-gray-800">ID chứng chỉ</label>
+            <label className="block text-base font-medium text-gray-800">ID chứng chỉ</label>
           </div>
           <div className="w-1/2 space-y-2">
-            <label className="block text-sm font-medium text-gray-800">Họ và tên</label>
+            <label className="block text-base font-medium text-gray-800">Họ và tên</label>
           </div>
         </div>
 
@@ -153,7 +153,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
                         placeholder="Mã chứng chỉ"
                         value={data.certificateNumber}
                         disabled
-                        className="mt-1 block w-full bg-transparent px-6 py-4 sm:text-sm"
+                        className="mt-1 block w-full bg-transparent px-6 py-4 sm:text-base"
                       />
                     </div>
                     <div className="w-1/2">
@@ -163,7 +163,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
                         placeholder="Họ và tên của bạn"
                         value={data.fullname}
                         disabled
-                        className="mt-1 block w-full bg-transparent py-4 sm:text-sm"
+                        className="mt-1 block w-full bg-transparent py-4 sm:text-base"
                       />
                     </div>
                   </div>
@@ -179,7 +179,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
                 required
                 placeholder="Mã chứng chỉ"
                 disabled
-                className="mt-1 block w-full rounded-md border-none px-6 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border-none px-6 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
               />
             </div>
             <div className="w-1/2">
@@ -188,7 +188,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
                 required
                 placeholder="Họ và tên của bạn"
                 disabled
-                className="mt-1 block w-full rounded-md border-none py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                className="mt-1 block w-full rounded-md border-none py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
               />
             </div>
           </div>

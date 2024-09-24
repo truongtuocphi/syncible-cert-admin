@@ -21,10 +21,10 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
       <Web3ModalProvider initialState={initialState}>
         <div className="flex min-h-screen bg-bgPageAdmin">
           <Sidebar />
-          <div className="ml-64 flex-1 p-6 pt-16">
+          <div className="ml-64 flex-1 p-6 pt-16 2xl:ml-96">
             <Header />
             <div className="mx-auto mt-10 flex max-w-screen-lg justify-center text-black 2xl:max-w-screen-3xl">
-              <div className="w-full 2xl:h-[80%]">{children}</div>
+              <div className="w-full">{children}</div>
             </div>
           </div>
         </div>

@@ -14,16 +14,16 @@ import { GrCertificate } from 'react-icons/gr';
 import Modal from './Modal';
 
 const menuSidebar = [
-  { name: 'Trang Chủ', url: '/admin', icon: <BiHome className="text-2xl" /> },
+  { name: 'Trang Chủ', url: '/admin', icon: <BiHome className="text-2xl 2xl:text-3xl" /> },
   {
     name: 'Tùy Chỉnh Mẫu',
     url: '/admin/customized',
-    icon: <BiFile className="text-2xl" />,
+    icon: <BiFile className="text-2xl 2xl:text-3xl" />,
   },
   {
     name: 'Quản lý Chứng Chỉ',
     url: '/admin/collection',
-    icon: <BiCustomize className="text-2xl" />,
+    icon: <BiCustomize className="text-2xl 2xl:text-3xl" />,
   },
   { name: 'Tạo Chứng Chỉ Số', url: '/admin/mintnft', icon: <GrCertificate className="text-2xl" /> },
 ];
@@ -41,14 +41,14 @@ const Sidebar = () => {
     'hover:bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] hover:text-gray-700';
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-white px-3 text-gray-800 shadow-md">
+    <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-white px-3 text-gray-800 shadow-md 2xl:w-80">
       <div>
         <div className="flex items-center justify-start p-4">
           <Link href={'/admin'} className="h-auto w-auto">
             <Image
               src={'/SyncibleAdmin.png'}
               alt="logo"
-              className="h-auto w-full"
+              className="h-auto w-full md:h-5 md:w-32 2xl:h-10 2xl:w-40"
               width={140}
               height={30}
             />
@@ -60,7 +60,7 @@ const Sidebar = () => {
               const isActive = pathname.replace(/^\/(en|vi)/, '') === item.url;
 
               return (
-                <li className="text-base" key={item.name}>
+                <li className="text-base 2xl:text-lg" key={item.name}>
                   {item.name !== 'Tạo Chứng Chỉ Số' ? (
                     <Link
                       href={item.url}

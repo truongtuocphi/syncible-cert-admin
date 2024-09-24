@@ -8,21 +8,21 @@ const listCard = [
   {
     title: 'Tùy chỉnh mẫu chứng chỉ',
     des: 'Chỉnh sửa giao diện và chuyên về chủ đề của riêng bạn. Thêm logo, màu sắc và hình ảnh của bạn để phản ánh thương hiệu của bạn.',
-    icon: <BiFile className="text-2xl text-gray-800" />,
+    icon: <BiFile className="text-2xl text-gray-800 2xl:text-3xl" />,
     titleButton: 'Tùy chỉnh ở đây',
     link: '/admin/customized',
   },
   {
     title: 'Quản lý Chứng chỉ',
     des: 'Quản lý chứng chỉ số được đúc của bạn tại đây',
-    icon: <BiCustomize className="text-2xl text-gray-800" />,
+    icon: <BiCustomize className="text-2xl text-gray-800 2xl:text-3xl" />,
     titleButton: 'Tạo ngay',
     link: '/admin/collection',
   },
   {
     title: 'Tạo chứng chỉ',
     des: 'Tạo chứng chỉ của bạn',
-    icon: <GrCertificate className="text-2xl text-gray-800" />,
+    icon: <GrCertificate className="text-2xl text-gray-800 2xl:text-3xl" />,
     titleButton: 'Tạo chứng chỉ số',
     link: '/admin/mintnft',
   },
@@ -33,8 +33,10 @@ const HomeAdmin = () => {
     <div className="flex w-full flex-col">
       <Breadcrumb />
       <div className="mt-3">
-        <h1 className="mb-3 text-3xl font-bold text-gray-700">Chào mừng bạn đến với Syncible</h1>
-        <p className="text-sm font-semibold text-gray-500">
+        <h1 className="mb-3 text-3xl font-bold text-gray-700 2xl:text-4xl">
+          Chào mừng bạn đến với Syncible
+        </h1>
+        <p className="text-sm font-semibold text-gray-500 2xl:text-base">
           Tạo chứng chỉ của riêng bạn một cách dễ dàng hơn với các bước bên dưới
         </p>
       </div>

@@ -137,6 +137,23 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     }
   }, [dataContract, onDataContract]);
 
+  function getInitialsFromCertificateName(certificateName: string): string {
+    if (!certificateName) {
+      return '';
+    }
+
+    const nameParts = certificateName.trim().split(' ');
+
+    const initials = nameParts
+      .slice(1)
+      .map((word) => word[0])
+      .join('');
+
+    console.log('initials', initials);
+
+    return initials;
+  }
+
   if (!data) return <Loading />;
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
@@ -151,6 +168,15 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
             fontFamily={fontFamily}
             fontSize={fontSize}
           />
+        </div>
+      </div>
+
+      <div className="my-12 flex w-full items-center justify-center text-black">
+        <div className="flex items-center gap-4">
+          <div className="flex size-12 items-center justify-center rounded-full bg-primary-50 text-lg text-white">
+            {getInitialsFromCertificateName(name?.split('Certificate for')[1]?.trim())}
+          </div>
+          <p className="text-2xl font-bold">{name?.split('Certificate for')[1]?.trim()}</p>
         </div>
       </div>
 

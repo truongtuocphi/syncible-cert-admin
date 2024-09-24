@@ -142,9 +142,9 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   if (error) return <p>{error}</p>;
 
   return (
-    <div className="mx-auto mt-5 max-w-full space-y-4 rounded-xl bg-white p-4 text-black">
-      <div className="flex flex-col justify-between md:flex-row">
-        <div className="h-[170px] w-3/5 sm:h-[270px] lg:h-[420px] 2xl:h-[500px]">
+    <div className="mx-auto mt-5 max-w-full">
+      <div className="flex flex-col justify-center md:flex-row">
+        <div className="h-[170px] w-3/5 sm:h-[270px] lg:h-[420px] 2xl:h-[550px]">
           <CertificatePreview
             previewImage={templateURL}
             name={name?.split('Certificate for')[1]?.trim()}
@@ -152,44 +152,53 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
             fontSize={fontSize}
           />
         </div>
-        <div className="mt-4 w-full md:ml-4 md:mt-0 md:w-[40%]">
-          <h3 className="text-3xl font-bold text-black">
-            {name?.split('Certificate for')[1]?.trim()}
-          </h3>
-        </div>
       </div>
-      <div className="mt-6 flex flex-col justify-between md:flex-row">
-        <div className="flex w-full flex-col items-start md:w-1/2">
-          <h4 className="text-xl font-bold">Full details</h4>
-          <p className="mt-2">Production location: VietNam</p>
-          <p className="mt-2">Dymension: 500x300</p>
-          <p className="mt-2">{`Certificate ID: ${certificateID}`}</p>
-          <p className="mt-2">{`Date: ${date}`}</p>
+
+      <div className="mt-6 flex flex-col justify-between gap-8 rounded-3xl bg-white p-6 md:flex-row">
+        <div className="items-star flex w-full flex-col md:w-1/2">
+          <h4 className="text-xl font-bold">Chi tiết chứng thông tin chứng chỉ</h4>
+          <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
+          <div className="space-y-4">
+            <div className="flex flex-col gap-2">
+              <p className="font-bold">Vị trí phát hành</p>
+              <p>Việt Nam</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="font-bold">Kích thước chứng chỉ</p>
+              <p> 500x300</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="font-bold">Ngày phát hành</p>
+              <p>{`${date}`}</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="font-bold">Ngày hết hạn</p>
+              <p>Vô thời hạn</p>
+            </div>
+          </div>
         </div>
         <div className="flex w-full flex-col items-start md:w-1/2">
-          <h4 className="text-xl font-bold">Chain Information</h4>
-          <p className="mt-2">{`Blockchain: ${blockchainType}`}</p>
-          {/* <div className="mt-2 flex items-center gap-2">
-            <p>
-              {`Token ID: `}
-              <span className="text-primary-50 underline">
-                {slugPost.slice(0, 4)}...{slugPost.slice(-6)}
-              </span>
-            </p>
-            <CopyButton textToCopy={slugPost} />
-          </div> */}
-          <div className="mt-2 flex items-center gap-2">
-            <p>
-              {`Contract address: `}
-              <span className="text-primary-50 underline">
-                {dataContract[0].slice(0, 4)}...
-                {dataContract[0].slice(-6)}
-              </span>
-            </p>
-            <CopyButton textToCopy={dataContract[0]} />
-            <Link href={`https://polygonscan.com/address/${dataContract[0]}`} target="_blank">
-              <RiShareBoxLine className="text-black" />
-            </Link>
+          <h4 className="text-xl font-bold">Thông tin Blockchain</h4>
+          <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
+          <div className="space-y-4">
+            <div className="flex flex-col gap-2">
+              <p className="font-bold">Blockchain</p>
+              <p>Polygon</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="font-bold">Mã chứng chỉ</p>
+              <p>{`${certificateID}`}</p>
+            </div>
+            <div className="flex flex-col gap-2">
+              <p className="font-bold">Địa chỉ hợp đồng</p>
+              <div className="mt-2 flex items-center gap-2">
+                {`${dataContract}`}
+                <CopyButton textToCopy={dataContract[0]} />
+                <Link href={`https://polygonscan.com/address/${dataContract[0]}`} target="_blank">
+                  <RiShareBoxLine className="text-black" />
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </div>

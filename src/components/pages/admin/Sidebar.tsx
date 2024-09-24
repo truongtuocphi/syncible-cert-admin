@@ -48,7 +48,7 @@ const Sidebar = () => {
             <Image
               src={'/SyncibleAdmin.png'}
               alt="logo"
-              className="h-auto w-full md:h-5 md:w-32 2xl:h-10 2xl:w-40"
+              className="h-auto w-full md:h-5 md:w-32 2xl:h-11 2xl:w-40"
               width={140}
               height={30}
             />

@@ -12,6 +12,10 @@ import { db, ref, get } from '@/lib/firebase';
 import replaceData from '@/utils/replaceData';
 
 import CertificatePreview from './admin/CertificatePreview';
+import { FaFacebookF } from 'react-icons/fa';
+import { FaXTwitter } from 'react-icons/fa6';
+import { MdEmail } from 'react-icons/md';
+import { FaLinkedinIn } from 'react-icons/fa';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
 
@@ -20,8 +24,32 @@ if (!headerURL) {
   console.error('NEXT_PUBLIC_HEADER_URL không được định nghĩa');
 }
 
+const listSocialMedia = [
+  {
+    link_name: 'LinkedIn',
+    url: 'https://www.linkedin.com/',
+    icon: <FaLinkedinIn className="text-2xl" />,
+  },
+  {
+    link_name: 'Facebook',
+    url: 'https://www.facebook.com/',
+    icon: <FaFacebookF className="text-2xl" />,
+  },
+  {
+    link_name: 'Twitter',
+    url: 'https://twitter.com/',
+    icon: <FaXTwitter className="text-2xl" />,
+  },
+  {
+    link_name: 'Instagram',
+    url: 'https://www.instagram.com/',
+    icon: <MdEmail className="text-2xl" />,
+  },
+];
+
 interface IdExperienceProps {
   slugPost: string;
+  changeLayout?: boolean;
   onDataContract?: (dataContract: any) => void;
   onDataNameCertificate?: (name: any) => void;
 }
@@ -30,11 +58,13 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   slugPost,
   onDataContract,
   onDataNameCertificate,
+  changeLayout = false,
 }) => {
   const [data, setData] = useState<any>(null);
   const [dataContract, setDataContract] = useState<any[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [linkWeb, setLinkWeb] = useState<string>('');
 
   const [name, setName] = useState('');
   const [certificateID, setCertificateID] = useState('');
@@ -132,6 +162,11 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   }, [slugPost]);
 
   useEffect(() => {
+    const currentPath = window.location.pathname;
+    setLinkWeb(currentPath);
+  }, []);
+
+  useEffect(() => {
     if (dataContract.length > 0 && onDataContract) {
       onDataContract(dataContract[0]);
     }
@@ -189,54 +224,125 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         </div>
       </div>
 
-      <div className="mt-6 flex flex-col justify-between gap-8 rounded-3xl bg-white p-6 md:flex-row">
-        <div className="items-star flex w-full flex-col md:w-1/2">
-          <h4 className="text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
-          <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
-          <div className="space-y-4">
-            <div className="flex flex-col gap-2">
-              <p className="font-bold">Vị trí phát hành</p>
-              <p>Việt Nam</p>
+      {changeLayout ? (
+        <div className="grid grid-cols-12 gap-6 bg-gradient-to-b from-white/50">
+          <div className="col-span-8 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
+            <div className="items-star flex w-full flex-col md:w-1/2">
+              <h4 className="mb-4 text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
+              <div className="space-y-4">
+                <div className="flex flex-col gap-2">
+                  <p className="font-bold">Vị trí phát hành</p>
+                  <p>Việt Nam</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="font-bold">Kích thước chứng chỉ</p>
+                  <p> 500x300</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="font-bold">Ngày phát hành</p>
+                  <p>{`${date}`}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="font-bold">Ngày hết hạn</p>
+                  <p>Vô thời hạn</p>
+                </div>
+              </div>
+
+              <div className="mt-4 space-y-4">
+                <div className="flex flex-col gap-2">
+                  <p className="font-bold">Blockchain</p>
+                  <p>Polygon</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="font-bold">ID chứng chỉ</p>
+                  <p>{`${certificateID}`}</p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <p className="font-bold">Địa chỉ hợp đồng</p>
+                  <div className="mt-2 flex items-center gap-2">
+                    {`${dataContract}`}
+                    <CopyButton textToCopy={dataContract[0]} />
+                    <Link
+                      href={`https://polygonscan.com/address/${dataContract[0]}`}
+                      target="_blank"
+                    >
+                      <RiShareBoxLine className="text-black" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="flex flex-col gap-2">
-              <p className="font-bold">Kích thước chứng chỉ</p>
-              <p> 500x300</p>
+          </div>
+          <div className="col-span-4 h-fit rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
+            <h4 className="mb-4 text-xl font-bold">Chia sẽ chứng chỉ</h4>
+            <p className="text-[#A2A3A9]">
+              Hiển thị thông tin xác thực này trên mạng xã hội của bạn
+            </p>
+            <div className="mt-2 flex items-center justify-around">
+              {listSocialMedia.map((social, index) => (
+                <Link href={social.url} className="rounded-xl px-6 py-4 shadow-lg">
+                  <div className="" key={index}>
+                    {social.icon}
+                  </div>
+                </Link>
+              ))}
             </div>
-            <div className="flex flex-col gap-2">
-              <p className="font-bold">Ngày phát hành</p>
-              <p>{`${date}`}</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="font-bold">Ngày hết hạn</p>
-              <p>Vô thời hạn</p>
+            <div className="mt-4 flex items-center justify-between overflow-hidden rounded-xl border-[1px] bg-white">
+              <input type="text" value={linkWeb} className="border-r-[1px] border-gray-200 p-3" />
+              <CopyButton textToCopy={linkWeb} />
             </div>
           </div>
         </div>
-        <div className="flex w-full flex-col items-start md:w-1/2">
-          <h4 className="text-xl font-bold">Thông tin Blockchain</h4>
-          <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
-          <div className="space-y-4">
-            <div className="flex flex-col gap-2">
-              <p className="font-bold">Blockchain</p>
-              <p>Polygon</p>
+      ) : (
+        <div className="mt-6 flex flex-col justify-between gap-8 rounded-3xl bg-white p-6 md:flex-row">
+          <div className="items-star flex w-full flex-col md:w-1/2">
+            <h4 className="text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
+            <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
+            <div className="space-y-4">
+              <div className="flex flex-col gap-2">
+                <p className="font-bold">Vị trí phát hành</p>
+                <p>Việt Nam</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="font-bold">Kích thước chứng chỉ</p>
+                <p> 500x300</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="font-bold">Ngày phát hành</p>
+                <p>{`${date}`}</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="font-bold">Ngày hết hạn</p>
+                <p>Vô thời hạn</p>
+              </div>
             </div>
-            <div className="flex flex-col gap-2">
-              <p className="font-bold">ID chứng chỉ</p>
-              <p>{`${certificateID}`}</p>
-            </div>
-            <div className="flex flex-col gap-2">
-              <p className="font-bold">Địa chỉ hợp đồng</p>
-              <div className="mt-2 flex items-center gap-2">
-                {`${dataContract}`}
-                <CopyButton textToCopy={dataContract[0]} />
-                <Link href={`https://polygonscan.com/address/${dataContract[0]}`} target="_blank">
-                  <RiShareBoxLine className="text-black" />
-                </Link>
+          </div>
+          <div className="flex w-full flex-col items-start md:w-1/2">
+            <h4 className="text-xl font-bold">Thông tin Blockchain</h4>
+            <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
+            <div className="space-y-4">
+              <div className="flex flex-col gap-2">
+                <p className="font-bold">Blockchain</p>
+                <p>Polygon</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="font-bold">ID chứng chỉ</p>
+                <p>{`${certificateID}`}</p>
+              </div>
+              <div className="flex flex-col gap-2">
+                <p className="font-bold">Địa chỉ hợp đồng</p>
+                <div className="mt-2 flex items-center gap-2">
+                  {`${dataContract}`}
+                  <CopyButton textToCopy={dataContract[0]} />
+                  <Link href={`https://polygonscan.com/address/${dataContract[0]}`} target="_blank">
+                    <RiShareBoxLine className="text-black" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

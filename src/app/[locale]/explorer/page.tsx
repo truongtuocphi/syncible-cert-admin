@@ -48,7 +48,7 @@ export default function Explorer() {
           <Navbar />
         </div>
         <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
-          <div className="relative flex h-72 w-full flex-col items-center justify-center gap-3 rounded-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50 shadow-lg">
+          <div className="relative flex h-72 w-full flex-col items-center justify-center gap-3 rounded-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50">
             <div className="font-bold text-gray-700 md:text-5xl ">{t('header')}</div>
             <div className="block w-full px-6 md:hidden">
               <div className="flex flex-col items-center justify-center gap-2 overflow-hidden px-2">
@@ -66,33 +66,29 @@ export default function Explorer() {
                   onChange={(e) => setNameCertificate(e.target.value)}
                   className="w-full rounded-xl border border-slate-200 px-4 py-3 text-black outline-none sm:py-6"
                 />
-                <ButtonPrimary
-                  onClick={handleSearch}
-                  className="flex w-full p-1 px-8 py-4 sm:w-fit"
-                >
-                  <span className="pr-2 text-white">{t('search_button.label')}</span>
-                  <FaSearch className="text-xl text-white" />
+                <ButtonPrimary onClick={handleSearch} className="px-3 py-5">
+                  {t('search_button.label')}
                 </ButtonPrimary>
               </div>
             </div>
-            <div className="absolute -bottom-1/2 left-1/2 flex hidden -translate-x-1/2 -translate-y-[150%] items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2 md:block">
+            <div className="absolute -bottom-1/2 left-1/2 flex -translate-x-1/2 -translate-y-[150%] items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2 md:block">
               <div className="flex flex-col items-center justify-center gap-2 divide-y md:flex-row md:divide-x md:divide-y-0">
                 <input
                   type="text"
                   placeholder="Your certificate code"
                   value={idCertificate}
                   onChange={(e) => setIdCertificate(e.target.value)}
-                  className="w-80  px-4 py-6 text-black outline-none"
+                  className="w-80 px-4 py-4 text-black outline-none"
                 />
                 <input
                   type="text"
                   placeholder="Your full name"
                   value={nameCertificate}
                   onChange={(e) => setNameCertificate(e.target.value)}
-                  className="w-72 px-4 py-6 text-black outline-none"
+                  className="w-72 px-4 py-4 text-black outline-none"
                 />
-                <ButtonPrimary onClick={handleSearch} className="size-14 p-1">
-                  <FaSearch className="text-xl text-white" />
+                <ButtonPrimary onClick={handleSearch} className="px-3 py-5">
+                  {t('search_button.label')}
                 </ButtonPrimary>
               </div>
             </div>

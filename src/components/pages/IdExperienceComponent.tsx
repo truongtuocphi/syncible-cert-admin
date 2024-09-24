@@ -205,29 +205,26 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     window.open(linkedInUrl, '_blank');
   };
 
-  const addToLinkedInProfile = (
-    name: string,
-    organization: string,
-    issueDate: string, // Chuỗi định dạng year/dd/mm
-    expirationDate: string | null, // null nếu chứng chỉ vô thời hạn
-    certificateUrl: string,
-    certificateId: string
-  ): void => {
-    // Tách year và month từ issueDate
-    const [issueYear, , issueMonth] = issueDate.split('/');
+  function generateLinkedInCertificationLink(
+    certName: string,
+    organizationName: string,
+    issueYear: string,
+    issueMonth: string,
+    certId: string,
+    certUrl: string
+  ): string {
+    const baseUrl = 'https://www.linkedin.com/profile/add/?startTask=CERTIFICATION_NAME';
+    const params = new URLSearchParams({
+      name: certName,
+      organizationName: organizationName,
+      issueYear: issueYear,
+      issueMonth: issueMonth,
+      certId: certId,
+      certUrl: certUrl,
+    });
 
-    // Khởi tạo URL cơ bản
-    let linkedInProfileUrl = `https://www.linkedin.com/profile/add?startTask=CERTIFICATION_NAME&name=${encodeURIComponent(name)}&organizationId=${encodeURIComponent(organization)}&issueYear=${encodeURIComponent(issueYear)}&issueMonth=${encodeURIComponent(issueMonth)}&certUrl=${encodeURIComponent(certificateUrl)}&certId=${encodeURIComponent(certificateId)}`;
-
-    // Nếu có expirationDate, thêm expirationYear và expirationMonth vào URL
-    if (expirationDate) {
-      const [expirationYear, , expirationMonth] = expirationDate.split('/');
-      linkedInProfileUrl += `&expirationYear=${encodeURIComponent(expirationYear)}&expirationMonth=${encodeURIComponent(expirationMonth)}`;
-    }
-
-    // Mở URL trên LinkedIn
-    window.open(linkedInProfileUrl, '_blank');
-  };
+    return `${baseUrl}&${params.toString()}`;
+  }
 
   if (!data) return <Loading />;
   if (loading) return <Loading />;
@@ -250,10 +247,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
             'https://gateway.pinata.cloud/ipfs/QmVQUxa7ERzgnpqhFzXo9SyUKGs3wEieDLBaqpgig7fP7J'
           }
         />
-        <meta
-          property="og:url"
-          content={`https://syncible-cert-admin.vercel.app/en/certificatedetail/${slugPost}`}
-        />
+        <meta property="og:url" content={`${linkWeb}/${slugPost}`} />
       </head>
       <div className="mx-auto mt-5 max-w-full">
         <div className="flex flex-col justify-center md:flex-row">
@@ -356,13 +350,13 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
 
                             <ButtonPrimary
                               onClick={() =>
-                                addToLinkedInProfile(
+                                generateLinkedInCertificationLink(
                                   'Chứng chỉ Blockchain', // Tên chứng chỉ
                                   'Syncible Cert Organization', // Tên tổ chức
                                   date, // Ngày cấp
-                                  null, // Vô thời hạn
-                                  'https://syncible-cert-admin.vercel.app/en/certificatedetail/QmVX7TRubJkFjnkirLTdFMU5ReNfBuLSUchHu8d7Quzvyj', // URL chứng chỉ
-                                  'QmVX7TRubJkFjnkirLTdFMU5ReNfBuLSUchHu8d7Quzvyj' // ID chứng chỉ
+                                  date,
+                                  certificateID, // ID chứng chỉ
+                                  linkWeb, // URL chứng chỉ
                                 )
                               }
                               className="mt-10 w-full rounded-full"
@@ -391,7 +385,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                                 shareOnLinkedIn(
                                   'Chứng chỉ blockchain',
                                   'Chứng chỉ về blockchain được cấp bởi tổ chức Syncible',
-                                  'https://syncible-cert-admin.vercel.app/en/certificatedetail/QmVX7TRubJkFjnkirLTdFMU5ReNfBuLSUchHu8d7Quzvyj'
+                                  linkWeb
                                 )
                               }
                             >
@@ -402,7 +396,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                       </Dialog>
                     ) : (
                       <Link
-                        href={`${social.url}${`https://syncible-cert-admin.vercel.app/en/certificatedetail/QmVX7TRubJkFjnkirLTdFMU5ReNfBuLSUchHu8d7Quzvyj`}`}
+                        href={`${social.url}${linkWeb}`}
                         className="rounded-xl px-6 py-4 shadow-lg"
                         target={'_blank'}
                       >

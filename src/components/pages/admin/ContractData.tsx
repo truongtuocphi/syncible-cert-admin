@@ -1,9 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
-
 import Link from 'next/link';
 import { HiTemplate } from 'react-icons/hi';
-
 import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
 import CertificatePreview from './CertificatePreview';
@@ -12,7 +10,6 @@ interface Props {
   collectionContractAddress: string;
   slug?: string;
   displayName?: string;
-  // eslint-disable-next-line no-unused-vars
   onItemsCountChange: (count: number) => void;
 }
 
@@ -74,6 +71,17 @@ const ContractData: React.FC<Props> = ({
       {data ? (
         <>
           {data.map((item, index) => {
+            const defaultFontSize = 40;
+
+            // Adjust the font size based on screen size.
+            const responsiveFontSize = {
+              base: defaultFontSize,
+              sm: defaultFontSize + 5,
+              md: defaultFontSize + 10,
+              lg: defaultFontSize + 15,
+              xl: defaultFontSize + 20,
+            };
+
             return (
               <Link
                 href={`/admin/collection/collectiondetail/${slug}/${item[3]}?nameCollection=${displayName}`}
@@ -83,7 +91,7 @@ const ContractData: React.FC<Props> = ({
                   <CertificatePreview
                     previewImage={item[4][1] || 'default-image-url'}
                     name={item[1] || 'Unknown Name'}
-                    fontSize={item.fontSize || 'default-size'}
+                    fontSize={responsiveFontSize} // Pass responsive font size.
                     fontFamily={item.fontFamily || 'default-font'}
                   />
                 </div>

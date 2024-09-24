@@ -144,10 +144,19 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
 
     const nameParts = certificateName.trim().split(' ');
 
-    const initials = nameParts
-      .slice(1)
-      .map((word) => word[0])
-      .join('');
+    let initials: string;
+
+    if (nameParts.length >= 4) {
+      initials = nameParts
+        .slice(-2)
+        .map((word) => word[0])
+        .join('');
+    } else {
+      initials = nameParts
+        .slice(1)
+        .map((word) => word[0])
+        .join('');
+    }
 
     console.log('initials', initials);
 

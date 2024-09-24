@@ -5,17 +5,19 @@ const CertificatePreview: React.FC<any> = ({
   previewImage,
   name,
   fontFamily = 'Dancing Script',
-  fontSize = 40,
+  fontSize = 40, // Default font size
 }) => {
   // Function to determine the font size based on screen width
   const getFontSize = () => {
     if (typeof window !== 'undefined') {
       const width = window.innerWidth;
-      if (width < 640) return `${fontSize * 0.8}px`; // Mobile
-      if (width < 768) return `${fontSize}px`; // Tablet
-      if (width < 1024) return `${fontSize * 1.2}px`; // Small Laptop
-      if (width < 1280) return `${fontSize * 1.5}px`; // Large Laptop
-      return `${fontSize * 2}px`; // Desktop
+
+      // Set font size based on screen width without excessive scaling
+      if (width < 640) return `${fontSize - 20}px`; // Mobile
+      if (width < 768) return `${fontSize - 10}px`; // Tablet
+      if (width < 1024) return `${fontSize + 10}px`; // Small Laptop
+      if (width < 1280) return `${fontSize + 20}px`; // Large Laptop
+      return `${fontSize + 30}px`; // Desktop
     }
     return `${fontSize}px`; // Fallback
   };

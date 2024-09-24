@@ -258,14 +258,14 @@ const Experience = () => {
               <div className="w-full space-y-4 rounded-lg bg-white">
                 <div className="flex items-start justify-start gap-4">
                   <div className="w-1/2 space-y-2 ">
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-base font-medium text-gray-700">
                       Hình chứng chỉ
                     </label>
                     <p className="text-xs text-gray-400">
                       Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây
                     </p>
                     <div
-                      className="relative flex w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 py-10 text-gray-600 hover:border-gray-400"
+                      className="relative flex h-1/2 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 py-10 text-gray-600 hover:border-gray-400"
                       onDrop={(e) => handleDrop(e, setBannerImage)}
                       onDragOver={handleDragOver}
                     >
@@ -281,13 +281,13 @@ const Experience = () => {
                             onClick={handleRemoveImage}
                             className="rounded-full bg-gray-700 p-1 text-white"
                           >
-                            <FaTimes className="text-sm" />
+                            <FaTimes className="text-base" />
                           </button>
                         </div>
                       ) : (
                         <div className="flex flex-col items-center">
                           <BiImageAdd className="text-3xl text-black" />
-                          <p className="mt-2 text-sm text-gray-500">
+                          <p className="mt-2 text-base text-gray-500">
                             Kéo & thả hoặc click để tải lên
                           </p>
                           <input
@@ -305,7 +305,7 @@ const Experience = () => {
                   </div>
                   {/* preview */}
                   <div className="sticky h-fit w-1/2" style={{ top: `${top}px` }}>
-                    <div className="block text-sm font-medium text-gray-700">
+                    <div className="block text-base font-medium text-gray-700">
                       Bản xem trước chứng chỉ
                     </div>
                     <p className="mt-2 text-xs text-gray-400">
@@ -324,7 +324,7 @@ const Experience = () => {
                           fontSize={fontSize}
                         />
                       ) : (
-                        <div className="relative h-96 bg-gray-50">
+                        <div className="relative h-96 bg-gray-50 2xl:h-[430px]">
                           <div className="absolute left-1/2 top-1/2 h-28 w-28 -translate-x-1/2 -translate-y-1/2 rounded-full border-[0.5px] border-gray-200 bg-gray-100">
                             <FaImage className="absolute left-1/2 top-[40%] -translate-x-1/2 text-3xl text-gray-500" />
                           </div>
@@ -334,19 +334,19 @@ const Experience = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-sm font-medium text-gray-700">Vai trò</label>
+                  <label className="block w-1/2 text-base font-medium text-gray-700">Vai trò</label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
                     required
-                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   >
                     <option value="Teacher">Teacher</option>
                     <option value="Student">Student</option>
                   </select>
                 </div>
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-sm font-medium text-gray-700">
+                  <label className="block w-1/2 text-base font-medium text-gray-700">
                     Ngày phát hành chứng chỉ
                   </label>
                   <input
@@ -354,17 +354,17 @@ const Experience = () => {
                     value={issuedDate}
                     onChange={(e) => setIssuedDate(e.target.value)}
                     required
-                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   />
                 </div>
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-sm font-medium text-gray-700">
+                  <label className="block w-1/2 text-base font-medium text-gray-700">
                     Lưu chứng chỉ số vào
                   </label>
                   <select
                     onChange={(e) => setcollectionContractAddress(e.target.value)}
                     required
-                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   >
                     {selectedContract.length === 0 ? (
                       <option value="">Vui lòng kết nối ví để hiện thị dữ liệu</option>
@@ -393,12 +393,14 @@ const Experience = () => {
 
               <div className="mt-4">
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-sm font-medium text-gray-700">Phông chữ</label>
+                  <label className="block w-1/2 text-base font-medium text-gray-700">
+                    Phông chữ
+                  </label>
                   <select
                     value={fontFamily}
                     onChange={(e) => setFontFamily(e.target.value)}
                     required
-                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   >
                     <option value="MonteCarlo">MonteCarlo</option>
                     <option value="Noto Serif">Noto Serif</option>
@@ -414,13 +416,13 @@ const Experience = () => {
                 </div>
 
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-sm font-medium text-gray-700">Cỡ chữ</label>
+                  <label className="block w-1/2 text-base font-medium text-gray-700">Cỡ chữ</label>
                   <input
                     type="number"
                     value={fontSize}
                     onChange={(e) => setFontSize(e.target.value)}
                     required
-                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                    className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                     placeholder="Nhập cỡ chữ (vd: 16)"
                   />
                 </div>
@@ -429,7 +431,7 @@ const Experience = () => {
               <div className="mt-4 flex items-center justify-end gap-4">
                 <Link href={'/admin'}>
                   <ButtonPrimary
-                    className="w-40 border-2 border-gray-800 bg-white text-gray-800"
+                    className="w-40 border-2 border-primary-50 bg-white text-primary-50"
                     disabled={loadingButton}
                   >
                     Hủy

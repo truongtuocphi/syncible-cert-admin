@@ -98,13 +98,6 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
 
       <div className="flex items-center justify-between">
         <label className="block text-base font-medium text-gray-900">Tải tệp CSV</label>
-        {/* <input
-          type="file"
-          onChange={(e) => handleCSVChange(e)}
-          accept=".csv"
-          required
-          className="block w-full cursor-pointer rounded-lg border-[1px] text-base text-gray-500 file:mr-4 file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-base file:font-semibold file:text-primary-50 hover:file:bg-blue-100"
-        /> */}
         <div className="space-y-2">
           <input
             type="file"

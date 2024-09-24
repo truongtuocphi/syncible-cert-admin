@@ -212,7 +212,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     issueMonth: string,
     certId: string,
     certUrl: string
-  ): string {
+  ): any {
     const baseUrl = 'https://www.linkedin.com/profile/add/?startTask=CERTIFICATION_NAME';
     const params = new URLSearchParams({
       name: certName,
@@ -223,7 +223,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
       certUrl: certUrl,
     });
 
-    return `${baseUrl}&${params.toString()}`;
+    window.open(`${baseUrl}&${params.toString()}`, '_blank');
   }
 
   if (!data) return <Loading />;
@@ -356,7 +356,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                                   date, // Ngày cấp
                                   date,
                                   certificateID, // ID chứng chỉ
-                                  linkWeb, // URL chứng chỉ
+                                  linkWeb // URL chứng chỉ
                                 )
                               }
                               className="mt-10 w-full rounded-full"

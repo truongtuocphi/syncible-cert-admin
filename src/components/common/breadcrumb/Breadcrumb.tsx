@@ -9,6 +9,7 @@ import getCustomLabel from '@/utils/labelCustomization';
 
 const Breadcrumb = () => {
   const pathname = usePathname();
+
   const paths = pathname.split('/').filter((path) => path);
 
   const isAdminMintNFTPath = pathname === '/admin/mintnft';
@@ -23,9 +24,14 @@ const Breadcrumb = () => {
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
 
-      const label = getCustomLabel(path);
+      let label;
+      if (path.length === 42) {
+        label = 'Quản Lý Chi Tiết'; // Sử dụng nameContract nếu path có độ dài 42
+      } else {
+        label = getCustomLabel(path);
+      }
 
-      const truncatedLabel = path.length > 19 ? `${path.slice(0, 3)}...${path.slice(-3)}` : label;
+      const truncatedLabel = path.length > 45 ? `${path.slice(0, 3)}...${path.slice(-3)}` : label;
 
       return { label: truncatedLabel, href };
     });
@@ -33,7 +39,6 @@ const Breadcrumb = () => {
   return (
     <nav aria-label="breadcrumb">
       <ol className="flex space-x-2 text-gray-500">
-        {/* show breadcrumb */}
         {breadcrumbItems.map((item, index) => (
           <li key={item.href} className="flex items-center">
             {index < breadcrumbItems.length - 1 ? (

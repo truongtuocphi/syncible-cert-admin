@@ -41,7 +41,7 @@ const Sidebar = () => {
     'hover:bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] hover:text-gray-700';
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-white px-3 text-gray-800 shadow-md 2xl:w-80">
+    <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-white px-3 text-gray-800 shadow-md 2xl:w-96">
       <div>
         <div className="flex items-center justify-start p-4">
           <Link href={'/admin'} className="h-auto w-auto">

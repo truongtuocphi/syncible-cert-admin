@@ -33,7 +33,7 @@ const Header = () => {
   }, [router]);
 
   return (
-    <div className="fixed left-0 right-0 top-0 z-40 ml-64 flex items-center justify-end bg-bgPageAdmin p-6 py-3 text-black 2xl:ml-80">
+    <div className="fixed left-0 right-0 top-0 z-40 ml-64 flex items-center justify-end bg-bgPageAdmin p-6 py-3 text-black 2xl:ml-96">
       <div className="flex gap-5">
         <div className="flex items-center gap-2 md:gap-4">
           <ButtonPrimary onClick={() => open()} className="bg-primary-50 text-white">

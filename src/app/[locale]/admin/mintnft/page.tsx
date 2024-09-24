@@ -257,7 +257,7 @@ const Experience = () => {
             <form onSubmit={handleSubmit} className="w-full">
               <div className="w-full space-y-4 rounded-lg bg-white">
                 <div className="flex items-start justify-start gap-4">
-                  <div className="w-1/2 space-y-2 ">
+                  <div className="h-1/2 w-1/2 space-y-2 ">
                     <label className="block text-base font-medium text-gray-700">
                       Hình chứng chỉ
                     </label>
@@ -265,7 +265,7 @@ const Experience = () => {
                       Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây
                     </p>
                     <div
-                      className="relative flex h-1/2 w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 py-10 text-gray-600 hover:border-gray-400"
+                      className="relative flex w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 py-10 text-gray-600 hover:border-gray-400 2xl:h-72"
                       onDrop={(e) => handleDrop(e, setBannerImage)}
                       onDragOver={handleDragOver}
                     >

@@ -7,7 +7,7 @@ import Papa from 'papaparse';
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import getAcronym from '@/utils/getAcronym';
-import { BiFolderPlus, BiImageAdd } from 'react-icons/bi';
+import { BiFolderPlus } from 'react-icons/bi';
 
 const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 

@@ -212,7 +212,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               <p>Polygon</p>
             </div>
             <div className="flex flex-col gap-2">
-              <p className="font-bold">Mã chứng chỉ</p>
+              <p className="font-bold">ID chứng chỉ</p>
               <p>{`${certificateID}`}</p>
             </div>
             <div className="flex flex-col gap-2">

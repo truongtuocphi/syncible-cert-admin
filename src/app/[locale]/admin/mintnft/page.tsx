@@ -238,13 +238,13 @@ const Experience = () => {
 
   return (
     <>
-      <div className='mb-4'>
+      <div className="mb-4">
         <Breadcrumb />
       </div>
       {typePage == null ? (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       ) : (
-        <div className="space-y-6">
+        <div className="h-full space-y-6">
           <div className="flex items-center gap-2">
             <Link href={'/admin'}>
               <ButtonPrimary className="size-10 rounded-lg p-2 text-white">

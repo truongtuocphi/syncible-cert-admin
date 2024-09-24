@@ -70,7 +70,6 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-64 rounded-2xl">
-        <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">
             <CgProfile className="mr-2" />
@@ -78,7 +77,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
             <FaRegMoneyBillAlt className="mr-2" />
-            <div className="flex items-center justify-between">
+            <div className="flex w-full items-center justify-between">
               <p>Ngôn Ngữ</p>
               <p>VI</p>
             </div>

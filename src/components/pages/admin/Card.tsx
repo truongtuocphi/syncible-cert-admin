@@ -18,7 +18,7 @@ export default function Card({ data }: any) {
           {data.icon}
         </div>
 
-        <div className="mt-5 flex flex-col gap-3 2xl:gap-4">
+        <div className="mt-5 flex flex-col gap-3 2xl:gap-5">
           <h2 className="text-2xl font-bold text-gray-800 2xl:text-3xl">{data.title}</h2>
           <p className="text-sm text-gray-500 2xl:text-base">{data.des}</p>
         </div>

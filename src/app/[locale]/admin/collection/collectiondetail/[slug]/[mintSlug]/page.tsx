@@ -32,8 +32,6 @@ const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
     }
   }, [someQueryParam]);
 
-  console.log('nameCertificate', nameCertificate);
-
   return (
     <>
       <div className="mb-4">

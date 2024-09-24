@@ -164,8 +164,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   }, [slugPost]);
 
   useEffect(() => {
-    const currentPath = window.location.pathname;
-    setLinkWeb(currentPath);
+    const currentLink = window.location.href;
+    setLinkWeb(currentLink);
   }, []);
 
   useEffect(() => {

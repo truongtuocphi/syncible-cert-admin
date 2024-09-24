@@ -156,7 +156,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
 
       <div className="mt-6 flex flex-col justify-between gap-8 rounded-3xl bg-white p-6 md:flex-row">
         <div className="items-star flex w-full flex-col md:w-1/2">
-          <h4 className="text-xl font-bold">Chi tiết chứng thông tin chứng chỉ</h4>
+          <h4 className="text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
           <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
           <div className="space-y-4">
             <div className="flex flex-col gap-2">

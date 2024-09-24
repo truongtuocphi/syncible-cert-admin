@@ -250,8 +250,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         <meta property="og:url" content={`${linkWeb}/${slugPost}`} />
       </head>
       <div className="mx-auto mt-5 max-w-full">
-        <div className="flex flex-col justify-center md:flex-row">
-          <div className="h-[170px] w-3/5 sm:h-[270px] lg:h-[420px] 2xl:h-[550px]">
+        <div className="flex flex-col items-center justify-center md:flex-row">
+          <div className="w-1/2">
             <CertificatePreview
               previewImage={templateURL}
               name={name?.split('Certificate for')[1]?.trim()}

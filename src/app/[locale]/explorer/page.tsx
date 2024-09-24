@@ -107,7 +107,7 @@ export default function Explorer() {
               </div>
             </div>
           ) : data ? (
-            <div className="mx-auto mt-16 aspect-[4/3] w-full space-y-4 rounded-xl bg-white p-4 text-black md:w-1/2 ">
+            <div className="mx-auto mt-16 w-full space-y-4 text-black md:w-1/2 ">
               <Link href={`/certificatedetail/${data.mintData[0][3]}`}>
                 <CertificatePreview
                   previewImage={data.mintData[0][4][1]} // Cập nhật để lấy URL từ mảng

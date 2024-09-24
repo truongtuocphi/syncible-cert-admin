@@ -1,29 +1,38 @@
-/* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import { useEffect, useState } from 'react';
 
-const CertificatePreview: React.FC<any> = ({
-  previewImage,
-  name,
-  fontFamily = 'Dancing Script',
-  fontSize = 40, // Default font size
-}) => {
-  // Function to determine the font size based on screen width
-  const getFontSize = () => {
-    if (typeof window !== 'undefined') {
-      const width = window.innerWidth;
+const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontSize = 40 }: any) => {
+  const [dynamicFontSize, setDynamicFontSize] = useState(fontSize); // Kích thước chữ mặc định
 
-      // Calculate a fluid font size based on the viewport width
-      // Base font size with some scaling for larger screens
-      return `${Math.max(fontSize, Math.min(fontSize + width / 100, fontSize + 40))}px`;
-    }
-    return `${fontSize}px`; // Fallback
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      const image = document.getElementById('certificate-image');
+      if (image) {
+        const newFontSize = Math.max(20, image.clientWidth / 10); // Tính toán kích thước chữ
+        setDynamicFontSize(newFontSize);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Gọi ngay khi component mount
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <div className="relative h-full w-full overflow-hidden">
-      <img src={previewImage} alt="Certificate_Image" className="h-full w-full object-cover" />
+    <div className="relative h-full w-full">
+      <img
+        id="certificate-image"
+        src={previewImage}
+        alt="Certificate_Image"
+        className="h-full w-full object-cover"
+      />
       <div className="absolute inset-0 flex items-center justify-center">
-        <h1 className="font-bold" style={{ fontFamily, fontSize: getFontSize() }}>
+        <h1
+          className="font-bold"
+          style={{ fontFamily: fontFamily, fontSize: `${dynamicFontSize}px` }}
+        >
           {name}
         </h1>
       </div>
@@ -31,4 +40,4 @@ const CertificatePreview: React.FC<any> = ({
   );
 };
 
-export default CertificatePreview;
+export default Certificate;

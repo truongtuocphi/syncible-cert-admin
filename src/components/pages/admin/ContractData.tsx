@@ -70,7 +70,7 @@ const ContractData: React.FC<Props> = ({
     );
 
   return (
-    <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2 xl:grid-cols-3">
+    <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2 2xl:grid-cols-3">
       {data ? (
         <>
           {data.map((item, index) => {

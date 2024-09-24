@@ -66,7 +66,7 @@ export default function SectionOurVision() {
             className="h-full object-cover "
             priority
           />
-          {/* <OurVision className="h-full w-full" alt="Image of a globe" /> // hình svg này có vấn đề nên a chưa fix dc, chắc để sau*/}
+          {/* <OurVision className="h-full w-full" alt="Image of a globe" />  */}
         </div>
       </div>
     </div>

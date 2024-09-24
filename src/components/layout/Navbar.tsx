@@ -153,7 +153,7 @@ const Navbar = () => {
                       <Link
                         href={href}
                         className={clsx(
-                          'nav-link hover:text-[#2C2C2C] hover:underline ',
+                          'nav-link hover:text-[#2C2C2C] hover:underline',
                           currentPath === href && 'text-[#2C2C2C]'
                         )}
                       >

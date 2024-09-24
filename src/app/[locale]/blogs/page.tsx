@@ -6,14 +6,14 @@ import { useEffect, useState } from 'react';
 import Navbar from '@/components/layout/Navbar';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { montserrat } from '@/components/ui/fonts';
-import { ChevronDown } from 'lucide-react';
+// import { ChevronDown } from 'lucide-react';
 
 import SyncibleBanner from '/public/SyncibleBanner.svg';
 
 import { Link, usePathname } from '@/i18n/routing';
 
 import { notFound } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+// import { Button } from '@/components/ui/button';
 import Footer from '@/components/layout/Footer';
 
 export default function Blogs() {
@@ -90,14 +90,29 @@ export default function Blogs() {
     };
 
     loadContent();
+
+    const smoothScroll = () => {
+      const anchorLinks = document.querySelectorAll('a[href^="#"]');
+      anchorLinks.forEach((link) => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = link.getAttribute('href');
+          if (href) {
+            const target = document.querySelector(href);
+            target?.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    };
+    smoothScroll();
   }, [locale]);
 
-  const handleToggleBlogNav = () => {
-    setToggleBlogNav(!toggleBlogNav);
-  };
+  // const handleToggleBlogNav = () => {
+  //   setToggleBlogNav(!toggleBlogNav);
+  // };
 
   return (
-    <div className="relative min-h-screen">
+    <div className="relative min-h-screen scroll-smooth">
       <div className="fixed top-0 z-30 w-screen md:mt-6">
         <Navbar />
       </div>
@@ -114,7 +129,7 @@ export default function Blogs() {
             </div>
             <div className="flex flex-col gap-8 md:flex-row">
               <div className="w-full overflow-hidden rounded-xl bg-white/50 text-[#A2A3A9] md:hidden">
-                <Button
+                {/* <Button
                   className={clsx(
                     'flex w-full justify-between rounded-lg bg-white/50 px-4 py-2 text-left text-[#2C2C2C] hover:bg-white/50 hover:text-[#2C2C2C]',
                     { 'rounded-b-none border-b': toggleBlogNav }
@@ -129,14 +144,14 @@ export default function Blogs() {
                   >
                     <ChevronDown />
                   </div>
-                </Button>
+                </Button> */}
                 <div className={clsx('flex flex-col gap-2 px-4 py-2', { hidden: !toggleBlogNav })}>
                   {keys.map((key) => (
                     <Link
                       key={key}
                       href={t(`navigation.${key}.href`)}
                       className={clsx(
-                        'hover:text-[#2C2C2C]',
+                        'hover:text-[#2C2C2C] hover:underline',
                         pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]'
                       )}
                       onClick={() => setToggleBlogNav(false)}
@@ -183,7 +198,7 @@ export default function Blogs() {
                         key={key}
                         href={t(`navigation.${key}.href`)}
                         className={clsx(
-                          'hover:text-[#2C2C2C]',
+                          'hover:text-[#2C2C2C] hover:underline',
                           pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]'
                         )}
                       >
@@ -211,7 +226,7 @@ export default function Blogs() {
                       </div>
                     </div>
                     <div className="w-full border-t-[1px]"></div>
-                    <div className="flex gap-4 ">
+                    <div className="flex flex-col gap-6">
                       <div className="flex w-full flex-col gap-2">
                         <div className="text-base font-medium text-[#A2A3A9]">
                           {t('blog_info.date_created.label')}

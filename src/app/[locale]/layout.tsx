@@ -39,7 +39,6 @@ export default async function RootLayout({
         />
       </head>
       <body className={`${inter.className} min-h-screen bg-brand-10`}>
-      
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <NextIntlClientProvider messages={messages}>
           <Web3ModalProvider initialState={initialState}>

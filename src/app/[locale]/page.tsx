@@ -29,7 +29,7 @@ const Page = () => {
   const t = useTranslations('HomePage.title_section');
   return (
     <>
-      <div className="relative min-h-screen overflow-hidden">
+      <div className="relative min-h-screen overflow-hidden scroll-smooth">
         <div className="fixed top-0 z-30 w-screen md:mt-6">
           <Navbar />
         </div>
@@ -129,10 +129,10 @@ const Page = () => {
             <div className="absolute -left-[170%] -top-[15%] -z-10 w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>
-            <div className="absolute -right-[130%] top-1/2 -z-10 w-[125rem] sm:w-[150%] -translate-y-[50%] sm:-right-1/2 sm:-translate-y-[70%]">
+            <div className="absolute -right-[130%] top-1/2 -z-10 w-[125rem] -translate-y-[50%] sm:-right-1/2 sm:w-[150%] sm:-translate-y-[70%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>
-            <div className="absolute -bottom-[10%] -left-[150%] -z-10 w-[125rem] sm:w-[150%] sm:-bottom-1/2 sm:-left-1/2 sm:-translate-y-[150%]">
+            <div className="absolute -bottom-[10%] -left-[150%] -z-10 w-[125rem] sm:-bottom-1/2 sm:-left-1/2 sm:w-[150%] sm:-translate-y-[150%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>
             <Image

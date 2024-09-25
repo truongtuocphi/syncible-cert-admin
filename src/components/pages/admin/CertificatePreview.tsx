@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 
 const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontSize = 40 }: any) => {
-  const [dynamicFontSize, setDynamicFontSize] = useState(fontSize); // Kích thước chữ mặc định
+  const [dynamicFontSize, setDynamicFontSize] = useState(fontSize);
 
   useEffect(() => {
     const handleResize = () => {
       const image = document.getElementById('certificate-image');
       if (image) {
-        const newFontSize = Math.max(20, image.clientWidth / 10); // Tính toán kích thước chữ
+        const newFontSize = Math.max(20, image.clientWidth / 10);
         setDynamicFontSize(newFontSize);
       }
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // Gọi ngay khi component mount
+    handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);

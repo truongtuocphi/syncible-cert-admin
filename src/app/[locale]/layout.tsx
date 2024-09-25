@@ -40,7 +40,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`${inter.className} min-h-screen bg-brand-10`}>
+      <body className={`${inter.className} bg-custom-blue-gradient min-h-screen`}>
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         {/* <img
           src="/Ellipse_25.png"

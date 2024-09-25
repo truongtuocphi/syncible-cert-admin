@@ -1,8 +1,10 @@
 'use client';
 import clsx from 'clsx';
+import { notFound } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 
+import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { montserrat } from '@/components/ui/fonts';
@@ -12,9 +14,53 @@ import SyncibleBanner from '/public/SyncibleBanner.svg';
 
 import { Link, usePathname } from '@/i18n/routing';
 
-import { notFound } from 'next/navigation';
 // import { Button } from '@/components/ui/button';
-import Footer from '@/components/layout/Footer';
+
+const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
+  const t = useTranslations('BlogPage');
+
+  const pathname = usePathname();
+
+  const [active, setActive] = useState(false);
+
+  const onScroll = () => {
+    const y =
+      document.getElementById(t(`navigation.${key}.href`).replace('#', ''))?.getBoundingClientRect()
+        .y || 0;
+    let nextY = 1000;
+    if (!!nextId) {
+      nextY =
+        document
+          .getElementById(t(`navigation.${nextId}.href`).replace('#', ''))
+          ?.getBoundingClientRect().y || 1000;
+    }
+    if (y < 100 && nextY > 100) {
+      setActive(true);
+    } else {
+      setActive(false);
+    }
+  };
+
+  useEffect(() => {
+    window.removeEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <Link
+      key={key}
+      href={t(`navigation.${key}.href`)}
+      className={clsx(
+        'hover:text-[#2C2C2C] hover:underlin',
+        // pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]',
+        active && 'font-bold text-black'
+      )}
+    >
+      {t(`navigation.${key}.label`)}
+    </Link>
+  );
+};
 
 export default function Blogs() {
   const t = useTranslations('BlogPage');
@@ -25,11 +71,11 @@ export default function Blogs() {
   const [Content, setContent] = useState<any>(null);
 
   function CustomH2({ children }: { children: React.ReactNode }) {
-    return <div className="text-2xl font-bold">{children}</div>;
+    return <h2 className="text-2xl font-bold">{children}</h2>;
   }
 
   function CustomP({ children }: { children: React.ReactNode }) {
-    return <div className="text-lg text-[#6C6D71]">{children}</div>;
+    return <p className="text-lg text-[#6C6D71]">{children}</p>;
   }
 
   function CustomUl({ children }: { children: React.ReactNode }) {
@@ -92,19 +138,46 @@ export default function Blogs() {
     loadContent();
 
     const smoothScroll = () => {
-      const anchorLinks = document.querySelectorAll('a[href^="#"]');
-      anchorLinks.forEach((link) => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const href = link.getAttribute('href');
-          if (href) {
-            const target = document.querySelector(href);
-            target?.scrollIntoView({ behavior: 'smooth' });
-          }
+      const contentSection = document.getElementById('table-content');
+      if (contentSection) {
+        const anchorLinks = contentSection.querySelectorAll('a[href^="#"]');
+        // console.log(anchorLinks);
+        anchorLinks.forEach((link) => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const href = link.getAttribute('href');
+            if (href) {
+              const target = document.querySelector(href);
+              target?.scrollIntoView({ behavior: 'smooth' });
+            }
+          });
         });
-      });
+      }
     };
     smoothScroll();
+
+    // const observer = new IntersectionObserver(
+    //   (entries) => {
+    //     console.log(entries);
+    //     entries.forEach((entry) => {
+    //       if (entry.isIntersecting) {
+    //         const activeSection = entry.target.getAttribute('id');
+    //         document.querySelectorAll('a[href^="#"]').forEach(link => {
+    //           link.classList.toggle('font-bold', link.getAttribute('href') === `#${activeSection}`);
+    //           link.classList.toggle('text-[#A2A3A9]', link.getAttribute('href') !== `#${activeSection}`);
+    //         });
+    //       }
+    //     });
+    //   },
+    //   { rootMargin: '-40% 0px -60% 0px', threshold: 0.5 }
+    // );
+    // document.querySelectorAll('h2[id]').forEach((section) => {
+    //   observer.observe(section);
+    // });
+
+    // return () => {
+    //   observer.disconnect();
+    // };
   }, [locale]);
 
   // const handleToggleBlogNav = () => {
@@ -128,8 +201,8 @@ export default function Blogs() {
               </div>
             </div>
             <div className="flex flex-col gap-8 md:flex-row">
-              <div className="w-full overflow-hidden rounded-xl bg-white/50 text-[#A2A3A9] md:hidden">
-                {/* <Button
+              {/* <div className="w-full overflow-hidden rounded-xl bg-white/50 text-[#A2A3A9] md:hidden">
+                <Button
                   className={clsx(
                     'flex w-full justify-between rounded-lg bg-white/50 px-4 py-2 text-left text-[#2C2C2C] hover:bg-white/50 hover:text-[#2C2C2C]',
                     { 'rounded-b-none border-b': toggleBlogNav }
@@ -144,7 +217,7 @@ export default function Blogs() {
                   >
                     <ChevronDown />
                   </div>
-                </Button> */}
+                </Button>
                 <div className={clsx('flex flex-col gap-2 px-4 py-2', { hidden: !toggleBlogNav })}>
                   {keys.map((key) => (
                     <Link
@@ -160,7 +233,7 @@ export default function Blogs() {
                     </Link>
                   ))}
                 </div>
-              </div>
+              </div> */}
               <div className="hidden basis-1/4 md:block">
                 <div className="flex h-full flex-col gap-8">
                   <div className="flex flex-col gap-6">
@@ -192,8 +265,11 @@ export default function Blogs() {
                       <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
                     </div>
                   </div>
-                  <div className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]">
-                    {keys.map((key) => (
+                  <div
+                    id="table-content"
+                    className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
+                  >
+                    {/* {keys.map((key) => (
                       <Link
                         key={key}
                         href={t(`navigation.${key}.href`)}
@@ -204,6 +280,10 @@ export default function Blogs() {
                       >
                         {t(`navigation.${key}.label`)}
                       </Link>
+                    ))} */}
+
+                    {keys.map((key, index) => (
+                      <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
                     ))}
                   </div>
                 </div>
@@ -231,15 +311,21 @@ export default function Blogs() {
                         <div className="text-base font-medium text-[#A2A3A9]">
                           {t('blog_info.date_created.label')}
                         </div>
-                        <div className="text-lg font-medium">{t('blog_info.date_created.value')}</div>
+                        <div className="text-lg font-medium">
+                          {t('blog_info.date_created.value')}
+                        </div>
                       </div>
                       <div className="flex w-full flex-col gap-2">
-                        <div className="text-base font-medium text-[#A2A3A9]">{t('blog_info.read_time.label')}</div>
+                        <div className="text-base font-medium text-[#A2A3A9]">
+                          {t('blog_info.read_time.label')}
+                        </div>
                         <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
                       </div>
                     </div>
                   </div>
-                  <div>{Content && <Content components={overrideComponents} />}</div>
+                  <div id="content-section">
+                    {Content && <Content  components={overrideComponents}/>}
+                  </div>
                 </div>
               </div>
             </div>

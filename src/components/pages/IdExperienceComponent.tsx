@@ -271,7 +271,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         </div>
 
         {changeLayout ? (
-          <div className="grid grid-rows-12 gap-6 bg-gradient-to-b from-white/50 xl:grid-cols-12">
+          <div className="grid grid-cols-12 gap-6 bg-gradient-to-b from-white/50">
             <div className="col-span-8 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
               <div className="items-star flex w-full flex-col md:w-1/2">
                 <h4 className="mb-4 text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
@@ -301,7 +301,10 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">ID chứng chỉ</p>
-                    <p>{`${certificateID}`}</p>
+                    <div className="flex items-center gap-2">
+                      <p>{`${certificateID}`}</p>
+                      <CopyButton textToCopy={certificateID} />
+                    </div>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">Địa chỉ hợp đồng</p>
@@ -455,7 +458,10 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                 </div>
                 <div className="flex flex-col gap-2">
                   <p className="font-bold">ID chứng chỉ</p>
-                  <p>{`${certificateID}`}</p>
+                  <div className="flex items-center gap-2">
+                    <p>{`${certificateID}`}</p>
+                    <CopyButton textToCopy={certificateID} />
+                  </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <p className="font-bold">Địa chỉ hợp đồng</p>

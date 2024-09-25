@@ -42,7 +42,7 @@ const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontsi
           className="font-bold"
           style={{
             fontFamily: fontFamily,
-            fontSize: `${userFontSize || dynamicFontSize}px`, // Use user-defined or dynamic size
+            fontSize: `${userFontSize}px`, // Use user-defined or dynamic size
           }}
         >
           {name}

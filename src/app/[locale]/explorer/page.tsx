@@ -15,6 +15,7 @@ import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { CollectionData } from '@/types/function';
 import fetchDataFirebase from '@/utils/featDataFirebase';
 import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 
 export default function Explorer() {
   const [idCertificate, setIdCertificate] = useState<string>('');
@@ -107,7 +108,7 @@ export default function Explorer() {
               </div>
             </div>
           ) : data ? (
-            <div className="mx-auto mt-16 w-full space-y-4 text-black md:w-1/2 ">
+            <div className="mx-auto mt-32 w-full space-y-4 text-black md:w-1/2 ">
               <Link href={`/certificatedetail/${data.mintData[0][3]}`}>
                 <CertificatePreview
                   previewImage={data.mintData[0][4][1]} // Cập nhật để lấy URL từ mảng
@@ -127,6 +128,9 @@ export default function Explorer() {
               </div>
             </div>
           )}
+        </div>
+        <div className="font-inter relative mt-10 w-full text-black">
+          <Footer />
         </div>
       </div>
     </>

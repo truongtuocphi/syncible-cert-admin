@@ -9,10 +9,8 @@ const Certificate = ({
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
 
   useEffect(() => {
-    // Kiểm tra xem URL có chứa 'mintnft' hay không
     const isMintNFTPage = window.location.pathname.includes('mintnft');
 
-    // Nếu là trang mintnft, không thực thi effect này
     if (isMintNFTPage) return;
 
     const handleResize = () => {

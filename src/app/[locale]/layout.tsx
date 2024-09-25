@@ -42,11 +42,6 @@ export default async function RootLayout({
       </head>
       <body className={`${inter.className} min-h-screen bg-brand-10`}>
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
-        {/* <img
-          src="/Ellipse_25.png"
-          alt="background"
-          className="absolute left-0 top-0 -z-10 h-[1000px] w-full"
-        /> */}
         <NextIntlClientProvider messages={messages}>
           <Web3ModalProvider initialState={initialState}>
             <main>{children}</main>

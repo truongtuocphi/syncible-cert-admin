@@ -143,9 +143,6 @@ const Page = () => {
               sizes="100vw"
               priority
             />
-            {/* <div className="absolute top-0 h-full">
-              <StarAndLineBG className="h-full w-full z-20" />
-            </div> */}
           </div>
         </div>
       </div>

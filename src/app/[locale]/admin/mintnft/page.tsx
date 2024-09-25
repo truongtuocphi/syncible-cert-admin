@@ -235,6 +235,20 @@ const Experience = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   if (loading) router.push(`/admin/collection/collectiondetail`);
 
   return (
@@ -333,7 +347,7 @@ const Experience = () => {
                               : dataFromMintSingle[0]?.fullname
                           }
                           fontFamily={fontFamily}
-                          fontSize={fontSize}
+                          fontSizeMint={fontSize}
                         />
                       ) : (
                         <div className="relative h-96 bg-gray-50 2xl:h-[430px]">

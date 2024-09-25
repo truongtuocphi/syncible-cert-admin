@@ -41,7 +41,7 @@ const Certificate = ({
 
     if (screenWidth >= 3840) return fontSize.xl;
     if (screenWidth >= 2560) return fontSize.lg + 20;
-    if (screenWidth >= 1280) return fontSize.lg - 10;
+    if (screenWidth >= 1280) return fontSize.lg - 15;
     if (screenWidth >= 768) return fontSize.md - 20;
     if (screenWidth >= 640) return fontSize.sm;
     if (screenWidth < 640) return fontSize.sm - 20;

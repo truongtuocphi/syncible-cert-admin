@@ -254,7 +254,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               previewImage={templateURL}
               name={name?.split('Certificate for')[1]?.trim()}
               fontFamily={fontFamily}
-              fontSize={40}
             />
           </div>
         </div>
@@ -307,7 +306,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">Địa chỉ hợp đồng</p>
                     <div className="mt-2 flex items-center gap-2">
-                      {`${dataContract.slice(0, 5)}...${dataContract.slice(-6)}`}
+                      {`${dataContract.slice(0, 4)}`}
                       <CopyButton textToCopy={dataContract[0]} />
                       <Link
                         href={`https://polygonscan.com/address/${dataContract[0]}`}

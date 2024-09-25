@@ -22,7 +22,7 @@ import { uploadMetadata } from '@/lib/pinata';
 import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
-import { BiImageAdd } from 'react-icons/bi';
+import { BiFolderPlus, BiImageAdd } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 
@@ -33,7 +33,7 @@ const Experience = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
-  const [fileBannerImage, setFileBannerImage] = useState<string | null>(null);
+  const [fileBannerImage, setFileBannerImage] = useState<string>('Tải tệp lên');
   const [role, setRole] = useState<'Teacher' | 'Student'>('Student');
   const [issuedDate, setIssuedDate] = useState('');
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
@@ -119,6 +119,7 @@ const Experience = () => {
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
     const file = e.target.files?.[0];
+
     if (file) {
       setLoading(true);
       setFileBannerImage(file.name);
@@ -256,16 +257,16 @@ const Experience = () => {
           <div className="flex space-x-6 rounded-xl bg-white p-4">
             <form onSubmit={handleSubmit} className="w-full">
               <div className="w-full space-y-4 rounded-lg bg-white">
-                <div className="flex items-start justify-start gap-4">
+                <div className="flex items-center justify-start gap-4">
                   <div className="h-1/2 w-1/2 space-y-2 ">
-                    <label className="block text-base font-medium text-gray-700">
+                    <label className="block text-base font-bold text-gray-700">
                       Hình chứng chỉ
                     </label>
                     <p className="text-xs text-gray-400">
                       Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây
                     </p>
                     <div
-                      className="relative flex w-full items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 py-10 text-gray-600 hover:border-gray-400 2xl:h-72"
+                      className="relative flex w-full items-center justify-start rounded-lg py-5 text-gray-600 hover:border-gray-400 2xl:h-72"
                       onDrop={(e) => handleDrop(e, setBannerImage)}
                       onDragOver={handleDragOver}
                     >
@@ -274,7 +275,7 @@ const Experience = () => {
                           <Loading />
                         </div>
                       ) : bannerImage ? (
-                        <div className="flex h-full w-full items-center justify-center gap-3">
+                        <div className="flex h-full w-full items-center justify-start gap-3">
                           {`${fileBannerImage?.slice(0, 7)}...${fileBannerImage?.slice(-6)}`}
                           <button
                             type="button"
@@ -286,26 +287,37 @@ const Experience = () => {
                         </div>
                       ) : (
                         <div className="flex flex-col items-center">
-                          <BiImageAdd className="text-3xl text-black" />
-                          <p className="mt-2 text-base text-gray-500">
-                            Kéo & thả hoặc click để tải lên
-                          </p>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            required
-                            onChange={(e) =>
-                              handleImageBannerChange(e, setBannerImage, setLoadingBanner)
-                            }
-                            className="absolute inset-0 cursor-pointer opacity-0"
-                          />
+                          <div className="space-y-2">
+                            <input
+                              type="file"
+                              onChange={(e) =>
+                                handleImageBannerChange(e, setBannerImage, setLoadingBanner)
+                              }
+                              accept=".jpg, .png"
+                              required
+                              className="hidden"
+                              id="file-upload"
+                            />
+                            <div className="flex items-center gap-4">
+                              <label
+                                htmlFor="file-upload"
+                                className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-800 hover:bg-gray-100"
+                              >
+                                <BiImageAdd className="text-2xl text-gray-800" />
+                                Chọn tệp
+                              </label>
+                              {fileBannerImage.length > 17
+                                ? `${fileBannerImage?.slice(0, 7)}...${fileBannerImage?.slice(-6)}`
+                                : fileBannerImage}
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>
                   </div>
                   {/* preview */}
                   <div className="sticky h-fit w-1/2" style={{ top: `${top}px` }}>
-                    <div className="block text-base font-medium text-gray-700">
+                    <div className="block text-base font-bold text-gray-700">
                       Bản xem trước chứng chỉ
                     </div>
                     <p className="mt-2 text-xs text-gray-400">
@@ -334,7 +346,7 @@ const Experience = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-base font-medium text-gray-700">Vai trò</label>
+                  <label className="block w-1/2 text-base font-bold text-gray-700">Vai trò</label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
@@ -346,7 +358,7 @@ const Experience = () => {
                   </select>
                 </div>
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-base font-medium text-gray-700">
+                  <label className="block w-1/2 text-base font-bold text-gray-700">
                     Ngày phát hành chứng chỉ
                   </label>
                   <input
@@ -358,7 +370,7 @@ const Experience = () => {
                   />
                 </div>
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-base font-medium text-gray-700">
+                  <label className="block w-1/2 text-base font-bold text-gray-700">
                     Lưu chứng chỉ số vào
                   </label>
                   <select
@@ -393,9 +405,7 @@ const Experience = () => {
 
               <div className="mt-4">
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-base font-medium text-gray-700">
-                    Phông chữ
-                  </label>
+                  <label className="block w-1/2 text-base font-bold text-gray-700">Phông chữ</label>
                   <select
                     value={fontFamily}
                     onChange={(e) => setFontFamily(e.target.value)}
@@ -416,7 +426,7 @@ const Experience = () => {
                 </div>
 
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-base font-medium text-gray-700">Cỡ chữ</label>
+                  <label className="block w-1/2 text-base font-bold text-gray-700">Cỡ chữ</label>
                   <input
                     type="number"
                     value={fontSize}

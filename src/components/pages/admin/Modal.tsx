@@ -64,19 +64,24 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
               key={index}
               onClick={() => handleSelect(index)}
             >
-              <div>
-                <div className="flex w-full items-center justify-center p-5">
-                  <Image
-                    src={dataCard.icon}
-                    alt="icon"
-                    className="w-1/2"
-                    width={200}
-                    height={200}
-                  />
-                </div>
-                <div className="text-start">
-                  <h3 className="mt-4 text-lg font-bold text-gray-800">{dataCard.title}</h3>
-                  <p className="mt-2 line-clamp-3 text-sm text-gray-600">{dataCard.description}</p>
+              <div className="relative rotate-[259deg] bg-gradient-to-r from-[#FFEBE2] to-[#E49D6B] shadow-lg transition">
+                <div className="absolute inset-0 blur-[50px] filter"></div>
+                <div className="relative z-10 p-4">
+                  <div className="flex w-full items-center justify-center p-5">
+                    <Image
+                      src={dataCard.icon}
+                      alt="icon"
+                      className="w-1/2"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                  <div className="text-start">
+                    <h3 className="mt-4 text-lg font-bold text-gray-800">{dataCard.title}</h3>
+                    <p className="mt-2 line-clamp-3 text-sm text-gray-600">
+                      {dataCard.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

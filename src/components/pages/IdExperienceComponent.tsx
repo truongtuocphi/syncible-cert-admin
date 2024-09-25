@@ -306,7 +306,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">Địa chỉ hợp đồng</p>
                     <div className="mt-2 flex items-center gap-2">
-                      {`${dataContract.slice(0, 4)}`}
+                      {`${dataContract[0].slice(0, 6)}...${dataContract[0].slice(-11)}`}
                       <CopyButton textToCopy={dataContract[0]} />
                       <Link
                         href={`https://polygonscan.com/address/${dataContract[0]}`}

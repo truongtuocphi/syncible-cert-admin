@@ -22,17 +22,4 @@
 
 img {
   position: static !important;
-<<<<<<< HEAD
-}
-
-.backgroundCustom {
-  color: white;
-}
-
-.backgroundCustomSidebar {
-  background-image: url('/Rectangle_35.jpg');
-  color: white;
-  background-size: cover;
-=======
->>>>>>> 8e654fe20535e774fad15334d840e1b76ec5449f
 }

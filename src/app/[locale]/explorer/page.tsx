@@ -112,6 +112,8 @@ export default function Explorer() {
                 <CertificatePreview
                   previewImage={data.mintData[0][4][1]} // Cập nhật để lấy URL từ mảng
                   name={data.mintData[0][1]} // Cập nhật để lấy fullname từ mảng
+                  fontFamily={data.mintData[0].fontFamily}
+                  fontSize={data.mintData[0].fontSize}
                 />
               </Link>
             </div>

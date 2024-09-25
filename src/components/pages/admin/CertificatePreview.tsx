@@ -1,13 +1,8 @@
 import { useEffect, useState } from 'react';
 
-const Certificate = ({
-  previewImage,
-  name,
-  fontFamily = 'Dancing Script',
-  initialFontSize = 40,
-}: any) => {
-  const [dynamicFontSize, setDynamicFontSize] = useState(initialFontSize);
-  const [userFontSize, setUserFontSize] = useState(initialFontSize);
+const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontsize = 40 }: any) => {
+  const [dynamicFontSize, setDynamicFontSize] = useState(fontsize);
+  const [userFontSize, setUserFontSize] = useState(fontsize);
 
   useEffect(() => {
     const handleResize = () => {

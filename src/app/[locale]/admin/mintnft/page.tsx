@@ -347,7 +347,7 @@ const Experience = () => {
                               : dataFromMintSingle[0]?.fullname
                           }
                           fontFamily={fontFamily}
-                          fontSize={fontSize}
+                          fontSize={{ base: fontSize }}
                         />
                       ) : (
                         <div className="relative h-96 bg-gray-50 2xl:h-[430px]">

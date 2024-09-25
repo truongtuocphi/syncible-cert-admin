@@ -29,7 +29,7 @@ const Page = () => {
   const t = useTranslations('HomePage.title_section');
   return (
     <>
-      <div className="relative min-h-screen overflow-hidden scroll-smooth">
+      <div className="relative min-h-screen overflow-hidden">
         <div className="fixed top-0 z-30 w-screen md:mt-6">
           <Navbar />
         </div>

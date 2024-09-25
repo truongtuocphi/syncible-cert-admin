@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { BiSolidCommentError } from 'react-icons/bi';
 import { HiTemplate } from 'react-icons/hi';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Loading from '@/components/common/loading/Loading';
@@ -48,7 +49,7 @@ export default function Explorer() {
         <div className="fixed top-0 z-30 w-screen md:mt-6">
           <Navbar />
         </div>
-        <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
+        <div className="relative z-20 mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
           <div className="relative flex h-72 w-full flex-col items-center justify-center gap-3 rounded-[2.5rem]">
             <div className="font-bold text-gray-700 md:text-5xl ">{t('header')}</div>
             <div className="block w-full px-6 md:hidden">
@@ -130,6 +131,16 @@ export default function Explorer() {
         </div>
         <div className="font-inter relative mt-10 w-full text-black">
           <Footer />
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col items-center overflow-hidden">
+          <div className="relative mx-auto h-full w-full max-w-[90rem]">
+            <div className="absolute -left-1/2 -top-1/2 -z-10 w-[125rem] sm:-translate-x-[20%] sm:-translate-y-[50%] sm:-top-[5%] sm:left-[-40%] sm:w-[150%]">
+              <LightBlueGradientEllipse className="h-full w-full" />
+            </div>
+            <div className="absolute -right-1/2 -bottom-1/2 -z-10 w-[125rem] sm:-translate-y-[20%] sm:translate-x-[20%]">
+              <LightBlueGradientEllipse className="h-full w-full" />
+            </div>
+          </div>
         </div>
       </div>
     </>

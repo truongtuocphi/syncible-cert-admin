@@ -113,11 +113,11 @@
     "navigation": {
       "link_1": {
         "label": "Syncible Certificate là gì?",
-        "href": "#syncible-certificate"
+        "href": "#syncible-certificate-là-gì"
       },
       "link_2": {
         "label": "Bảng So Sánh Chứng Chỉ",
-        "href": "#credential-comparison-table"
+        "href": "#bảng-so-sánh-chứng-chỉ"
       },
       "link_3": {
         "label": "Syncible Qualified Batch là gì?",
@@ -125,11 +125,11 @@
       },
       "link_4": {
         "label": "Thiết kế mẫu Syncible Certificate",
-        "href": "#design-a-syncible-certificate-template"
+        "href": "#thiết-kế-mẫu-syncible-sertificate"
       },
       "link_5": {
         "label": "Tại sao nên chuyển sang Syncible để tạo chứng chỉ kỹ thuật số?",
-        "href": "#why-switch-to-syncible-for-custom-digital-certificates"
+        "href": "#tại-sao-nên-chuyển-sang-syncible-để-tạo-chứng-chỉ-kỹ-thuật-số"
       }
     }
   },

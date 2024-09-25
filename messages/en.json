@@ -113,7 +113,7 @@
     "navigation": {
       "link_1": {
         "label": "What is a Syncible Certificate?",
-        "href": "#syncible-certificate"
+        "href": "#what-is-a-syncible-certificate"
       },
       "link_2": {
         "label": "Credential Comparison Table",
@@ -121,7 +121,7 @@
       },
       "link_3": {
         "label": "What is a Syncible Qualified Batch?",
-        "href": "#syncible-qualified-batch"
+        "href": "#what-is-a-syncible-qualified-batch"
       },
       "link_4": {
         "label": "Design a Syncible Certificate template",

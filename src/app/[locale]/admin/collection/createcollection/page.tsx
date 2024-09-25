@@ -263,7 +263,7 @@ const CreateCollection: React.FC = () => {
                     <HoverCard>
                       <HoverCardTrigger asChild>
                         <Button variant="link">
-                          <IoMdHelpCircleOutline className="text-2xl" />
+                          <IoMdHelpCircleOutline className="text-xl text-gray-600" />
                         </Button>
                       </HoverCardTrigger>
                       <HoverCardContent className="w-80">

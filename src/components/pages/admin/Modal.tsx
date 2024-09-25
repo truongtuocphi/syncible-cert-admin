@@ -68,9 +68,9 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                 <img
                   src={index === 0 ? '/Frame_1.png' : '/Frame_2.png'}
                   alt="Frame_1"
-                  className="absolute left-0 top-0 -z-10 h-full w-full object-cover"
+                  className="absolute left-0 top-0 -z-10 object-cover"
                 />
-                <div className="p-4">
+                <div className="p-4 absolute top-0">
                   <div className="flex w-full items-center justify-center p-5">
                     <Image
                       src={dataCard.icon}

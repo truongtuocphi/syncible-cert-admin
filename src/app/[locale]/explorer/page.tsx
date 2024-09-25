@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 import { BiSolidCommentError } from 'react-icons/bi';
-import { FaSearch } from 'react-icons/fa';
 import { HiTemplate } from 'react-icons/hi';
 import { useTranslations } from 'next-intl';
 
@@ -16,6 +15,7 @@ import { CollectionData } from '@/types/function';
 import fetchDataFirebase from '@/utils/featDataFirebase';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
 
 export default function Explorer() {
   const [idCertificate, setIdCertificate] = useState<string>('');
@@ -44,7 +44,7 @@ export default function Explorer() {
 
   return (
     <>
-      <div className="relative min-h-screen flex-col items-center pt-16">
+      <div className="relative flex-col items-center pt-16">
         <div className="fixed top-0 z-30 w-screen md:mt-6">
           <Navbar />
         </div>
@@ -108,13 +108,12 @@ export default function Explorer() {
               </div>
             </div>
           ) : data ? (
-            <div className="mx-auto mt-32 w-full space-y-4 text-black md:w-1/2 ">
+            <div className="mx-auto mt-10 w-[70%] space-y-4 text-black md:mt-32 md:w-1/2 ">
               <Link href={`/certificatedetail/${data.mintData[0][3]}`}>
                 <CertificatePreview
-                  previewImage={data.mintData[0][4][1]} // Cập nhật để lấy URL từ mảng
-                  name={data.mintData[0][1]} // Cập nhật để lấy fullname từ mảng
+                  previewImage={data.mintData[0][4][1]}
+                  name={data.mintData[0][1]}
                   fontFamily={data.mintData[0].fontFamily}
-                  fontSize={data.mintData[0].fontSize}
                 />
               </Link>
             </div>

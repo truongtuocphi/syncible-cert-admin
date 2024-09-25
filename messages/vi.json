@@ -145,6 +145,31 @@
       "label": "Tìm kiếm"
     }
   },
+  "IdExperienceComponent": {
+    "header": "Chi tiết thông tin chứng chỉ",
+
+    "location": {
+      "title": "Vị trí phát hành",
+      "value": "Việt Nam"
+    },
+
+    "dimensions": "Kích thước chứng chỉ",
+
+    "date": "Ngày phát hành",
+
+    "expirationDate": {
+      "title": "Ngày hết hạn",
+      "value": "Vô thời hạn"
+    },
+
+    "certificate": "ID chứng chỉ",
+
+    "contract": "Địa chỉ hợp đồng",
+
+    "header_2": "Chia sẻ chứng chỉ",
+
+    "label": "Hiển thị thông tin xác thực này trên mạng xã hội của bạn"
+  },
   "Localization": {
     "header": "Ngôn ngữ",
     "label": "{locale, select, en {EN} vi {VI} other {Không xác định}}"

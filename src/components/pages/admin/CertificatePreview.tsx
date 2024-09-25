@@ -9,13 +9,16 @@ const Certificate = ({
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
 
   useEffect(() => {
+    // Kiểm tra xem URL có chứa 'mintnft' hay không
     const isMintNFTPage = window.location.pathname.includes('mintnft');
+
+    // Nếu là trang mintnft, không thực thi effect này
+    if (isMintNFTPage) return;
 
     const handleResize = () => {
       const image = document.getElementById('certificate-image');
       let newFontSize = fontSize.base;
 
-      // Responsive font size based on screen width
       const screenWidth = window.innerWidth;
       if (screenWidth >= 3840) newFontSize = fontSize.xl;
       else if (screenWidth >= 2560) newFontSize = fontSize.lg + 20;
@@ -25,7 +28,7 @@ const Certificate = ({
       else if (screenWidth < 640 && screenWidth > 500) newFontSize = fontSize.sm - 20;
       else if (screenWidth <= 500) newFontSize = fontSize.base - 25;
 
-      if (isMintNFTPage && image) {
+      if (image) {
         const imageWidth = image.clientWidth;
         let adjustedFontSize = Math.max(20, imageWidth / 10);
 
@@ -48,6 +51,7 @@ const Certificate = ({
 
   const finalFontSize = `${userFontSize}px`;
   console.log('finalFontSize', finalFontSize);
+
   return (
     <div className="relative h-full w-full">
       {/* Image */}

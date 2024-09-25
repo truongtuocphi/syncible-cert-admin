@@ -64,7 +64,7 @@ export default function Login() {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-start overflow-hidden px-8 py-5">
+    <div className="relative flex max-h-screen min-h-[1000px] items-center justify-start overflow-hidden px-8 py-5">
       <video
         className="absolute left-0 top-0 h-full w-full object-cover"
         src="/video/Cubes_Diagonal_3840x2160.mp4"

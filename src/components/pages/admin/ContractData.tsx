@@ -87,7 +87,7 @@ const ContractData: React.FC<Props> = ({
                 href={`/admin/collection/collectiondetail/${slug}/${item[3]}?nameCollection=${displayName}`}
                 key={index}
               >
-                <div className="h-[170px] w-full sm:h-[270px] lg:h-[360px] 2xl:h-[385px]">
+                <div className="w-full h-full">
                   <CertificatePreview
                     previewImage={item[4][1] || 'default-image-url'}
                     name={item[1] || 'Unknown Name'}

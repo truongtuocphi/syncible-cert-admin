@@ -320,7 +320,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               </div>
             </div>
             <div className="col-span-4 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl">
-              <h4 className="mb-4 text-xl font-bold">Chia sẽ chứng chỉ</h4>
+              <h4 className="mb-4 text-xl font-bold">Chia sẻ chứng chỉ</h4>
               <p className="text-[#A2A3A9]">
                 Hiển thị thông tin xác thực này trên mạng xã hội của bạn
               </p>

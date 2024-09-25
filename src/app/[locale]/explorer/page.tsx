@@ -48,7 +48,7 @@ export default function Explorer() {
           <Navbar />
         </div>
         <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 2xl:px-60">
-          <div className="relative flex h-72 w-full flex-col items-center justify-center gap-3 rounded-[2.5rem] border-t-2 border-white bg-gradient-to-b from-white/50">
+          <div className="relative flex h-72 w-full flex-col items-center justify-center gap-3 rounded-[2.5rem]">
             <div className="font-bold text-gray-700 md:text-5xl ">{t('header')}</div>
             <div className="block w-full px-6 md:hidden">
               <div className="flex flex-col items-center justify-center gap-2 overflow-hidden px-2">
@@ -71,7 +71,7 @@ export default function Explorer() {
                 </ButtonPrimary>
               </div>
             </div>
-            <div className="absolute -bottom-1/2 left-1/2 flex hidden -translate-x-1/2 -translate-y-[150%] items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2 md:block">
+            <div className="absolute -bottom-1/2 left-1/2 hidden -translate-x-1/2 -translate-y-[150%] items-center justify-center gap-2 overflow-hidden rounded-full border-[0.5px] bg-white px-2 md:block">
               <div className="flex flex-col items-center justify-center gap-2 divide-y md:flex-row md:divide-x md:divide-y-0">
                 <input
                   type="text"

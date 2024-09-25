@@ -19,10 +19,10 @@
     --color-foreground: 255, 255, 255;
   }
 }
-
+/* 
 img {
   position: static !important;
-}
+} */
 
 .backgroundCustom {
   color: white;

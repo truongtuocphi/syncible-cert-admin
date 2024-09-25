@@ -58,13 +58,13 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
         <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
           {datCard.map((dataCard, index) => (
             <div
-              className={`flex cursor-pointer flex-col justify-between rounded-lg border p-4 text-center ${
+              className={`relative flex cursor-pointer flex-col justify-between rounded-lg border-4 p-4 text-center shadow-lg transition ${
                 selectedOption === index ? 'border-indigo-500 bg-indigo-50' : 'hover:bg-gray-50'
               }`}
               key={index}
               onClick={() => handleSelect(index)}
             >
-              <div className="relative bg-gradient-to-r from-[#FFEBE2] to-[#E49D6B] shadow-lg blur-lg transition">
+              <div className="">
                 <div className="absolute inset-0 blur-[50px] filter"></div>
                 <div className="relative z-10">
                   <div className="flex w-full items-center justify-center p-5">

@@ -7,7 +7,13 @@ const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontSi
     const handleResize = () => {
       const image = document.getElementById('certificate-image');
       if (image) {
-        const newFontSize = Math.max(20, image.clientWidth / 10);
+        const imageWidth = image.clientWidth;
+        let newFontSize = Math.max(20, imageWidth / 10);
+
+        if (window.innerWidth >= 1340) {
+          newFontSize *= 0.8;
+        }
+
         setDynamicFontSize(newFontSize);
       }
     };

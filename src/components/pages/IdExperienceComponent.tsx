@@ -354,8 +354,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                             <ButtonPrimary
                               onClick={() =>
                                 generateLinkedInCertificationLink(
-                                  'Chứng chỉ Blockchain', // Tên chứng chỉ
-                                  'Syncible Cert Organization', // Tên tổ chức
+                                  'Certificate', // Tên chứng chỉ
+                                  'Syncible', // Tên tổ chức
                                   date, // Ngày cấp
                                   date,
                                   certificateID, // ID chứng chỉ

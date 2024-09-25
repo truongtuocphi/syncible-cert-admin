@@ -271,9 +271,9 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         </div>
 
         {changeLayout ? (
-          <div className="grid grid-cols-12 gap-6 bg-gradient-to-b from-white/50">
-            <div className="col-span-8 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
-              <div className="items-star flex w-full flex-col md:w-1/2">
+          <div className="grid grid-cols-1 gap-6 bg-gradient-to-b from-white/50 md:grid-cols-12">
+            <div className="col-span-12 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl md:col-span-8">
+              <div className="flex w-full flex-col items-start">
                 <h4 className="mb-4 text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">
@@ -282,7 +282,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">Kích thước chứng chỉ</p>
-                    <p> 500x300</p>
+                    <p>500x300</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">Ngày phát hành</p>
@@ -309,7 +309,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">Địa chỉ hợp đồng</p>
                     <div className="mt-2 flex items-center gap-2">
-                      {`${dataContract}`}
+                      {`${dataContract.slice(0, 5)}...${dataContract.slice(-6)}`}
                       <CopyButton textToCopy={dataContract[0]} />
                       <Link
                         href={`https://polygonscan.com/address/${dataContract[0]}`}
@@ -322,7 +322,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                 </div>
               </div>
             </div>
-            <div className="col-span-4 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl">
+
+            <div className="col-span-12 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl md:col-span-4">
               <h4 className="mb-4 text-xl font-bold">Chia sẻ chứng chỉ</h4>
               <p className="text-[#A2A3A9]">
                 Hiển thị thông tin xác thực này trên mạng xã hội của bạn

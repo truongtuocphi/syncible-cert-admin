@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 
-const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontSize = 40 }: any) => {
-  const [userFontSize, setUserFontSize] = useState(fontSize);
+const Certificate = ({
+  previewImage,
+  name,
+  fontFamily = 'Dancing Script',
+  fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
+}: any) => {
+  const [userFontSize, setUserFontSize] = useState(fontSize.base);
 
   useEffect(() => {
     if (!window.location.pathname.includes('mintnft')) {
@@ -14,7 +19,7 @@ const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontSi
         const imageWidth = image.clientWidth;
         let newFontSize = Math.max(20, imageWidth / 10);
 
-        if (window.innerWidth >= 1340) {
+        if (window.innerWidth >= 2560) {
           newFontSize *= 0.8;
         }
 
@@ -30,9 +35,23 @@ const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontSi
     };
   }, []);
 
+  // Function to dynamically choose font size based on screen width
+  const getResponsiveFontSize = () => {
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth >= 3840) return fontSize.xl;
+    if (screenWidth >= 2560) return fontSize.lg + 20;
+    if (screenWidth >= 1280) return fontSize.lg - 10;
+    if (screenWidth >= 768) return fontSize.md - 20;
+    if (screenWidth >= 640) return fontSize.sm;
+    if (screenWidth < 640) return fontSize.sm - 20;
+    if (screenWidth <= 500) return fontSize.sm - 20;
+    return fontSize.base;
+  };
+
   const finalFontSize = window.location.pathname.includes('mintnft')
-    ? `${fontSize}px`
-    : `${userFontSize}px`;
+    ? `${userFontSize}px`
+    : `${getResponsiveFontSize()}px`;
 
   console.log('finalFontSize', finalFontSize);
 

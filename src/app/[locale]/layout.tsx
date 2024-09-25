@@ -14,8 +14,8 @@ import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 
 export const metadata: Metadata = {
-  title: 'Nền Tảng Chứng Chỉ Số Syncible',
-  description: 'Nền Tảng Chứng Chỉ Số Syncible',
+  title: 'Syncible | Tokenized Academic Certificate on Blockchain',
+  description: 'Syncible | Tokenized Academic Certificate on Blockchain',
   icons: {
     icon: { url: 'src/app/icon.ico', sizes: '10x26', type: 'image/x-icon' },
   },

@@ -230,8 +230,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
-  console.log(linkWeb);
-
   return (
     <>
       <head>
@@ -256,7 +254,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               previewImage={templateURL}
               name={name?.split('Certificate for')[1]?.trim()}
               fontFamily={fontFamily}
-              fontSize={fontSize}
+              fontSize={40}
             />
           </div>
         </div>

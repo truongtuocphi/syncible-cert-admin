@@ -1,17 +1,21 @@
 import { useEffect, useState } from 'react';
 
-const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontsize = 40 }: any) => {
-  const [userFontSize, setUserFontSize] = useState(fontsize);
+const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontSize = 40 }: any) => {
+  const [userFontSize, setUserFontSize] = useState(fontSize);
 
   useEffect(() => {
+    if (!window.location.pathname.includes('mintnft')) {
+      return;
+    }
+
     const handleResize = () => {
       const image = document.getElementById('certificate-image');
       if (image) {
         const imageWidth = image.clientWidth;
-        let newFontSize = Math.max(20, imageWidth / 10); // Tính kích thước chữ động
+        let newFontSize = Math.max(20, imageWidth / 10);
 
         if (window.innerWidth >= 1340) {
-          newFontSize *= 0.8; // Điều chỉnh theo độ rộng màn hình
+          newFontSize *= 0.8;
         }
 
         setUserFontSize(newFontSize);
@@ -19,17 +23,18 @@ const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontsi
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // Gọi khi component mount
+    handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
-  // Kiểm tra xem URL có chứa "mintnft" không
   const finalFontSize = window.location.pathname.includes('mintnft')
-    ? `${fontsize}px`
+    ? `${fontSize}px`
     : `${userFontSize}px`;
+
+  console.log('finalFontSize', finalFontSize);
 
   return (
     <div className="relative h-full w-full">
@@ -46,7 +51,7 @@ const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontsi
           className="font-bold"
           style={{
             fontFamily: fontFamily,
-            fontSize: finalFontSize, // Sử dụng kích thước chữ theo URL
+            fontSize: finalFontSize,
           }}
         >
           {name}

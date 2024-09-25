@@ -354,12 +354,12 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                             <ButtonPrimary
                               onClick={() =>
                                 generateLinkedInCertificationLink(
-                                  'Certificate', // Tên chứng chỉ
-                                  'Syncible', // Tên tổ chức
-                                  date, // Ngày cấp
+                                  'Certificate',
+                                  'Syncible',
                                   date,
-                                  certificateID, // ID chứng chỉ
-                                  linkWeb // URL chứng chỉ
+                                  date,
+                                  certificateID,
+                                  linkWeb
                                 )
                               }
                               className="mt-10 w-full rounded-full"

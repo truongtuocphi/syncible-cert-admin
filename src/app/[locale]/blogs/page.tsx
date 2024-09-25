@@ -322,9 +322,9 @@ export default function Blogs() {
                         <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
                       </div>
                     </div>
-                    <div>{Content && <Content components={overrideComponents} />}</div>
                   </div>
                   <div id="content-section">
+                    {/* {Content && <Content/>} */}
                     {Content && <Content  components={overrideComponents}/>}
                   </div>
                 </div>

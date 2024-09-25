@@ -35,7 +35,7 @@ const Certificate = ({
       // Điều chỉnh kích thước font theo kích thước hình ảnh (nếu có)
       if (image) {
         const imageWidth = image.clientWidth;
-        let adjustedFontSize = Math.max(20, imageWidth / 10);
+        let adjustedFontSize = Math.max(20, imageWidth / 15);
 
         if (window.innerWidth >= 2560) {
           adjustedFontSize *= 0.8;

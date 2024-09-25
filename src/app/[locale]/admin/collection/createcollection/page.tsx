@@ -258,7 +258,7 @@ const CreateCollection: React.FC = () => {
             <div className="flex items-center gap-4 space-y-2">
               <div className="w-1/2">
                 <label className="block text-base font-medium text-gray-900">
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2">
                     <p>Biểu tượng hợp đồng</p>
                     <HoverCard>
                       <HoverCardTrigger asChild>

@@ -25,12 +25,7 @@ const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontsi
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
-
-  const handleFontSizeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const newSize = parseInt(event.target.value, 10);
-    setUserFontSize(newSize);
-  };
+  }, [fontsize]);
 
   return (
     <div className="relative h-full w-full">
@@ -52,21 +47,6 @@ const Certificate = ({ previewImage, name, fontFamily = 'Dancing Script', fontsi
         >
           {name}
         </h1>
-      </div>
-
-      {/* Font size control */}
-      <div className="absolute bottom-4 right-4">
-        <label htmlFor="font-size-slider">Font Size: </label>
-        <input
-          type="range"
-          id="font-size-slider"
-          min="20"
-          max="100"
-          value={userFontSize}
-          onChange={handleFontSizeChange}
-          className="ml-2"
-        />
-        <span className="ml-2">{userFontSize}px</span>
       </div>
     </div>
   );

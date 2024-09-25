@@ -37,6 +37,7 @@ import {
 import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
 import { deleteDataById } from '@/utils/deleteDataFirebase';
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 
 export type Collection = {
   id: string;
@@ -254,6 +255,9 @@ export default function Collection() {
 
   return (
     <>
+      <div className="mb-4">
+        <Breadcrumb />
+      </div>
       <div className="flex items-center justify-between space-x-4 py-4">
         <div className="flex items-center rounded-2xl border-[1px] border-gray-200 bg-white px-4 py-1">
           <BiSearch className="text-2xl text-gray-500" />

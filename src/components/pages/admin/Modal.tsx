@@ -58,25 +58,34 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
         <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
           {datCard.map((dataCard, index) => (
             <div
-              className={`flex cursor-pointer flex-col justify-between rounded-lg border p-4 text-center shadow-lg transition ${
+              className={`relative flex cursor-pointer flex-col justify-between rounded-lg border-4 text-center shadow-lg transition ${
                 selectedOption === index ? 'border-indigo-500 bg-indigo-50' : 'hover:bg-gray-50'
               }`}
               key={index}
               onClick={() => handleSelect(index)}
             >
-              <div>
-                <div className="flex w-full items-center justify-center p-5">
-                  <Image
-                    src={dataCard.icon}
-                    alt="icon"
-                    className="w-1/2"
-                    width={200}
-                    height={200}
-                  />
-                </div>
-                <div className="text-start">
-                  <h3 className="mt-4 text-lg font-bold text-gray-800">{dataCard.title}</h3>
-                  <p className="mt-2 line-clamp-3 text-sm text-gray-600">{dataCard.description}</p>
+              <div className="relative z-10">
+                <img
+                  src={index === 0 ? '/Frame_1.png' : '/Frame_2.png'}
+                  alt="Frame_1"
+                  className="absolute left-0 top-0 -z-10 h-full w-full object-cover"
+                />
+                <div className="p-4">
+                  <div className="flex w-full items-center justify-center p-5">
+                    <Image
+                      src={dataCard.icon}
+                      alt="icon"
+                      className="w-1/2"
+                      width={200}
+                      height={200}
+                    />
+                  </div>
+                  <div className="text-start">
+                    <h3 className="mt-4 text-lg font-bold text-gray-800">{dataCard.title}</h3>
+                    <p className="mt-2 line-clamp-3 text-sm text-gray-600">
+                      {dataCard.description}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

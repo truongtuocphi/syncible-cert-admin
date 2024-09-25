@@ -6,7 +6,8 @@
 .index :global .pintura-editor {
   --color-background: 255, 255, 255;
   --color-foreground: 10, 10, 10;
-  font-family: 'Crimson Text', 'Dancing Script', 'Great Vibes', 'MonteCarlo', 'Noto Serif', cursive;
+  font-family: 'Crimson Text', 'Dancing Script', 'Great Vibes', 'MonteCarlo', 'Noto Serif',
+    'EB Garamond', 'Montserrat', 'Open Sans', 'Playfair Display', 'Roboto', cursive;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,10 +19,10 @@
     --color-foreground: 255, 255, 255;
   }
 }
-
+/* 
 img {
   position: static !important;
-}
+} */
 
 .backgroundCustom {
   color: white;

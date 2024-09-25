@@ -7,7 +7,12 @@ import { MdNavigateNext } from 'react-icons/md';
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
 import getCustomLabel from '@/utils/labelCustomization';
 
-const Breadcrumb = () => {
+interface propData {
+  displayName?: string;
+  nameCertificate?: string;
+}
+
+const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
   const pathname = usePathname();
 
   const paths = pathname.split('/').filter((path) => path);
@@ -24,36 +29,47 @@ const Breadcrumb = () => {
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
 
-      let label;
+      let label = '';
+
       if (path.length === 42) {
-        label = 'Quản Lý Chi Tiết'; // Sử dụng nameContract nếu path có độ dài 42
+        label = displayName || 'Loadding...';
+      }
+
+      if (path.length === 46 && nameCertificate) {
+        label = nameCertificate || 'Loading...';
       } else {
         label = getCustomLabel(path);
       }
 
-      const truncatedLabel = path.length > 45 ? `${path.slice(0, 3)}...${path.slice(-3)}` : label;
+      const truncatedLabel = label.length > 41 ? `${displayName}` : label;
 
       return { label: truncatedLabel, href };
     });
 
   return (
     <nav aria-label="breadcrumb">
-      <ol className="flex space-x-2 text-gray-500">
+      <ol className="flex text-gray-400">
         {breadcrumbItems.map((item, index) => (
-          <li key={item.href} className="flex items-center">
+          <li key={item.href} className="flex items-center text-sm 2xl:text-base">
             {index < breadcrumbItems.length - 1 ? (
               <div className="flex items-center gap-2">
                 {item.label && (
                   <>
-                    <Link href={item.href} className="line-clamp-1 text-sm">
+                    <Link
+                      href={item.href}
+                      className="line-clamp-1 text-sm hover:text-gray-800 2xl:text-base"
+                    >
                       {capitalizeFirstLetter(item.label)}
                     </Link>
-                    <MdNavigateNext className="text-xl" />
+                    <MdNavigateNext className="mr-2 text-xl" />
                   </>
                 )}
               </div>
             ) : (
-              <Link href={item.href} className="text-sm text-gray-700">
+              <Link
+                href={item.href}
+                className="text-sm text-gray-400 hover:text-gray-800 2xl:text-base"
+              >
                 {capitalizeFirstLetter(item.label)}
               </Link>
             )}

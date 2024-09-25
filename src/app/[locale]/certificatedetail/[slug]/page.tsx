@@ -7,14 +7,12 @@ export default function CertificateDetail({ params }: { params: { slug: string }
 
   return (
     <>
-      <div className="fixed z-10 w-full bg-purple-500/30 shadow backdrop-blur-sm">
+      <div className="fixed top-0 z-30 w-screen md:mt-6">
         <Navbar />
       </div>
       <div className="min-h-screen flex-col items-center pt-16">
-        <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:grid-cols-2 lg:px-24 2xl:px-60">
-          <div className="rounded-lg bg-white p-2">
-            <IdExperienceComponent slugPost={slugPost} />
-          </div>
+        <div className="mt-10 px-6 md:px-14 lg:mt-28 lg:px-24 2xl:px-60">
+          <IdExperienceComponent slugPost={slugPost} changeLayout={true} />
         </div>
         <div className="relative text-white">
           <Footer />

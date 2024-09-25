@@ -69,9 +69,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
           </div>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-64">
-        <DropdownMenuLabel>Tài khoản của tôi</DropdownMenuLabel>
-        <DropdownMenuSeparator />
+      <DropdownMenuContent className="w-64 rounded-2xl">
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">
             <CgProfile className="mr-2" />
@@ -79,18 +77,17 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
             <FaRegMoneyBillAlt className="mr-2" />
-            Thanh toán
+            <div className="flex w-full items-center justify-between">
+              <p>Ngôn Ngữ</p>
+              <p>VI</p>
+            </div>
           </DropdownMenuItem>
           <DropdownMenuItem className="cursor-pointer">
-            <IoSettingsOutline className="mr-2" />
-            Cài đặt
+            <MdOutlineContactSupport className="mr-2" />
+            Hỗ trợ
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="cursor-pointer">
-          <MdOutlineContactSupport className="mr-2" />
-          Hỗ trợ
-        </DropdownMenuItem>
         <DropdownMenuItem className="cursor-pointer" onClick={handleSignOut}>
           <FiLogOut className="mr-2" />
           Đăng xuất

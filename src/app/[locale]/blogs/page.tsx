@@ -83,7 +83,7 @@ export default function Blogs() {
   }
 
   function CustomLi({ children }: { children: React.ReactNode }) {
-    return <li className="ps-1 text-lg text-[#6C6D71]">{children}</li>;
+    return <li className="ps-1 text-base text-[#6C6D71]">{children}</li>;
   }
 
   function CustomTable({ children }: { children: React.ReactNode }) {
@@ -322,6 +322,7 @@ export default function Blogs() {
                         <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
                       </div>
                     </div>
+                    <div>{Content && <Content components={overrideComponents} />}</div>
                   </div>
                   <div id="content-section">
                     {Content && <Content  components={overrideComponents}/>}

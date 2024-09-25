@@ -20,7 +20,7 @@ export default function CopyAddressButton({ textToCopy }: { textToCopy: string }
   return (
     <ButtonPrimary
       onClick={handleCopy}
-      className="w-fit cursor-pointer bg-transparent hover:bg-transparent"
+      className="w-fit cursor-pointer bg-transparent hover:bg-transparent border-none"
     >
       {copied ? (
         <div className="text-purple-500">Copied!</div>

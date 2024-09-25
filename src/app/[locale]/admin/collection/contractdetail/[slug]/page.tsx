@@ -14,6 +14,7 @@ import Loading from '@/components/common/loading/Loading';
 import ContractData from '@/components/pages/admin/ContractData';
 import { CollectionData } from '@/types/function';
 import fetchDataCollectionById from '@/utils/fetchDataCollectionById';
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<CollectionData | null>(null);
@@ -43,6 +44,9 @@ export default function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
+      <div className="mb-4">
+        <Breadcrumb />
+      </div>
       <div className="space-y-6">
         <div className="flex items-center gap-2">
           <Link href={'/admin/collection'}>

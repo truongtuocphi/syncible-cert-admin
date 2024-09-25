@@ -44,6 +44,7 @@ import {
   DrawerTrigger,
 } from '@/components/ui/drawer';
 import { Input } from '@/components/ui/input';
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 
 setPlugins(plugin_crop, plugin_filter, plugin_annotate, plugin_sticker);
 
@@ -84,6 +85,26 @@ const predefinedTemplates = [
     id: 7,
     imageUrl: 'QmV8R2Dz1Y7GKNSj2bJ5keN4X4LUwJuRpMbs3sxiws1Kso',
     name: 'Certificate 7',
+  },
+  {
+    id: 8,
+    imageUrl: 'Qmf2oFMiKV884XY2bGFSH7KjgcQGhHHK472xTBUmp6ELzd',
+    name: 'Certificate 8',
+  },
+  {
+    id: 9,
+    imageUrl: 'Qmcw543Aor4DGVp4GYirxZBmS4e3Xef4wi1vsqDDs6cM4m',
+    name: 'Certificate 9',
+  },
+  {
+    id: 10,
+    imageUrl: 'Qmez1NiNoeKiKhdLiQpRwgstubsGf43yCRXYmwC8pVRN9G',
+    name: 'Certificate 10',
+  },
+  {
+    id: 11,
+    imageUrl: 'QmTPnETa5dMbP28mZc2gQWaLCJXHxViuGpynWdsgHuM35R',
+    name: 'Certificate 11',
   },
 ];
 
@@ -149,6 +170,9 @@ export default function DefineTemplate() {
 
   return (
     <>
+      <div className="mb-4">
+        <Breadcrumb />
+      </div>
       <div className="mb-4 flex w-full items-center justify-between">
         <h2 className="text-2xl font-bold">Tùy chỉnh mẫu</h2>
         <div className="flex items-center gap-6">
@@ -160,7 +184,7 @@ export default function DefineTemplate() {
               onChange={handleTemplateChange}
             />
             <ButtonPrimary
-              className="flex items-center gap-2 border-2 border-primary-50 bg-white text-primary-50"
+              className="flex items-center gap-2 border-2 border-primary-50 bg-white text-primary-50 hover:bg-primary-50 hover:text-white"
               onClick={() => document.getElementById('picture')?.click()}
             >
               <FaRegFileImage className="text-2xl" />
@@ -235,11 +259,16 @@ export default function DefineTemplate() {
               ['Noto Serif', 'Noto Serif'],
               ['Crimson Text', 'Crimson Text'],
               ['Great Vibes', 'Great Vibes'],
+              ['EB Garamond', 'EB Garamond'],
+              ['Montserrat', 'Montserrat'],
+              ['Open Sans', 'Open Sans'],
+              ['Playfair Display', 'Playfair Display'],
+              ['Roboto', 'Roboto'],
               ...createDefaultFontFamilyOptions(),
             ],
           })}
           onLoad={(res) => {
-            console.log('load image', res);
+            // console.log('load image', res);
           }}
           onProcess={({ dest }) => setResult(URL.createObjectURL(dest))}
           imageAnnotation={[

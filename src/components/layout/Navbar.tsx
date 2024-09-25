@@ -33,7 +33,7 @@ const Navbar = () => {
   const t = useTranslations('HomePage.navigation.top_nav');
   const router = useRouter();
   const locale = useLocale();
-  
+
   const links = [
     { label: t('links.about.label'), href: t('links.about.href') },
     { label: t('links.blogs.label'), href: t('links.blogs.href') },
@@ -84,7 +84,7 @@ const Navbar = () => {
     <div className={`${montserrat.className} "relative w-full`}>
       <div className="flex flex-col items-center">
         <div className="w-full md:px-8 xl:px-[6.5rem]">
-          <div className="grid w-full grid-cols-12 items-center justify-items-center rounded-3xl p-4 backdrop-blur-sm lg:bg-white/50">
+          <div className="grid w-full grid-cols-12 items-center justify-items-center rounded-3xl p-4 backdrop-blur-xl lg:bg-white/50">
             <div className="col-span-6 justify-self-start md:col-span-4">
               <Link href="/" className="">
                 <div className="h-8 w-28 md:h-10 md:w-40">

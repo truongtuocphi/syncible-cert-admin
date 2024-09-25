@@ -1,6 +1,6 @@
 _Bài viết này sẽ giới thiệu tổng quan về chứng chỉ, bao gồm các loại khác nhau, ứng dụng thực tiễn và các ví dụ minh họa. Chúng ta sẽ tìm hiểu những lợi ích mà các chứng chỉ số mang lại cho cả bên phát hành và người nhận, đồng thời giải quyết những thách thức phổ biến liên quan đến việc sử dụng chúng. Trong số các chứng chỉ số, huy hiệu kỹ thuật số (digital badges) nổi bật như một phương tiện đại diện cho thành tựu, kỹ năng hoặc những thành tích đáng chú ý có thể xác minh. Chúng được sử dụng rộng rãi trong nhiều môi trường và cho phép cá nhân thể hiện năng lực của mình một cách rõ ràng. Bài viết này sẽ đi sâu vào huy hiệu kỹ thuật số, khám phá cách thức tạo ra, cách chúng hoạt động trong mối quan hệ với chứng chỉ số, và làm thế nào các tổ chức có thể nâng cao chương trình của mình thông qua việc phát hành chứng chỉ số._
 
-<br/>
+<br />
 <div className="border"></div>
 <br />
 
@@ -35,62 +35,74 @@ Ngoài ra, Syncible Certificate còn phục vụ nhiều mục đích quan trọ
 
 Syncible Certificate được các tổ chức và cơ sở giáo dục sử dụng rộng rãi như một hình thức công nhận chính thức về trình độ chuyên môn. Dù là chứng chỉ hoàn thành khóa học, phát triển chuyên môn, hay xác nhận tư cách thành viên, Syncible Certificate mang đến một giải pháp kỹ thuật số tiện lợi, thay thế cho các chứng chỉ giấy hoặc PDF truyền thống. Dù được số hóa, Syncible Certificate vẫn cho phép in bản cứng để đáp ứng nhu cầu của những người có mong muốn sở hữu chứng chỉ vật lý.
 
-<br/>
+<br />
 
 <br />
 
 ## <div id="credential-comparison-table" className="scroll-mt-[100px]">Bảng So Sánh Chứng Chỉ</div>
 
-<br/>
+<br />
 
 <table className="table-fixed border-separate border-spacing-0 overflow-hidden text-xs xs:text-base">
   <thead className="border h-[88px] bg-white/50 rounded-t-[1.25rem]">
     <tr>
-      <th className="border border-r-0 rounded-tl-[1.25rem]">Tính năng</th>
-    <th className="border border-r-0">Chứng Chỉ Tokenized</th>
-    <th className="border border-r-0">Chứng Chỉ Giấy</th>
-    <th className="border rounded-tr-[1.25rem]">Chứng Chỉ PDF</th>
+      <th className="rounded-tl-[1.25rem] border border-r-0">Tính năng</th>
+      <th className="border border-r-0">Chứng Chỉ Tokenized</th>
+      <th className="border border-r-0">Chứng Chỉ Giấy</th>
+      <th className="rounded-tr-[1.25rem] border">Chứng Chỉ PDF</th>
     </tr>
   </thead>
   <tbody className="text-[#6C6D71]">
     <tr className="h-[108px]">
-      <td className="border border-t-0 border-r-0 p-2">Xác minh</td>
-    <td className="border border-t-0 border-r-0 p-2">Xác minh tức thì dựa trên blockchain</td>
-      <td className="border border-t-0 border-r-0 p-2">Xác minh thủ công, tiến trình chậm</td>
+      <td className="border border-r-0 border-t-0 p-2">Xác minh</td>
+      <td className="border border-r-0 border-t-0 p-2">Xác minh tức thì dựa trên blockchain</td>
+      <td className="border border-r-0 border-t-0 p-2">Xác minh thủ công, tiến trình chậm</td>
       <td className="border border-t-0 p-2">Xác minh thủ công hoặc bán tự động</td>
     </tr>
     <tr className="h-[108px]">
-      <td className="border border-t-0 border-r-0 p-2">Chống lừa đảo</td>
-      <td className="border border-t-0 border-r-0 p-2">>Xác minh tức thì dựa trên blockchain</td>
-    <td className="border border-t-0 border-r-0 p-2">Thấp - Dễ bị làm giả và giả mạo</td>
-      <td className="border border-t-0 border-r-0 p-2">Xác minh thủ công hoặc bán tự động</td>
+      <td className="border border-r-0 border-t-0 p-2">Chống lừa đảo</td>
+      <td className="border border-r-0 border-t-0 p-2">Xác minh tức thì dựa trên blockchain</td>
+      <td className="border border-r-0 border-t-0 p-2">Thấp - Dễ bị làm giả và giả mạo</td>
+      <td className="border border-r-0 border-t-0 p-2">Xác minh thủ công hoặc bán tự động</td>
     </tr>
     <tr className="h-[108px]">
-    <td className="border border-t-0 border-r-0 p-2">Khả năng chia sẻ</td>
-    <td className="border border-t-0 border-r-0 p-2">Không thể bị mất hoặc hư hỏng vì được lưu trữ kỹ thuật số trên blockchain</td>
-    <td className="border border-t-0 border-r-0 p-2">Nguy cơ mất hoặc hư hỏng cao</td>
-    <td className="border border-t-0 p-2">Dễ bị mất hoặc hỏng nếu thiết bị lưu trữ gặp sự cố</td>
+      <td className="border border-r-0 border-t-0 p-2">Khả năng chia sẻ</td>
+      <td className="border border-r-0 border-t-0 p-2">
+        Không thể bị mất hoặc hư hỏng vì được lưu trữ kỹ thuật số trên blockchain
+      </td>
+      <td className="border border-r-0 border-t-0 p-2">Nguy cơ mất hoặc hư hỏng cao</td>
+      <td className="border border-t-0 p-2">Dễ bị mất hoặc hỏng nếu thiết bị lưu trữ gặp sự cố</td>
     </tr>
     <tr className="h-[108px]">
-      <td className="border border-t-0 border-r-0 p-2">Chi phí</td>
-      <td className="border border-t-0 border-r-0 p-2">Có chi phí tạo dựng ban đầu những đỡ tốn kém hơn về lâu dài</td>
-      <td className="border border-t-0 border-r-0 p-2">Chi phí cao hơn cho in ấn, lưu trữ và thay thế</td>
+      <td className="border border-r-0 border-t-0 p-2">Chi phí</td>
+      <td className="border border-r-0 border-t-0 p-2">
+        Có chi phí tạo dựng ban đầu những đỡ tốn kém hơn về lâu dài
+      </td>
+      <td className="border border-r-0 border-t-0 p-2">
+        Chi phí cao hơn cho in ấn, lưu trữ và thay thế
+      </td>
       <td className="border border-t-0  p-2">It tốn kém, dễ tạo và phân phối</td>
     </tr>
     <tr className="h-[108px]">
-      <td className="border border-t-0 border-r-0 rounded-bl-[1.25rem] p-2">Truy cập</td>
-      <td className="border border-t-0 border-r-0 p-2">24/7 truy cập vào mọi thiết bị có internet</td>
-    <td className="border border-t-0 border-r-0 p-2">Chỉ có thể truy cập vật lý, khó truy cập từ xa</td>
-      <td className="border border-t-0 rounded-br-[1.25rem] p-2">Có thể truy cập từ mọi thiết bị với phần nềm phù hợp</td>
+      <td className="rounded-bl-[1.25rem] border border-r-0 border-t-0 p-2">Truy cập</td>
+      <td className="border border-r-0 border-t-0 p-2">
+        24/7 truy cập vào mọi thiết bị có internet
+      </td>
+      <td className="border border-r-0 border-t-0 p-2">
+        Chỉ có thể truy cập vật lý, khó truy cập từ xa
+      </td>
+      <td className="rounded-br-[1.25rem] border border-t-0 p-2">
+        Có thể truy cập từ mọi thiết bị với phần nềm phù hợp
+      </td>
     </tr>
   </tbody>
 </table>
 
-<br/>
+<br />
 
 ## <div id="syncible-qualified-batch" className="scroll-mt-[100px]">Syncible Qualified Batch là gì?</div>
 
-<br/>
+<br />
 
 <div className="flex">
 <img src="/batch_black.png" alt="blue batch certified by Syncible" className="w-[171px] h-[171px] xs:w-[200px] xs:h-[200px]" title="Batch image 1"/>
@@ -99,42 +111,66 @@ Syncible Certificate được các tổ chức và cơ sở giáo dục sử d�
 
 Syncible Qualified Batch là dấu mộc đại diện cho các Syncible Certificate đã được xác thực, được phát hành như một phần của sự hợp tác giữa Syncible và các tổ chức uy tín. Những batch này đóng vai trò như một dấu ấn chính thức của sự hợp tác, đảm bảo rằng tất cả các chứng chỉ đều hợp lệ và không thể bị giả mạo. Syncible đảm nhiệm vai trò bảo chứng, xác nhận rằng mọi chứng chỉ trong batch đều được lưu trữ an toàn trên blockchain, mang lại sự tin cậy và an toàn cho người nhận.
 
-<br/>
+<br />
 
 Batch này được phát hành như một phần của chương trình chứng nhận hoặc thành tựu có cấu trúc. Mỗi batch tương ứng với một lộ trình học tập, sáng kiến đào tạo hoặc mốc phát triển chuyên môn cụ thể, đảm bảo sự nhất quán trong tất cả các chứng chỉ thuộc batch. Hệ thống này đặc biệt có giá trị trong môi trường giáo dục và doanh nghiệp, nơi chứng chỉ đã được xác thực đóng vai trò quan trọng trong việc duy trì uy tín và lòng tin.
 
-<br/>
+<br />
 
 ## <div id="design-a-syncible-certificate-template" className="scroll-mt-[100px]">Thiết kế mẫu Syncible Certificate</div>
 
-<br/>
+<br />
 
-
-<img src="/ElegantParticipationCertificate.png" alt="Full size certificate with elegant design" title="Full size certificate with elegant design"/>
-<br/>
+<img
+  src="/ElegantParticipationCertificate.png"
+  alt="Full size certificate with elegant design"
+  title="Full size certificate with elegant design"
+/>
+<br />
 
 Syncible cung cấp công cụ thiết kế chứng chỉ trực tuyến, có thể truy cập thông qua nền tảng tại app.syncible.io. Mặc dù công cụ này miễn phí sử dụng, bạn sẽ cần đăng ký một trong các gói dịch vụ để loại bỏ watermark. Công cụ này mang lại nhiều tính năng thiết kế đa dạng, bao gồm thư viện các hình nền, phông chữ, và mẫu batch, giúp người phát hành tạo ra các chứng chỉ kỹ thuật số tùy chỉnh hoàn toàn theo nhu cầu.
 
-<br/>
+<br />
 
 Sử dụng công cụ thiết kế của Syncible, người phát hành có thể tải lên bản mẫu riêng mình làm nền, tải xuống các thiết kế huy hiệu đã hoàn thành dưới dạng tệp SVG hoặc PNG và thậm chí tách các tài sản thiết kế riêng lẻ để tùy chỉnh thêm. Sau khi đăng ký, dù là tài khoản trả phí hay dùng thử, người phát hành sẽ có quyền truy cập vào nhiều mẫu thiết kế có sẵn và có thể tích hợp văn bản động trực tiếp vào thiết kế của mình.
 
-<br/>
+<br />
 
-<img src="/certificate_custom.png" alt="Design certificate screenshot" title="Design certificate screenshot"/>
+<img
+  src="/certificate_custom.png"
+  alt="Design certificate screenshot"
+  title="Design certificate screenshot"
+/>
 
-<br/>
+<br />
 
 Tính năng văn bản động cho phép cập nhật tự động các yếu tố như tên người nhận, tiêu đề khóa học và thông tin của tổ chức, dựa trên dữ liệu liên kết. Người phát hành cũng có thể tạo các thuộc tính tùy chỉnh như trường văn bản, địa chỉ email hoặc hình ảnh, nhằm đáp ứng các yêu cầu thiết kế riêng biệt cho mỗi chứng chỉ. Bên cạnh đó, Syncible giúp hiện đại hóa quy trình cấp chứng chỉ của bạn, đồng thời đảm bảo tính xác thực và hiệu quả – đi kèm với sự linh hoạt trong thiết kế huy hiệu với bảng màu ấm hoặc mát tùy chọn.
 
-<br/>
+<br />
 
 Với công cụ thiết kế của Syncible, việc tạo ra các chứng chỉ kỹ thuật số chuyên nghiệp và cá nhân hóa chưa bao giờ dễ dàng đến thế.
 
-<br/>
+<br />
 
 ## <div id="why-switch-to-syncible-for-custom-digital-certificates" className="scroll-mt-[100px]">Tại sao nên chuyển sang Syncible để tạo chứng chỉ kỹ thuật số?</div>
 
-<br/>
+<br />
 
 Nền tảng chứng chỉ kỹ thuật số của Syncible không chỉ giúp các tổ chức công nhận thành tựu mà còn khuyến khích sự tiến bộ và xác thực kỹ năng thông qua các huy hiệu có thể tùy chỉnh, dễ dàng xác minh. Chuyển sang Syncible giúp các tổ chức nâng cao quy trình cấp chứng chỉ của mình, đồng thời cung cấp cho người nhận những chứng chỉ số tin cậy và dễ chia sẻ.
+
+<br />
+
+Nếu doanh nghiệp của bạn đang tìm kiếm để:
+
+- Đơn giản hóa việc tạo và quản lý các huy hiệu kỹ thuật số, tiết kiệm thời gian quý giá
+- Giảm chi phí trong khi mở rộng phạm vi và cách sử dụng chứng chỉ
+- Tăng cường độ nhận diện cho các chương trình và chứng nhận trên các nền tảng trực tuyến
+- Cung cấp phương thức dễ dàng và thân thiện với thiết bị di động để người nhận xác minh kỹ năng và thành tựu
+- Bảo vệ chứng chỉ bằng công nghệ blockchain, loại bỏ nguy cơ gian lận
+- Tạo các lộ trình học tập có cấu trúc với các huy hiệu hướng dẫn tiến trình và theo dõi hoàn thành
+- Mở rộng phạm vi tiếp cận và gia tăng tác động của chương trình chứng nhận
+
+<br />
+Syncible cung cấp nền tảng lý tưởng với các công cụ thiết kế tùy chỉnh, bảo mật dựa trên blockchain
+và giải pháp mở rộng linh hoạt. Syncible được thiết kế để giúp bạn hiện đại hóa quy trình cấp chứng
+chỉ trong khi đảm bảo tính xác thực và hiệu quả.

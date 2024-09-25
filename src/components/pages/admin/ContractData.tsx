@@ -1,20 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from 'react';
-
 import Link from 'next/link';
 import { HiTemplate } from 'react-icons/hi';
-
 import { db, ref, get } from '@/lib/firebase';
 import configDate from '@/utils/configDate';
 import CertificatePreview from './CertificatePreview';
 
 interface Props {
   collectionContractAddress: string;
-  // eslint-disable-next-line no-unused-vars
+  slug?: string;
+  displayName?: string;
   onItemsCountChange: (count: number) => void;
 }
 
-const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCountChange }) => {
+const ContractData: React.FC<Props> = ({
+  collectionContractAddress,
+  onItemsCountChange,
+  slug,
+  displayName,
+}) => {
   const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
@@ -63,17 +67,31 @@ const ContractData: React.FC<Props> = ({ collectionContractAddress, onItemsCount
     );
 
   return (
-    <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2">
+    <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2 2xl:grid-cols-3">
       {data ? (
         <>
           {data.map((item, index) => {
+            const defaultFontSize = 40;
+
+            // Adjust the font size based on screen size.
+            const responsiveFontSize = {
+              base: defaultFontSize,
+              sm: defaultFontSize + 5,
+              md: defaultFontSize + 10,
+              lg: defaultFontSize + 15,
+              xl: defaultFontSize + 20,
+            };
+
             return (
-              <Link href={`/admin/mintnft/${item[3]}`} key={index}>
-                <div className="h-[170px] w-full sm:h-[270px] lg:h-[370px] 2xl:h-[400px]">
+              <Link
+                href={`/admin/collection/collectiondetail/${slug}/${item[3]}?nameCollection=${displayName}`}
+                key={index}
+              >
+                <div className="w-full h-full">
                   <CertificatePreview
                     previewImage={item[4][1] || 'default-image-url'}
                     name={item[1] || 'Unknown Name'}
-                    fontSize={item.fontSize || 'default-size'}
+                    fontSize={responsiveFontSize}
                     fontFamily={item.fontFamily || 'default-font'}
                   />
                 </div>

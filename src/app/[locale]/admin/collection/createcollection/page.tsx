@@ -24,6 +24,8 @@ import CopyAddressButton from '@/components/pages/admin/CopyAddressButton';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { AiOutlinePicture } from 'react-icons/ai';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { IoMdHelpCircleOutline } from 'react-icons/io';
 
 const CreateCollection: React.FC = () => {
   const router = useRouter();
@@ -141,7 +143,25 @@ const CreateCollection: React.FC = () => {
             <div className="flex items-center justify-between gap-4">
               <div className="w-1/2">
                 <label className="block text-base font-medium text-gray-900">
-                  Hình ảnh biểu tượng
+                  <div className="flex items-center gap-5">
+                    <p>Hình ảnh biểu tượng</p>
+                    <HoverCard>
+                      <HoverCardTrigger asChild>
+                        <IoMdHelpCircleOutline className="text-2xl" />
+                      </HoverCardTrigger>
+                      <HoverCardContent className="w-80">
+                        <div className="flex flex-col gap-4">
+                          <h1 className="text-base font-bold">Contract Symbol</h1>
+                          <p className="text-sm text-gray-400">
+                            The Contract Symbol is a tool that displays the name and symbol of your
+                            specific token on the blockchain explorer. It indicates that the
+                            certificates have been verify state, allowing users to track
+                            transactions, token quantities, and NFT ownership on the blockchain.
+                          </p>
+                        </div>
+                      </HoverCardContent>
+                    </HoverCard>
+                  </div>
                 </label>
                 <p className="text-xs text-gray-400">Cập nhật bộ sưu tập logo của bạn.</p>
               </div>
@@ -257,7 +277,7 @@ const CreateCollection: React.FC = () => {
             <div className="flex items-center gap-4 space-y-2">
               <div className="w-1/2">
                 <label className="block text-base font-medium text-gray-900">
-                  Biểu tượng hợp đồng
+                  <p>Biểu tượng hợp đồng</p>
                 </label>
                 <p className="text-xs text-gray-400">
                   Biểu tượng hợp đồng này không được thay đổi trong tương lai.

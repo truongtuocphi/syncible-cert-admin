@@ -64,7 +64,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
               key={index}
               onClick={() => handleSelect(index)}
             >
-              <div className="relative rotate-[259deg] bg-gradient-to-r from-[#FFEBE2] to-[#E49D6B] shadow-lg transition">
+              <div className="relative bg-gradient-to-r from-[#FFEBE2] to-[#E49D6B] shadow-lg transition">
                 <div className="absolute inset-0 blur-[50px] filter"></div>
                 <div className="relative z-10 p-4">
                   <div className="flex w-full items-center justify-center p-5">

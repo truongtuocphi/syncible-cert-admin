@@ -268,12 +268,12 @@ const CreateCollection: React.FC = () => {
                       </HoverCardTrigger>
                       <HoverCardContent className="w-80">
                         <div className="flex flex-col gap-4">
-                          <h1 className="text-base font-bold">Contract Symbol</h1>
+                          <h1 className="text-base font-bold">Biểu tượng hợp đồng</h1>
                           <p className="text-sm text-gray-400">
-                            The Contract Symbol is a tool that displays the name and symbol of your
-                            specific token on the blockchain explorer. It indicates that the
-                            certificates have been verify state, allowing users to track
-                            transactions, token quantities, and NFT ownership on the blockchain.
+                            Biểu tượng Hợp đồng là một công cụ hiển thị tên và biểu tượng của bạn mã
+                            thông báo cụ thể trên trình khám phá blockchain. Nó chỉ ra rằng chứng
+                            chỉ đã được xác minh trạng thái, cho phép người dùng theo dõi giao dịch,
+                            số lượng token và quyền sở hữu NFT trên blockchain.
                           </p>
                         </div>
                       </HoverCardContent>

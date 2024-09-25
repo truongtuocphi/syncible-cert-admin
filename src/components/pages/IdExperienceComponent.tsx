@@ -271,9 +271,162 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         </div>
 
         {changeLayout ? (
-          <div className="grid grid-cols-12 gap-6 bg-gradient-to-b from-white/50">
-            <div className="col-span-8 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
-              <div className="items-star flex w-full flex-col md:w-1/2">
+          // <div className="grid grid-cols-1 gap-6 bg-gradient-to-b from-white/50 md:grid-cols-12">
+          //   <div className="col-span-8 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl">
+          //     <div className="items-star flex w-full flex-col md:w-1/2">
+          //       <h4 className="mb-4 text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
+          //       <div className="space-y-4">
+          //         <div className="flex flex-col gap-2">
+          //           <p className="font-bold">Vị trí phát hành</p>
+          //           <p>Việt Nam</p>
+          //         </div>
+          //         <div className="flex flex-col gap-2">
+          //           <p className="font-bold">Kích thước chứng chỉ</p>
+          //           <p> 500x300</p>
+          //         </div>
+          //         <div className="flex flex-col gap-2">
+          //           <p className="font-bold">Ngày phát hành</p>
+          //           <p>{`${date}`}</p>
+          //         </div>
+          //         <div className="flex flex-col gap-2">
+          //           <p className="font-bold">Ngày hết hạn</p>
+          //           <p>Vô thời hạn</p>
+          //         </div>
+          //       </div>
+
+          //       <div className="mt-4 space-y-4">
+          //         <div className="flex flex-col gap-2">
+          //           <p className="font-bold">Blockchain</p>
+          //           <p>Polygon</p>
+          //         </div>
+          //         <div className="flex flex-col gap-2">
+          //           <p className="font-bold">ID chứng chỉ</p>
+          //           <div className="flex items-center gap-2">
+          //             <p>{`${certificateID}`}</p>
+          //             <CopyButton textToCopy={certificateID} />
+          //           </div>
+          //         </div>
+          //         <div className="flex flex-col gap-2">
+          //           <p className="font-bold">Địa chỉ hợp đồng</p>
+          //           <div className="mt-2 flex items-center gap-2">
+          //             {`${dataContract}`}
+          //             <CopyButton textToCopy={dataContract[0]} />
+          //             <Link
+          //               href={`https://polygonscan.com/address/${dataContract[0]}`}
+          //               target="_blank"
+          //             >
+          //               <RiShareBoxLine className="text-black" />
+          //             </Link>
+          //           </div>
+          //         </div>
+          //       </div>
+          //     </div>
+          //   </div>
+          //   <div className="col-span-4 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl">
+          //     <h4 className="mb-4 text-xl font-bold">Chia sẻ chứng chỉ</h4>
+          //     <p className="text-[#A2A3A9]">
+          //       Hiển thị thông tin xác thực này trên mạng xã hội của bạn
+          //     </p>
+          //     <div className="mt-4 flex items-center justify-around">
+          //       {listSocialMedia.map((social, index) => (
+          //         <>
+          //           {index === 0 ? (
+          //             <Dialog>
+          //               <DialogTrigger asChild>
+          //                 <div
+          //                   className="cursor-pointer rounded-xl px-6 py-4 shadow-lg"
+          //                   key={index}
+          //                 >
+          //                   {social.icon}
+          //                 </div>
+          //               </DialogTrigger>
+          //               <DialogContent className="sm:max-w-[576px]">
+          //                 <div>
+          //                   <div className="text-center">
+          //                     <h1 className="text-4xl font-bold">Add to LinkedIn profile</h1>
+          //                     <p className="mt-3 text-base text-gray-500">
+          //                       Add your certification to your
+          //                       <span className="font-bold text-black">LinkedIn</span> profile with
+          //                       1 click
+          //                     </p>
+          //                   </div>
+
+          //                   <ButtonPrimary
+          //                     onClick={() =>
+          //                       generateLinkedInCertificationLink(
+          //                         'Certificate',
+          //                         'Syncible',
+          //                         date,
+          //                         date,
+          //                         certificateID,
+          //                         linkWeb
+          //                       )
+          //                     }
+          //                     className="mt-10 w-full rounded-full"
+          //                   >
+          //                     Add to my profile
+          //                   </ButtonPrimary>
+
+          //                   <nav className="list mt-10">
+          //                     <ul className="list-disc text-gray-400">
+          //                       <li className="mt-2 list-inside">
+          //                         No expiration date:
+          //                         <span className="font-bold text-black">
+          //                           Click 'this certification does not expire' on LinkedIn
+          //                         </span>
+          //                       </li>
+          //                       <li className="mt-2 list-inside">
+          //                         LinkedIn no longer shares profile updates to your network. Click
+          //                         the share button below to share your credential instead.
+          //                       </li>
+          //                     </ul>
+          //                   </nav>
+
+          //                   <ButtonPrimary
+          //                     className="mt-10 w-full rounded-full"
+          //                     onClick={() =>
+          //                       shareOnLinkedIn(
+          //                         'Chứng chỉ blockchain',
+          //                         'Chứng chỉ về blockchain được cấp bởi tổ chức Syncible',
+          //                         linkWeb
+          //                       )
+          //                     }
+          //                   >
+          //                     Share
+          //                   </ButtonPrimary>
+          //                 </div>
+          //               </DialogContent>
+          //             </Dialog>
+          //           ) : (
+          //             <Link
+          //               href={`${social.url}${linkWeb}`}
+          //               className="rounded-xl px-6 py-4 shadow-lg"
+          //               target={'_blank'}
+          //             >
+          //               <div className="" key={index}>
+          //                 {social.icon}
+          //               </div>
+          //             </Link>
+          //           )}
+          //         </>
+          //       ))}
+          //     </div>
+          //     <div className="mt-4 flex items-center justify-between overflow-hidden rounded-xl border-[1px] bg-white pr-6">
+          //       <input
+          //         type="text"
+          //         value={linkWeb}
+          //         className="border-r-[1px] border-gray-100 py-3 pl-3 pr-6"
+          //         disabled
+          //       />
+          //       <div className="text-center">
+          //         <CopyButton textToCopy={linkWeb} />
+          //       </div>
+          //     </div>
+          //   </div>
+          // </div>
+          <div className="grid grid-cols-1 gap-6 bg-gradient-to-b from-white/50 md:grid-cols-12">
+            <div className="col-span-12 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl md:col-span-8">
+              <div className="flex w-full flex-col items-start">
                 <h4 className="mb-4 text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">
@@ -282,7 +435,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">Kích thước chứng chỉ</p>
-                    <p> 500x300</p>
+                    <p>500x300</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">Ngày phát hành</p>
@@ -322,7 +475,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                 </div>
               </div>
             </div>
-            <div className="col-span-4 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl">
+
+            <div className="col-span-12 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl md:col-span-4">
               <h4 className="mb-4 text-xl font-bold">Chia sẻ chứng chỉ</h4>
               <p className="text-[#A2A3A9]">
                 Hiển thị thông tin xác thực này trên mạng xã hội của bạn

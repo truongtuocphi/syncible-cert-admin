@@ -108,7 +108,7 @@ export default function Explorer() {
               </div>
             </div>
           ) : data ? (
-            <div className="mx-auto mt-10 w-[70%] space-y-4 text-black md:w-1/2 ">
+            <div className="mx-auto mt-10 w-[70%] space-y-4 text-black md:mt-32 md:w-1/2 ">
               <Link href={`/certificatedetail/${data.mintData[0][3]}`}>
                 <CertificatePreview
                   previewImage={data.mintData[0][4][1]}

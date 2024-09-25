@@ -145,6 +145,31 @@
       "label": "Search"
     }
   },
+  "IdExperienceComponent": {
+    "header": "Certificate Details",
+
+    "location": {
+      "title": "Issuance Location",
+      "value": "Vietnam"
+    },
+
+    "dimensions": "Certificate Dimensions",
+
+    "date": "Issuance Date",
+
+    "expirationDate": {
+      "title": "ExpirationDate",
+      "value": "Permanent"
+    },
+
+    "certificate": "Certificate ID",
+
+    "contract": "Contract Address",
+
+    "header_2": "Share Certificate",
+
+    "label": "Display this verified information on your social media"
+  },
   "Localization": {
     "header": "Language",
     "label": "{locale, select, en {EN} vi {VI} other {Unknown}}"

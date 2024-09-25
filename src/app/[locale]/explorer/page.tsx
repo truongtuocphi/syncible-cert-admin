@@ -5,7 +5,6 @@ import { useState } from 'react';
 
 import Link from 'next/link';
 import { BiSolidCommentError } from 'react-icons/bi';
-import { FaSearch } from 'react-icons/fa';
 import { HiTemplate } from 'react-icons/hi';
 import { useTranslations } from 'next-intl';
 
@@ -16,6 +15,7 @@ import { CollectionData } from '@/types/function';
 import fetchDataFirebase from '@/utils/featDataFirebase';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
+import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
 
 export default function Explorer() {
   const [idCertificate, setIdCertificate] = useState<string>('');
@@ -44,7 +44,7 @@ export default function Explorer() {
 
   return (
     <>
-      <div className="relative min-h-screen flex-col items-center pt-16">
+      <div className="relative flex-col items-center pt-16">
         <div className="fixed top-0 z-30 w-screen md:mt-6">
           <Navbar />
         </div>

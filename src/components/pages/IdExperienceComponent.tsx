@@ -19,6 +19,8 @@ import { FaLinkedinIn } from 'react-icons/fa';
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ButtonPrimary from '../common/button/ButtonPrimary';
 
+import { useTranslations } from 'next-intl';
+
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
 
 if (!headerURL) {
@@ -75,6 +77,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   const [templateURL, setTemplateURL] = useState('');
   const [fontFamily, setFontFamily] = useState<string>('');
   const [fontSize, setFontSize] = useState<string>('');
+
+  const t = useTranslations('IdExperienceComponent');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -271,23 +275,23 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
           <div className="grid grid-cols-1 gap-6 bg-gradient-to-b from-white/50 md:grid-cols-12">
             <div className="col-span-12 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl md:col-span-8">
               <div className="flex w-full flex-col items-start">
-                <h4 className="mb-4 text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
+                <h4 className="mb-4 text-xl font-bold">{t('header')}</h4>
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold">Vị trí phát hành</p>
-                    <p>Việt Nam</p>
+                    <p className="font-bold">{t('location.title')}</p>
+                    <p>{t('location.value')}</p>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold">Kích thước chứng chỉ</p>
+                    <p className="font-bold">{t('dimensions')}</p>
                     <p>500x300</p>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold">Ngày phát hành</p>
+                    <p className="font-bold">{t('date')}</p>
                     <p>{`${date}`}</p>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold">Ngày hết hạn</p>
-                    <p>Vô thời hạn</p>
+                    <p className="font-bold">{t('expirationDate.title')}</p>
+                    <p>{t('expirationDate.value')}</p>
                   </div>
                 </div>
 
@@ -297,14 +301,14 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                     <p>Polygon</p>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold">ID chứng chỉ</p>
+                    <p className="font-bold">{t('certificate')}</p>
                     <div className="flex items-center gap-2">
                       <p>{`${certificateID}`}</p>
                       <CopyButton textToCopy={certificateID} />
                     </div>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <p className="font-bold">Địa chỉ hợp đồng</p>
+                    <p className="font-bold">{t('contract')}</p>
                     <div className="mt-2 flex items-center gap-2">
                       {`${dataContract[0].slice(0, 6)}...${dataContract[0].slice(-11)}`}
                       <CopyButton textToCopy={dataContract[0]} />
@@ -321,10 +325,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
             </div>
 
             <div className="col-span-12 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl md:col-span-4">
-              <h4 className="mb-4 text-xl font-bold">Chia sẻ chứng chỉ</h4>
-              <p className="text-[#A2A3A9]">
-                Hiển thị thông tin xác thực này trên mạng xã hội của bạn
-              </p>
+              <h4 className="mb-4 text-xl font-bold">{t('header_2')}</h4>
+              <p className="text-[#A2A3A9]">{t('label')}</p>
               <div className="mt-4 flex items-center justify-around">
                 {listSocialMedia.map((social, index) => (
                   <>

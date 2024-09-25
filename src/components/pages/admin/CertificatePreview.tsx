@@ -4,17 +4,17 @@ const Certificate = ({
   previewImage,
   name,
   fontFamily = 'Dancing Script',
-  customFontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
+  fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
   fontSizeMint = 40,
 }: any) => {
-  const [userFontSize, setUserFontSize] = useState(customFontSize.base);
+  const [userFontSize, setUserFontSize] = useState(fontSize.base);
 
   useEffect(() => {
     const isMintNFTPage = window.location.pathname.includes('mintnft');
 
     const handleResize = () => {
       const image = document.getElementById('certificate-image');
-      let newFontSize = customFontSize.base;
+      let newFontSize = fontSize.base;
 
       const screenWidth = window.innerWidth;
 
@@ -22,14 +22,14 @@ const Certificate = ({
       if (isMintNFTPage) {
         newFontSize = fontSizeMint; // Áp dụng fontSizeMint cho trang mintnft
       } else {
-        // Áp dụng customFontSize cho các trang khác
-        if (screenWidth >= 3840) newFontSize = customFontSize.xl;
-        else if (screenWidth >= 2560) newFontSize = customFontSize.lg + 20;
-        else if (screenWidth >= 1280) newFontSize = customFontSize.lg - 15;
-        else if (screenWidth >= 768) newFontSize = customFontSize.md - 20;
-        else if (screenWidth >= 640) newFontSize = customFontSize.sm - 20;
-        else if (screenWidth < 640 && screenWidth > 500) newFontSize = customFontSize.sm - 20;
-        else if (screenWidth <= 500) newFontSize = customFontSize.base - 25;
+        // Áp dụng fontSize cho các trang khác
+        if (screenWidth >= 3840) newFontSize = fontSize.xl;
+        else if (screenWidth >= 2560) newFontSize = fontSize.lg + 20;
+        else if (screenWidth >= 1280) newFontSize = fontSize.lg - 15;
+        else if (screenWidth >= 768) newFontSize = fontSize.md - 20;
+        else if (screenWidth >= 640) newFontSize = fontSize.sm - 20;
+        else if (screenWidth < 640 && screenWidth > 500) newFontSize = fontSize.sm - 20;
+        else if (screenWidth <= 500) newFontSize = fontSize.base - 25;
       }
 
       // Điều chỉnh kích thước font theo kích thước hình ảnh (nếu có)
@@ -55,7 +55,7 @@ const Certificate = ({
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [customFontSize, fontSizeMint]);
+  }, [fontSize, fontSizeMint]);
 
   const finalFontSize = `${userFontSize}px`;
   console.log('finalFontSize', finalFontSize);

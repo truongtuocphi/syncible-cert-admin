@@ -258,7 +258,7 @@ const CreateCollection: React.FC = () => {
             <div className="flex items-center gap-4 space-y-2">
               <div className="w-1/2">
                 <label className="block text-base font-medium text-gray-900">
-                  <div className="flex items-center gap-5">
+                  <div className="flex items-center">
                     <p>Biểu tượng hợp đồng</p>
                     <HoverCard>
                       <HoverCardTrigger asChild>
@@ -267,7 +267,7 @@ const CreateCollection: React.FC = () => {
                         </Button>
                       </HoverCardTrigger>
                       <HoverCardContent className="w-80">
-                        <div className="flex flex-col gap-4">
+                        <div className="flex flex-col gap-2">
                           <h1 className="text-base font-bold">Biểu tượng hợp đồng</h1>
                           <p className="text-sm text-gray-400">
                             Biểu tượng Hợp đồng là một công cụ hiển thị tên và biểu tượng của bạn mã

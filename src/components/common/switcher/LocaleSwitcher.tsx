@@ -63,7 +63,7 @@ export function LocaleCollapsible() {
         <div className="flex items-center justify-between text-[#A2A3A9]">
           <div>{t('header')}</div>
           <CollapsibleTrigger asChild>
-            <Button variant="link" size="sm" className="w-9 p-0">
+            <Button variant="link" size="sm" className="w-9 p-0 w-full justify-end">
               <ChevronsUpDown className="h-4 w-4" />
               <span className="sr-only">Toggle</span>
             </Button>

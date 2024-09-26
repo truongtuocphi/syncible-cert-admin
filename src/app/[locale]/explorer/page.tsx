@@ -7,7 +7,6 @@ import Link from 'next/link';
 import { BiSolidCommentError } from 'react-icons/bi';
 import { HiTemplate } from 'react-icons/hi';
 import { useTranslations } from 'next-intl';
-import Image from 'next/image';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Loading from '@/components/common/loading/Loading';

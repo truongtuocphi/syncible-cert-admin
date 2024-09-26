@@ -91,6 +91,16 @@
       }
     }
   },
+  "BlogListPage": {
+    "title": "Blog",
+    "text": "Browse our blog for tips, insights, and stories on engaging learners and growing your credentialing program.",
+    "category": {
+      "label": "Category",
+      "all": {
+        "label": "All"
+      }
+    }
+  },
   "BlogPage": {
     "header": "What is a Syncible Certificate and Syncible Qualified Batch?",
     "nav_select_placeholder": {

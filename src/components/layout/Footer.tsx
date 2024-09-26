@@ -56,7 +56,7 @@ const Footer = () => {
   return (
     <div className="relative flex flex-col items-center">
       <div className="w-full max-w-[90rem]">
-        <div className="px-4 py-4 pb-8 md:px-8 md:py-8 xl:px-[6.5rem]">
+        <div className="px-4 py-4 pb-8 md:px-8 md:py-8 xl:px-32">
           <div className="flex flex-col justify-between sm:items-center md:flex-row">
             <div>{t('footer_section.copy_right')}</div>
             <div className="flex flex-col gap-4 sm:items-center md:flex-row lg:gap-6">

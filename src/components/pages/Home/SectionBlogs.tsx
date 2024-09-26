@@ -28,7 +28,7 @@ export default function SectionBlogs() {
   const t = useTranslations('HomePage.blogs_section');
   return (
     <div className="w-full max-w-[90rem]" id="blogs">
-      <div className="flex flex-col items-center gap-8 px-4 py-[4.5rem] md:px-8 xl:px-[6.5rem] xl:py-32 ">
+      <div className="flex flex-col items-center gap-8 px-4 py-[4.5rem] md:px-8 xl:px-32 xl:py-32 ">
         <div className=" text-[2rem] font-semibold">{t('header')}</div>
         <Carousel
           opts={{ align: 'start', startIndex: 1, loop: false }}

@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import clsx from 'clsx';
-import { useRouter } from 'next/navigation';
 
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -12,7 +11,7 @@ import ArrowRightIcon from '@/assets/icons/arrow-badge-right.svg';
 import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Link, usePathname } from '@/i18n/routing';
+import { Link, usePathname,useRouter } from '@/i18n/routing';
 
 import SyncibleLogo from '/public/syncible-logo.svg';
 import { LocaleCollapsible, LocaleSelect } from '../common/switcher/LocaleSwitcher';
@@ -33,6 +32,7 @@ const Navbar = () => {
   const t = useTranslations('HomePage.navigation.top_nav');
   const router = useRouter();
   const locale = useLocale();
+  const [isOpen, setIsOpen] = useState(false);
 
   const links = [
     { label: t('links.about.label'), href: t('links.about.href') },
@@ -45,40 +45,18 @@ const Navbar = () => {
     if (target.startsWith('#')) {
       if (currentPath === '/') {
         scrollToTarget(target);
+        setIsOpen(false);
       } else {
-        console.log("it's here");
-        await router.push(`/${locale}`);
+        router.push(`/`);
+        setIsOpen(false);
         setTimeout(() => {
           scrollToTarget(target);
         }, 500);
       }
     } else {
-      await router.push(target);
+      router.push(target);
     }
   };
-
-  useEffect(() => {
-    const links = document.querySelectorAll('.nav-link');
-    links.forEach((link) => {
-      link.addEventListener('click', (e) => {
-        const target = link.getAttribute('href');
-        if (target && target.startsWith('#')) {
-          handleNavClick(e, target);
-        }
-      });
-    });
-
-    return () => {
-      links.forEach((link) => {
-        link.removeEventListener('click', (e) => {
-          const target = link.getAttribute('href');
-          if (target && target.startsWith('#')) {
-            handleNavClick(e, target);
-          }
-        });
-      });
-    };
-  }, [router]);
 
   return (
     <div className={`${montserrat.className} "relative w-full`}>
@@ -93,7 +71,7 @@ const Navbar = () => {
               </Link>
             </div>
             <div className="col-span-6 col-end-13 block justify-self-end lg:hidden">
-              <Sheet>
+              <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild className="text-black">
                   <Button className="border-none bg-transparent px-0 text-2xl hover:bg-transparent hover:text-white active:bg-none">
                     &#9776;
@@ -116,17 +94,18 @@ const Navbar = () => {
                     <div className="flex flex-col px-4 py-4 font-semibold text-[#A2A3A9]">
                       {links.map(({ label, href }) => (
                         <div key={label}>
-                          <SheetClose asChild>
-                            <Link
-                              href={href}
-                              className={clsx(
-                                'nav-link w-full text-base hover:text-[#2C2C2C]',
-                                currentPath === href && 'text-[#2C2C2C]'
-                              )}
-                            >
-                              <div className="py-4"> {label}</div>
-                            </Link>
-                          </SheetClose>
+                          {/* <SheetClose asChild> */}
+                          <Link
+                            href={href}
+                            className={clsx(
+                              'nav-link w-full text-base hover:text-[#2C2C2C]',
+                              currentPath === href && 'text-[#2C2C2C]'
+                            )}
+                            onClick={(e) => handleNavClick(e, href)}
+                          >
+                            <div className="py-4"> {label}</div>
+                          </Link>
+                          {/* </SheetClose> */}
                         </div>
                       ))}
                       <div className="py-2">
@@ -156,6 +135,7 @@ const Navbar = () => {
                           'nav-link hover:text-[#2C2C2C] hover:underline',
                           currentPath === href && 'text-[#2C2C2C]'
                         )}
+                        onClick={(e) => handleNavClick(e, href)}
                       >
                         {label}
                       </Link>

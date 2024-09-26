@@ -80,7 +80,7 @@ export default function Page() {
                 disabled={currentPage === totalPages}
                 className="h-auto rounded-xl border-none bg-white p-3 shadow-combinedShadow2 hover:bg-white/50 disabled:cursor-not-allowed disabled:bg-white/50"
               >
-                 <ArrowNarrowRight className="w-6 h-6"/>
+                <ArrowNarrowRight className="h-6 w-6" />
               </button>
             </div>
           </div>

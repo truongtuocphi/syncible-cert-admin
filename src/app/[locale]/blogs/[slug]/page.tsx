@@ -9,7 +9,7 @@ import Navbar from '@/components/layout/Navbar';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 import { montserrat } from '@/components/ui/fonts';
 
-import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
+import LightBlueGradientEllipse from '../../../../../public/Ellipse_1.svg';
 // import { ChevronDown } from 'lucide-react';
 
 import SyncibleBanner from '/public/SyncibleBanner.svg';

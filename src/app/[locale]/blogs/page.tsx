@@ -52,7 +52,7 @@ const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
       key={key}
       href={t(`navigation.${key}.href`)}
       className={clsx(
-        'hover:text-[#2C2C2C] hover:underlin',
+        'hover:underlin hover:text-[#2C2C2C]',
         // pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]',
         active && 'font-bold text-black'
       )}
@@ -75,7 +75,7 @@ export default function Blogs() {
   }
 
   function CustomP({ children }: { children: React.ReactNode }) {
-    return <p className="text-lg text-[#6C6D71]">{children}</p>;
+    return <p className="text-base text-[#6C6D71]">{children}</p>;
   }
 
   function CustomUl({ children }: { children: React.ReactNode }) {
@@ -200,7 +200,7 @@ export default function Blogs() {
                 <SyncibleBanner className="aspect-[24/9] h-full w-full" />
               </div>
             </div>
-            <div className="flex flex-col gap-8 md:flex-row">
+            <div className="flex flex-col gap-12 md:flex-row">
               {/* <div className="w-full overflow-hidden rounded-xl bg-white/50 text-[#A2A3A9] md:hidden">
                 <Button
                   className={clsx(
@@ -267,7 +267,7 @@ export default function Blogs() {
                   </div>
                   <div
                     id="table-content"
-                    className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
+                    className="sticky top-[9rem] flex flex-col gap-6 text-base font-bold text-[#A2A3A9]"
                   >
                     {/* {keys.map((key) => (
                       <Link
@@ -325,7 +325,7 @@ export default function Blogs() {
                   </div>
                   <div id="content-section">
                     {/* {Content && <Content/>} */}
-                    {Content && <Content  components={overrideComponents}/>}
+                    {Content && <Content components={overrideComponents} />}
                   </div>
                 </div>
               </div>

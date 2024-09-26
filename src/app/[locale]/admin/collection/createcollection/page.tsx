@@ -270,10 +270,10 @@ const CreateCollection: React.FC = () => {
                         <div className="flex flex-col gap-2">
                           <h1 className="text-base font-bold">Biểu tượng hợp đồng</h1>
                           <p className="text-sm text-gray-400">
-                            Biểu tượng Hợp đồng là một công cụ hiển thị tên và biểu tượng của bạn mã
-                            thông báo cụ thể trên trình khám phá blockchain. Nó chỉ ra rằng chứng
-                            chỉ đã được xác minh trạng thái, cho phép người dùng theo dõi giao dịch,
-                            số lượng token và quyền sở hữu NFT trên blockchain.
+                            biểu tượng mã thông báo cụ thể của bạn trên trình khám phá blockchain.
+                            Nó chỉ ra rằng chứng chỉ đã được xác minh trạng thái, cho phép người
+                            dùng theo dõi giao dịch, số lượng token và quyền sở hữu NFT trên
+                            blockchain.
                           </p>
                         </div>
                       </HoverCardContent>

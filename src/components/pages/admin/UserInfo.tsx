@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import { signOut } from 'firebase/auth';
 import Image from 'next/image';
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { BiUser } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
 import { BiGlobe } from 'react-icons/bi';
@@ -22,7 +22,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { auth } from '@/lib/firebase';
-import { routing, useRouter, usePathname, Link } from '@/i18n/routing';
+import { routing, usePathname, Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
 import { BiCheck } from 'react-icons/bi';
 
@@ -33,27 +33,24 @@ interface UserInfoProps {
 const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
 
+  const router = useRouter();
+
   const href = window.location.href.split('/');
-  const t = useTranslations('Localization');
   const locale = useLocale();
-  const routerLang = useRouter();
   const pathname = usePathname();
 
-  // const handleLanguageChange = async (value: 'en' | 'vi') => {
-  //   routerLang.replace(pathname, { locale: value });
-  // };
+  const t = useTranslations('Localization');
+  const transLation = useTranslations('Dapp');
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      window.location.href = '/';
+      router.push('/');
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error signing out: ', error);
     }
   };
-
-  console.log('href', href.includes('vi'));
 
   return (
     <DropdownMenu>
@@ -90,7 +87,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
             className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
           >
             <BiUser className="mr-4 text-2xl" />
-            Hồ sơ
+            {transLation('userInfo.profile')}
           </DropdownMenuItem>
 
           <DropdownMenuItem
@@ -99,8 +96,8 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
           >
             <BiGlobe className="mr-4 text-2xl" />
             <div className="flex w-full items-center justify-between">
-              <p>Ngôn Ngữ</p>
-              <p>VI</p>
+              <p>{transLation('userInfo.language')}</p>
+              {t('label', { locale: locale })}
             </div>
           </DropdownMenuItem>
 
@@ -109,7 +106,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
             className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
           >
             <BiHelpCircle className="mr-4 text-2xl" />
-            Hỗ trợ
+            {transLation('userInfo.helpCenter')}
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
@@ -119,7 +116,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
           onMouseEnter={() => setIsLanguageOpen(false)}
         >
           <BiLogOut className="mr-4 text-2xl" />
-          Đăng xuất
+          {transLation('userInfo.LogOut')}
         </DropdownMenuItem>
         {isLanguageOpen && (
           <div

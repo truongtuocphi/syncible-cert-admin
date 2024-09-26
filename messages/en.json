@@ -180,6 +180,51 @@
 
     "label": "Display this verified information on your social media"
   },
+
+  "Dapp": {
+    "userInfo": {
+      "profile": "Profile",
+      "language": "Language",
+      "helpCenter": "Help center",
+      "LogOut": "Log out"
+    },
+
+    "header": {
+      "wallet": "Connect wallet"
+    },
+
+    "sideBar": {
+      "home": "Home",
+      "certificateManagement": "Certificate Management",
+      "customizeTemplate": "Customize Template",
+      "createDigitalCertificate": "Create Digital Certificate",
+      "setting": "Setting"
+    },
+
+    "welcom": {
+      "title": "Welcome to Syncible",
+      "p": "Creating your own certificate is easier with the steps below"
+    },
+
+    "listCard": {
+      "card_0": {
+        "title": "Customize certificate template",
+        "p": "Customize the look and feel of your theme. Add your logo, colors, and images to reflect your brand.",
+        "button": "Customize"
+      },
+      "card_1": {
+        "title": "Certificate management",
+        "p": "Manage your minted digital certificates here",
+        "button": "Create now"
+      },
+      "card_2": {
+        "title": "Create certificate",
+        "p": "Create your digital certificate",
+        "button": "Create digital certificate"
+      }
+    }
+  },
+
   "Localization": {
     "header": "Language",
     "label": "{locale, select, en {EN} vi {VI} other {Unknown}}"

@@ -4,8 +4,7 @@ import { useEffect, useState } from 'react';
 
 import { ethers } from 'ethers';
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
-import { useRouter } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
@@ -24,16 +23,6 @@ import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
 import { BiImageAdd } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 
 const Experience = () => {
   const pathname = useSearchParams();

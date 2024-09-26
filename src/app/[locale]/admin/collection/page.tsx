@@ -274,7 +274,7 @@ export default function Collection() {
           </ButtonPrimary>
         ) : (
           <Link href={'/admin/collection/createcollection'}>
-            <ButtonPrimary className="hover:bg-secondPrimaryHover ml-auto flex items-center gap-2 border-[1px] border-gray-200 bg-transparent font-bold text-gray-600">
+            <ButtonPrimary className="ml-auto flex items-center gap-2 border-[1px] border-gray-200 bg-transparent font-bold text-gray-600 hover:bg-secondPrimaryHover">
               <BiPlusCircle className="text-2xl" />
               Tạo mục
             </ButtonPrimary>
@@ -319,9 +319,14 @@ export default function Collection() {
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className="h-48 text-center">
-                  <Loading />
-                  Không có kết quả. Vui lòng chờ hoặc kết nối ví của bạn hoặc tạo một mục quản lý để
-                  hiện kết quả.
+                  {/* <Loading /> */}
+                  {!address ? (
+                    'Vui lòng kết nối ví để hiện thị kết quả'
+                  ) : table.getRowModel().rows.length == 0 ? (
+                    'Hãy tạo một mục quản lý để hiện thị kết quả'
+                  ) : (
+                    <Loading />
+                  )}
                 </TableCell>
               </TableRow>
             )}

@@ -16,12 +16,12 @@ import Modal from './Modal';
 const menuSidebar = [
   { name: 'home', url: '/admin', icon: <BiHome className="text-2xl 2xl:text-3xl" /> },
   {
-    name: 'certificateManagement',
+    name: 'customizeTemplate',
     url: '/admin/customized',
     icon: <BiFile className="text-2xl 2xl:text-3xl" />,
   },
   {
-    name: 'customizeTemplate',
+    name: 'certificateManagement',
     url: '/admin/collection',
     icon: <BiCustomize className="text-2xl 2xl:text-3xl" />,
   },

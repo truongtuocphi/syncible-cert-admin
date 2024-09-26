@@ -69,7 +69,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const keys = ['link_1', 'link_2', 'link_3', 'link_4', 'link_5'] as const;
   const pathname = usePathname();
   const locale = useLocale();
-  const [toggleBlogNav, setToggleBlogNav] = useState(false);
   const [Content, setContent] = useState<any>(null);
 
   function CustomH2({ children }: { children: React.ReactNode }) {
@@ -276,12 +275,12 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
         </div>
         <Footer />
       </div>
-      <div className="-z-10 absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col items-center overflow-hidden">
+      <div className="absolute bottom-0 left-0 right-0 top-0 -z-10 flex h-full w-full flex-col items-center overflow-hidden">
         <div className="relative mx-auto h-full w-full max-w-[90rem]">
-          <div className="absolute left-1/2 -top-[5%] -z-10 w-[125rem] sm:-translate-x-[60%] ">
+          <div className="absolute -top-[5%] left-1/2 -z-10 w-[125rem] sm:-translate-x-[60%] ">
             <LightBlueGradientEllipse className="h-full w-full" />
           </div>
-          <div className="absolute top-1/2 right-1/2 -z-10 w-[125rem] sm: translate-x-[60%]">
+          <div className="sm: absolute right-1/2 top-1/2 -z-10 w-[125rem] translate-x-[60%]">
             <LightBlueGradientEllipse className="h-full w-full" />
           </div>
         </div>

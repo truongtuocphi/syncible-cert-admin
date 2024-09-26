@@ -118,7 +118,7 @@ const Page = () => {
             <SectionFAQ />
           </div>
           <SectionBlogs />
-          <div className="font-inter relative w-full text-black">
+          <div className="relative w-full">
             <Footer />
           </div>
         </div>

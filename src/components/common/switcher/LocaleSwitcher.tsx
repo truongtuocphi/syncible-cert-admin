@@ -34,7 +34,7 @@ export function LocaleSelect() {
           </div>
           <SelectValue placeholder={t('label', { locale: locale })} />
         </SelectTrigger>
-        <SelectContent className="">
+        <SelectContent>
           <SelectGroup>
             {routing.locales.map((loc) => (
               <SelectItem

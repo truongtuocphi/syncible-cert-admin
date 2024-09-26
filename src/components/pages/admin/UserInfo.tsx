@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 
 import { signOut } from 'firebase/auth';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
 import { BiUser } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
 import { BiGlobe } from 'react-icons/bi';
@@ -22,6 +22,9 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { auth } from '@/lib/firebase';
+import { routing, useRouter, usePathname, Link } from '@/i18n/routing';
+import { useLocale, useTranslations } from 'next-intl';
+import { BiCheck } from 'react-icons/bi';
 
 interface UserInfoProps {
   user: any;
@@ -29,17 +32,28 @@ interface UserInfoProps {
 
 const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
-  const router = useRouter();
+
+  const href = window.location.href.split('/');
+  const t = useTranslations('Localization');
+  const locale = useLocale();
+  const routerLang = useRouter();
+  const pathname = usePathname();
+
+  // const handleLanguageChange = async (value: 'en' | 'vi') => {
+  //   routerLang.replace(pathname, { locale: value });
+  // };
 
   const handleSignOut = async () => {
     try {
       await signOut(auth);
-      router.push('/');
+      window.location.href = '/';
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error('Error signing out: ', error);
     }
   };
+
+  console.log('href', href.includes('vi'));
 
   return (
     <DropdownMenu>
@@ -114,12 +128,16 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
             onMouseLeave={() => setIsLanguageOpen(false)}
           >
             <div className="p-2">
-              <DropdownMenuItem className="cursor-pointer py-3 text-base font-bold hover:rounded-xl hover:bg-[#F5F5F5]">
-                English
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer py-3 text-base font-bold hover:rounded-xl hover:bg-[#F5F5F5]">
-                Vietnamese
-              </DropdownMenuItem>
+              {routing.locales.map((loc) => (
+                <Link href={`${pathname}`} locale={loc} key={loc}>
+                  <DropdownMenuItem className="cursor-pointer py-3 text-base font-bold hover:rounded-xl hover:bg-[#F5F5F5]">
+                    <div className="flex w-full items-center justify-between">
+                      <div>{loc === 'vi' ? 'Vietnamese' : 'English'}</div>
+                      <div>{href.includes(loc) ? <BiCheck className="text-2xl" /> : null}</div>
+                    </div>
+                  </DropdownMenuItem>
+                </Link>
+              ))}
             </div>
           </div>
         )}

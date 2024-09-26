@@ -14,22 +14,21 @@ const config = {
     },
     extend: {
       screens: {
-        '3xs': '320px', // Custom smallest size
-        '2xs': '375px', // Custom
-        xs: '480px', // Custom extra small screen size
-        sm: '640px', // Small screens (default Tailwind)
-        md: '768px', // Medium screens (default Tailwind)
-        lg: '1024px', // Large screens (default Tailwind)
-        xl: '1280px', // Extra-large screens (default Tailwind)
-        '2xl': '1536px', // 2XL screens (default Tailwind)
-        '3xl': '1920px', // Full HD screens
-        '4xl': '2560px', // 2K screens (Quad HD)
-        '5xl': '3840px', // 4K screens },
+        '3xs': '320px',
+        '2xs': '375px',
+        xs: '480px',
+        sm: '640px',
+        md: '768px',
+        lg: '1024px',
+        xl: '1280px',
+        '2xl': '1536px',
+        '3xl': '1920px',
+        '5xl': '3840px',
       },
       backgroundImage: {
         'custom-radial-gradient':
           'radial-gradient(circle at center, rgba(107, 228, 222, 0.65) 0%, rgba(255, 235, 226, 0.0) 70%)',
-        'custom-blue-gradient': 'linear-gradient(to right, #d4f1f9, #e6fcff)',
+        'custom-blue-gradient': 'linear-gradient(to right, #c3eefa, #e6fcff)',
       },
       blur: {
         '4xl': '5px',

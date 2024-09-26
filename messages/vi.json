@@ -170,6 +170,51 @@
 
     "label": "Hiển thị thông tin xác thực này trên mạng xã hội của bạn"
   },
+
+  "Dapp": {
+    "userInfo": {
+      "profile": "Hồ sơ",
+      "language": "Ngôn ngữ",
+      "helpCenter": "Trung tâm trợ giúp",
+      "LogOut": "Đăng xuất"
+    },
+
+    "header": {
+      "wallet": "Kết nối ví"
+    },
+
+    "sideBar": {
+      "home": "Trang chủ",
+      "certificateManagement": "Tùy Chỉnh Mẫu",
+      "customizeTemplate": "Quản lý Chứng Chỉ",
+      "createDigitalCertificate": "Tạo Chứng Chỉ Số",
+      "setting": "Cài đặt"
+    },
+
+    "welcom": {
+      "title": "Welcome to Syncible",
+      "p": "Tạo chứng chỉ của riêng bạn một cách dễ dàng hơn với các bước bên dưới"
+    },
+
+    "listCard": {
+      "card_0": {
+        "title": "Tùy chỉnh mẫu chứng chỉ",
+        "p": "Chỉnh sửa giao diện và chuyên về chủ đề của riêng bạn. Thêm logo, màu sắc và hình ảnh của bạn để phản ánh thương hiệu của bạn.",
+        "button": "Tùy chỉnh ở đây"
+      },
+      "card_1": {
+        "title": "Quản lý Chứng chỉ",
+        "p": "Quản lý chứng chỉ số được đúc của bạn tại đây",
+        "button": "Tạo ngay"
+      },
+      "card_2": {
+        "title": "Tạo chứng chỉ",
+        "p": "Tạo chứng chỉ của bạn",
+        "button": "Tạo chứng chỉ số"
+      }
+    }
+  },
+
   "Localization": {
     "header": "Ngôn ngữ",
     "label": "{locale, select, en {EN} vi {VI} other {Không xác định}}"

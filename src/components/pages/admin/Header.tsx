@@ -7,11 +7,11 @@ import { useRouter } from 'next/navigation';
 import { BiWallet } from 'react-icons/bi';
 import { useAccount } from 'wagmi';
 
-import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import UserInfo from '@/components/pages/admin/UserInfo';
 import { Skeleton } from '@/components/ui/skeleton';
 import { auth, onAuthStateChanged } from '@/lib/firebase';
+import { useTranslations } from 'next-intl';
 
 const Header = () => {
   const { open } = useWeb3Modal();
@@ -19,6 +19,8 @@ const Header = () => {
 
   const [user, setUser] = useState<any>(null);
   const router = useRouter();
+
+  const t = useTranslations('Dapp');
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user: any) => {
@@ -42,7 +44,7 @@ const Header = () => {
             ) : (
               <div className="flex items-center gap-2">
                 <BiWallet className="text-2xl" />
-                <span>Kết nối ví</span>
+                <span>{t('header.wallet')}</span>
               </div>
             )}
           </ButtonPrimary>

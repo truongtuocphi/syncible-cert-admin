@@ -8,8 +8,12 @@ import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 
 import Modal from './Modal';
 
-export default function Card({ data }: any) {
+import { useTranslations } from 'next-intl';
+
+export default function Card({ data, numberIndex }: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const t = useTranslations('Dapp.listCard');
 
   return (
     <div className="flex h-full w-full flex-col justify-between rounded-3xl border-[0.5px] border-gray-200 bg-white px-6 py-8 2xl:px-8 2xl:py-10">
@@ -19,15 +23,19 @@ export default function Card({ data }: any) {
         </div>
 
         <div className="mt-5 flex flex-col gap-3 2xl:gap-5">
-          <h2 className="text-2xl font-bold text-gray-800 2xl:text-3xl">{data.title}</h2>
-          <p className="text-sm text-gray-500 2xl:text-base">{data.des}</p>
+          <h2 className="text-2xl font-bold text-gray-800 2xl:text-3xl">
+            {t(`card_${numberIndex}.${data.title}`)}
+          </h2>
+          <p className="text-sm text-gray-500 2xl:text-base">
+            {t(`card_${numberIndex}.${data.des}`)}
+          </p>
         </div>
       </div>
 
-      {data.title !== 'Tạo chứng chỉ' ? (
+      {data.title !== t(`card_${numberIndex}.${data.title}`) ? (
         <Link href={data.link}>
           <ButtonPrimary className="mt-5 w-full bg-primary-50 text-white">
-            {data.titleButton}
+            {t(`card_${numberIndex}.${data.titleButton}`)}
           </ButtonPrimary>
         </Link>
       ) : (
@@ -35,7 +43,7 @@ export default function Card({ data }: any) {
           onClick={() => setIsModalOpen(true)}
           className="mt-5 w-full bg-primary-50 text-white"
         >
-          {data.titleButton}
+          {t(`card_${numberIndex}.${data.titleButton}`)}
         </ButtonPrimary>
       )}
 

@@ -8,29 +8,35 @@ import { usePathname } from 'next/navigation';
 import { BiCustomize } from 'react-icons/bi';
 import { BiHome } from 'react-icons/bi';
 import { BiFile } from 'react-icons/bi';
-import { BiCog } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
+import { useTranslations } from 'next-intl';
 
 import Modal from './Modal';
 
 const menuSidebar = [
-  { name: 'Trang Chủ', url: '/admin', icon: <BiHome className="text-2xl 2xl:text-3xl" /> },
+  { name: 'home', url: '/admin', icon: <BiHome className="text-2xl 2xl:text-3xl" /> },
   {
-    name: 'Tùy Chỉnh Mẫu',
+    name: 'certificateManagement',
     url: '/admin/customized',
     icon: <BiFile className="text-2xl 2xl:text-3xl" />,
   },
   {
-    name: 'Quản lý Chứng Chỉ',
+    name: 'customizeTemplate',
     url: '/admin/collection',
     icon: <BiCustomize className="text-2xl 2xl:text-3xl" />,
   },
-  { name: 'Tạo Chứng Chỉ Số', url: '/admin/mintnft', icon: <GrCertificate className="text-2xl" /> },
+  {
+    name: 'createDigitalCertificate',
+    url: '/admin/mintnft',
+    icon: <GrCertificate className="text-2xl" />,
+  },
 ];
 
 const Sidebar = () => {
   const pathname = usePathname() || '/admin';
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const t = useTranslations('Dapp');
 
   // Active
   const baseLinkClasses =
@@ -41,7 +47,7 @@ const Sidebar = () => {
     'hover:bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] hover:text-gray-700';
 
   return (
-    <div className="fixed left-0 top-0 z-50 flex h-full w-64 flex-col justify-between bg-white px-3 text-gray-800 shadow-md 2xl:w-96">
+    <div className="fixed left-0 top-0 z-50 flex h-full w-80 flex-col justify-between bg-white px-3 text-gray-800 shadow-md 2xl:w-96">
       <div>
         <div className="flex items-center justify-start p-4">
           <Link href={'/admin'} className="h-auto w-auto">
@@ -61,7 +67,7 @@ const Sidebar = () => {
 
               return (
                 <li className="text-base 2xl:text-lg" key={item.name}>
-                  {item.name !== 'Tạo Chứng Chỉ Số' ? (
+                  {item.name !== t(`sideBar.${item.name}`) ? (
                     <Link
                       href={item.url}
                       className={`${baseLinkClasses} ${
@@ -69,7 +75,8 @@ const Sidebar = () => {
                       }`}
                     >
                       {item.icon}
-                      {item.name}
+                      {t(`sideBar.${item.name}`)}
+                      {/* {item.name} */}
                     </Link>
                   ) : (
                     <div
@@ -79,7 +86,7 @@ const Sidebar = () => {
                       } cursor-pointer`}
                     >
                       {item.icon}
-                      {item.name}
+                      {t(`sideBar.${item.name}`)}
                     </div>
                   )}
                 </li>

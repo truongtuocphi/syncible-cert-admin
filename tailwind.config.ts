@@ -65,6 +65,8 @@ const config = {
           '40': '#B1A5F9',
           '50': '#836EF9',
         },
+        primaryHover: '#B8B4FE',
+        secondPrimaryHover: '#F5F5F5',
       },
       keyframes: {
         'fade-in': {

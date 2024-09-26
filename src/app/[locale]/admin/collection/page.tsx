@@ -260,7 +260,7 @@ export default function Collection() {
       </div>
       <div className="flex items-center justify-between space-x-4 py-4">
         <div className="flex items-center rounded-2xl border-[1px] border-gray-200 bg-white px-4 py-1">
-          <BiSearch className="text-2xl text-gray-500" />
+          <BiSearch className="text-xl text-gray-500" />
           <Input
             placeholder="Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng"
             value={(table.getColumn('displayName')?.getFilterValue() as string) ?? ''}
@@ -274,7 +274,7 @@ export default function Collection() {
           </ButtonPrimary>
         ) : (
           <Link href={'/admin/collection/createcollection'}>
-            <ButtonPrimary className="ml-auto flex items-center gap-2 border-[1px] border-gray-400 bg-transparent font-bold text-gray-600 hover:bg-primary-50 hover:text-white">
+            <ButtonPrimary className="hover:bg-secondPrimaryHover ml-auto flex items-center gap-2 border-[1px] border-gray-200 bg-transparent font-bold text-gray-600">
               <BiPlusCircle className="text-2xl" />
               Tạo mục
             </ButtonPrimary>

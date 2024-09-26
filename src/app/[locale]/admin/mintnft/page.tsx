@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 
 import { ethers } from 'ethers';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -22,9 +21,19 @@ import { uploadMetadata } from '@/lib/pinata';
 import { Collection } from '@/types/function';
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
-import { BiFolderPlus, BiImageAdd } from 'react-icons/bi';
+import { BiImageAdd } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -268,7 +277,8 @@ const Experience = () => {
             </Link>
             <h1 className="text-2xl font-semibold">Quay lại</h1>
           </div>
-          <div className="flex space-x-6 rounded-xl bg-white p-4">
+          <div className="rounded-3xl bg-white p-6">
+            <h1 className="mb-4 text-xl font-bold">Tạo chứng chỉ số</h1>
             <form onSubmit={handleSubmit} className="w-full">
               <div className="w-full space-y-4 rounded-lg bg-white">
                 <div className="flex items-center justify-start gap-4">

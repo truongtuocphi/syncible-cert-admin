@@ -141,6 +141,7 @@ const CreateCollection: React.FC = () => {
         <h1 className="text-2xl font-semibold text-gray-600">Tạo mục quản lý lưu trữ</h1>
         <div className="flex space-x-6">
           <form onSubmit={handleSubmit} className="w-full space-y-6">
+            {/* img logo and banner */}
             <div className="flex items-center justify-between gap-4">
               <div className="w-1/2">
                 <label className="block text-base font-medium text-gray-900">
@@ -234,6 +235,7 @@ const CreateCollection: React.FC = () => {
                 )}
               </div>
             </div>
+            {/* end */}
             <div className="flex items-center gap-4 space-y-2">
               <div className="w-1/2">
                 <label className="block text-base font-medium text-gray-900">Tên hiển thị</label>

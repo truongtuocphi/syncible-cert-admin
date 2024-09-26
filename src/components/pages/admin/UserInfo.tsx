@@ -9,7 +9,6 @@ import { CgProfile } from 'react-icons/cg';
 import { FaRegMoneyBillAlt, FaUser } from 'react-icons/fa';
 import { FaChevronDown } from 'react-icons/fa';
 import { FiLogOut } from 'react-icons/fi';
-import { IoSettingsOutline } from 'react-icons/io5';
 import { MdOutlineContactSupport } from 'react-icons/md';
 
 import { Button } from '@/components/ui/button';
@@ -18,7 +17,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
@@ -44,7 +42,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="h-fit w-fit rounded-full border-none bg-transparent p-0 text-left outline-none focus-visible:ring-0">
+        <Button className="h-fit w-fit rounded-full border-none bg-transparent p-0 text-left focus:ring-primary-50 focus-visible:ring-2">
           <div className="flex cursor-pointer items-center space-x-4 rounded-3xl bg-white py-2 pl-2 pr-4">
             <div className="flex items-center gap-2">
               {user.photoURL ? (
@@ -69,7 +67,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
           </div>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-64 rounded-2xl">
+      <DropdownMenuContent className="mt-5 w-64 rounded-2xl border-none">
         <DropdownMenuGroup>
           <DropdownMenuItem className="cursor-pointer">
             <CgProfile className="mr-2" />

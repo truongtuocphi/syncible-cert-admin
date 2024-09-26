@@ -62,7 +62,7 @@ const Navbar = () => {
     <div className={`${montserrat.className} "relative w-full`}>
       <div className="flex flex-col items-center">
         <div className="w-full md:px-8 xl:px-[6.5rem]">
-          <div className="grid w-full grid-cols-12 items-center justify-items-center rounded-3xl p-4 backdrop-blur-xl lg:bg-white/50">
+          <div className="grid w-full grid-cols-12 items-center justify-items-center p-4 backdrop-blur-xl md:rounded-3xl md:bg-white/50">
             <div className="col-span-6 justify-self-start md:col-span-4">
               <Link href="/" className="">
                 <div className="h-8 w-28 md:h-10 md:w-40">

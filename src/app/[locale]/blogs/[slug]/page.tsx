@@ -88,43 +88,11 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     return <li className="ps-1 text-base text-[#6C6D71]">{children}</li>;
   }
 
-  function CustomTable({ children }: { children: React.ReactNode }) {
-    return (
-      <table
-        className="table-auto rounded-[1.25rem] border"
-        style={{ borderRadius: '5px', borderCollapse: 'collapse' }}
-      >
-        {children}
-      </table>
-    );
-  }
-
-  function CustomThead({ children }: { children: React.ReactNode }) {
-    return <thead className="border-b">{children}</thead>;
-  }
-
-  function CustomTr({ children }: { children: React.ReactNode }) {
-    return <tr className="border-b">{children}</tr>;
-  }
-
-  function CustomTh({ children }: { children: React.ReactNode }) {
-    return <th className="">{children}</th>;
-  }
-
-  function CustomTd({ children }: { children: React.ReactNode }) {
-    return <td className="border-r">{children}</td>;
-  }
-
   const overrideComponents = {
     h2: CustomH2,
     p: CustomP,
     ul: CustomUl,
     li: CustomLi,
-    table: CustomTable,
-    thead: CustomThead,
-    tr: CustomTr,
-    th: CustomTh,
-    td: CustomTd,
   };
 
   const loadContent = async () => {

@@ -16,6 +16,7 @@ const ListNews = [
   {
     title: 'What is a Syncible Certificate and Syncible Qualified Batch?',
     link: '/blogs',
+    bannerImg: '/SyncibleSmallerBanner.png',
     author: {
       name: 'Ryan Barn',
       avatar: '/SmugFace.png',
@@ -31,7 +32,7 @@ export default function SectionBlogs() {
       <div className="flex flex-col items-center gap-8 px-4 py-[4.5rem] md:px-8 xl:px-32 xl:py-32 ">
         <div className=" text-[2rem] font-semibold">{t('header')}</div>
         <Carousel
-          opts={{ align: 'start', startIndex: 1, loop: false }}
+          opts={{ align: 'center', startIndex: 1, loop: false }}
           // plugins={[
           //   Autoplay({
           //     delay: 5000,

@@ -40,3 +40,14 @@ interface IInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 
 interface ISidebarMenuProps {
   collapse?: boolean;
 }
+
+interface ArticleEntry {
+  title: string;
+  link: string;
+  bannerImg: string;
+  author: {
+    name: string;
+    avatar: string;
+    position: string;
+  };
+}

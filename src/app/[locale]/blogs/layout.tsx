@@ -11,7 +11,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
       <div className="fixed top-0 z-30 w-screen md:mt-6">
         <Navbar />
       </div>
-      <div className={`${montserrat.className} z-20 flex h-screen flex-col items-center gap-10`}>
+      <div className={`${montserrat.className} z-20 flex flex-col items-center gap-10`}>
         {children}
       </div>
       <div className="font-inter relative mt-10 w-full text-black">

@@ -3,24 +3,15 @@ import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 
-interface ArticaleEntry {
-  title: string;
-  link: string;
-  author: {
-    name: string;
-    avatar: string;
-    position: string;
-  };
-}
 
-export default function BlogCard({ entry }: { entry: ArticaleEntry }) {
+export default function BlogCard({ entry }: { entry: ArticleEntry }) {
   return (
-    <Card className="h-full overflow-hidden rounded-[1.25rem] border-[#F0F0F0]  bg-white/80 shadow-none">
+    <Card className="h-full overflow-hidden rounded-[1.25rem] border-[#F0F0F0] backdrop-blur-[50px]  bg-white/80 shadow-none">
       <CardHeader>
         <div className="max-h-40 w-full overflow-hidden rounded-xl">
           <Image
-            src="/SyncibleSmallerBanner.png"
-            alt="placeholder photo"
+            src={entry.bannerImg || '/SyncibleSmallerBanner.png'}
+            alt="Banner photo of the blog post"
             priority
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -30,12 +21,14 @@ export default function BlogCard({ entry }: { entry: ArticaleEntry }) {
       </CardHeader>
       <CardContent>
         <CardTitle className="line-clamp-3 h-32 font-bold leading-[2rem]">
-          <Link href={entry.link} className="hover:underline">{entry.title}</Link>
+          <Link href={entry.link} className="hover:underline">
+            {entry.title}
+          </Link>
         </CardTitle>
       </CardContent>
       <CardFooter>
         <div className="flex w-full gap-4">
-          <Avatar className="flex items-center h-16 w-16">
+          <Avatar className="flex h-16 w-16 items-center">
             <AvatarImage src={entry.author.avatar} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>

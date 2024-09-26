@@ -287,7 +287,7 @@ export default function DefineTemplate() {
             },
             {
               x: 800,
-              y: 1000,
+              y: 960,
               width: 400,
               height: 400,
               backgroundImage: '/batch_black.png',

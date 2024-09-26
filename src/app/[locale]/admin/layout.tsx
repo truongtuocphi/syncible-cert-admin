@@ -19,7 +19,7 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   return (
     <ClientSessionProvider>
       <Web3ModalProvider initialState={initialState}>
-        <div className="flex bg-bgPageAdmin" style={{ minHeight: 'calc(100vh + 40px)' }}>
+        <div className="flex bg-bgPageAdmin" style={{ minHeight: 'calc(100vh + 100px)' }}>
           <Sidebar />
           <div className="ml-64 flex-1 p-6 pt-16 2xl:ml-96">
             <Header />

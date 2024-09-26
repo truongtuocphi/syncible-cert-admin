@@ -9,7 +9,7 @@ const ButtonPrimary = forwardRef<HTMLButtonElement, ButtonProps>(({ className, .
   return (
     <Button
       className={cn(
-        'rounded-2xl border-2 border-primary-50 bg-primary-50 px-5 py-6 text-white hover:bg-white hover:text-primary-50',
+        'hover:bg-primaryHover rounded-2xl bg-primary-50 px-5 py-6 text-white',
         className
       )}
       ref={ref}

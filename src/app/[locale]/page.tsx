@@ -18,12 +18,10 @@ import { Link } from '@/i18n/routing';
 import BannerCertificate from '../../../public/cert_example.png';
 
 import Background from '../../../public/DoraBG.png';
-import StarAndLineBG from '../../../public/dora.svg';
 import LightBlueGradientEllipse from '../../../public/Ellipse_1.svg';
 import EthereumLogoSVG from '../../../public/ethereum-logo.svg';
 import PolygonLogoSVG from '../../../public/polygon-logo.svg';
 import SectionFAQ from '@/components/pages/Home/SectionFAQ';
-// import ContactButton from '@/components/common/button/ContactButton';
 
 const Page = () => {
   const t = useTranslations('HomePage.title_section');

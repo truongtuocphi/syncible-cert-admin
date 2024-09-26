@@ -170,10 +170,8 @@ export default function DefineTemplate() {
 
   return (
     <>
-      <div className="mb-4">
-        <Breadcrumb />
-      </div>
-      <div className="mb-4 flex w-full items-center justify-between">
+      <Breadcrumb />
+      <div className="my-4 flex w-full items-center justify-between">
         <h2 className="text-2xl font-bold">Tùy chỉnh mẫu</h2>
         <div className="flex items-center gap-6">
           <>
@@ -239,7 +237,11 @@ export default function DefineTemplate() {
           </div>
         </div>
       </div>
-      <div className="h-dvh w-full overflow-hidden rounded-xl">
+
+      <div
+        className="w-full overflow-hidden rounded-xl 2xl:min-h-[700px]"
+        style={{ height: 'calc(100vh - 100%)' }}
+      >
         <PinturaEditor
           {...getEditorDefaults()}
           {...editorDefaults}
@@ -285,7 +287,7 @@ export default function DefineTemplate() {
             },
             {
               x: 800,
-              y: 1000,
+              y: 960,
               width: 400,
               height: 400,
               backgroundImage: '/batch_black.png',

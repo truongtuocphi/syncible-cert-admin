@@ -141,6 +141,7 @@ const CreateCollection: React.FC = () => {
         <h1 className="text-2xl font-semibold text-gray-600">Tạo mục quản lý lưu trữ</h1>
         <div className="flex space-x-6">
           <form onSubmit={handleSubmit} className="w-full space-y-6">
+            {/* img logo and banner */}
             <div className="flex items-center justify-between gap-4">
               <div className="w-1/2">
                 <label className="block text-base font-medium text-gray-900">
@@ -234,6 +235,7 @@ const CreateCollection: React.FC = () => {
                 )}
               </div>
             </div>
+            {/* end */}
             <div className="flex items-center gap-4 space-y-2">
               <div className="w-1/2">
                 <label className="block text-base font-medium text-gray-900">Tên hiển thị</label>
@@ -270,10 +272,10 @@ const CreateCollection: React.FC = () => {
                         <div className="flex flex-col gap-2">
                           <h1 className="text-base font-bold">Biểu tượng hợp đồng</h1>
                           <p className="text-sm text-gray-400">
-                            Biểu tượng Hợp đồng là một công cụ hiển thị tên và biểu tượng của bạn mã
-                            thông báo cụ thể trên trình khám phá blockchain. Nó chỉ ra rằng chứng
-                            chỉ đã được xác minh trạng thái, cho phép người dùng theo dõi giao dịch,
-                            số lượng token và quyền sở hữu NFT trên blockchain.
+                            biểu tượng mã thông báo cụ thể của bạn trên trình khám phá blockchain.
+                            Nó chỉ ra rằng chứng chỉ đã được xác minh trạng thái, cho phép người
+                            dùng theo dõi giao dịch, số lượng token và quyền sở hữu NFT trên
+                            blockchain.
                           </p>
                         </div>
                       </HoverCardContent>

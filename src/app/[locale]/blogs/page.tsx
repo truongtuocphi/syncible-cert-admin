@@ -7,10 +7,15 @@ import { useEffect, useState } from 'react';
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { montserrat } from '@/components/ui/fonts';
-import SyncibleBanner from '/public/SyncibleBanner.svg';
-import { Link, usePathname } from '@/i18n/routing';
 import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
+import { montserrat } from '@/components/ui/fonts';
+// import { ChevronDown } from 'lucide-react';
+
+import SyncibleBanner from '/public/SyncibleBanner.svg';
+
+import { Link, usePathname } from '@/i18n/routing';
+
+// import { Button } from '@/components/ui/button';
 
 const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
   const t = useTranslations('BlogPage');
@@ -181,11 +186,11 @@ export default function Blogs() {
   // };
 
   return (
-    <div className="relative min-h-screen scroll-smooth">
+    <div className="relative min-h-screen">
       <div className="fixed top-0 z-30 w-screen md:mt-6">
         <Navbar />
       </div>
-      <div className={`${montserrat.className}  z-20 flex flex-col items-center gap-10`}>
+      <div className={`${montserrat.className} z-20 flex flex-col items-center gap-10`}>
         <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
           <div className="flex flex-col px-4 pb-4 md:px-8 md:pb-10 xl:px-32">
             <div className="flex flex-col items-center gap-10">
@@ -196,40 +201,7 @@ export default function Blogs() {
                 <SyncibleBanner className="aspect-[24/9] h-full w-full" />
               </div>
             </div>
-            <div className="flex flex-col gap-12 md:flex-row">
-              {/* <div className="w-full overflow-hidden rounded-xl bg-white/50 text-[#A2A3A9] md:hidden">
-                <Button
-                  className={clsx(
-                    'flex w-full justify-between rounded-lg bg-white/50 px-4 py-2 text-left text-[#2C2C2C] hover:bg-white/50 hover:text-[#2C2C2C]',
-                    { 'rounded-b-none border-b': toggleBlogNav }
-                  )}
-                  onClick={handleToggleBlogNav}
-                >
-                  {t('nav_select_placeholder.label')}
-                  <div
-                    className={clsx('transition-transform', {
-                      'rotate-180 duration-300': toggleBlogNav,
-                    })}
-                  >
-                    <ChevronDown />
-                  </div>
-                </Button>
-                <div className={clsx('flex flex-col gap-2 px-4 py-2', { hidden: !toggleBlogNav })}>
-                  {keys.map((key) => (
-                    <Link
-                      key={key}
-                      href={t(`navigation.${key}.href`)}
-                      className={clsx(
-                        'hover:text-[#2C2C2C] hover:underline',
-                        pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]'
-                      )}
-                      onClick={() => setToggleBlogNav(false)}
-                    >
-                      {t(`navigation.${key}.label`)}
-                    </Link>
-                  ))}
-                </div>
-              </div> */}
+            <div className="flex flex-col gap-8 md:flex-row">
               <div className="hidden basis-1/4 md:block">
                 <div className="flex h-full flex-col gap-8">
                   <div className="flex flex-col gap-6">
@@ -263,7 +235,7 @@ export default function Blogs() {
                   </div>
                   <div
                     id="table-content"
-                    className="sticky top-[9rem] flex flex-col gap-6 text-base font-bold text-[#A2A3A9]"
+                    className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
                   >
                     {/* {keys.map((key) => (
                       <Link
@@ -320,23 +292,22 @@ export default function Blogs() {
                     </div>
                   </div>
                   <div id="content-section">
-                    {/* {Content && <Content/>} */}
-                    {Content && <Content components={overrideComponents} />}
+                    {Content && <Content />}
+                    {/* {Content && <Content  components={overrideComponents}/>} */}
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <Footer />
       </div>
-      <Footer />
-
-      <div className="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col items-center overflow-hidden">
+      <div className="absolute bottom-0 left-0 right-0 top-0 -z-10 flex h-full w-full flex-col items-center overflow-hidden">
         <div className="relative mx-auto h-full w-full max-w-[90rem]">
-          <div className="absolute -left-1/2 -top-1/2 -z-10 w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%] sm:-translate-x-[20%] sm:-translate-y-[50%]">
+          <div className="absolute -top-[5%] left-1/2 -z-10 w-[125rem] sm:-translate-x-[60%] ">
             <LightBlueGradientEllipse className="h-full w-full" />
           </div>
-          <div className="absolute -bottom-1/2 -right-1/2 -z-10 w-[125rem] sm:-translate-y-[20%] sm:translate-x-[20%]">
+          <div className="sm: absolute right-1/2 top-1/2 -z-10 w-[125rem] translate-x-[60%]">
             <LightBlueGradientEllipse className="h-full w-full" />
           </div>
         </div>

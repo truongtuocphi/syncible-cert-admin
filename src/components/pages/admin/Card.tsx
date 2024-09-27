@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import Link from 'next/link';
 
@@ -10,7 +10,20 @@ import Modal from './Modal';
 
 import { useTranslations } from 'next-intl';
 
-export default function Card({ data, numberIndex }: any) {
+interface IData {
+  title: string;
+  des: string;
+  icon: ReactNode;
+  titleButton: string;
+  link: string;
+}
+
+interface IProps {
+  data: IData;
+  numberIndex: number;
+}
+
+export default function Card({ data, numberIndex }: IProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const t = useTranslations('Dapp.listCard');
@@ -19,7 +32,7 @@ export default function Card({ data, numberIndex }: any) {
     <div className="flex h-full w-full flex-col justify-between rounded-3xl border-[0.5px] border-gray-200 bg-white px-6 py-8 2xl:px-8 2xl:py-10">
       <div>
         <div className="flex size-14 items-center justify-center rounded-full border-[0.5px] border-gray-200 2xl:size-20">
-          {data.icon}
+          {data?.icon}
         </div>
 
         <div className="mt-5 flex flex-col gap-3 2xl:gap-5">
@@ -32,7 +45,8 @@ export default function Card({ data, numberIndex }: any) {
         </div>
       </div>
 
-      {data.title !== t(`card_${numberIndex}.${data.title}`) ? (
+      {t(`card_${numberIndex}.${data.title}`) === 'Create certificate' ||
+      t(`card_${numberIndex}.${data.title}`) === 'Tạo chứng chỉ' ? (
         <Link href={data.link}>
           <ButtonPrimary className="mt-5 w-full bg-primary-50 text-white">
             {t(`card_${numberIndex}.${data.titleButton}`)}
@@ -47,7 +61,6 @@ export default function Card({ data, numberIndex }: any) {
         </ButtonPrimary>
       )}
 
-      {/* Modal */}
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </div>
   );

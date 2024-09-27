@@ -152,6 +152,7 @@ export default function Collection() {
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -174,6 +175,7 @@ export default function Collection() {
         });
         setData(collections);
       }
+      setIsLoading(false);
     };
 
     fetchData();
@@ -255,17 +257,15 @@ export default function Collection() {
 
   return (
     <>
-      <div className="mb-4">
-        <Breadcrumb />
-      </div>
-      <div className="flex items-center justify-between space-x-4 py-4">
+      <Breadcrumb />
+      <div className="mt-4 flex items-center justify-between space-x-4 py-4">
         <div className="flex items-center rounded-2xl border-[1px] border-gray-200 bg-white px-4 py-1">
           <BiSearch className="text-xl text-gray-500" />
           <Input
             placeholder="Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng"
             value={(table.getColumn('displayName')?.getFilterValue() as string) ?? ''}
             onChange={(event) => table.getColumn('displayName')?.setFilterValue(event.target.value)}
-            className="w-80 border-none bg-transparent"
+            className="w-80 border-none bg-transparent outline-none"
           />
         </div>
         {selectedRowCount > 0 ? (
@@ -283,55 +283,56 @@ export default function Collection() {
       </div>
 
       <div className="overflow-hidden rounded-xl border">
-        <Table>
-          <TableHeader className="bg-gray-100">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id} className="font-bold text-black">
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(header.column.columnDef.header, header.getContext())}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody className="bg-white hover:bg-white">
-            {table.getRowModel().rows.length > 0 ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className="text-gray-600">
-                      {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                    </TableCell>
+        {isLoading ? (
+          <div className="flex h-60 items-center justify-center">
+            <Loading />
+          </div>
+        ) : (
+          <Table>
+            <TableHeader className="bg-gray-100">
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <TableHead key={header.id} className="font-bold text-black">
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(header.column.columnDef.header, header.getContext())}
+                    </TableHead>
                   ))}
-                  <td className="hidden">
-                    <ContractData
-                      collectionContractAddress={row.getValue('contractAddress')}
-                      onItemsCountChange={(count: number) =>
-                        handleItemsCountChange(row.getValue('id'), count)
-                      }
-                    />
-                  </td>
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={columns.length} className="h-48 text-center">
-                  {/* <Loading /> */}
-                  {!address ? (
-                    'Vui lòng kết nối ví để hiện thị kết quả'
-                  ) : table.getRowModel().rows.length == 0 ? (
-                    'Hãy tạo một mục quản lý để hiện thị kết quả'
-                  ) : (
-                    <Loading />
-                  )}
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              ))}
+            </TableHeader>
+            <TableBody className="bg-white hover:bg-white">
+              {table.getRowModel().rows.length > 0 ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id} className="text-gray-600">
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                    <td className="hidden">
+                      <ContractData
+                        collectionContractAddress={row.getValue('contractAddress')}
+                        onItemsCountChange={(count: number) =>
+                          handleItemsCountChange(row.getValue('id'), count)
+                        }
+                      />
+                    </td>
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-48 text-center">
+                    {!address
+                      ? 'Vui lòng kết nối ví để hiện thị kết quả'
+                      : 'Hãy tạo một mục quản lý để hiện thị kết quả'}
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        )}
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="space-x-2">

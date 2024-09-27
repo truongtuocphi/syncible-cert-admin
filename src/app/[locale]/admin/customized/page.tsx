@@ -45,6 +45,7 @@ import {
 } from '@/components/ui/drawer';
 import { Input } from '@/components/ui/input';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { useTranslations } from 'next-intl';
 
 setPlugins(plugin_crop, plugin_filter, plugin_annotate, plugin_sticker);
 
@@ -143,10 +144,12 @@ const editorDefaults = getEditorDefaults({
 
 export default function DefineTemplate() {
   const [result, setResult] = useState('');
-  const [fileName, setFileName] = useState<string>('Tải mẫu lên');
+  const [fileName, setFileName] = useState<any>('');
   const [selectedTemplate, setSelectedTemplate] = useState<string>(
     `${headerURL}/QmTSo1QyvYhb6csz2p46mkdVz7ZoHMwepDgDBTzkLeJBjh`
   );
+
+  const t = useTranslations('Dapp.customCertificate');
 
   const handleTemplateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -172,7 +175,7 @@ export default function DefineTemplate() {
     <>
       <Breadcrumb />
       <div className="my-4 flex w-full items-center justify-between">
-        <h2 className="text-2xl font-bold">Tùy chỉnh mẫu</h2>
+        <h2 className="text-2xl font-bold">{t('title')}</h2>
         <div className="flex items-center gap-6">
           <>
             <Input
@@ -186,7 +189,8 @@ export default function DefineTemplate() {
               onClick={() => document.getElementById('picture')?.click()}
             >
               <FaRegFileImage className="text-2xl" />
-              {fileName.slice(0, 12)}
+              {fileName ? fileName.slice(0, 12) : t('uploadModel')}
+              {/* {fileName.slice(0, 12)} */}
             </ButtonPrimary>
           </>
           <div className="grid items-center gap-1.5">
@@ -194,13 +198,15 @@ export default function DefineTemplate() {
               <DrawerTrigger asChild>
                 <ButtonPrimary className="flex items-center gap-2 text-white">
                   <BiCategory className="text-2xl" />
-                  Chọn mẫu
+                  {t('buttonSelectModel')}
                 </ButtonPrimary>
               </DrawerTrigger>
               <DrawerContent>
                 <div className="mx-auto w-full max-w-5xl text-gray-700">
                   <DrawerHeader>
-                    <DrawerTitle className="text-2xl font-bold">Chọn mẫu Chứng chỉ</DrawerTitle>
+                    <DrawerTitle className="text-2xl font-bold">
+                      {t('buttonSelectModel')}
+                    </DrawerTitle>
                   </DrawerHeader>
                   <div className="my-6 grid grid-cols-5 gap-4 px-4">
                     {predefinedTemplates.map((template) => (

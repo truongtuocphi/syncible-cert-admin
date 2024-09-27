@@ -5,24 +5,13 @@ import { useState } from 'react';
 import { ref, set } from 'firebase/database';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { BiCloudUpload, BiCollection, BiImageAdd } from 'react-icons/bi';
-import { FaImage, FaTimes } from 'react-icons/fa';
-import { LuEye } from 'react-icons/lu';
+import { BiCollection, BiImageAdd } from 'react-icons/bi';
+import { FaImage } from 'react-icons/fa';
 import { useAccount } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTitle,
-  DrawerTrigger,
-} from '@/components/ui/drawer';
 import deployContract from '@/contract/deployContract';
 import { db } from '@/lib/firebase';
-import CopyAddressButton from '@/components/pages/admin/CopyAddressButton';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { AiOutlinePicture } from 'react-icons/ai';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { IoMdHelpCircleOutline } from 'react-icons/io';
@@ -174,44 +163,6 @@ const CreateCollection: React.FC = () => {
                         `${fileLogoImage?.slice(0, 4)}...${fileLogoImage?.slice(-4)}`}
                     </div>
                   </div>
-                  {/* <div className="flex w-full items-center gap-4">
-                    {previewImage ? (
-                      <div className="relative h-36 w-36 overflow-hidden rounded-full bg-gray-300">
-                        <Image
-                          src={previewImage}
-                          alt="Selected Media"
-                          className="h-full w-full object-cover"
-                          width={144}
-                          height={144}
-                        />
-                      </div>
-                    ) : (
-                      <div className="flex h-36 w-36 items-center justify-center rounded-full border-[0.5px] border-dashed border-gray-300">
-                        <FaImage className="text-3xl text-gray-500" />
-                      </div>
-                    )}
-                    <div className="space-y-2">
-                      <input
-                        type="file"
-                        accept="image/*"
-                        onChange={(e) => handleImageChange(e, setLogoImage)}
-                        required
-                        className="hidden"
-                        id="file-upload"
-                      />
-                      <div className="flex items-center gap-4">
-                        <label
-                          htmlFor="file-upload"
-                          className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-500 hover:bg-gray-100"
-                        >
-                          <BiImageAdd className="text-2xl text-black" />
-                          Chọn tệp
-                        </label>
-                        {fileLogoImage &&
-                          `${fileLogoImage?.slice(0, 4)}...${fileLogoImage?.slice(-4)}`}
-                      </div>
-                    </div>
-                  </div> */}
                 </div>
                 <div className="flex flex-col items-start gap-4 space-y-2">
                   <div className="w-full">
@@ -223,11 +174,7 @@ const CreateCollection: React.FC = () => {
                       SVG. Kích thước tối đa: 3 MB.
                     </p>
                   </div>
-                  <div
-                    // className="relative flex h-56 w-1/2 items-center justify-center rounded-lg border-[1px] border-dashed border-gray-300 text-gray-600 hover:border-gray-400"
-                    onDrop={(e) => handleDrop(e, setBannerImage)}
-                    onDragOver={handleDragOver}
-                  >
+                  <div onDrop={(e) => handleDrop(e, setBannerImage)} onDragOver={handleDragOver}>
                     <div className="space-y-2">
                       <input
                         type="file"
@@ -249,39 +196,6 @@ const CreateCollection: React.FC = () => {
                           `${fileLogoImage?.slice(0, 4)}...${fileLogoImage?.slice(-4)}`} */}
                       </div>
                     </div>
-                    {/* {bannerImage ? (
-                      <div className="relative h-full w-full">
-                        <Image
-                          src={bannerImage}
-                          alt="Banner Image"
-                          fill
-                          className="rounded-md object-cover"
-                        />
-                        <button
-                          type="button"
-                          onClick={handleRemoveImage}
-                          className="absolute right-2 top-2 rounded-full bg-gray-500 p-1 text-white"
-                        >
-                          <FaTimes className="text-lg" />
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="flex flex-col items-center">
-                        <div className="text flex size-14 items-center justify-center rounded-full bg-gray-100">
-                          <BiCloudUpload className=" text-center text-3xl text-gray-500" />
-                        </div>
-                        <p className="mt-2 text-base text-gray-500">
-                          Kéo và thả hoặc nhấp để tải lên
-                        </p>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          required
-                          onChange={(e) => handleImageBannerChange(e, setBannerImage)}
-                          className="absolute inset-0 cursor-pointer opacity-0"
-                        />
-                      </div>
-                    )} */}
                   </div>
                 </div>
               </div>

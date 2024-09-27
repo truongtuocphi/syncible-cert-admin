@@ -212,6 +212,12 @@
         "p": "Tạo chứng chỉ của bạn",
         "button": "Tạo Chứng Chỉ"
       }
+    },
+
+    "customCertificate": {
+      "title": "Tùy chỉnh mẫu",
+      "buttonSelectModel": "Chọn mẫu",
+      "uploadModel": "Tải mẫu lên"
     }
   },
 

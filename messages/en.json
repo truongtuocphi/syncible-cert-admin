@@ -212,6 +212,12 @@
         "p": "Create your digital certificate",
         "button": "Create Digital Certificate"
       }
+    },
+
+    "customCertificate": {
+      "title": "Customize Template",
+      "buttonSelectModel": "Select model",
+      "uploadModel": "Upload template"
     }
   },
 

@@ -223,8 +223,10 @@
     "Management": {
       "title": "Certificate Management",
       "button": "Create",
+      "buttonDelete": "Delete",
 
       "table": {
+        "id": "ID",
         "name": "Display name",
         "symbol": "Contract Symbol",
         "quantily": "Quantily",

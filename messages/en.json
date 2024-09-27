@@ -223,8 +223,10 @@
     "Management": {
       "title": "Quản Lý Chứng Chỉ",
       "button": "Tạo mục",
+      "buttonDelete": "Xóa đã chọn",
 
       "table": {
+        "id": "ID",
         "name": "Tên hiển thị",
         "symbol": "Biểu tượng hợp đồng",
         "quantily": "Tổng số chứng chỉ",

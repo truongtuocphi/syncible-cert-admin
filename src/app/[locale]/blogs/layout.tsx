@@ -16,7 +16,6 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
     const handleScroll = () => {
       if (window.innerWidth < 768) {
         const currentScrollY = window.scrollY;
-
         // Show the navbar when scrolling up, hide it when scrolling down
         if (currentScrollY > lastScrollY) {
           setIsNavbarVisible(false); // Scrolling down

@@ -1,25 +1,21 @@
-import { ChevronsUpDown } from 'lucide-react';
+import { useState } from 'react';
+
+import { ChevronsUpDown, Check } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { routing, useRouter, usePathname, Link } from '@/i18n/routing';
 
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { routing, useRouter, usePathname, Link } from '@/i18n/routing';
+
 import GlobeIconSVG from '../../../../public/globe-svgrepo-com.svg';
 
 export function LocaleSelect() {
   const t = useTranslations('Localization');
-  const locale = useLocale();
+  const locale = useLocale() as 'en' | 'vi';
   const router = useRouter();
   const pathname = usePathname();
+  
 
   const handleLanguageChange = async (value: 'en' | 'vi') => {
     router.replace(pathname, { locale: value });
@@ -27,27 +23,36 @@ export function LocaleSelect() {
 
   return (
     <>
-      <Select defaultValue={locale} onValueChange={handleLanguageChange}>
-        <SelectTrigger className="justify-none rounded-[2rem] border-none bg-slate-100 text-[#A2A3A9] hover:text-[#2C2C2C] focus:ring-0 active:text-[#2C2C2C]">
-          <div className="flex items-center pr-4">
-            <GlobeIconSVG className="h-[18px] w-[18px]" />
-          </div>
-          <SelectValue placeholder={t('label', { locale: locale })} />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectGroup>
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button variant="secondary" className="bg-transparent hover:bg-transparent">
+            <div className="flex items-center pr-2">
+              <GlobeIconSVG className="h-6 w-6" />
+            </div>
+            {locale.toUpperCase()}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent
+          align="end"
+          className="w-auto rounded-[20px] border-none shadow-combinedShadow2"
+        >
+          <div className="flex w-44 flex-col">
             {routing.locales.map((loc) => (
-              <SelectItem
+              <Button
+                variant="link"
                 key={loc}
-                value={loc}
-                className="text-[#A2A3A9] hover:text-[#2C2C2C] active:text-[#2C2C2C]"
+                onClick={() => handleLanguageChange(loc as 'en' | 'vi')}
+                className="h-auto rounded-2xl px-4 py-3 font-semibold text-[#2C2C2C] hover:bg-[#EEEEEE] hover:text-[#2C2C2C] hover:no-underline active:text-[#2C2C2C]"
               >
-                {t('label', { locale: loc })}
-              </SelectItem>
+                <div className="flex w-full justify-between">
+                  {t('label', { locale: loc })}
+                  {locale === loc && <Check className="h-6 w-6" />}
+                </div>
+              </Button>
             ))}
-          </SelectGroup>
-        </SelectContent>
-      </Select>
+          </div>
+        </PopoverContent>
+      </Popover>
     </>
   );
 }
@@ -63,7 +68,7 @@ export function LocaleCollapsible() {
         <div className="flex items-center justify-between text-[#A2A3A9]">
           <div>{t('header')}</div>
           <CollapsibleTrigger asChild>
-            <Button variant="link" size="sm" className="w-9 p-0 w-full justify-end">
+            <Button variant="link" size="sm" className="w-9 w-full justify-end p-0">
               <ChevronsUpDown className="h-4 w-4" />
               <span className="sr-only">Toggle</span>
             </Button>

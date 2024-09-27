@@ -227,6 +227,6 @@
 
   "Localization": {
     "header": "Language",
-    "label": "{locale, select, en {EN} vi {VI} other {Unknown}}"
+    "label": "{locale, select, en {English} vi {Vietnamese} other {Unknown}}"
   }
 }

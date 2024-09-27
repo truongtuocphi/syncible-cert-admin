@@ -224,9 +224,8 @@
       }
     }
   },
-
   "Localization": {
     "header": "Ngôn ngữ",
-    "label": "{locale, select, en {EN} vi {VI} other {Không xác định}}"
+    "label": "{locale, select, en {Tiếng Anh} vi {Tiếng Việt} other {Không xác định}}"
   }
 }

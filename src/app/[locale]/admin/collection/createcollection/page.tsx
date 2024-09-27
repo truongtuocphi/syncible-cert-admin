@@ -107,7 +107,7 @@ const CreateCollection: React.FC = () => {
     try {
       setIsLoading(true);
 
-      const contractAddress = await deployContract(displayName, address);
+      const contractAddress = await deployContract(displayName, address, contractSymbol);
 
       const collectionRef = ref(db, `collections/${contractAddress}`);
       await set(collectionRef, {

@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import ABI from '@/contract/ABI.json';
 import bytecodeJson from '@/contract/contractBytecode.json';
 
-const deployContract = async (displayName: string, address: any) => {
+const deployContract = async (displayName: string, address: any, contractSymbol: string) => {
   if (!window.ethereum) {
     throw new Error('No Ethereum provider found');
   }
@@ -83,7 +83,7 @@ const deployContract = async (displayName: string, address: any) => {
         );
 
         function initialize() public initializer {
-            __ERC721_init("Syncible Certificate NFT", "SCNFT");
+            __ERC721_init(${displayName}, ${contractSymbol});
             __ERC721URIStorage_init();
             __AccessControl_init();
             __UUPSUpgradeable_init();

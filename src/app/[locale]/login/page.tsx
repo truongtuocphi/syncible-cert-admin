@@ -17,6 +17,8 @@ import {
   provider,
   browserSessionPersistence,
 } from '@/lib/firebase';
+import Link from 'next/link';
+import { IoIosArrowRoundBack } from 'react-icons/io';
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
@@ -64,7 +66,7 @@ export default function Login() {
   };
 
   return (
-    <div className="relative flex max-h-screen h-screen items-center justify-start overflow-hidden px-8 py-5">
+    <div className="relative flex h-screen max-h-screen items-center justify-start overflow-hidden px-8 py-5">
       <video
         className="absolute left-0 top-0 h-full w-full object-cover"
         src="/video/Cubes_Diagonal_3840x2160.mp4"
@@ -76,7 +78,7 @@ export default function Login() {
         className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:p-10 2xl:h-[850px]"
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
       >
-        <div className="p-3">
+        <div className="flex items-center justify-between p-3">
           <Image
             src="/SyncibleAdmin.png"
             style={{ width: '110px', height: 'auto' }}
@@ -84,6 +86,14 @@ export default function Login() {
             width={110}
             height={30}
           />
+
+          <Link
+            href="/"
+            className="group flex items-center gap-2 text-base text-gray-600 hover:text-black"
+          >
+            <IoIosArrowRoundBack className="text-xl text-gray-600 group-hover:text-black" />
+            Back
+          </Link>
         </div>
         <div className="mx-auto mt-16 w-full max-w-lg p-3">
           <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>
@@ -135,8 +145,6 @@ export default function Login() {
               </div>
               {error && <p className="mt-2 text-red-500">{error}</p>}
             </div>
-
-            {/* {error && <p className="mt-2 text-center text-red-500">{error}</p>} */}
 
             <button
               type="submit"

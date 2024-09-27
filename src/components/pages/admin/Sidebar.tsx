@@ -18,12 +18,12 @@ const menuSidebar = [
   {
     name: 'customizeTemplate',
     url: '/admin/customized',
-    icon: <BiFile className="text-2xl 2xl:text-3xl" />,
+    icon: <BiCustomize className="text-2xl 2xl:text-3xl" />,
   },
   {
     name: 'certificateManagement',
     url: '/admin/collection',
-    icon: <BiCustomize className="text-2xl 2xl:text-3xl" />,
+    icon: <BiFile className="text-2xl 2xl:text-3xl" />,
   },
   {
     name: 'createDigitalCertificate',

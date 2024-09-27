@@ -265,7 +265,7 @@ export default function Collection() {
         <div className="flex items-center rounded-2xl border-[1px] border-gray-200 bg-white px-4 py-1">
           <BiSearch className="text-xl text-gray-500" />
           <Input
-            placeholder="Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng"
+            placeholder={`${t('placeholder')}`}
             value={(table.getColumn('displayName')?.getFilterValue() as string) ?? ''}
             onChange={(event) => table.getColumn('displayName')?.setFilterValue(event.target.value)}
             className="w-80 border-none bg-transparent outline-none"

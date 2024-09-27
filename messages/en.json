@@ -224,6 +224,7 @@
       "title": "Quản Lý Chứng Chỉ",
       "button": "Tạo mục",
       "buttonDelete": "Xóa đã chọn",
+      "placeholder": "Search by name, symbol, contract address",
 
       "table": {
         "id": "ID",

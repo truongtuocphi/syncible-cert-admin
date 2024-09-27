@@ -224,6 +224,7 @@
       "title": "Certificate Management",
       "button": "Create",
       "buttonDelete": "Delete",
+      "placeholder": "Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng",
 
       "table": {
         "id": "ID",

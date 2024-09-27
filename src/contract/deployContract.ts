@@ -19,7 +19,6 @@ const deployContract = async (displayName: string, address: any, contractSymbol:
   const bytecode = bytecodeJson.bytecode;
   const factory = new ethers.ContractFactory(abi, bytecode, await signer);
 
-  // Triển khai hợp đồng
   const contract = await factory.deploy({
     gasLimit: 4000000,
     gasPrice: ethers.parseUnits('40', 'gwei'),
@@ -32,11 +31,10 @@ const deployContract = async (displayName: string, address: any, contractSymbol:
 
   const deployedContract = new ethers.Contract(await contract.getAddress(), abi, await signer);
 
-  // Khởi tạo hợp đồng
   const initializeTx = await deployedContract.initialize();
   await initializeTx.wait();
 
-  // Cấp quyền admin mới
+  // set owner contract
   const grantAdminTx = await deployedContract.grantAdminRole(address);
   await grantAdminTx.wait();
 
@@ -221,7 +219,6 @@ const deployContract = async (displayName: string, address: any, contractSymbol:
     }
   };
 
-  // Sau khi triển khai thành công, tiến hành xác minh
   await verifyContract(await contract.getAddress());
 
   return contract.getAddress();

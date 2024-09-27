@@ -82,7 +82,7 @@ export default function Page() {
               <ArrowNarrowRight className="h-6 w-6" />
             </button>
           </div>
-        </div>
+        </div>      
       </div>
     </div>
   );

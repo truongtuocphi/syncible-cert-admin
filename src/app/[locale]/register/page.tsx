@@ -13,6 +13,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 import { GoogleIcon } from '@/assets/icons';
 import { auth, db, set, ref } from '@/lib/firebase';
 import { signInWithPopup, provider } from '@/lib/firebase';
+import { IoIosArrowRoundBack } from 'react-icons/io';
 
 interface FormData {
   firstName: string;
@@ -152,7 +153,7 @@ export default function Register() {
         className={`z-10 ${!showContinueSignUp && 'h-screen lg:p-10'} w-full p-5 text-black backdrop-blur-sm md:w-[500px] xl:max-h-[850px]`}
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
       >
-        <div className="p-3">
+        <div className="flex items-center justify-between p-3">
           <Image
             src="/SyncibleAdmin.png"
             style={{ width: '110px', height: 'auto' }}
@@ -160,6 +161,14 @@ export default function Register() {
             width={110}
             height={30}
           />
+
+          <Link
+            href="/login"
+            className="group flex items-center gap-2 text-base text-gray-600 hover:text-black"
+          >
+            <IoIosArrowRoundBack className="text-xl text-gray-600 group-hover:text-black" />
+            Back
+          </Link>
         </div>
         {!showContinueSignUp ? (
           <div className="flex h-full w-full items-center justify-center">

@@ -32,7 +32,7 @@ export default function Card({ data, numberIndex }: IProps) {
     <div className="flex h-full w-full flex-col justify-between rounded-3xl border-[0.5px] border-gray-200 bg-white px-6 py-8 2xl:px-8 2xl:py-10">
       <div>
         <div className="flex size-14 items-center justify-center rounded-full border-[0.5px] border-gray-200 2xl:size-20">
-          {data?.icon}
+          {data.icon}
         </div>
 
         <div className="mt-5 flex flex-col gap-3 2xl:gap-5">
@@ -45,8 +45,8 @@ export default function Card({ data, numberIndex }: IProps) {
         </div>
       </div>
 
-      {t(`card_${numberIndex}.${data.title}`) === 'Create certificate' ||
-      t(`card_${numberIndex}.${data.title}`) === 'Tạo chứng chỉ' ? (
+      {t(`card_${numberIndex}.${data.title}`) !== 'Create Digital Certificate' ||
+      t(`card_${numberIndex}.${data.title}`) !== 'Tạo Chứng Chỉ' ? (
         <Link href={data.link}>
           <ButtonPrimary className="mt-5 w-full bg-primary-50 text-white">
             {t(`card_${numberIndex}.${data.titleButton}`)}

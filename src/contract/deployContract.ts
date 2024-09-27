@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import ABI from '@/contract/ABI.json';
 import bytecodeJson from '@/contract/contractBytecode.json';
 
-const deployContract = async (displayName: string, address: any) => {
+const deployContract = async (displayName: string, address: any, contractSymbol: string) => {
   if (!window.ethereum) {
     throw new Error('No Ethereum provider found');
   }
@@ -19,10 +19,9 @@ const deployContract = async (displayName: string, address: any) => {
   const bytecode = bytecodeJson.bytecode;
   const factory = new ethers.ContractFactory(abi, bytecode, await signer);
 
-  // Triển khai hợp đồng
   const contract = await factory.deploy({
-    gasLimit: 5000000,
-    gasPrice: ethers.parseUnits('50', 'gwei'),
+    gasLimit: 4000000,
+    gasPrice: ethers.parseUnits('40', 'gwei'),
   });
 
   const receipt = await contract.deploymentTransaction()?.wait();
@@ -32,11 +31,10 @@ const deployContract = async (displayName: string, address: any) => {
 
   const deployedContract = new ethers.Contract(await contract.getAddress(), abi, await signer);
 
-  // Khởi tạo hợp đồng
   const initializeTx = await deployedContract.initialize();
   await initializeTx.wait();
 
-  // Cấp quyền admin mới
+  // set owner contract
   const grantAdminTx = await deployedContract.grantAdminRole(address);
   await grantAdminTx.wait();
 
@@ -83,7 +81,7 @@ const deployContract = async (displayName: string, address: any) => {
         );
 
         function initialize() public initializer {
-            __ERC721_init("Syncible Certificate NFT", "SCNFT");
+            __ERC721_init(${displayName}, ${contractSymbol});
             __ERC721URIStorage_init();
             __AccessControl_init();
             __UUPSUpgradeable_init();
@@ -221,7 +219,6 @@ const deployContract = async (displayName: string, address: any) => {
     }
   };
 
-  // Sau khi triển khai thành công, tiến hành xác minh
   await verifyContract(await contract.getAddress());
 
   return contract.getAddress();

@@ -195,8 +195,8 @@
 
     "sideBar": {
       "home": "Home",
-      "certificateManagement": "Certificate Management",
       "customizeTemplate": "Customize Template",
+      "certificateManagement": "Certificate Management",
       "createDigitalCertificate": "Create Digital Certificate",
       "setting": "Setting"
     },
@@ -215,12 +215,12 @@
       "card_1": {
         "title": "Certificate management",
         "p": "Manage your minted digital certificates here",
-        "button": "Create now"
+        "button": "Create Now"
       },
       "card_2": {
         "title": "Create certificate",
         "p": "Create your digital certificate",
-        "button": "Create digital certificate"
+        "button": "Create Digital Certificate"
       }
     }
   },

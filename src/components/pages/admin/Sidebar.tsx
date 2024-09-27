@@ -18,17 +18,17 @@ const menuSidebar = [
   {
     name: 'customizeTemplate',
     url: '/admin/customized',
-    icon: <BiFile className="text-2xl 2xl:text-3xl" />,
+    icon: <BiCustomize className="text-2xl 2xl:text-3xl" />,
   },
   {
     name: 'certificateManagement',
     url: '/admin/collection',
-    icon: <BiCustomize className="text-2xl 2xl:text-3xl" />,
+    icon: <BiFile className="text-2xl 2xl:text-3xl" />,
   },
   {
     name: 'createDigitalCertificate',
     url: '/admin/mintnft',
-    icon: <GrCertificate className="text-2xl" />,
+    icon: <GrCertificate className="text-2xl 2xl:text-3xl" />,
   },
 ];
 
@@ -67,7 +67,8 @@ const Sidebar = () => {
 
               return (
                 <li className="text-base 2xl:text-lg" key={item.name}>
-                  {item.name !== t(`sideBar.${item.name}`) ? (
+                  {t(`sideBar.${item.name}`) !== 'Create Digital Certificate' ||
+                  t(`sideBar.${item.name}`) !== 'Tạo Chứng Chỉ' ? (
                     <Link
                       href={item.url}
                       className={`${baseLinkClasses} ${
@@ -76,7 +77,6 @@ const Sidebar = () => {
                     >
                       {item.icon}
                       {t(`sideBar.${item.name}`)}
-                      {/* {item.name} */}
                     </Link>
                   ) : (
                     <div

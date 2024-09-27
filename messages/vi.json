@@ -195,9 +195,9 @@
 
     "sideBar": {
       "home": "Trang chủ",
-      "certificateManagement": "Tùy Chỉnh Mẫu",
-      "customizeTemplate": "Quản lý Chứng Chỉ",
-      "createDigitalCertificate": "Tạo Chứng Chỉ Số",
+      "customizeTemplate": "Tùy Chỉnh Mẫu",
+      "certificateManagement": "Quản lý Chứng Chỉ",
+      "createDigitalCertificate": "Tạo Chứng Chỉ",
       "setting": "Cài đặt"
     },
 
@@ -210,17 +210,17 @@
       "card_0": {
         "title": "Tùy chỉnh mẫu chứng chỉ",
         "p": "Chỉnh sửa giao diện và chuyên về chủ đề của riêng bạn. Thêm logo, màu sắc và hình ảnh của bạn để phản ánh thương hiệu của bạn.",
-        "button": "Tùy chỉnh ở đây"
+        "button": "Tùy Chỉnh Ở Đây"
       },
       "card_1": {
         "title": "Quản lý Chứng chỉ",
         "p": "Quản lý chứng chỉ số được đúc của bạn tại đây",
-        "button": "Tạo ngay"
+        "button": "Tạo Ngay"
       },
       "card_2": {
         "title": "Tạo chứng chỉ",
         "p": "Tạo chứng chỉ của bạn",
-        "button": "Tạo chứng chỉ số"
+        "button": "Tạo Chứng Chỉ"
       }
     }
   },

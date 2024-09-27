@@ -190,7 +190,6 @@ export default function DefineTemplate() {
             >
               <FaRegFileImage className="text-2xl" />
               {fileName ? fileName.slice(0, 12) : t('uploadModel')}
-              {/* {fileName.slice(0, 12)} */}
             </ButtonPrimary>
           </>
           <div className="grid items-center gap-1.5">

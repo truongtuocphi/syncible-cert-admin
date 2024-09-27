@@ -218,6 +218,20 @@
       "title": "Customize Template",
       "buttonSelectModel": "Select model",
       "uploadModel": "Upload template"
+    },
+
+    "Management": {
+      "title": "Quản Lý Chứng Chỉ",
+      "button": "Tạo mục",
+
+      "table": {
+        "name": "Tên hiển thị",
+        "symbol": "Biểu tượng hợp đồng",
+        "quantily": "Tổng số chứng chỉ",
+        "contract": "Địa chỉ hợp đồng",
+        "status": "Trạng thái",
+        "operetion": "Thao tác"
+      }
     }
   },
 

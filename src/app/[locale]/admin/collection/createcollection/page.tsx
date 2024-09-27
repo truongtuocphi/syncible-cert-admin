@@ -210,7 +210,7 @@ const CreateCollection: React.FC = () => {
                         alt="Banner Preview"
                         width={600}
                         height={200}
-                        className="h-1/2 rounded-3xl object-cover"
+                        className="h-1/2 w-full rounded-3xl object-cover"
                       />
                     ) : (
                       <div className="relative h-1/2 w-full rounded-3xl border-[0.5px] border-dashed border-gray-300 bg-[#FAFAFA]">

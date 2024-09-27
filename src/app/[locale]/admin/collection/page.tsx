@@ -38,6 +38,7 @@ import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
 import { deleteDataById } from '@/utils/deleteDataFirebase';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { useTranslations } from 'next-intl';
 
 export type Collection = {
   id: string;
@@ -126,7 +127,9 @@ const columns: ColumnDef<Collection>[] = [
     accessorKey: 'status',
     header: 'Trạng thái',
     cell: () => (
-      <div className="rounded-full bg-green-500 p-2 text-center text-white">Hoạt Động</div>
+      <div className="w-fit rounded-full bg-green-500 p-2 text-center text-white">
+        Hoạt Động
+      </div>
     ),
   },
   {
@@ -153,6 +156,8 @@ export default function Collection() {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  const t = useTranslations('Dapp.Management');
 
   useEffect(() => {
     const fetchData = async () => {

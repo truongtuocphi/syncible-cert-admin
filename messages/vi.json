@@ -218,6 +218,20 @@
       "title": "Tùy chỉnh mẫu",
       "buttonSelectModel": "Chọn mẫu",
       "uploadModel": "Tải mẫu lên"
+    },
+
+    "Management": {
+      "title": "Certificate Management",
+      "button": "Create",
+
+      "table": {
+        "name": "Display name",
+        "symbol": "Contract Symbol",
+        "quantily": "Quantily",
+        "contract": "Contract address",
+        "status": "status",
+        "operetion": "Operation"
+      }
     }
   },
 

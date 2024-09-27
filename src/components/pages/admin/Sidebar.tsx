@@ -28,7 +28,7 @@ const menuSidebar = [
   {
     name: 'createDigitalCertificate',
     url: '/admin/mintnft',
-    icon: <GrCertificate className="text-2xl" />,
+    icon: <GrCertificate className="text-2xl 2xl:text-3xl" />,
   },
 ];
 
@@ -77,7 +77,6 @@ const Sidebar = () => {
                     >
                       {item.icon}
                       {t(`sideBar.${item.name}`)}
-                      {/* {item.name} */}
                     </Link>
                   ) : (
                     <div

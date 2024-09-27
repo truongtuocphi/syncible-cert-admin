@@ -299,7 +299,12 @@ const CreateCollection: React.FC = () => {
                         className="h-1/2 rounded-3xl object-cover"
                       />
                     ) : (
-                      <div className="h-1/2 w-full rounded-3xl border-[0.5px] border-dashed border-gray-300 bg-[#FAFAFA]"></div>
+                      <div className="relative h-1/2 w-full rounded-3xl border-[0.5px] border-dashed border-gray-300 bg-[#FAFAFA]">
+                        <div className="absolute left-1/2 top-[30%] flex -translate-x-1/2 items-center gap-2 text-gray-300">
+                          <FaImage className="text-xl text-gray-300" />
+                          Preview Banner
+                        </div>
+                      </div>
                     )}
                     {logoImage ? (
                       <div className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white bg-[#FAFAFA]">
@@ -313,16 +318,19 @@ const CreateCollection: React.FC = () => {
                       </div>
                     ) : (
                       <div className="absolute left-1/2 top-1/2 h-32 w-32 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-white bg-[#FAFAFA]">
-                        <FaImage className="absolute left-1/2 top-[40%] -translate-x-1/2 text-2xl text-gray-500 2xl:text-3xl" />
+                        <div className="absolute left-1/2 top-[30%] flex -translate-x-1/2 flex-col items-center gap-2 text-gray-300">
+                          <FaImage className="text-2xl text-gray-500 2xl:text-3xl" />
+                          <p className="text-xs 2xl:text-sm">Logo</p>
+                        </div>
                       </div>
                     )}
                     {displayName ? (
-                      <div className="mt-16 text-center">
+                      <div className="mt-20 text-center">
                         <h3 className="mt-2 text-lg font-bold text-gray-800">{displayName}</h3>
                         <p className="mt-1 text-sm font-semibold text-gray-600">ERC 721</p>
                       </div>
                     ) : (
-                      <div className="mt-16 text-center">
+                      <div className="mt-20 text-center">
                         <p className="text-sm font-semibold text-gray-600">
                           Preview of your collection
                         </p>

@@ -67,7 +67,8 @@ const Sidebar = () => {
 
               return (
                 <li className="text-base 2xl:text-lg" key={item.name}>
-                  {item.name !== t(`sideBar.${item.name}`) ? (
+                  {t(`sideBar.${item.name}`) !== 'Create Digital Certificate' ||
+                  t(`sideBar.${item.name}`) !== 'Tạo Chứng Chỉ' ? (
                     <Link
                       href={item.url}
                       className={`${baseLinkClasses} ${

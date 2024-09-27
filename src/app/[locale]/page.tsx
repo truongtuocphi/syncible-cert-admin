@@ -136,7 +136,7 @@ const Page = () => {
             <Image
               src={Background}
               alt="The background image with star-like shapes a a single curvy line that extend to the botton of the image"
-              className="z-20 h-full w-full object-cover object-top"
+              className="z-20 h-full w-full object-contain object-top"
               fill
               sizes="100vw"
               priority

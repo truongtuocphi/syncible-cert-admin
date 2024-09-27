@@ -185,8 +185,8 @@
 
     "sideBar": {
       "home": "Home",
-      "certificateManagement": "Certificate Management",
       "customizeTemplate": "Customize Template",
+      "certificateManagement": "Certificate Management",
       "createDigitalCertificate": "Create Digital Certificate",
       "setting": "Setting"
     },

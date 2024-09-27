@@ -1,7 +1,7 @@
 import Footer from '@/components/layout/Footer';
 import Navbar from '@/components/layout/Navbar';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
-import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
+import LightBlueGradientEllipse from '../../../../../public/Ellipse_1.svg';
 
 export default function CertificateDetail({ params }: { params: { slug: string } }) {
   const slugPost = params.slug;

@@ -143,7 +143,7 @@ const CreateCollection: React.FC = () => {
           <form onSubmit={handleSubmit} className="w-full space-y-6">
             {/* img logo and banner */}
             <div className="flex items-start justify-between gap-5">
-              <div className="flex w-[30%] flex-col items-start gap-4">
+              <div className="flex w-[30%] flex-col items-start gap-6">
                 <div className="flex flex-col items-start justify-between gap-4">
                   <div className="w-full">
                     <label className="block text-base font-medium text-gray-900">

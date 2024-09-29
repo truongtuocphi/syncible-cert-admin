@@ -15,11 +15,14 @@ import ContractData from '@/components/pages/admin/ContractData';
 import { CollectionData } from '@/types/function';
 import fetchDataCollectionById from '@/utils/fetchDataCollectionById';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { useTranslations } from 'next-intl';
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<CollectionData | null>(null);
   const [itemsCount, setItemsCount] = useState<number>(0);
   const slugPost = params.slug;
+
+  const t = useTranslations('Dapp.contractDetail');
 
   useEffect(() => {
     const getData = async () => {
@@ -54,7 +57,7 @@ export default function Page({ params }: { params: { slug: string } }) {
               <FaArrowLeft className="text-xl text-white" />
             </ButtonPrimary>
           </Link>
-          <h1 className="text-2xl font-semibold text-gray-600">Trở về</h1>
+          <h1 className="text-2xl font-semibold text-gray-600">{t('buttonBack')}</h1>
         </div>
 
         <div className="h-fit w-full overflow-hidden rounded-2xl border-[0.5px] border-gray-200 bg-white">
@@ -87,7 +90,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <div className="flex w-1/2 items-center gap-2">
                   <PiCertificateFill className="text-5xl text-red-500" />
                   <div className="flex flex-col">
-                    <div className="text-base text-gray-400">Chứng chỉ</div>
+                    <div className="text-base text-gray-400">{t('titleCertificate')}</div>
                     <div className="text-lg font-bold text-gray-500">{itemsCount}</div>
                   </div>
                 </div>
@@ -95,7 +98,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <div className="flex w-1/2 items-center gap-2">
                   <FaUser className="text-5xl text-primary-50" />
                   <div className="flex flex-col">
-                    <div className="text-base text-gray-400">Người sở hữu</div>
+                    <div className="text-base text-gray-400">{t('titleOwner')}</div>
                     <div className="text-lg font-bold text-gray-500">1</div>
                   </div>
                 </div>
@@ -104,22 +107,22 @@ export default function Page({ params }: { params: { slug: string } }) {
             <div className="w-full space-y-4 rounded-lg bg-white p-4">
               <div className="flex items-center justify-between">
                 <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">Tên hiển thị</h2>
+                  <h2 className="text-lg font-bold text-gray-700">{t('displayName')}</h2>
                   <p className="text-sm font-semibold text-gray-500">{data.contractName}</p>
                 </div>
                 <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">Loại</h2>
+                  <h2 className="text-lg font-bold text-gray-700">{t('type')}</h2>
                   <p className="text-sm font-semibold text-gray-500">ERC-721</p>
                 </div>
               </div>
 
               <div className="flex items-center justify-between">
                 <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">Mô tả</h2>
+                  <h2 className="text-lg font-bold text-gray-700">{t('describe')}</h2>
                   <p className="text-sm font-semibold text-gray-500">{data.description}</p>
                 </div>
                 <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">Trạng thái</h2>
+                  <h2 className="text-lg font-bold text-gray-700">{t('status')}</h2>
                   <p className="h-fit w-fit rounded-lg bg-green-200 px-4 py-2 text-sm font-semibold text-green-600">
                     Đã xác minh
                   </p>
@@ -128,12 +131,12 @@ export default function Page({ params }: { params: { slug: string } }) {
 
               <div className="flex items-center justify-between">
                 <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">Tên hợp đồng</h2>
+                  <h2 className="text-lg font-bold text-gray-700">{t('displayName')}</h2>
                   <p className="text-sm font-semibold text-gray-500">{data.displayName}</p>
                 </div>
                 <div className="flex w-1/2 flex-col gap-1">
                   <div className="flex flex-col gap-1">
-                    <h2 className="text-lg font-bold text-gray-700">Địa chỉ hợp đồng</h2>
+                    <h2 className="text-lg font-bold text-gray-700">{t('contractAddress')}</h2>
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-semibold text-gray-500">{data.contractAddress}</p>
                       <CopyButton textToCopy={data.contractAddress || ''} />
@@ -150,12 +153,12 @@ export default function Page({ params }: { params: { slug: string } }) {
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">Ký hiệu hợp đồng</h2>
+                  <h2 className="text-lg font-bold text-gray-700">{t('symbol')}</h2>
                   <p className="text-sm font-semibold text-gray-500">{data.contractSymbol}</p>
                 </div>
                 <div className="flex w-1/2 flex-col gap-1">
                   <div className="flex flex-col gap-1">
-                    <h2 className="text-lg font-bold text-gray-700">Chủ sở hữu bộ sưu tập</h2>
+                    <h2 className="text-lg font-bold text-gray-700">{t('collectionOwner')}</h2>
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-semibold text-gray-500">{data.address}</p>
                       <CopyButton textToCopy={data.address || ''} />

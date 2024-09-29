@@ -79,6 +79,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   const [fontSize, setFontSize] = useState<string>('');
 
   const t = useTranslations('IdExperienceComponent');
+  const translationCollection = useTranslations('Dapp.collectionCertificate');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -427,29 +428,29 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         ) : (
           <div className="mt-6 flex flex-col justify-between gap-8 rounded-3xl bg-white p-6 md:flex-row">
             <div className="items-star flex w-full flex-col md:w-1/2">
-              <h4 className="text-xl font-bold">Chi tiết thông tin chứng chỉ</h4>
+              <h4 className="text-xl font-bold">{translationCollection('titleFullDetail')}</h4>
               <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
               <div className="space-y-4">
                 <div className="flex flex-col gap-2">
-                  <p className="font-bold">Vị trí phát hành</p>
+                  <p className="font-bold">{translationCollection('productionLocation')}</p>
                   <p>Việt Nam</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="font-bold">Kích thước chứng chỉ</p>
+                  <p className="font-bold">{translationCollection('Dymension')}</p>
                   <p> 500x300</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="font-bold">Ngày phát hành</p>
+                  <p className="font-bold">{translationCollection('issueDate')}</p>
                   <p>{`${date}`}</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="font-bold">Ngày hết hạn</p>
-                  <p>Vô thời hạn</p>
+                  <p className="font-bold">{translationCollection('expiryDate')}</p>
+                  <p>{translationCollection('valueExpiryDate')}</p>
                 </div>
               </div>
             </div>
             <div className="flex w-full flex-col items-start md:w-1/2">
-              <h4 className="text-xl font-bold">Thông tin Blockchain</h4>
+              <h4 className="text-xl font-bold">{translationCollection('titleBlockChain')}</h4>
               <div className="my-3 w-full border-[0.5px] border-gray-100"></div>
               <div className="space-y-4">
                 <div className="flex flex-col gap-2">
@@ -457,14 +458,14 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   <p>Polygon</p>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="font-bold">ID chứng chỉ</p>
+                  <p className="font-bold">{translationCollection('certificateID')}</p>
                   <div className="flex items-center gap-2">
                     <p>{`${certificateID}`}</p>
                     <CopyButton textToCopy={certificateID} />
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
-                  <p className="font-bold">Địa chỉ hợp đồng</p>
+                  <p className="font-bold">{translationCollection('contractAddress')}</p>
                   <div className="mt-2 flex items-center gap-2">
                     {`${dataContract}`}
                     <CopyButton textToCopy={dataContract[0]} />

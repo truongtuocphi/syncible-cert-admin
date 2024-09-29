@@ -221,20 +221,54 @@
     },
 
     "Management": {
-      "title": "Certificate Management",
-      "button": "Create",
-      "buttonDelete": "Delete",
+      "title": "Quản Lý Chứng Chỉ",
+      "button": "Tạo mục",
+      "buttonDelete": "Xóa đã chọn",
       "placeholder": "Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng",
 
       "table": {
         "id": "ID",
-        "name": "Display name",
-        "symbol": "Contract Symbol",
-        "quantily": "Quantily",
-        "contract": "Contract address",
-        "status": "status",
-        "operetion": "Operation"
+        "name": "Tên hiển thị",
+        "symbol": "Biểu tượng hợp đồng",
+        "quantily": "Tổng số chứng chỉ",
+        "contract": "Địa chỉ hợp đồng",
+        "status": "Trạng thái",
+        "valueStatus": "Hoạt Động",
+        "operetion": "Thao tác"
       }
+    },
+
+    "contractDetail": {
+      "buttonBack": "Trở Về",
+      "titleCertificate": "Chứng chỉ",
+      "titleOwner": "Người sở hữu",
+      "displayName": "Tên hiển thị",
+      "type": "Loại",
+      "describe": "Mô tả",
+      "contractName": "Tên hợp đồng",
+      "symbol": "Ký hiệu hợp đồng",
+      "status": "Trạng thái",
+      "contractAddress": "Địa chỉ hợp đồng",
+      "collectionOwner": "Chủ sở hữu bộ sưu tập"
+    },
+
+    "collectionDetail": {
+      "buttonBack": "Trở về",
+      "titleItem": "Chứng chỉ",
+      "titleOwner": "Chủ sở hữu"
+    },
+
+    "collectionCertificate": {
+      "buttonBack": "Chi tiết chứng chỉ",
+      "titleFullDetail": "Chi tiết thông tin chứng chỉ",
+      "titleBlockChain": "Thông tin Blockchain",
+      "productionLocation": "Vị trí phát hành",
+      "Dymension": "Kích thước chứng chỉ",
+      "issueDate": "Ngày phát hành",
+      "expiryDate": "Ngày hết hạn",
+      "valueExpiryDate": "Vô thời hạn",
+      "certificateID": "ID chứng chỉ",
+      "contractAddress": "Địa chỉ hợp đồng"
     }
   },
 

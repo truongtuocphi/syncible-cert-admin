@@ -127,7 +127,7 @@ const columns: ColumnDef<Collection>[] = [
     accessorKey: 'status',
     header: 'table.status',
     cell: () => (
-      <div className="w-fit rounded-full bg-green-500 p-2 text-center text-white">Hoạt Động</div>
+      <div className="w-fit rounded-full bg-green-500 p-2 text-center text-white">Verified</div>
     ),
   },
   {

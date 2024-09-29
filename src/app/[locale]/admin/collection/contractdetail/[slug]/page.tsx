@@ -45,7 +45,7 @@ export default function Page({ params }: { params: { slug: string } }) {
   return (
     <>
       <div className="mb-4">
-        <Breadcrumb />
+        <Breadcrumb displayName={data.displayName} />
       </div>
       <div className="space-y-6">
         <div className="flex items-center gap-2">
@@ -57,7 +57,7 @@ export default function Page({ params }: { params: { slug: string } }) {
           <h1 className="text-2xl font-semibold text-gray-600">Trở về</h1>
         </div>
 
-        <div className="h-fit w-full rounded-xl border-[0.5px] border-gray-200 bg-white p-4">
+        <div className="h-fit w-full overflow-hidden rounded-2xl border-[0.5px] border-gray-200 bg-white">
           <div className="h-fit w-full">
             <div className="relative h-56">
               <Image
@@ -65,9 +65,9 @@ export default function Page({ params }: { params: { slug: string } }) {
                 alt="Xem trước hình ảnh banner"
                 width={600}
                 height={200}
-                className="h-full w-full object-contain"
+                className="h-full w-full object-cover"
               />
-              <div className="absolute bottom-0 left-0 h-28 w-28 rounded-full border-[0.5px] border-gray-200">
+              <div className="absolute bottom-4 left-4 h-28 w-28 rounded-full border-[0.5px] border-gray-200">
                 <Image
                   src={data.logoImage || ''}
                   alt="Xem trước logo"

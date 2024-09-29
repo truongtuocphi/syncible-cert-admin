@@ -7,7 +7,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
-import { useSearchParams } from 'next/navigation'; // Import hook from Next.js
+import { useSearchParams } from 'next/navigation';
 
 const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
   const [dataContract, setDataContract] = useState(null);

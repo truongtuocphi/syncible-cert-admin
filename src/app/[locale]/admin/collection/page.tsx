@@ -154,6 +154,10 @@ export default function Collection() {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
 
   const t = useTranslations('Dapp.Management');
 
@@ -208,6 +212,7 @@ export default function Collection() {
       columnFilters,
       columnVisibility,
       rowSelection,
+      pagination,
     },
   });
 
@@ -250,9 +255,9 @@ export default function Collection() {
         setData(collections);
       }
 
-      alert('Tất cả đã được xóa thành công.');
+      alert(`${t('alert_1')}`);
     } catch (error) {
-      alert('Đã xảy ra lỗi khi xóa dữ liệu.');
+      alert(`${t('alert_2')}`);
       // eslint-disable-next-line no-console
       console.error('Error deleting selected rows:', error);
     }
@@ -296,16 +301,16 @@ export default function Collection() {
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id} className="font-bold text-black">
+                    <TableHead
+                      key={header.id}
+                      className="text-ellipsis whitespace-nowrap font-bold text-black"
+                    >
                       {header.isPlaceholder
                         ? null
                         : t(flexRender(header.column.columnDef.header, header.getContext())) !=
                             'Dapp.Management.[object Object]'
                           ? t(flexRender(header.column.columnDef.header, header.getContext()))
                           : flexRender(header.column.columnDef.header, header.getContext())}
-                      {/* {header.isPlaceholder
-                        ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())} */}
                     </TableHead>
                   ))}
                 </TableRow>
@@ -342,6 +347,9 @@ export default function Collection() {
         )}
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
+        <div className="text-muted-foreground flex-1 text-sm">
+          Page 1 of {table.getFilteredRowModel().rows.length}
+        </div>
         <div className="space-x-2">
           <Button
             variant="outline"
@@ -357,7 +365,7 @@ export default function Collection() {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-          {t('table.buttonPrevious')}
+            {t('table.buttonPrevious')}
           </Button>
         </div>
       </div>

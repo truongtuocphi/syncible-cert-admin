@@ -58,7 +58,6 @@ const Certificate = ({
   }, [fontSize, fontSizeMint]);
 
   const finalFontSize = `${userFontSize}px`;
-  console.log('finalFontSize', finalFontSize);
 
   return (
     <div className="relative h-full w-full">

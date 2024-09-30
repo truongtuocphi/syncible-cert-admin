@@ -244,16 +244,19 @@
         "id": "ID",
         "name": "Display name",
         "symbol": "Contract Symbol",
-        "quantily": "Quantily",
+        "quantily": "Quantity",
         "contract": "Contract address",
-        "status": "status",
+        "status": "Status",
         "valueStatus": "Verified",
         "operetion": "Operation",
         "noti_1": "Please connect your wallet to display results",
         "noti_2": "Let's create a management section to display the results",
         "buttonNext": "Next",
         "buttonPrevious": "Previous"
-      }
+      },
+
+      "alert_1": "All have been deleted successfully",
+      "alert_2": "An error occurred while deleting data"
     },
 
     "contractDetail": {
@@ -339,7 +342,26 @@
       "subTitleCSV": "Your csv file format must be formatted according to Syncible's file format field for consistency. Once formatted, save the file as a CSV file and paste it into the template below",
       "buttonUploadFileCSV": "Download sample CSV file",
       "downloadFileCSV": "Choose file"
+    },
+
+    "modal": {
+      "title": "Create Certificate",
+      "title_1": "Create a single certificate",
+      "des_1": "This item is designed for providing a single qualification to one person",
+      "title_2": "Generate certificates in bulk",
+      "des_2": "This item is designed for mass certification of courses per student",
+      "button": "Create Digital Certificate"
     }
+  },
+
+  "breadcrumb": {
+    "mintnft": "Create a Certificate",
+    "collection": "Certificate management",
+    "createcollection": "Certificate Management",
+    "admin": "Home",
+    "contractdetail": "Contract details",
+    "filestorage": "Storage folder",
+    "customized": "Customize templates"
   },
 
   "Localization": {

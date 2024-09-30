@@ -246,14 +246,17 @@
         "symbol": "Biểu tượng hợp đồng",
         "quantily": "Tổng số chứng chỉ",
         "contract": "Địa chỉ hợp đồng",
-        "status": "Trạng thái",
+        "status": "Xác thực",
         "valueStatus": "Hoạt Động",
         "operetion": "Thao tác",
         "noti_1": "Vui lòng kết nối ví để hiện thị kết quả",
         "noti_2": "Hãy tạo một mục quản lý để hiện thị kết quả",
         "buttonNext": "Trước",
         "buttonPrevious": "Kế tiếp"
-      }
+      },
+
+       "alert_1": "Tất cả đã được xóa thành công",
+       "alert_2": "Đã xảy ra lỗi khi xóa dữ liệu"
     },
 
     "contractDetail": {
@@ -339,8 +342,28 @@
       "subTitleCSV": "Định dạng tập tin csv của bạn phải được định dạng theo trường định dạng tập tin của Syncible để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành tập tin CSV và dán vào mẫu dưới đây",
       "buttonUploadFileCSV": "Tải file CSV mẫu",
       "downloadFileCSV": "Tải tệp"
+    },
+
+    "modal": {
+      "title": "Tạo Chứng Chỉ",
+      "title_1": "Tạo chứng chỉ đơn lẻ",
+      "des_1": "Mục này được thiết kế cho việc cung cấp bằng cấp đơn lẻ dành cho một người",
+      "title_2": "Tạo chứng chỉ hàng loạt",
+      "des_2": "Mục này được thiết kế cho việc cung cấp bằng cấp hàng loạt cho khoá học trên một học viên",
+      "button": "Tạo Chứng Chỉ"
     }
   },
+
+  "breadcrumb": {
+    "mintnft": "Tạo chứng chỉ",
+    "collection": "Quản lý chứng chỉ",
+    "createcollection": "Tạo mục quản lý",
+    "admin": "Trang chủ",
+    "contractdetail": "Chi tiết hợp đồng",
+    "filestorage": "Thư mục lưu trữ",
+    "customized": "Tùy chỉnh mẫu"
+  },
+
   "Localization": {
     "header": "Ngôn ngữ",
     "label": "{locale, select, en {Tiếng Anh} vi {Tiếng Việt} other {Không xác định}}"

@@ -3,13 +3,13 @@
 import { useState } from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BiCustomize } from 'react-icons/bi';
 import { BiHome } from 'react-icons/bi';
 import { BiFile } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 import Modal from './Modal';
 
@@ -45,8 +45,6 @@ const Sidebar = () => {
     'bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] text-gray-700';
   const inactiveLinkClasses =
     'hover:bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] hover:text-gray-700';
-
-  console.log(t(`sideBar.createDigitalCertificate`) !== 'Tạo Chứng Chỉ');
 
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-80 flex-col justify-between bg-white px-3 text-gray-800 shadow-md 2xl:w-96">

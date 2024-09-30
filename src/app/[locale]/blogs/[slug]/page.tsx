@@ -159,58 +159,53 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   }, [locale]);
 
   return (
-    <div className="relative min-h-screen">
-      <div className="fixed top-0 z-30 w-screen md:mt-6">
-        <Navbar />
-      </div>
-      <div className={`${montserrat.className} z-20 flex flex-col items-center gap-10`}>
-        <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
-          <div className="flex flex-col px-4 pb-4 md:px-8 md:pb-10 xl:px-32">
-            <div className="flex flex-col items-center gap-10">
-              <div className="text-center text-2xl font-bold md:text-3xl lg:text-5xl">
-                {t('header')}
-              </div>
-              <div className="w-full">
-                <SyncibleBanner className="aspect-[24/9] h-full w-full" />
-              </div>
-            </div>
-            <div className="flex flex-col gap-8 md:flex-row">
-              <div className="hidden basis-1/4 md:block">
-                <div className="flex h-full flex-col gap-8">
-                  <div className="flex flex-col gap-6">
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <Avatar className="h-16 w-16">
-                          <AvatarImage src="/SmugFace.png" alt="" />
-                          <AvatarFallback>SC</AvatarFallback>
-                        </Avatar>
-                      </div>
-                      <div>
-                        <div className="text-lg font-bold">{t('author_profile.name')}</div>
-                        <div className="text-base font-medium text-[#A2A3A9]">
-                          {t('author_profile.role')}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="w-[70%] border-t-[1px]"></div>
-                    <div className="flex flex-col gap-2">
-                      <div className="text-base font-medium text-[#A2A3A9]">
-                        {t('blog_info.date_created.label')}
-                      </div>
-                      <div className="text-lg font-medium">{t('blog_info.date_created.value')}</div>
-                    </div>
-                    <div className="flex flex-col gap-2">
-                      <div className="text-base font-medium text-[#A2A3A9]">
-                        {t('blog_info.read_time.label')}
-                      </div>
-                      <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
+    <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
+      <div className="flex flex-col gap-10 px-4 pb-4 md:px-8 md:pb-10 xl:px-32">
+        <div className="flex flex-col items-center gap-10">
+          <div className="text-center text-2xl font-bold md:text-3xl lg:text-5xl">
+            {t('header')}
+          </div>
+          <div className="h-full w-full">
+            <SyncibleBanner className="aspect-[24/9] h-full w-full" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-8 md:flex-row">
+          <div className="hidden basis-1/4 md:block">
+            <div className="flex h-full flex-col gap-8">
+              <div className="flex flex-col gap-6">
+                <div className="flex items-center gap-4">
+                  <div>
+                    <Avatar className="h-16 w-16">
+                      <AvatarImage src="/SmugFace.png" alt="" />
+                      <AvatarFallback>SC</AvatarFallback>
+                    </Avatar>
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold">{t('author_profile.name')}</div>
+                    <div className="text-base font-medium text-[#A2A3A9]">
+                      {t('author_profile.role')}
                     </div>
                   </div>
-                  <div
-                    id="table-content"
-                    className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
-                  >
-                    {/* {keys.map((key) => (
+                </div>
+                <div className="w-[70%] border-t-[1px]"></div>
+                <div className="flex flex-col gap-2">
+                  <div className="text-base font-medium text-[#A2A3A9]">
+                    {t('blog_info.date_created.label')}
+                  </div>
+                  <div className="text-lg font-medium">{t('blog_info.date_created.value')}</div>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <div className="text-base font-medium text-[#A2A3A9]">
+                    {t('blog_info.read_time.label')}
+                  </div>
+                  <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
+                </div>
+              </div>
+              <div
+                id="table-content"
+                className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
+              >
+                {/* {keys.map((key) => (
                       <Link
                         key={key}
                         href={t(`navigation.${key}.href`)}
@@ -223,65 +218,50 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                       </Link>
                     ))} */}
 
-                    {keys.map((key, index) => (
-                      <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="basis-3/4">
-                <div className="flex flex-col gap-8">
-                  <div className="flex flex-col gap-6 md:hidden">
-                    <div className="flex items-center gap-4">
-                      <div>
-                        <Avatar className="h-16 w-16">
-                          <AvatarImage src="/SmugFace.png" />
-                          <AvatarFallback>SC</AvatarFallback>
-                        </Avatar>
-                      </div>
-                      <div>
-                        <div className="text-lg font-bold">{t('author_profile.name')}</div>
-                        <div className="text-base font-medium text-[#A2A3A9]">
-                          {t('author_profile.role')}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="w-full border-t-[1px]"></div>
-                    <div className="flex flex-col gap-6">
-                      <div className="flex w-full flex-col gap-2">
-                        <div className="text-base font-medium text-[#A2A3A9]">
-                          {t('blog_info.date_created.label')}
-                        </div>
-                        <div className="text-lg font-medium">
-                          {t('blog_info.date_created.value')}
-                        </div>
-                      </div>
-                      <div className="flex w-full flex-col gap-2">
-                        <div className="text-base font-medium text-[#A2A3A9]">
-                          {t('blog_info.read_time.label')}
-                        </div>
-                        <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="content-section">
-                    {Content && <Content />}
-                    {/* {Content && <Content  components={overrideComponents}/>} */}
-                  </div>
-                </div>
+                {keys.map((key, index) => (
+                  <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
+                ))}
               </div>
             </div>
           </div>
-        </div>
-        <Footer />
-      </div>
-      <div className="absolute bottom-0 left-0 right-0 top-0 -z-10 flex h-full w-full flex-col items-center overflow-hidden">
-        <div className="relative mx-auto h-full w-full max-w-[90rem]">
-          <div className="absolute -top-[5%] left-1/2 -z-10 w-[125rem] sm:-translate-x-[60%] ">
-            <LightBlueGradientEllipse className="h-full w-full" />
-          </div>
-          <div className="sm: absolute right-1/2 top-1/2 -z-10 w-[125rem] translate-x-[60%]">
-            <LightBlueGradientEllipse className="h-full w-full" />
+          <div className="basis-3/4">
+            <div className="flex flex-col gap-8">
+              <div className="flex flex-col gap-6 md:hidden">
+                <div className="flex items-center gap-4">
+                  <div>
+                    <Avatar className="h-16 w-16">
+                      <AvatarImage src="/SmugFace.png" />
+                      <AvatarFallback>SC</AvatarFallback>
+                    </Avatar>
+                  </div>
+                  <div>
+                    <div className="text-lg font-bold">{t('author_profile.name')}</div>
+                    <div className="text-base font-medium text-[#A2A3A9]">
+                      {t('author_profile.role')}
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full border-t-[1px]"></div>
+                <div className="flex flex-col gap-6">
+                  <div className="flex w-full flex-col gap-2">
+                    <div className="text-base font-medium text-[#A2A3A9]">
+                      {t('blog_info.date_created.label')}
+                    </div>
+                    <div className="text-lg font-medium">{t('blog_info.date_created.value')}</div>
+                  </div>
+                  <div className="flex w-full flex-col gap-2">
+                    <div className="text-base font-medium text-[#A2A3A9]">
+                      {t('blog_info.read_time.label')}
+                    </div>
+                    <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
+                  </div>
+                </div>
+              </div>
+              <div id="content-section">
+                {Content && <Content />}
+                {/* {Content && <Content  components={overrideComponents}/>} */}
+              </div>
+            </div>
           </div>
         </div>
       </div>

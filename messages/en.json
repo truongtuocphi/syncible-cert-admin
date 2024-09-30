@@ -63,7 +63,7 @@
           },
           "blogs": {
             "label": "Blogs",
-            "href": "#blogs"
+            "href": "/blogs"
           },
           "explorer": {
             "label": "Explorer",

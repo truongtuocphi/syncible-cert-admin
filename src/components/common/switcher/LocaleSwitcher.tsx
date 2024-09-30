@@ -15,7 +15,6 @@ export function LocaleSelect() {
   const locale = useLocale() as 'en' | 'vi';
   const router = useRouter();
   const pathname = usePathname();
-  
 
   const handleLanguageChange = async (value: 'en' | 'vi') => {
     router.replace(pathname, { locale: value });
@@ -68,7 +67,7 @@ export function LocaleCollapsible() {
         <div className="flex items-center justify-between text-[#A2A3A9]">
           <div>{t('header')}</div>
           <CollapsibleTrigger asChild>
-            <Button variant="link" size="sm" className="w-9 w-full justify-end p-0">
+            <Button variant="link" size="sm" className="w-9 justify-end p-0">
               <ChevronsUpDown className="h-4 w-4" />
               <span className="sr-only">Toggle</span>
             </Button>
@@ -87,3 +86,5 @@ export function LocaleCollapsible() {
     </>
   );
 }
+
+

@@ -11,7 +11,7 @@ export default function Page() {
   const t = useTranslations('BlogListPage');
   const dummyData: ArticleEntry[] = Array.from({ length: 15 }, (_, index) => ({
     title: `Blog Post ${index + 1}`,
-    link: `/blog/post-${index + 1}`,
+    link: `/blogs/post-${index + 1}`,
     bannerImg: '/SyncibleSmallerBanner.png', // Replace with actual banner image URLs if available
     author: {
       name: `Author ${index + 1}`,

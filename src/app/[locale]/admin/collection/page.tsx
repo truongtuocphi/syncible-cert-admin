@@ -74,6 +74,7 @@ const columns: ColumnDef<Collection>[] = [
     ),
   },
   {
+    id: 'id',
     accessorKey: 'id',
     header: ({ column }) => {
       return (
@@ -225,6 +226,14 @@ export default function Collection() {
       columnVisibility,
       rowSelection,
       pagination,
+    },
+    initialState: {
+      sorting: [
+        {
+          id: 'id',
+          desc: true,
+        },
+      ],
     },
   });
 

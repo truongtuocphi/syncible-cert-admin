@@ -185,9 +185,9 @@
 
     "sideBar": {
       "home": "Trang chủ",
-      "customizeTemplate": "Tùy Chỉnh Mẫu Chứng Chỉ",
+      "customizeTemplate": "Tùy chỉnh mẫu Chứng Chỉ",
       "certificateManagement": "Quản lý Chứng chỉ số hóa",
-      "createDigitalCertificate": "Tạo Chứng Chỉ Số Hoá",
+      "createDigitalCertificate": "Tạo Chứng chỉ Số hoá",
       "setting": "Cài đặt"
     },
 

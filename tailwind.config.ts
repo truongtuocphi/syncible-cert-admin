@@ -28,7 +28,7 @@ const config = {
       backgroundImage: {
         'custom-radial-gradient':
           'radial-gradient(circle at center, rgba(107, 228, 222, 0.65) 0%, rgba(255, 235, 226, 0.0) 70%)',
-        'custom-blue-gradient': 'linear-gradient(to right, #c3eefa, #e6fcff)',
+        'custom-blue-gradient': 'linear-gradient(to right, #c3eefa, rgba(246, 255, 247, 1))',
       },
       blur: {
         '4xl': '5px',

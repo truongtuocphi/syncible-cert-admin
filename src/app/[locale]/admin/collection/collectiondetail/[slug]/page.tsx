@@ -13,11 +13,14 @@ import CopyAddressButton from '@/components/pages/admin/CopyAddressButton';
 import { CollectionData } from '@/types/function';
 import fetchDataCollectionById from '@/utils/fetchDataCollectionById';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { useTranslations } from 'next-intl';
 
 export default function CollectionDetail({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<CollectionData | null>(null);
   const [itemsCount, setItemsCount] = useState<number>(0);
   const slugPost = params.slug;
+
+  const t = useTranslations('Dapp.collectionDetail');
 
   useEffect(() => {
     const getData = async () => {
@@ -51,7 +54,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
         </Link>
-        <div className="text-xl font-semibold text-gray-500">Trở về</div>
+        <div className="text-xl font-semibold text-gray-500">{t('buttonBack')}</div>
       </div>
 
       <div className="mt-4 h-fit w-full">
@@ -81,12 +84,12 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             <div className="flex items-center justify-center gap-5">
               <div className="text-center">
                 <span className="text-base font-bold text-black">{itemsCount} </span>
-                <span className="text-base text-gray-600">Items</span>
+                <span className="text-base text-gray-600">{t('titleItem')}</span>
               </div>
 
               <div className="text-center">
                 <span className="text-base font-bold text-black">1 </span>
-                <span className="text-base text-gray-600">Owner</span>
+                <span className="text-base text-gray-600">{t('titleOwner')}</span>
               </div>
             </div>
             <p className="mt-4 text-base text-gray-600">{data.description}</p>

@@ -38,6 +38,7 @@ import { db, ref, get } from '@/lib/firebase';
 import truncateAddress from '@/lib/truncateAddress';
 import { deleteDataById } from '@/utils/deleteDataFirebase';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { useTranslations } from 'next-intl';
 
 export type Collection = {
   id: string;
@@ -73,22 +74,22 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'id',
-    header: 'ID',
+    header: 'table.id',
     cell: ({ row }) => <div>{row.index + 1}</div>,
   },
   {
     accessorKey: 'displayName',
-    header: 'Tên hiển thị',
+    header: 'table.name',
     cell: ({ row }) => <div>{row.getValue('displayName')}</div>,
   },
   {
     accessorKey: 'contractSymbol',
-    header: 'Biểu tượng hợp đồng',
+    header: 'table.symbol',
     cell: ({ row }) => <div>{row.getValue('contractSymbol')}</div>,
   },
   {
     accessorKey: 'itemsCount',
-    header: 'Tổng số chứng chỉ',
+    header: 'table.quantily',
     cell: ({ row }) => {
       let itemsCount = row.getValue('itemsCount');
 
@@ -105,7 +106,7 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'contractAddress',
-    header: 'Địa chỉ hợp đồng',
+    header: 'table.contract',
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
         {truncateAddress(row.getValue('contractAddress'))}
@@ -124,14 +125,14 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'status',
-    header: 'Trạng thái',
+    header: 'table.status',
     cell: () => (
-      <div className="rounded-full bg-green-500 p-2 text-center text-white">Hoạt Động</div>
+      <div className="w-fit rounded-full bg-green-500 p-2 text-center text-white">Verified</div>
     ),
   },
   {
     id: 'actions',
-    header: 'Thao tác',
+    header: 'table.operetion',
     cell: ({ row }) => (
       <div className="flex items-center space-x-2">
         <Link href={`/admin/collection/collectiondetail/${row.getValue('id')}`}>
@@ -153,6 +154,8 @@ export default function Collection() {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const [isLoading, setIsLoading] = useState(true);
+
+  const t = useTranslations('Dapp.Management');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -262,7 +265,7 @@ export default function Collection() {
         <div className="flex items-center rounded-2xl border-[1px] border-gray-200 bg-white px-4 py-1">
           <BiSearch className="text-xl text-gray-500" />
           <Input
-            placeholder="Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng"
+            placeholder={`${t('placeholder')}`}
             value={(table.getColumn('displayName')?.getFilterValue() as string) ?? ''}
             onChange={(event) => table.getColumn('displayName')?.setFilterValue(event.target.value)}
             className="w-80 border-none bg-transparent outline-none"
@@ -270,13 +273,13 @@ export default function Collection() {
         </div>
         {selectedRowCount > 0 ? (
           <ButtonPrimary onClick={handleDelete} className="bg-red-500">
-            Xóa đã chọn ({selectedRowCount})
+            {t('buttonDelete')} ({selectedRowCount})
           </ButtonPrimary>
         ) : (
           <Link href={'/admin/collection/createcollection'}>
             <ButtonPrimary className="ml-auto flex items-center gap-2 border-[1px] border-gray-200 bg-transparent font-bold text-gray-600 hover:bg-secondPrimaryHover">
               <BiPlusCircle className="text-2xl" />
-              Tạo mục
+              {t('button')}
             </ButtonPrimary>
           </Link>
         )}
@@ -296,7 +299,13 @@ export default function Collection() {
                     <TableHead key={header.id} className="font-bold text-black">
                       {header.isPlaceholder
                         ? null
-                        : flexRender(header.column.columnDef.header, header.getContext())}
+                        : t(flexRender(header.column.columnDef.header, header.getContext())) !=
+                            'Dapp.Management.[object Object]'
+                          ? t(flexRender(header.column.columnDef.header, header.getContext()))
+                          : flexRender(header.column.columnDef.header, header.getContext())}
+                      {/* {header.isPlaceholder
+                        ? null
+                        : flexRender(header.column.columnDef.header, header.getContext())} */}
                     </TableHead>
                   ))}
                 </TableRow>
@@ -324,9 +333,7 @@ export default function Collection() {
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-48 text-center">
-                    {!address
-                      ? 'Vui lòng kết nối ví để hiện thị kết quả'
-                      : 'Hãy tạo một mục quản lý để hiện thị kết quả'}
+                    {!address ? `${t('table.noti_1')}` : `${t('table.noti_2')}`}
                   </TableCell>
                 </TableRow>
               )}
@@ -342,7 +349,7 @@ export default function Collection() {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Trước
+            {t('table.buttonNext')}
           </Button>
           <Button
             variant="outline"
@@ -350,7 +357,7 @@ export default function Collection() {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Kế tiếp
+          {t('table.buttonPrevious')}
           </Button>
         </div>
       </div>

@@ -226,6 +226,119 @@
         "p": "Create your digital certificate",
         "button": "Create Digital Certificate"
       }
+    },
+
+    "customCertificate": {
+      "title": "Customize Template",
+      "buttonSelectModel": "Select model",
+      "uploadModel": "Upload template"
+    },
+
+    "Management": {
+      "title": "Certificate Management",
+      "button": "Create",
+      "buttonDelete": "Delete",
+      "placeholder": "Search by name, symbol, contract address",
+
+      "table": {
+        "id": "ID",
+        "name": "Display name",
+        "symbol": "Contract Symbol",
+        "quantily": "Quantily",
+        "contract": "Contract address",
+        "status": "status",
+        "valueStatus": "Verified",
+        "operetion": "Operation",
+        "noti_1": "Please connect your wallet to display results",
+        "noti_2": "Let's create a management section to display the results",
+        "buttonNext": "Next",
+        "buttonPrevious": "Previous"
+      }
+    },
+
+    "contractDetail": {
+      "buttonBack": "Back",
+      "titleCertificate": "Items",
+      "titleOwner": "Owner",
+      "displayName": "Display Name",
+      "type": "Type",
+      "describe": "Description",
+      "contractName": "Contract Name",
+      "symbol": "Contract Symbol",
+      "status": "Status",
+      "contractAddress": "Contract Address",
+      "collectionOwner": "Collection Owner"
+    },
+
+    "collectionDetail": {
+      "buttonBack": "Back",
+      "titleItem": "Items",
+      "titleOwner": "Owner"
+    },
+
+    "collectionCertificate": {
+      "buttonBack": "Certificate Details",
+      "titleFullDetail": "Full details",
+      "titleBlockChain": "Chain information",
+      "productionLocation": "Production location",
+      "Dymension": "Dymension",
+      "issueDate": "Issue date",
+      "expiryDate": "Expiry date",
+      "valueExpiryDate": "Does not expire",
+      "certificateID": "Certificate ID",
+      "contractAddress": "Contract address"
+    },
+
+    "createCollection": {
+      "title": "Create ERC-721 Collection",
+      "titleImage": "Logo Image",
+      "subtitleImage": "Update your logo collection",
+      "Buttonfile": "Choose file",
+      "titleBanner": "Banner Image",
+      "subTitleBanner": "This image will appear at the top of your collection page. Avoid including too much text in this banner image, as the dimension changes on different devices. Recommended size: 1400 x 400 px. Supported formats: JPG, PNG, SVG. Maximum size: 3 MB.",
+      "titlePreviewBanner": "Preview Banner",
+      "titlePreviewCollection": "Preview of your collection",
+      "titleDisplayName": "Display Name",
+      "subTitleDisplayName": "This is display name for collection on your store",
+      "titleSymbol": "Contract Symbol",
+      "subTitleSymbol": "This contract symbol can't be changed in the future",
+      "titleHoverCard": "Contract Symbol",
+      "subTitleHoverCard": "The Contract Symbol is a tool that displays the name and symbol of your specific token on the blockchain explorer. It indicates that the certificates have been verify state, allowing users to track transactions, token quantities, and NFT ownership on the blockchains",
+      "titleDescription": "Description",
+      "subTitleDescription": "A detailed description of your collection",
+      "buttonCreate": "Creating...",
+      "ButtonCreateCollection": "Create Collection",
+
+      "placeholderInput_1": "Display Name",
+      "placeholderInput_2": "Contract Symbol",
+      "placeholderInput_3": "Description"
+    },
+
+    "mintNFT": {
+      "titleback": "Back",
+      "title": "Create Digital Certificate",
+      "titleImage": "Certificate image",
+      "subTitleImage": "Upload your customized certificate template here",
+      "buttonFile": "Choose file",
+      "titleRole": "Role",
+      "titleDate": "Certificate Issue Date",
+      "titleCertificateto": "Save digital certificate to",
+      "notiCertificate": "Please connect wallet to display data",
+      "titleFont": "Font",
+      "titleFontSize": "Font size",
+      "ButtonCancel": "Cancel",
+      "ButtonSubmitLoading": "Processing...",
+      "ButtonCreateCertificate": "Create certificate",
+
+      "titleIDCertificate": "Certificate ID",
+      "placeholderID": "Certificate ID",
+      "titleFullName": "Full name",
+      "placeholderFullName": "Your full name",
+
+      "titleCSV": "CSV Information",
+      "subTitleCSV": "Your csv file format must be formatted according to Syncible's file format field for consistency. Once formatted, save the file as a CSV file and paste it into the template below",
+      "buttonUploadFileCSV": "Download sample CSV file",
+      "downloadFileCSV": "Choose file"
     }
   },
 

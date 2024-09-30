@@ -7,13 +7,16 @@ import { FaArrowLeft } from 'react-icons/fa';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
-import { useSearchParams } from 'next/navigation'; // Import hook from Next.js
+import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
   const [dataContract, setDataContract] = useState(null);
   const [nameCertificate, setNameCertificate] = useState('');
   const [displayName, setDisplayName] = useState('');
   const slugPost = params.mintSlug;
+
+  const t = useTranslations('Dapp.collectionCertificate');
 
   const searchParams = useSearchParams();
   const someQueryParam = searchParams.get('nameCollection');
@@ -46,7 +49,7 @@ const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
         </Link>
-        <h2 className="text-2xl font-bold text-gray-600">Chi tiết chứng chỉ</h2>
+        <h2 className="text-2xl font-bold text-gray-600">{t('buttonBack')}</h2>
       </div>
       <IdExperienceComponent
         slugPost={slugPost}

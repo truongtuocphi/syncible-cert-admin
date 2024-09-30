@@ -8,6 +8,7 @@ import Papa from 'papaparse';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import getAcronym from '@/utils/getAcronym';
 import { BiFolderPlus } from 'react-icons/bi';
+import { useTranslations } from 'next-intl';
 
 const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -26,6 +27,8 @@ interface CertificateData {
 export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps) => {
   const [csvData, setCsvData] = useState<CertificateData[]>([]);
   const [fileNameCSV, setFileNameCSV] = useState<string | null>('');
+
+  const t = useTranslations('Dapp.mintNFT');
 
   const handleDownload = async () => {
     const fileUrl = `${headerURLPinata}/ipfs/QmSusJoDdDnAr5AVocRzLBPhb7yHmeSXCBTJUyGLPekg7R`;
@@ -81,23 +84,19 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
     <>
       <div className="my-6 w-full border-[0.5px] border-gray-100"></div>
 
-      <div className="block text-base font-medium text-gray-700">Thông tin CSV</div>
-      <p className="mt-3 text-sm text-gray-400">
-        Định dạng tập tin csv của bạn phải được định dạng theo trường định dạng tập tin của Syncible
-        để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành tập tin CSV và dán vào
-        mẫu dưới đây.
-      </p>
+      <div className="block text-base font-medium text-gray-700">{t('titleCSV')}</div>
+      <p className="mt-3 text-sm text-gray-400">{t('subTitleCSV')}</p>
       <div
         onClick={handleDownload}
         className="mt-3 block cursor-pointer border-none bg-transparent text-base font-medium text-primary-50 underline"
       >
-        Tải file CSV mẫu
+        {t('buttonUploadFileCSV')}
       </div>
 
       <div className="my-6 w-full border-[0.5px] border-gray-100"></div>
 
       <div className="flex items-center justify-between">
-        <label className="block text-base font-medium text-gray-900">Tải tệp CSV</label>
+        <label className="block text-base font-medium text-gray-900">{t('downloadFileCSV')}</label>
         <div className="space-y-2">
           <input
             type="file"
@@ -113,7 +112,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
               className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-800 hover:bg-gray-100"
             >
               <BiFolderPlus className="text-2xl text-gray-800" />
-              Chọn tệp
+              {t('downloadFileCSV')}
             </label>
             {fileNameCSV && `${fileNameCSV?.slice(0, 4)}...${fileNameCSV?.slice(-8)}`}
           </div>
@@ -123,10 +122,14 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
       <div className="mt-5 w-full overflow-hidden rounded-3xl bg-gray-100">
         <div className="flex gap-2 bg-gray-200 px-6 py-4">
           <div className="w-1/2 space-y-2">
-            <label className="block text-base font-medium text-gray-800">ID chứng chỉ</label>
+            <label className="block text-base font-medium text-gray-800">
+              {t('titleIDCertificate')}
+            </label>
           </div>
           <div className="w-1/2 space-y-2">
-            <label className="block text-base font-medium text-gray-800">Họ và tên</label>
+            <label className="block text-base font-medium text-gray-800">
+              {t('titleFullName')}
+            </label>
           </div>
         </div>
 
@@ -143,7 +146,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
                       <input
                         type="text"
                         required
-                        placeholder="Mã chứng chỉ"
+                        placeholder={t('placeholderID')}
                         value={data.certificateNumber}
                         disabled
                         className="mt-1 block w-full bg-transparent px-6 py-4 sm:text-base"
@@ -153,7 +156,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
                       <input
                         type="text"
                         required
-                        placeholder="Họ và tên của bạn"
+                        placeholder={t('placeholderFullName')}
                         value={data.fullname}
                         disabled
                         className="mt-1 block w-full bg-transparent py-4 sm:text-base"
@@ -170,7 +173,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
               <input
                 type="text"
                 required
-                placeholder="Mã chứng chỉ"
+                placeholder={t('placeholderID')}
                 disabled
                 className="mt-1 block w-full rounded-md border-none px-6 py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
               />
@@ -179,7 +182,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
               <input
                 type="text"
                 required
-                placeholder="Họ và tên của bạn"
+                placeholder={t('placeholderFullName')}
                 disabled
                 className="mt-1 block w-full rounded-md border-none py-4 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
               />

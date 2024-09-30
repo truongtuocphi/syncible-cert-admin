@@ -81,7 +81,7 @@ const deployContract = async (displayName: string, address: any, contractSymbol:
         );
 
         function initialize() public initializer {
-            __ERC721_init(${displayName}, ${contractSymbol});
+            __ERC721_init("${displayName}", "${contractSymbol}");
             __ERC721URIStorage_init();
             __AccessControl_init();
             __UUPSUpgradeable_init();

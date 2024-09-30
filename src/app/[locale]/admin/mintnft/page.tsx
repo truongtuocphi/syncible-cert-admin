@@ -32,7 +32,7 @@ const Experience = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(true);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
-  const [fileBannerImage, setFileBannerImage] = useState<string>('Tải tệp lên');
+  const [fileBannerImage, setFileBannerImage] = useState<string>('');
   const [role, setRole] = useState<'Teacher' | 'Student'>('Student');
   const [issuedDate, setIssuedDate] = useState('');
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);

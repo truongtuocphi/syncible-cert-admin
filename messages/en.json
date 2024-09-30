@@ -311,7 +311,10 @@
       "titleCertificateto": "Save digital certificate to",
       "notiCertificate": "Please connect wallet to display data",
       "titleFont": "Font",
-      "titleFontSize": "Font size"
+      "titleFontSize": "Font size",
+      "ButtonCancel": "Cancel",
+      "ButtonSubmitLoading": "Processing...",
+      "ButtonCreateCertificate": "Create certificate"
     }
   },
 

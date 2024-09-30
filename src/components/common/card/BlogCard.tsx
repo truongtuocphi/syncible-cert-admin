@@ -3,7 +3,6 @@ import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 
-
 export default function BlogCard({ entry }: { entry: ArticleEntry }) {
   return (
     <Card className="h-full overflow-hidden rounded-[1.25rem] border-[#F0F0F0] bg-white/80 shadow-none backdrop-blur-[50px]">
@@ -28,11 +27,15 @@ export default function BlogCard({ entry }: { entry: ArticleEntry }) {
       </CardContent>
       <CardFooter>
         <div className="flex w-full gap-4">
-          <Avatar className="flex h-16 w-16 items-center">
-            <AvatarImage src={entry.author.avatar} />
-            <AvatarFallback>CN</AvatarFallback>
-          </Avatar>
-          <div className={`flex w-full flex-col justify-center`}>
+          <div className="h-16 w-16 overflow-hidden rounded-full shrink-0">
+            <Image
+              className="h-full w-full"
+              src={entry.author.avatar}
+              alt={entry.author.name}
+              fill
+            />
+          </div>
+          <div className="flex w-full flex-col justify-center">
             <div className="text-lg font-bold">{entry.author.name}</div>
             <div className="text-base font-medium text-[#A2A3A9]">{entry.author.position}</div>
           </div>

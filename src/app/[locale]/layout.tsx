@@ -28,7 +28,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  const initialState = cookieToInitialState(config, headers().get('cookie'));
+  const initialState = cookieToInitialState(config, headers()?.get('cookie'));
   const messages = await getMessages();
 
   return (

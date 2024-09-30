@@ -74,7 +74,6 @@ const columns: ColumnDef<Collection>[] = [
     ),
   },
   {
-    id: 'id',
     accessorKey: 'id',
     header: ({ column }) => {
       return (

@@ -204,7 +204,7 @@
       },
       "card_1": {
         "title": "Certificate management",
-        "p": "Manage your minted digital certificates here",
+        "p": "Creating and managing contracts securely stores tokenized certificates on the blockchain network.",
         "button": "Create Now"
       },
       "card_2": {

@@ -333,9 +333,7 @@ export default function Collection() {
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-48 text-center">
-                    {!address
-                      ? 'Vui lòng kết nối ví để hiện thị kết quả'
-                      : 'Hãy tạo một mục quản lý để hiện thị kết quả'}
+                    {!address ? `${t('table.noti_1')}` : `${t('table.noti_2')}`}
                   </TableCell>
                 </TableRow>
               )}
@@ -351,7 +349,7 @@ export default function Collection() {
             onClick={() => table.previousPage()}
             disabled={!table.getCanPreviousPage()}
           >
-            Trước
+            {t('table.buttonNext')}
           </Button>
           <Button
             variant="outline"
@@ -359,7 +357,7 @@ export default function Collection() {
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Kế tiếp
+          {t('table.buttonPrevious')}
           </Button>
         </div>
       </div>

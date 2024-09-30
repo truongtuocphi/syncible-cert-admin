@@ -234,7 +234,11 @@
         "contract": "Địa chỉ hợp đồng",
         "status": "Trạng thái",
         "valueStatus": "Hoạt Động",
-        "operetion": "Thao tác"
+        "operetion": "Thao tác",
+        "noti_1": "Vui lòng kết nối ví để hiện thị kết quả",
+        "noti_2": "Hãy tạo một mục quản lý để hiện thị kết quả",
+        "buttonNext": "Trước",
+        "buttonPrevious": "Kế tiếp"
       }
     },
 

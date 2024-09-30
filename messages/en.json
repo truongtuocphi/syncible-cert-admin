@@ -234,7 +234,11 @@
         "contract": "Contract address",
         "status": "status",
         "valueStatus": "Verified",
-        "operetion": "Operation"
+        "operetion": "Operation",
+        "noti_1": "Please connect your wallet to display results",
+        "noti_2": "Let's create a management section to display the results",
+        "buttonNext": "Next",
+        "buttonPrevious": "Previous"
       }
     },
 

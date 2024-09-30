@@ -83,9 +83,9 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                     />
                   </div>
                   <div className="text-start">
-                    <h3 className="mt-4 text-lg font-bold text-gray-800">{dataCard.title}</h3>
+                    <h3 className="mt-4 text-lg font-bold text-gray-800">{t(dataCard.title)}</h3>
                     <p className="mt-2 line-clamp-3 text-sm text-gray-600">
-                      {dataCard.description}
+                      {t(dataCard.description)}
                     </p>
                   </div>
                 </div>

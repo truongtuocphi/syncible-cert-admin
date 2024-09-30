@@ -67,11 +67,11 @@ const predefinedTemplates = [
     imageUrl: 'QmQuUeJXHpfmGaHbSEXX913Hyq8Nv8e4Fkojaw1KpJRk2B',
     name: 'Certificate 3',
   },
-  {
-    id: 4,
-    imageUrl: 'QmPp9J3sYw4pcSU1qPYnTpAFGbwyUWFkUDtAF1Cb8hU2ao',
-    name: 'Certificate 4',
-  },
+  // {
+  //   id: 4,
+  //   imageUrl: 'QmPp9J3sYw4pcSU1qPYnTpAFGbwyUWFkUDtAF1Cb8hU2ao',
+  //   name: 'Certificate 4',
+  // },
   {
     id: 5,
     imageUrl: 'QmbNVR9u4KPxu5DygVLpR18bRo1Ar2b47waUNFykgZRz3P',

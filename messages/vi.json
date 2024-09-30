@@ -202,9 +202,9 @@
 
     "sideBar": {
       "home": "Trang chủ",
-      "customizeTemplate": "Tùy Chỉnh Mẫu",
-      "certificateManagement": "Quản lý Chứng Chỉ",
-      "createDigitalCertificate": "Tạo Chứng Chỉ",
+      "customizeTemplate": "Tùy chỉnh mẫu Chứng Chỉ",
+      "certificateManagement": "Quản lý Chứng chỉ số hóa",
+      "createDigitalCertificate": "Tạo Chứng chỉ Số hoá",
       "setting": "Cài đặt"
     },
 
@@ -215,18 +215,18 @@
 
     "listCard": {
       "card_0": {
-        "title": "Tùy chỉnh mẫu chứng chỉ",
-        "p": "Chỉnh sửa giao diện và chuyên về chủ đề của riêng bạn. Thêm logo, màu sắc và hình ảnh của bạn để phản ánh thương hiệu của bạn.",
+        "title": "Tùy Chỉnh Mẫu Chứng Chỉ",
+        "p": "Tuỳ chỉnh giao diện theo phong cách của bạn. Thêm logo, màu sắc và hình ảnh để thể hiện đúng thương hiệu của bạn.",
         "button": "Tùy Chỉnh Ở Đây"
       },
       "card_1": {
-        "title": "Quản lý Chứng chỉ",
-        "p": "Quản lý chứng chỉ số được đúc của bạn tại đây",
+        "title": "Quản lý Chứng Chỉ Số Hóa",
+        "p": "Nơi tạo hợp đồng lưu trữ các chứng chỉ đã được số hoá trên mạng lưới chuỗi khối.",
         "button": "Tạo Ngay"
       },
       "card_2": {
-        "title": "Tạo chứng chỉ",
-        "p": "Tạo chứng chỉ của bạn",
+        "title": "Tạo Chứng Chỉ Số Hoá",
+        "p": "Tạo chứng chỉ số hóa sau khi thiết kế bản mẫu và thiết lập hợp đồng lưu trữ chứng chỉ số.",
         "button": "Tạo Chứng Chỉ"
       }
     },

@@ -204,7 +204,7 @@
       "home": "Home",
       "customizeTemplate": "Customize Template",
       "certificateManagement": "Certificate Management",
-      "createDigitalCertificate": "Create Digital Certificate",
+      "createDigitalCertificate": "Create Tokenized Certificate",
       "setting": "Setting"
     },
 
@@ -215,18 +215,18 @@
 
     "listCard": {
       "card_0": {
-        "title": "Customize certificate template",
+        "title": "Customize Certificate Template",
         "p": "Customize the look and feel of your theme. Add your logo, colors, and images to reflect your brand.",
         "button": "Customize"
       },
       "card_1": {
-        "title": "Certificate management",
-        "p": "Manage your minted digital certificates here",
+        "title": "Certificate Management",
+        "p": "Creating and managing contracts securely stores tokenized certificates on the blockchain network.",
         "button": "Create Now"
       },
       "card_2": {
-        "title": "Create certificate",
-        "p": "Create your digital certificate",
+        "title": "Create Tokenized Certificate",
+        "p": "Create tokenized certificates after designing the template and establishing the contract for storing these certificates",
         "button": "Create Digital Certificate"
       }
     },

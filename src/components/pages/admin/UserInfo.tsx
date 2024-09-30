@@ -10,7 +10,7 @@ import { FaUser } from 'react-icons/fa';
 import { BiGlobe } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
 import { BiLogOut } from 'react-icons/bi';
-import { BiHelpCircle } from 'react-icons/bi';
+// import { BiHelpCircle } from 'react-icons/bi';
 
 import { Button } from '@/components/ui/button';
 import {

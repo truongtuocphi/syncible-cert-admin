@@ -5,21 +5,21 @@ const t = useTranslations('HomePage.title_section');
 const getCustomLabel = (path: string) => {
   switch (path) {
     case 'mintnft':
-      return 'Tạo chứng chỉ số';
+      return t('mintnft');
     case 'collection':
-      return 'Quản lý chứng chỉ';
+      return t('collection');
     case 'createcollection':
-      return 'Tạo mục quản lý';
+      return t('createcollection');
     case 'admin':
-      return 'Trang chủ';
+      return t('admin');
     case 'collectiondetail':
       return '';
     case 'contractdetail':
-      return 'Chi tiết hợp đồng';
+      return t('contractdetail');
     case 'filestorage':
-      return 'Thư mục lưu trữ';
+      return t('filestorage');
     case 'customized':
-      return 'Tùy chỉnh mẫu';
+      return t('customized');
     case 'vi':
       return '';
     case 'en':

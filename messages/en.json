@@ -337,6 +337,16 @@
     }
   },
 
+  "breadcrumb": {
+    "mintnft": "Create a Certificate",
+    "collection": "Certificate management",
+    "createcollection": "Certificate Management",
+    "admin": "Home",
+    "contractdetail": "Contract details",
+    "filestorage": "Storage folder",
+    "customized": "Customize templates"
+  },
+
   "Localization": {
     "header": "Language",
     "label": "{locale, select, en {EN} vi {VI} other {Unknown}}"

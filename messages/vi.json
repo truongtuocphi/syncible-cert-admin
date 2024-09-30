@@ -337,6 +337,16 @@
     }
   },
 
+  "breadcrumb": {
+    "mintnft": "Tạo chứng chỉ",
+    "collection": "Quản lý chứng chỉ",
+    "createcollection": "Tạo mục quản lý",
+    "admin": "Trang chủ",
+    "contractdetail": "Chi tiết hợp đồng",
+    "filestorage": "Thư mục lưu trữ",
+    "customized": "Tùy chỉnh mẫu"
+  },
+
   "Localization": {
     "header": "Ngôn ngữ",
     "label": "{locale, select, en {EN} vi {VI} other {Không xác định}}"

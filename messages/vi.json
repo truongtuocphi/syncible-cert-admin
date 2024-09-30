@@ -204,12 +204,12 @@
       },
       "card_1": {
         "title": "Quản lý Chứng chỉ số hóa",
-        "p": "Tạo chứng chỉ số hóa sau khi thiết kế bản mẫu và thiết lập hợp đồng lưu trữ chứng chỉ số",
+        "p": "Nơi tạo hợp đồng lưu trữ các chứng chỉ đã được số hoá trên mạng lưới chuỗi khối.",
         "button": "Tạo Ngay"
       },
       "card_2": {
         "title": "Tạo Chứng Chỉ Số Hoá",
-        "p": "Tạo chứng chỉ của bạn",
+        "p": "Tạo chứng chỉ số hóa sau khi thiết kế bản mẫu và thiết lập hợp đồng lưu trữ chứng chỉ số.",
         "button": "Tạo Chứng Chỉ"
       }
     },

@@ -68,7 +68,7 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
             ) : (
               <Link
                 href={item.href}
-                className="text-sm text-gray-400 hover:text-gray-800 2xl:text-base"
+                className="text-sm font-bold text-gray-600 hover:text-gray-800 2xl:text-base"
               >
                 {capitalizeFirstLetter(item.label)}
               </Link>

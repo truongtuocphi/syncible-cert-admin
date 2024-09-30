@@ -46,8 +46,6 @@ const Sidebar = () => {
   const inactiveLinkClasses =
     'hover:bg-gradient-to-r from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] hover:text-gray-700';
 
-  console.log(t(`sideBar.createDigitalCertificate`) !== 'Tạo Chứng Chỉ');
-
   return (
     <div className="fixed left-0 top-0 z-50 flex h-full w-80 flex-col justify-between bg-white px-3 text-gray-800 shadow-md 2xl:w-96">
       <div>

@@ -101,13 +101,13 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
             </div>
           </DropdownMenuItem>
 
-          <DropdownMenuItem
+          {/* <DropdownMenuItem
             onMouseEnter={() => setIsLanguageOpen(false)}
             className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
           >
             <BiHelpCircle className="mr-4 text-2xl" />
             {transLation('userInfo.helpCenter')}
-          </DropdownMenuItem>
+          </DropdownMenuItem> */}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem

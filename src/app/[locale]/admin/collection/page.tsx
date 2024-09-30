@@ -154,6 +154,10 @@ export default function Collection() {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [pagination, setPagination] = React.useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
 
   const t = useTranslations('Dapp.Management');
 
@@ -208,6 +212,7 @@ export default function Collection() {
       columnFilters,
       columnVisibility,
       rowSelection,
+      pagination,
     },
   });
 

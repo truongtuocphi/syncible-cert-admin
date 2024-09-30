@@ -47,7 +47,7 @@ export const MintSingleForm = ({ DataIssuedDate, DataRole, onGetData }: MintBulk
   return (
     <div className="grid grid-cols-2 gap-4">
       <div className="col-span-1 space-y-2">
-        <label>{t('titleIDCertificate')}</label>
+        <label className="text-base font-bold text-gray-700">{t('titleIDCertificate')}</label>
         <input
           type="text"
           required
@@ -58,7 +58,7 @@ export const MintSingleForm = ({ DataIssuedDate, DataRole, onGetData }: MintBulk
         />
       </div>
       <div className="col-span-1 space-y-2">
-        <label>{t('titleFullName')}</label>
+        <label className="text-base font-bold text-gray-700">{t('titleFullName')}</label>
         <input
           type="text"
           required

@@ -325,6 +325,15 @@
       "subTitleCSV": "Your csv file format must be formatted according to Syncible's file format field for consistency. Once formatted, save the file as a CSV file and paste it into the template below",
       "buttonUploadFileCSV": "Download sample CSV file",
       "downloadFileCSV": "Choose file"
+    },
+
+    "modal": {
+      "title": "Tạo Chứng Chỉ",
+      "title_1": "Tạo chứng chỉ đơn lẻ",
+      "des_1": "Mục này được thiết kế cho việc cung cấp bằng cấp đơn lẻ dành cho một người",
+      "title_2": "Tạo chứng chỉ hàng loạt",
+      "des_2": "Mục này được thiết kế cho việc cung cấp bằng cấp hàng loạt cho khoá học trên một học viên",
+      "button": "Tạo Chứng Chỉ"
     }
   },
 

@@ -325,6 +325,15 @@
       "subTitleCSV": "Định dạng tập tin csv của bạn phải được định dạng theo trường định dạng tập tin của Syncible để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành tập tin CSV và dán vào mẫu dưới đây",
       "buttonUploadFileCSV": "Tải file CSV mẫu",
       "downloadFileCSV": "Tải tệp"
+    },
+
+    "modal": {
+      "title": "Create Certificate",
+      "title_1": "Create a single certificate",
+      "des_1": "This item is designed for providing a single qualification to one person",
+      "title_2": "Generate certificates in bulk",
+      "des_2": "This item is designed for mass certification of courses per student",
+      "button": "Create Digital Certificate"
     }
   },
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { IoClose } from 'react-icons/io5';
 import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 
@@ -12,15 +13,14 @@ interface ModalProps {
 
 const datCard = [
   {
-    title: 'Tạo chứng chỉ đơn lẻ',
-    description: 'Mục này được thiết kế cho việc cung cấp bằng cấp đơn lẻ dành cho một người.',
+    title: 'title_1',
+    description: 'des_1',
     link: '/admin/mintnft?type=mintsingle',
     icon: '/Capa_1.png',
   },
   {
-    title: 'Tạo chứng chỉ hàng loạt',
-    description:
-      'Mục này được thiết kế cho việc cung cấp bằng cấp hàng loạt cho khoá học trên một học viên.',
+    title: 'title_2',
+    description: 'des_2',
     link: '/admin/mintnft?type=mintbulk',
     icon: '/Capa_2.png',
   },
@@ -29,6 +29,8 @@ const datCard = [
 const Modal = ({ isOpen, onClose }: ModalProps) => {
   const [selectedOption, setSelectedOption] = useState<number | null>(null);
   const router = useRouter();
+
+  const t = useTranslations('Dapp.modal');
 
   useEffect(() => {
     if (isOpen) {
@@ -54,7 +56,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-70 text-black">
       <div className="relative w-11/12 rounded-lg bg-white p-6 md:max-w-2xl">
-        <h2 className="text-center text-xl font-bold text-gray-700">Tạo chứng chỉ</h2>
+        <h2 className="text-center text-xl font-bold text-gray-700">{t('title')}</h2>
         <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2">
           {datCard.map((dataCard, index) => (
             <div
@@ -70,7 +72,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
                   alt="Frame_1"
                   className="absolute left-0 top-0 -z-10 object-cover"
                 />
-                <div className="p-4 absolute top-0">
+                <div className="absolute top-0 p-4">
                   <div className="flex w-full items-center justify-center p-5">
                     <Image
                       src={dataCard.icon}
@@ -96,7 +98,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
           disabled={selectedOption === null}
           onClick={handleCreateCertificate}
         >
-          Tạo chứng chỉ
+          {t('button')}
         </ButtonPrimary>
         <button
           onClick={onClose}

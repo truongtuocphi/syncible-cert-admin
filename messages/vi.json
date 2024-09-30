@@ -103,6 +103,9 @@
       "all": {
         "label": "Tất cả"
       }
+    },
+    "pagination" : {
+      "label": "Trang {page} của {totalPages}"
     }
   },
   "BlogPage": {

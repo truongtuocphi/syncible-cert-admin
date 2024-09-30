@@ -103,6 +103,9 @@
       "all": {
         "label": "All"
       }
+    },
+    "pagination" : {
+      "label": "Page {page} of {totalPages}"
     }
   },
   "BlogPage": {

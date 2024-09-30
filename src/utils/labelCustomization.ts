@@ -1,8 +1,8 @@
 import { useTranslations } from 'next-intl';
 
-const t = useTranslations('HomePage.title_section');
-
 const getCustomLabel = (path: string) => {
+  const t = useTranslations('breadcrumb');
+
   switch (path) {
     case 'mintnft':
       return t('mintnft');

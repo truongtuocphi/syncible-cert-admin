@@ -80,7 +80,7 @@ const columns: ColumnDef<Collection>[] = [
         <Button
           variant="ghost"
           className="p-0"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'desc')}
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
         >
           ID
           <CaretSortIcon className="ml-2 h-4 w-4" />

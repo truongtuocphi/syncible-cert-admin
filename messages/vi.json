@@ -198,17 +198,17 @@
 
     "listCard": {
       "card_0": {
-        "title": "Tùy chỉnh mẫu chứng chỉ",
+        "title": "Tùy Chỉnh Mẫu Chứng Chỉ",
         "p": "Tuỳ chỉnh giao diện theo phong cách của bạn. Thêm logo, màu sắc và hình ảnh để thể hiện đúng thương hiệu của bạn.",
         "button": "Tùy Chỉnh Ở Đây"
       },
       "card_1": {
         "title": "Quản lý Chứng chỉ số hóa",
-        "p": "Nơi tạo hợp đồng lưu trữ các chứng chỉ đã được số hoá trên mạng lưới chuỗi khối",
+        "p": "Tạo chứng chỉ số hóa sau khi thiết kế bản mẫu và thiết lập hợp đồng lưu trữ chứng chỉ số",
         "button": "Tạo Ngay"
       },
       "card_2": {
-        "title": "Tạo chứng chỉ",
+        "title": "Tạo Chứng Chỉ Số Hoá",
         "p": "Tạo chứng chỉ của bạn",
         "button": "Tạo Chứng Chỉ"
       }

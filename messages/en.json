@@ -45,7 +45,11 @@
       }
     },
     "blogs_section": {
-      "header": "Blogs"
+      "header": "Blogs",
+      "see_more": {
+        "label": "See more",
+        "href": "/blogs"
+      }
     },
     "footer_section": {
       "copy_right": "© 2024 All rights reserved by Syncible."

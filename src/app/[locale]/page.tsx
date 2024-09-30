@@ -18,6 +18,7 @@ import { Link } from '@/i18n/routing';
 import BannerCertificate from '../../../public/cert_example.png';
 
 import Background from '../../../public/DoraBG.png';
+import BackgroundSmall from '../../../public/DoraBGSmall.png';
 import LightBlueGradientEllipse from '../../../public/Ellipse_1.svg';
 import EthereumLogoSVG from '../../../public/ethereum-logo.svg';
 import PolygonLogoSVG from '../../../public/polygon-logo.svg';
@@ -72,13 +73,12 @@ const Page = () => {
                         >
                           <span>{t('contact_button.label')}</span>
                         </Button>
-                        {/* <ContactButton /> */}
                       </Link>
                     </div>
                   </div>
                 </div>
                 <div className="relative h-fit w-full animate-swipe-up-fadein self-center lg:basis-1/2">
-                  <div className="md:scale-80 absolute left-1/2 top-1/2 hidden h-full w-full -translate-x-1/2 -translate-y-1/2 scale-50 sm:scale-90 md:block lg:scale-110">
+                  <div className="absolute left-1/2 top-1/2 hidden h-full w-full -translate-x-1/2 -translate-y-1/2 scale-50 sm:scale-90 md:block md:scale-75 lg:scale-110">
                     <Image
                       src={BannerCertificate}
                       alt="Certificate"
@@ -122,8 +122,8 @@ const Page = () => {
             <Footer />
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 top-0 flex w-full flex-col items-center overflow-hidden">
-          <div className="relative mx-auto h-full w-full max-w-[90rem]">
+        <div className="absolute inset-0 flex w-full flex-col items-center overflow-hidden">
+          <div className="relative mx-auto min-h-full w-full max-w-[90rem]">
             <div className="absolute -left-[170%] -top-[15%] -z-10 w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>
@@ -133,12 +133,24 @@ const Page = () => {
             <div className="absolute -bottom-[10%] -left-[150%] -z-10 w-[125rem] sm:-bottom-1/2 sm:-left-1/2 sm:w-[150%] sm:-translate-y-[150%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>
+          </div>
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 top-0">
+          <div className="hidden sm:block">
             <Image
               src={Background}
-              alt="The background image with star-like shapes a a single curvy line that extend to the botton of the image"
-              className="z-20 h-full w-full object-cover object-top"
               fill
-              sizes="100vw"
+              alt="The background image with star-like shapes and a single curvy line that extends to the bottom of the image"
+              className="z-10 h-auto w-full object-cover object-top"
+              priority
+            />
+          </div>
+          <div className="block sm:hidden">
+            <Image
+              src={BackgroundSmall}
+              fill
+              alt="The background image with star-like shapes and a single curvy line that extends to the bottom of the image"
+              className="z-0 h-auto w-full object-cover object-top"
               priority
             />
           </div>

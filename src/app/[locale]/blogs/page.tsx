@@ -57,7 +57,7 @@ export default function Page() {
           </div>
         </div>
         <div className="w-full">
-          <div className="grid w-full grid-cols-1 gap-8 pt-4 sm:pt-16 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full grid-cols-1 gap-8 pt-4 sm:grid-cols-2 sm:pt-16 lg:grid-cols-3">
             {currentPosts.map((post, index) => (
               <BlogCard key={index} entry={post} />
             ))}

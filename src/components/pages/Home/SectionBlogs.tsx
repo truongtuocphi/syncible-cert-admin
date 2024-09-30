@@ -1,8 +1,8 @@
 'use client';
 import Autoplay from 'embla-carousel-autoplay';
-
 import { useTranslations } from 'next-intl';
 
+import ArrowNarrowRight from '@/assets/icons/arrow-narrow-right.svg';
 import BlogCard from '@/components/common/card/BlogCard';
 import {
   Carousel,
@@ -11,6 +11,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from '@/components/ui/carousel';
+import Link from 'next/link';
 
 const ListNews = [
   {
@@ -22,7 +23,7 @@ const ListNews = [
       avatar: '/SmugFace.png',
       position: 'Member',
     },
-  }
+  },
 ];
 
 export default function SectionBlogs() {
@@ -30,7 +31,16 @@ export default function SectionBlogs() {
   return (
     <div className="w-full max-w-[90rem]" id="blogs">
       <div className="flex flex-col items-center gap-8 px-4 py-[4.5rem] md:px-8 xl:px-32 xl:py-32 ">
-        <div className=" text-[2rem] font-semibold">{t('header')}</div>
+        <div className="flex w-full items-center justify-between">
+          <div className="text-[2rem] font-bold">{t('header')}</div>
+          <Link href={t('see_more.href')} className="font-semibold text-[#A2A3A9]">
+            <div className="flex items-center">
+              {t('see_more.label')}
+              <ArrowNarrowRight className="inline-block h-6 w-6 stroke-[#A2A3A9] pl-1 [&_path]:stroke-current" />
+            </div>
+          </Link>
+        </div>
+
         <Carousel
           opts={{ align: 'center', startIndex: 1, loop: false }}
           // plugins={[

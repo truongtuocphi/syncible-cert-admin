@@ -6,7 +6,7 @@ import { Link } from '@/i18n/routing';
 
 export default function BlogCard({ entry }: { entry: ArticleEntry }) {
   return (
-    <Card className="h-full overflow-hidden rounded-[1.25rem] border-[#F0F0F0] backdrop-blur-[50px]  bg-white/80 shadow-none">
+    <Card className="h-full overflow-hidden rounded-[1.25rem] border-[#F0F0F0] bg-white/80 shadow-none backdrop-blur-[50px]">
       <CardHeader>
         <div className="max-h-40 w-full overflow-hidden rounded-xl">
           <Image
@@ -32,7 +32,7 @@ export default function BlogCard({ entry }: { entry: ArticleEntry }) {
             <AvatarImage src={entry.author.avatar} />
             <AvatarFallback>CN</AvatarFallback>
           </Avatar>
-          <div className={` flex w-full flex-col justify-center`}>
+          <div className={`flex w-full flex-col justify-center`}>
             <div className="text-lg font-bold">{entry.author.name}</div>
             <div className="text-base font-medium text-[#A2A3A9]">{entry.author.position}</div>
           </div>

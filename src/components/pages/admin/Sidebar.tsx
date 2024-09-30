@@ -3,13 +3,13 @@
 import { useState } from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { BiCustomize } from 'react-icons/bi';
 import { BiHome } from 'react-icons/bi';
 import { BiFile } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 import Modal from './Modal';
 

@@ -239,7 +239,10 @@
         "noti_2": "Let's create a management section to display the results",
         "buttonNext": "Next",
         "buttonPrevious": "Previous"
-      }
+      },
+
+      "alert_1": "All have been deleted successfully",
+      "alert_2": "An error occurred while deleting data"
     },
 
     "contractDetail": {

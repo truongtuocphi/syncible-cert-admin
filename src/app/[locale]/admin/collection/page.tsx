@@ -255,9 +255,9 @@ export default function Collection() {
         setData(collections);
       }
 
-      alert('Tất cả đã được xóa thành công.');
+      alert(`${t('alert_1')}`);
     } catch (error) {
-      alert('Đã xảy ra lỗi khi xóa dữ liệu.');
+      alert(`${t('alert_2')}`);
       // eslint-disable-next-line no-console
       console.error('Error deleting selected rows:', error);
     }

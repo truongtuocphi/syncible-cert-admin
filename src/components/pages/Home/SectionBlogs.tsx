@@ -43,7 +43,7 @@ export default function SectionBlogs() {
           // Map to your ArticleEntry structure
           return {
             title: post.title.rendered,
-            link: post.link,
+            link: `/blogs/${post.slug}`,
             bannerImg: bannerImg || '/SyncibleSmallerBanner.png', // Use a default image if no banner
             author: author,
           };
@@ -78,6 +78,7 @@ export default function SectionBlogs() {
         >
           <div className="flex flex-col justify-center">
             <CarouselContent className="pb-10 pt-7 md:-ml-6">
+              
               {posts.map((entry, index) => (
                 <CarouselItem key={index} className="basis-full md:basis-1/2 md:pl-6 lg:basis-1/3">
                   <BlogCard entry={entry} />

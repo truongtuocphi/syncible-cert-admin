@@ -51,7 +51,7 @@ export default function Page() {
             // Map to your ArticleEntry structure
             return {
               title: post.title.rendered,
-              link: post.link,
+              link: `/blogs/${post.slug}`,
               bannerImg: bannerImg || '/SyncibleSmallerBanner.png', // Use a default image if no banner
               author: author,
             };
@@ -96,9 +96,11 @@ export default function Page() {
         </div>
         <div className="w-full">
           <div className="grid w-full grid-cols-1 gap-8 pt-4 sm:grid-cols-2 sm:pt-16 lg:grid-cols-3">
-            {posts.map((post: any, index: number | null | undefined) => (
-              <BlogCard key={index} entry={post} />
-            ))}
+            {loading
+              ? Array.from({ length: postsPerPage }, (_, index) => <BlogCardSkeleton key={index} />)
+              : posts.map((post: any, index: number | null | undefined) => (
+                  <BlogCard key={index} entry={post} />
+                ))}
           </div>
           {/* Pagination controls */}
           <div className="flex items-center justify-center gap-8 pt-8">
@@ -109,7 +111,7 @@ export default function Page() {
             >
               <ArrowNarrowLeft className="h-6 w-6" />
             </Button>
-            <span>
+            <span className="text-[#A2A3A9] font-medium">
               {/* Page {currentPage} of {totalPages} */}
               {t('pagination.label', { page: currentPage, totalPages: totalPages })}
             </span>

@@ -4,19 +4,14 @@ import { notFound } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 
-import Footer from '@/components/layout/Footer';
-import Navbar from '@/components/layout/Navbar';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { montserrat } from '@/components/ui/fonts';
-
-import LightBlueGradientEllipse from '../../../../../public/Ellipse_1.svg';
-// import { ChevronDown } from 'lucide-react';
+import ArrowNarrowRight from '@/assets/icons/arrow-narrow-right.svg';
 
 import SyncibleBanner from '/public/SyncibleBanner.svg';
 
 import { Link, usePathname } from '@/i18n/routing';
-
-// import { Button } from '@/components/ui/button';
+import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
+import  Breadcrumb  from '@/components/common/breadcrumb/BlogBreadcrumb'
 
 const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
   const t = useTranslations('BlogPage');
@@ -70,39 +65,9 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const pathname = usePathname();
   const locale = useLocale();
   const [Content, setContent] = useState<any>(null);
-
-  function CustomH2({ children }: { children: React.ReactNode }) {
-    return <h2 className="text-2xl font-bold">{children}</h2>;
-  }
-
-  function CustomP({ children }: { children: React.ReactNode }) {
-    return <p className="text-lg text-[#6C6D71]">{children}</p>;
-  }
-
-  function CustomUl({ children }: { children: React.ReactNode }) {
-    return <ul className="list-disc ps-8">{children}</ul>;
-  }
-
-  function CustomLi({ children }: { children: React.ReactNode }) {
-    return <li className="ps-1 text-base text-[#6C6D71]">{children}</li>;
-  }
-
-  const overrideComponents = {
-    h2: CustomH2,
-    p: CustomP,
-    ul: CustomUl,
-    li: CustomLi,
-  };
-
-  const loadContent = async () => {
-    try {
-      // const ContentModule = (await import(`./${locale}.mdx`)).default;
-      const ContentModule = (await import(`@/markdown/${locale}/blog_001.mdx`)).default;
-      setContent(() => ContentModule);
-    } catch (error) {
-      notFound();
-    }
-  };
+  const [loading, setLoading] = useState(true);
+  const { slug } = params;
+  
 
   const getHeaders = () => {
     const headers = document.querySelectorAll('h2[id]');
@@ -131,8 +96,28 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   };
 
   useEffect(() => {
-    loadContent();
+    
     smoothScroll();
+
+    async function fetchBlockContent(slug: string) {
+      setLoading(true);
+      try {
+        const response = await fetchDataFromWP(`https://admin.syncible.io/wp-json/wp/v2/posts?slug=${slug}`);
+
+        if(response.length === 0) {
+          notFound();
+        } else {
+          // const post = response[0];
+          // const content = post.content.rendered;
+          setContent(response[0]);
+        }
+      } catch (error) {
+        console.error('Error fetching posts:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchBlockContent(slug);
 
     // const observer = new IntersectionObserver(
     //   (entries) => {
@@ -156,17 +141,31 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     // return () => {
     //   observer.disconnect();
     // };
-  }, [locale]);
+  }, [slug]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (!Content) {
+    return notFound();
+  }
+
+  const breadcrumbItems = [
+    { label: 'Blogs', href: '/blogs' },
+    { label: Content.title.rendered, href: '' },
+  ]
 
   return (
     <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
       <div className="flex flex-col gap-10 px-4 pb-4 md:px-8 md:pb-10 xl:px-32">
+        <Breadcrumb items={breadcrumbItems} />
         <div className="flex flex-col items-center gap-10">
           <div className="text-center text-2xl font-bold md:text-3xl lg:text-5xl">
-            {t('header')}
+            {Content.title.rendered}
           </div>
-          <div className="h-full w-full">
-            <SyncibleBanner className="aspect-[24/9] h-full w-full" />
+          <div className="w-full rounded-[2rem]">
+            <SyncibleBanner className="aspect-[1184/395] h-fit w-full object-cover" />
           </div>
         </div>
         <div className="flex flex-col gap-8 md:flex-row">
@@ -205,7 +204,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 id="table-content"
                 className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
               >
-                {/* {keys.map((key) => (
+                {keys.map((key) => (
                       <Link
                         key={key}
                         href={t(`navigation.${key}.href`)}
@@ -216,11 +215,11 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                       >
                         {t(`navigation.${key}.label`)}
                       </Link>
-                    ))} */}
+                    ))}
 
-                {keys.map((key, index) => (
+                {/* {keys.map((key, index) => (
                   <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
-                ))}
+                ))} */}
               </div>
             </div>
           </div>
@@ -257,10 +256,8 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                   </div>
                 </div>
               </div>
-              <div id="content-section">
-                {Content && <Content />}
-                {/* {Content && <Content  components={overrideComponents}/>} */}
-              </div>
+              {/* Render blog content */}
+              <div id="content-section" className="max-w-[90rem]" dangerouslySetInnerHTML={{ __html: Content.content.rendered.replace(/\n{3,}/g, '<br />')}}></div>
             </div>
           </div>
         </div>

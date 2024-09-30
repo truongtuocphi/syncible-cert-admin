@@ -2,6 +2,7 @@ import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '@/componen
 import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
+import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 
 export default function BlogCard({ entry }: { entry: ArticleEntry }) {
   return (
@@ -26,20 +27,22 @@ export default function BlogCard({ entry }: { entry: ArticleEntry }) {
         </CardTitle>
       </CardContent>
       <CardFooter>
-        <div className="flex w-full gap-4">
+        <AuthorProfile author={entry.author} />
+        {/* <div className="flex w-full gap-4">
           <div className="h-16 w-16 overflow-hidden rounded-full shrink-0">
             <Image
               className="h-full w-full"
               src={entry.author.avatar}
               alt={entry.author.name}
               fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
           </div>
           <div className="flex w-full flex-col justify-center">
             <div className="text-lg font-bold">{entry.author.name}</div>
             <div className="text-base font-medium text-[#A2A3A9]">{entry.author.position}</div>
           </div>
-        </div>
+        </div> */}
       </CardFooter>
     </Card>
   );

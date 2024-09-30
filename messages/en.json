@@ -230,7 +230,7 @@
         "id": "ID",
         "name": "Display name",
         "symbol": "Contract Symbol",
-        "quantily": "Quantily",
+        "quantily": "Quantity",
         "contract": "Contract address",
         "status": "Status",
         "valueStatus": "Verified",

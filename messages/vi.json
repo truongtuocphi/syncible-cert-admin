@@ -328,12 +328,12 @@
     },
 
     "modal": {
-      "title": "Create Certificate",
-      "title_1": "Create a single certificate",
-      "des_1": "This item is designed for providing a single qualification to one person",
-      "title_2": "Generate certificates in bulk",
-      "des_2": "This item is designed for mass certification of courses per student",
-      "button": "Create Digital Certificate"
+      "title": "Tạo Chứng Chỉ",
+      "title_1": "Tạo chứng chỉ đơn lẻ",
+      "des_1": "Mục này được thiết kế cho việc cung cấp bằng cấp đơn lẻ dành cho một người",
+      "title_2": "Tạo chứng chỉ hàng loạt",
+      "des_2": "Mục này được thiết kế cho việc cung cấp bằng cấp hàng loạt cho khoá học trên một học viên",
+      "button": "Tạo Chứng Chỉ"
     }
   },
 

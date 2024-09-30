@@ -239,7 +239,10 @@
         "noti_2": "Hãy tạo một mục quản lý để hiện thị kết quả",
         "buttonNext": "Trước",
         "buttonPrevious": "Kế tiếp"
-      }
+      },
+
+       "alert_1": "Tất cả đã được xóa thành công",
+       "alert_2": "Đã xảy ra lỗi khi xóa dữ liệu"
     },
 
     "contractDetail": {

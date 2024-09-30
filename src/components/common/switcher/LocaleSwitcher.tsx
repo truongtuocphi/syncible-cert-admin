@@ -17,7 +17,7 @@ import GlobeIconSVG from '../../../../public/globe-svgrepo-com.svg';
 
 export function LocaleSelect() {
   const t = useTranslations('Localization');
-  const locale = useLocale();
+  const locale = useLocale() as 'en' | 'vi';
   const router = useRouter();
   const pathname = usePathname();
 

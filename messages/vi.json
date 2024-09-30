@@ -316,11 +316,15 @@
       "ButtonSubmitLoading": "Đang xử lý...",
       "ButtonCreateCertificate": "Tạo chứng chỉ",
 
-      "titleIDCertificate": "Certificate ID",
-      "placeholderID": "Certificate ID",
-
+      "titleIDCertificate": "ID chứng chỉ",
+      "placeholderID": "ID chứng chỉ",
       "titleFullName": "Họ và tên",
-      "placeholderFullName": "Họ và tên của bạn"
+      "placeholderFullName": "Họ và tên của bạn",
+
+      "titleCSV": "Thông tin CSV",
+      "subTitleCSV": "Định dạng tập tin csv của bạn phải được định dạng theo trường định dạng tập tin của Syncible để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành tập tin CSV và dán vào mẫu dưới đây",
+      "buttonUploadFileCSV": "Tải file CSV mẫu",
+      "downloadFileCSV": "Tải tệp"
     }
   },
 

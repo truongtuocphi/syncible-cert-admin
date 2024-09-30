@@ -16,10 +16,9 @@ import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { IoMdHelpCircleOutline } from 'react-icons/io';
 import { Button } from '@/components/ui/button';
+import { useTranslations } from 'next-intl';
 
 const CreateCollection: React.FC = () => {
-  const router = useRouter();
-  const { address } = useAccount();
   const [logoImage, setLogoImage] = useState<string | null>(null);
   const [fileLogoImage, setfileLogoImage] = useState<string | null>('');
   const [bannerImage, setBannerImage] = useState<string | null>(null);
@@ -28,8 +27,12 @@ const CreateCollection: React.FC = () => {
   const [contractSymbol, setContractSymbol] = useState<string>('');
   const [description, setDescription] = useState<string>('');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
-
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const router = useRouter();
+  const { address } = useAccount();
+
+  const t = useTranslations('Dapp.createCollection');
 
   const handleImageChange = (
     e: React.ChangeEvent<HTMLInputElement>,
@@ -127,7 +130,7 @@ const CreateCollection: React.FC = () => {
         <Breadcrumb />
       </div>
       <div className="space-y-6 rounded-lg bg-white p-6">
-        <h1 className="text-2xl font-semibold text-gray-600">Tạo mục quản lý lưu trữ</h1>
+        <h1 className="text-2xl font-semibold text-gray-600">{t('title')}</h1>
         <div className="flex space-x-6">
           <form onSubmit={handleSubmit} className="w-full space-y-6">
             {/* img logo and banner */}
@@ -137,10 +140,10 @@ const CreateCollection: React.FC = () => {
                   <div className="w-full">
                     <label className="block text-base font-medium text-gray-900">
                       <label className="block text-base font-medium text-gray-900">
-                        Hình ảnh logo
+                        {t('titleImage')}
                       </label>
                     </label>
-                    <p className="text-xs text-gray-400">Cập nhật bộ sưu tập logo của bạn.</p>
+                    <p className="text-xs text-gray-400">{t('subtitleImage')}</p>
                   </div>
                   <div className="space-y-2">
                     <input
@@ -157,7 +160,7 @@ const CreateCollection: React.FC = () => {
                         className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-500 hover:bg-gray-100"
                       >
                         <BiImageAdd className="text-2xl text-black" />
-                        Chọn tệp
+                        {t('Buttonfile')}
                       </label>
                       {fileLogoImage &&
                         `${fileLogoImage?.slice(0, 4)}...${fileLogoImage?.slice(-4)}`}
@@ -166,13 +169,10 @@ const CreateCollection: React.FC = () => {
                 </div>
                 <div className="flex flex-col items-start gap-4 space-y-2">
                   <div className="w-full">
-                    <label className="block text-base font-medium text-gray-900">Ảnh bìa</label>
-                    <p className="text-xs text-gray-400">
-                      Hình ảnh này sẽ xuất hiện ở đầu trang bộ sưu tập của bạn. Tránh bao gồm quá
-                      nhiều văn bản trong ảnh bìa này khi kích thước thay đổi trên các thiết bị khác
-                      nhau. Kích thước đề xuất: 1400 x 400 px. Các định dạng được hỗ trợ: JPG, PNG,
-                      SVG. Kích thước tối đa: 3 MB.
-                    </p>
+                    <label className="block text-base font-medium text-gray-900">
+                      {t('titleBanner')}
+                    </label>
+                    <p className="text-xs text-gray-400">{t('subTitleBanner')}</p>
                   </div>
                   <div onDrop={(e) => handleDrop(e, setBannerImage)} onDragOver={handleDragOver}>
                     <div className="space-y-2">
@@ -190,7 +190,7 @@ const CreateCollection: React.FC = () => {
                           className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-500 hover:bg-gray-100"
                         >
                           <BiImageAdd className="text-2xl text-black" />
-                          Chọn tệp
+                          {t('Buttonfile')}
                         </label>
                         {/* {fileLogoImage &&
                           `${fileLogoImage?.slice(0, 4)}...${fileLogoImage?.slice(-4)}`} */}
@@ -216,7 +216,7 @@ const CreateCollection: React.FC = () => {
                       <div className="relative h-1/2 w-full rounded-3xl border-[0.5px] border-dashed border-gray-300 bg-[#FAFAFA]">
                         <div className="absolute left-1/2 top-[30%] flex -translate-x-1/2 items-center gap-2 text-gray-300">
                           <FaImage className="text-xl text-gray-300" />
-                          Preview Banner
+                          {t('titlePreviewBanner')}
                         </div>
                       </div>
                     )}
@@ -246,7 +246,7 @@ const CreateCollection: React.FC = () => {
                     ) : (
                       <div className="mt-20 text-center">
                         <p className="text-sm font-semibold text-gray-600">
-                          Preview of your collection
+                          {t('titlePreviewCollection')}
                         </p>
                       </div>
                     )}
@@ -257,16 +257,16 @@ const CreateCollection: React.FC = () => {
             {/* end */}
             <div className="flex items-center gap-4 space-y-2">
               <div className="w-1/2">
-                <label className="block text-base font-medium text-gray-900">Tên hiển thị</label>
-                <p className="text-xs text-gray-400">
-                  Đây là tên hiển thị cho bộ sưu tập trên mục quản lý của bạn.
-                </p>
+                <label className="block text-base font-medium text-gray-900">
+                  {t('titleDisplayName')}
+                </label>
+                <p className="text-xs text-gray-400">{t('subTitleDisplayName')}</p>
               </div>
               <div className="w-1/2">
                 <input
                   type="text"
                   value={displayName}
-                  placeholder="Display Name"
+                  placeholder={t('placeholderInput_1')}
                   onChange={(e) => {
                     setDisplayName(e.target.value);
                     setContractName(e.target.value);
@@ -280,7 +280,7 @@ const CreateCollection: React.FC = () => {
               <div className="w-1/2">
                 <label className="block text-base font-medium text-gray-900">
                   <div className="flex items-center gap-2">
-                    <p>Biểu tượng hợp đồng</p>
+                    <p>{t('titleSymbol')}</p>
                     <HoverCard>
                       <HoverCardTrigger asChild>
                         <Button variant="link" className="p-0">
@@ -289,27 +289,20 @@ const CreateCollection: React.FC = () => {
                       </HoverCardTrigger>
                       <HoverCardContent className="w-80">
                         <div className="flex flex-col gap-2">
-                          <h1 className="text-base font-bold">Biểu tượng hợp đồng</h1>
-                          <p className="text-sm text-gray-400">
-                            biểu tượng mã thông báo cụ thể của bạn trên trình khám phá blockchain.
-                            Nó chỉ ra rằng chứng chỉ đã được xác minh trạng thái, cho phép người
-                            dùng theo dõi giao dịch, số lượng token và quyền sở hữu NFT trên
-                            blockchain.
-                          </p>
+                          <h1 className="text-base font-bold">{t('titleHoverCard')}</h1>
+                          <p className="text-sm text-gray-400">{t('subTitleHoverCard')}</p>
                         </div>
                       </HoverCardContent>
                     </HoverCard>
                   </div>
                 </label>
-                <p className="text-xs text-gray-400">
-                  Biểu tượng hợp đồng này không được thay đổi trong tương lai.
-                </p>
+                <p className="text-xs text-gray-400">{t('subTitleSymbol')}</p>
               </div>
               <div className="w-1/2">
                 <input
                   type="text"
                   value={contractSymbol}
-                  placeholder="Contract Symbol"
+                  placeholder={t('placeholderInput_2')}
                   onChange={(e) => setContractSymbol(e.target.value)}
                   className="block w-full rounded-xl border p-4 focus:ring focus:ring-indigo-200"
                   required
@@ -318,13 +311,15 @@ const CreateCollection: React.FC = () => {
             </div>
             <div className="flex items-start gap-4 space-y-2">
               <div className="w-1/2">
-                <label className="block text-base font-medium text-gray-900">Mô tả</label>
-                <p className="text-xs text-gray-400">Một mô tả chi tiết về bộ sưu tập của bạn.</p>
+                <label className="block text-base font-medium text-gray-900">
+                  {t('titleDescription')}
+                </label>
+                <p className="text-xs text-gray-400">{t('subTitleDescription')}</p>
               </div>
               <div className="w-1/2">
                 <textarea
                   value={description}
-                  placeholder="Description"
+                  placeholder={t('placeholderInput_3')}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={4}
                   className="block w-full rounded-lg border px-4 py-2 focus:ring focus:ring-indigo-200"
@@ -334,96 +329,13 @@ const CreateCollection: React.FC = () => {
             </div>
 
             <div className="flex items-center justify-end gap-6">
-              {/* <Drawer>
-                <DrawerTrigger asChild>
-                  <ButtonPrimary className="flex items-center gap-2 border-[0.5px] border-gray-200 bg-transparent text-gray-800 hover:bg-primary-50 hover:text-white">
-                    <LuEye className="text-lg" />
-                    Bản xem thử
-                  </ButtonPrimary>
-                </DrawerTrigger>
-                <DrawerContent className="mx-auto h-[80%] w-full rounded-lg">
-                  <div className="mx-auto h-full w-[70%] text-gray-700">
-                    <DrawerHeader>
-                      <DrawerTitle className="text-center text-2xl font-bold">
-                        Bản xem thử
-                      </DrawerTitle>
-                    </DrawerHeader>
-                    <ScrollArea className="h-[80%] w-full rounded-md bg-gray-100 pb-4">
-                      <div className="h-fit w-full rounded-lg bg-gray-100 p-5">
-                        <div className="relative h-80 w-full">
-                          {bannerImage ? (
-                            <Image
-                              src={bannerImage}
-                              alt="Banner Preview"
-                              fill
-                              className="h-full w-full rounded-lg object-cover"
-                            />
-                          ) : (
-                            <div className="h-1/2 w-full rounded-lg border-[0.5px] border-gray-100 bg-gray-50"></div>
-                          )}
-                          {logoImage ? (
-                            <div className="absolute -bottom-14 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full border-[0.5px] border-gray-400 bg-white">
-                              <Image
-                                src={logoImage}
-                                alt="Logo Preview"
-                                width={112}
-                                height={112}
-                                className="h-full w-full rounded-full object-cover"
-                              />
-                            </div>
-                          ) : (
-                            <div className="absolute left-1/2 top-1/2 h-40 w-40 -translate-x-1/2 -translate-y-1/2 rounded-full border-[0.5px] border-gray-200 bg-gray-100">
-                              <FaImage className="absolute left-1/2 top-[40%] -translate-x-1/2 text-3xl text-gray-500" />
-                            </div>
-                          )}
-                          {displayName ? (
-                            <div className="mt-14 flex flex-col justify-center gap-2 text-center">
-                              <h2 className="text-2xl font-bold text-gray-700">{displayName}</h2>
-                              <div>{<CopyAddressButton textToCopy={'0x000000000000000000'} />}</div>
-                              <div className="flex items-center justify-center gap-5">
-                                <div className="text-center">
-                                  <span className="text-base font-bold text-black">0</span>
-                                  <span className="text-base text-gray-600">Chứng chỉ</span>
-                                </div>
-
-                                <div className="text-center">
-                                  <span className="text-base font-bold text-black">1 </span>
-                                  <span className="text-base text-gray-600">Chủ sở hữu</span>
-                                </div>
-                              </div>
-                              <p className="mt-4 text-base text-gray-600">{description}</p>
-
-                              <div className="mt-4">
-                                <div className="grid w-full grid-cols-1 gap-2 md:grid-cols-2">
-                                  <div className="flex h-80 w-full items-center justify-center rounded-lg bg-gray-300">
-                                    <AiOutlinePicture className="text-4xl text-gray-400" />
-                                  </div>
-                                  <div className="flex h-80 w-full items-center justify-center rounded-lg bg-gray-300">
-                                    <AiOutlinePicture className="text-4xl text-gray-400" />
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="mt-24 text-center">
-                              <p className="text-base font-semibold text-gray-600">
-                                Xem trước mục quản lý của bạn
-                              </p>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                    </ScrollArea>
-                  </div>
-                </DrawerContent>
-              </Drawer> */}
               <ButtonPrimary
                 type="submit"
                 className="flex items-center gap-2 text-base text-white"
                 disabled={isLoading}
               >
                 <BiCollection className="text-lg" />
-                {isLoading ? 'Đang tạo...' : 'Tạo mục quản lý'}
+                {isLoading ? `${t('buttonCreate')}` : `${t('ButtonCreateCollection')}`}
               </ButtonPrimary>
             </div>
           </form>

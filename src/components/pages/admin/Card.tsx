@@ -45,7 +45,7 @@ export default function Card({ data, numberIndex }: IProps) {
         </div>
       </div>
 
-      {t(`card_${numberIndex}.${data.title}`) !== 'Create Digital Certificate' ||
+      {t(`card_${numberIndex}.${data.title}`) !== 'Create Digital Certificate' &&
       t(`card_${numberIndex}.${data.title}`) !== 'Tạo Chứng Chỉ' ? (
         <Link href={data.link}>
           <ButtonPrimary className="mt-5 w-full bg-primary-50 text-white">

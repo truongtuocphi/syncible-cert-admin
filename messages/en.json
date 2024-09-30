@@ -273,6 +273,45 @@
       "valueExpiryDate": "Does not expire",
       "certificateID": "Certificate ID",
       "contractAddress": "Contract address"
+    },
+
+    "createCollection": {
+      "title": "Create ERC-721 Collection",
+      "titleImage": "Logo Image",
+      "subtitleImage": "Update your logo collection",
+      "Buttonfile": "Choose file",
+      "titleBanner": "Banner Image",
+      "subTitleBanner": "This image will appear at the top of your collection page. Avoid including too much text in this banner image, as the dimension changes on different devices. Recommended size: 1400 x 400 px. Supported formats: JPG, PNG, SVG. Maximum size: 3 MB.",
+      "titlePreviewBanner": "Preview Banner",
+      "titlePreviewCollection": "Preview of your collection",
+      "titleDisplayName": "Display Name",
+      "subTitleDisplayName": "This is display name for collection on your store",
+      "titleSymbol": "Contract Symbol",
+      "subTitleSymbol": "This contract symbol can't be changed in the future",
+      "titleHoverCard": "Contract Symbol",
+      "subTitleHoverCard": "The Contract Symbol is a tool that displays the name and symbol of your specific token on the blockchain explorer. It indicates that the certificates have been verify state, allowing users to track transactions, token quantities, and NFT ownership on the blockchains",
+      "titleDescription": "Description",
+      "subTitleDescription": "A detailed description of your collection",
+      "buttonCreate": "Creating...",
+      "ButtonCreateCollection": "Create Collection",
+
+      "placeholderInput_1": "Display Name",
+      "placeholderInput_2": "Contract Symbol",
+      "placeholderInput_3": "Description"
+    },
+
+    "mintNFT": {
+      "titleback": "Back",
+      "title": "Create Digital Certificate",
+      "titleImage": "Certificate image",
+      "subTitleImage": "Upload your customized certificate template here",
+      "buttonFile": "Choose file",
+      "titleRole": "Role",
+      "titleDate": "Certificate Issue Date",
+      "titleCertificateto": "Save digital certificate to",
+      "notiCertificate": "Please connect wallet to display data",
+      "titleFont": "Font",
+      "titleFontSize": "Font size"
     }
   },
 

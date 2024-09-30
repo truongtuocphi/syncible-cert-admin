@@ -23,6 +23,7 @@ import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
 import { BiImageAdd } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { useTranslations } from 'next-intl';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -48,6 +49,8 @@ const Experience = () => {
   const [fontSize, setFontSize] = useState<string>('40');
 
   const typePage = pathname.get('type');
+
+  const t = useTranslations('Dapp.mintNFT');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -264,20 +267,18 @@ const Experience = () => {
                 <FaArrowLeft />
               </ButtonPrimary>
             </Link>
-            <h1 className="text-2xl font-semibold">Quay lại</h1>
+            <h1 className="text-2xl font-semibold">{t('titleback')}</h1>
           </div>
           <div className="rounded-3xl bg-white p-6">
-            <h1 className="mb-4 text-xl font-bold">Tạo chứng chỉ số</h1>
+            <h1 className="mb-4 text-xl font-bold">{t('title')}</h1>
             <form onSubmit={handleSubmit} className="w-full">
               <div className="w-full space-y-4 rounded-lg bg-white">
                 <div className="flex items-center justify-start gap-4">
                   <div className="h-1/2 w-1/2 space-y-2 ">
                     <label className="block text-base font-bold text-gray-700">
-                      Hình chứng chỉ
+                      {t('titleImage')}
                     </label>
-                    <p className="text-xs text-gray-400">
-                      Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây
-                    </p>
+                    <p className="text-xs text-gray-400">{t('subTitleImage')}</p>
                     <div
                       className="relative flex w-full items-center justify-start rounded-lg py-5 text-gray-600 hover:border-gray-400 2xl:h-72"
                       onDrop={(e) => handleDrop(e, setBannerImage)}
@@ -317,7 +318,7 @@ const Experience = () => {
                                 className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-800 hover:bg-gray-100"
                               >
                                 <BiImageAdd className="text-2xl text-gray-800" />
-                                Chọn tệp
+                                {t('buttonFile')}
                               </label>
                               {fileBannerImage.length > 17
                                 ? `${fileBannerImage?.slice(0, 7)}...${fileBannerImage?.slice(-6)}`
@@ -329,13 +330,7 @@ const Experience = () => {
                     </div>
                   </div>
                   {/* preview */}
-                  <div className="sticky h-fit w-1/2" style={{ top: `${top}px` }}>
-                    <div className="block text-base font-bold text-gray-700">
-                      Bản xem trước chứng chỉ
-                    </div>
-                    <p className="mt-2 text-xs text-gray-400">
-                      Sau khi tải mẫu chứng chỉ sẽ hiện ở đây
-                    </p>
+                  <div className="sticky h-fit w-1/2">
                     <div className="mt-2 h-fit w-full overflow-hidden rounded-lg border-[0.5px] border-dashed border-gray-400">
                       {bannerImage ? (
                         <CertificatePreview
@@ -359,7 +354,9 @@ const Experience = () => {
                   </div>
                 </div>
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-base font-bold text-gray-700">Vai trò</label>
+                  <label className="block w-1/2 text-base font-bold text-gray-700">
+                    {t('titleRole')}
+                  </label>
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
@@ -372,7 +369,7 @@ const Experience = () => {
                 </div>
                 <div className="flex items-center gap-4 space-y-2">
                   <label className="block w-1/2 text-base font-bold text-gray-700">
-                    Ngày phát hành chứng chỉ
+                    {t('titleDate')}
                   </label>
                   <input
                     type="date"
@@ -384,7 +381,7 @@ const Experience = () => {
                 </div>
                 <div className="flex items-center gap-4 space-y-2">
                   <label className="block w-1/2 text-base font-bold text-gray-700">
-                    Lưu chứng chỉ số vào
+                    {t('titleCertificateto')}
                   </label>
                   <select
                     onChange={(e) => setcollectionContractAddress(e.target.value)}
@@ -392,7 +389,7 @@ const Experience = () => {
                     className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   >
                     {selectedContract.length === 0 ? (
-                      <option value="">Vui lòng kết nối ví để hiện thị dữ liệu</option>
+                      <option value="">{t('notiCertificate')}</option>
                     ) : (
                       selectedContract.map((collection) => (
                         <option key={collection.id} value={collection.contractAddress}>
@@ -418,7 +415,9 @@ const Experience = () => {
 
               <div className="mt-4">
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-base font-bold text-gray-700">Phông chữ</label>
+                  <label className="block w-1/2 text-base font-bold text-gray-700">
+                    {t('titleFont')}
+                  </label>
                   <select
                     value={fontFamily}
                     onChange={(e) => setFontFamily(e.target.value)}
@@ -439,7 +438,9 @@ const Experience = () => {
                 </div>
 
                 <div className="flex items-center gap-4 space-y-2">
-                  <label className="block w-1/2 text-base font-bold text-gray-700">Cỡ chữ</label>
+                  <label className="block w-1/2 text-base font-bold text-gray-700">
+                    {t('titleFontSize')}
+                  </label>
                   <input
                     type="number"
                     value={fontSize}
@@ -457,7 +458,7 @@ const Experience = () => {
                     className="w-40 border-2 border-primary-50 bg-white text-primary-50"
                     disabled={loadingButton}
                   >
-                    Hủy
+                    {t('ButtonCancel')}
                   </ButtonPrimary>
                 </Link>
                 <ButtonPrimary
@@ -466,7 +467,9 @@ const Experience = () => {
                   disabled={loadingButton}
                 >
                   <GrCertificate className="text-lg text-white" />
-                  {loadingButton ? 'Đang xử lý...' : 'Tạo chứng chỉ'}
+                  {loadingButton
+                    ? `${t('ButtonSubmitLoading')}`
+                    : `${t('ButtonCreateCertificate')}`}
                 </ButtonPrimary>
               </div>
             </form>

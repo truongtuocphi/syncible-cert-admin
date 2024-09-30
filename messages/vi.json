@@ -192,7 +192,7 @@
     },
 
     "welcom": {
-      "title": "Welcome to Syncible",
+      "title": "Chào mừng đến với Syncible",
       "p": "Tạo chứng chỉ của riêng bạn một cách dễ dàng hơn với các bước bên dưới"
     },
 
@@ -273,6 +273,48 @@
       "valueExpiryDate": "Vô thời hạn",
       "certificateID": "ID chứng chỉ",
       "contractAddress": "Địa chỉ hợp đồng"
+    },
+
+    "createCollection": {
+      "title": "Tạo mục quản lý lưu trữ",
+      "titleImage": "Hình ảnh logo",
+      "subtitleImage": "Cập nhật bộ sưu tập logo của bạn",
+      "Buttonfile": "Chọn tệp",
+      "titleBanner": "Ảnh bìa",
+      "subTitleBanner": "Hình ảnh này sẽ xuất hiện ở đầu trang bộ sưu tập của bạn. Tránh bao gồm quá nhiều văn bản trong ảnh bìa này khi kích thước thay đổi trên các thiết bị khác nhau. Kích thước đề xuất: 1400 x 400 px. Các định dạng được hỗ trợ: JPG, PNG, SVG. Kích thước tối đa: 3 MB.",
+      "titlePreviewBanner": "Xem trước ảnh bìa",
+      "titlePreviewCollection": "Xem trước mục quản lý của bạn",
+      "titleDisplayName": "Tên hiển thị",
+      "subTitleDisplayName": "Đây là tên hiển thị cho bộ sưu tập trên mục quản lý của bạn.",
+      "titleSymbol": "Biểu tượng hợp đồng",
+      "subTitleSymbol": "Biểu tượng hợp đồng này không được thay đổi trong tương lai",
+      "titleHoverCard": "Biểu tượng hợp đồng",
+      "subTitleHoverCard": "biểu tượng mã thông báo cụ thể của bạn trên trình khám phá blockchain. Nó chỉ ra rằng chứng chỉ đã được xác minh trạng thái, cho phép người dùng theo dõi giao dịch, số lượng token và quyền sở hữu NFT trên blockchain",
+      "titleDescription": "Mô tả",
+      "subTitleDescription": "Một mô tả chi tiết về bộ sưu tập của bạn",
+      "buttonCreate": "Đang tạo...",
+      "ButtonCreateCollection": "Tạo mục quản lý",
+
+      "placeholderInput_1": "Tên hiển thị",
+      "placeholderInput_2": "Biểu tượng hợp đồng",
+      "placeholderInput_3": "Mô tả"
+    },
+
+    "mintNFT": {
+      "titleback": "Quay lại",
+      "title": "Tạo Chứng Chỉ",
+      "titleImage": "Hình chứng chỉ",
+      "subTitleImage": "Tải mẫu chứng chỉ mà bạn đã tùy chỉnh lên đây",
+      "buttonFile": "Chọn tệp",
+      "titleRole": "Vai trò",
+      "titleDate": "Ngày phát hành chứng chỉ",
+      "titleCertificateto": "Lưu chứng chỉ số vào",
+      "notiCertificate": "Vui lòng kết nối ví để hiện thị dữ liệu",
+      "titleFont": "Phông chữ",
+      "titleFontSize": "Cỡ chữ",
+      "ButtonCancel": "Hủy",
+      "ButtonSubmitLoading": "Đang xử lý...",
+      "ButtonCreateCertificate": "Tạo chứng chỉ"
     }
   },
 

@@ -296,7 +296,10 @@ export default function Collection() {
               {table.getHeaderGroups().map((headerGroup) => (
                 <TableRow key={headerGroup.id}>
                   {headerGroup.headers.map((header) => (
-                    <TableHead key={header.id} className="font-bold text-black">
+                    <TableHead
+                      key={header.id}
+                      className="text-ellipsis whitespace-nowrap font-bold text-black"
+                    >
                       {header.isPlaceholder
                         ? null
                         : t(flexRender(header.column.columnDef.header, header.getContext())) !=

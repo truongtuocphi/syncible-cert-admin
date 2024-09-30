@@ -232,7 +232,7 @@
         "symbol": "Contract Symbol",
         "quantily": "Quantily",
         "contract": "Contract address",
-        "status": "status",
+        "status": "Status",
         "valueStatus": "Verified",
         "operetion": "Operation",
         "noti_1": "Please connect your wallet to display results",

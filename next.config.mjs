@@ -34,11 +34,6 @@ const nextConfig = {
   },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
   productionBrowserSourceMaps: false,
-
-  i18n: {
-    locales: ['en', 'vi'],
-    defaultLocale: 'en',
-  },
 };
 
 export default withNextIntl(withMDX(nextConfig));

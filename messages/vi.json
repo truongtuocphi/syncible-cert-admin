@@ -185,9 +185,9 @@
 
     "sideBar": {
       "home": "Trang chủ",
-      "customizeTemplate": "Tùy Chỉnh Mẫu",
-      "certificateManagement": "Quản lý Chứng Chỉ",
-      "createDigitalCertificate": "Tạo Chứng Chỉ",
+      "customizeTemplate": "Tùy Chỉnh Mẫu Chứng Chỉ",
+      "certificateManagement": "Quản lý Chứng chỉ số hóa",
+      "createDigitalCertificate": "Tạo Chứng Chỉ Số Hoá",
       "setting": "Cài đặt"
     },
 
@@ -203,7 +203,7 @@
         "button": "Tùy Chỉnh Ở Đây"
       },
       "card_1": {
-        "title": "Quản lý Chứng chỉ số hóa",
+        "title": "Quản lý Chứng Chỉ Số Hóa",
         "p": "Nơi tạo hợp đồng lưu trữ các chứng chỉ đã được số hoá trên mạng lưới chuỗi khối.",
         "button": "Tạo Ngay"
       },

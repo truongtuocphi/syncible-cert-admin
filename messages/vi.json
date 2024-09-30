@@ -314,7 +314,13 @@
       "titleFontSize": "Cỡ chữ",
       "ButtonCancel": "Hủy",
       "ButtonSubmitLoading": "Đang xử lý...",
-      "ButtonCreateCertificate": "Tạo chứng chỉ"
+      "ButtonCreateCertificate": "Tạo chứng chỉ",
+
+      "titleIDCertificate": "Certificate ID",
+      "placeholderID": "Certificate ID",
+
+      "titleFullName": "Họ và tên",
+      "placeholderFullName": "Họ và tên của bạn"
     }
   },
 

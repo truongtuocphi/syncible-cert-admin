@@ -4,6 +4,7 @@
 import { useEffect, useState } from 'react';
 
 import getAcronym from '@/utils/getAcronym';
+import { useTranslations } from 'next-intl';
 
 interface MintBulkProps {
   DataIssuedDate: string;
@@ -19,6 +20,8 @@ interface CertificateData {
 export const MintSingleForm = ({ DataIssuedDate, DataRole, onGetData }: MintBulkProps) => {
   const [name, setName] = useState<string>('');
   const [certificateNumber, setCertificateNumber] = useState<string>('');
+
+  const t = useTranslations('Dapp.mintNFT');
 
   useEffect(() => {
     setCertificateNumber(generateCertificateNumber(DataIssuedDate, DataRole));
@@ -44,22 +47,22 @@ export const MintSingleForm = ({ DataIssuedDate, DataRole, onGetData }: MintBulk
   return (
     <div className="grid grid-cols-2 gap-4">
       <div className="col-span-1 space-y-2">
-        <label>ID chứng chỉ</label>
+        <label>{t('titleIDCertificate')}</label>
         <input
           type="text"
           required
-          placeholder="Mã chứng chỉ"
+          placeholder={t('PlaceholderID')}
           value={certificateNumber}
           disabled
           className="mt-1 block w-full rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
         />
       </div>
       <div className="col-span-1 space-y-2">
-        <label>Họ và tên</label>
+        <label>{t('titleFullName')}</label>
         <input
           type="text"
           required
-          placeholder="Họ và tên của bạn"
+          placeholder={t('placeholderFullName')}
           value={name}
           onChange={handleNameChange}
           className="mt-1 block w-full rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"

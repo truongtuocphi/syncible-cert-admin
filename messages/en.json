@@ -314,7 +314,13 @@
       "titleFontSize": "Font size",
       "ButtonCancel": "Cancel",
       "ButtonSubmitLoading": "Processing...",
-      "ButtonCreateCertificate": "Create certificate"
+      "ButtonCreateCertificate": "Create certificate",
+
+      "titleIDCertificate": "Certificate ID",
+      "placeholderID": "Certificate ID",
+
+      "titleFullName": "Full name",
+      "placeholderFullName": "Your full name"
     }
   },
 

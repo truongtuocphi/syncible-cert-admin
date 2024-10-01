@@ -1,11 +1,7 @@
 'use client';
 import clsx from 'clsx';
-import { notFound } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
-import {
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
@@ -15,9 +11,9 @@ import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
 import { Link } from '@/i18n/routing';
 
-
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
+  const [notFoundError, setNotFoundError] = useState(false);
   const [author, setAuthor] = useState<any>(null);
   const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -26,36 +22,18 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
 
-  const smoothScroll = () => {
-    const contentSection = document.getElementById('table-content');
-    if (contentSection) {
-      const anchorLinks = contentSection.querySelectorAll('a[href^="#"]');
-      // console.log(anchorLinks);
-      anchorLinks.forEach((link) => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const href = link.getAttribute('href');
-          if (href) {
-            const target = document.querySelector(href);
-            target?.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
-    }
-  };
-
   useEffect(() => {
-    smoothScroll();
 
     async function fetchBlockContent(slug: string) {
       setLoading(true);
+      setNotFoundError(false);
       try {
         const response = await fetchDataFromWP(
           `https://admin.syncible.io/wp-json/wp/v2/posts?slug=${slug}&_embed`
         );
 
         if (response.length === 0) {
-          notFound();
+          setNotFoundError(true);
         } else {
           const post = response[0]; // Get the blog post content
 
@@ -92,6 +70,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
         }
       } catch (error) {
         console.error('Error fetching posts:', error);
+        setNotFoundError(true);
       } finally {
         setLoading(false);
       }
@@ -103,13 +82,20 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     return <div className="m-auto">{t('loading')}</div>;
   }
 
-  if (!blogContent) {
-    return notFound();
+  if (notFoundError) {
+    return (
+      <div className="flex h-full w-full items-center justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">Content Not Found</h1>
+          <p className="mt-4 text-xl">Sorry, the content you're looking for doesn't exist.</p>
+        </div>
+      </div>
+    );
   }
 
   const breadcrumbItems = [
     { label: 'Blogs', href: '/blogs' },
-    { label: blogContent.title.rendered, href: '' },
+    { label: blogContent?.title?.rendered || 'Untitled', href: '' },
   ];
 
   const readTime = Math.ceil(blogContent.content.rendered.split(' ').length / 200);
@@ -168,7 +154,9 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 id="table-content"
                 className="sticky top-[9rem] flex flex-col gap-2 text-lg text-[#A2A3A9]"
               >
-                <div className="text-[#2C2C2C] font-bold text-2xl">{t('table_of_contents.label')}</div>
+                <div className="text-2xl font-bold text-[#2C2C2C]">
+                  {t('table_of_contents.label')}
+                </div>
                 <TableOfContent headings={toc}></TableOfContent>
               </div>
             </div>
@@ -204,24 +192,24 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 dangerouslySetInnerHTML={{ __html: blogContent.content.rendered }}
               ></div>
               <div>
-              {categories.length > 0 && (
-                <div className="mt-8 flex items-center gap-4">
-                  <div className="text-xl font-bold">{t('category.label')}</div>
-                  <div className="flex items-center gap-4 h-full">
-                    {categories.map((category) => (
-                      <div key={category.id}>
-                        <Link
-                          // href={`/categories/${category.slug}`}
-                          href="#"
-                          className="text-[#6C6D71] hover:underline text-lg py-2 px-4 bg-[#F2F2F2] rounded-xl"
-                        >
-                          {category.name}
-                        </Link>
-                      </div>
-                    ))}
+                {categories.length > 0 && (
+                  <div className="mt-8 flex items-center gap-4">
+                    <div className="text-xl font-bold">{t('category.label')}</div>
+                    <div className="flex h-full items-center gap-4">
+                      {categories.map((category) => (
+                        <div key={category.id}>
+                          <Link
+                            // href={`/categories/${category.slug}`}
+                            href="#"
+                            className="rounded-xl bg-[#F2F2F2] px-4 py-2 text-lg text-[#6C6D71] hover:underline"
+                          >
+                            {category.name}
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
               </div>
             </div>
           </div>

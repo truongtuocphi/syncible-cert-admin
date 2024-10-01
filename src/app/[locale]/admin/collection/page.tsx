@@ -338,23 +338,27 @@ export default function Collection() {
             </TableHeader>
             <TableBody className="bg-white hover:bg-white">
               {table.getRowModel().rows.length > 0 ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="text-gray-600">
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
-                    ))}
-                    <td className="hidden">
-                      <ContractData
-                        collectionContractAddress={row.getValue('contractAddress')}
-                        onItemsCountChange={(count: number) =>
-                          handleItemsCountChange(row.getValue('id'), count)
-                        }
-                      />
-                    </td>
-                  </TableRow>
-                ))
+                table
+                  .getRowModel()
+                  .rows.slice()
+                  .reverse()
+                  .map((row) => (
+                    <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id} className="text-gray-600">
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                      <td className="hidden">
+                        <ContractData
+                          collectionContractAddress={row.getValue('contractAddress')}
+                          onItemsCountChange={(count: number) =>
+                            handleItemsCountChange(row.getValue('id'), count)
+                          }
+                        />
+                      </td>
+                    </TableRow>
+                  ))
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-48 text-center">

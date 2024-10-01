@@ -25,18 +25,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const [categories, setCategories] = useState<any[]>([]);
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
-  // Biến để lưu trạng thái render ban đầu
-  const [isInitialRender, setIsInitialRender] = useState(true);
-
-  useEffect(() => {
-    if (isInitialRender) {
-      // Chỉ thiết lập trạng thái lần đầu tiên render
-      setIsInitialRender(false);
-    } else {
-      // Nếu locale đã thay đổi, chuyển hướng về trang home
-      router.push('/');
-    }
-  }, [locale, isInitialRender, router]);
+  
 
   useEffect(() => {
     async function fetchBlockContent(slug: string) {

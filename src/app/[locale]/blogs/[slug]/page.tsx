@@ -9,58 +9,11 @@ import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
-
-const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
-  const t = useTranslations('BlogPage');
-
-  const pathname = usePathname();
-
-  const [active, setActive] = useState(false);
-
-  const onScroll = () => {
-    const y =
-      document.getElementById(t(`navigation.${key}.href`).replace('#', ''))?.getBoundingClientRect()
-        .y || 0;
-    let nextY = 1000;
-    if (!!nextId) {
-      nextY =
-        document
-          .getElementById(t(`navigation.${nextId}.href`).replace('#', ''))
-          ?.getBoundingClientRect().y || 1000;
-    }
-    if (y < 100 && nextY > 100) {
-      setActive(true);
-    } else {
-      setActive(false);
-    }
-  };
-
-  useEffect(() => {
-    window.removeEventListener('scroll', onScroll);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  return (
-    <Link
-      key={key}
-      href={t(`navigation.${key}.href`)}
-      className={clsx(
-        'hover:underlin hover:text-[#2C2C2C]',
-        // pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]',
-        active && 'font-bold text-black'
-      )}
-    >
-      {t(`navigation.${key}.label`)}
-    </Link>
-  );
-};
+import { Link } from '@/i18n/routing';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
-  const keys = ['link_1', 'link_2', 'link_3', 'link_4', 'link_5'] as const;
-  const pathname = usePathname();
-  const locale = useLocale();
+  const [notFoundError, setNotFoundError] = useState(false);
   const [author, setAuthor] = useState<any>(null);
   const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);

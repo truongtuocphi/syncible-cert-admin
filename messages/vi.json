@@ -124,7 +124,7 @@
       },
       "read_time": { 
         "label" : "Thời gian đọc:",
-        "value" : "8 phút"
+        "value" : "{readTime} phút"
       }
     },
     "navigation": {

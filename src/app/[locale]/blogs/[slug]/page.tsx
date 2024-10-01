@@ -5,13 +5,14 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import ArrowNarrowRight from '@/assets/icons/arrow-narrow-right.svg';
 
 import SyncibleBanner from '/public/SyncibleBanner.svg';
 
 import { Link, usePathname } from '@/i18n/routing';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
-import  Breadcrumb  from '@/components/common/breadcrumb/BlogBreadcrumb'
+import generateIdFromText from '@/utils/generateHeaderID';
+import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
+import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 
 const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
   const t = useTranslations('BlogPage');
@@ -64,10 +65,10 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const keys = ['link_1', 'link_2', 'link_3', 'link_4', 'link_5'] as const;
   const pathname = usePathname();
   const locale = useLocale();
-  const [Content, setContent] = useState<any>(null);
+  const [author, setAuthor] = useState<any>(null);
+  const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const { slug } = params;
-  
 
   const getHeaders = () => {
     const headers = document.querySelectorAll('h2[id]');
@@ -96,20 +97,30 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   };
 
   useEffect(() => {
-    
     smoothScroll();
 
     async function fetchBlockContent(slug: string) {
       setLoading(true);
       try {
-        const response = await fetchDataFromWP(`https://admin.syncible.io/wp-json/wp/v2/posts?slug=${slug}`);
+        const response = await fetchDataFromWP(
+          `https://admin.syncible.io/wp-json/wp/v2/posts?slug=${slug}`
+        );
 
-        if(response.length === 0) {
+        if (response.length === 0) {
           notFound();
         } else {
-          // const post = response[0];
-          // const content = post.content.rendered;
-          setContent(response[0]);
+          const post = response[0]; // Get the blog post content
+          setBlogContent(post);
+
+          // Fetch the author data
+          const authorResponse = await fetchDataFromWP(
+            `https://admin.syncible.io/wp-json/wp/v2/users/${post.author}`
+          );
+          setAuthor({
+            name: authorResponse.name,
+            avatar: authorResponse.avatar_urls['96'], // Use the 96px avatar size
+            position: authorResponse.description, // Assuming a default position; you could add a custom field for this
+          });
         }
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -147,14 +158,22 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     return <div>Loading...</div>;
   }
 
-  if (!Content) {
+  if (!blogContent) {
     return notFound();
   }
 
   const breadcrumbItems = [
     { label: 'Blogs', href: '/blogs' },
-    { label: Content.title.rendered, href: '' },
-  ]
+    { label: blogContent.title.rendered, href: '' },
+  ];
+
+  const processedContent = blogContent.content.rendered
+    .replace(/\n{3,}/g, '<br />') // Limit newlines to 2
+    .replace(/<h([1-6])>(.*?)<\/h\1>/g, (match: any, level: any, content: string) => {
+      console.log(content);
+      const id = generateIdFromText(content); // Generate an ID from the heading content
+      return `<h${level} id="${id}">${content}</h${level}>`; // Add the ID to the heading
+    });
 
   return (
     <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
@@ -162,7 +181,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
         <Breadcrumb items={breadcrumbItems} />
         <div className="flex flex-col items-center gap-10">
           <div className="text-center text-2xl font-bold md:text-3xl lg:text-5xl">
-            {Content.title.rendered}
+            {blogContent.title.rendered}
           </div>
           <div className="w-full rounded-[2rem]">
             <SyncibleBanner className="aspect-[1184/395] h-fit w-full object-cover" />
@@ -173,7 +192,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
             <div className="flex h-full flex-col gap-8">
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">
-                  <div>
+                  {/* <div>
                     <Avatar className="h-16 w-16">
                       <AvatarImage src="/SmugFace.png" alt="" />
                       <AvatarFallback>SC</AvatarFallback>
@@ -184,14 +203,21 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                     <div className="text-base font-medium text-[#A2A3A9]">
                       {t('author_profile.role')}
                     </div>
-                  </div>
+                  </div> */}
+                  {author && <AuthorProfile author={author} />}
                 </div>
                 <div className="w-[70%] border-t-[1px]"></div>
                 <div className="flex flex-col gap-2">
                   <div className="text-base font-medium text-[#A2A3A9]">
                     {t('blog_info.date_created.label')}
                   </div>
-                  <div className="text-lg font-medium">{t('blog_info.date_created.value')}</div>
+                  <div className="text-lg text-[#2C2C2C] font-medium">
+                    {new Date(blogContent.date).toLocaleDateString('en-GB', {
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric',
+                    })}
+                  </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="text-base font-medium text-[#A2A3A9]">
@@ -205,17 +231,17 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
               >
                 {keys.map((key) => (
-                      <Link
-                        key={key}
-                        href={t(`navigation.${key}.href`)}
-                        className={clsx(
-                          'hover:text-[#2C2C2C] hover:underline',
-                          pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]'
-                        )}
-                      >
-                        {t(`navigation.${key}.label`)}
-                      </Link>
-                    ))}
+                  <Link
+                    key={key}
+                    href={t(`navigation.${key}.href`)}
+                    className={clsx(
+                      'hover:text-[#2C2C2C] hover:underline',
+                      pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]'
+                    )}
+                  >
+                    {t(`navigation.${key}.label`)}
+                  </Link>
+                ))}
 
                 {/* {keys.map((key, index) => (
                   <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
@@ -257,7 +283,11 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 </div>
               </div>
               {/* Render blog content */}
-              <div id="content-section" className="max-w-[90rem]" dangerouslySetInnerHTML={{ __html: Content.content.rendered.replace(/\n{3,}/g, '<br />')}}></div>
+              <div
+                id="content-section"
+                className="prose max-w-[90rem] lg:prose-lg xl:prose-xl"
+                dangerouslySetInnerHTML={{ __html: processedContent }}
+              ></div>
             </div>
           </div>
         </div>

@@ -1,17 +1,14 @@
 'use client';
 import clsx from 'clsx';
-import { notFound } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
-import { Link, usePathname } from '@/i18n/routing';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
 import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
-import { useRouter } from 'next/navigation';
 
 const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
   const t = useTranslations('BlogPage');
@@ -61,55 +58,28 @@ const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
-  const router = useRouter();
   const keys = ['link_1', 'link_2', 'link_3', 'link_4', 'link_5'] as const;
   const pathname = usePathname();
   const locale = useLocale();
   const [author, setAuthor] = useState<any>(null);
   const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState<any[]>([]);
   const { slug } = params;
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
 
-  const getHeaders = (document: Document) => {
-    const headers = document.querySelectorAll('h2[id]');
-    return Array.from(headers).map((header) => ({
-      id: header.id,
-      value: header.textContent,
-    }));
-  };
-
-  const smoothScroll = () => {
-    const contentSection = document.getElementById('table-content');
-    if (contentSection) {
-      const anchorLinks = contentSection.querySelectorAll('a[href^="#"]');
-      // console.log(anchorLinks);
-      anchorLinks.forEach((link) => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const href = link.getAttribute('href');
-          if (href) {
-            const target = document.querySelector(href);
-            target?.scrollIntoView({ behavior: 'smooth' });
-          }
-        });
-      });
-    }
-  };
-
   useEffect(() => {
-    smoothScroll();
-
     async function fetchBlockContent(slug: string) {
       setLoading(true);
+      setNotFoundError(false);
       try {
         const response = await fetchDataFromWP(
-          `https://admin.syncible.io/wp-json/wp/v2/posts?slug=${slug}`
+          `https://admin.syncible.io/wp-json/wp/v2/posts?slug=${slug}&_embed`
         );
 
         if (response.length === 0) {
-          notFound();
+          setNotFoundError(true);
         } else {
           const post = response[0]; // Get the blog post content
 
@@ -128,56 +98,51 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
             post.content.rendered.replace(/\n{3,}/g, '\n\n') // Limit newlines to 2
           );
 
-          const toc = generateTOC(doc);
+          const toc = generateTOC(doc); // Generate the Table of Content
           setToc(toc);
+
           setBlogContent({ ...post, content: { rendered: html } });
+
+          if (post.categories.length > 0) {
+            const categoryPromises = post.categories.map(async (categoryId: number) => {
+              const categoryResponse = await fetchDataFromWP(
+                `https://admin.syncible.io/wp-json/wp/v2/categories/${categoryId}`
+              );
+              return categoryResponse;
+            });
+            const categoryData = await Promise.all(categoryPromises);
+            setCategories(categoryData); // Set the categories in state
+          }
         }
       } catch (error) {
         console.error('Error fetching posts:', error);
+        setNotFoundError(true);
       } finally {
         setLoading(false);
       }
     }
     fetchBlockContent(slug);
-
-    // const observer = new IntersectionObserver(
-    //   (entries) => {
-    //     console.log(entries);
-    //     entries.forEach((entry) => {
-    //       if (entry.isIntersecting) {
-    //         const activeSection = entry.target.getAttribute('id');
-    //         document.querySelectorAll('a[href^="#"]').forEach(link => {
-    //           link.classList.toggle('font-bold', link.getAttribute('href') === `#${activeSection}`);
-    //           link.classList.toggle('text-[#A2A3A9]', link.getAttribute('href') !== `#${activeSection}`);
-    //         });
-    //       }
-    //     });
-    //   },
-    //   { rootMargin: '-40% 0px -60% 0px', threshold: 0.5 }
-    // );
-    // document.querySelectorAll('h2[id]').forEach((section) => {
-    //   observer.observe(section);
-    // });
-
-    // return () => {
-    //   observer.disconnect();
-    // };
   }, [slug]);
 
   if (loading) {
     return <div className="m-auto">{t('loading')}</div>;
   }
 
-  if (!blogContent) {
-    return notFound();
+  if (notFoundError) {
+    return (
+      <div className="flex h-full w-full items-center justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold">Content Not Found</h1>
+          <p className="mt-4 text-xl">Sorry, the content you're looking for doesn't exist.</p>
+        </div>
+      </div>
+    );
   }
 
   const breadcrumbItems = [
     { label: 'Blogs', href: '/blogs' },
-    { label: blogContent.title.rendered, href: '' },
+    { label: blogContent?.title?.rendered || 'Untitled', href: '' },
   ];
-
-  // const processedContent = addIdsToHeadings(blogContent.content.rendered);
 
   const readTime = Math.ceil(blogContent.content.rendered.split(' ').length / 200);
   const date_created = new Date(blogContent.date).toLocaleDateString('en-GB', {
@@ -195,7 +160,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
             {blogContent.title.rendered}
           </div>
           <div className="h-full w-full overflow-hidden rounded-xl sm:rounded-[2rem]">
-            {/* <SyncibleBanner className="aspect-[1184/395] h-fit w-full object-cover" /> */}
             {bannerImg && (
               <Image
                 src={bannerImg}
@@ -231,15 +195,15 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                   </div>
                 </div>
               </div>
+              {/* Render table content */}
               <div
                 id="table-content"
-                className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
+                className="sticky top-[9rem] flex flex-col gap-2 text-lg text-[#A2A3A9]"
               >
+                <div className="text-2xl font-bold text-[#2C2C2C]">
+                  {t('table_of_contents.label')}
+                </div>
                 <TableOfContent headings={toc}></TableOfContent>
-
-                {/* {keys.map((key, index) => (
-                  <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
-                ))} */}
               </div>
             </div>
           </div>
@@ -273,6 +237,26 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 className="prose max-w-[90rem] lg:prose-lg xl:prose-xl"
                 dangerouslySetInnerHTML={{ __html: blogContent.content.rendered }}
               ></div>
+              <div>
+                {categories.length > 0 && (
+                  <div className="mt-8 flex items-center gap-4">
+                    <div className="text-xl font-bold">{t('category.label')}</div>
+                    <div className="flex h-full items-center gap-4">
+                      {categories.map((category) => (
+                        <div key={category.id}>
+                          <Link
+                            // href={`/categories/${category.slug}`}
+                            href="#"
+                            className="rounded-xl bg-[#F2F2F2] px-4 py-2 text-lg text-[#6C6D71] hover:underline"
+                          >
+                            {category.name}
+                          </Link>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

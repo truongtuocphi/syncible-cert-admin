@@ -110,12 +110,9 @@
   },
   "BlogPage": {
     "loading": "Đang tải nội dung...",
-    "nav_select_placeholder": {
-      "label" : "Trên trang này"
-    },
-    "author_profile": {
-      "name": "Ryan",
-      "role": "Thành viên"
+    "not_found": "Không tìm thấy nội dung",
+    "table_of_contents": {
+      "label": "Mục lục"
     },
     "blog_info" : {
       "date_created": {
@@ -127,27 +124,8 @@
         "value" : "{read_time, plural, =0 {Ít hơn một phút} =1 {1 phút} other {# phút}}"
       }
     },
-    "navigation": {
-      "link_1": {
-        "label": "Syncible Certificate là gì?",
-        "href": "#syncible-certificate-là-gì"
-      },
-      "link_2": {
-        "label": "Bảng So Sánh Chứng Chỉ",
-        "href": "#bảng-so-sánh-chứng-chỉ"
-      },
-      "link_3": {
-        "label": "Syncible Qualified Batch là gì?",
-        "href": "#syncible-qualified-batch"
-      },
-      "link_4": {
-        "label": "Thiết kế mẫu Syncible Certificate",
-        "href": "#thiết-kế-mẫu-syncible-sertificate"
-      },
-      "link_5": {
-        "label": "Tại sao nên chuyển sang Syncible để tạo chứng chỉ kỹ thuật số?",
-        "href": "#tại-sao-nên-chuyển-sang-syncible-để-tạo-chứng-chỉ-kỹ-thuật-số"
-      }
+    "category": {
+      "label": "Danh mục:"
     }
   },
   "ExplorerPage": {

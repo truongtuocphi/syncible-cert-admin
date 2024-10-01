@@ -110,12 +110,9 @@
   },
   "BlogPage": {
     "loading": "Loading content...",
-    "nav_select_placeholder": {
-      "label" : "On this page"
-    },
-    "author_profile": {
-      "name": "Ryan",
-      "role": "Member"
+    "not_found": "Blog not found",
+    "table_of_contents": {
+      "label": "Table of Contents"
     },
     "blog_info" : {
       "date_created": {
@@ -127,27 +124,8 @@
         "value" : "{read_time, plural, =0 {No longer than a minute} =1 {1 minute} other {# minutes}}"
       }
     },
-    "navigation": {
-      "link_1": {
-        "label": "What is a Syncible Certificate?",
-        "href": "#what-is-a-syncible-certificate"
-      },
-      "link_2": {
-        "label": "Credential Comparison Table",
-        "href": "#credential-comparison-table"
-      },
-      "link_3": {
-        "label": "What is a Syncible Qualified Batch?",
-        "href": "#what-is-a-syncible-qualified-batch"
-      },
-      "link_4": {
-        "label": "Design a Syncible Certificate template",
-        "href": "#design-a-syncible-certificate-template"
-      },
-      "link_5": {
-        "label": "Why Switch to Syncible for Custom Digital Certificates?",
-        "href": "#why-switch-to-syncible-for-custom-digital-certificates"
-      }
+    "category": {
+      "label": "Categories:"
     }
   },
   "ExplorerPage": {

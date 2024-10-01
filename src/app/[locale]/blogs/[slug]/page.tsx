@@ -13,12 +13,15 @@ import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
+import { Link } from '@/i18n/routing';
+
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
   const [author, setAuthor] = useState<any>(null);
   const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [categories, setCategories] = useState<any[]>([]);
   const { slug } = params;
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
@@ -48,7 +51,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
       setLoading(true);
       try {
         const response = await fetchDataFromWP(
-          `https://admin.syncible.io/wp-json/wp/v2/posts?slug=${slug}`
+          `https://admin.syncible.io/wp-json/wp/v2/posts?slug=${slug}&_embed`
         );
 
         if (response.length === 0) {
@@ -75,6 +78,17 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           setToc(toc);
 
           setBlogContent({ ...post, content: { rendered: html } });
+
+          if (post.categories.length > 0) {
+            const categoryPromises = post.categories.map(async (categoryId: number) => {
+              const categoryResponse = await fetchDataFromWP(
+                `https://admin.syncible.io/wp-json/wp/v2/categories/${categoryId}`
+              );
+              return categoryResponse;
+            });
+            const categoryData = await Promise.all(categoryPromises);
+            setCategories(categoryData); // Set the categories in state
+          }
         }
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -189,6 +203,26 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 className="prose max-w-[90rem] lg:prose-lg xl:prose-xl"
                 dangerouslySetInnerHTML={{ __html: blogContent.content.rendered }}
               ></div>
+              <div>
+              {categories.length > 0 && (
+                <div className="mt-8 flex items-center gap-4">
+                  <div className="text-xl font-bold">{t('category.label')}</div>
+                  <div className="flex items-center gap-4 h-full">
+                    {categories.map((category) => (
+                      <div key={category.id}>
+                        <Link
+                          // href={`/categories/${category.slug}`}
+                          href="#"
+                          className="text-[#6C6D71] hover:underline text-lg py-2 px-4 bg-[#F2F2F2] rounded-xl"
+                        >
+                          {category.name}
+                        </Link>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              </div>
             </div>
           </div>
         </div>

@@ -39,7 +39,6 @@ import truncateAddress from '@/lib/truncateAddress';
 import { deleteDataById } from '@/utils/deleteDataFirebase';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import { useTranslations } from 'next-intl';
-import { CaretSortIcon } from '@radix-ui/react-icons';
 
 export type Collection = {
   id: string;
@@ -75,18 +74,7 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'id',
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          className="p-0"
-          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-        >
-          ID
-          <CaretSortIcon className="ml-2 h-4 w-4" />
-        </Button>
-      );
-    },
+    header: 'table.id',
     cell: ({ row }) => <div>{row.index + 1}</div>,
   },
   {
@@ -226,14 +214,6 @@ export default function Collection() {
       rowSelection,
       pagination,
     },
-    initialState: {
-      sorting: [
-        {
-          id: 'id',
-          desc: true,
-        },
-      ],
-    },
   });
 
   const selectedRowCount = useMemo(() => Object.keys(rowSelection).length, [rowSelection]);
@@ -278,7 +258,6 @@ export default function Collection() {
       alert(`${t('alert_1')}`);
     } catch (error) {
       alert(`${t('alert_2')}`);
-      // eslint-disable-next-line no-console
       console.error('Error deleting selected rows:', error);
     }
   };
@@ -338,27 +317,34 @@ export default function Collection() {
             </TableHeader>
             <TableBody className="bg-white hover:bg-white">
               {table.getRowModel().rows.length > 0 ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'}>
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="text-gray-600">
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
-                    ))}
-                    <td className="hidden">
-                      <ContractData
-                        collectionContractAddress={row.getValue('contractAddress')}
-                        onItemsCountChange={(count: number) =>
-                          handleItemsCountChange(row.getValue('id'), count)
-                        }
-                      />
-                    </td>
-                  </TableRow>
-                ))
+                [...table.getRowModel().rows].reverse().map(
+                  (
+                    row // Reverse the rows here
+                  ) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() ? 'selected' : undefined}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id} className="text-gray-600">
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                      <td className="hidden">
+                        <ContractData
+                          collectionContractAddress={row.getValue('contractAddress')}
+                          onItemsCountChange={(count) =>
+                            handleItemsCountChange(row.getValue('id'), count)
+                          }
+                        />
+                      </td>
+                    </TableRow>
+                  )
+                )
               ) : (
                 <TableRow>
                   <TableCell colSpan={columns.length} className="h-48 text-center">
-                    {!address ? `${t('table.noti_1')}` : `${t('table.noti_2')}`}
+                    {!address ? t('table.noti_1') : t('table.noti_2')}
                   </TableCell>
                 </TableRow>
               )}

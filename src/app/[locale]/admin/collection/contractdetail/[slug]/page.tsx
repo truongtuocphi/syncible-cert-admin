@@ -116,7 +116,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </div>
               </div>
 
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <div className="flex w-1/2 flex-col gap-1">
                   <h2 className="text-lg font-bold text-gray-700">{t('describe')}</h2>
                   <p className="text-sm font-semibold text-gray-500">{data.description}</p>
@@ -127,13 +127,9 @@ export default function Page({ params }: { params: { slug: string } }) {
                     Đã xác minh
                   </p>
                 </div>
-              </div>
+              </div> */}
 
               <div className="flex items-center justify-between">
-                <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">{t('displayName')}</h2>
-                  <p className="text-sm font-semibold text-gray-500">{data.displayName}</p>
-                </div>
                 <div className="flex w-1/2 flex-col gap-1">
                   <div className="flex flex-col gap-1">
                     <h2 className="text-lg font-bold text-gray-700">{t('contractAddress')}</h2>
@@ -150,6 +146,12 @@ export default function Page({ params }: { params: { slug: string } }) {
                     </div>
                   </div>
                 </div>
+                <div className="flex w-1/2 flex-col gap-1">
+                  <h2 className="text-lg font-bold text-gray-700">{t('status')}</h2>
+                  <p className="h-fit w-fit rounded-lg bg-green-200 px-4 py-2 text-sm font-semibold text-green-600">
+                    Đã xác minh
+                  </p>
+                </div>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex w-1/2 flex-col gap-1">
@@ -165,6 +167,19 @@ export default function Page({ params }: { params: { slug: string } }) {
                     </div>
                   </div>
                 </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex w-1/2 flex-col gap-1">
+                  <h2 className="text-lg font-bold text-gray-700">{t('describe')}</h2>
+                  <p className="text-sm font-semibold text-gray-500">{data.description}</p>
+                </div>
+                {/* <div className="flex w-1/2 flex-col gap-1">
+                  <h2 className="text-lg font-bold text-gray-700">{t('status')}</h2>
+                  <p className="h-fit w-fit rounded-lg bg-green-200 px-4 py-2 text-sm font-semibold text-green-600">
+                    Đã xác minh
+                  </p>
+                </div> */}
               </div>
             </div>
           </div>

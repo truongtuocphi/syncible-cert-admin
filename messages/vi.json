@@ -273,7 +273,8 @@
       "symbol": "Ký hiệu hợp đồng",
       "status": "Trạng thái",
       "contractAddress": "Địa chỉ hợp đồng",
-      "collectionOwner": "Chủ sở hữu bộ sưu tập"
+      "collectionOwner": "Chủ sở hữu bộ sưu tập",
+      "Verified": "Đã xác minh"
     },
 
     "collectionDetail": {

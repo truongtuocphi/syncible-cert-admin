@@ -149,7 +149,7 @@ export default function Page({ params }: { params: { slug: string } }) {
                 <div className="flex w-1/2 flex-col gap-1">
                   <h2 className="text-lg font-bold text-gray-700">{t('status')}</h2>
                   <p className="h-fit w-fit rounded-lg bg-green-200 px-4 py-2 text-sm font-semibold text-green-600">
-                    Đã xác minh
+                    {t('Verified')}
                   </p>
                 </div>
               </div>

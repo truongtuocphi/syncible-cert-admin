@@ -16,7 +16,7 @@ import {
 import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/routing';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
-import { addIdsToHeadings } from '@/utils/processBlogContent';
+import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
@@ -301,4 +301,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
       </div>
     </div>
   );
+}
+function getH2TagsWithAttributes(processedContent: { html: string; doc: Document }) {
+  throw new Error('Function not implemented.');
 }

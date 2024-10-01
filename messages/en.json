@@ -266,7 +266,8 @@
       "symbol": "Display symbol",
       "status": "Status",
       "contractAddress": "Contract Address",
-      "collectionOwner": "Collection Owner"
+      "collectionOwner": "Collection Owner",
+      "Verified": "Verified"
     },
 
     "collectionDetail": {

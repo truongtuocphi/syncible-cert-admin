@@ -2,7 +2,16 @@
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
-import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from 'react';
+import {
+  AwaitedReactNode,
+  JSXElementConstructor,
+  Key,
+  ReactElement,
+  ReactNode,
+  ReactPortal,
+  useEffect,
+  useState,
+} from 'react';
 
 import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/routing';
@@ -194,4 +203,3 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     </div>
   );
 }
-

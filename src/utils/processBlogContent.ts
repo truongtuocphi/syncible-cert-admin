@@ -6,7 +6,7 @@ export function generateIdFromText(text: string): string {
     .replace(/^[^a-zA-Z]+/, '') // Remove any leading non-alphabetic characters
     .toLowerCase()
     .replace(/\s+/g, '-') // Replace spaces with hyphens
-    .replace(/[^a-z0-9-]/g, '') // Remove any remaining invalid characters
+    .replace(/[^a-z0-9-]/g, ''); // Remove any remaining invalid characters
 }
 
 export function addIdsToHeadings(html: string) {
@@ -41,7 +41,7 @@ export function addIdsToHeadings(html: string) {
 }
 
 export function generateTOC(doc: Document) {
-  const toc: { id: string; text: string; }[] = [];
+  const toc: { id: string; text: string }[] = [];
   const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
   headings.forEach((heading) => {
     const id = heading.id;

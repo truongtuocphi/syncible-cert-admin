@@ -74,7 +74,17 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'id',
-    header: 'table.id',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+        >
+          Email
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => <div>{row.index + 1}</div>,
   },
   {

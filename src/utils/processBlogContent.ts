@@ -11,15 +11,12 @@ export function generateIdFromText(text: string): string {
 export function addIdsToHeadings(html: string) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
-
-  const headings = doc.querySelectorAll('h2:not([id])');
+  const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
   headings.forEach((heading) => {
     const textContent = heading.textContent || '';
-
     const id = generateIdFromText(textContent);
-
-    heading.id = id;
+    heading.id = id; // Assign the generated ID to the heading
   });
 
   return { html: doc.body.innerHTML, doc }; // Return both updated HTML and the document

@@ -184,7 +184,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     { label: blogContent.title.rendered, href: '' },
   ];
 
-  const processedContent = addIdsToHeadings(blogContent.content.rendered.replace(/\n{3,}/g, '')); // remove any new lines
+  // const processedContent = addIdsToHeadings(blogContent.content.rendered);
 
   const readTime = Math.ceil(blogContent.content.rendered.split(' ').length / 200);
   const date_created = new Date(blogContent.date).toLocaleDateString('en-GB', {
@@ -192,8 +192,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     month: '2-digit',
     year: 'numeric',
   });
-
-  const sidebarContent = getH2TagsWithAttributes(processedContent);
 
   return (
     <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
@@ -244,20 +242,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 id="table-content"
                 className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
               >
-                {toc.length > 0 && (
-                  <div className="mt-8">
-                    <h2 className="font-bold">Table of Contents</h2>
-                    <ul className="list-disc pl-4">
-                      {toc.map((item, index) => (
-                        <li key={index}>
-                          <a href={`#${item.id}`} className="text-blue-600 hover:underline">
-                            {item.text}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                <TableOfContent headings={toc}></TableOfContent>
 
                 {/* {keys.map((key, index) => (
                   <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
@@ -301,7 +286,4 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
       </div>
     </div>
   );
-}
-function getH2TagsWithAttributes(processedContent: { html: string; doc: Document }) {
-  throw new Error('Function not implemented.');
 }

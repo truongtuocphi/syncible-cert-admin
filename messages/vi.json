@@ -246,7 +246,7 @@
       "table": {
         "id": "ID",
         "name": "Tên hiển thị",
-        "symbol": "Biểu tượng hợp đồng",
+        "symbol": "Biểu tượng hiển thị",
         "quantily": "Tổng số chứng chỉ",
         "contract": "Địa chỉ hợp đồng",
         "status": "Xác thực",
@@ -306,9 +306,9 @@
       "titlePreviewCollection": "Xem trước mục quản lý của bạn",
       "titleDisplayName": "Tên hiển thị",
       "subTitleDisplayName": "Đây là tên hiển thị cho bộ sưu tập trên mục quản lý của bạn.",
-      "titleSymbol": "Biểu tượng hợp đồng",
-      "subTitleSymbol": "Biểu tượng hợp đồng này không được thay đổi trong tương lai",
-      "titleHoverCard": "Biểu tượng hợp đồng",
+      "titleSymbol": "Biểu tượng hiển thị",
+      "subTitleSymbol": "Biểu tượng hiển thị này không được thay đổi trong tương lai",
+      "titleHoverCard": "Biểu tượng hiển thị",
       "subTitleHoverCard": "biểu tượng mã thông báo cụ thể của bạn trên trình khám phá blockchain. Nó chỉ ra rằng chứng chỉ đã được xác minh trạng thái, cho phép người dùng theo dõi giao dịch, số lượng token và quyền sở hữu NFT trên blockchain",
       "titleDescription": "Mô tả",
       "subTitleDescription": "Một mô tả chi tiết về bộ sưu tập của bạn",
@@ -316,7 +316,7 @@
       "ButtonCreateCollection": "Tạo mục quản lý",
 
       "placeholderInput_1": "Tên hiển thị",
-      "placeholderInput_2": "Biểu tượng hợp đồng",
+      "placeholderInput_2": "Biểu tượng hiển thị",
       "placeholderInput_3": "Mô tả"
     },
 

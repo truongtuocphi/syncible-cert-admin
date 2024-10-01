@@ -2,16 +2,7 @@
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
-import {
-  AwaitedReactNode,
-  JSXElementConstructor,
-  Key,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/routing';
@@ -20,6 +11,7 @@ import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
+import { useRouter } from 'next/navigation';
 
 const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
   const t = useTranslations('BlogPage');
@@ -69,6 +61,7 @@ const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
+  const router = useRouter();
   const keys = ['link_1', 'link_2', 'link_3', 'link_4', 'link_5'] as const;
   const pathname = usePathname();
   const locale = useLocale();

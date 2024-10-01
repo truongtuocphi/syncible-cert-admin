@@ -110,13 +110,6 @@
   },
   "BlogPage": {
     "loading": "Loading content...",
-    "nav_select_placeholder": {
-      "label" : "On this page"
-    },
-    "author_profile": {
-      "name": "Ryan",
-      "role": "Member"
-    },
     "blog_info" : {
       "date_created": {
         "label" : "Date Created:",

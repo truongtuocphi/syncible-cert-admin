@@ -12,57 +12,8 @@ import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
 
-const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
-  const t = useTranslations('BlogPage');
-
-  const pathname = usePathname();
-
-  const [active, setActive] = useState(false);
-
-  const onScroll = () => {
-    const y =
-      document.getElementById(t(`navigation.${key}.href`).replace('#', ''))?.getBoundingClientRect()
-        .y || 0;
-    let nextY = 1000;
-    if (!!nextId) {
-      nextY =
-        document
-          .getElementById(t(`navigation.${nextId}.href`).replace('#', ''))
-          ?.getBoundingClientRect().y || 1000;
-    }
-    if (y < 100 && nextY > 100) {
-      setActive(true);
-    } else {
-      setActive(false);
-    }
-  };
-
-  useEffect(() => {
-    window.removeEventListener('scroll', onScroll);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  return (
-    <Link
-      key={key}
-      href={t(`navigation.${key}.href`)}
-      className={clsx(
-        'hover:underlin hover:text-[#2C2C2C]',
-        // pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]',
-        active && 'font-bold text-black'
-      )}
-    >
-      {t(`navigation.${key}.label`)}
-    </Link>
-  );
-};
-
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
-  const keys = ['link_1', 'link_2', 'link_3', 'link_4', 'link_5'] as const;
-  const pathname = usePathname();
-  const locale = useLocale();
   const [author, setAuthor] = useState<any>(null);
   const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -70,13 +21,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
 
-  const getHeaders = (document: Document) => {
-    const headers = document.querySelectorAll('h2[id]');
-    return Array.from(headers).map((header) => ({
-      id: header.id,
-      value: header.textContent,
-    }));
-  };
 
   const smoothScroll = () => {
     const contentSection = document.getElementById('table-content');
@@ -126,8 +70,9 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
             post.content.rendered.replace(/\n{3,}/g, '\n\n') // Limit newlines to 2
           );
 
-          const toc = generateTOC(doc);
+          const toc = generateTOC(doc); // Generate the Table of Content
           setToc(toc);
+
           setBlogContent({ ...post, content: { rendered: html } });
         }
       } catch (error) {
@@ -137,29 +82,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
       }
     }
     fetchBlockContent(slug);
-
-    // const observer = new IntersectionObserver(
-    //   (entries) => {
-    //     console.log(entries);
-    //     entries.forEach((entry) => {
-    //       if (entry.isIntersecting) {
-    //         const activeSection = entry.target.getAttribute('id');
-    //         document.querySelectorAll('a[href^="#"]').forEach(link => {
-    //           link.classList.toggle('font-bold', link.getAttribute('href') === `#${activeSection}`);
-    //           link.classList.toggle('text-[#A2A3A9]', link.getAttribute('href') !== `#${activeSection}`);
-    //         });
-    //       }
-    //     });
-    //   },
-    //   { rootMargin: '-40% 0px -60% 0px', threshold: 0.5 }
-    // );
-    // document.querySelectorAll('h2[id]').forEach((section) => {
-    //   observer.observe(section);
-    // });
-
-    // return () => {
-    //   observer.disconnect();
-    // };
   }, [slug]);
 
   if (loading) {
@@ -174,8 +96,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     { label: 'Blogs', href: '/blogs' },
     { label: blogContent.title.rendered, href: '' },
   ];
-
-  // const processedContent = addIdsToHeadings(blogContent.content.rendered);
 
   const readTime = Math.ceil(blogContent.content.rendered.split(' ').length / 200);
   const date_created = new Date(blogContent.date).toLocaleDateString('en-GB', {
@@ -193,7 +113,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
             {blogContent.title.rendered}
           </div>
           <div className="h-full w-full overflow-hidden rounded-xl sm:rounded-[2rem]">
-            {/* <SyncibleBanner className="aspect-[1184/395] h-fit w-full object-cover" /> */}
             {bannerImg && (
               <Image
                 src={bannerImg}
@@ -229,16 +148,12 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                   </div>
                 </div>
               </div>
+              {/* Render table content */}
               <div
                 id="table-content"
                 className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
-              >
-                
+              >               
                 <TableOfContent headings={toc}></TableOfContent>
-
-                {/* {keys.map((key, index) => (
-                  <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
-                ))} */}
               </div>
             </div>
           </div>

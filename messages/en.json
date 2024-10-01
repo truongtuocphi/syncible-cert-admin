@@ -246,7 +246,7 @@
       "table": {
         "id": "ID",
         "name": "Display name",
-        "symbol": "Contract Symbol",
+        "symbol": "Display symbol",
         "quantily": "Quantity",
         "contract": "Contract address",
         "status": "Status",
@@ -270,7 +270,7 @@
       "type": "Type",
       "describe": "Description",
       "contractName": "Contract Name",
-      "symbol": "Contract Symbol",
+      "symbol": "Display symbol",
       "status": "Status",
       "contractAddress": "Contract Address",
       "collectionOwner": "Collection Owner"
@@ -306,17 +306,17 @@
       "titlePreviewCollection": "Preview of your collection",
       "titleDisplayName": "Display Name",
       "subTitleDisplayName": "This is display name for collection on your store",
-      "titleSymbol": "Contract Symbol",
+      "titleSymbol": "Display symbol",
       "subTitleSymbol": "This contract symbol can't be changed in the future",
-      "titleHoverCard": "Contract Symbol",
-      "subTitleHoverCard": "The Contract Symbol is a tool that displays the name and symbol of your specific token on the blockchain explorer. It indicates that the certificates have been verify state, allowing users to track transactions, token quantities, and NFT ownership on the blockchains",
+      "titleHoverCard": "Display symbol",
+      "subTitleHoverCard": "The Display symbol is a tool that displays the name and symbol of your specific token on the blockchain explorer. It indicates that the certificates have been verify state, allowing users to track transactions, token quantities, and NFT ownership on the blockchains",
       "titleDescription": "Description",
       "subTitleDescription": "A detailed description of your collection",
       "buttonCreate": "Creating...",
       "ButtonCreateCollection": "Create Collection",
 
       "placeholderInput_1": "Display Name",
-      "placeholderInput_2": "Contract Symbol",
+      "placeholderInput_2": "Display symbol",
       "placeholderInput_3": "Description"
     },
 

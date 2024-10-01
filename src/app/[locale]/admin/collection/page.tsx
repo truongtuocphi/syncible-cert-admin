@@ -39,6 +39,7 @@ import truncateAddress from '@/lib/truncateAddress';
 import { deleteDataById } from '@/utils/deleteDataFirebase';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import { useTranslations } from 'next-intl';
+import { CaretSortIcon } from '@radix-ui/react-icons';
 
 export type Collection = {
   id: string;
@@ -74,7 +75,20 @@ const columns: ColumnDef<Collection>[] = [
   },
   {
     accessorKey: 'id',
-    header: 'table.id',
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => {
+            const newSortDirection = column.getIsSorted() === 'asc' ? 'desc' : 'asc';
+            column.toggleSorting(newSortDirection === 'desc');
+          }}
+        >
+          ID
+          <CaretSortIcon className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => <div>{row.index + 1}</div>,
   },
   {

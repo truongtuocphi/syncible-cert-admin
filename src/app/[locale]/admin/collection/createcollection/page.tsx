@@ -281,7 +281,7 @@ const CreateCollection: React.FC = () => {
                 <label className="block text-base font-medium text-gray-900">
                   <div className="flex items-center gap-2">
                     <p>{t('titleSymbol')}</p>
-                    <HoverCard>
+                    {/* <HoverCard>
                       <HoverCardTrigger asChild>
                         <Button variant="link" className="p-0">
                           <IoMdHelpCircleOutline className="text-xl text-gray-600" />
@@ -293,7 +293,7 @@ const CreateCollection: React.FC = () => {
                           <p className="text-sm text-gray-400">{t('subTitleHoverCard')}</p>
                         </div>
                       </HoverCardContent>
-                    </HoverCard>
+                    </HoverCard> */}
                   </div>
                 </label>
                 <p className="text-xs text-gray-400">{t('subTitleSymbol')}</p>

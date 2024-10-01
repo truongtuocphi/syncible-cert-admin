@@ -17,12 +17,15 @@ export default function Page() {
   const [posts, setPosts] = useState<ArticleEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
+  const locale = useLocale();
+
   useEffect(() => {
     async function fetchPosts(page: number) {
       setLoading(true);
       try {
+        const tagId = locale === 'en' ? 6 : 7;
         const { data, totalPages } = await fetchPaginatedDataFromWP(
-          `https://admin.syncible.io/wp-json/wp/v2/posts?page=${page}&per_page=${postsPerPage}`
+          `https://admin.syncible.io/wp-json/wp/v2/posts?page=${page}&per_page=${postsPerPage}&tags=${tagId}`
         );
 
         setTotalPages(parseInt(totalPages.toString(), 10));
@@ -66,7 +69,7 @@ export default function Page() {
       }
     }
     fetchPosts(currentPage);
-  }, [currentPage]);
+  }, [currentPage, locale]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -111,7 +114,7 @@ export default function Page() {
             >
               <ArrowNarrowLeft className="h-6 w-6" />
             </Button>
-            <span className="text-[#A2A3A9] font-medium">
+            <span className="font-medium text-[#A2A3A9]">
               {/* Page {currentPage} of {totalPages} */}
               {t('pagination.label', { page: currentPage, totalPages: totalPages })}
             </span>

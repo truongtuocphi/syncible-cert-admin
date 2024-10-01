@@ -3,18 +3,11 @@ import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import {
-  AwaitedReactNode,
-  JSXElementConstructor,
-  Key,
-  ReactElement,
-  ReactNode,
-  ReactPortal,
   useEffect,
   useState,
 } from 'react';
 
 import Image from 'next/image';
-import { Link, usePathname } from '@/i18n/routing';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
 import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
@@ -29,7 +22,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
-
 
   const smoothScroll = () => {
     const contentSection = document.getElementById('table-content');
@@ -160,8 +152,9 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
               {/* Render table content */}
               <div
                 id="table-content"
-                className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
-              >               
+                className="sticky top-[9rem] flex flex-col gap-2 text-lg text-[#A2A3A9]"
+              >
+                <div className="text-[#2C2C2C] font-bold text-2xl">{t('table_of_contents.label')}</div>
                 <TableOfContent headings={toc}></TableOfContent>
               </div>
             </div>

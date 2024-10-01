@@ -110,6 +110,10 @@
   },
   "BlogPage": {
     "loading": "Đang tải nội dung...",
+    "not_found": "Không tìm thấy nội dung",
+    "table_of_contents": {
+      "label": "Mục lục"
+    },
     "blog_info" : {
       "date_created": {
         "label" : "Ngày tạo:",

@@ -33,13 +33,13 @@ export default function TableOfContent({ headings }: { headings: any }) {
   return (
     <ul>
       {headings.map((heading: any, index: Key | null | undefined) => (
-        <li key={index}>
+        <li key={index} className="pt-2">
           <Link
             key={index}
             href={`#${heading.id}`}
             className={clsx(
               'hover:text-[#2C2C2C] hover:no-underline focus:no-underline',
-              activeId === heading.id ? 'text-[#2C2C2C] font-bold' : 'text-[#A2A3A9]'
+              activeId === heading.id ? 'text-[#2C2C2C] font-bold' : 'text-[#A2A3A9] font-medium'
             )}
             onClick={(e) => {
               e.preventDefault();

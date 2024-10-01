@@ -15,12 +15,12 @@ export function addIdsToHeadings(html: string) {
   const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
   const headingClasses: Record<string, string> = {
-    h1: 'text-4xl font-bold my-4 scroll-mt-[120px]',   // Example classes for h1
-    h2: 'text-3xl font-bold my-4 scroll-mt-[120px]', // Example classes for h2
-    h3: 'text-2xl font-bold my-3 scroll-mt-[120px]',  // Example classes for h3
-    h4: 'text-xl font-semibold my-3 scroll-mt-[120px]',   // Example classes for h4
-    h5: 'text-lg font-semibold my-2 scroll-mt-[120px]',   // Example classes for h5
-    h6: 'text-base font-medium my-2 scroll-mt-[120px]', // Example classes for h6
+    h1: 'text-4xl font-bold my-4 scroll-mt-[120px]',   
+    h2: 'text-3xl font-bold my-4 scroll-mt-[120px]', 
+    h3: 'text-2xl font-bold my-3 scroll-mt-[120px]',  
+    h4: 'text-xl font-semibold my-3 scroll-mt-[120px]',   
+    h5: 'text-lg font-semibold my-2 scroll-mt-[120px]',   
+    h6: 'text-base font-medium my-2 scroll-mt-[120px]', 
   };
 
   headings.forEach((heading) => {

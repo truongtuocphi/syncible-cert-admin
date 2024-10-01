@@ -12,7 +12,6 @@ export default function TableOfContent({ headings }: { headings: any }) {
             href={`#${heading.id}`}
             className={clsx(
               'hover:text-[#2C2C2C] hover:underline'
-              //   pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]'
             )}
             onClick={(e) => {
               e.preventDefault();
@@ -22,7 +21,7 @@ export default function TableOfContent({ headings }: { headings: any }) {
               }
             }}
           >
-            {heading.value}
+            {heading.text}
           </Link>
         </li>
       ))}

@@ -2,14 +2,15 @@
 import clsx from 'clsx';
 import { notFound } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/routing';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
-import { addIdsToHeadings } from '@/utils/processBlogContent';
+import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
+import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
 
 const LinkTitle = ({ id: key, nextId }: { id: string; nextId: string }) => {
   const t = useTranslations('BlogPage');
@@ -67,8 +68,9 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const [loading, setLoading] = useState(true);
   const { slug } = params;
   const [bannerImg, setBannerImg] = useState<string | null>(null);
+  const [toc, setToc] = useState<any[]>([]);
 
-  const getHeaders = () => {
+  const getHeaders = (document: Document) => {
     const headers = document.querySelectorAll('h2[id]');
     return Array.from(headers).map((header) => ({
       id: header.id,
@@ -108,7 +110,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           notFound();
         } else {
           const post = response[0]; // Get the blog post content
-          setBlogContent(post);
 
           // Fetch the author data
           const authorResponse = await fetchDataFromWP(
@@ -120,16 +121,14 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
             position: authorResponse.description, // Assuming a default position; you could add a custom field for this
           });
 
-          // if (post.featured_media) {
-          //   const mediaResponse = await fetchDataFromWP(
-          //     `https://admin.syncible.io/wp-json/wp/v2/media/${post.featured_media}`
-          //   );
-          //   setBannerImg(mediaResponse.source_url); // Ensure a default empty string if no image
-          // } else {
-          //   setBannerImg('/SyncibleBiggerBanner.png');
-          // }
-
           setBannerImg('/SyncibleBiggerBanner.png');
+          const { html, doc } = addIdsToHeadings(
+            post.content.rendered.replace(/\n{3,}/g, '\n\n') // Limit newlines to 2
+          );
+
+          const toc = generateTOC(doc);
+          setToc(toc);
+          setBlogContent({ ...post, content: { rendered: html } });
         }
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -176,7 +175,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     { label: blogContent.title.rendered, href: '' },
   ];
 
-  const processedContent = addIdsToHeadings(blogContent.content.rendered.replace(/\n{3,}/g, '')); // remove any new lines
+  // const processedContent = addIdsToHeadings(blogContent.content.rendered);
 
   const readTime = Math.ceil(blogContent.content.rendered.split(' ').length / 200);
   const date_created = new Date(blogContent.date).toLocaleDateString('en-GB', {
@@ -184,12 +183,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     month: '2-digit',
     year: 'numeric',
   });
-  const toc =
-    processedContent.match(/<h([1-6]) id="(.*?)">.*?<\/h\1>/g)?.map((heading) => {
-      const id = heading.match(/id="(.*?)"/)?.[1];
-      const text = heading.replace(/<\/?[^>]+(>|$)/g, ''); // Remove HTML tags
-      return { id, text };
-    }) || [];
 
   return (
     <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
@@ -199,7 +192,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           <div className="text-center text-2xl font-bold md:text-3xl lg:text-5xl">
             {blogContent.title.rendered}
           </div>
-          <div className="h-full w-full overflow-hidden rounded-xl sm:rounded-[2rem] md:max-h-[30rem]">
+          <div className="h-full w-full overflow-hidden rounded-xl sm:rounded-[2rem]">
             {/* <SyncibleBanner className="aspect-[1184/395] h-fit w-full object-cover" /> */}
             {bannerImg && (
               <Image
@@ -240,20 +233,8 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 id="table-content"
                 className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
               >
-                {toc.length > 0 && (
-                  <div className="mt-8">
-                    <h2 className="font-bold">Table of Contents</h2>
-                    <ul className="list-disc pl-4">
-                      {toc.map((item, index) => (
-                        <li key={index}>
-                          <a href={`#${item.id}`} className="text-blue-600 hover:underline">
-                            {item.text}
-                          </a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+                
+                <TableOfContent headings={toc}></TableOfContent>
 
                 {/* {keys.map((key, index) => (
                   <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
@@ -289,7 +270,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
               <div
                 id="content-section"
                 className="prose max-w-[90rem] lg:prose-lg xl:prose-xl"
-                dangerouslySetInnerHTML={{ __html: processedContent }}
+                dangerouslySetInnerHTML={{ __html: blogContent.content.rendered }}
               ></div>
             </div>
           </div>
@@ -298,3 +279,4 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     </div>
   );
 }
+

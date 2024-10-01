@@ -79,6 +79,7 @@ const columns: ColumnDef<Collection>[] = [
       return (
         <Button
           variant="ghost"
+          className='p-0'
           onClick={() => {
             const newSortDirection = column.getIsSorted() === 'asc' ? 'desc' : 'asc';
             column.toggleSorting(newSortDirection === 'desc');

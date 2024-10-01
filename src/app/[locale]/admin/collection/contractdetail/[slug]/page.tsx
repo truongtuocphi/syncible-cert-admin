@@ -116,20 +116,37 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </div>
               </div>
 
-              {/* <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between">
+                <div className="flex w-1/2 flex-col gap-1">
+                  <h2 className="text-lg font-bold text-gray-700">{t('symbol')}</h2>
+                  <p className="text-sm font-semibold text-gray-500">{data.contractSymbol}</p>
+                </div>
+                <div className="flex w-1/2 flex-col gap-1">
+                  <h2 className="text-lg font-bold text-gray-700">{t('status')}</h2>
+                  <p className="h-fit w-fit rounded-lg bg-green-200 px-4 py-2 text-sm font-semibold text-green-600">
+                    {t('Verified')}
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
                 <div className="flex w-1/2 flex-col gap-1">
                   <h2 className="text-lg font-bold text-gray-700">{t('describe')}</h2>
                   <p className="text-sm font-semibold text-gray-500">{data.description}</p>
                 </div>
                 <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">{t('status')}</h2>
-                  <p className="h-fit w-fit rounded-lg bg-green-200 px-4 py-2 text-sm font-semibold text-green-600">
-                    Đã xác minh
-                  </p>
+                  <div className="flex flex-col gap-1">
+                    <h2 className="text-lg font-bold text-gray-700">{t('collectionOwner')}</h2>
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-semibold text-gray-500">{data.address}</p>
+                      <CopyButton textToCopy={data.address || ''} />
+                    </div>
+                  </div>
                 </div>
-              </div> */}
+              </div>
 
               <div className="flex items-center justify-between">
+                <div className="w-1/2"></div>
                 <div className="flex w-1/2 flex-col gap-1">
                   <div className="flex flex-col gap-1">
                     <h2 className="text-lg font-bold text-gray-700">{t('contractAddress')}</h2>
@@ -146,40 +163,6 @@ export default function Page({ params }: { params: { slug: string } }) {
                     </div>
                   </div>
                 </div>
-                <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">{t('status')}</h2>
-                  <p className="h-fit w-fit rounded-lg bg-green-200 px-4 py-2 text-sm font-semibold text-green-600">
-                    {t('Verified')}
-                  </p>
-                </div>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">{t('symbol')}</h2>
-                  <p className="text-sm font-semibold text-gray-500">{data.contractSymbol}</p>
-                </div>
-                <div className="flex w-1/2 flex-col gap-1">
-                  <div className="flex flex-col gap-1">
-                    <h2 className="text-lg font-bold text-gray-700">{t('collectionOwner')}</h2>
-                    <div className="flex items-center gap-2">
-                      <p className="text-sm font-semibold text-gray-500">{data.address}</p>
-                      <CopyButton textToCopy={data.address || ''} />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between">
-                <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">{t('describe')}</h2>
-                  <p className="text-sm font-semibold text-gray-500">{data.description}</p>
-                </div>
-                {/* <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">{t('status')}</h2>
-                  <p className="h-fit w-fit rounded-lg bg-green-200 px-4 py-2 text-sm font-semibold text-green-600">
-                    Đã xác minh
-                  </p>
-                </div> */}
               </div>
             </div>
           </div>

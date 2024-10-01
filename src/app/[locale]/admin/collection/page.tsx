@@ -84,7 +84,7 @@ const columns: ColumnDef<Collection>[] = [
             column.toggleSorting(newSortDirection === 'desc');
           }}
         >
-          Email
+          ID
           <CaretSortIcon className="ml-2 h-4 w-4" />
         </Button>
       );

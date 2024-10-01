@@ -38,6 +38,8 @@ const Sidebar = () => {
 
   const t = useTranslations('Dapp');
 
+  console.log(t(`sideBar.createDigitalCertificate`));
+
   // Active
   const baseLinkClasses =
     'flex items-center gap-4 rounded-xl px-4 py-4 font-bold text-gray-500 transition-colors duration-300';
@@ -67,8 +69,8 @@ const Sidebar = () => {
 
               return (
                 <li className="text-base 2xl:text-lg" key={item.name}>
-                  {t(`sideBar.${item.name}`) !== 'Create Digital Certificate' &&
-                  t(`sideBar.${item.name}`) !== 'Tạo Chứng Chỉ' ? (
+                  {t(`sideBar.${item.name}`) !== 'Create Tokenized Certificate' &&
+                  t(`sideBar.${item.name}`) !== 'Tạo Chứng chỉ Số hoá' ? (
                     <Link
                       href={item.url}
                       className={`${baseLinkClasses} ${

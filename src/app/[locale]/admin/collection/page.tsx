@@ -39,7 +39,6 @@ import truncateAddress from '@/lib/truncateAddress';
 import { deleteDataById } from '@/utils/deleteDataFirebase';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import { useTranslations } from 'next-intl';
-import { CaretSortIcon } from '@radix-ui/react-icons';
 
 export type Collection = {
   id: string;

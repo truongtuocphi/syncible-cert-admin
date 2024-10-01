@@ -16,6 +16,7 @@ import { CollectionData } from '@/types/function';
 import fetchDataCollectionById from '@/utils/fetchDataCollectionById';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import { useTranslations } from 'next-intl';
+import convertToVietnamTime from '@/utils/convertToVietnamTime';
 
 export default function Page({ params }: { params: { slug: string } }) {
   const [data, setData] = useState<CollectionData | null>(null);
@@ -131,8 +132,10 @@ export default function Page({ params }: { params: { slug: string } }) {
 
               <div className="flex items-center justify-between">
                 <div className="flex w-1/2 flex-col gap-1">
-                  <h2 className="text-lg font-bold text-gray-700">{t('describe')}</h2>
-                  <p className="pr-4 text-sm font-semibold text-gray-500">{data.description}</p>
+                  <h2 className="text-lg font-bold text-gray-700">{t('time')}</h2>
+                  <p className="pr-4 text-sm font-semibold text-gray-500">
+                    {convertToVietnamTime(data.createdAt)}
+                  </p>
                 </div>
                 <div className="flex w-1/2 flex-col gap-1">
                   <div className="flex flex-col gap-1">
@@ -145,7 +148,11 @@ export default function Page({ params }: { params: { slug: string } }) {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end">
+              <div className="flex items-center justify-between">
+                <div className="flex w-1/2 flex-col gap-1">
+                  <h2 className="text-lg font-bold text-gray-700">{t('describe')}</h2>
+                  <p className="pr-4 text-sm font-semibold text-gray-500">{data.description}</p>
+                </div>
                 <div className="flex w-1/2 flex-col gap-1">
                   <div className="flex flex-col gap-1">
                     <h2 className="text-lg font-bold text-gray-700">{t('contractAddress')}</h2>

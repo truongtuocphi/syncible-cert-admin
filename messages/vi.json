@@ -274,7 +274,8 @@
       "status": "Trạng thái",
       "contractAddress": "Địa chỉ hợp đồng",
       "collectionOwner": "Chủ sở hữu bộ sưu tập",
-      "Verified": "Đã xác minh"
+      "Verified": "Đã xác minh",
+      "time": "Thời điểm khởi tạo"
     },
 
     "collectionDetail": {

@@ -111,7 +111,7 @@ const CreateCollection: React.FC = () => {
         bannerImage,
         contractAddress,
         address,
-        // createdAt: new Date().toISOString(),
+        createdAt: new Date().toISOString(),
       });
 
       alert('Collection created and contract deployed successfully!');

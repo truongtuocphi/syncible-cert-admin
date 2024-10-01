@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/routing';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
-import generateIdFromText from '@/utils/generateHeaderID';
+import { addIdsToHeadings } from '@/utils/processBlogContent';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 
@@ -176,20 +176,20 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     { label: blogContent.title.rendered, href: '' },
   ];
 
-  const processedContent = blogContent.content.rendered
-    .replace(/\n{3,}/g, '') // remove any new lines
-    .replace(/<h([1-6])>(.*?)<\/h\1>/g, (match: any, level: any, content: string) => {
-      const id = generateIdFromText(content); // Generate an ID from the heading content
-      return `<h${level} id="${id}">${content}</h${level}>`; // Add the ID to the heading
-    });
+  const processedContent = addIdsToHeadings(blogContent.content.rendered.replace(/\n{3,}/g, '')); // remove any new lines
 
   const readTime = Math.ceil(blogContent.content.rendered.split(' ').length / 200);
-
   const date_created = new Date(blogContent.date).toLocaleDateString('en-GB', {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',
   });
+  const toc =
+    processedContent.match(/<h([1-6]) id="(.*?)">.*?<\/h\1>/g)?.map((heading) => {
+      const id = heading.match(/id="(.*?)"/)?.[1];
+      const text = heading.replace(/<\/?[^>]+(>|$)/g, ''); // Remove HTML tags
+      return { id, text };
+    }) || [];
 
   return (
     <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
@@ -240,18 +240,20 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 id="table-content"
                 className="sticky top-[9rem] flex flex-col gap-2 text-lg font-bold text-[#A2A3A9]"
               >
-                {keys.map((key) => (
-                  <Link
-                    key={key}
-                    href={t(`navigation.${key}.href`)}
-                    className={clsx(
-                      'hover:text-[#2C2C2C] hover:underline',
-                      pathname === t(`navigation.${key}.href`) && 'text-[#2C2C2C]'
-                    )}
-                  >
-                    {t(`navigation.${key}.label`)}
-                  </Link>
-                ))}
+                {toc.length > 0 && (
+                  <div className="mt-8">
+                    <h2 className="font-bold">Table of Contents</h2>
+                    <ul className="list-disc pl-4">
+                      {toc.map((item, index) => (
+                        <li key={index}>
+                          <a href={`#${item.id}`} className="text-blue-600 hover:underline">
+                            {item.text}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
                 {/* {keys.map((key, index) => (
                   <LinkTitle key={key} id={key} nextId={keys?.[index + 1] || ''} />
@@ -277,7 +279,9 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                     <div className="text-base font-medium text-[#A2A3A9]">
                       {t('blog_info.read_time.label')}
                     </div>
-                    <div className="text-lg font-medium">{t('blog_info.read_time.value', { read_time: readTime })}</div>
+                    <div className="text-lg font-medium">
+                      {t('blog_info.read_time.value', { read_time: readTime })}
+                    </div>
                   </div>
                 </div>
               </div>

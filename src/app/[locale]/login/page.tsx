@@ -67,13 +67,13 @@ export default function Login() {
 
   return (
     <div className="relative flex h-screen max-h-screen items-center justify-start overflow-hidden px-8 py-5">
-      {/* <video
+      <video
         className="absolute left-0 top-0 h-full w-full object-cover"
         src="/video/Cubes_Diagonal_3840x2160.mp4"
         autoPlay
         loop
         muted
-      ></video> */}
+      ></video>
       <div
         className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:p-10 2xl:h-[850px]"
         style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}

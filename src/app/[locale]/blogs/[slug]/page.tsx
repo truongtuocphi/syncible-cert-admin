@@ -1,24 +1,28 @@
 'use client';
 import clsx from 'clsx';
 import { useTranslations, useLocale } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
 import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
+import { Link } from '@/i18n/routing';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
-import { Link } from '@/i18n/routing';
+import { useRouter } from 'next/navigation';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
+  const locale = useLocale();
+  const router = useRouter();
+  const { slug } = params;
+
   const [notFoundError, setNotFoundError] = useState(false);
   const [author, setAuthor] = useState<any>(null);
   const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<any[]>([]);
-  const { slug } = params;
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
 

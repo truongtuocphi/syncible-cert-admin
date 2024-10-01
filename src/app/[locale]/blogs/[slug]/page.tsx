@@ -245,8 +245,8 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 {sidebarContent.length > 0 && (
                   <div className="mt-8">
                     <h2 className="font-bold">Table of Contents</h2>
-                    <ul className="list-disc pl-4">
-                      <li>
+                    <ul className="list-none pl-4">
+                      <li className="flex flex-col gap-4">
                         {sidebarContent.map((item, index) => (
                           <div key={index} dangerouslySetInnerHTML={{ __html: item }} />
                         ))}

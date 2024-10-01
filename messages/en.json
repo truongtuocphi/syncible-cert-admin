@@ -124,7 +124,7 @@
       },
       "read_time": { 
         "label" : "Read Time:",
-        "value" : "{readTime, plural, =0 {No longer than a minute} =1 {1 minute} other {# minutes}}"
+        "value" : "{read_time, plural, =0 {No longer than a minute} =1 {1 minute} other {# minutes}}"
       }
     },
     "navigation": {

@@ -124,7 +124,7 @@
       },
       "read_time": { 
         "label" : "Thời gian đọc:",
-        "value" : "{readTime} phút"
+        "value" : "{read_time, plural, =0 {Ít hơn một phút} =1 {1 phút} other {# phút}}"
       }
     },
     "navigation": {

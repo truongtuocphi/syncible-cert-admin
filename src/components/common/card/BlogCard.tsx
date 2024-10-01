@@ -8,7 +8,7 @@ export default function BlogCard({ entry }: { entry: ArticleEntry }) {
   return (
     <Card className="h-full overflow-hidden rounded-[1.25rem] border-[#F0F0F0] bg-white/80 shadow-none backdrop-blur-[50px]">
       <CardHeader>
-        <div className="max-h-40 w-full overflow-hidden rounded-xl">
+        <div className="relative max-h-40 w-full overflow-hidden rounded-xl">
           <Image
             src={entry.bannerImg || '/SyncibleSmallerBanner.png'}
             alt="Banner photo of the blog post"
@@ -28,21 +28,6 @@ export default function BlogCard({ entry }: { entry: ArticleEntry }) {
       </CardContent>
       <CardFooter>
         <AuthorProfile author={entry.author} />
-        {/* <div className="flex w-full gap-4">
-          <div className="h-16 w-16 overflow-hidden rounded-full shrink-0">
-            <Image
-              className="h-full w-full"
-              src={entry.author.avatar}
-              alt={entry.author.name}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </div>
-          <div className="flex w-full flex-col justify-center">
-            <div className="text-lg font-bold">{entry.author.name}</div>
-            <div className="text-base font-medium text-[#A2A3A9]">{entry.author.position}</div>
-          </div>
-        </div> */}
       </CardFooter>
     </Card>
   );

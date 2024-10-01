@@ -21,7 +21,7 @@ export default function Breadcrumb({ items }: BreadcrumbProps) {
                 {item.label}
               </Link>
             ) : (
-              <span className="font-medium text-[#2C2C2C]">{item.label}</span>
+              <span className="font-medium text-[#2C2C2C] line-clamp-1">{item.label}</span>
             )}
             {index < items.length - 1 && <span className="mx-2 [&_path]:stroke-current"><ArrowNarrowRight className="stroke-[#A2A3A9] h-4 w-4" /></span>}
           </li>

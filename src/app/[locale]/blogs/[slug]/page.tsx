@@ -36,7 +36,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
       // Nếu locale đã thay đổi, chuyển hướng về trang home
       router.push('/');
     }
-  }, [locale, isInitialRender]);
+  }, [locale, isInitialRender, router]);
 
   useEffect(() => {
     async function fetchBlockContent(slug: string) {

@@ -96,7 +96,7 @@
     }
   },
   "BlogListPage": {
-    "title": "Blog",
+    "title": "Blogs",
     "text": "Browse our blog for tips, insights, and stories on engaging learners and growing your credentialing program.",
     "category": {
       "label": "Category",
@@ -109,7 +109,7 @@
     }
   },
   "BlogPage": {
-    "header": "What is a Syncible Certificate and Syncible Qualified Batch?",
+    "loading": "Loading content...",
     "nav_select_placeholder": {
       "label" : "On this page"
     },
@@ -124,7 +124,7 @@
       },
       "read_time": { 
         "label" : "Read Time:",
-        "value" : "8 minutes"
+        "value" : "{readTime, plural, =0 {No longer than a minute} =1 {1 minute} other {# minutes}}"
       }
     },
     "navigation": {

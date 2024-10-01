@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
 
 import SyncibleBanner from '/public/SyncibleBanner.svg';
-
+import Image from 'next/image';
 import { Link, usePathname } from '@/i18n/routing';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
 import generateIdFromText from '@/utils/generateHeaderID';
@@ -69,6 +69,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const { slug } = params;
+  const [bannerImg, setBannerImg] = useState<string | null>(null);
 
   const getHeaders = () => {
     const headers = document.querySelectorAll('h2[id]');
@@ -121,6 +122,15 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
             avatar: authorResponse.avatar_urls['96'], // Use the 96px avatar size
             position: authorResponse.description, // Assuming a default position; you could add a custom field for this
           });
+
+          if (post.featured_media) {
+            const mediaResponse = await fetchDataFromWP(
+              `https://admin.syncible.io/wp-json/wp/v2/media/${post.featured_media}`
+            );
+            setBannerImg(mediaResponse.source_url); // Ensure a default empty string if no image
+          } else {
+            setBannerImg('/SyncibleBiggerBanner.png');
+          }
         }
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -155,7 +165,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   }, [slug]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="m-auto">{t('loading')}</div>;
   }
 
   if (!blogContent) {
@@ -168,13 +178,18 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   ];
 
   const processedContent = blogContent.content.rendered
-    .replace(/\n{3,}/g, '<br />') // Limit newlines to 2
+    .replace(/\n{3,}/g, '') // Limit newlines to 2
     .replace(/<h([1-6])>(.*?)<\/h\1>/g, (match: any, level: any, content: string) => {
-      console.log(content);
       const id = generateIdFromText(content); // Generate an ID from the heading content
       return `<h${level} id="${id}">${content}</h${level}>`; // Add the ID to the heading
     });
 
+  const readTime = Math.ceil(blogContent.content.rendered.split(' ').length / 200);
+  const date_created = new Date(blogContent.date).toLocaleDateString('en-GB', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
   return (
     <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
       <div className="flex flex-col gap-10 px-4 pb-4 md:px-8 md:pb-10 xl:px-32">
@@ -183,8 +198,17 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           <div className="text-center text-2xl font-bold md:text-3xl lg:text-5xl">
             {blogContent.title.rendered}
           </div>
-          <div className="w-full rounded-[2rem]">
-            <SyncibleBanner className="aspect-[1184/395] h-fit w-full object-cover" />
+          <div className="h-full w-full overflow-hidden rounded-[2rem]">
+            {/* <SyncibleBanner className="aspect-[1184/395] h-fit w-full object-cover" /> */}
+            {bannerImg && (
+              <Image
+                src={bannerImg}
+                alt={blogContent.title.rendered}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority
+              />
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-8 md:flex-row">
@@ -192,18 +216,6 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
             <div className="flex h-full flex-col gap-8">
               <div className="flex flex-col gap-6">
                 <div className="flex items-center gap-4">
-                  {/* <div>
-                    <Avatar className="h-16 w-16">
-                      <AvatarImage src="/SmugFace.png" alt="" />
-                      <AvatarFallback>SC</AvatarFallback>
-                    </Avatar>
-                  </div>
-                  <div>
-                    <div className="text-lg font-bold">{t('author_profile.name')}</div>
-                    <div className="text-base font-medium text-[#A2A3A9]">
-                      {t('author_profile.role')}
-                    </div>
-                  </div> */}
                   {author && <AuthorProfile author={author} />}
                 </div>
                 <div className="w-[70%] border-t-[1px]"></div>
@@ -211,19 +223,17 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                   <div className="text-base font-medium text-[#A2A3A9]">
                     {t('blog_info.date_created.label')}
                   </div>
-                  <div className="text-lg text-[#2C2C2C] font-medium">
-                    {new Date(blogContent.date).toLocaleDateString('en-GB', {
-                      day: '2-digit',
-                      month: '2-digit',
-                      year: 'numeric',
-                    })}
+                  <div className="text-lg font-medium text-[#2C2C2C]">
+                    {date_created}
                   </div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="text-base font-medium text-[#A2A3A9]">
                     {t('blog_info.read_time.label')}
                   </div>
-                  <div className="text-lg font-medium">{t('blog_info.read_time.value')}</div>
+                  <div className="text-lg font-medium">
+                    {t('blog_info.read_time.value', { readTime: readTime })}
+                  </div>
                 </div>
               </div>
               <div

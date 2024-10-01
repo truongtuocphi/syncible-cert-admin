@@ -96,7 +96,7 @@
     }
   },
   "BlogListPage": {
-    "title": "Blog",
+    "title": "Blogs",
     "text": "Tìm hiểu blog của chúng tôi về các mẹo, thông tin chi tiết và câu chuyện về việc thu hút người học và phát triển chương trình cấp chứng chỉ của bạn.",
     "category": {
       "label": "Danh mục",
@@ -109,7 +109,7 @@
     }
   },
   "BlogPage": {
-    "header": "Syncible Certificate và Syncible Qualified Batch là gì?",
+    "loading": "Đang tải nội dung...",
     "nav_select_placeholder": {
       "label" : "Trên trang này"
     },

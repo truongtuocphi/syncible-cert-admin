@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { Key, use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import BlogCard from '@/components/common/card/BlogCard';
 import { Button } from '@/components/ui/button';
 import ArrowNarrowLeft from '@/assets/icons/arrow-narrow-left.svg';

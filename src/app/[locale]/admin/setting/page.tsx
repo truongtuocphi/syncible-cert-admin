@@ -28,8 +28,8 @@ export default function Setting() {
           </TabsTrigger>
         </TabsList>
         {/* Edit profile */}
-        <TabsContent value="profile" className="rounded-2xl">
-          <Card>
+        <TabsContent value="profile">
+          <Card className="rounded-2xl">
             <CardHeader>
               <CardTitle>Account</CardTitle>
               <CardDescription>
@@ -52,8 +52,8 @@ export default function Setting() {
           </Card>
         </TabsContent>
         {/* Account */}
-        <TabsContent value="account" className="rounded-2xl">
-          <Card>
+        <TabsContent value="account">
+          <Card className="rounded-2xl">
             <CardHeader>
               <CardTitle>Account</CardTitle>
               <CardDescription>
@@ -76,8 +76,8 @@ export default function Setting() {
           </Card>
         </TabsContent>
         {/* Password */}
-        <TabsContent value="password" className="rounded-2xl">
-          <Card>
+        <TabsContent value="password">
+          <Card className="rounded-2xl">
             <CardHeader>
               <CardTitle>Password</CardTitle>
               <CardDescription>

@@ -11,7 +11,7 @@
     },
     "about_section": {
       "header": "About us",
-      "content": "Syncible a pioneering platform that provides secure and transparent NFT certificates for across various sectors, including education, business, and non-profit organizations. Syncible ensures the authenticity and integrity of digital certificates, helping to minimize the risk of counterfeiting and enhancing the credibility of certificate-issuing organizations."
+      "content": "Syncible a pioneering platform that provides secure and transparent tokenized certificates for across various sectors, including education, business, and non-profit organizations. Syncible ensures the authenticity and integrity of digital certificates, helping to minimize the risk of counterfeiting and enhancing the credibility of certificate-issuing organizations."
     },
     "believe_section": {
       "header": "What we believe",
@@ -25,7 +25,7 @@
       "header": "FAQs",
       "question_1": {
         "header": "What is Blockchain?",
-        "answer": "Blockchain is a secure, decentralized digital ledger used to record economic transactions or virtually any valuable data. Once data is written to the blockchain, it becomes permanent and cannot be altered by any party. Syncible utilizes the Bitcoin blockchain to store permanent records of credentials, allowing issuers to verify these records on the blockchain and reduce the risk of credential fraud."
+        "answer": "Blockchain is a secure, decentralized digital ledger used to record economic transactions or virtually any valuable data. Once data is written to the blockchain, it becomes permanent and cannot be altered by any party. Syncible utilizes the Ethereum blockchain to store permanent records of credentials, allowing issuers to verify these records on the blockchain and reduce the risk of credential fraud."
       },
       "question_2": {
         "header": "How Does Blockchain Prevent Credential Fraud?",

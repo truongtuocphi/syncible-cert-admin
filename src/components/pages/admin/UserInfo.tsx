@@ -108,15 +108,15 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mt-5 w-64 rounded-2xl border-none">
         <DropdownMenuGroup>
-          <DropdownMenuItem
-            onMouseEnter={() => setIsLanguageOpen(false)}
-            className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
-          >
-            <Link href={'/admin/setting'}>
+          <Link href={'/admin/setting'}>
+            <DropdownMenuItem
+              onMouseEnter={() => setIsLanguageOpen(false)}
+              className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
+            >
               <BiUser className="mr-4 text-2xl" />
               {transLation('userInfo.profile')}
-            </Link>
-          </DropdownMenuItem>
+            </DropdownMenuItem>
+          </Link>
 
           <DropdownMenuItem
             className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"

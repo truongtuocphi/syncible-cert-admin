@@ -51,17 +51,8 @@ export default function Setting() {
         {/* Edit profile */}
         <TabsContent value="profile">
           <Card className="rounded-2xl">
-            <CardHeader>
-              <CardTitle>Account</CardTitle>
-              <CardDescription>
-                Make changes to your account here. Click save when you're done.
-              </CardDescription>
-            </CardHeader>
             <CardContent className="space-y-2">
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="mx-auto max-w-2xl rounded-md bg-white p-4 shadow-md"
-              >
+              <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                 <div className="mb-6 flex items-center space-x-4">
                   <img src={image} alt="Profile" className="h-24 w-24 rounded-full object-cover" />
                   <div>

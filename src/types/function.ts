@@ -8,6 +8,7 @@ export interface CollectionData {
   description?: string | undefined;
   displayName?: string | undefined;
   logoImage?: string | undefined;
+  createdAt?: string | undefined;
 }
 
 export interface Collection {

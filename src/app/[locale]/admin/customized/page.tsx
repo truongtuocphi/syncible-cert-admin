@@ -233,7 +233,7 @@ export default function DefineTemplate() {
                   </div>
                   <DrawerFooter>
                     <DrawerClose asChild>
-                      <Button className="mt-4 bg-primary-50 text-white">Xong</Button>
+                      <Button className="mt-4 bg-primary-50 text-white">{t('buttonDone')}</Button>
                     </DrawerClose>
                   </DrawerFooter>
                 </div>
@@ -309,22 +309,20 @@ export default function DefineTemplate() {
         <DialogContent className="text-white">
           <DialogTitle>
             <div className="mb-1 flex w-full items-center justify-between">
-              <p className="font-bold text-gray-700">Bản xem trước</p>
+              <p className="font-bold text-gray-700">{t('titleModal')}</p>
               <IoClose
                 onClick={() => setResult('')}
                 className="cursor-pointer text-3xl font-medium text-gray-700"
               />
             </div>
-            <DialogDescription>
-              Đây là bản xem trước của mẫu chứng chỉ mà bạn đã tạo.
-            </DialogDescription>
+            <DialogDescription>{t('subTitleModal')}</DialogDescription>
           </DialogTitle>
           <div className="h-fit w-full">
             <img src={result} alt="img" className="h-full w-full border-[0.5px] border-gray-300" />
           </div>
           <DialogFooter>
             <ButtonPrimary onClick={handleDownload} className="px-6 text-white">
-              Tải mẫu xuống
+              {t('ButtonModal')}
             </ButtonPrimary>
           </DialogFooter>
         </DialogContent>

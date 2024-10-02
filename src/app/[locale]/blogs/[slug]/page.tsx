@@ -1,29 +1,32 @@
 'use client';
 import clsx from 'clsx';
 import { useTranslations, useLocale } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Image from 'next/image';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
 import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
+import { Link } from '@/i18n/routing';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
-import { Link } from '@/i18n/routing';
+import { useRouter } from 'next/navigation';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
+  const locale = useLocale();
+  const router = useRouter();
+  const { slug } = params;
+
   const [notFoundError, setNotFoundError] = useState(false);
   const [author, setAuthor] = useState<any>(null);
   const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [categories, setCategories] = useState<any[]>([]);
-  const { slug } = params;
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
 
   useEffect(() => {
-
     async function fetchBlockContent(slug: string) {
       setLoading(true);
       setNotFoundError(false);
@@ -35,24 +38,21 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
         if (response.length === 0) {
           setNotFoundError(true);
         } else {
-          const post = response[0]; // Get the blog post content
+          const post = response[0];
 
-          // Fetch the author data
           const authorResponse = await fetchDataFromWP(
             `https://admin.syncible.io/wp-json/wp/v2/users/${post.author}`
           );
           setAuthor({
             name: authorResponse.name,
-            avatar: authorResponse.avatar_urls['96'], // Use the 96px avatar size
-            position: authorResponse.description, // Assuming a default position; you could add a custom field for this
+            avatar: authorResponse.avatar_urls['96'],
+            position: authorResponse.description,
           });
 
           setBannerImg('/SyncibleBiggerBanner.png');
-          const { html, doc } = addIdsToHeadings(
-            post.content.rendered.replace(/\n{3,}/g, '\n\n') // Limit newlines to 2
-          );
+          const { html, doc } = addIdsToHeadings(post.content.rendered.replace(/\n{3,}/g, '\n\n'));
 
-          const toc = generateTOC(doc); // Generate the Table of Content
+          const toc = generateTOC(doc);
           setToc(toc);
 
           setBlogContent({ ...post, content: { rendered: html } });
@@ -65,7 +65,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
               return categoryResponse;
             });
             const categoryData = await Promise.all(categoryPromises);
-            setCategories(categoryData); // Set the categories in state
+            setCategories(categoryData);
           }
         }
       } catch (error) {

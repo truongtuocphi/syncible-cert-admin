@@ -11,7 +11,7 @@
     },
     "about_section": {
       "header": "About us",
-      "content": "Syncible a pioneering platform that provides secure and transparent NFT certificates for across various sectors, including education, business, and non-profit organizations. Syncible ensures the authenticity and integrity of digital certificates, helping to minimize the risk of counterfeiting and enhancing the credibility of certificate-issuing organizations."
+      "content": "Syncible a pioneering platform that provides secure and transparent tokenized certificates for across various sectors, including education, business, and non-profit organizations. Syncible ensures the authenticity and integrity of digital certificates, helping to minimize the risk of counterfeiting and enhancing the credibility of certificate-issuing organizations."
     },
     "believe_section": {
       "header": "What we believe",
@@ -25,7 +25,7 @@
       "header": "FAQs",
       "question_1": {
         "header": "What is Blockchain?",
-        "answer": "Blockchain is a secure, decentralized digital ledger used to record economic transactions or virtually any valuable data. Once data is written to the blockchain, it becomes permanent and cannot be altered by any party. Syncible utilizes the Bitcoin blockchain to store permanent records of credentials, allowing issuers to verify these records on the blockchain and reduce the risk of credential fraud."
+        "answer": "Blockchain is a secure, decentralized digital ledger used to record economic transactions or virtually any valuable data. Once data is written to the blockchain, it becomes permanent and cannot be altered by any party. Syncible utilizes the Ethereum and Polygon blockchain to store permanent records of credentials, allowing issuers to verify these records on the blockchain and reduce the risk of credential fraud."
       },
       "question_2": {
         "header": "How Does Blockchain Prevent Credential Fraud?",
@@ -218,7 +218,11 @@
     "customCertificate": {
       "title": "Customize Template",
       "buttonSelectModel": "Select model",
-      "uploadModel": "Upload template"
+      "uploadModel": "Upload template",
+      "buttonDone": "Done",
+      "titleModal": "Preview",
+      "subTitleModal": "This is a preview of the certificate template you have created.",
+      "ButtonModal": "Download template"
     },
 
     "Management": {
@@ -249,7 +253,7 @@
     "contractDetail": {
       "buttonBack": "Back",
       "titleCertificate": "Items",
-      "titleOwner": "Owner",
+      "titleOwner": "Contract Owner",
       "displayName": "Display Name",
       "type": "Type",
       "describe": "Description",
@@ -258,7 +262,8 @@
       "status": "Status",
       "contractAddress": "Contract Address",
       "collectionOwner": "Collection Owner",
-      "Verified": "Verified"
+      "Verified": "Verified",
+      "time": "Time Created"
     },
 
     "collectionDetail": {
@@ -281,7 +286,7 @@
     },
 
     "createCollection": {
-      "title": "Create ERC-721 Collection",
+      "title": "Create New Contract ",
       "titleImage": "Logo Image",
       "subtitleImage": "Update your logo collection",
       "Buttonfile": "Choose file",
@@ -344,8 +349,8 @@
 
   "breadcrumb": {
     "mintnft": "Create a Certificate",
-    "collection": "Certificate management",
-    "createcollection": "Certificate Management",
+    "collection": "Certificate Management",
+    "createcollection": "Create Contract",
     "admin": "Home",
     "contractdetail": "Contract details",
     "filestorage": "Storage folder",

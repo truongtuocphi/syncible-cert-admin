@@ -2,7 +2,7 @@
 
 import { ReactNode, useState } from 'react';
 
-import Link from 'next/link';
+import { Link } from '@/i18n/routing';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 

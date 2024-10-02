@@ -7,11 +7,10 @@ import LinkedInIcon from '@/assets/icons/LinkedinIcon.svg';
 import TwitterIcon from '@/assets/icons/TwitterIcon.svg';
 import YoutubeIcon from '@/assets/icons/YoutubeIcon.svg';
 
-
 const listSocialMedia = [
   {
     link_name: 'LinkedIn',
-    url: 'https://www.linkedin.com/',
+    url: 'https://www.linkedin.com/company/syncible',
     icon: <LinkedInIcon className="h-full w-full" />,
   },
   {
@@ -72,7 +71,7 @@ const Footer = () => {
               <div className="flex items-center gap-5">
                 {listSocialMedia.map(({ link_name, url, icon }) => {
                   return (
-                    <Link key={link_name} href={url} target='_blank'>
+                    <Link key={link_name} href={url} target="_blank">
                       <div className="aspect-square h-6 cursor-pointer">{icon}</div>
                     </Link>
                   );

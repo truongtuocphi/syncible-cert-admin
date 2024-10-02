@@ -45,12 +45,27 @@ export default function Login() {
     e.preventDefault();
     setLoading(true);
     setError('');
+
     try {
       await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
-    } catch (error) {
+    } catch (error: any) {
+      // Chuyển `error` thành kiểu `any` để có thể truy cập thông tin lỗi chi tiết
       setLoading(false);
-      setError('Invalid credentials.');
+
+      // Log chi tiết lỗi ra console để dễ dàng kiểm tra
+      console.error('Login error:', error);
+
+      // Hiển thị thông báo lỗi chi tiết dựa trên mã lỗi từ Firebase
+      if (error.code === 'auth/wrong-password') {
+        setError('Incorrect password.');
+      } else if (error.code === 'auth/user-not-found') {
+        setError('Account does not exist.');
+      } else if (error.code === 'auth/invalid-email') {
+        setError('Invalid email.');
+      } else {
+        setError('Login failed. Please try again.');
+      }
     }
   };
 

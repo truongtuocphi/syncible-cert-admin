@@ -25,6 +25,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const [categories, setCategories] = useState<any[]>([]);
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
+  
 
   useEffect(() => {
     async function fetchBlockContent(slug: string) {

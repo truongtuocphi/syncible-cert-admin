@@ -1,11 +1,5 @@
 import Image from 'next/image';
 
-interface Author {
-  name: string;
-  avatar: string;
-  position: string;
-}
-
 export default function AuthorProfile({ author }: { author: Author }) {
   return (
     <div className="flex w-full gap-4">

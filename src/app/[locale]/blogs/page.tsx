@@ -117,11 +117,11 @@ export default function Page() {
           </div>
         </div>
         {/* making a filter here by clicking on the categories */}
-        <div className="w-full border-b border-[#CCCCCC] pt-16">
+        <div className="w-full border-b border-[#CCCCCC] pt-16 text-[#A2A3A9]">
           <div className="flex space-x-4 font-semibold">
             <div
-              className={clsx("w-fit border-b pb-4", {
-              'border-[#2C2C2C]': selectedCategory === null,
+              className={clsx("w-fit border-b pb-4 cursor-pointer", {
+              'border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
               })}
               onClick={() => handleCategoryClick(null)}
             >
@@ -130,8 +130,8 @@ export default function Page() {
             {categories.map((category) => (
                 <div
                 key={category.id}
-                className={clsx("w-fit border-b pb-4", {
-                  'border-[#2C2C2C]': selectedCategory === category.id,
+                className={clsx("w-fit border-b pb-4 cursor-pointer", {
+                  'border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
                 })}
                 onClick={() => handleCategoryClick(category.id)}
                 >

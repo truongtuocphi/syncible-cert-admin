@@ -14,6 +14,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { BiImageAdd } from 'react-icons/bi';
 
 export default function Setting() {
   const {
@@ -59,26 +60,27 @@ export default function Setting() {
                     <img
                       src={image}
                       alt="Profile"
-                      className="h-24 w-24 rounded-full border-2 object-cover"
+                      className="h-32 w-32 rounded-full border-2 border-white object-cover shadow"
                     />
-                    <div>
-                      <label htmlFor="profilePic" className="cursor-pointer text-blue-500">
-                        Change picture
-                      </label>
+                    <div className="space-y-2">
                       <input
                         type="file"
-                        id="profilePic"
-                        className="hidden"
+                        accept="image/*"
                         onChange={handleImageChange}
+                        required
+                        className="hidden"
+                        id="file-upload"
                       />
+                      <div className="flex items-center gap-4">
+                        <label
+                          htmlFor="file-upload"
+                          className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-500 hover:bg-gray-100"
+                        >
+                          <BiImageAdd className="text-2xl text-black" />
+                          Change picture
+                        </label>
+                      </div>
                     </div>
-                    <button
-                      type="button"
-                      className="text-red-500"
-                      onClick={() => setImage('/path/to/default/profile.png')}
-                    >
-                      Delete
-                    </button>
                   </div>
                 </div>
 

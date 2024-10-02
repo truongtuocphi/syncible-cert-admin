@@ -23,7 +23,7 @@ export default function Setting() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const [image, setImage] = useState('/path/to/default/profile.png');
+  const [image, setImage] = useState('');
 
   const onSubmit = (data: any) => {
     console.log(data);

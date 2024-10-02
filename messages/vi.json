@@ -212,7 +212,11 @@
     "customCertificate": {
       "title": "Tùy chỉnh mẫu",
       "buttonSelectModel": "Chọn mẫu",
-      "uploadModel": "Tải mẫu lên"
+      "uploadModel": "Tải mẫu lên",
+      "buttonDone": "Xong",
+      "titleModal": "Bản xem trước",
+      "subTitleModal": "Đây là bản xem trước của mẫu chứng chỉ mà bạn đã tạo.",
+      "ButtonModal": "Tải mẫu xuống"
     },
 
     "Management": {

@@ -212,7 +212,11 @@
     "customCertificate": {
       "title": "Customize Template",
       "buttonSelectModel": "Select model",
-      "uploadModel": "Upload template"
+      "uploadModel": "Upload template",
+      "buttonDone": "Done",
+      "titleModal": "Preview",
+      "subTitleModal": "This is a preview of the certificate template you have created.",
+      "ButtonModal": "Download template"
     },
 
     "Management": {

@@ -1,54 +1,73 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import BlogCard from '@/components/common/card/BlogCard';
 import { Button } from '@/components/ui/button';
 import ArrowNarrowLeft from '@/assets/icons/arrow-narrow-left.svg';
 import ArrowNarrowRight from '@/assets/icons/arrow-narrow-right.svg';
-import { fetchPaginatedDataFromWP } from '@/utils/fetchDataFromWordPress';
+import {
+  fetchCategories,
+  fetchPaginatedDataFromWP,
+  fetchPosts,
+  fetchAuthorById,
+  fetchMediaById,
+} from '@/utils/fetchDataFromWordPress';
 import { BlogCardSkeleton } from '@/components/common/skeleton/Skeleton';
+import clsx from 'clsx';
 
 export default function Page() {
   const t = useTranslations('BlogListPage');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const postsPerPage = 9;
+  const [categories, setCategories] = useState<any[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [posts, setPosts] = useState<ArticleEntry[]>([]);
   const [loading, setLoading] = useState(true);
-
   const locale = useLocale();
 
   useEffect(() => {
-    async function fetchPosts(page: number) {
+    async function loadCategories() {
+      try {
+        const { data } = await fetchCategories();
+        const filteredCategories = data.filter((category: any) => category.id !== 1);
+        setCategories(filteredCategories);
+      } catch (error) {
+        console.error('Error fetching categories:', error);
+      }
+    }
+
+    loadCategories();
+  }, []);
+
+  useEffect(() => {
+    async function loadPosts() {
       setLoading(true);
       try {
         const tagId = locale === 'en' ? 6 : 7;
-        const { data, totalPages } = await fetchPaginatedDataFromWP(
-          `https://admin.syncible.io/wp-json/wp/v2/posts?page=${page}&per_page=${postsPerPage}&tags=${tagId}`
+        const { data, totalPages } = await fetchPosts(
+          currentPage,
+          postsPerPage,
+          selectedCategory,
+          tagId
         );
-
-        setTotalPages(parseInt(totalPages.toString(), 10));
 
         const mappedPosts = await Promise.all(
           data.map(async (post: any) => {
             // Fetch featured media (banner image) if available
-            let bannerImg = '';
+            let bannerImg = '/SyncibleSmallerBanner.png';
             if (post.featured_media) {
-              const mediaResponse = await fetchPaginatedDataFromWP(
-                `https://admin.syncible.io/wp-json/wp/v2/media/${post.featured_media}`
-              );
-              bannerImg = mediaResponse.data.source_url || ''; // Ensure a default empty string if no image
+              const mediaResponse = await fetchMediaById(post.featured_media);
+              bannerImg = mediaResponse.source_url || bannerImg; // Ensure a default empty string if no image
             }
 
             // Fetch author details
-            const authorResponse = await fetchPaginatedDataFromWP(
-              `https://admin.syncible.io/wp-json/wp/v2/users/${post.author}`
-            );
+            const authorResponse = await fetchAuthorById(post.author);
             const author = {
-              name: authorResponse.data.name,
-              avatar: authorResponse.data.avatar_urls['96'], // Use the 96px avatar size
-              position: authorResponse.data.description, // Assuming a default position; you could add a custom field for this
+              name: authorResponse.name,
+              avatar: authorResponse.avatar_urls['96'], // Use the 96px avatar size
+              position: authorResponse.description, // Assuming a default position; you could add a custom field for this
             };
 
             // Map to your ArticleEntry structure
@@ -60,16 +79,16 @@ export default function Page() {
             };
           })
         );
-
+        setTotalPages(parseInt(totalPages.toString(), 10));
         setPosts(mappedPosts);
       } catch (error) {
         console.error('Error fetching posts:', error);
       } finally {
-        setLoading(false); // Stop loading when data is fetched
+        setLoading(false);
       }
     }
-    fetchPosts(currentPage);
-  }, [currentPage, locale]);
+    loadPosts();
+  }, [currentPage, selectedCategory, locale]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -83,6 +102,11 @@ export default function Page() {
     }
   };
 
+  const handleCategoryClick = (categoryId: number | null) => {
+    setSelectedCategory(categoryId);
+    setCurrentPage(1); // Reset to first page when a category is selected
+  };
+
   return (
     <div className="flex justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
       <div className="flex h-full w-full max-w-[90rem] flex-col items-center px-4 md:px-8 xl:px-32">
@@ -92,9 +116,28 @@ export default function Page() {
             {t('text')}
           </div>
         </div>
+        {/* making a filter here by clicking on the categories */}
         <div className="w-full border-b border-[#CCCCCC] pt-16">
-          <div className="w-fit border-b border-[#2C2C2C] pb-4 font-semibold">
-            {t('category.all.label')}
+          <div className="flex space-x-4 font-semibold">
+            <div
+              className={clsx("w-fit border-b pb-4", {
+              'border-[#2C2C2C]': selectedCategory === null,
+              })}
+              onClick={() => handleCategoryClick(null)}
+            >
+              {t('category.all.label')}
+            </div>
+            {categories.map((category) => (
+                <div
+                key={category.id}
+                className={clsx("w-fit border-b pb-4", {
+                  'border-[#2C2C2C]': selectedCategory === category.id,
+                })}
+                onClick={() => handleCategoryClick(category.id)}
+                >
+                {category.name}
+                </div>
+            ))}
           </div>
         </div>
         <div className="w-full">

@@ -125,7 +125,13 @@
       }
     },
     "category": {
-      "label": "Categories:"
+      "label": "Categories:",
+      "not_found": {
+        "blog": {
+          "header": "Blog not found",
+          "content": "The blog you are looking for does not exist."
+        }
+      }
     }
   },
   "ExplorerPage": {

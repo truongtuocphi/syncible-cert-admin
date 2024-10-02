@@ -17,7 +17,8 @@ export function LocaleSelect() {
   const pathname = usePathname();
 
   const handleLanguageChange = async (value: 'en' | 'vi') => {
-    router.replace(pathname, { locale: value });
+    // router.replace(pathname, { locale: value });
+    router.replace('/', { locale: value });
   };
 
   return (
@@ -76,7 +77,10 @@ export function LocaleCollapsible() {
         <CollapsibleContent className="space-y-2">
           {routing.locales.map((loc) => (
             <div key={loc} className="px-4 py-3 text-sm hover:text-[#2C2C2C] active:text-[#2C2C2C]">
-              <Link href={`${pathname}`} locale={loc}>
+              {/* <Link href={`${pathname}`} locale={loc}>
+                {t('label', { locale: loc })}
+              </Link> */}
+              <Link href="\" locale={loc}>
                 {t('label', { locale: loc })}
               </Link>
             </div>

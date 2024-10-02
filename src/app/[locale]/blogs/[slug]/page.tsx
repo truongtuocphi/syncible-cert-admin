@@ -86,8 +86,8 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
     return (
       <div className="flex h-full w-full items-center justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
         <div className="text-center">
-          <h1 className="text-4xl font-bold">Content Not Found</h1>
-          <p className="mt-4 text-xl">Sorry, the content you're looking for doesn't exist.</p>
+          <h1 className="text-4xl font-bold">{t('category.not_found.blog.header')}</h1>
+          <p className="mt-4 text-xl">{t('category.not_found.blog.content')}</p>
         </div>
       </div>
     );

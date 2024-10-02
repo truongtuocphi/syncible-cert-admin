@@ -125,7 +125,13 @@
       }
     },
     "category": {
-      "label": "Danh mục:"
+      "label": "Danh mục:",
+      "not_found": {
+        "blog": {
+          "header": "Không tìm thấy Blog",
+          "content": "Blog bạn đang tìm không tồn tại."
+        }
+      }
     }
   },
   "ExplorerPage": {

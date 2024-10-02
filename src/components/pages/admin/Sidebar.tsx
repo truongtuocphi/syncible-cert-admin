@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { BiCustomize } from 'react-icons/bi';
+import { BiCog, BiCustomize } from 'react-icons/bi';
 import { BiHome } from 'react-icons/bi';
 import { BiFile } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
@@ -101,13 +101,13 @@ const Sidebar = () => {
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
       </div>
       <div className="mb-3 text-base">
-        {/* <Link
+        <Link
           href={'/admin/setting'}
-          className={`flex items-center gap-4 rounded-lg from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] p-4 px-4 py-4 font-bold text-gray-500 hover:bg-gradient-to-r hover:text-gray-700`}
+          className={`flex items-center gap-4 rounded-xl from-[#a2f2e7] via-[#a2f2e7]/70 to-[#ffe4c2] px-4 py-4 font-bold text-gray-500 transition-colors duration-300 hover:bg-gradient-to-r hover:text-gray-700`}
         >
           <BiCog className="text-2xl" />
-          Cài đặt
-        </Link> */}
+          {t(`sideBar.setting`)}
+        </Link>
       </div>
     </div>
   );

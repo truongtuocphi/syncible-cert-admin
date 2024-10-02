@@ -10,7 +10,6 @@ import { FaUser } from 'react-icons/fa';
 import { BiGlobe } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
 import { BiLogOut } from 'react-icons/bi';
-// import { BiHelpCircle } from 'react-icons/bi';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -113,8 +112,10 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
             onMouseEnter={() => setIsLanguageOpen(false)}
             className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
           >
-            <BiUser className="mr-4 text-2xl" />
-            {transLation('userInfo.profile')}
+            <Link href={'/admin/setting'}>
+              <BiUser className="mr-4 text-2xl" />
+              {transLation('userInfo.profile')}
+            </Link>
           </DropdownMenuItem>
 
           <DropdownMenuItem

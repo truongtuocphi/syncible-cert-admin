@@ -20,7 +20,7 @@ export default function BlogCard({ entry }: { entry: ArticleEntry }) {
         </div>
       </CardHeader>
       <CardContent>
-        <CardTitle className="line-clamp-3 h-32 font-bold leading-[2rem]">
+        <CardTitle className="line-clamp-4 h-32 font-bold leading-[2rem]">
           <Link href={entry.link} className="hover:underline">
             {entry.title}
           </Link>

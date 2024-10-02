@@ -50,29 +50,36 @@ export default function Setting() {
         </TabsList>
         {/* Edit profile */}
         <TabsContent value="profile">
-          <Card className="rounded-2xl">
+          <Card className="rounded-2xl p-6">
             <CardContent className="space-y-2">
               <form onSubmit={handleSubmit(onSubmit)} className="w-full">
-                <div className="mb-6 flex items-center space-x-4">
-                  <img src={image} alt="Profile" className="h-24 w-24 rounded-full object-cover" />
-                  <div>
-                    <label htmlFor="profilePic" className="cursor-pointer text-blue-500">
-                      Change picture
-                    </label>
-                    <input
-                      type="file"
-                      id="profilePic"
-                      className="hidden"
-                      onChange={handleImageChange}
+                <div className="flex items-center justify-between">
+                  <div className="block text-gray-700">Profile picture</div>
+                  <div className="mb-6 flex items-center space-x-4">
+                    <img
+                      src={image}
+                      alt="Profile"
+                      className="h-24 w-24 rounded-full border-2 object-cover"
                     />
+                    <div>
+                      <label htmlFor="profilePic" className="cursor-pointer text-blue-500">
+                        Change picture
+                      </label>
+                      <input
+                        type="file"
+                        id="profilePic"
+                        className="hidden"
+                        onChange={handleImageChange}
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      className="text-red-500"
+                      onClick={() => setImage('/path/to/default/profile.png')}
+                    >
+                      Delete
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    className="text-red-500"
-                    onClick={() => setImage('/path/to/default/profile.png')}
-                  >
-                    Delete
-                  </button>
                 </div>
 
                 <div className="mb-4">
@@ -149,9 +156,6 @@ export default function Setting() {
                 </div>
               </form>
             </CardContent>
-            <CardFooter>
-              <Button>Save changes</Button>
-            </CardFooter>
           </Card>
         </TabsContent>
         {/* Account */}

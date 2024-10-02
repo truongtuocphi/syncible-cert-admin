@@ -83,7 +83,7 @@ export default function Login() {
   return (
     <div
       className="relative flex max-h-screen items-center justify-start"
-      style={{ minHeight: 'calc(100vh + 100px)' }}
+      style={{ minHeight: 'calc(100vh + 30px)' }}
     >
       <video
         className="absolute left-0 top-0 h-full w-full object-cover"
@@ -94,7 +94,7 @@ export default function Login() {
       ></video>
       <div className="flex h-full w-full items-center px-8 py-5">
         <div
-          className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:p-10 2xl:h-[850px]"
+          className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:px-10 lg:pb-20 lg:pt-10 2xl:h-[850px]"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
         >
           <div className="flex items-center justify-between p-3">
@@ -173,7 +173,7 @@ export default function Login() {
                 Sign in
               </button>
             </form>
-            <div className="mt-4 text-center">
+            {/* <div className="mt-4 text-center">
               <div className="my-6 flex items-center">
                 <div className="flex-grow border-t border-gray-300"></div>
                 <span className="mx-4 text-gray-500">Or</span>
@@ -187,7 +187,7 @@ export default function Login() {
                 <GoogleIcon className="mr-2 size-6" />
                 Sign in with Google
               </button>
-            </div>
+            </div> */}
             <div className="mt-4 text-center">
               <p className="text-sm">
                 Don&rsquo;t have an account?{' '}

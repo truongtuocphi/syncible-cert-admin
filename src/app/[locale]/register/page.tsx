@@ -112,6 +112,7 @@ export default function Register() {
           lastName,
           institution,
           email,
+          avatar: '',
           createdAt: new Date().toISOString(),
         });
       }

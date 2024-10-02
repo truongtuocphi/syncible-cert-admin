@@ -38,8 +38,6 @@ const Sidebar = () => {
 
   const t = useTranslations('Dapp');
 
-  console.log(t(`sideBar.createDigitalCertificate`));
-
   // Active
   const baseLinkClasses =
     'flex items-center gap-4 rounded-xl px-4 py-4 font-bold text-gray-500 transition-colors duration-300';

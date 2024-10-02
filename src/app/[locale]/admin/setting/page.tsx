@@ -15,6 +15,7 @@ import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BiImageAdd } from 'react-icons/bi';
+import { FaImage } from 'react-icons/fa';
 
 export default function Setting() {
   const {
@@ -55,13 +56,18 @@ export default function Setting() {
             <CardContent className="space-y-2">
               <form onSubmit={handleSubmit(onSubmit)} className="w-full">
                 <div className="flex items-center justify-between">
-                  <div className="block text-gray-700">Profile picture</div>
-                  <div className="mb-6 flex items-center space-x-4">
-                    <img
+                  <div className="block w-1/2 font-bold text-gray-700">Profile picture</div>
+                  <div className="mb-6 flex w-1/2 items-center justify-start space-x-4">
+                    {/* <img
                       src={image}
                       alt="Profile"
                       className="h-32 w-32 rounded-full border-2 border-white object-cover shadow"
-                    />
+                    /> */}
+                    <div className="relative h-32 w-32 rounded-full border-4 border-white bg-[#FAFAFA] shadow-lg">
+                      <div className="absolute left-1/2 top-[40%] flex -translate-x-1/2 flex-col items-center gap-2 text-gray-300">
+                        <FaImage className="text-2xl text-gray-500 2xl:text-3xl" />
+                      </div>
+                    </div>
                     <div className="space-y-2">
                       <input
                         type="file"

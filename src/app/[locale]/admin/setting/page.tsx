@@ -27,12 +27,11 @@ export default function Setting() {
 
   const onSubmit = (data: any) => {
     console.log(data);
-    // Save user info to Firebase or any backend
   };
 
   const handleImageChange = (e: any) => {
     const file = e.target.files[0];
-    setImage(URL.createObjectURL(file)); // Preview the uploaded image
+    setImage(URL.createObjectURL(file)); 
   };
 
   return (

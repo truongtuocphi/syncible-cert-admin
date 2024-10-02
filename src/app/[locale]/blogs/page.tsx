@@ -120,23 +120,23 @@ export default function Page() {
         <div className="w-full border-b border-[#CCCCCC] pt-16">
           <div className="flex space-x-4 font-semibold">
             <div
-              className={clsx("w-fit border-b pb-4", {
-              'border-[#2C2C2C]': selectedCategory === null,
+              className={clsx('w-fit border-b pb-4', {
+                'border-[#2C2C2C]': selectedCategory === null,
               })}
               onClick={() => handleCategoryClick(null)}
             >
               {t('category.all.label')}
             </div>
             {categories.map((category) => (
-                <div
+              <div
                 key={category.id}
-                className={clsx("w-fit border-b pb-4", {
-                  'border-[#2C2C2C]': selectedCategory === category.id,
+                className={clsx('w-fit border-b pb-4', {
+                  'cursor-pointer border-[#2C2C2C]': selectedCategory === category.id,
                 })}
                 onClick={() => handleCategoryClick(category.id)}
-                >
+              >
                 {category.name}
-                </div>
+              </div>
             ))}
           </div>
         </div>

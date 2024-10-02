@@ -25,7 +25,7 @@
       "header": "Câu hỏi thường gặp",
       "question_1": {
         "header": "Blockchain là gì?",
-        "answer": "Blockchain là một sổ cái kỹ thuật số an toàn và phi tập trung, dùng để ghi lại các giao dịch kinh tế hoặc bất kỳ loại dữ liệu có giá trị nào. Khi dữ liệu đã được ghi vào blockchain, nó trở nên cố định và không thể bị thay đổi bởi bất kỳ bên nào. Syncible tận dụng blockchain của Bitcoin để lưu trữ các hồ sơ chứng nhận vĩnh viễn, cho phép các bên phát hành có thể xác minh các thông tin này trực tiếp trên blockchain, giúp giảm thiểu nguy cơ gian lận chứng chỉ."
+        "answer": "Blockchain là một sổ cái kỹ thuật số an toàn và phi tập trung, dùng để ghi lại các giao dịch kinh tế hoặc bất kỳ loại dữ liệu có giá trị nào. Khi dữ liệu đã được ghi vào blockchain, nó trở nên cố định và không thể bị thay đổi bởi bất kỳ bên nào. Syncible tận dụng blockchain của Ethereum và Polygon để lưu trữ các hồ sơ chứng nhận vĩnh viễn, cho phép các bên phát hành có thể xác minh các thông tin này trực tiếp trên blockchain, giúp giảm thiểu nguy cơ gian lận chứng chỉ."
       },
       "question_2": {
         "header": "Blockchain ngăn chặn gian lận chứng chỉ như thế nào?",

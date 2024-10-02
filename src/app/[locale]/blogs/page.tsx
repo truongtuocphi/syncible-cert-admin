@@ -128,15 +128,15 @@ export default function Page() {
               {t('category.all.label')}
             </div>
             {categories.map((category) => (
-                <div
+              <div
                 key={category.id}
                 className={clsx("w-fit border-b pb-4 cursor-pointer", {
                   'border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
                 })}
                 onClick={() => handleCategoryClick(category.id)}
-                >
+              >
                 {category.name}
-                </div>
+              </div>
             ))}
           </div>
         </div>

@@ -5,25 +5,32 @@ import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
+
 import { useAccount } from 'wagmi';
 
+import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
+import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Loading from '@/components/common/loading/Loading';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
-import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
-import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
 import Modal from '@/components/pages/admin/Modal';
-import ABI from '@/contract/ABI.json';
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+
 import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
-import { Collection } from '@/types/function';
+
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
+
+import { Collection } from '@/types/function';
+
 import { BiImageAdd } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
-import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
+
 import { useTranslations } from 'next-intl';
+
+import ABI from '@/contract/ABI.json';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -40,7 +47,6 @@ const Experience = () => {
   const [csvDataFromChild, setCsvDataFromChild] = useState<any[]>([]);
   const [dataFromMintSingle, setDataFromMintSingle] = useState<any[]>([]);
   const [coppyCsvDataFromChild, setCoppyCsvDataFromChild] = useState<any[]>([]);
-  const [top, setTop] = useState(20);
   const [loadingButton, setLoadingButton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingBanner, setLoadingBanner] = useState<boolean>(false);
@@ -53,6 +59,8 @@ const Experience = () => {
   const t = useTranslations('Dapp.mintNFT');
 
   useEffect(() => {
+    if (!address) return;
+
     const fetchData = async () => {
       try {
         const dbRef = ref(db, 'collections');
@@ -62,7 +70,7 @@ const Experience = () => {
           const collections: Collection[] = [];
           snapshot.forEach((childSnapshot) => {
             const collection = childSnapshot.val();
-            if (collection.address === address) {
+            if (collection?.address === address) {
               collections.push({
                 id: childSnapshot.key || '',
                 displayName: collection.displayName,
@@ -164,6 +172,11 @@ const Experience = () => {
       return;
     }
 
+    if (typeof window.ethereum === 'undefined') {
+      alert('Please install a wallet like MetaMask.');
+      return;
+    }
+
     setLoadingButton(true);
     try {
       const provider = new ethers.BrowserProvider(window.ethereum);
@@ -187,7 +200,9 @@ const Experience = () => {
             };
 
             const tokenURI = await uploadMetadata(metadata);
-            setTokenLink(tokenURI);
+            if (tokenURI) {
+              setTokenLink(tokenURI);
+            }
 
             return [
               address,
@@ -202,7 +217,7 @@ const Experience = () => {
 
       if (mintDataArray) {
         const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 4000000,
+          gasLimit: 7000000,
         });
 
         await tx.wait();
@@ -221,22 +236,6 @@ const Experience = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 5) {
-        setTop(100);
-      } else {
-        setTop(20);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -247,6 +246,22 @@ const Experience = () => {
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string }) => {
+      // Hiển thị hộp thoại xác nhận
+      event.preventDefault(); // Hủy sự kiện mặc định
+      event.returnValue = ''; // Đặt giá trị để kích hoạt hộp thoại
+    };
+
+    // Thêm sự kiện
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Xóa sự kiện khi component unmount
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, []);
 

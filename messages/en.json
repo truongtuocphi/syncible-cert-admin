@@ -144,6 +144,14 @@
     },
     "search_button": {
       "label": "Search"
+    },
+    "result": {
+      "initial": {
+        "label": "The certificate(s) will be shown here"
+      },
+      "not_found": {
+        "label": "No certificate found"
+      }
     }
   },
   "IdExperienceComponent": {

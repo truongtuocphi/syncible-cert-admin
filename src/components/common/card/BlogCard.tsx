@@ -1,5 +1,4 @@
 import { Card, CardHeader, CardContent, CardTitle, CardFooter } from '@/components/ui/card';
-import { Avatar, AvatarImage, AvatarFallback } from '@radix-ui/react-avatar';
 import Image from 'next/image';
 import { Link } from '@/i18n/routing';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
@@ -20,8 +19,8 @@ export default function BlogCard({ entry }: { entry: ArticleEntry }) {
         </div>
       </CardHeader>
       <CardContent>
-        <CardTitle className="line-clamp-3 h-32 font-bold leading-[2rem]">
-          <Link href={entry.link} className="hover:underline">
+        <CardTitle className="h-32 font-bold leading-[2rem]">
+          <Link href={entry.link} className="hover:underline line-clamp-3">
             {entry.title}
           </Link>
         </CardTitle>

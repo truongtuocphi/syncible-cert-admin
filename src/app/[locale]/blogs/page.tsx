@@ -1,14 +1,13 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import BlogCard from '@/components/common/card/BlogCard';
 import { Button } from '@/components/ui/button';
 import ArrowNarrowLeft from '@/assets/icons/arrow-narrow-left.svg';
 import ArrowNarrowRight from '@/assets/icons/arrow-narrow-right.svg';
 import {
   fetchCategories,
-  fetchPaginatedDataFromWP,
   fetchPosts,
   fetchAuthorById,
   fetchMediaById,
@@ -20,6 +19,7 @@ export default function Page() {
   const t = useTranslations('BlogListPage');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>(1);
+  const [notFoundError, setNotFoundError] = useState(false);
   const postsPerPage = 9;
   const [categories, setCategories] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
@@ -66,8 +66,8 @@ export default function Page() {
             const authorResponse = await fetchAuthorById(post.author);
             const author = {
               name: authorResponse.name,
-              avatar: authorResponse.avatar_urls['96'], // Use the 96px avatar size
-              position: authorResponse.description, // Assuming a default position; you could add a custom field for this
+              avatar_url: authorResponse.avatar_urls['96'], // Use the 96px avatar size
+              description: authorResponse.description, // Assuming a default position; you could add a custom field for this
             };
 
             // Map to your ArticleEntry structure
@@ -117,11 +117,11 @@ export default function Page() {
           </div>
         </div>
         {/* making a filter here by clicking on the categories */}
-        <div className="w-full border-b border-[#CCCCCC] pt-16 text-[#A2A3A9]">
-          <div className="flex space-x-4 font-semibold">
+        <div className="sm:w-full sm:max-w-none border-b border-[#CCCCCC] pt-16 text-[#A2A3A9] overflow-auto max-w-[350px]">
+          <div className="flex space-x-4 font-semibold overflow-x-auto">
             <div
-              className={clsx("w-fit border-b pb-4 cursor-pointer", {
-              'border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
+              className={clsx("w-fit pb-4 cursor-pointer flex-shrink-0", {
+              'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
               })}
               onClick={() => handleCategoryClick(null)}
             >
@@ -130,8 +130,8 @@ export default function Page() {
             {categories.map((category) => (
               <div
                 key={category.id}
-                className={clsx("w-fit border-b pb-4 cursor-pointer", {
-                  'border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
+                className={clsx("w-fit pb-4 cursor-pointer flex-shrink-0", {
+                  'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
                 })}
                 onClick={() => handleCategoryClick(category.id)}
               >
@@ -158,7 +158,6 @@ export default function Page() {
               <ArrowNarrowLeft className="h-6 w-6" />
             </Button>
             <span className="font-medium text-[#A2A3A9]">
-              {/* Page {currentPage} of {totalPages} */}
               {t('pagination.label', { page: currentPage, totalPages: totalPages })}
             </span>
             <Button

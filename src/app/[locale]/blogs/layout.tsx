@@ -10,41 +10,9 @@ import { useEffect, useState } from 'react';
 import clsx from 'clsx';
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
-  const [isNavbarVisible, setIsNavbarVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.innerWidth < 768) {
-        const currentScrollY = window.scrollY;
-        // Show the navbar when scrolling up, hide it when scrolling down
-        if (currentScrollY > lastScrollY) {
-          setIsNavbarVisible(false); // Scrolling down
-        } else {
-          setIsNavbarVisible(true); // Scrolling up
-        }
-        setLastScrollY(currentScrollY);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [lastScrollY]);
   return (
     <div className="relative flex min-h-screen flex-col">
-      <div
-        className={clsx(
-          montserrat.className,
-          'fixed top-0 z-30 w-screen transition-transform duration-300 ease-in-out md:mt-6',
-          {
-            'translate-y-0': isNavbarVisible,
-            '-translate-y-full': !isNavbarVisible,
-          }
-        )}
-      >
         <Navbar />
-      </div>
       <div
         className={`${montserrat.className} z-20 flex h-full flex-grow flex-col items-center gap-10`}
       >

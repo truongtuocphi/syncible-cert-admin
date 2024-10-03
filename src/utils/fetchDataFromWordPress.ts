@@ -7,6 +7,8 @@ export const fetchPaginatedDataFromWP = async (url: string) => {
     const response = await axios.get(url);
     const data = response.data;
     const totalPages = response.headers['x-wp-totalpages'];
+
+
     return { data, totalPages };
   } catch (error) {
     console.error('Error while fetching data:', error);

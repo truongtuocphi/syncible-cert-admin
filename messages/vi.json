@@ -135,7 +135,7 @@
     }
   },
   "ExplorerPage": {
-    "header": "Tim kiếm chứng chỉ của bạn",
+    "header": "Tìm kiếm chứng chỉ của bạn",
     "input_1": {
       "placeholder": "Nhập mã chứng chỉ"
     },
@@ -144,6 +144,14 @@
     },
     "search_button": {
       "label": "Tìm kiếm"
+    },
+    "result": {
+      "initial": {
+        "label": "Chứng chỉ của bạn sẽ xuất hiện ở đây"
+      },
+      "not_found": {
+        "label": "Không tìm thấy kết quả nào"
+      }
     }
   },
   "IdExperienceComponent": {

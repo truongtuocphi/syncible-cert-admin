@@ -1,7 +1,6 @@
 'use client';
-import clsx from 'clsx';
-import { useTranslations, useLocale } from 'next-intl';
-import { useEffect, useRef, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import { useEffect, useState } from 'react';
 
 import Image from 'next/image';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
@@ -10,24 +9,20 @@ import { Link } from '@/i18n/routing';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
-import { useRouter } from 'next/navigation';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
-  const locale = useLocale();
-  const router = useRouter();
   const { slug } = params;
-
   const [notFoundError, setNotFoundError] = useState(false);
-  const [author, setAuthor] = useState<any>(null);
+  const [author, setAuthor] = useState<Author | null>(null);
   const [blogContent, setBlogContent] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
 
   useEffect(() => {
-    async function fetchBlockContent(slug: string) {
+    async function fetchBlogContent(slug: string) {
       setLoading(true);
       setNotFoundError(false);
       try {
@@ -43,10 +38,11 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           const authorResponse = await fetchDataFromWP(
             `https://admin.syncible.io/wp-json/wp/v2/users/${post.author}`
           );
+          console.log(post.author);
           setAuthor({
             name: authorResponse.name,
-            avatar: authorResponse.avatar_urls['96'],
-            position: authorResponse.description,
+            avatar_url: authorResponse.avatar_urls['96'],
+            description: authorResponse.description,
           });
 
           setBannerImg('/SyncibleBiggerBanner.png');
@@ -75,7 +71,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
         setLoading(false);
       }
     }
-    fetchBlockContent(slug);
+    fetchBlogContent(slug);
   }, [slug]);
 
   if (loading) {

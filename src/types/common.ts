@@ -6,30 +6,21 @@ interface ArticleEntry {
   title: string;
   link: string;
   bannerImg: string;
-  author: {
-    name: string;
-    avatar: string;
-    position: string;
-  };
+  author: Author;
 }
 
 interface Author {
   name: string;
-  avatar: string;
-  position: string;
-}
-
-interface BlogPost {
-  title: { rendered: string };
-  content: { rendered: string };
-  author: number;
-  categories: number[];
-  date: string;
-  featured_media?: number;
+  avatar_url: string;
+  description: string;
 }
 
 interface Category {
   id: number;
   name: string;
   slug: string;
+}
+
+interface Media {
+  source_url: string;
 }

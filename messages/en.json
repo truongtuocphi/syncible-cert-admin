@@ -230,6 +230,8 @@
       "button": "Create",
       "buttonDelete": "Delete",
       "placeholder": "Search by name, symbol, contract address",
+      "page": "Page",
+      "of": "of",
 
       "table": {
         "id": "ID",

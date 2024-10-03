@@ -230,6 +230,8 @@
       "button": "Tạo mục",
       "buttonDelete": "Xóa đã chọn",
       "placeholder": "Tìm kiếm theo tên, ký hiệu, địa chỉ hợp đồng",
+      "page": "Trang",
+      "of": "của",
 
       "table": {
         "id": "ID",

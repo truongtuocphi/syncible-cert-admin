@@ -25,13 +25,13 @@ export async function uploadImageToPinata(file: any) {
     });
 
     if (!response.ok) {
-      throw new Error(`Error uploading image: ${response.statusText}`);
+      const errorData = await response.json();
+      throw new Error(`Error uploading image: ${response.statusText} - ${errorData.message}`);
     }
 
     const data = await response.json();
     return `https://gateway.pinata.cloud/ipfs/${data.IpfsHash}`;
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.error('Error uploading image to Pinata:', error);
     throw error;
   }

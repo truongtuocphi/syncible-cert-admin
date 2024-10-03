@@ -79,7 +79,7 @@ const columns: ColumnDef<Collection>[] = [
       return (
         <Button
           variant="ghost"
-          className='p-0'
+          className="p-0"
           onClick={() => {
             const newSortDirection = column.getIsSorted() === 'asc' ? 'desc' : 'asc';
             column.toggleSorting(newSortDirection === 'desc');
@@ -368,9 +368,7 @@ export default function Collection() {
         )}
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="text-muted-foreground flex-1 text-sm">
-          Page 1 of {table.getFilteredRowModel().rows.length}
-        </div>
+        <div className="text-muted-foreground flex-1 text-sm">Page 1 of 1</div>
         <div className="space-x-2">
           <Button
             variant="outline"

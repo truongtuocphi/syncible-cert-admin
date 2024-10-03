@@ -58,47 +58,6 @@ const Experience = () => {
 
   const t = useTranslations('Dapp.mintNFT');
 
-  useEffect(() => {
-    if (!address) return;
-
-    const fetchData = async () => {
-      try {
-        const dbRef = ref(db, 'collections');
-        const snapshot = await get(dbRef);
-
-        if (snapshot.exists()) {
-          const collections: Collection[] = [];
-          snapshot.forEach((childSnapshot) => {
-            const collection = childSnapshot.val();
-            if (collection?.address === address) {
-              collections.push({
-                id: childSnapshot.key || '',
-                displayName: collection.displayName,
-                contractAddress: collection.contractAddress,
-              });
-            }
-          });
-          setSelectedContract(collections);
-        } else {
-          // eslint-disable-next-line no-console
-          console.log('No data available');
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [address]);
-
-  useEffect(() => {
-    if (selectedContract.length > 0) {
-      // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
-      setcollectionContractAddress(selectedContract[0].contractAddress);
-    }
-  }, [selectedContract]);
-
   const handleDrop = (
     e: React.DragEvent<HTMLDivElement>,
     setImage: React.Dispatch<React.SetStateAction<string | null>>
@@ -153,18 +112,6 @@ const Experience = () => {
     setCoppyCsvDataFromChild([]);
   };
 
-  useEffect(() => {
-    if (csvDataFromChild.length > 0) {
-      const validData = csvDataFromChild.filter(
-        (data) => data.fullname && data.fullname.trim() !== ''
-      );
-      setCoppyCsvDataFromChild(validData);
-      setDataFromMintSingle([]);
-    } else {
-      setCoppyCsvDataFromChild([]);
-    }
-  }, [csvDataFromChild]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!address) {
@@ -179,51 +126,53 @@ const Experience = () => {
 
     setLoadingButton(true);
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
+      if (typeof window.ethereum !== 'undefined') {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-      const mintDataArray = await Promise.all(
-        (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
-          async (data) => {
-            const metadata = {
-              fullname: `Certificate for ${data.fullname}` || 'Default Name',
-              tokenURI: tokenLink || 'Default tokenLink',
-              attributes: [
-                { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
-                { trait_type: 'Role', value: role || 'NaN' },
-                { trait_type: 'Date', value: issuedDate || 'NaN' },
-                { trait_type: 'Template URL', value: bannerImage || 'NaN' },
-                { trait_type: 'Font', value: fontFamily || 'NaN' },
-                { trait_type: 'Font Size', value: fontSize || 'NaN' },
-              ],
-            };
+        const mintDataArray = await Promise.all(
+          (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
+            async (data) => {
+              const metadata = {
+                fullname: `Certificate for ${data.fullname}` || 'Default Name',
+                tokenURI: tokenLink || 'Default tokenLink',
+                attributes: [
+                  { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
+                  { trait_type: 'Role', value: role || 'NaN' },
+                  { trait_type: 'Date', value: issuedDate || 'NaN' },
+                  { trait_type: 'Template URL', value: bannerImage || 'NaN' },
+                  { trait_type: 'Font', value: fontFamily || 'NaN' },
+                  { trait_type: 'Font Size', value: fontSize || 'NaN' },
+                ],
+              };
 
-            const tokenURI = await uploadMetadata(metadata);
-            if (tokenURI) {
-              setTokenLink(tokenURI);
+              const tokenURI = await uploadMetadata(metadata);
+              if (tokenURI) {
+                setTokenLink(tokenURI);
+              }
+
+              return [
+                address,
+                data.fullname,
+                data.certificateNumber,
+                tokenURI,
+                [issuedDate, bannerImage],
+              ];
             }
+          )
+        );
 
-            return [
-              address,
-              data.fullname,
-              data.certificateNumber,
-              tokenURI,
-              [issuedDate, bannerImage],
-            ];
-          }
-        )
-      );
+        if (mintDataArray) {
+          const tx = await contract.mintBulk(mintDataArray, {
+            gasLimit: 7000000,
+          });
 
-      if (mintDataArray) {
-        const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 7000000,
-        });
-
-        await tx.wait();
-        alert('Chứng chỉ được tạo thành công!');
-        setLoading(true);
-        await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
+          await tx.wait();
+          alert('Chứng chỉ được tạo thành công!');
+          setLoading(true);
+          await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
+        }
       }
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -236,31 +185,57 @@ const Experience = () => {
   };
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
+    if (!address) return;
+
+    const fetchData = async () => {
+      try {
+        const dbRef = ref(db, 'collections');
+        const snapshot = await get(dbRef);
+
+        if (snapshot.exists()) {
+          const collections: Collection[] = [];
+          snapshot.forEach((childSnapshot) => {
+            const collection = childSnapshot.val();
+            if (collection?.address === address) {
+              collections.push({
+                id: childSnapshot.key || '',
+                displayName: collection.displayName,
+                contractAddress: collection.contractAddress,
+              });
+            }
+          });
+          setSelectedContract(collections);
+        } else {
+          // eslint-disable-next-line no-console
+          console.log('No data available');
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching data:', error);
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+    fetchData();
+  }, [address]);
 
   useEffect(() => {
-    const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string }) => {
-      event.preventDefault();
-      event.returnValue = '';
-    };
+    if (selectedContract.length > 0) {
+      // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
+      setcollectionContractAddress(selectedContract[0].contractAddress);
+    }
+  }, [selectedContract]);
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
-
-    return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-    };
-  }, []);
+  useEffect(() => {
+    if (csvDataFromChild.length > 0) {
+      const validData = csvDataFromChild.filter(
+        (data) => data.fullname && data.fullname.trim() !== ''
+      );
+      setCoppyCsvDataFromChild(validData);
+      setDataFromMintSingle([]);
+    } else {
+      setCoppyCsvDataFromChild([]);
+    }
+  }, [csvDataFromChild]);
 
   if (loading) router.push(`/admin/collection/collectiondetail`);
 

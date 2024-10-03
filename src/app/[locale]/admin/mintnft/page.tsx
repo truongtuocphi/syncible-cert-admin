@@ -251,15 +251,12 @@ const Experience = () => {
 
   useEffect(() => {
     const handleBeforeUnload = (event: { preventDefault: () => void; returnValue: string }) => {
-      // Hiển thị hộp thoại xác nhận
-      event.preventDefault(); // Hủy sự kiện mặc định
-      event.returnValue = ''; // Đặt giá trị để kích hoạt hộp thoại
+      event.preventDefault();
+      event.returnValue = '';
     };
 
-    // Thêm sự kiện
     window.addEventListener('beforeunload', handleBeforeUnload);
 
-    // Xóa sự kiện khi component unmount
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };

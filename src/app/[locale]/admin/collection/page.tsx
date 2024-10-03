@@ -393,7 +393,7 @@ export default function Collection() {
             variant="outline"
             size="sm"
             onClick={handlePreviousPage}
-            disabled={!table.getCanPreviousPage()}
+            disabled={currentPage === 0}
           >
             {t('table.buttonNext')}
           </Button>
@@ -401,7 +401,7 @@ export default function Collection() {
             variant="outline"
             size="sm"
             onClick={handleNextPage}
-            disabled={!table.getCanNextPage()}
+            disabled={table.getFilteredRowModel().rows.length <= 10}
           >
             {t('table.buttonPrevious')}
           </Button>

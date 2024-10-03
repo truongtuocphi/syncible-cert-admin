@@ -79,7 +79,7 @@ const columns: ColumnDef<Collection>[] = [
       return (
         <Button
           variant="ghost"
-          className='p-0'
+          className="p-0"
           onClick={() => {
             const newSortDirection = column.getIsSorted() === 'asc' ? 'desc' : 'asc';
             column.toggleSorting(newSortDirection === 'desc');
@@ -169,6 +169,7 @@ export default function Collection() {
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({});
   const [rowSelection, setRowSelection] = React.useState({});
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
   const [pagination, setPagination] = React.useState({
     pageIndex: 0,
     pageSize: 10,
@@ -229,6 +230,7 @@ export default function Collection() {
       rowSelection,
       pagination,
     },
+    pageCount: Math.ceil(data.length / 10),
   });
 
   const selectedRowCount = useMemo(() => Object.keys(rowSelection).length, [rowSelection]);
@@ -274,6 +276,20 @@ export default function Collection() {
     } catch (error) {
       alert(`${t('alert_2')}`);
       console.error('Error deleting selected rows:', error);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < table.getFilteredRowModel().rows.length - 1) {
+      table.nextPage();
+      setCurrentPage((prev) => prev + 1); // Tăng trang hiện tại
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 0) {
+      table.previousPage();
+      setCurrentPage((prev) => prev - 1); // Giảm trang hiện tại
     }
   };
 
@@ -369,22 +385,23 @@ export default function Collection() {
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
         <div className="text-muted-foreground flex-1 text-sm">
-          Page 1 of {table.getFilteredRowModel().rows.length}
+          {t('page')} {currentPage + 1} {t('of')}{' '}
+          {Math.ceil(table.getFilteredRowModel().rows.length / 10)}
         </div>
         <div className="space-x-2">
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
+            onClick={handlePreviousPage}
+            disabled={currentPage === 0}
           >
             {t('table.buttonNext')}
           </Button>
           <Button
             variant="outline"
             size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
+            onClick={handleNextPage}
+            disabled={table.getFilteredRowModel().rows.length <= 10}
           >
             {t('table.buttonPrevious')}
           </Button>

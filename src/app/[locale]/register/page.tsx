@@ -112,6 +112,7 @@ export default function Register() {
           lastName,
           institution,
           email,
+          avatar: '',
           createdAt: new Date().toISOString(),
         });
       }
@@ -180,19 +181,19 @@ export default function Register() {
               >
                 Continue with email
               </button>
-              <div className="my-6 flex items-center">
+              {/* <div className="my-6 flex items-center">
                 <div className="flex-grow border-t border-gray-300"></div>
                 <span className="mx-4 text-gray-500">Or</span>
                 <div className="flex-grow border-t border-gray-300"></div>
-              </div>
-              <button
+              </div> */}
+              {/* <button
                 onClick={handleGoogleSignIn}
                 disabled={loading}
                 className="mt-2 flex w-full items-center justify-center rounded-[20px] border border-gray-300 bg-white px-4 py-3 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
               >
                 <GoogleIcon className="mr-2 size-6" />
                 Sign in with Google
-              </button>
+              </button> */}
               <div className="mt-4 text-center">
                 <p className="text-sm">
                   Already have an account?{' '}

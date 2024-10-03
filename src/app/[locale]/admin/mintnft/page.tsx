@@ -5,25 +5,32 @@ import { useEffect, useState } from 'react';
 import { ethers } from 'ethers';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
+
 import { useAccount } from 'wagmi';
 
+import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
+import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Loading from '@/components/common/loading/Loading';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
-import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
-import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
 import Modal from '@/components/pages/admin/Modal';
-import ABI from '@/contract/ABI.json';
+import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+
 import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
-import { Collection } from '@/types/function';
+
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
+
+import { Collection } from '@/types/function';
+
 import { BiImageAdd } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
-import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
+import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
+
 import { useTranslations } from 'next-intl';
+
+import ABI from '@/contract/ABI.json';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -40,7 +47,6 @@ const Experience = () => {
   const [csvDataFromChild, setCsvDataFromChild] = useState<any[]>([]);
   const [dataFromMintSingle, setDataFromMintSingle] = useState<any[]>([]);
   const [coppyCsvDataFromChild, setCoppyCsvDataFromChild] = useState<any[]>([]);
-  const [top, setTop] = useState(20);
   const [loadingButton, setLoadingButton] = useState(false);
   const [loading, setLoading] = useState(false);
   const [loadingBanner, setLoadingBanner] = useState<boolean>(false);
@@ -51,45 +57,6 @@ const Experience = () => {
   const typePage = pathname.get('type');
 
   const t = useTranslations('Dapp.mintNFT');
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const dbRef = ref(db, 'collections');
-        const snapshot = await get(dbRef);
-
-        if (snapshot.exists()) {
-          const collections: Collection[] = [];
-          snapshot.forEach((childSnapshot) => {
-            const collection = childSnapshot.val();
-            if (collection.address === address) {
-              collections.push({
-                id: childSnapshot.key || '',
-                displayName: collection.displayName,
-                contractAddress: collection.contractAddress,
-              });
-            }
-          });
-          setSelectedContract(collections);
-        } else {
-          // eslint-disable-next-line no-console
-          console.log('No data available');
-        }
-      } catch (error) {
-        // eslint-disable-next-line no-console
-        console.error('Error fetching data:', error);
-      }
-    };
-
-    fetchData();
-  }, [address]);
-
-  useEffect(() => {
-    if (selectedContract.length > 0) {
-      // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
-      setcollectionContractAddress(selectedContract[0].contractAddress);
-    }
-  }, [selectedContract]);
 
   const handleDrop = (
     e: React.DragEvent<HTMLDivElement>,
@@ -145,18 +112,6 @@ const Experience = () => {
     setCoppyCsvDataFromChild([]);
   };
 
-  useEffect(() => {
-    if (csvDataFromChild.length > 0) {
-      const validData = csvDataFromChild.filter(
-        (data) => data.fullname && data.fullname.trim() !== ''
-      );
-      setCoppyCsvDataFromChild(validData);
-      setDataFromMintSingle([]);
-    } else {
-      setCoppyCsvDataFromChild([]);
-    }
-  }, [csvDataFromChild]);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!address) {
@@ -164,51 +119,60 @@ const Experience = () => {
       return;
     }
 
+    if (typeof window.ethereum === 'undefined') {
+      alert('Please install a wallet like MetaMask.');
+      return;
+    }
+
     setLoadingButton(true);
     try {
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const signer = await provider.getSigner();
-      const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
+      if (typeof window.ethereum !== 'undefined') {
+        const provider = new ethers.BrowserProvider(window.ethereum);
+        const signer = await provider.getSigner();
+        const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-      const mintDataArray = await Promise.all(
-        (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
-          async (data) => {
-            const metadata = {
-              fullname: `Certificate for ${data.fullname}` || 'Default Name',
-              tokenURI: tokenLink || 'Default tokenLink',
-              attributes: [
-                { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
-                { trait_type: 'Role', value: role || 'NaN' },
-                { trait_type: 'Date', value: issuedDate || 'NaN' },
-                { trait_type: 'Template URL', value: bannerImage || 'NaN' },
-                { trait_type: 'Font', value: fontFamily || 'NaN' },
-                { trait_type: 'Font Size', value: fontSize || 'NaN' },
-              ],
-            };
+        const mintDataArray = await Promise.all(
+          (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
+            async (data) => {
+              const metadata = {
+                fullname: `Certificate for ${data.fullname}` || 'Default Name',
+                tokenURI: tokenLink || 'Default tokenLink',
+                attributes: [
+                  { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
+                  { trait_type: 'Role', value: role || 'NaN' },
+                  { trait_type: 'Date', value: issuedDate || 'NaN' },
+                  { trait_type: 'Template URL', value: bannerImage || 'NaN' },
+                  { trait_type: 'Font', value: fontFamily || 'NaN' },
+                  { trait_type: 'Font Size', value: fontSize || 'NaN' },
+                ],
+              };
 
-            const tokenURI = await uploadMetadata(metadata);
-            setTokenLink(tokenURI);
+              const tokenURI = await uploadMetadata(metadata);
+              if (tokenURI) {
+                setTokenLink(tokenURI);
+              }
 
-            return [
-              address,
-              data.fullname,
-              data.certificateNumber,
-              tokenURI,
-              [issuedDate, bannerImage],
-            ];
-          }
-        )
-      );
+              return [
+                address,
+                data.fullname,
+                data.certificateNumber,
+                tokenURI,
+                [issuedDate, bannerImage],
+              ];
+            }
+          )
+        );
 
-      if (mintDataArray) {
-        const tx = await contract.mintBulk(mintDataArray, {
-          gasLimit: 4000000,
-        });
+        if (mintDataArray) {
+          const tx = await contract.mintBulk(mintDataArray, {
+            gasLimit: 7000000,
+          });
 
-        await tx.wait();
-        alert('Chứng chỉ được tạo thành công!');
-        setLoading(true);
-        await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
+          await tx.wait();
+          alert('Chứng chỉ được tạo thành công!');
+          setLoading(true);
+          await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
+        }
       }
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -221,34 +185,57 @@ const Experience = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 5) {
-        setTop(100);
-      } else {
-        setTop(20);
+    if (!address) return;
+
+    const fetchData = async () => {
+      try {
+        const dbRef = ref(db, 'collections');
+        const snapshot = await get(dbRef);
+
+        if (snapshot.exists()) {
+          const collections: Collection[] = [];
+          snapshot.forEach((childSnapshot) => {
+            const collection = childSnapshot.val();
+            if (collection?.address === address) {
+              collections.push({
+                id: childSnapshot.key || '',
+                displayName: collection.displayName,
+                contractAddress: collection.contractAddress,
+              });
+            }
+          });
+          setSelectedContract(collections);
+        } else {
+          // eslint-disable-next-line no-console
+          console.log('No data available');
+        }
+      } catch (error) {
+        // eslint-disable-next-line no-console
+        console.error('Error fetching data:', error);
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    fetchData();
+  }, [address]);
 
   useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-      }
-    };
+    if (selectedContract.length > 0) {
+      // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
+      setcollectionContractAddress(selectedContract[0].contractAddress);
+    }
+  }, [selectedContract]);
 
-    window.addEventListener('keydown', handleKeyDown);
-
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown);
-    };
-  }, []);
+  useEffect(() => {
+    if (csvDataFromChild.length > 0) {
+      const validData = csvDataFromChild.filter(
+        (data) => data.fullname && data.fullname.trim() !== ''
+      );
+      setCoppyCsvDataFromChild(validData);
+      setDataFromMintSingle([]);
+    } else {
+      setCoppyCsvDataFromChild([]);
+    }
+  }, [csvDataFromChild]);
 
   if (loading) router.push(`/admin/collection/collectiondetail`);
 
@@ -437,7 +424,7 @@ const Experience = () => {
                   </select>
                 </div>
 
-                <div className="flex items-center gap-4 space-y-2">
+                {/* <div className="flex items-center gap-4 space-y-2">
                   <label className="block w-1/2 text-base font-bold text-gray-700">
                     {t('titleFontSize')}
                   </label>
@@ -449,7 +436,7 @@ const Experience = () => {
                     className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                     placeholder="Nhập cỡ chữ (vd: 16)"
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className="mt-4 flex items-center justify-end gap-4">

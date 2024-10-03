@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { IoClose } from 'react-icons/io5';
 import { useRouter } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 
@@ -31,6 +31,7 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
   const router = useRouter();
 
   const t = useTranslations('Dapp.modal');
+  const lang = useLocale();
 
   useEffect(() => {
     if (isOpen) {
@@ -48,7 +49,9 @@ const Modal = ({ isOpen, onClose }: ModalProps) => {
 
   const handleCreateCertificate = () => {
     if (selectedOption !== null) {
-      router.push(datCard[selectedOption].link);
+      const targetLink = datCard[selectedOption].link;
+      const urlWithLocale = `/${lang}/${targetLink}`;
+      router.push(urlWithLocale);
       onClose();
     }
   };

@@ -28,6 +28,7 @@ const CreateCollection: React.FC = () => {
   const [description, setDescription] = useState<string>('');
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState({ logo: false, banner: false });
 
   const router = useRouter();
   const { address } = useAccount();
@@ -84,10 +85,6 @@ const CreateCollection: React.FC = () => {
     e.preventDefault();
   };
 
-  const handleRemoveImage = () => {
-    setBannerImage(null);
-  };
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -139,20 +136,18 @@ const CreateCollection: React.FC = () => {
               <div className="flex w-[30%] flex-col items-start gap-6">
                 <div className="flex flex-col items-start justify-between gap-4">
                   <div className="w-full">
-                    <label className="block text-base font-medium text-gray-900">
-                      <label className="block text-base font-medium text-gray-900">
-                        {t('titleImage')}
-                      </label>
+                    <label className="mb-2 block text-base font-medium text-gray-900">
+                      {t('titleImage')}
                     </label>
                     <p className="text-xs text-gray-400">{t('subtitleImage')}</p>
                   </div>
-                  <div className="space-y-2">
+                  <div className="relative space-y-2">
                     <input
                       type="file"
                       accept="image/*"
                       onChange={(e) => handleImageChange(e, setLogoImage)}
                       required
-                      className="hidden"
+                      className="absolute h-full w-full cursor-pointer opacity-0"
                       id="file-upload"
                     />
                     <div className="flex items-center gap-4">
@@ -163,6 +158,11 @@ const CreateCollection: React.FC = () => {
                         <BiImageAdd className="text-2xl text-black" />
                         {t('Buttonfile')}
                       </label>
+                      {error.logo && (
+                        <p className="text-sm text-red-500">
+                          Please upload a logo image file before proceeding.
+                        </p>
+                      )}
                       {fileLogoImage &&
                         `${fileLogoImage?.slice(0, 4)}...${fileLogoImage?.slice(-4)}`}
                     </div>
@@ -170,19 +170,19 @@ const CreateCollection: React.FC = () => {
                 </div>
                 <div className="flex flex-col items-start gap-4 space-y-2">
                   <div className="w-full">
-                    <label className="block text-base font-medium text-gray-900">
+                    <label className="mb-2 block text-base font-medium text-gray-900">
                       {t('titleBanner')}
                     </label>
                     <p className="text-xs text-gray-400">{t('subTitleBanner')}</p>
                   </div>
                   <div onDrop={(e) => handleDrop(e, setBannerImage)} onDragOver={handleDragOver}>
-                    <div className="space-y-2">
+                    <div className="relative space-y-2">
                       <input
                         type="file"
                         accept="image/*"
                         onChange={(e) => handleImageBannerChange(e, setBannerImage)}
                         required
-                        className="hidden"
+                        className="absolute h-full w-full cursor-pointer opacity-0"
                         id="file-upload-banner"
                       />
                       <div className="flex items-center gap-4">

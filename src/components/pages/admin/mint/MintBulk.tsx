@@ -101,7 +101,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
           <input
             type="file"
             onChange={(e) => handleCSVChange(e)}
-            accept=".csv .xlsx"
+            accept=".csv,.xlsx"
             required
             className="hidden"
             id="file-upload"

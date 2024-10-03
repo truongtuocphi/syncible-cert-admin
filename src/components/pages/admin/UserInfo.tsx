@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { signOut } from 'firebase/auth';
 import Image from 'next/image';
@@ -10,7 +10,6 @@ import { FaUser } from 'react-icons/fa';
 import { BiGlobe } from 'react-icons/bi';
 import { FaChevronDown } from 'react-icons/fa';
 import { BiLogOut } from 'react-icons/bi';
-// import { BiHelpCircle } from 'react-icons/bi';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -21,17 +20,30 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { auth } from '@/lib/firebase';
+import { auth, db, onAuthStateChanged } from '@/lib/firebase';
 import { routing, usePathname, Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
 import { BiCheck } from 'react-icons/bi';
+import { ref, get, child } from 'firebase/database';
+import fetchDataByUid from '@/utils/fetchDataByUID';
 
 interface UserInfoProps {
   user: any;
 }
 
+interface UserInfo {
+  firstName?: string;
+  lastName?: string;
+  institution?: string;
+  email?: string;
+  createdAt?: string;
+  avatar?: string;
+}
+
 const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [dataUser, setDataUser] = useState<UserInfo | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
@@ -41,6 +53,18 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
 
   const t = useTranslations('Localization');
   const transLation = useTranslations('Dapp');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await fetchDataByUid(user.uid);
+      setDataUser(data);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [user.uid]);
+
+  console.log(dataUser);
 
   const handleSignOut = async () => {
     try {
@@ -58,9 +82,9 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
         <Button className="h-fit w-fit rounded-full border-none bg-transparent p-0 text-left focus-visible:ring-0">
           <div className="flex cursor-pointer items-center space-x-4 rounded-3xl bg-white py-2 pl-2 pr-4 focus:ring-primary-50 focus-visible:ring-2">
             <div className="flex items-center gap-2">
-              {user.photoURL ? (
+              {dataUser?.avatar ? (
                 <Image
-                  src={user.photoURL}
+                  src={dataUser?.avatar && user.photoURL}
                   alt={user.displayName || 'User Photo'}
                   className="h-10 w-10 transform cursor-pointer rounded-full transition-transform hover:scale-105"
                   width={40}
@@ -72,8 +96,10 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
                 </div>
               )}
               <div>
-                <div className="font-bold text-gray-600">{user.displayName || 'Anonymous'}</div>
-                <div className="text-sm font-semibold text-gray-500">{user.email}</div>
+                <div className="font-bold text-gray-600">
+                  {`${dataUser?.firstName} ${dataUser?.lastName}` || 'Anonymous'}
+                </div>
+                <div className="text-sm font-semibold text-gray-500">{dataUser?.email}</div>
               </div>
             </div>
             <FaChevronDown className="text-gray-500" />
@@ -82,13 +108,15 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mt-5 w-64 rounded-2xl border-none">
         <DropdownMenuGroup>
-          <DropdownMenuItem
-            onMouseEnter={() => setIsLanguageOpen(false)}
-            className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
-          >
-            <BiUser className="mr-4 text-2xl" />
-            {transLation('userInfo.profile')}
-          </DropdownMenuItem>
+          <Link href={'/admin/setting'}>
+            <DropdownMenuItem
+              onMouseEnter={() => setIsLanguageOpen(false)}
+              className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
+            >
+              <BiUser className="mr-4 text-2xl" />
+              {transLation('userInfo.profile')}
+            </DropdownMenuItem>
+          </Link>
 
           <DropdownMenuItem
             className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
@@ -100,14 +128,6 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
               {t('label', { locale: locale })}
             </div>
           </DropdownMenuItem>
-
-          {/* <DropdownMenuItem
-            onMouseEnter={() => setIsLanguageOpen(false)}
-            className="cursor-pointer py-3 text-base font-bold hover:rounded-2xl hover:bg-[#F5F5F5]"
-          >
-            <BiHelpCircle className="mr-4 text-2xl" />
-            {transLation('userInfo.helpCenter')}
-          </DropdownMenuItem> */}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem

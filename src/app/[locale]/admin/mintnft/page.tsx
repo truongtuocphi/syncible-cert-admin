@@ -424,7 +424,7 @@ const Experience = () => {
                   </select>
                 </div>
 
-                <div className="flex items-center gap-4 space-y-2">
+                {/* <div className="flex items-center gap-4 space-y-2">
                   <label className="block w-1/2 text-base font-bold text-gray-700">
                     {t('titleFontSize')}
                   </label>
@@ -436,7 +436,7 @@ const Experience = () => {
                     className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                     placeholder="Nhập cỡ chữ (vd: 16)"
                   />
-                </div>
+                </div> */}
               </div>
 
               <div className="mt-4 flex items-center justify-end gap-4">

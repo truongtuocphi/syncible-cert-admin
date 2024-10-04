@@ -129,6 +129,8 @@ export default function Login() {
       ></video> */}
       <div className="h-full w-full px-8 py-5">
         <div className="m-10 mx-auto w-2/3 space-y-4">
+        <p className="break-all">Code Verifier: {codeVerifier}</p>
+        <p className="break-all">Code Challenge: {codeChallenge}</p>
           <button onClick={handleLoginWithBasal} className="rounded-lg bg-blue-500 p-4">
             Login with Basal
           </button>

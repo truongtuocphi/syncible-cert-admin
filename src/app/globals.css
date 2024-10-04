@@ -19,7 +19,7 @@
     --color-foreground: 255, 255, 255;
   }
 }
-/* whoever read this, do not delete this class unless you enjoy seeing Image components fuck the whole page up, look up online and find out while later */
+/* whoever read this, do not delete this class unless you enjoy seeing Image components fuck the whole page up, look up online and find out why later */
 img {
   position: static !important;
 }

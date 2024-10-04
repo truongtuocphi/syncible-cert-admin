@@ -1,14 +1,14 @@
 'use client';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-
 import Image from 'next/image';
-import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
+import { fetchPostBySlug } from '@/utils/fetchDataFromWordPress';
 import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
 import { Link } from '@/i18n/routing';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
+import { useFormatter } from 'next-intl';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
@@ -20,25 +20,20 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
+  const format = useFormatter();
 
   useEffect(() => {
     async function fetchBlogContent(slug: string) {
       setLoading(true);
       setNotFoundError(false);
       try {
-        const response = await fetchDataFromWP(
-          `https://admin.syncible.io/wp-json/wp/v2/posts?slug=${slug}&_embed`
-        );
+        const response = await fetchPostBySlug(`${slug}`);
 
-        if (response.length === 0) {
+        if (response.length === 0 || response === null || response === undefined) {
           setNotFoundError(true);
         } else {
-          const post = response[0];
+          const authorResponse = response['_embedded']['author'][0];
 
-          const authorResponse = await fetchDataFromWP(
-            `https://admin.syncible.io/wp-json/wp/v2/users/${post.author}`
-          );
-          console.log(post.author);
           setAuthor({
             name: authorResponse.name,
             avatar_url: authorResponse.avatar_urls['96'],
@@ -46,23 +41,17 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           });
 
           setBannerImg('/SyncibleBiggerBanner.png');
-          const { html, doc } = addIdsToHeadings(post.content.rendered.replace(/\n{3,}/g, '\n\n'));
+          const { html, doc } = addIdsToHeadings(
+            response.content.rendered.replace(/\n{3,}/g, '\n\n')
+          );
 
           const toc = generateTOC(doc);
           setToc(toc);
 
-          setBlogContent({ ...post, content: { rendered: html } });
+          setBlogContent({ ...response, content: { rendered: html } });
 
-          if (post.categories.length > 0) {
-            const categoryPromises = post.categories.map(async (categoryId: number) => {
-              const categoryResponse = await fetchDataFromWP(
-                `https://admin.syncible.io/wp-json/wp/v2/categories/${categoryId}`
-              );
-              return categoryResponse;
-            });
-            const categoryData = await Promise.all(categoryPromises);
-            setCategories(categoryData);
-          }
+          const categoryResponse = response['_embedded']['wp:term'][0];
+          setCategories(categoryResponse);
         }
       } catch (error) {
         console.error('Error fetching posts:', error);
@@ -95,10 +84,11 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   ];
 
   const readTime = Math.ceil(blogContent.content.rendered.split(' ').length / 200);
-  const date_created = new Date(blogContent.date).toLocaleDateString('en-GB', {
-    day: '2-digit',
-    month: '2-digit',
+
+  const dateCreated = format.dateTime(new Date(blogContent.date), {
     year: 'numeric',
+    month: 'long',
+    day: 'numeric'
   });
 
   return (
@@ -109,7 +99,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
           <div className="text-center text-2xl font-bold md:text-3xl lg:text-5xl">
             {blogContent.title.rendered}
           </div>
-          <div className="h-full w-full overflow-hidden rounded-xl sm:rounded-[2rem]">
+          <div className="relative h-full w-full overflow-hidden rounded-xl sm:rounded-[2rem]">
             {bannerImg && (
               <Image
                 src={bannerImg}
@@ -134,7 +124,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                   <div className="text-base font-medium text-[#A2A3A9]">
                     {t('blog_info.date_created.label')}
                   </div>
-                  <div className="text-lg font-medium text-[#2C2C2C]">{date_created}</div>
+                  <div className="text-lg font-medium text-[#2C2C2C]">{dateCreated}</div>
                 </div>
                 <div className="flex flex-col gap-2">
                   <div className="text-base font-medium text-[#A2A3A9]">
@@ -169,7 +159,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                     <div className="text-base font-medium text-[#A2A3A9]">
                       {t('blog_info.date_created.label')}
                     </div>
-                    <div className="text-lg font-medium">{date_created}</div>
+                    <div className="text-lg font-medium">{dateCreated}</div>
                   </div>
                   <div className="flex w-full flex-col gap-2">
                     <div className="text-base font-medium text-[#A2A3A9]">
@@ -191,7 +181,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 {categories.length > 0 && (
                   <div className="mt-8 flex items-center gap-4">
                     <div className="text-xl font-bold">{t('category.label')}</div>
-                    <div className="flex h-full items-center gap-4">
+                    <div className="flex flex-wrap h-full items-center gap-4">
                       {categories.map((category) => (
                         <div key={category.id}>
                           <Link

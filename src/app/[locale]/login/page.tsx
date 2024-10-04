@@ -35,8 +35,8 @@ export default function Login() {
   //login
   const [codeVerifier, setCodeVerifier] = useState('');
   const [codeChallenge, setCodeChallenge] = useState('');
-  const clientId = '14495804986765760978';
-  const redirectUri = 'https://syncible-cert-admin.vercel.app/oauth/callback';
+  const clientId = '14437770757134244933';
+  const redirectUri = 'http://localhost:3000/oauth/callback';
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

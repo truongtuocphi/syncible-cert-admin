@@ -1,72 +1,62 @@
 'use client';
 
-import { useSearchParams, useRouter } from 'next/navigation'; // Hook để lấy tham số từ URL
+import { useSearchParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-const Callback = () => {
-  const router = useRouter();
+export default function Callback() {
   const searchParams = useSearchParams();
-  const code = searchParams.get('code') || ''; // Lấy mã xác thực từ URL
-  const state = searchParams.get('state') || ''; // Lấy trạng thái từ URL
+  const router = useRouter();
 
-  const [codeVerifier, setCodeVerifier] = useState('');
-  const [responseData, setResponse] = useState<any>(null);
-  const clientId = '14495804986765760978';
-  const redirectUri = 'https://syncible-cert-admin.vercel.app/oauth/callback';
+  // Lấy mã xác thực từ URL
+  const code = searchParams.get('code') || '';
+  const state = searchParams.get('state') || '';
 
+  const clientId = '14437770757134244933'; // Client ID từ Basal SSO
+  const redirectUri = 'http://localhost:3000/oauth/callback'; // URL callback phải khớp với cấu hình Basal SSO
+
+  // Hàm lấy access token từ Basal SSO
   const handleGetAccessToken = async () => {
-    try {
-      const storedState = localStorage.getItem('state');
-      if (!storedState || storedState !== state) {
-        throw new Error('Invalid state parameter');
-      }
+    const storedState = localStorage.getItem('state'); // Lấy state đã lưu từ localStorage
 
-      const options = {
+    if (!storedState || storedState !== state) {
+      throw new Error('Invalid state parameter'); // So sánh state từ URL và localStorage
+    }
+
+    try {
+      const res = await fetch('https://api.basalwallet.com/api/v1/oauth/token', {
         method: 'POST',
         headers: {
-          accept: 'application/json',
-          'content-type': 'application/json',
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
         body: JSON.stringify({
-          grant_type: 'authorization_code,refresh_token',
-          code: code,
+          grant_type: 'authorization_code',
+          code,
           redirect_uri: redirectUri,
           code_verifier: localStorage.getItem('codeVerifier') || '',
           client_id: clientId,
         }),
-      };
+      });
 
-      const res = await fetch('https://api.basalwallet.com/api/v1/oauth/token', options);
       const data = await res.json();
-      setResponse(data);
 
       if (data.success) {
+        // Lưu access token vào localStorage
         localStorage.setItem('access_token', data.data.access_token);
-        localStorage.setItem('refresh_token', data.data.refresh_token);
+        // Chuyển hướng người dùng đến trang admin
         router.push('/admin');
+      } else {
+        console.error('Error fetching access token:', data);
       }
     } catch (error) {
-      alert(error);
+      console.error('Error during token request:', error);
     }
   };
 
   useEffect(() => {
-    setCodeVerifier(localStorage.getItem('codeVerifier') || '');
+    // Thực thi hàm lấy access token sau khi component được render
     handleGetAccessToken();
   }, []);
 
-  return (
-    <div className="m-10 mx-auto w-2/3 space-y-4">
-      <h1 className="text-lg font-bold">Callback Response</h1>
-      <p className="break-all">Code Verifier: {codeVerifier}</p>
-      <p className="break-all">Code Authorization: {code}</p>
-      <p className="break-all">Access Token: {responseData?.data?.access_token || ''}</p>
-      <p className="break-all">Refresh Token: {responseData?.data?.refresh_token || ''}</p>
-      <div className="pt-4">
-        <a href="/oauth">Retry</a>
-      </div>
-    </div>
-  );
-};
-
-export default Callback;
+  return <p>Redirecting to admin...</p>;
+}

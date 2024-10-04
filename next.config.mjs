@@ -15,6 +15,7 @@ const withMDX = createMDX({
 
 const nextConfig = {
   images: { remotePatterns: [{ protocol: 'https', hostname: '*' }] },
+
   webpack: (config) => {
     config.experiments = {
       ...config.experiments,

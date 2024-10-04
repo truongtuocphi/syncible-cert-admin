@@ -77,13 +77,17 @@ export default function Page({ params }: { params: { slug: string } }) {
               )}
 
               <div className="absolute bottom-4 left-4 h-28 w-28 rounded-full border-[0.5px] border-gray-100">
-                <Image
-                  src={data.logoImage || '/default_avatar.png'}
-                  alt="Xem trước logo"
-                  width={112}
-                  height={112}
-                  className="h-full w-full rounded-full object-cover"
-                />
+                {data.logoImage ? (
+                  <Image
+                    src={data.logoImage || ''}
+                    alt="Xem trước logo"
+                    width={112}
+                    height={112}
+                    className="h-full w-full rounded-full object-cover"
+                  />
+                ) : (
+                  <div className="h-full w-full rounded-full bg-gray-200"></div>
+                )}
               </div>
             </div>
           </div>

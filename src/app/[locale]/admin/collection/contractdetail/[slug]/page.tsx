@@ -64,16 +64,21 @@ export default function Page({ params }: { params: { slug: string } }) {
         <div className="h-fit w-full overflow-hidden rounded-2xl border-[0.5px] border-gray-200 bg-white">
           <div className="h-fit w-full">
             <div className="relative h-56">
-              <Image
-                src={data.bannerImage || ''}
-                alt="Xem trước hình ảnh banner"
-                width={600}
-                height={200}
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute bottom-4 left-4 h-28 w-28 rounded-full border-[0.5px] border-gray-200">
+              {data.bannerImage ? (
                 <Image
-                  src={data.logoImage || ''}
+                  src={data.bannerImage || ''}
+                  alt="Xem trước hình ảnh banner"
+                  width={600}
+                  height={200}
+                  className="h-full w-full object-cover"
+                />
+              ) : (
+                <div className="h-full w-full bg-gray-100"></div>
+              )}
+
+              <div className="absolute bottom-4 left-4 h-28 w-28 rounded-full border-[0.5px] border-gray-100">
+                <Image
+                  src={data.logoImage || '/default_avatar.png'}
                   alt="Xem trước logo"
                   width={112}
                   height={112}

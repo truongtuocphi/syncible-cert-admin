@@ -19,6 +19,10 @@ import {
 } from '@/lib/firebase';
 import Link from 'next/link';
 import { IoIosArrowRoundBack } from 'react-icons/io';
+import base64url from 'base64-url';
+import { sha256 } from '@noble/hashes/sha256';
+import { v4 as uuid } from 'uuid';
+import { randomBytes } from 'crypto';
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
@@ -27,6 +31,12 @@ export default function Login() {
   const [loading, setLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
+
+  //login
+  const [codeVerifier, setCodeVerifier] = useState('');
+  const [codeChallenge, setCodeChallenge] = useState('');
+  const clientId = '14495804986765760978';
+  const redirectUri = 'https://syncible-cert-admin.vercel.app/oauth/callback';
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -80,19 +90,51 @@ export default function Login() {
     }
   };
 
+  //login with basel
+  const handleCreateCode = () => {
+    const codeVerifier = uuid();
+    const codeChallenge = base64url.escape(Buffer.from(sha256(codeVerifier)).toString('base64'));
+    localStorage.setItem('codeVerifier', codeVerifier);
+    setCodeVerifier(codeVerifier);
+    setCodeChallenge(codeChallenge);
+  };
+
+  useEffect(() => {
+    handleCreateCode();
+  }, []);
+
+  const handleLoginWithBasal = async () => {
+    const randomState = randomBytes(32).toString('hex'); // Tạo trạng thái ngẫu nhiên
+    localStorage.setItem('state', randomState); // Lưu trạng thái vào localStorage
+
+    window.open(
+      `https://app.basalwallet.com/auth/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURI(
+        redirectUri
+      )}&response_type=code&scope=id+email&state=${randomState}&code_challenge=${codeChallenge}&code_challenge_method=S256`,
+      '_self' // Mở yêu cầu xác thực trong cùng một tab
+    );
+  };
+
   return (
     <div
       className="relative flex max-h-screen items-center justify-start"
       style={{ minHeight: 'calc(100vh + 30px)' }}
     >
-      <video
+      {/* <video
         className="absolute left-0 top-0 h-full w-full object-cover"
         src="/video/Cubes_Diagonal_3840x2160.mp4"
         autoPlay
         loop
         muted
-      ></video>
-      <div className="flex h-full w-full items-center px-8 py-5">
+      ></video> */}
+      <div className="h-full w-full px-8 py-5">
+        <div className="m-10 mx-auto w-2/3 space-y-4">
+          <button onClick={handleLoginWithBasal} className="rounded-lg bg-blue-500 p-4">
+            Login with Basal
+          </button>
+        </div>
+      </div>
+      {/* <div className="flex h-full w-full items-center px-8 py-5">
         <div
           className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:px-10 lg:pb-20 lg:pt-10 2xl:h-[850px]"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
@@ -173,21 +215,6 @@ export default function Login() {
                 Sign in
               </button>
             </form>
-            {/* <div className="mt-4 text-center">
-              <div className="my-6 flex items-center">
-                <div className="flex-grow border-t border-gray-300"></div>
-                <span className="mx-4 text-gray-500">Or</span>
-                <div className="flex-grow border-t border-gray-300"></div>
-              </div>
-              <button
-                onClick={handleGoogleSignIn}
-                disabled={loading}
-                className="mt-2 flex w-full items-center justify-center rounded-[20px] border border-gray-300 bg-gray-100 px-4 py-3 text-gray-700 hover:bg-gray-200 disabled:opacity-50"
-              >
-                <GoogleIcon className="mr-2 size-6" />
-                Sign in with Google
-              </button>
-            </div> */}
             <div className="mt-4 text-center">
               <p className="text-sm">
                 Don&rsquo;t have an account?{' '}
@@ -198,7 +225,7 @@ export default function Login() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

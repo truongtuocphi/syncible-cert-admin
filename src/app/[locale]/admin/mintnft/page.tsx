@@ -92,7 +92,7 @@ const Experience = () => {
       setLoading(true);
       setFileBannerImage(file.name);
       try {
-        const imageUrl = '';
+        const imageUrl = await uploadImageToPinata(file);
         setImage(imageUrl);
       } catch (error) {
         // eslint-disable-next-line no-console

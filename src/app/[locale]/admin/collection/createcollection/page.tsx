@@ -146,7 +146,6 @@ const CreateCollection: React.FC = () => {
                       type="file"
                       accept="image/*"
                       onChange={(e) => handleImageChange(e, setLogoImage)}
-                      required
                       className="absolute h-full w-full cursor-pointer opacity-0"
                       id="file-upload"
                     />
@@ -181,7 +180,6 @@ const CreateCollection: React.FC = () => {
                         type="file"
                         accept="image/*"
                         onChange={(e) => handleImageBannerChange(e, setBannerImage)}
-                        required
                         className="absolute h-full w-full cursor-pointer opacity-0"
                         id="file-upload-banner"
                       />

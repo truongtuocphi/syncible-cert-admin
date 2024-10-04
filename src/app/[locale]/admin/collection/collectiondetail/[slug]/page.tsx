@@ -60,17 +60,21 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
       <div className="mt-4 h-fit w-full">
         <div className="w-full">
           <div className="relative h-80 w-full">
-            <Image
-              src={data.bannerImage || ''}
-              width={500}
-              height={300}
-              alt={'Banner'}
-              className="h-80 w-full rounded-xl border-[0.5px] border-gray-200 object-cover"
-            />
+            {data.bannerImage ? (
+              <Image
+                src={data.bannerImage || ''}
+                width={500}
+                height={300}
+                alt={'Banner'}
+                className="h-80 w-full rounded-xl border-[0.5px] border-gray-200 object-cover"
+              />
+            ) : (
+              <div className="h-80 w-full rounded-xl border-[0.5px] border-gray-200 bg-gray-300"></div>
+            )}
 
             <div className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 translate-y-[40%] rounded-full border-[0.5px] border-gray-400 bg-white">
               <Image
-                src={data.logoImage || ''}
+                src={data.logoImage || '/default_avatar.png'}
                 width={144}
                 height={144}
                 alt={'Banner'}

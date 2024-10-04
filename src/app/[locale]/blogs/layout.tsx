@@ -12,7 +12,7 @@ import clsx from 'clsx';
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative flex min-h-screen flex-col">
-        <Navbar />
+      <Navbar />
       <div
         className={`${montserrat.className} z-20 flex h-full flex-grow flex-col items-center gap-10`}
       >

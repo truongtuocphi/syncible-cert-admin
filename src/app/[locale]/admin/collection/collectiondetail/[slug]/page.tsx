@@ -69,17 +69,21 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
                 className="h-80 w-full rounded-xl border-[0.5px] border-gray-200 object-cover"
               />
             ) : (
-              <div className="h-80 w-full rounded-xl border-[0.5px] border-gray-200 bg-gray-300"></div>
+              <div className="h-80 w-full rounded-xl border-[0.5px] border-gray-200 bg-gray-100"></div>
             )}
 
             <div className="absolute left-1/2 top-1/2 h-36 w-36 -translate-x-1/2 translate-y-[40%] rounded-full border-[0.5px] border-gray-400 bg-white">
-              <Image
-                src={data.logoImage || '/default_avatar.png'}
-                width={144}
-                height={144}
-                alt={'Banner'}
-                className="h-full w-full rounded-full object-cover"
-              />
+              {data.logoImage ? (
+                <Image
+                  src={data.logoImage || ''}
+                  width={144}
+                  height={144}
+                  alt={'Banner'}
+                  className="h-full w-full rounded-full object-cover"
+                />
+              ) : (
+                <div className="h-full w-full rounded-full bg-gray-200 object-cover"></div>
+              )}
             </div>
           </div>
           <div className="mt-14 flex flex-col justify-center gap-2 text-center">

@@ -68,7 +68,7 @@ const Certificate = ({
         id="certificate-image"
         src={previewImage}
         alt="Certificate_Image"
-        className="h-full w-full object-cover"
+        className="h-full w-full object-cover shadow-combinedShadow2"
       />
       {/* Name */}
       <div className="absolute inset-0 flex items-center justify-center">

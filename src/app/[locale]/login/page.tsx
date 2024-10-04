@@ -104,14 +104,14 @@ export default function Login() {
   }, []);
 
   const handleLoginWithBasal = async () => {
-    const randomState = randomBytes(32).toString('hex'); // Tạo trạng thái ngẫu nhiên
-    localStorage.setItem('state', randomState); // Lưu trạng thái vào localStorage
+    const randomState = randomBytes(32).toString('hex');
+    localStorage.setItem('state', randomState);
 
     window.open(
       `https://app.basalwallet.com/auth/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURI(
         redirectUri
       )}&response_type=code&scope=id+email&state=${randomState}&code_challenge=${codeChallenge}&code_challenge_method=S256`,
-      '_self' // Mở yêu cầu xác thực trong cùng một tab
+      '_self'
     );
   };
 
@@ -129,8 +129,8 @@ export default function Login() {
       ></video> */}
       <div className="h-full w-full px-8 py-5">
         <div className="m-10 mx-auto w-2/3 space-y-4">
-        <p className="break-all">Code Verifier: {codeVerifier}</p>
-        <p className="break-all">Code Challenge: {codeChallenge}</p>
+          <p className="break-all">Code Verifier: {codeVerifier}</p>
+          <p className="break-all">Code Challenge: {codeChallenge}</p>
           <button onClick={handleLoginWithBasal} className="rounded-lg bg-blue-500 p-4">
             Login with Basal
           </button>

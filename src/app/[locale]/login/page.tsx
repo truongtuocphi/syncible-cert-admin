@@ -36,8 +36,8 @@ export default function Login() {
   //login
   const [codeVerifier, setCodeVerifier] = useState('');
   const [codeChallenge, setCodeChallenge] = useState('');
-  const clientId = process.env.NEXT_PUBLIC_URL_BASAL;
-  const redirectUri = process.env.NEXT_PUBLIC_ID_BASAL;
+  const clientId = process.env.NEXT_PUBLIC_ID_BASAL;
+  const redirectUri = process.env.NEXT_PUBLIC_URL_BASAL;
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -233,7 +233,7 @@ export default function Login() {
             width={110}
             height={30}
           />
-          <div className="flex flex-col h-full w-full items-center justify-center">
+          <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="flex flex-col gap-3 text-center">
               <h2 className="text-3xl font-bold">Sign in to Syncible!</h2>
               <p>Please connect to Basal Wallet to use the features.</p>

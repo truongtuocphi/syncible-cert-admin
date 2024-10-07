@@ -37,7 +37,7 @@ export default function Login() {
   const [codeVerifier, setCodeVerifier] = useState('');
   const [codeChallenge, setCodeChallenge] = useState('');
   const clientId = process.env.NEXT_PUBLIC_URL_BASAL;
-  const redirectUri = process.env.NEXT_PUBLIC_URL_BASAL;
+  const redirectUri = process.env.NEXT_PUBLIC_ID_BASAL;
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);

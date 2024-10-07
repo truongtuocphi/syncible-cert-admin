@@ -99,7 +99,10 @@ export default function Explorer() {
                         className="max-w-48 py-2 text-black outline-none sm:max-w-none"
                       />
                     </div>
-                    <ButtonPrimary onClick={handleSearchforIdCert} className="px-5 py-3 font-bold shadow-combinedShadow1">
+                    <ButtonPrimary
+                      onClick={handleSearchforIdCert}
+                      className="px-5 py-3 font-bold shadow-combinedShadow1"
+                    >
                       {t('search_button.label')}
                     </ButtonPrimary>
                   </div>
@@ -114,7 +117,10 @@ export default function Explorer() {
                         className="max-w-48 py-2 text-black outline-none sm:max-w-none"
                       />
                     </div>
-                    <ButtonPrimary onClick={handleSearchforName} className="px-5 py-3 font-bold shadow-combinedShadow1">
+                    <ButtonPrimary
+                      onClick={handleSearchforName}
+                      className="px-5 py-3 font-bold shadow-combinedShadow1"
+                    >
                       {t('search_button.label')}
                     </ButtonPrimary>
                   </div>
@@ -158,7 +164,9 @@ export default function Explorer() {
               <div className="flex w-full items-center justify-center">
                 <div className="flex flex-col items-center gap-2">
                   <BiSolidCommentError className="text-7xl text-gray-700" />
-                  <div className="text-lg font-semibold text-gray-700">{t('result.not_found.label')}</div>
+                  <div className="text-lg font-semibold text-gray-700">
+                    {t('result.not_found.label')}
+                  </div>
                 </div>
               </div>
             ) : data ? (
@@ -175,7 +183,7 @@ export default function Explorer() {
                 </Link>
               </div>
             ) : (
-              <div className="flex flex-grow h-full w-full items-center justify-center">
+              <div className="flex h-full w-full flex-grow items-center justify-center">
                 <div className="flex flex-col items-center gap-2">
                   <HiTemplate className="text-7xl text-gray-700" />
                   <div className="text-lg font-semibold text-gray-700">
@@ -190,7 +198,7 @@ export default function Explorer() {
           <Footer />
         </div>
         <div className="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col items-center overflow-hidden">
-          <div className="relative mx-auto h-full w-full max-w-[90rem]">
+          <div className="relative -z-10 mx-auto h-full w-full max-w-[90rem]">
             <div className="absolute -left-1/2 -top-1/2 -z-10 w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%] sm:-translate-x-[20%] sm:-translate-y-[50%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>

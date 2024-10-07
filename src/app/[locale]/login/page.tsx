@@ -125,13 +125,13 @@ export default function Login() {
       className="relative flex max-h-screen items-center justify-start"
       style={{ minHeight: 'calc(100vh + 100px)' }}
     >
-      <video
+      {/* <video
         className="absolute left-0 top-0 h-full w-full object-cover"
         src="/video/Cubes_Diagonal_3840x2160.mp4"
         autoPlay
         loop
         muted
-      ></video>
+      ></video> */}
       <div className="flex h-full w-full items-center px-8 py-5">
         <div
           className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:px-10 lg:pb-20 lg:pt-10 2xl:h-[850px]"
@@ -215,14 +215,14 @@ export default function Login() {
               <div className="m-10 mx-auto w-full">
                 {/* <p className="break-all">Code Verifier: {codeVerifier}</p>
                   <p className="break-all">Code Challenge: {codeChallenge}</p> */}
-                <button
-                  onClick={handleLoginWithBasal}
-                  className="w-full rounded-[20px] bg-blue-500 p-3 text-white"
-                >
-                  Login with Basal
-                </button>
               </div>
             </form>
+            <button
+              onClick={handleLoginWithBasal}
+              className="w-full rounded-[20px] bg-blue-500 p-3 text-white"
+            >
+              Login with Basal
+            </button>
             <div className="mt-4 text-center">
               <p className="text-sm">
                 Don&rsquo;t have an account?{' '}

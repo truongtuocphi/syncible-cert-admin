@@ -1,21 +1,36 @@
 'use client';
 
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { ref, set, get } from 'firebase/database'; // Sử dụng get để kiểm tra user
-import { createUserWithEmailAndPassword } from 'firebase/auth'; // Sử dụng để tạo user với email và password
-import { db, auth } from '@/lib/firebase'; // Firebase Realtime Database
+import {
+  auth,
+  db,
+  set,
+  ref,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  provider,
+  browserSessionPersistence,
+  onAuthStateChanged,
+  get,
+} from '@/lib/firebase';
+import { useRouter } from 'next/navigation';
+import { FirebaseError } from 'firebase/app';
+import Loading from '@/components/common/loading/Loading';
 
 const Page = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams.get('code') || '';
   const state = searchParams.get('state') || '';
-  const router = useRouter(); // Dùng để điều hướng trang
 
   const [codeVerifier, setCodeVerifier] = useState('');
   const [accessToken, setAccessToken] = useState('');
   const [responseData, setResponse] = useState<any>();
   const [userInfo, setUserInfo] = useState<any>(null);
+  const [formErrors, setFormErrors] = useState<any>({});
+  const [success, setSuccess] = useState('');
 
   // Hàm lấy Access Token
   const handleGetAccessToken = async () => {
@@ -34,9 +49,9 @@ const Page = () => {
         body: JSON.stringify({
           grant_type: 'authorization_code',
           code: code,
-          redirect_uri: 'http://localhost:3000/oauth/callback',
+          redirect_uri: process.env.NEXT_PUBLIC_URL_BASAL,
           code_verifier: localStorage.getItem('codeVerifier') || '',
-          client_id: '14437770757134244933',
+          client_id: process.env.NEXT_PUBLIC_ID_BASAL,
         }),
       };
 
@@ -61,50 +76,77 @@ const Page = () => {
       const userInfoData = await res.json();
       setUserInfo(userInfoData);
 
-      const basalId = userInfoData.data.id; // ID từ Basal API
+      // Kiểm tra xem user đã tồn tại trong Realtime Database chưa
+      await checkAndRegisterUser(userInfoData);
+    } catch (error) {
+      alert('Failed to fetch user info');
+    }
+  };
 
-      // Lấy current user từ Firebase Auth
-      const currentUser = auth.currentUser;
+  // Hàm kiểm tra và đăng ký người dùng
+  const checkAndRegisterUser = async (userInfoData: any) => {
+    const user = auth.currentUser; // Lấy người dùng hiện tại từ Firebase
+    const userRef = ref(db, 'users/' + user?.uid); // Sử dụng `uid` của người dùng Firebase
 
-      if (currentUser) {
-        const userRef = ref(db, 'users/' + currentUser.uid); // Sử dụng uid của currentUser
+    // Kiểm tra xem người dùng đã tồn tại trong database chưa
+    const snapshot = await get(userRef);
 
-        // Kiểm tra xem user đã tồn tại trong Firebase chưa
-        const userSnapshot = await get(userRef);
+    if (!snapshot.exists()) {
+      // Nếu người dùng chưa tồn tại trong cơ sở dữ liệu, thực hiện đăng ký
+      const email = userInfoData?.data?.email;
+      const password = 'defaultPassword'; // Mật khẩu mặc định hoặc có thể tạo mật khẩu khác
 
-        if (userSnapshot.exists()) {
-          const storedBasalId = userSnapshot.val().basalId;
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        const newUser = auth.currentUser; // Lấy người dùng sau khi đăng ký
 
-          // So sánh basalId đã lưu với basalId hiện tại
-          if (storedBasalId === basalId) {
-            // Nếu trùng khớp, điều hướng trực tiếp đến /admin
-            router.push('/admin');
-          } else {
-            alert('ID từ Basal không khớp với thông tin đã lưu');
-          }
-        } else {
-          // Tạo user mới trong Firebase Auth nếu chưa tồn tại
-          const fakePassword = '123123'; // Password giả, không cần thực sự
-          await createUserWithEmailAndPassword(auth, userInfoData?.data?.email, fakePassword);
-
-          // Lưu thông tin vào Firebase Realtime Database
-          await set(userRef, {
-            uid: currentUser.uid, // Dùng uid của currentUser
-            basalId: basalId, // ID từ Basal API
-            name: userInfoData.data.name || 'Anonymous',
-            email: userInfoData.data.email,
-            avatar: userInfoData.data.avatar_url || '',
+        if (newUser) {
+          const newUserRef = ref(db, 'users/' + newUser.uid); // Tạo `ref` với `uid` của người dùng mới
+          await set(newUserRef, {
+            uid: newUser.uid, // Lưu `uid` của Firebase user
+            idBasal: userInfoData?.data?.id, // Có thể lưu thêm thông tin từ Basal
+            name: userInfoData?.data?.name || '',
+            email,
+            avatar: '',
             createdAt: new Date().toISOString(),
           });
-
-          // Điều hướng đến trang /admin sau khi lưu
-          router.push('/admin');
+          setSuccess('Registration successful! Redirecting to login...');
+          setTimeout(() => {
+            router.push('/admin');
+          }, 2000);
         }
-      } else {
-        alert('Failed to retrieve current user from Firebase Auth');
+      } catch (err) {
+        const firebaseError = err as FirebaseError;
+
+        if (firebaseError.code === 'auth/email-already-in-use') {
+          // Nếu email đã tồn tại, thực hiện đăng nhập
+          try {
+            await signInWithEmailAndPassword(auth, email, password);
+            console.log('Login successful!');
+            await router.push('/admin');
+          } catch (loginError) {
+            await router.push('/login');
+            console.error('Login error:', loginError);
+          }
+        } else {
+          // Các lỗi khác ngoài "email đã tồn tại"
+          setFormErrors({
+            email: 'Registration failed.',
+          });
+        }
       }
-    } catch (error) {
-      alert('Failed to fetch user info or save to Firebase');
+    } else {
+      // Nếu người dùng đã tồn tại thì thực hiện đăng nhập
+      const email = userInfoData?.data?.email;
+      const password = 'defaultPassword'; // Mật khẩu mặc định hoặc mật khẩu của user
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        await router.push('/admin');
+      } catch (error) {
+        await router.push('/login');
+        console.error('Login error:', error);
+      }
     }
   };
 
@@ -123,26 +165,8 @@ const Page = () => {
   }, [accessToken]);
 
   return (
-    <div className="m-10 mx-auto w-2/3 space-y-4">
-      <p className="break-all">Code Verifier: {codeVerifier}</p>
-      <p className="break-all">Code Authorization: {code}</p>
-      <p className="break-all">Access token: {accessToken}</p>
-      <p className="break-all">Refresh token: {responseData?.data?.refresh_token || ''}</p>
-
-      {/* Hiển thị thông tin user nếu có */}
-      {userInfo && (
-        <div className="pt-4">
-          <p className="font-bold">User Info:</p>
-          <p className="break-all">ID: {userInfo?.data?.id}</p>
-          <p className="break-all">Email: {userInfo?.data?.email}</p>
-          <p className="break-all">Name: {userInfo?.data?.name}</p>
-          <p className="break-all">Avatar: {userInfo?.data?.avatar_url}</p>
-        </div>
-      )}
-
-      <div className="pt-4">
-        <a href="/login">Retry</a>
-      </div>
+    <div className="relative flex h-screen w-full items-center justify-center bg-white">
+      <Loading />
     </div>
   );
 };

@@ -341,9 +341,9 @@
       "titleFullName": "Full name",
       "placeholderFullName": "Your full name",
 
-      "titleCSV": "CSV Information",
-      "subTitleCSV": "Your csv file format must be formatted according to Syncible's file format field for consistency. Once formatted, save the file as a CSV file and paste it into the template below",
-      "buttonUploadFileCSV": "Download sample CSV file",
+      "titleCSV": "XLSX Information",
+      "subTitleCSV": "Your csv file format must be formatted according to Syncible's file format field for consistency. Once formatted, save the file as a .xlsx file and paste it into the template below",
+      "buttonUploadFileCSV": "Download sample .xlsx file",
       "downloadFileCSV": "Choose file"
     },
 
@@ -354,6 +354,22 @@
       "title_2": "Generate certificates in bulk",
       "des_2": "This item is designed for mass certification of courses per student",
       "button": "Create Digital Certificate"
+    },
+
+    "setting": {
+      "title": "Settings",
+      "tabProfile": "Profile",
+      "tabAcc": "Account",
+      "titleProfilePicture": "Profile picture",
+      "titleName": "Name",
+      "titleEmail": "Email",
+      "titleLanguage": "Language",
+      "titleChain": "Chain",
+      "titleCreateDate": "Create Date",
+      "titleWalletAddress": "Wallet Address",
+      "titleConnectWallet": "Connect Wallet",
+      "titleSubscriptionPlan": "Subscription Plan",
+      "titleTrial": "Trial"
     }
   },
 

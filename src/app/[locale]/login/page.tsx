@@ -23,6 +23,7 @@ import base64url from 'base64-url';
 import { sha256 } from '@noble/hashes/sha256';
 import { v4 as uuid } from 'uuid';
 import { randomBytes } from 'crypto';
+import BasalIcon from '@/components/icons/BasalIcon';
 
 export default function Login() {
   const [email, setEmail] = useState<string>('');
@@ -35,8 +36,8 @@ export default function Login() {
   //login
   const [codeVerifier, setCodeVerifier] = useState('');
   const [codeChallenge, setCodeChallenge] = useState('');
-  const clientId = '14437770757134244933';
-  const redirectUri = 'http://localhost:3000/oauth/callback';
+  const clientId = process.env.NEXT_PUBLIC_ID_BASAL;
+  const redirectUri = process.env.NEXT_PUBLIC_URL_BASAL;
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -112,12 +113,14 @@ export default function Login() {
     const randomState = randomBytes(32).toString('hex');
     localStorage.setItem('state', randomState);
 
-    window.open(
-      `https://app.basalwallet.com/auth/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURI(
-        redirectUri
-      )}&response_type=code&scope=id+email&state=${randomState}&code_challenge=${codeChallenge}&code_challenge_method=S256`,
-      '_self'
-    );
+    if (redirectUri) {
+      window.open(
+        `https://app.basalwallet.com/auth/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURI(
+          redirectUri
+        )}&response_type=code&scope=id+email&state=${randomState}&code_challenge=${codeChallenge}&code_challenge_method=S256`,
+        '_self'
+      );
+    }
   };
 
   return (
@@ -125,19 +128,19 @@ export default function Login() {
       className="relative flex max-h-screen items-center justify-start"
       style={{ minHeight: 'calc(100vh + 100px)' }}
     >
-      {/* <video
+      <video
         className="absolute left-0 top-0 h-full w-full object-cover"
         src="/video/Cubes_Diagonal_3840x2160.mp4"
         autoPlay
         loop
         muted
-      ></video> */}
+      ></video>
       <div className="flex h-full w-full items-center px-8 py-5">
         <div
-          className="z-10 w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:px-10 lg:pb-20 lg:pt-10 2xl:h-[850px]"
+          className="z-10 h-[685px] w-full p-2 text-black backdrop-blur-sm md:w-[470px] lg:px-10 lg:pb-20 lg:pt-10 2xl:h-[850px]"
           style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)', borderRadius: '56px 8px 56px 8px' }}
         >
-          <div className="flex items-center justify-between p-3">
+          {/* <div className="flex items-center justify-between p-3">
             <Image
               src="/SyncibleAdmin.png"
               style={{ width: '110px', height: 'auto' }}
@@ -153,8 +156,8 @@ export default function Login() {
               <IoIosArrowRoundBack className="text-xl text-gray-600 group-hover:text-black" />
               Back
             </Link>
-          </div>
-          <div className="mx-auto mt-16 w-full max-w-lg p-3">
+          </div> */}
+          {/* <div className="mx-auto mt-16 w-full max-w-lg p-3">
             <h1 className="mb-6 text-center text-2xl font-bold">Sign in to Syncible!</h1>
             {loading && <Loading />}
             <form className="space-y-4" onSubmit={handleSubmit}>
@@ -212,17 +215,7 @@ export default function Login() {
                 Sign in
               </button>
               <div className="my-4 text-center">or</div>
-              <div className="m-10 mx-auto w-full">
-                {/* <p className="break-all">Code Verifier: {codeVerifier}</p>
-                  <p className="break-all">Code Challenge: {codeChallenge}</p> */}
-              </div>
             </form>
-            <button
-              onClick={handleLoginWithBasal}
-              className="w-full rounded-[20px] bg-blue-500 p-3 text-white"
-            >
-              Login with Basal
-            </button>
             <div className="mt-4 text-center">
               <p className="text-sm">
                 Don&rsquo;t have an account?{' '}
@@ -231,6 +224,29 @@ export default function Login() {
                 </a>
               </p>
             </div>
+          </div> */}
+
+          <Image
+            src="/SyncibleAdmin.png"
+            style={{ width: '110px', height: 'auto' }}
+            alt="logo"
+            width={110}
+            height={30}
+          />
+          <div className="flex h-full w-full flex-col items-center justify-center">
+            <div className="flex flex-col gap-3 text-center">
+              <h2 className="text-3xl font-bold">Sign in to Syncible!</h2>
+              <p>Please connect to Basal Wallet to use the features.</p>
+            </div>
+            <button
+              onClick={handleLoginWithBasal}
+              className="mt-10 w-full rounded-[20px] border-[0.5px] border-gray-100 bg-white p-3 font-bold text-black"
+            >
+              <div className="flex items-center justify-center gap-2">
+                <BasalIcon width={24} height={24} />
+                Continue with Basal Wallet
+              </div>
+            </button>
           </div>
         </div>
       </div>

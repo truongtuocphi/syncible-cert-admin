@@ -1,23 +1,23 @@
-'use client';
 
-import Footer from '@/components/layout/Footer';
-import Navbar from '@/components/layout/Navbar';
-import { montserrat } from '@/components/ui/fonts';
+// import Footer from '@/components/layout/Footer';
+// import Navbar from '@/components/layout/Navbar';
+// import { montserrat } from '@/components/ui/fonts';
 
-import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
-import { Link, usePathname } from '@/i18n/routing';
-import { useEffect, useState } from 'react';
-import clsx from 'clsx';
+// import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
+// import { Link, usePathname } from '@/i18n/routing';
+// import { useEffect, useState } from 'react';
+// import clsx from 'clsx';
 
 export default function BlogLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative flex min-h-screen flex-col">
+    <>
+      {/* <div className="relative flex min-h-screen flex-col">
       <Navbar />
       <div
         className={`${montserrat.className} z-20 flex h-full flex-grow flex-col items-center gap-10`}
-      >
+      > */}
         {children}
-      </div>
+      {/* </div>
       <div className="relative mt-10 w-full">
         <Footer />
       </div>
@@ -31,6 +31,7 @@ export default function BlogLayout({ children }: { children: React.ReactNode }) 
           </div>
         </div>
       </div>
-    </div>
+      </div> */}
+      </>
   );
 }

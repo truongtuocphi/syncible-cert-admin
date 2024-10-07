@@ -59,8 +59,13 @@ export function LocaleSelect() {
 
 export function LocaleCollapsible() {
   const t = useTranslations('Localization');
-  const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleLanguageChange = async (value: 'en' | 'vi') => {
+    // router.replace(pathname, { locale: value });
+    router.replace('/', { locale: value });
+  };
 
   return (
     <>
@@ -80,9 +85,12 @@ export function LocaleCollapsible() {
               {/* <Link href={`${pathname}`} locale={loc}>
                 {t('label', { locale: loc })}
               </Link> */}
-              <Link href="\" locale={loc}>
+              {/* <Link href="\" locale={loc}>
                 {t('label', { locale: loc })}
-              </Link>
+              </Link> */}
+              <Button variant="link" onClick={() => handleLanguageChange(loc as 'en' | 'vi')}>
+                {t('label', { locale: loc })}
+              </Button>
             </div>
           ))}
         </CollapsibleContent>

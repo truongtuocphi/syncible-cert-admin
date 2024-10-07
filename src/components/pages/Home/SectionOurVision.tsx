@@ -57,7 +57,7 @@ export default function SectionOurVision() {
             </div>
           </div>
         </div>
-        <div className="h-full w-full basis-1/2" ref={rightRef}>
+        <div className="relative h-full w-full basis-1/2" ref={rightRef}>
           <Image
             src="/img03.png"
             alt="Image of a globe"

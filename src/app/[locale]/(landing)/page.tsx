@@ -15,23 +15,21 @@ import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
 import { Link } from '@/i18n/routing';
 
-import BannerCertificate from '../../../public/cert_example.png';
+import BannerCertificate from '../../../../public/cert_example.png';
 
-import Background from '../../../public/DoraBG.png';
-import BackgroundSmall from '../../../public/DoraBGSmall.png';
-import LightBlueGradientEllipse from '../../../public/Ellipse_1.svg';
-import EthereumLogoSVG from '../../../public/ethereum-logo.svg';
-import PolygonLogoSVG from '../../../public/polygon-logo.svg';
+import Background from '../../../../public/DoraBG.png';
+import BackgroundSmall from '../../../../public/DoraBGSmall.png';
+import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
+import EthereumLogoSVG from '../../../../public/ethereum-logo.svg';
+import PolygonLogoSVG from '../../../../public/polygon-logo.svg';
 import SectionFAQ from '@/components/pages/Home/SectionFAQ';
 
 const Page = () => {
   const t = useTranslations('HomePage.title_section');
   return (
     <>
-      <div className="relative min-h-screen overflow-hidden">
-        <div className="fixed top-0 z-30 w-screen md:mt-6">
-          <Navbar />
-        </div>
+      {/* <div className="relative min-h-screen overflow-hidden">       
+        <Navbar /> */}
         <div
           className={`${montserrat.className} relative z-20 flex flex-col items-center gap-10 overflow-hidden`}
         >
@@ -118,11 +116,11 @@ const Page = () => {
             <SectionFAQ />
           </div>
           <SectionBlogs />
-          <div className="relative w-full">
+          {/* <div className="relative w-full">
             <Footer />
-          </div>
+          </div> */}
         </div>
-        <div className="absolute inset-0 flex w-full flex-col items-center overflow-hidden">
+        {/* <div className="absolute inset-0 flex w-full flex-col items-center overflow-hidden">
           <div className="relative mx-auto min-h-full w-full max-w-[90rem]">
             <div className="absolute -left-[170%] -top-[15%] -z-10 w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%]">
               <LightBlueGradientEllipse className="h-full w-full" />
@@ -135,7 +133,7 @@ const Page = () => {
             </div>
           </div>
         </div>
-        <div className="absolute bottom-0 left-0 right-0 top-0">
+         <div className="absolute bottom-0 left-0 right-0 top-0">
           <div className="hidden sm:block">
             <Image
               src={Background}
@@ -155,7 +153,7 @@ const Page = () => {
             />
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

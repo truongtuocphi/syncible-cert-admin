@@ -345,7 +345,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                             {social.icon}
                           </div>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[576px]">
+                        <DialogContent className="sm:max-w-[576px] ">
                           <div>
                             <div className="text-center">
                               <h1 className="text-4xl font-bold">Add to LinkedIn profile</h1>
@@ -367,20 +367,20 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                                   linkWeb
                                 )
                               }
-                              className="mt-10 w-full rounded-full"
+                              className="mt-10 w-full rounded-full shadow-combinedShadow1"
                             >
                               Add to my profile
                             </ButtonPrimary>
 
                             <nav className="list mt-10">
-                              <ul className="list-disc text-gray-400">
-                                <li className="mt-2 list-inside">
+                              <ul className="list-disc list-inside text-gray-400">
+                                <li className="mt-2">
                                   No expiration date: 
                                   <span className="font-bold text-black">
                                     Click 'this certification does not expire' on LinkedIn
                                   </span>
                                 </li>
-                                <li className="mt-2 list-inside">
+                                <li className="mt-2 ">
                                   LinkedIn no longer shares profile updates to your network. Click
                                   the share button below to share your credential instead.
                                 </li>
@@ -388,7 +388,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                             </nav>
 
                             <ButtonPrimary
-                              className="mt-10 w-full rounded-full"
+                              className="mt-10 w-full rounded-full shadow-combinedShadow1"
                               onClick={() =>
                                 shareOnLinkedIn(
                                   'Chứng chỉ blockchain',

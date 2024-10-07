@@ -38,6 +38,7 @@ const Page = () => {
       const storedState = localStorage.getItem('state');
       if (!storedState || storedState !== state) {
         throw new Error('Invalid state parameter');
+        router.push('/login')
       }
 
       const options = {

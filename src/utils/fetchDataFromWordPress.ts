@@ -2,6 +2,7 @@ import axios from 'axios';
 
 const WP_BASE_URL = 'https://admin.syncible.io/wp-json/wp/v2';
 
+// 1. Fetch posts with pagination
 export const fetchPaginatedDataFromWP = async (url: string) => {
   try {
     const response = await axios.get(url);
@@ -16,6 +17,7 @@ export const fetchPaginatedDataFromWP = async (url: string) => {
   }
 };
 
+// 2. Fetch posts without any optional parameters
 export const fetchDataFromWP = async (url: string) => {
   try {
     const response = await axios.get(url);
@@ -27,6 +29,7 @@ export const fetchDataFromWP = async (url: string) => {
   }
 }
 
+// 3. Fetch categories
 export const fetchCategories = async () => {
   const url = `${WP_BASE_URL}/categories`;
   try {
@@ -38,7 +41,7 @@ export const fetchCategories = async () => {
   }
 };
 
-// 2. Fetch posts with pagination and optional category filter
+// 4. Fetch posts with pagination and optional category filter
 export const fetchPosts = async (page: number, postsPerPage: number, categoryId: number | null, tagId: number) => {
   let url = `${WP_BASE_URL}/posts?page=${page}&per_page=${postsPerPage}&tags=${tagId}`;
   
@@ -56,9 +59,9 @@ export const fetchPosts = async (page: number, postsPerPage: number, categoryId:
   }
 };
 
-// 3. Fetch post by slug
+// 5. Fetch post by slug
 export const fetchPostBySlug = async (slug: string) => {
-  const url = `${WP_BASE_URL}/posts?slug=${slug}`;
+  const url = `${WP_BASE_URL}/posts?slug=${slug}&_embed`; // using embed to get author, media, category details 
   try {
     const post = await fetchDataFromWP(url);
     return post.length > 0 ? post[0] : null; // Return the first post that matches the slug or null if not found
@@ -68,7 +71,7 @@ export const fetchPostBySlug = async (slug: string) => {
   }
 };
 
-// 4. Fetch media (featured image or media by ID)
+// 6. Fetch media (featured image or media by ID)
 export const fetchMediaById = async (mediaId: number) => {
   const url = `${WP_BASE_URL}/media/${mediaId}`;
   try {
@@ -80,7 +83,7 @@ export const fetchMediaById = async (mediaId: number) => {
   }
 };
 
-// 5. Fetch author details by ID
+// 7. Fetch author details by ID
 export const fetchAuthorById = async (authorId: number) => {
   const url = `${WP_BASE_URL}/users/${authorId}`;
   try {

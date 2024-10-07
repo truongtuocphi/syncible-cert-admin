@@ -252,9 +252,9 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         />
         <meta property="og:url" content={`${linkWeb}/${slugPost}`} />
       </head>
-      <div className="mx-auto mt-5 max-w-full">
+      <div className="mt-5 w-full px-0 sm:px-4">
         <div className="flex flex-col items-center justify-center md:flex-row">
-          <div className="w-1/2">
+          <div className="w-full sm:w-2/3">
             <CertificatePreview
               previewImage={templateURL}
               name={name?.split('Certificate for')[1]?.trim()}
@@ -268,15 +268,17 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
             <div className="flex size-12 items-center justify-center rounded-full bg-primary-50 text-lg text-white">
               {getInitialsFromCertificateName(name?.split('Certificate for')[1]?.trim())}
             </div>
-            <p className="text-2xl font-bold">{name?.split('Certificate for')[1]?.trim()}</p>
+            <p className="text-lg font-bold sm:text-[2rem]">
+              {name?.split('Certificate for')[1]?.trim()}
+            </p>
           </div>
         </div>
 
         {changeLayout ? (
-          <div className="grid grid-cols-1 gap-6 bg-gradient-to-b from-white/50 md:grid-cols-12">
-            <div className="col-span-12 rounded-3xl border-[1px] border-gray-200 bg-white/50 p-6 backdrop-blur-xl md:col-span-8">
+          <div className="grid grid-rows-2 grid-cols-1 gap-6 xl:grid-cols-12 xl:grid-rows-1">
+            <div className="col-span-1 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-8">
               <div className="flex w-full flex-col items-start">
-                <h4 className="mb-4 text-xl font-bold">{t('header')}</h4>
+                <h4 className="mb-4 text-lg lg:text-2xl  font-bold">{t('header')}</h4>
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">{t('location.title')}</p>
@@ -325,23 +327,25 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               </div>
             </div>
 
-            <div className="col-span-12 h-fit rounded-3xl border-[1px] border-gray-100 bg-white/50 p-6 backdrop-blur-xl md:col-span-4">
-              <h4 className="mb-4 text-xl font-bold">{t('header_2')}</h4>
-              <p className="text-[#A2A3A9]">{t('label')}</p>
-              <div className="mt-4 flex items-center justify-around">
+            <div className="flex flex-col gap-8 col-span-1 h-fit rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-4">
+              <div className="flex flex-col gap-1">
+                <div className="text-lg lg:text-2xl font-bold">{t('header_2')}</div>
+                <div className="text-[#A2A3A9]">{t('label')}</div>
+              </div>
+              <div className="flex items-center justify-between gap-4">
                 {listSocialMedia.map((social, index) => (
                   <>
                     {index === 0 ? (
                       <Dialog>
                         <DialogTrigger asChild>
                           <div
-                            className="cursor-pointer rounded-xl px-6 py-4 shadow-lg"
+                            className="flex flex-grow cursor-pointer justify-center rounded-xl p-3 shadow-combinedShadow2"
                             key={index}
                           >
                             {social.icon}
                           </div>
                         </DialogTrigger>
-                        <DialogContent className="sm:max-w-[576px]">
+                        <DialogContent className="sm:max-w-[576px] ">
                           <div>
                             <div className="text-center">
                               <h1 className="text-4xl font-bold">Add to LinkedIn profile</h1>
@@ -363,20 +367,20 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                                   linkWeb
                                 )
                               }
-                              className="mt-10 w-full rounded-full"
+                              className="mt-10 w-full rounded-full shadow-combinedShadow1"
                             >
                               Add to my profile
                             </ButtonPrimary>
 
                             <nav className="list mt-10">
-                              <ul className="list-disc text-gray-400">
-                                <li className="mt-2 list-inside">
+                              <ul className="list-disc list-inside text-gray-400">
+                                <li className="mt-2">
                                   No expiration date: 
                                   <span className="font-bold text-black">
                                     Click 'this certification does not expire' on LinkedIn
                                   </span>
                                 </li>
-                                <li className="mt-2 list-inside">
+                                <li className="mt-2 ">
                                   LinkedIn no longer shares profile updates to your network. Click
                                   the share button below to share your credential instead.
                                 </li>
@@ -384,7 +388,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                             </nav>
 
                             <ButtonPrimary
-                              className="mt-10 w-full rounded-full"
+                              className="mt-10 w-full rounded-full shadow-combinedShadow1"
                               onClick={() =>
                                 shareOnLinkedIn(
                                   'Chứng chỉ blockchain',
@@ -401,7 +405,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                     ) : (
                       <Link
                         href={`${social.url}${linkWeb}`}
-                        className="rounded-xl px-6 py-4 shadow-lg"
+                        className="flex flex-grow justify-center rounded-xl p-3 shadow-combinedShadow2"
                         target={'_blank'}
                       >
                         <div className="" key={index}>
@@ -412,14 +416,14 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   </>
                 ))}
               </div>
-              <div className="mt-4 flex items-center justify-between overflow-hidden rounded-xl border-[1px] bg-white pr-6">
+              <div className="flex items-center overflow-hidden rounded-xl bg-white border border-[#A2A3A9]">
                 <input
                   type="text"
                   value={linkWeb}
-                  className="border-r-[1px] border-gray-100 py-3 pl-3 pr-6"
+                  className="p-3 grow border-r border-[#A2A3A9] text-ellipsis"
                   disabled
                 />
-                <div className="text-center">
+                <div className="text-center p-3">
                   <CopyButton textToCopy={linkWeb} />
                 </div>
               </div>

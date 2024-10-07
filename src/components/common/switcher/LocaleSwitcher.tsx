@@ -1,8 +1,5 @@
-import { useState } from 'react';
-
 import { ChevronsUpDown, Check } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
-
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -64,32 +61,31 @@ export function LocaleSelect({ routerURL = '/' }: LocaleSelectProps) {
 
 export function LocaleCollapsible() {
   const t = useTranslations('Localization');
-  const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <>
-      <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <Collapsible>
         <div className="flex items-center justify-between text-[#A2A3A9]">
-          <div>{t('header')}</div>
+          <div className="w-full">{t('header')}</div>
           <CollapsibleTrigger asChild>
-            <Button variant="link" size="sm" className="w-9 justify-end p-0">
+            <Button variant="link" size="sm" className="w-full justify-end p-0">
               <ChevronsUpDown className="h-4 w-4" />
               <span className="sr-only">Toggle</span>
             </Button>
           </CollapsibleTrigger>
         </div>
         <CollapsibleContent className="space-y-2">
-          {routing.locales.map((loc) => (
-            <div key={loc} className="px-4 py-3 text-sm hover:text-[#2C2C2C] active:text-[#2C2C2C]">
-              {/* <Link href={`${pathname}`} locale={loc}>
-                {t('label', { locale: loc })}
-              </Link> */}
-              <Link href="\" locale={loc}>
+          <div className="flex flex-col">
+            {routing.locales.map((loc) => (
+              <Link
+                href="/"
+                locale={loc}
+                key={loc}
+                className="px-4 py-3 text-sm hover:text-[#2C2C2C] active:text-[#2C2C2C]"
+              >
                 {t('label', { locale: loc })}
               </Link>
-            </div>
-          ))}
+            ))}
+          </div>
         </CollapsibleContent>
       </Collapsible>
     </>

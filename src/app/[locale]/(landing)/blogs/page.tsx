@@ -108,7 +108,7 @@ export default function Page() {
   };
 
   return (
-    <div className="flex justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
+    <div className="relative flex grow justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44 z-20">
       <div className="flex h-full w-full max-w-[90rem] flex-col items-center px-4 md:px-8 xl:px-32">
         <div className="flex flex-col items-center gap-8">
           <div className="text-5xl font-bold">{t('title')}</div>

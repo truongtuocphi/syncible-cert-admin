@@ -6,7 +6,6 @@ import clsx from 'clsx';
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { useTranslations, useLocale } from 'next-intl';
-
 import ArrowRightIcon from '@/assets/icons/arrow-badge-right.svg';
 import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
@@ -47,6 +46,8 @@ const Navbar = () => {
           setIsNavbarVisible(true); // Scrolling up
         }
         setLastScrollY(currentScrollY);
+      } else {
+        setIsNavbarVisible(true);
       }
     };
 
@@ -77,6 +78,7 @@ const Navbar = () => {
       }
     } else {
       router.push(target);
+      setIsOpen(false);
     }
   };
 
@@ -90,7 +92,7 @@ const Navbar = () => {
         }
       )}
     >
-      <div className={`${montserrat.className} "relative w-full`}>
+      <div className={`${montserrat.className} relative w-full`}>
         <div className="flex flex-col items-center">
           <div className="w-full md:px-8 xl:px-[6.5rem]">
             <div className="grid w-full grid-cols-12 items-center justify-items-center bg-white/50 p-4  backdrop-blur-[50px] md:rounded-3xl">
@@ -122,7 +124,7 @@ const Navbar = () => {
                       </Link>
                     </SheetTitle>
                     <div className="flex flex-col gap-6">
-                      <div className="flex flex-col px-4 py-4 font-semibold text-[#A2A3A9]">
+                      <div className="flex flex-col px-2 font-semibold text-[#A2A3A9]">
                         {links.map(({ label, href }) => (
                           <div key={label}>
                             {/* <SheetClose asChild> */}

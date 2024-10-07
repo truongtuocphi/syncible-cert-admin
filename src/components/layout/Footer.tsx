@@ -62,7 +62,7 @@ const Footer = () => {
               <div className="flex gap-8">
                 {Links.map(({ link_name, url }) => (
                   <Link href={url} key={link_name}>
-                    <div className="active:text- py-3 text-lg">{link_name}</div>
+                    <div className="py-3 ">{link_name}</div>
                   </Link>
                 ))}
               </div>

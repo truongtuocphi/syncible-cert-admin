@@ -17,6 +17,7 @@ import {
 } from '@/lib/firebase';
 import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
+import Loading from '@/components/common/loading/Loading';
 
 const Page = () => {
   const router = useRouter();
@@ -116,12 +117,23 @@ const Page = () => {
         }
       } catch (err) {
         const firebaseError = err as FirebaseError;
-        setFormErrors({
-          email:
-            firebaseError.code === 'auth/email-already-in-use'
-              ? 'Email is already in use.'
-              : 'Registration failed.',
-        });
+
+        if (firebaseError.code === 'auth/email-already-in-use') {
+          // Nếu email đã tồn tại, thực hiện đăng nhập
+          try {
+            await signInWithEmailAndPassword(auth, email, password);
+            console.log('Login successful!');
+            await router.push('/admin');
+          } catch (loginError) {
+            await router.push('/login');
+            console.error('Login error:', loginError);
+          }
+        } else {
+          // Các lỗi khác ngoài "email đã tồn tại"
+          setFormErrors({
+            email: 'Registration failed.',
+          });
+        }
       }
     } else {
       // Nếu người dùng đã tồn tại thì thực hiện đăng nhập
@@ -130,7 +142,9 @@ const Page = () => {
 
       try {
         await signInWithEmailAndPassword(auth, email, password);
+        await router.push('/admin');
       } catch (error) {
+        await router.push('/login');
         console.error('Login error:', error);
       }
     }
@@ -151,30 +165,17 @@ const Page = () => {
   }, [accessToken]);
 
   return (
-    <div className="m-10 mx-auto w-2/3 space-y-4">
-      <p className="break-all">Code Verifier: {codeVerifier}</p>
-      <p className="break-all">Code Authorization: {code}</p>
-      <p className="break-all">Access token: {accessToken}</p>
-      <p className="break-all">Refresh token: {responseData?.data?.refresh_token || ''}</p>
-
-      {/* Hiển thị thông tin user nếu có */}
-      {userInfo && (
-        <div className="pt-4">
-          <p className="font-bold">User Info:</p>
-          <p className="break-all">ID: {userInfo?.data?.id}</p>
-          <p className="break-all">Email: {userInfo?.data?.email}</p>
-          <p className="break-all">Name: {userInfo?.data?.name}</p>
-          <p className="break-all">Avatar: {userInfo?.data?.avatar_url}</p>
-        </div>
-      )}
-
-      <div className="pt-4">
-        <a href="/login">Retry</a>
+    <div className="relative flex h-screen w-full items-center justify-center">
+      <video
+        className="absolute left-0 top-0 h-full w-full object-cover"
+        src="/video/Cubes_Diagonal_3840x2160.mp4"
+        autoPlay
+        loop
+        muted
+      ></video>
+      <div className="h-[300px] w-[300px]" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
+        <Loading />
       </div>
-
-      {/* Hiển thị thông báo thành công hoặc lỗi */}
-      {success && <p className="text-green-500">{success}</p>}
-      {formErrors.email && <p className="text-red-500">{formErrors.email}</p>}
     </div>
   );
 };

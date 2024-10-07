@@ -354,6 +354,22 @@
       "title_2": "Tạo chứng chỉ hàng loạt",
       "des_2": "Mục này được thiết kế cho việc cung cấp bằng cấp hàng loạt cho khoá học trên một học viên",
       "button": "Tạo Chứng Chỉ"
+    },
+
+    "setting": {
+      "title": "Cài đặt",
+      "tabProfile": "Hồ sơ",
+      "tabAcc": "Tài khoản",
+      "titleProfilePicture": "Ảnh đại diện",
+      "titleName": "Tên",
+      "titleEmail": "Email",
+      "titleLanguage": "Ngôn ngữ",
+      "titleChain": "Chuỗi",
+      "titleCreateDate": "Ngày tạo",
+      "titleWalletAddress": "Địa chỉ ví",
+      "titleConnectWallet": "Kết nối ví",
+      "titleSubscriptionPlan": "Gói đăng ký",
+      "titleTrial": "Dùng thử"
     }
   },
 

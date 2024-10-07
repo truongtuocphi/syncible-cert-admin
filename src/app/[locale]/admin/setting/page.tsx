@@ -3,6 +3,8 @@
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
+import { useTranslations } from 'next-intl';
+
 import {
   Card,
   CardContent,
@@ -42,6 +44,8 @@ export default function Setting() {
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<any>(null);
 
+  const t = useTranslations('Dapp.setting');
+
   useEffect(() => {
     // Lấy người dùng hiện tại từ auth
     const currentUser = auth.currentUser;
@@ -67,14 +71,14 @@ export default function Setting() {
 
   return (
     <>
-      <div className="mb-4 text-2xl font-bold text-gray-800">Settings</div>
+      <div className="mb-4 text-2xl font-bold text-gray-800">{t('title')}</div>
       <Tabs defaultValue="profile" className="w-full">
         <TabsList className="grid w-4/12 grid-cols-2 rounded-3xl bg-gray-200 ">
           <TabsTrigger value="profile" className="rounded-2xl">
-            Profile
+            {t('tabProfile')}
           </TabsTrigger>
           <TabsTrigger value="account" className="rounded-2xl">
-            Account
+            {t('tabAcc')}
           </TabsTrigger>
         </TabsList>
         {/* Edit profile */}
@@ -83,7 +87,9 @@ export default function Setting() {
             <CardContent className="space-y-2">
               <div>
                 <div className="flex items-center justify-between">
-                  <div className="block w-1/2 font-bold text-gray-700">Profile picture</div>
+                  <div className="block w-1/2 font-bold text-gray-700">
+                    {t('titleProfilePicture')}
+                  </div>
                   <div className="mb-6 flex w-1/2 items-center justify-start space-x-4">
                     {image ? (
                       <img
@@ -105,11 +111,11 @@ export default function Setting() {
                 <div className="space-y-4">
                   {userData?.name ? (
                     <div className="flex items-center justify-between">
-                      <div className="block w-1/2 font-bold text-gray-700">Name</div>
+                      <div className="block w-1/2 font-bold text-gray-700">{t('titleName')}</div>
                       <div className="w-1/2">
                         <input
                           type="text"
-                          placeholder={'Name'}
+                          placeholder={t('titleName')}
                           disabled
                           value={userData?.name}
                           className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
@@ -119,11 +125,11 @@ export default function Setting() {
                   ) : null}
 
                   <div className="flex items-center justify-between">
-                    <div className="block w-1/2 font-bold text-gray-700">Email</div>
+                    <div className="block w-1/2 font-bold text-gray-700">{t('titleEmail')}</div>
                     <div className="w-1/2">
                       <input
                         type="text"
-                        placeholder={'Email'}
+                        placeholder={t('titleEmail')}
                         disabled
                         value={userData?.email}
                         className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
@@ -135,7 +141,7 @@ export default function Setting() {
                 <div className="my-8 w-full border-[0.5px] border-gray-50"></div>
 
                 <div className="flex items-center justify-between">
-                  <div className="block w-1/2 font-bold text-gray-700">Language</div>
+                  <div className="block w-1/2 font-bold text-gray-700">{t('titleLanguage')}</div>
                   <div className="w-1/2">
                     <LocaleSelect />
                   </div>
@@ -150,30 +156,32 @@ export default function Setting() {
             <CardContent className="space-y-2">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-1 flex flex-col gap-2">
-                  <div className="font-bold text-gray-700">Chain</div>
+                  <div className="font-bold text-gray-700">{t('titleChain')}</div>
                   <div className="flex items-center gap-2">
                     <IconETH width="24px" height="24px" />
                     <div className="text-gray-400">Ethereum</div>
                   </div>
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">
-                  <div className="font-bold text-gray-700">Create Date</div>
+                  <div className="font-bold text-gray-700">{t('titleCreateDate')}</div>
                   <div className="text-gray-400">{convertToVietnamTime(userData?.createdAt)}</div>
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">
-                  <div className="font-bold text-gray-700">Wallet Address</div>
+                  <div className="font-bold text-gray-700">{t('titleWalletAddress')}</div>
                   {isConnected && address ? (
                     <div className="flex items-center gap-2">
                       {address.slice(0, 10)}...{address.slice(-5)}
                       <CopyButton textToCopy={address || ''} />
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2">Connect Wallet</div>
+                    <div className="flex items-center gap-2">{t('titleConnectWallet')}</div>
                   )}
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">
-                  <div className="font-bold text-gray-700">Subscription Plan</div>
-                  <div className="w-fit rounded-2xl bg-gray-200 px-3 py-1 text-gray-400">Trial</div>
+                  <div className="font-bold text-gray-700">{t('titleSubscriptionPlan')}</div>
+                  <div className="w-fit rounded-2xl bg-gray-200 px-3 py-1 text-gray-400">
+                    {t('titleTrial')}
+                  </div>
                 </div>
               </div>
             </CardContent>

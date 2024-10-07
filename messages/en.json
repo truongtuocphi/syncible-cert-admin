@@ -354,6 +354,22 @@
       "title_2": "Generate certificates in bulk",
       "des_2": "This item is designed for mass certification of courses per student",
       "button": "Create Digital Certificate"
+    },
+
+    "setting": {
+      "title": "Settings",
+      "tabProfile": "Profile",
+      "tabAcc": "Account",
+      "titleProfilePicture": "Profile picture",
+      "titleName": "Name",
+      "titleEmail": "Email",
+      "titleLanguage": "Language",
+      "titleChain": "Chain",
+      "titleCreateDate": "Create Date",
+      "titleWalletAddress": "Wallet Address",
+      "titleConnectWallet": "Connect Wallet",
+      "titleSubscriptionPlan": "Subscription Plan",
+      "titleTrial": "Trial"
     }
   },
 

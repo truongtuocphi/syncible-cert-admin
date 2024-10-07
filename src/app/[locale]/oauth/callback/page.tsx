@@ -49,9 +49,9 @@ const Page = () => {
         body: JSON.stringify({
           grant_type: 'authorization_code',
           code: code,
-          redirect_uri: 'http://localhost:3000/oauth/callback',
+          redirect_uri: process.env.NEXT_PUBLIC_URL_BASAL,
           code_verifier: localStorage.getItem('codeVerifier') || '',
-          client_id: '14437770757134244933',
+          client_id: process.env.NEXT_PUBLIC_ID_BASAL,
         }),
       };
 

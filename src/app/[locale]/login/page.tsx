@@ -36,8 +36,8 @@ export default function Login() {
   //login
   const [codeVerifier, setCodeVerifier] = useState('');
   const [codeChallenge, setCodeChallenge] = useState('');
-  const clientId = '14437770757134244933';
-  const redirectUri = 'http://localhost:3000/oauth/callback';
+  const clientId = process.env.NEXT_PUBLIC_URL_BASAL;
+  const redirectUri = process.env.NEXT_PUBLIC_URL_BASAL;
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -113,12 +113,14 @@ export default function Login() {
     const randomState = randomBytes(32).toString('hex');
     localStorage.setItem('state', randomState);
 
-    window.open(
-      `https://app.basalwallet.com/auth/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURI(
-        redirectUri
-      )}&response_type=code&scope=id+email&state=${randomState}&code_challenge=${codeChallenge}&code_challenge_method=S256`,
-      '_self'
-    );
+    if (redirectUri) {
+      window.open(
+        `https://app.basalwallet.com/auth/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURI(
+          redirectUri
+        )}&response_type=code&scope=id+email&state=${randomState}&code_challenge=${codeChallenge}&code_challenge_method=S256`,
+        '_self'
+      );
+    }
   };
 
   return (

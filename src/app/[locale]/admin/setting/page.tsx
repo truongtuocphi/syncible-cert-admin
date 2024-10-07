@@ -36,13 +36,20 @@ import {
   get,
 } from '@/lib/firebase';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
+import { routing, usePathname, Link, useRouter } from '@/i18n/routing';
+import { BiCheck } from 'react-icons/bi';
 
 export default function Setting() {
   const { address, isConnected } = useAccount();
+  const { locales } = routing;
+  const pathname = usePathname();
+  const router = useRouter();
 
   const [image, setImage] = useState('');
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<any>(null);
+
+  const href = window.location.href.split('/');
 
   const t = useTranslations('Dapp.setting');
 
@@ -109,20 +116,18 @@ export default function Setting() {
                 <div className="my-8 w-full border-[0.5px] border-gray-50"></div>
 
                 <div className="space-y-4">
-                  {userData?.name ? (
-                    <div className="flex items-center justify-between">
-                      <div className="block w-1/2 font-bold text-gray-700">{t('titleName')}</div>
-                      <div className="w-1/2">
-                        <input
-                          type="text"
-                          placeholder={t('titleName')}
-                          disabled
-                          value={userData?.name}
-                          className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
-                        />
-                      </div>
+                  <div className="flex items-center justify-between">
+                    <div className="block w-1/2 font-bold text-gray-700">{t('titleName')}</div>
+                    <div className="w-1/2">
+                      <input
+                        type="text"
+                        placeholder={t('titleName')}
+                        disabled
+                        value={userData?.name}
+                        className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
+                      />
                     </div>
-                  ) : null}
+                  </div>
 
                   <div className="flex items-center justify-between">
                     <div className="block w-1/2 font-bold text-gray-700">{t('titleEmail')}</div>
@@ -143,7 +148,7 @@ export default function Setting() {
                 <div className="flex items-center justify-between">
                   <div className="block w-1/2 font-bold text-gray-700">{t('titleLanguage')}</div>
                   <div className="w-1/2">
-                    <LocaleSelect />
+                    <LocaleSelect routerURL="/admin" />
                   </div>
                 </div>
               </div>

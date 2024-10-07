@@ -38,7 +38,6 @@ const Page = () => {
       const storedState = localStorage.getItem('state');
       if (!storedState || storedState !== state) {
         throw new Error('Invalid state parameter');
-        router.push('/login')
       }
 
       const options = {
@@ -48,7 +47,7 @@ const Page = () => {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          grant_type: 'authorization_code,refresh_token',
+          grant_type: 'authorization_code',
           code: code,
           redirect_uri: process.env.NEXT_PUBLIC_URL_BASAL,
           code_verifier: localStorage.getItem('codeVerifier') || '',

@@ -48,7 +48,7 @@ const Page = () => {
           'content-type': 'application/json',
         },
         body: JSON.stringify({
-          grant_type: 'authorization_code',
+          grant_type: 'authorization_code,refresh_token',
           code: code,
           redirect_uri: process.env.NEXT_PUBLIC_URL_BASAL,
           code_verifier: localStorage.getItem('codeVerifier') || '',

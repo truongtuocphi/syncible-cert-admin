@@ -166,9 +166,7 @@ const Page = () => {
 
   return (
     <div className="relative flex h-screen w-full items-center justify-center bg-white">
-      <div className="h-[300px] w-[300px]" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
-        <Loading />
-      </div>
+      <Loading />
     </div>
   );
 };

@@ -96,7 +96,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
       <div className="flex flex-col gap-10 px-4 pb-4 md:px-8 md:pb-10 xl:px-32">
         <Breadcrumb items={breadcrumbItems} />
         <div className="flex flex-col items-center gap-10">
-          <div className="text-center text-2xl font-bold md:text-3xl lg:text-5xl">
+          <div className="sm:text-center text-2xl font-bold md:text-3xl lg:text-5xl">
             {blogContent.title.rendered}
           </div>
           <div className="relative h-full w-full overflow-hidden rounded-xl sm:rounded-[2rem]">

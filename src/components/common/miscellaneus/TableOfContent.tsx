@@ -11,7 +11,7 @@ export default function TableOfContent({ headings }: { headings: any }) {
         const element = document.getElementById(heading.id);
         if (element) {
           const rect = element.getBoundingClientRect();
-          const isVisible = rect.top >= 0 && rect.top <= window.innerHeight / 2; // Check if the element is within the top half of the screen
+          const isVisible = rect.top >= 0 && rect.top <= window.innerHeight / 4; // Check if the element is within one fourth of the screen
 
           if (isVisible) {
             setActiveId(heading.id);

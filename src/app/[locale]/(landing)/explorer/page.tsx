@@ -80,8 +80,8 @@ export default function Explorer() {
     <>
       {/* <div className={`${montserrat.className} relative flex min-h-dvh flex-col`}>
         <Navbar /> */}
-        <div className="z-20 flex min-h-dvh flex-col">
-          <div className="flex flex-col flex-grow gap-4 px-4 h-full pt-24 sm:px-0 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
+        {/* <div className="z-20 flex min-h-dvh flex-col"> */}
+          <div className="flex flex-col grow gap-4 px-4 h-full pt-24 sm:px-0 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
             <div className="relative flex w-full flex-col items-center gap-2 rounded-[2.5rem] sm:gap-8">
               <div className="text-left text-[2.5rem] font-bold text-[#2C2C2C] sm:text-center md:text-5xl">
                 {t('header')}
@@ -170,7 +170,7 @@ export default function Explorer() {
                 </div>
               </div>
             ) : data ? (
-              <div className="flex h-full w-full flex-grow items-center justify-center space-y-4 text-black md:mt-32">
+              <div className="flex h-full w-full flex-col gap-3 flex-grow items-center justify-center space-y-4 text-black md:mt-32">
                 <Link
                   href={`/certificatedetail/${data.mintData[0][3]}`}
                   className="w-[90%] md:w-1/2"
@@ -193,7 +193,7 @@ export default function Explorer() {
               </div>
             )}
           </div>
-        </div>
+        {/* </div> */}
         {/* <div className="relative mt-10 w-full text-black">
           <Footer />
         </div>

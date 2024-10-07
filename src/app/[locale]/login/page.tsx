@@ -233,10 +233,14 @@ export default function Login() {
             width={110}
             height={30}
           />
-          <div className="flex h-full w-full items-center justify-center">
+          <div className="flex flex-col h-full w-full items-center justify-center">
+            <div className="flex flex-col gap-3 text-center">
+              <h2 className="text-3xl font-bold">Sign in to Syncible!</h2>
+              <p>Please connect to Basal Wallet to use the features.</p>
+            </div>
             <button
               onClick={handleLoginWithBasal}
-              className="w-full rounded-[20px] border-[0.5px] border-gray-100 bg-white p-3 font-bold text-black"
+              className="mt-10 w-full rounded-[20px] border-[0.5px] border-gray-100 bg-white p-3 font-bold text-black"
             >
               <div className="flex items-center justify-center gap-2">
                 <BasalIcon width={24} height={24} />

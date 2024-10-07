@@ -1,7 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import {
   Card,
@@ -16,14 +16,54 @@ import { Label } from '@/components/ui/label';
 import { useForm } from 'react-hook-form';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { BiImageAdd } from 'react-icons/bi';
-import { FaImage } from 'react-icons/fa';
+import { FaUser } from 'react-icons/fa';
 import { LocaleSelect } from '@/components/common/switcher/LocaleSwitcher';
 import IconETH from '@/components/icons/ETHIcon';
 import CopyButton from '@/components/common/coppyText/CopyButton';
+import {
+  auth,
+  db,
+  set,
+  ref,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  provider,
+  browserSessionPersistence,
+  onAuthStateChanged,
+  get,
+} from '@/lib/firebase';
+import convertToVietnamTime from '@/utils/convertToVietnamTime';
 
 export default function Setting() {
-  const [image, setImage] = useState('');
   const { address, isConnected } = useAccount();
+
+  const [image, setImage] = useState('');
+  const [user, setUser] = useState<any>(null);
+  const [userData, setUserData] = useState<any>(null);
+
+  useEffect(() => {
+    // Lấy người dùng hiện tại từ auth
+    const currentUser = auth.currentUser;
+
+    if (currentUser) {
+      setUser(currentUser); // Lưu thông tin người dùng vào state
+
+      // Lấy dữ liệu từ Realtime Database bằng user UID
+      const userRef = ref(db, 'users/' + currentUser.uid);
+      get(userRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            setUserData(snapshot.val()); // Lưu thông tin người dùng từ DB vào state
+          } else {
+            console.log('No data available');
+          }
+        })
+        .catch((error) => {
+          console.error('Error fetching user data:', error);
+        });
+    }
+  }, []);
 
   return (
     <>
@@ -54,7 +94,7 @@ export default function Setting() {
                     ) : (
                       <div className="relative h-32 w-32 rounded-full border-4 border-white bg-[#FAFAFA] shadow-lg">
                         <div className="absolute left-1/2 top-[40%] flex -translate-x-1/2 flex-col items-center gap-2 text-gray-300">
-                          <FaImage className="text-2xl text-gray-500 2xl:text-3xl" />
+                          <FaUser className="text-4xl text-gray-500 2xl:text-3xl" />
                         </div>
                       </div>
                     )}
@@ -63,17 +103,21 @@ export default function Setting() {
                 <div className="my-8 w-full border-[0.5px] border-gray-50"></div>
 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="block w-1/2 font-bold text-gray-700">Profile picture</div>
-                    <div className="w-1/2">
-                      <input
-                        type="text"
-                        placeholder={'Name'}
-                        disabled
-                        className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
-                      />
+                  {userData?.name ? (
+                    <div className="flex items-center justify-between">
+                      <div className="block w-1/2 font-bold text-gray-700">Name</div>
+                      <div className="w-1/2">
+                        <input
+                          type="text"
+                          placeholder={'Name'}
+                          disabled
+                          value={userData?.name}
+                          className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
+                        />
+                      </div>
                     </div>
-                  </div>
+                  ) : null}
+
                   <div className="flex items-center justify-between">
                     <div className="block w-1/2 font-bold text-gray-700">Email</div>
                     <div className="w-1/2">
@@ -81,6 +125,7 @@ export default function Setting() {
                         type="text"
                         placeholder={'Email'}
                         disabled
+                        value={userData?.email}
                         className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
                       />
                     </div>
@@ -113,7 +158,7 @@ export default function Setting() {
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">
                   <div className="font-bold text-gray-700">Create Date</div>
-                  <div className="text-gray-400">24 Sep 2024</div>
+                  <div className="text-gray-400">{convertToVietnamTime(userData?.createdAt)}</div>
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">
                   <div className="font-bold text-gray-700">Wallet Address</div>
@@ -123,7 +168,7 @@ export default function Setting() {
                       <CopyButton textToCopy={address || ''} />
                     </div>
                   ) : (
-                    <div className="flex items-center gap-2">"Connect Wallet"</div>
+                    <div className="flex items-center gap-2">Connect Wallet</div>
                   )}
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">

@@ -32,6 +32,7 @@ interface UserInfoProps {
 }
 
 interface UserInfo {
+  name?: string;
   firstName?: string;
   lastName?: string;
   institution?: string;
@@ -96,9 +97,9 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
                 </div>
               )}
               <div>
-                <div className="font-bold text-gray-600">
-                  {`${dataUser?.firstName} ${dataUser?.lastName}` || 'Anonymous'}
-                </div>
+                {dataUser?.name ? (
+                  <div className="font-bold text-gray-600">{`${dataUser?.name}`}</div>
+                ) : null}
                 <div className="text-sm font-semibold text-gray-500">{dataUser?.email}</div>
               </div>
             </div>

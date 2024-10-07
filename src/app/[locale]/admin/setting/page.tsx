@@ -27,7 +27,6 @@ import {
   db,
   set,
   ref,
-  signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
   signInWithPopup,
   provider,

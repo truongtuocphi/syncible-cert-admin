@@ -122,7 +122,7 @@ export default function Setting() {
                         type="text"
                         placeholder={t('titleName')}
                         value={userData?.name}
-                        className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
+                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 px-6 py-4 sm:text-base"
                       />
                     </div>
                   </div>

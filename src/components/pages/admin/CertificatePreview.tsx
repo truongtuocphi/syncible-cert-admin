@@ -25,8 +25,8 @@ const Certificate = ({
         newFontSize = fontSizeMint; // Áp dụng fontSizeMint cho trang mintnft
       } else {
         // Áp dụng fontSize cho các trang khác
-        if (screenWidth >= 3840) newFontSize = fontSize.xl + 20;
-        else if (screenWidth >= 2560) newFontSize = fontSize.lg + 30;
+        if (screenWidth >= 3840) newFontSize = fontSize.xl + 25;
+        else if (screenWidth >= 2560) newFontSize = fontSize.lg + 35;
         else if (screenWidth >= 1280) newFontSize = fontSize.lg - 15;
         else if (screenWidth >= 768) newFontSize = fontSize.md - 20;
         else if (screenWidth >= 640) newFontSize = fontSize.sm - 20;

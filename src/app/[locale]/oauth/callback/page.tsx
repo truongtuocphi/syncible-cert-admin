@@ -11,7 +11,6 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   provider,
-  onAuthStateChanged,
   get,
 } from '@/lib/firebase';
 import { setPersistence, browserSessionPersistence } from 'firebase/auth';

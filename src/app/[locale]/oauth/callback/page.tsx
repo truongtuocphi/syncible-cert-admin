@@ -166,8 +166,6 @@ const Page = () => {
   useEffect(() => {
     if (accessToken) {
       handleGetUserInfo(accessToken);
-    } else {
-      router.push('/login');
     }
   }, [accessToken]);
 

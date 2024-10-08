@@ -32,7 +32,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
 
   const handleDownload = async () => {
     const fileUrl = `${headerURLPinata}/ipfs/QmSusJoDdDnAr5AVocRzLBPhb7yHmeSXCBTJUyGLPekg7R`;
-    const fileName = 'Convertio_input.xlsx';
+    const fileName = 'Convertio_input.csv';
 
     try {
       const response = await fetch(fileUrl);

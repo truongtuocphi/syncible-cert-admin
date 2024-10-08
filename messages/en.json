@@ -370,7 +370,8 @@
       "titleWalletAddress": "Wallet Address",
       "titleConnectWallet": "Connect Wallet",
       "titleSubscriptionPlan": "Subscription Plan",
-      "titleTrial": "Trial"
+      "titleTrial": "Trial",
+      "titlenoUserLoggedIn": "No user logged in"
     }
   },
 

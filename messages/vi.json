@@ -370,7 +370,8 @@
       "titleWalletAddress": "Địa chỉ ví",
       "titleConnectWallet": "Kết nối ví",
       "titleSubscriptionPlan": "Gói đăng ký",
-      "titleTrial": "Dùng thử"
+      "titleTrial": "Dùng thử",
+      "titlenoUserLoggedIn": "không có người dùng nào đăng nhập"
     }
   },
 

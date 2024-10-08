@@ -15,6 +15,7 @@ import {
   onAuthStateChanged,
   get,
 } from '@/lib/firebase';
+import { setPersistence } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
 import Loading from '@/components/common/loading/Loading';
@@ -144,6 +145,7 @@ const Page = () => {
       const password = 'defaultPassword'; // Mật khẩu mặc định hoặc mật khẩu của user
 
       try {
+        await setPersistence(auth, browserSessionPersistence);
         await signInWithEmailAndPassword(auth, email, password);
         await router.push('/admin');
       } catch (error) {

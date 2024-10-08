@@ -51,8 +51,8 @@ const Page = () => {
       };
 
       const res = await fetch('https://api.basalwallet.com/api/v1/oauth/token', options);
-      const data = await res.json();
-      setAccessToken(data?.data?.access_token || '');
+      const dataAPI = await res.json();
+      setAccessToken(dataAPI?.data?.access_token || '');
     } catch (error) {
       alert(error);
       router.push('/login');

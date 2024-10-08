@@ -40,7 +40,7 @@ const Certificate = ({
         let adjustedFontSize = Math.max(20, imageWidth / 15);
 
         if (window.innerWidth >= 2560) {
-          adjustedFontSize *= 0.8;
+          adjustedFontSize *= 0.9;
         }
 
         // Áp dụng fontSizeMint cho trang mintnft nếu có

@@ -89,17 +89,17 @@ const Page = () => {
     if (!snapshot.exists()) {
       // Nếu người dùng chưa tồn tại trong cơ sở dữ liệu, thực hiện đăng ký
       const email = userInfoData?.data?.email;
-      const password = 'defaultPassword'; // Mật khẩu mặc định hoặc có thể tạo mật khẩu khác
+      const password = 'defaultPassword';
 
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        const newUser = auth.currentUser; // Lấy người dùng sau khi đăng ký
+        const newUser = auth.currentUser;
 
         if (newUser) {
-          const newUserRef = ref(db, 'users/' + newUser.uid); // Tạo `ref` với `uid` của người dùng mới
+          const newUserRef = ref(db, 'users/' + newUser.uid);
           await set(newUserRef, {
-            uid: newUser.uid, // Lưu `uid` của Firebase user
-            idBasal: userInfoData?.data?.id, // Có thể lưu thêm thông tin từ Basal
+            uid: newUser.uid,
+            idBasal: userInfoData?.data?.id,
             name: userInfoData?.data?.name || '',
             email,
             avatar: '',
@@ -124,14 +124,12 @@ const Page = () => {
             console.error('Login error:', loginError);
           }
         } else {
-          // Các lỗi khác ngoài "email đã tồn tại"
           router.push('/login');
         }
       }
     } else {
-      // Nếu người dùng đã tồn tại thì thực hiện đăng nhập
       const email = userInfoData?.data?.email;
-      const password = 'defaultPassword'; // Mật khẩu mặc định hoặc mật khẩu của user
+      const password = 'defaultPassword';
 
       try {
         await setPersistence(auth, browserSessionPersistence);

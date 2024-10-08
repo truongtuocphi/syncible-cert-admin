@@ -7,7 +7,11 @@ import { routing, useRouter, usePathname, Link } from '@/i18n/routing';
 
 import GlobeIconSVG from '../../../../public/globe-svgrepo-com.svg';
 
-export function LocaleSelect() {
+interface LocaleSelectProps {
+  routerURL?: string;
+}
+
+export function LocaleSelect({ routerURL = '/' }: LocaleSelectProps) {
   const t = useTranslations('Localization');
   const locale = useLocale() as 'en' | 'vi';
   const router = useRouter();
@@ -15,7 +19,8 @@ export function LocaleSelect() {
 
   const handleLanguageChange = async (value: 'en' | 'vi') => {
     // router.replace(pathname, { locale: value });
-    router.replace('/', { locale: value });
+    const url = routerURL ? routerURL : '/';
+    router.replace(url, { locale: value });
   };
 
   return (

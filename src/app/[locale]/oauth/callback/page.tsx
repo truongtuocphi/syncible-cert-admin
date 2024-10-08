@@ -11,10 +11,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   provider,
-  browserSessionPersistence,
-  onAuthStateChanged,
   get,
 } from '@/lib/firebase';
+import { setPersistence, browserSessionPersistence } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
 import Loading from '@/components/common/loading/Loading';
@@ -25,12 +24,7 @@ const Page = () => {
   const code = searchParams.get('code') || '';
   const state = searchParams.get('state') || '';
 
-  const [codeVerifier, setCodeVerifier] = useState('');
   const [accessToken, setAccessToken] = useState('');
-  const [responseData, setResponse] = useState<any>();
-  const [userInfo, setUserInfo] = useState<any>(null);
-  const [formErrors, setFormErrors] = useState<any>({});
-  const [success, setSuccess] = useState('');
 
   // Hàm lấy Access Token
   const handleGetAccessToken = async () => {
@@ -56,11 +50,11 @@ const Page = () => {
       };
 
       const res = await fetch('https://api.basalwallet.com/api/v1/oauth/token', options);
-      const data = await res.json();
-      setResponse(data);
-      setAccessToken(data?.data?.access_token || '');
+      const dataAPI = await res.json();
+      setAccessToken(dataAPI?.data?.access_token || '');
     } catch (error) {
       alert(error);
+      router.push('/login');
     }
   };
 
@@ -74,12 +68,12 @@ const Page = () => {
         },
       });
       const userInfoData = await res.json();
-      setUserInfo(userInfoData);
 
       // Kiểm tra xem user đã tồn tại trong Realtime Database chưa
       await checkAndRegisterUser(userInfoData);
     } catch (error) {
       alert('Failed to fetch user info');
+      router.push('/login');
     }
   };
 
@@ -94,23 +88,22 @@ const Page = () => {
     if (!snapshot.exists()) {
       // Nếu người dùng chưa tồn tại trong cơ sở dữ liệu, thực hiện đăng ký
       const email = userInfoData?.data?.email;
-      const password = 'defaultPassword'; // Mật khẩu mặc định hoặc có thể tạo mật khẩu khác
+      const password = 'defaultPassword';
 
       try {
         await createUserWithEmailAndPassword(auth, email, password);
-        const newUser = auth.currentUser; // Lấy người dùng sau khi đăng ký
+        const newUser = auth.currentUser;
 
         if (newUser) {
-          const newUserRef = ref(db, 'users/' + newUser.uid); // Tạo `ref` với `uid` của người dùng mới
+          const newUserRef = ref(db, 'users/' + newUser.uid);
           await set(newUserRef, {
-            uid: newUser.uid, // Lưu `uid` của Firebase user
-            idBasal: userInfoData?.data?.id, // Có thể lưu thêm thông tin từ Basal
+            uid: newUser.uid,
+            idBasal: userInfoData?.data?.id,
             name: userInfoData?.data?.name || '',
             email,
             avatar: '',
             createdAt: new Date().toISOString(),
           });
-          setSuccess('Registration successful! Redirecting to login...');
           setTimeout(() => {
             router.push('/admin');
           }, 2000);
@@ -121,6 +114,7 @@ const Page = () => {
         if (firebaseError.code === 'auth/email-already-in-use') {
           // Nếu email đã tồn tại, thực hiện đăng nhập
           try {
+            await setPersistence(auth, browserSessionPersistence);
             await signInWithEmailAndPassword(auth, email, password);
             console.log('Login successful!');
             await router.push('/admin');
@@ -129,30 +123,25 @@ const Page = () => {
             console.error('Login error:', loginError);
           }
         } else {
-          // Các lỗi khác ngoài "email đã tồn tại"
-          setFormErrors({
-            email: 'Registration failed.',
-          });
+          router.push('/login');
         }
       }
     } else {
-      // Nếu người dùng đã tồn tại thì thực hiện đăng nhập
       const email = userInfoData?.data?.email;
-      const password = 'defaultPassword'; // Mật khẩu mặc định hoặc mật khẩu của user
+      const password = 'defaultPassword';
 
       try {
+        await setPersistence(auth, browserSessionPersistence);
         await signInWithEmailAndPassword(auth, email, password);
         await router.push('/admin');
       } catch (error) {
-        await router.push('/login');
+        router.push('/login');
         console.error('Login error:', error);
       }
     }
   };
 
   useEffect(() => {
-    setCodeVerifier(localStorage.getItem('codeVerifier') || '');
-
     // Lấy Access Token
     handleGetAccessToken();
   }, []);

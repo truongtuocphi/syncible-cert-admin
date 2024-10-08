@@ -14,6 +14,8 @@ const Certificate = ({
   useEffect(() => {
     const isMintNFTPage = window.location.pathname.includes('mintnft');
 
+    console.log('isMintNFTPage', isMintNFTPage);
+
     const handleResize = () => {
       const image = document.getElementById('certificate-image');
       let newFontSize = fontSize.base;
@@ -39,12 +41,15 @@ const Certificate = ({
         const imageWidth = image.clientWidth;
         let adjustedFontSize = Math.max(20, imageWidth / 15);
 
+        adjustedFontSize *= 1.1;
+
         if (window.innerWidth >= 2560) {
           adjustedFontSize *= 0.9;
         }
 
         // Áp dụng fontSizeMint cho trang mintnft nếu có
-        setUserFontSize(isMintNFTPage ? fontSizeMint : adjustedFontSize);
+        const fontsizeMintNFT = adjustedFontSize;
+        setUserFontSize(isMintNFTPage ? fontsizeMintNFT : adjustedFontSize);
       } else {
         // Nếu không có hình ảnh, đặt giá trị fontSize mới
         setUserFontSize(newFontSize);

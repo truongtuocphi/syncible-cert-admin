@@ -53,7 +53,7 @@ export const MintSingleForm = ({ DataIssuedDate, DataRole, onGetData }: MintBulk
           placeholder={t('PlaceholderID')}
           value={certificateNumber}
           disabled
-          className="mt-1 block w-full rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          className="mt-1 block w-full rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
         />
       </div>
       <div className="col-span-1 space-y-2">
@@ -64,7 +64,7 @@ export const MintSingleForm = ({ DataIssuedDate, DataRole, onGetData }: MintBulk
           placeholder={t('placeholderFullName')}
           value={name}
           onChange={handleNameChange}
-          className="mt-1 block w-full rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+          className="mt-1 block w-full rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
         />
       </div>
     </div>

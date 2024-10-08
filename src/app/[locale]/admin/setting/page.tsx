@@ -110,7 +110,6 @@ export default function Setting() {
                     </div>
                   </div>
 
-                  
                   <div className="flex items-center justify-between">
                     <div className="block w-1/2 font-bold text-gray-700">{t('titleIDBasal')}</div>
                     <div className="w-1/2">
@@ -146,7 +145,7 @@ export default function Setting() {
                   <div className="font-bold text-gray-700">{t('titleChain')}</div>
                   <div className="flex items-center gap-2">
                     <IconPolygon width="24px" height="24px" />
-                    <div className="text-gray-400">Ethereum</div>
+                    <div className="text-gray-400">Polygon</div>
                   </div>
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">

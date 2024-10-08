@@ -1,54 +1,25 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import { useTranslations } from 'next-intl';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useForm } from 'react-hook-form';
+import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { BiImageAdd } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
 import { LocaleSelect } from '@/components/common/switcher/LocaleSwitcher';
-import IconETH from '@/components/icons/ETHIcon';
+import IconPolygon from '@/components/icons/IconPolygon';
 import CopyButton from '@/components/common/coppyText/CopyButton';
-import {
-  auth,
-  db,
-  set,
-  ref,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  provider,
-  browserSessionPersistence,
-  onAuthStateChanged,
-  get,
-} from '@/lib/firebase';
+import { auth, db, ref, get } from '@/lib/firebase';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
-import { routing, usePathname, Link, useRouter } from '@/i18n/routing';
-import { BiCheck } from 'react-icons/bi';
+import { routing, usePathname, useRouter } from '@/i18n/routing';
 
 export default function Setting() {
   const { address, isConnected } = useAccount();
-  const { locales } = routing;
-  const pathname = usePathname();
-  const router = useRouter();
 
   const [image, setImage] = useState('');
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<any>(null);
-
-  const href = window.location.href.split('/');
 
   const t = useTranslations('Dapp.setting');
 
@@ -160,7 +131,7 @@ export default function Setting() {
                 <div className="col-span-1 flex flex-col gap-2">
                   <div className="font-bold text-gray-700">{t('titleChain')}</div>
                   <div className="flex items-center gap-2">
-                    <IconETH width="24px" height="24px" />
+                    <IconPolygon width="24px" height="24px" />
                     <div className="text-gray-400">Ethereum</div>
                   </div>
                 </div>

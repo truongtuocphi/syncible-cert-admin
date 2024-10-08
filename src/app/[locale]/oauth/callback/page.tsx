@@ -61,6 +61,7 @@ const Page = () => {
       setAccessToken(data?.data?.access_token || '');
     } catch (error) {
       alert(error);
+      router.push('/login');
     }
   };
 
@@ -80,6 +81,7 @@ const Page = () => {
       await checkAndRegisterUser(userInfoData);
     } catch (error) {
       alert('Failed to fetch user info');
+      router.push('/login');
     }
   };
 
@@ -133,6 +135,7 @@ const Page = () => {
           setFormErrors({
             email: 'Registration failed.',
           });
+          router.push('/login');
         }
       }
     } else {
@@ -144,7 +147,7 @@ const Page = () => {
         await signInWithEmailAndPassword(auth, email, password);
         await router.push('/admin');
       } catch (error) {
-        await router.push('/login');
+        router.push('/login');
         console.error('Login error:', error);
       }
     }
@@ -161,6 +164,8 @@ const Page = () => {
   useEffect(() => {
     if (accessToken) {
       handleGetUserInfo(accessToken);
+    } else {
+      router.push('/login');
     }
   }, [accessToken]);
 

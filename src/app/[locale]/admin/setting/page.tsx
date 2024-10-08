@@ -53,11 +53,10 @@ export default function Setting() {
   const t = useTranslations('Dapp.setting');
 
   useEffect(() => {
-    // Lấy người dùng hiện tại từ auth
     const currentUser = auth.currentUser;
 
     if (currentUser) {
-      setUser(currentUser); // Lưu thông tin người dùng vào state
+      setUser(currentUser);
 
       // Lấy dữ liệu từ Realtime Database bằng user UID
       const userRef = ref(db, 'users/' + currentUser.uid);

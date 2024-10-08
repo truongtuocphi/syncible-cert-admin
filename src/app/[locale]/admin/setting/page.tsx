@@ -12,6 +12,7 @@ import IconPolygon from '@/components/icons/IconPolygon';
 import CopyButton from '@/components/common/coppyText/CopyButton';
 import { auth, db, ref, get } from '@/lib/firebase';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
+import Loading from '@/components/common/loading/Loading';
 
 export default function Setting() {
   const { address, isConnected } = useAccount();
@@ -42,6 +43,11 @@ export default function Setting() {
         });
     }
   }, []);
+
+  // Show loading component if userData is null
+  if (userData === null) {
+    return <Loading />;
+  }
 
   return (
     <>
@@ -91,7 +97,7 @@ export default function Setting() {
                         placeholder={t('titleName')}
                         disabled
                         value={userData?.last_name + ' ' + userData?.fist_name}
-                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 px-6 py-4 sm:text-base"
+                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
                       />
                     </div>
                   </div>
@@ -104,7 +110,7 @@ export default function Setting() {
                         placeholder={t('titleEmail')}
                         disabled
                         value={userData?.email}
-                        className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
+                        className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base border-[0.5px] border-gray-100 bg-gray-300"
                       />
                     </div>
                   </div>
@@ -117,7 +123,7 @@ export default function Setting() {
                         placeholder={t('titleIDBasal')}
                         disabled
                         value={userData?.idBasal}
-                        className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
+                        className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base border-[0.5px] border-gray-100 bg-gray-300"
                       />
                     </div>
                   </div>

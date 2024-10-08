@@ -58,7 +58,6 @@ const Page = () => {
     }
   };
 
-  // Hàm lấy thông tin người dùng bằng Access Token
   const handleGetUserInfo = async (token: string) => {
     try {
       const res = await fetch('https://api.basalwallet.com/api/v1/oauth/userinfo', {

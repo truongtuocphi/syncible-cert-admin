@@ -44,10 +44,6 @@ export default function Setting() {
     }
   }, []);
 
-  if (userData?.avatar) {
-    setImage(userData?.avatar);
-  }
-
   return (
     <>
       <div className="mb-4 text-2xl font-bold text-gray-800">{t('title')}</div>
@@ -95,6 +91,7 @@ export default function Setting() {
                         type="text"
                         placeholder={t('titleName')}
                         disabled
+                        value={userData?.last_name + ' ' + userData?.fist_name}
                         className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 px-6 py-4 sm:text-base"
                       />
                     </div>

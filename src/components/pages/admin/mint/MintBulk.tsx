@@ -44,7 +44,6 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
       link.click();
       document.body.removeChild(link);
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Download failed:', error);
     }
   };

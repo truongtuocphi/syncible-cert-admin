@@ -186,7 +186,9 @@ export default function Setting() {
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">
                   <div className="font-bold text-gray-700">{t('titleSubscriptionPlan')}</div>
-                  <div className="w-fit rounded-2xl bg-gray-300 px-3 py-1 text-gray-500">FREE</div>
+                  <div className="w-fit rounded-2xl bg-gray-300 px-3 py-1 text-gray-500">
+                    {t('titleTrial')}
+                  </div>
                 </div>
               </div>
             </CardContent>

@@ -13,6 +13,7 @@ import CopyButton from '@/components/common/coppyText/CopyButton';
 import { auth, db, ref, get } from '@/lib/firebase';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
 import Loading from '@/components/common/loading/Loading';
+import { onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
 
 export default function Setting() {
   const { address, isConnected } = useAccount();
@@ -20,12 +21,12 @@ export default function Setting() {
   const [image, setImage] = useState('');
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<any>(null);
-  const [loading, setLoading] = useState(true); // Thêm trạng thái loading
+  const [loading, setLoading] = useState(true); // Trạng thái loading
 
   const t = useTranslations('Dapp.setting');
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
 
@@ -33,7 +34,7 @@ export default function Setting() {
         get(userRef)
           .then((snapshot) => {
             if (snapshot.exists()) {
-              setUserData(snapshot.val());
+              setUserData(snapshot.val()); // Lưu thông tin người dùng từ DB vào state
             } else {
               console.log('No data available');
             }
@@ -42,24 +43,25 @@ export default function Setting() {
             console.error('Error fetching user data:', error);
           })
           .finally(() => {
-            setLoading(false); // Kết thúc trạng thái loading sau khi lấy dữ liệu
+            setLoading(false); // Sau khi hoàn thành quá trình lấy dữ liệu, tắt trạng thái loading
           });
       } else {
-        setLoading(false); // Nếu không có người dùng, vẫn kết thúc trạng thái loading
+        setLoading(false); // Nếu không có người dùng, tắt trạng thái loading
       }
     });
 
-    return () => unsubscribe(); // Hủy bỏ đăng ký listener khi component bị unmount
+    // Cleanup subscription khi component bị unmount
+    return () => unsubscribe();
   }, []);
 
-  // Show loading component if still loading
+  // Nếu đang loading, hiển thị component Loading
   if (loading) {
     return <Loading />;
   }
 
-  // Show message if no user is logged in
-  if (!user) {
-    return <div>{t('titlenoUserLoggedIn')}</div>;
+  // Nếu userData không tồn tại sau khi đã load xong, hiển thị thông báo
+  if (!userData) {
+    return <div>No user data available</div>;
   }
 
   return (
@@ -77,14 +79,117 @@ export default function Setting() {
         {/* Edit profile */}
         <TabsContent value="profile">
           <Card className="rounded-2xl p-6">
-            <CardContent className="space-y-2">{/* Nội dung hiển thị profile */}</CardContent>
+            <CardContent className="space-y-2">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="block w-1/2 font-bold text-gray-700">
+                    {t('titleProfilePicture')}
+                  </div>
+                  <div className="mb-6 flex w-1/2 items-center justify-start space-x-4">
+                    {userData?.avatar ? (
+                      <img
+                        src={userData?.avatar}
+                        alt="Profile"
+                        className="h-32 w-32 rounded-full border-2 border-white object-cover shadow-lg"
+                      />
+                    ) : (
+                      <div className="relative h-32 w-32 rounded-full border-4 border-white bg-[#FAFAFA] shadow-lg">
+                        <div className="absolute left-1/2 top-[40%] flex -translate-x-1/2 flex-col items-center gap-2 text-gray-300">
+                          <FaUser className="text-4xl text-gray-500 2xl:text-3xl" />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </div>
+                <div className="my-8 w-full border-[0.5px] border-gray-50"></div>
+
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between">
+                    <div className="block w-1/2 font-bold text-gray-700">{t('titleName')}</div>
+                    <div className="w-1/2">
+                      <input
+                        type="text"
+                        placeholder={t('titleName')}
+                        disabled
+                        value={userData?.last_name + ' ' + userData?.fist_name}
+                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="block w-1/2 font-bold text-gray-700">{t('titleEmail')}</div>
+                    <div className="w-1/2">
+                      <input
+                        type="text"
+                        placeholder={t('titleEmail')}
+                        disabled
+                        value={userData?.email}
+                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="block w-1/2 font-bold text-gray-700">{t('titleIDBasal')}</div>
+                    <div className="w-1/2">
+                      <input
+                        type="text"
+                        placeholder={t('titleIDBasal')}
+                        disabled
+                        value={userData?.idBasal}
+                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="my-8 w-full border-[0.5px] border-gray-50"></div>
+
+                <div className="flex items-center justify-between">
+                  <div className="block w-1/2 font-bold text-gray-700">{t('titleLanguage')}</div>
+                  <div className="w-1/2">
+                    <LocaleSelect routerURL="/admin" />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
           </Card>
         </TabsContent>
 
         {/* Account */}
         <TabsContent value="account">
           <Card className="rounded-2xl p-6">
-            <CardContent className="space-y-2">{/* Nội dung hiển thị tài khoản */}</CardContent>
+            <CardContent className="space-y-2">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-1 flex flex-col gap-2">
+                  <div className="font-bold text-gray-700">{t('titleChain')}</div>
+                  <div className="flex items-center gap-2">
+                    <IconPolygon width="24px" height="24px" />
+                    <div className="text-gray-400">Polygon</div>
+                  </div>
+                </div>
+                <div className="col-span-1 flex flex-col gap-2">
+                  <div className="font-bold text-gray-700">{t('titleCreateDate')}</div>
+                  <div className="text-gray-400">{convertToVietnamTime(userData?.createdAt)}</div>
+                </div>
+                <div className="col-span-1 flex flex-col gap-2">
+                  <div className="font-bold text-gray-700">{t('titleWalletAddress')}</div>
+                  {isConnected && address ? (
+                    <div className="flex items-center gap-2">
+                      {address.slice(0, 10)}...{address.slice(-5)}
+                      <CopyButton textToCopy={address || ''} />
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">{t('titleConnectWallet')}</div>
+                  )}
+                </div>
+                <div className="col-span-1 flex flex-col gap-2">
+                  <div className="font-bold text-gray-700">{t('titleSubscriptionPlan')}</div>
+                  <div className="w-fit rounded-2xl bg-gray-300 px-3 py-1 text-gray-500">FREE</div>
+                </div>
+              </div>
+            </CardContent>
           </Card>
         </TabsContent>
       </Tabs>

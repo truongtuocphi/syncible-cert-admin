@@ -17,6 +17,17 @@ import Favicon from './/favicon.ico'
 export const metadata: Metadata = {
   title: 'Syncible | Tokenized Academic Certificate on Blockchain',
   description: 'Syncible | Tokenized Academic Certificate on Blockchain',
+  openGraph: {
+    title: 'Syncible | Tokenized Academic Certificate on Blockchain',
+    description: 'The Syncible project helps you issue and validate highly secure digital certificates with blockchain.',
+    url: 'https://www.syncible.io',
+    siteName: 'Syncible',
+    locale: 'vi_VN',
+    type: 'website',
+  },
+  alternates: {
+    canonical: 'https://www.syncible.io',
+  },
   icons: [{ url : Favicon.src, sizes: '10x26', type: 'image/x-icon', rel: "icon" }],
 };
 

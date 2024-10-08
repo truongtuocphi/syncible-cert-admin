@@ -30,11 +30,10 @@ const Navbar = () => {
   gsap.registerPlugin(ScrollToPlugin);
   const t = useTranslations('HomePage.navigation.top_nav');
   const router = useRouter();
-  const locale = useLocale();
   const [isOpen, setIsOpen] = useState(false);
-
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerWidth < 768) {

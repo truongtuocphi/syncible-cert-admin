@@ -108,40 +108,42 @@ export default function Page() {
   };
 
   return (
-    <div className="relative flex grow justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44 z-20">
-      <div className="flex h-full w-full max-w-[90rem] flex-col items-center px-4 md:px-8 xl:px-32">
-        <div className="flex flex-col items-center gap-8">
-          <div className="text-5xl font-bold">{t('title')}</div>
-          <div className="max-w-4xl text-center text-lg font-semibold text-[#6C6D71]">
+    <div className="relative z-20 flex grow justify-center mt-24 md:mt-[8.25rem] lg:mt-40 xl:mt-44">
+      <div className="relative flex h-full w-full max-w-[90rem] flex-col gap-8 sm:items-center sm:gap-0">
+        <div className="flex flex-col gap-6 sm:items-center sm:gap-8 px-4 md:px-8 xl:px-32">
+          <div className="text-[2.5rem] font-bold sm:text-5xl">{t('title')}</div>
+          <div className="max-w-4xl font-medium text-[#6C6D71] sm:text-center sm:text-lg">
             {t('text')}
           </div>
         </div>
         {/* making a filter here by clicking on the categories */}
-        <div className="sm:w-full sm:max-w-none border-b border-[#CCCCCC] pt-16 text-[#A2A3A9] overflow-auto max-w-[350px]">
-          <div className="flex space-x-4 font-semibold overflow-x-auto">
-            <div
-              className={clsx("w-fit pb-4 cursor-pointer flex-shrink-0", {
-              'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
-              })}
-              onClick={() => handleCategoryClick(null)}
-            >
-              {t('category.all.label')}
-            </div>
-            {categories.map((category) => (
+        {/* <div className="relative h-full"> */}
+          <div className="sticky top-[4.5rem] border-b border-[#CCCCCC] text-[#A2A3A9] sm:static sm:w-full sm:pt-16 z-20">
+            <div className="flex space-x-4 overflow-x-auto font-semibold px-4 md:px-8 xl:px-32">
               <div
-                key={category.id}
-                className={clsx("w-fit pb-4 cursor-pointer flex-shrink-0", {
-                  'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
+                className={clsx('w-fit flex-shrink-0 cursor-pointer py-4 sm:pt-0', {
+                  'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
                 })}
-                onClick={() => handleCategoryClick(category.id)}
+                onClick={() => handleCategoryClick(null)}
               >
-                {category.name}
+                {t('category.all.label')}
               </div>
-            ))}
+              {categories.map((category) => (
+                <div
+                  key={category.id}
+                  className={clsx('w-fit flex-shrink-0 cursor-pointer py-4 sm:pt-0', {
+                    'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
+                  })}
+                  onClick={() => handleCategoryClick(category.id)}
+                >
+                  {category.name}
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-        <div className="w-full">
-          <div className="grid w-full grid-cols-1 gap-8 pt-4 sm:grid-cols-2 sm:pt-16 lg:grid-cols-3">
+        {/* </div> */}
+        <div className="w-full px-4 md:px-8 xl:px-32">
+          <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 sm:pt-16 lg:grid-cols-3">
             {loading
               ? Array.from({ length: postsPerPage }, (_, index) => <BlogCardSkeleton key={index} />)
               : posts.map((post: any, index: number | null | undefined) => (

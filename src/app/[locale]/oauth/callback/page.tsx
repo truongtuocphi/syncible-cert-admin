@@ -25,12 +25,10 @@ const Page = () => {
   const code = searchParams.get('code') || '';
   const state = searchParams.get('state') || '';
 
-  const [codeVerifier, setCodeVerifier] = useState('');
-  const [accessToken, setAccessToken] = useState('');
-  const [responseData, setResponse] = useState<any>();
   const [userInfo, setUserInfo] = useState<any>(null);
-  const [formErrors, setFormErrors] = useState<any>({});
-  const [success, setSuccess] = useState('');
+  const [accessToken, setAccessToken] = useState('');
+  const [codeVerifier, setCodeVerifier] = useState('');
+  const [responseData, setResponse] = useState<any>();
 
   // Hàm lấy Access Token
   const handleGetAccessToken = async () => {
@@ -58,7 +56,7 @@ const Page = () => {
       const res = await fetch('https://api.basalwallet.com/api/v1/oauth/token', options);
       const data = await res.json();
       setResponse(data);
-      setAccessToken(data?.data?.access_token || '');
+      setAccessToken(responseData?.data?.access_token || '');
     } catch (error) {
       alert(error);
       router.push('/login');
@@ -78,7 +76,7 @@ const Page = () => {
       setUserInfo(userInfoData);
 
       // Kiểm tra xem user đã tồn tại trong Realtime Database chưa
-      await checkAndRegisterUser(userInfoData);
+      await checkAndRegisterUser(userInfo);
     } catch (error) {
       alert('Failed to fetch user info');
       router.push('/login');
@@ -112,7 +110,6 @@ const Page = () => {
             avatar: '',
             createdAt: new Date().toISOString(),
           });
-          setSuccess('Registration successful! Redirecting to login...');
           setTimeout(() => {
             router.push('/admin');
           }, 2000);
@@ -133,9 +130,7 @@ const Page = () => {
           }
         } else {
           // Các lỗi khác ngoài "email đã tồn tại"
-          setFormErrors({
-            email: 'Registration failed.',
-          });
+          console.log('error login with email');
           router.push('/login');
         }
       }
@@ -157,7 +152,7 @@ const Page = () => {
 
   useEffect(() => {
     setCodeVerifier(localStorage.getItem('codeVerifier') || '');
-
+    console.log(codeVerifier);
     // Lấy Access Token
     handleGetAccessToken();
   }, []);

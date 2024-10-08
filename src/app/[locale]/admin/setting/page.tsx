@@ -90,7 +90,6 @@ export default function Setting() {
                       <input
                         type="text"
                         placeholder={t('titleName')}
-                        value={userData?.last_name}
                         disabled
                         className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 px-6 py-4 sm:text-base"
                       />

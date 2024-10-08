@@ -136,6 +136,7 @@ export default function Setting() {
             </CardContent>
           </Card>
         </TabsContent>
+
         {/* Account */}
         <TabsContent value="account">
           <Card className="rounded-2xl p-6">

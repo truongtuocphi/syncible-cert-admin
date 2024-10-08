@@ -11,11 +11,10 @@ import {
   createUserWithEmailAndPassword,
   signInWithPopup,
   provider,
-  browserSessionPersistence,
   onAuthStateChanged,
   get,
 } from '@/lib/firebase';
-import { setPersistence } from 'firebase/auth';
+import { setPersistence, browserSessionPersistence } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
 import Loading from '@/components/common/loading/Loading';

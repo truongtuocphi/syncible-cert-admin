@@ -124,6 +124,7 @@ const Page = () => {
         if (firebaseError.code === 'auth/email-already-in-use') {
           // Nếu email đã tồn tại, thực hiện đăng nhập
           try {
+            await setPersistence(auth, browserSessionPersistence);
             await signInWithEmailAndPassword(auth, email, password);
             console.log('Login successful!');
             await router.push('/admin');

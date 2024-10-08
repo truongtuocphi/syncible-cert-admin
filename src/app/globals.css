@@ -19,6 +19,11 @@
     --color-foreground: 255, 255, 255;
   }
 }
+
+input[type='text'][disabled] {
+  color: gray;
+}
+
 /* whoever read this, do not delete this class unless you enjoy seeing Image components fuck the whole page up, look up online and find out why later */
 img {
   position: static !important;
@@ -37,7 +42,7 @@ div.aligncenter {
 }
 
 .alignright {
-  float:right;
+  float: right;
   margin: 5px 0 20px 20px;
 }
 

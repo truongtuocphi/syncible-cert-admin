@@ -28,7 +28,6 @@ export default function Setting() {
     if (currentUser) {
       setUser(currentUser);
 
-      // Lấy dữ liệu từ Realtime Database bằng user UID
       const userRef = ref(db, 'users/' + currentUser.uid);
       get(userRef)
         .then((snapshot) => {

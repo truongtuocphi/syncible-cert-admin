@@ -44,6 +44,10 @@ export default function Setting() {
     }
   }, []);
 
+  if (userData?.avatar) {
+    setImage(userData?.avatar);
+  }
+
   return (
     <>
       <div className="mb-4 text-2xl font-bold text-gray-800">{t('title')}</div>

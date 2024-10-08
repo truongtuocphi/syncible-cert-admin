@@ -66,9 +66,9 @@ export default function Setting() {
                     {t('titleProfilePicture')}
                   </div>
                   <div className="mb-6 flex w-1/2 items-center justify-start space-x-4">
-                    {image ? (
+                    {userData?.avatar ? (
                       <img
-                        src={image}
+                        src={userData?.avatar}
                         alt="Profile"
                         className="h-32 w-32 rounded-full border-2 border-white object-cover shadow-lg"
                       />

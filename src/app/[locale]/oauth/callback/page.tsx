@@ -99,9 +99,11 @@ const Page = () => {
           await set(newUserRef, {
             uid: newUser.uid,
             idBasal: userInfoData?.data?.id,
-            name: userInfoData?.data?.name || '',
+            last_name: userInfoData?.data?.last_name || '',
+            fist_name: userInfoData?.data?.first_name || '',
+            name: userInfoData?.data?.first_name || '',
             email,
-            avatar: '',
+            avatar: userInfoData?.data?.avatar || '',
             createdAt: new Date().toISOString(),
           });
           setTimeout(() => {

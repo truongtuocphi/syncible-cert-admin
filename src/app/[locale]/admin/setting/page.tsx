@@ -12,7 +12,6 @@ import IconPolygon from '@/components/icons/IconPolygon';
 import CopyButton from '@/components/common/coppyText/CopyButton';
 import { auth, db, ref, get } from '@/lib/firebase';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
-import { routing, usePathname, useRouter } from '@/i18n/routing';
 
 export default function Setting() {
   const { address, isConnected } = useAccount();

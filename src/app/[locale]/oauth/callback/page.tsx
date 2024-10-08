@@ -68,11 +68,25 @@ const Page = () => {
       });
       const userInfoData = await res.json();
 
+      updateUserDataInFirebase(userInfoData.data);
+
       // Kiểm tra xem user đã tồn tại trong Realtime Database chưa
       await checkAndRegisterUser(userInfoData);
     } catch (error) {
       alert('Failed to fetch user info');
       router.push('/login');
+    }
+  };
+
+  const updateUserDataInFirebase = async (userData: any) => {
+    const user = auth.currentUser;
+    const userRef = ref(db, 'users/' + user?.uid);
+
+    if (user) {
+      await set(userRef, {
+        ...userData, // Cập nhật với dữ liệu mới
+        updatedAt: new Date().toISOString(),
+      });
     }
   };
 

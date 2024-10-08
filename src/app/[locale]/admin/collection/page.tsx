@@ -124,7 +124,7 @@ const columns: ColumnDef<Collection>[] = [
     header: 'table.contract',
     cell: ({ row }) => (
       <div className="flex items-center gap-2">
-        {truncateAddress(row.getValue('contractAddress'))}
+        {row.getValue('contractAddress') ? truncateAddress(row.getValue('contractAddress')) : null}
         <div className="flex items-center gap-2">
           <CopyButton textToCopy={row.getValue('contractAddress')} />
           <Link
@@ -347,7 +347,7 @@ export default function Collection() {
               ))}
             </TableHeader>
             <TableBody className="bg-white hover:bg-white">
-              {table.getRowModel().rows.length > 0 ? (
+              {table.getRowModel().rows.length >= 2 ? (
                 [...table.getRowModel().rows].reverse().map(
                   (
                     row // Reverse the rows here

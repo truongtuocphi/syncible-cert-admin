@@ -31,8 +31,8 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
   const t = useTranslations('Dapp.mintNFT');
 
   const handleDownload = async () => {
-    const fileUrl = `${headerURLPinata}/ipfs/QmSusJoDdDnAr5AVocRzLBPhb7yHmeSXCBTJUyGLPekg7R`;
-    const fileName = 'Convertio_input.csv';
+    const fileUrl = `${headerURLPinata}/ipfs/QmNqCVoNQ4wuPZfsJp8KNyDw5Tk3CbhC2R77cRJt9jmuCt`;
+    const fileName = 'sample.xlsx';
 
     try {
       const response = await fetch(fileUrl);
@@ -103,11 +103,11 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
             accept=".csv,.xlsx"
             required
             className="hidden"
-            id="file-upload"
+            id="file-upload-csv"
           />
           <div className="flex items-center gap-4">
             <label
-              htmlFor="file-upload"
+              htmlFor="file-upload-csv"
               className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-base font-semibold text-gray-800 hover:bg-gray-100"
             >
               <BiFolderPlus className="text-2xl text-gray-800" />

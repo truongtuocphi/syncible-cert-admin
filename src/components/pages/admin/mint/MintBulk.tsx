@@ -9,6 +9,7 @@ import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import getAcronym from '@/utils/getAcronym';
 import { BiFolderPlus } from 'react-icons/bi';
 import { useTranslations } from 'next-intl';
+import * as XLSX from 'xlsx';
 
 const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -19,9 +20,9 @@ interface MintBulkProps {
 }
 
 interface CertificateData {
-  certificateNumber: string;
-  fullname: string;
-  gmail: string;
+  certificateNumber?: string;
+  fullname?: string;
+  gmail?: string;
 }
 
 export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps) => {
@@ -48,26 +49,84 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
     }
   };
 
+  // const handleCSVChange = (event: any) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     setFileNameCSV(file.name);
+  //     Papa.parse<string>(file, {
+  //       header: true,
+  //       complete: (results) => {
+  //         const certificateData: CertificateData[] = results.data.map((data: any) => ({
+  //           certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
+  //           fullname: data.fullname,
+  //           gmail: data.gmail,
+  //         }));
+
+  //         onCsvRead(certificateData);
+  //         setCsvData(certificateData);
+  //       },
+  //       error: () => {
+  //         alert('Chuyển đổi file CSV thất bại!');
+  //       },
+  //     });
+  //   }
+  // };
+
   const handleCSVChange = (event: any) => {
     const file = event.target.files[0];
     if (file) {
-      setFileNameCSV(file.name);
-      Papa.parse<string>(file, {
-        header: true,
-        complete: (results) => {
-          const certificateData: CertificateData[] = results.data.map((data: any) => ({
-            certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
-            fullname: data.fullname,
-            gmail: data.gmail,
-          }));
+      const fileExtension = file.name.split('.').pop()?.toLowerCase(); // Lấy đuôi file (extension)
 
-          onCsvRead(certificateData);
-          setCsvData(certificateData);
-        },
-        error: () => {
-          alert('Chuyển đổi file CSV thất bại!');
-        },
-      });
+      if (fileExtension === 'csv') {
+        // Xử lý file CSV
+        Papa.parse(file, {
+          header: true,
+          complete: (results) => {
+            const certificateData = results.data.map((data: any) => ({
+              certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
+              fullname: data.fullname,
+              gmail: data.gmail,
+            }));
+
+            onCsvRead(certificateData);
+            setCsvData(certificateData);
+          },
+          error: () => {
+            alert('Chuyển đổi file CSV thất bại!');
+          },
+        });
+      } else if (fileExtension === 'xlsx' || fileExtension === 'xls') {
+        // Xử lý file Excel
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const target = e.target;
+          if (target && target.result) {
+            const data = new Uint8Array(e.target.result as ArrayBuffer);
+            const workbook = XLSX.read(data, { type: 'array' });
+
+            const sheetName = workbook.SheetNames[0];
+            const worksheet = workbook.Sheets[sheetName];
+
+            // Chuyển đổi sheet thành mảng JSON
+            const excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+            // Lấy dữ liệu từ cột fullname (A) và email (B)
+            const certificateData = excelData.slice(1).map((row: any) => ({
+              certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
+              fullname: row[0], // Cột A - fullname
+              email: row[1], // Cột B - email
+            }));
+
+            onCsvRead(certificateData);
+            setCsvData(certificateData);
+          } else {
+            alert('Không thể đọc file!'); // Thông báo nếu không thể đọc file
+          }
+        };
+        reader.readAsArrayBuffer(file);
+      } else {
+        alert('Định dạng file không hợp lệ! Vui lòng tải lên file CSV hoặc Excel.');
+      }
     }
   };
 

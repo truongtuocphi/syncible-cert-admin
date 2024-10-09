@@ -310,7 +310,7 @@ const Experience = () => {
                               }
                               accept=".jpg, .png"
                               required
-                              className="hidden"
+                              className="absolute bottom-4 opacity-0"
                               id="file-upload"
                             />
                             <div className="flex items-center gap-4">

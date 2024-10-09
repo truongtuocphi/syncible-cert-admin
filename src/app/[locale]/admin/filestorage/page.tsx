@@ -119,7 +119,7 @@ export default function FileStorage() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>Loading....</div>;
   }
 
   return (

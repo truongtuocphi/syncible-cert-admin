@@ -65,8 +65,6 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
     fetchData();
   }, [user.uid]);
 
-  console.log(dataUser);
-
   const handleSignOut = async () => {
     try {
       await signOut(auth);
@@ -97,7 +95,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
                 </div>
               )}
               <div>
-                {dataUser?.last_name && dataUser?.fist_name  ? (
+                {dataUser?.last_name && dataUser?.fist_name ? (
                   <div className="font-bold text-gray-600">{`${dataUser?.last_name} ${dataUser?.fist_name}`}</div>
                 ) : null}
                 <div className="text-sm font-semibold text-gray-500">{dataUser?.email}</div>

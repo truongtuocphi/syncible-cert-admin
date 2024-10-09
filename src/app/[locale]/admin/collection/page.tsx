@@ -40,6 +40,7 @@ import { deleteDataById } from '@/utils/deleteDataFirebase';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import { useTranslations } from 'next-intl';
 import { CaretSortIcon } from '@radix-ui/react-icons';
+import convertToVietnamTime from '@/utils/convertToVietnamTime';
 
 export type Collection = {
   id: string;
@@ -49,6 +50,7 @@ export type Collection = {
   interface: string;
   contractAddress: string;
   itemsCount?: number;
+  createdAt?: string;
 };
 
 const columns: ColumnDef<Collection>[] = [
@@ -123,7 +125,7 @@ const columns: ColumnDef<Collection>[] = [
     accessorKey: 'contractAddress',
     header: 'table.contract',
     cell: ({ row }) => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-1">
         {row.getValue('contractAddress') ? truncateAddress(row.getValue('contractAddress')) : null}
         <div className="flex items-center gap-2">
           <CopyButton textToCopy={row.getValue('contractAddress')} />
@@ -137,6 +139,11 @@ const columns: ColumnDef<Collection>[] = [
         </div>
       </div>
     ),
+  },
+  {
+    accessorKey: 'createdAt',
+    header: 'table.createdAt',
+    cell: ({ row }) => <div>{convertToVietnamTime(row.getValue('createdAt'))}</div>,
   },
   {
     accessorKey: 'status',
@@ -185,6 +192,7 @@ export default function Collection() {
         const collections: Collection[] = [];
         snapshot.forEach((childSnapshot: any) => {
           const collection = childSnapshot.val();
+          console.log('collection', collection);
           if (collection.address === address) {
             collections.push({
               id: childSnapshot.key || '',
@@ -193,9 +201,18 @@ export default function Collection() {
               contractSymbol: collection.contractSymbol,
               interface: collection.interface,
               contractAddress: collection.contractAddress,
+              createdAt: collection.createdAt || ' ',
             });
           }
         });
+
+        // Sort collections by createdAt in descending order, with fallback for undefined values
+        collections.sort((a, b) => {
+          const dateA = new Date(a.createdAt || 0); // Use a fallback like 0 (epoch) for undefined dates
+          const dateB = new Date(b.createdAt || 0);
+          return dateB.getTime() - dateA.getTime();
+        });
+
         setData(collections);
       }
       setIsLoading(false);
@@ -294,7 +311,7 @@ export default function Collection() {
   };
 
   return (
-    <>
+    <div className="w-full overflow-hidden">
       <Breadcrumb />
       <div className="mt-4 flex items-center justify-between space-x-4 py-4">
         <div className="flex items-center rounded-2xl border-[1px] border-gray-200 bg-white px-4 py-1">
@@ -326,54 +343,59 @@ export default function Collection() {
             <Loading />
           </div>
         ) : (
-          <Table>
-            <TableHeader className="bg-gray-100">
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <TableHead
-                      key={header.id}
-                      className="text-ellipsis whitespace-nowrap font-bold text-black"
-                    >
-                      {header.isPlaceholder
-                        ? null
-                        : t(flexRender(header.column.columnDef.header, header.getContext())) !=
-                            'Dapp.Management.[object Object]'
-                          ? t(flexRender(header.column.columnDef.header, header.getContext()))
-                          : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  ))}
-                </TableRow>
-              ))}
-            </TableHeader>
-            <TableBody className="bg-white hover:bg-white">
-              {table.getRowModel().rows.length >= 2 ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow key={row.id} data-state={row.getIsSelected() ? 'selected' : undefined}>
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id} className="text-gray-600">
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </TableCell>
+          <div className="w-full overflow-x-auto">
+            <Table>
+              <TableHeader className="bg-gray-100">
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => (
+                      <TableHead
+                        key={header.id}
+                        className="text-ellipsis whitespace-nowrap px-2 font-bold text-black"
+                      >
+                        {header.isPlaceholder
+                          ? null
+                          : t(flexRender(header.column.columnDef.header, header.getContext())) !=
+                              'Dapp.Management.[object Object]'
+                            ? t(flexRender(header.column.columnDef.header, header.getContext()))
+                            : flexRender(header.column.columnDef.header, header.getContext())}
+                      </TableHead>
                     ))}
-                    <td className="hidden">
-                      <ContractData
-                        collectionContractAddress={row.getValue('contractAddress')}
-                        onItemsCountChange={(count) =>
-                          handleItemsCountChange(row.getValue('id'), count)
-                        }
-                      />
-                    </td>
                   </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={columns.length} className="h-48 text-center">
-                    {!address ? t('table.noti_1') : t('table.noti_2')}
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
+                ))}
+              </TableHeader>
+              <TableBody className="bg-white hover:bg-white">
+                {table.getRowModel().rows.length >= 1 && address ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() ? 'selected' : undefined}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id} className="p-2 text-gray-600">
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </TableCell>
+                      ))}
+                      <td className="hidden">
+                        <ContractData
+                          collectionContractAddress={row.getValue('contractAddress')}
+                          onItemsCountChange={(count) =>
+                            handleItemsCountChange(row.getValue('id'), count)
+                          }
+                        />
+                      </td>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={columns.length} className="h-48 text-center">
+                      {!address ? t('table.noti_1') : t('table.noti_2')}
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </div>
         )}
       </div>
       <div className="flex items-center justify-end space-x-2 py-4">
@@ -400,6 +422,6 @@ export default function Collection() {
           </Button>
         </div>
       </div>
-    </>
+    </div>
   );
 }

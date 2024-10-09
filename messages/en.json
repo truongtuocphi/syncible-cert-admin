@@ -248,6 +248,7 @@
         "quantily": "Quantity",
         "contract": "Contract address",
         "status": "Status",
+        "createdAt": "Create time",
         "valueStatus": "Verified",
         "operetion": "Operation",
         "noti_1": "Please connect your wallet to display results",

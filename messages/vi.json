@@ -247,6 +247,7 @@
         "symbol": "Biểu tượng hiển thị",
         "quantily": "Tổng số chứng chỉ",
         "contract": "Địa chỉ hợp đồng",
+        "createdAt": "Thời gian tạo",
         "status": "Xác thực",
         "valueStatus": "Hoạt Động",
         "operetion": "Thao tác",

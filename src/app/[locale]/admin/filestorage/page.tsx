@@ -30,7 +30,7 @@ export default function FileStorage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedFolders, setSelectedFolders] = useState<string[]>([]);
-  const [isDeleteMode, setIsDeleteMode] = useState(false); // New state variable for delete mode
+  const [isDeleteMode, setIsDeleteMode] = useState(false);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {

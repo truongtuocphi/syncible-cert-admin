@@ -83,8 +83,8 @@ const columns: ColumnDef<Collection>[] = [
           variant="ghost"
           className="p-0"
           onClick={() => {
-            const newSortDirection = column.getIsSorted() === 'asc' ? 'desc' : 'asc';
-            column.toggleSorting(newSortDirection === 'desc');
+            const isSortedDesc = column.getIsSorted() === 'desc';
+            column.toggleSorting(!isSortedDesc);
           }}
         >
           ID
@@ -92,7 +92,10 @@ const columns: ColumnDef<Collection>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.index + 1}</div>,
+    cell: ({ row, table }) => {
+      const totalRows = table.getCoreRowModel().rows.length;
+      return <div>{totalRows - row.index}</div>;
+    },
   },
   {
     accessorKey: 'displayName',
@@ -206,9 +209,8 @@ export default function Collection() {
           }
         });
 
-        // Sort collections by createdAt in descending order, with fallback for undefined values
         collections.sort((a, b) => {
-          const dateA = new Date(a.createdAt || 0); // Use a fallback like 0 (epoch) for undefined dates
+          const dateA = new Date(a.createdAt || 0);
           const dateB = new Date(b.createdAt || 0);
           return dateB.getTime() - dateA.getTime();
         });

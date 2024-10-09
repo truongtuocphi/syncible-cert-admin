@@ -3,7 +3,7 @@ import Image from 'next/image';
 export default function AuthorProfile({ author }: { author: Author }) {
   return (
     <div className="flex w-full gap-4">
-      <div className="retalive h-16 w-16 shrink-0 overflow-hidden rounded-full">
+      <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full">
         <Image
           className="h-full w-full"
           src={author.avatar_url} 

@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations, useLocale } from 'next-intl';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BlogCard from '@/components/common/card/BlogCard';
 import { Button } from '@/components/ui/button';
 import ArrowNarrowLeft from '@/assets/icons/arrow-narrow-left.svg';
@@ -19,13 +19,16 @@ export default function Page() {
   const t = useTranslations('BlogListPage');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const [notFoundError, setNotFoundError] = useState(false);
   const postsPerPage = 9;
   const [categories, setCategories] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [posts, setPosts] = useState<ArticleEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const locale = useLocale();
+  const [lastScrollY, setLastScrollY] = useState(0); // For scroll detection
+  const [isCategoryFilterVisible, setIsCategoryFilterVisible] = useState(true); // State to handle category filter visibility
+  const [isCategoryFilterSticky, setIsCategoryFilterSticky] = useState(false); // Handle when the category filter reaches the top
+  const categoryFilterRef = useRef<HTMLDivElement>(null); // Reference to category filter
 
   useEffect(() => {
     async function loadCategories() {
@@ -90,6 +93,45 @@ export default function Page() {
     loadPosts();
   }, [currentPage, selectedCategory, locale]);
 
+
+  // Scroll detection for category filter
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      const categoryFilterTop = categoryFilterRef.current?.getBoundingClientRect().top || 0;
+      // Only trigger scroll behavior once the category filter reaches the top of the viewport
+
+      if (window.innerWidth < 768) {
+        if (categoryFilterTop <= 0) {
+          setIsCategoryFilterSticky(true); // Trigger sticky behavior
+        } else {
+          setIsCategoryFilterSticky(false);
+        }
+
+        if (isCategoryFilterSticky && isCategoryFilterVisible) {
+          if (currentScrollY > lastScrollY) {
+            setIsCategoryFilterVisible(false); // Scrolling down, return the filter to its origin postion
+
+            console.log('in scroll down', currentScrollY, lastScrollY, isCategoryFilterVisible);
+          }
+          else {
+            setIsCategoryFilterVisible(true); // Scrolling up, move the filter down by 72px
+            console.log('in scroll up', currentScrollY, lastScrollY, isCategoryFilterVisible);
+          }
+        }
+        setLastScrollY(currentScrollY);
+      } else {
+        setIsCategoryFilterVisible(true); // Always show filter on larger screens
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [lastScrollY,isCategoryFilterSticky]);
+
   const handleNextPage = () => {
     if (currentPage < totalPages) {
       setCurrentPage(currentPage + 1);
@@ -108,9 +150,9 @@ export default function Page() {
   };
 
   return (
-    <div className="relative z-20 flex grow justify-center mt-24 md:mt-[8.25rem] lg:mt-40 xl:mt-44">
+    <div className="relative z-20 mt-24 flex grow justify-center md:mt-[8.25rem] lg:mt-40 xl:mt-44">
       <div className="relative flex h-full w-full max-w-[90rem] flex-col gap-8 sm:items-center sm:gap-0">
-        <div className="flex flex-col gap-6 sm:items-center sm:gap-8 px-4 md:px-8 xl:px-32">
+        <div className="flex flex-col gap-6 px-4 sm:items-center sm:gap-8 md:px-8 xl:px-32">
           <div className="text-[2.5rem] font-bold sm:text-5xl">{t('title')}</div>
           <div className="max-w-4xl font-medium text-[#6C6D71] sm:text-center sm:text-lg">
             {t('text')}
@@ -118,29 +160,40 @@ export default function Page() {
         </div>
         {/* making a filter here by clicking on the categories */}
         {/* <div className="relative h-full"> */}
-          <div className="sticky top-[4.5rem] border-b border-[#CCCCCC] text-[#A2A3A9] sm:static sm:w-full sm:pt-16 z-20">
-            <div className="flex space-x-4 overflow-x-auto font-semibold px-4 md:px-8 xl:px-32">
-              <div
-                className={clsx('w-fit flex-shrink-0 cursor-pointer py-4 sm:pt-0', {
-                  'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
-                })}
-                onClick={() => handleCategoryClick(null)}
-              >
-                {t('category.all.label')}
-              </div>
-              {categories.map((category) => (
-                <div
-                  key={category.id}
-                  className={clsx('w-fit flex-shrink-0 cursor-pointer py-4 sm:pt-0', {
-                    'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
-                  })}
-                  onClick={() => handleCategoryClick(category.id)}
-                >
-                  {category.name}
-                </div>
-              ))}
+        <div
+          id="category-filter"
+          ref={categoryFilterRef}
+          className={clsx(
+            'sticky top-0 z-20 border-b border-[#CCCCCC] text-[#A2A3A9] transition-transform duration-300 ease-in-out sm:static sm:w-full sm:pt-16',
+            {
+              'bg-white/50 backdrop-blur-[50px]': isCategoryFilterSticky, // blurred background when sticky
+              'translate-y-[72px]':isCategoryFilterSticky && isCategoryFilterVisible, // transition down when scrolling up
+              'translate-y-0': isCategoryFilterSticky && !isCategoryFilterVisible, // Stay at the top when scrolling down
+            }
+          )}
+        >
+          <div className="flex space-x-4 overflow-x-auto px-4 font-semibold md:px-8 xl:px-32">
+            <div
+              className={clsx('w-fit flex-shrink-0 cursor-pointer py-4 sm:pt-0', {
+                'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
+              })}
+              onClick={() => handleCategoryClick(null)}
+            >
+              {t('category.all.label')}
             </div>
+            {categories.map((category) => (
+              <div
+                key={category.id}
+                className={clsx('w-fit flex-shrink-0 cursor-pointer py-4 sm:pt-0', {
+                  'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
+                })}
+                onClick={() => handleCategoryClick(category.id)}
+              >
+                {category.name}
+              </div>
+            ))}
           </div>
+        </div>
         {/* </div> */}
         <div className="w-full px-4 md:px-8 xl:px-32">
           <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 sm:pt-16 lg:grid-cols-3">

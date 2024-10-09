@@ -18,8 +18,9 @@ export default function SectionAbout() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: leftRef.current, // Use one trigger for both animations
-          start: 'top 50%', // Animation starts when top of the section is 80% of the viewport
+          start: 'top 80%', // Animation starts when top of the section is 80% of the viewport
           toggleActions: 'play none none reverse',
+          markers: false,
         },
       });
       // Left animation (moving from left)

@@ -27,7 +27,7 @@ export default function SectionWhatWeBelieve() {
           ease: 'power3.out',
           scrollTrigger: {
             trigger: ref.current,
-            start: 'top 50%', // Start animation when top of section is 50% of the viewport
+            start: 'top 80%', // Start animation when top of section is 50% of the viewport
             toggleActions: 'play none none reverse', // Trigger animation on scroll
             markers: false,
           },
@@ -47,12 +47,12 @@ export default function SectionWhatWeBelieve() {
       })
         .to(logoRef1.current, {
           x: 40, // Move further right
-          y: 20, // Move down
+          y: 0, // Move down
           duration: 1,
         })
         .to(logoRef1.current, {
           x: 20, // Move back to left
-          y: 40, // Move further down
+          y: 20, // Move further down
           duration: 1,
         })
         .to(logoRef1.current, {

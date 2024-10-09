@@ -17,8 +17,9 @@ export default function SectionOurVision() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: leftRef.current, // Use one trigger for both animations
-          start: 'top 50%', // Animation starts when top of the section is 80% of the viewport
+          start: 'top 80%', // Animation starts when top of the section is 80% of the viewport
           toggleActions: 'play none none reverse',
+          markers: false,
         },
       });
       // Right animation (moving from right)
@@ -61,7 +62,7 @@ export default function SectionOurVision() {
           <Image
             src="/img03.png"
             alt="Image of a globe"
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             fill
             className="h-full object-cover "
             priority

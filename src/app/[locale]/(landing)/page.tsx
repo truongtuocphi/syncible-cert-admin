@@ -5,24 +5,20 @@ import React from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
-import Footer from '@/components/layout/Footer';
-import Navbar from '@/components/layout/Navbar';
 import SectionAbout from '@/components/pages/Home/SectionAbout';
-import SectionBlogs from '@/components/pages/Home/SectionBlogs';
 import SectionOurVision from '@/components/pages/Home/SectionOurVision';
 import SectionWhatWeBelieve from '@/components/pages/Home/SectionWhatWeBelieve';
+import SectionFAQ from '@/components/pages/Home/SectionFAQ';
+import SectionBlogs from '@/components/pages/Home/SectionBlogs';
+
 import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
 import { Link } from '@/i18n/routing';
 
 import BannerCertificate from '../../../../public/cert_example.png';
-
-import Background from '../../../../public/DoraBG.png';
-import BackgroundSmall from '../../../../public/DoraBGSmall.png';
-import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
 import EthereumLogoSVG from '../../../../public/ethereum-logo.svg';
 import PolygonLogoSVG from '../../../../public/polygon-logo.svg';
-import SectionFAQ from '@/components/pages/Home/SectionFAQ';
+
 
 const Page = () => {
   const t = useTranslations('HomePage.title_section');

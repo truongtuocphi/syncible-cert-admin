@@ -239,16 +239,13 @@ const Experience = () => {
 
   useEffect(() => {
     const handleBeforeUnload = (event: { returnValue: string }) => {
-      // Thiết lập thông điệp hiển thị cho người dùng
       const message = 'Are you sure you want to leave this page?';
-      event.returnValue = message; // Hiển thị hộp thoại xác nhận
-      return message; // Một số trình duyệt yêu cầu trả về thông điệp này
+      event.returnValue = message;
+      return message;
     };
 
-    // Thêm sự kiện beforeunload
     window.addEventListener('beforeunload', handleBeforeUnload);
 
-    // Xóa sự kiện khi component bị hủy
     return () => {
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };

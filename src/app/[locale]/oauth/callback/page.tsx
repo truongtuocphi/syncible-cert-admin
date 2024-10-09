@@ -58,7 +58,6 @@ const Page = () => {
     }
   };
 
-  // Hàm lấy thông tin người dùng bằng Access Token
   const handleGetUserInfo = async (token: string) => {
     try {
       const res = await fetch('https://api.basalwallet.com/api/v1/oauth/userinfo', {
@@ -69,11 +68,25 @@ const Page = () => {
       });
       const userInfoData = await res.json();
 
+      updateUserDataInFirebase(userInfoData.data);
+
       // Kiểm tra xem user đã tồn tại trong Realtime Database chưa
       await checkAndRegisterUser(userInfoData);
     } catch (error) {
       alert('Failed to fetch user info');
       router.push('/login');
+    }
+  };
+
+  const updateUserDataInFirebase = async (userData: any) => {
+    const user = auth.currentUser;
+    const userRef = ref(db, 'users/' + user?.uid);
+
+    if (user) {
+      await set(userRef, {
+        ...userData, // Cập nhật với dữ liệu mới
+        updatedAt: new Date().toISOString(),
+      });
     }
   };
 
@@ -99,9 +112,11 @@ const Page = () => {
           await set(newUserRef, {
             uid: newUser.uid,
             idBasal: userInfoData?.data?.id,
-            name: userInfoData?.data?.name || '',
+            last_name: userInfoData?.data?.last_name || '',
+            fist_name: userInfoData?.data?.first_name || '',
+            name: userInfoData?.data?.first_name || '',
             email,
-            avatar: '',
+            avatar: userInfoData?.data?.avatar || '',
             createdAt: new Date().toISOString(),
           });
           setTimeout(() => {

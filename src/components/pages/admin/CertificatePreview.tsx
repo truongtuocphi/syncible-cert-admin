@@ -14,6 +14,8 @@ const Certificate = ({
   useEffect(() => {
     const isMintNFTPage = window.location.pathname.includes('mintnft');
 
+    console.log('isMintNFTPage', isMintNFTPage);
+
     const handleResize = () => {
       const image = document.getElementById('certificate-image');
       let newFontSize = fontSize.base;
@@ -25,8 +27,8 @@ const Certificate = ({
         newFontSize = fontSizeMint; // Áp dụng fontSizeMint cho trang mintnft
       } else {
         // Áp dụng fontSize cho các trang khác
-        if (screenWidth >= 3840) newFontSize = fontSize.xl + 20;
-        else if (screenWidth >= 2560) newFontSize = fontSize.lg + 30;
+        if (screenWidth >= 3840) newFontSize = fontSize.xl + 25;
+        else if (screenWidth >= 2560) newFontSize = fontSize.lg + 35;
         else if (screenWidth >= 1280) newFontSize = fontSize.lg - 15;
         else if (screenWidth >= 768) newFontSize = fontSize.md - 20;
         else if (screenWidth >= 640) newFontSize = fontSize.sm - 20;
@@ -39,12 +41,15 @@ const Certificate = ({
         const imageWidth = image.clientWidth;
         let adjustedFontSize = Math.max(20, imageWidth / 15);
 
+        adjustedFontSize *= 1.1;
+
         if (window.innerWidth >= 2560) {
-          adjustedFontSize *= 0.8;
+          adjustedFontSize *= 0.9;
         }
 
         // Áp dụng fontSizeMint cho trang mintnft nếu có
-        setUserFontSize(isMintNFTPage ? fontSizeMint : adjustedFontSize);
+        const fontsizeMintNFT = adjustedFontSize;
+        setUserFontSize(isMintNFTPage ? fontsizeMintNFT : adjustedFontSize);
       } else {
         // Nếu không có hình ảnh, đặt giá trị fontSize mới
         setUserFontSize(newFontSize);

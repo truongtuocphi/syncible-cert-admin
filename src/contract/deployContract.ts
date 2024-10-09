@@ -21,6 +21,7 @@ const deployContract = async (displayName: string, address: any, contractSymbol:
 
   const contract = await factory.deploy({
     gasPrice: ethers.parseUnits('90', 'gwei'),
+    gasLimit: 9000000, // Adjust this value as needed
   });
 
   const receipt = await contract.deploymentTransaction()?.wait();

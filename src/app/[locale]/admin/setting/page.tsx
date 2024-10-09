@@ -1,78 +1,68 @@
 'use client';
 
-import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
 import { useAccount } from 'wagmi';
 import { useTranslations } from 'next-intl';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { useForm } from 'react-hook-form';
+import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { BiImageAdd } from 'react-icons/bi';
 import { FaUser } from 'react-icons/fa';
 import { LocaleSelect } from '@/components/common/switcher/LocaleSwitcher';
-import IconETH from '@/components/icons/ETHIcon';
+import IconPolygon from '@/components/icons/IconPolygon';
 import CopyButton from '@/components/common/coppyText/CopyButton';
-import {
-  auth,
-  db,
-  set,
-  ref,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  provider,
-  browserSessionPersistence,
-  onAuthStateChanged,
-  get,
-} from '@/lib/firebase';
+import { auth, db, ref, get } from '@/lib/firebase';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
-import { routing, usePathname, Link, useRouter } from '@/i18n/routing';
-import { BiCheck } from 'react-icons/bi';
+import Loading from '@/components/common/loading/Loading';
+import { onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
 
 export default function Setting() {
   const { address, isConnected } = useAccount();
-  const { locales } = routing;
-  const pathname = usePathname();
-  const router = useRouter();
 
   const [image, setImage] = useState('');
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<any>(null);
-
-  const href = window.location.href.split('/');
+  const [loading, setLoading] = useState(true); // Trạng thái loading
 
   const t = useTranslations('Dapp.setting');
 
   useEffect(() => {
-    const currentUser = auth.currentUser;
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      if (currentUser) {
+        setUser(currentUser);
 
-    if (currentUser) {
-      setUser(currentUser);
+        const userRef = ref(db, 'users/' + currentUser.uid);
+        get(userRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              setUserData(snapshot.val()); // Lưu thông tin người dùng từ DB vào state
+            } else {
+              console.log('No data available');
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching user data:', error);
+          })
+          .finally(() => {
+            setLoading(false); // Sau khi hoàn thành quá trình lấy dữ liệu, tắt trạng thái loading
+          });
+      } else {
+        setLoading(false); // Nếu không có người dùng, tắt trạng thái loading
+      }
+    });
 
-      // Lấy dữ liệu từ Realtime Database bằng user UID
-      const userRef = ref(db, 'users/' + currentUser.uid);
-      get(userRef)
-        .then((snapshot) => {
-          if (snapshot.exists()) {
-            setUserData(snapshot.val()); // Lưu thông tin người dùng từ DB vào state
-          } else {
-            console.log('No data available');
-          }
-        })
-        .catch((error) => {
-          console.error('Error fetching user data:', error);
-        });
-    }
+    // Cleanup subscription khi component bị unmount
+    return () => unsubscribe();
   }, []);
+
+  // Nếu đang loading, hiển thị component Loading
+  if (loading) {
+    return <Loading />;
+  }
+
+  // Nếu userData không tồn tại sau khi đã load xong, hiển thị thông báo
+  if (!userData) {
+    return <div>No user data available</div>;
+  }
 
   return (
     <>
@@ -96,9 +86,9 @@ export default function Setting() {
                     {t('titleProfilePicture')}
                   </div>
                   <div className="mb-6 flex w-1/2 items-center justify-start space-x-4">
-                    {image ? (
+                    {userData?.avatar ? (
                       <img
-                        src={image}
+                        src={userData?.avatar}
                         alt="Profile"
                         className="h-32 w-32 rounded-full border-2 border-white object-cover shadow-lg"
                       />
@@ -120,8 +110,9 @@ export default function Setting() {
                       <input
                         type="text"
                         placeholder={t('titleName')}
-                        value={userData?.name}
-                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 px-6 py-4 sm:text-base"
+                        disabled
+                        value={userData?.last_name + ' ' + userData?.fist_name}
+                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
                       />
                     </div>
                   </div>
@@ -134,7 +125,20 @@ export default function Setting() {
                         placeholder={t('titleEmail')}
                         disabled
                         value={userData?.email}
-                        className="mt-1 block w-full rounded-2xl px-6 py-4 sm:text-base"
+                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <div className="block w-1/2 font-bold text-gray-700">{t('titleIDBasal')}</div>
+                    <div className="w-1/2">
+                      <input
+                        type="text"
+                        placeholder={t('titleIDBasal')}
+                        disabled
+                        value={userData?.idBasal}
+                        className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
                       />
                     </div>
                   </div>
@@ -152,6 +156,7 @@ export default function Setting() {
             </CardContent>
           </Card>
         </TabsContent>
+
         {/* Account */}
         <TabsContent value="account">
           <Card className="rounded-2xl p-6">
@@ -160,8 +165,8 @@ export default function Setting() {
                 <div className="col-span-1 flex flex-col gap-2">
                   <div className="font-bold text-gray-700">{t('titleChain')}</div>
                   <div className="flex items-center gap-2">
-                    <IconETH width="24px" height="24px" />
-                    <div className="text-gray-400">Ethereum</div>
+                    <IconPolygon width="24px" height="24px" />
+                    <div className="text-gray-400">Polygon</div>
                   </div>
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">
@@ -181,7 +186,7 @@ export default function Setting() {
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">
                   <div className="font-bold text-gray-700">{t('titleSubscriptionPlan')}</div>
-                  <div className="w-fit rounded-2xl bg-gray-200 px-3 py-1 text-gray-400">
+                  <div className="w-fit rounded-2xl bg-gray-300 px-3 py-1 text-gray-500">
                     {t('titleTrial')}
                   </div>
                 </div>

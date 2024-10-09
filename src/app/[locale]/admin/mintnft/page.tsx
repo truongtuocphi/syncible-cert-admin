@@ -237,6 +237,20 @@ const Experience = () => {
     }
   }, [csvDataFromChild]);
 
+  useEffect(() => {
+    const handleBeforeUnload = (event: { returnValue: string }) => {
+      const message = 'Are you sure you want to leave this page?';
+      event.returnValue = message;
+      return message;
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, []);
+
   if (loading) router.push(`/admin/collection/collectiondetail`);
 
   return (

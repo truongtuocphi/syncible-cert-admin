@@ -33,8 +33,8 @@ interface UserInfoProps {
 
 interface UserInfo {
   name?: string;
-  firstName?: string;
-  lastName?: string;
+  fist_name?: string;
+  last_name?: string;
   institution?: string;
   email?: string;
   createdAt?: string;
@@ -85,8 +85,8 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
             <div className="flex items-center gap-2">
               {dataUser?.avatar ? (
                 <Image
-                  src={dataUser?.avatar && user.photoURL}
-                  alt={user.displayName || 'User Photo'}
+                  src={dataUser?.avatar || user?.photoURL}
+                  alt={user?.displayName || 'User Photo'}
                   className="h-10 w-10 transform cursor-pointer rounded-full transition-transform hover:scale-105"
                   width={40}
                   height={40}
@@ -97,8 +97,8 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
                 </div>
               )}
               <div>
-                {dataUser?.name ? (
-                  <div className="font-bold text-gray-600">{`${dataUser?.name}`}</div>
+                {dataUser?.last_name && dataUser?.fist_name  ? (
+                  <div className="font-bold text-gray-600">{`${dataUser?.last_name} ${dataUser?.fist_name}`}</div>
                 ) : null}
                 <div className="text-sm font-semibold text-gray-500">{dataUser?.email}</div>
               </div>

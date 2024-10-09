@@ -341,8 +341,8 @@
       "titleFullName": "Full name",
       "placeholderFullName": "Your full name",
 
-      "titleCSV": "XLSX Information",
-      "subTitleCSV": "Your csv file format must be formatted according to Syncible's file format field for consistency. Once formatted, save the file as a .xlsx file and paste it into the template below",
+      "titleCSV": "CSV Information",
+      "subTitleCSV": "Your XLSX file format must be formatted according to Syncible's file format field for consistency. Once formatted, save the file as a CSV file and paste it into the template below",
       "buttonUploadFileCSV": "Download sample .xlsx file",
       "downloadFileCSV": "Choose file"
     },
@@ -361,15 +361,17 @@
       "tabProfile": "Profile",
       "tabAcc": "Account",
       "titleProfilePicture": "Profile picture",
-      "titleName": "Nickname",
+      "titleName": "Full name",
       "titleEmail": "Email",
+      "titleIDBasal": "User ID",
       "titleLanguage": "Language",
       "titleChain": "Chain",
       "titleCreateDate": "Create Date",
       "titleWalletAddress": "Wallet Address",
       "titleConnectWallet": "Connect Wallet",
       "titleSubscriptionPlan": "Subscription Plan",
-      "titleTrial": "Trial"
+      "titleTrial": "Trial",
+      "titlenoUserLoggedIn": "No user logged in"
     }
   },
 

@@ -117,7 +117,7 @@ export default function Login() {
       window.open(
         `https://app.basalwallet.com/auth/oauth/authorize?client_id=${clientId}&redirect_uri=${encodeURI(
           redirectUri
-        )}&response_type=code&scope=id+email&state=${randomState}&code_challenge=${codeChallenge}&code_challenge_method=S256`,
+        )}&response_type=code&scope=id+email+first_name+last_name+nickname+avatar&state=${randomState}&code_challenge=${codeChallenge}&code_challenge_method=S256`,
         '_self'
       );
     }

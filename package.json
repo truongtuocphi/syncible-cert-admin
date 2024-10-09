@@ -47,6 +47,7 @@
     "@tanstack/react-query": "^5.32.0",
     "@tanstack/react-table": "^8.20.1",
     "@types/mdx": "^2.0.13",
+    "@wagmi/core": "^2.13.8",
     "@web3modal/wagmi": "^4.1.11",
     "axios": "^1.7.7",
     "base64-url": "^2.3.3",
@@ -64,6 +65,7 @@
     "next": "^14.2.7",
     "next-auth": "^4.24.7",
     "next-intl": "^3.19.1",
+    "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
     "nextjs-toploader": "^1.6.12",
     "papaparse": "^5.4.1",
@@ -81,9 +83,9 @@
     "tailwindcss-animate": "^1.0.7",
     "vaul": "^0.9.1",
     "viem": "^2.9.26",
-    "wagmi": "^2.12.16",
+    "wagmi": "^2.12.17",
     "zod": "^3.23.8",
-    "zustand": "^5.0.0-rc.2"
+    "zustand": "^4.4.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.1",

@@ -17,6 +17,7 @@ import { setPersistence, browserSessionPersistence } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
 import Loading from '@/components/common/loading/Loading';
+import { update } from 'firebase/database';
 
 const Page = () => {
   const router = useRouter();
@@ -68,7 +69,14 @@ const Page = () => {
       });
       const userInfoData = await res.json();
 
-      updateUserDataInFirebase(userInfoData.data);
+      const { avatar, first_name, last_name } = userInfoData.data;
+
+      // Cập nhật dữ liệu người dùng trong Firebase
+      updateUserDataInFirebase({
+        avatar,
+        first_name,
+        last_name,
+      });
 
       // Kiểm tra xem user đã tồn tại trong Realtime Database chưa
       await checkAndRegisterUser(userInfoData);
@@ -83,10 +91,15 @@ const Page = () => {
     const userRef = ref(db, 'users/' + user?.uid);
 
     if (user) {
-      await set(userRef, {
-        ...userData, // Cập nhật với dữ liệu mới
-        updatedAt: new Date().toISOString(),
-      });
+      // Tạo đối tượng chỉ chứa các trường cần thiết
+      const dataToUpdate = {
+        avatar: userData.avatar,
+        first_name: userData.first_name,
+        last_name: userData.last_name,
+        updatedAt: new Date().toISOString(), // Cập nhật thời gian
+      };
+
+      await update(userRef, dataToUpdate);
     }
   };
 

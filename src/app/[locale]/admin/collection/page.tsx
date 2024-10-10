@@ -83,8 +83,7 @@ const columns: ColumnDef<Collection>[] = [
           variant="ghost"
           className="p-0"
           onClick={() => {
-            const isSortedDesc = column.getIsSorted() === 'desc';
-            column.toggleSorting(!isSortedDesc);
+            column.toggleSorting();
           }}
         >
           ID

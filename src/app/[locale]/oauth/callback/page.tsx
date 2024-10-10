@@ -9,8 +9,6 @@ import {
   ref,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signInWithPopup,
-  provider,
   get,
 } from '@/lib/firebase';
 import { setPersistence, browserSessionPersistence } from 'firebase/auth';
@@ -91,12 +89,11 @@ const Page = () => {
     const userRef = ref(db, 'users/' + user?.uid);
 
     if (user) {
-      // Tạo đối tượng chỉ chứa các trường cần thiết
       const dataToUpdate = {
         avatar: userData.avatar,
         first_name: userData.first_name,
         last_name: userData.last_name,
-        updatedAt: new Date().toISOString(), // Cập nhật thời gian
+        updatedAt: new Date().toISOString(),
       };
 
       await update(userRef, dataToUpdate);
@@ -105,8 +102,8 @@ const Page = () => {
 
   // Hàm kiểm tra và đăng ký người dùng
   const checkAndRegisterUser = async (userInfoData: any) => {
-    const user = auth.currentUser; // Lấy người dùng hiện tại từ Firebase
-    const userRef = ref(db, 'users/' + user?.uid); // Sử dụng `uid` của người dùng Firebase
+    const user = auth.currentUser;
+    const userRef = ref(db, 'users/' + user?.uid);
 
     // Kiểm tra xem người dùng đã tồn tại trong database chưa
     const snapshot = await get(userRef);
@@ -170,7 +167,6 @@ const Page = () => {
   };
 
   useEffect(() => {
-    // Lấy Access Token
     handleGetAccessToken();
   }, []);
 

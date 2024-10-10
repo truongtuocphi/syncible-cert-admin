@@ -193,10 +193,9 @@ export default function Collection() {
         const collections: Collection[] = [];
         snapshot.forEach((childSnapshot: any) => {
           const collection = childSnapshot.val();
-          console.log('collection', collection);
+
           if (collection.address === address) {
             collections.push({
-              // Replace id with the index later, so we can keep the original key here if needed
               // id: childSnapshot.key || '', // Original id line, commented out
               displayName: collection.displayName,
               contractName: collection.contractName,
@@ -208,7 +207,6 @@ export default function Collection() {
           }
         });
 
-        // Sort collections by createdAt date in descending order
         collections.sort((a, b) => {
           const dateA = new Date(a.createdAt || 0);
           const dateB = new Date(b.createdAt || 0);
@@ -306,14 +304,14 @@ export default function Collection() {
   const handleNextPage = () => {
     if (currentPage < table.getFilteredRowModel().rows.length - 1) {
       table.nextPage();
-      setCurrentPage((prev) => prev + 1); // Tăng trang hiện tại
+      setCurrentPage((prev) => prev + 1);
     }
   };
 
   const handlePreviousPage = () => {
     if (currentPage > 0) {
       table.previousPage();
-      setCurrentPage((prev) => prev - 1); // Giảm trang hiện tại
+      setCurrentPage((prev) => prev - 1);
     }
   };
 

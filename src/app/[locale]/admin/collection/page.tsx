@@ -76,7 +76,7 @@ const columns: ColumnDef<Collection>[] = [
     ),
   },
   {
-    accessorKey: 'id',
+    accessorKey: 'idTable',
     header: ({ column }) => {
       return (
         <Button
@@ -92,7 +92,7 @@ const columns: ColumnDef<Collection>[] = [
       );
     },
     cell: ({ row }) => {
-      return <div>{row.getValue('id')}</div>;
+      return <div>{row.getValue('idTable')}</div>;
     },
   },
   {
@@ -196,7 +196,7 @@ export default function Collection() {
 
           if (collection.address === address) {
             collections.push({
-              // id: childSnapshot.key || '', // Original id line, commented out
+              id: childSnapshot.key || '',
               displayName: collection.displayName,
               contractName: collection.contractName,
               contractSymbol: collection.contractSymbol,
@@ -215,7 +215,7 @@ export default function Collection() {
 
         const indexedCollections = collections.map((collection, index) => ({
           ...collection,
-          id: (collections.length - index).toString(),
+          idTable: (collections.length - index).toString(),
         }));
 
         setData(indexedCollections);

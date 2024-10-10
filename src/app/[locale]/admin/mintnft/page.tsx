@@ -361,7 +361,6 @@ const Experience = () => {
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
-                    required
                     className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   >
                     <option value="Teacher">Teacher</option>

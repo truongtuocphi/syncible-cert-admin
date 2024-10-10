@@ -14,8 +14,6 @@ const Certificate = ({
   useEffect(() => {
     const isMintNFTPage = window.location.pathname.includes('mintnft');
 
-    console.log('isMintNFTPage', isMintNFTPage);
-
     const handleResize = () => {
       const image = document.getElementById('certificate-image');
       let newFontSize = fontSize.base;

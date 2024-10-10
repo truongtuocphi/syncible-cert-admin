@@ -96,6 +96,13 @@ const columns: ColumnDef<Collection>[] = [
     },
   },
   {
+    accessorKey: 'id',
+    header: () => null,
+    cell: ({ row }) => {
+      return <div className="hidden">{row.getValue('id')}</div>;
+    },
+  },
+  {
     accessorKey: 'displayName',
     header: 'table.name',
     cell: ({ row }) => <div>{row.getValue('displayName')}</div>,
@@ -217,6 +224,8 @@ export default function Collection() {
           ...collection,
           idTable: (collections.length - index).toString(),
         }));
+
+        console.log('indexedCollections', indexedCollections);
 
         setData(indexedCollections);
       }

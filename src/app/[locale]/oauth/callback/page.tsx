@@ -9,14 +9,13 @@ import {
   ref,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
-  signInWithPopup,
-  provider,
   get,
 } from '@/lib/firebase';
 import { setPersistence, browserSessionPersistence } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { FirebaseError } from 'firebase/app';
 import Loading from '@/components/common/loading/Loading';
+import { update } from 'firebase/database';
 
 const Page = () => {
   const router = useRouter();
@@ -68,7 +67,14 @@ const Page = () => {
       });
       const userInfoData = await res.json();
 
-      updateUserDataInFirebase(userInfoData.data);
+      const { avatar, first_name, last_name } = userInfoData.data;
+
+      // Cập nhật dữ liệu người dùng trong Firebase
+      updateUserDataInFirebase({
+        avatar,
+        first_name,
+        last_name,
+      });
 
       // Kiểm tra xem user đã tồn tại trong Realtime Database chưa
       await checkAndRegisterUser(userInfoData);
@@ -83,17 +89,21 @@ const Page = () => {
     const userRef = ref(db, 'users/' + user?.uid);
 
     if (user) {
-      await set(userRef, {
-        ...userData, // Cập nhật với dữ liệu mới
+      const dataToUpdate = {
+        avatar: userData.avatar,
+        first_name: userData.first_name,
+        last_name: userData.last_name,
         updatedAt: new Date().toISOString(),
-      });
+      };
+
+      await update(userRef, dataToUpdate);
     }
   };
 
   // Hàm kiểm tra và đăng ký người dùng
   const checkAndRegisterUser = async (userInfoData: any) => {
-    const user = auth.currentUser; // Lấy người dùng hiện tại từ Firebase
-    const userRef = ref(db, 'users/' + user?.uid); // Sử dụng `uid` của người dùng Firebase
+    const user = auth.currentUser;
+    const userRef = ref(db, 'users/' + user?.uid);
 
     // Kiểm tra xem người dùng đã tồn tại trong database chưa
     const snapshot = await get(userRef);
@@ -157,7 +167,6 @@ const Page = () => {
   };
 
   useEffect(() => {
-    // Lấy Access Token
     handleGetAccessToken();
   }, []);
 

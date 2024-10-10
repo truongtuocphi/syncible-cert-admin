@@ -111,7 +111,7 @@ export default function Setting() {
                         type="text"
                         placeholder={t('titleName')}
                         disabled
-                        value={userData?.last_name + ' ' + userData?.fist_name}
+                        value={userData?.last_name  + ' ' + userData?.fist_name}
                         className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
                       />
                     </div>

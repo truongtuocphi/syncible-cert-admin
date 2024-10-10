@@ -165,7 +165,7 @@ const Experience = () => {
 
         if (mintDataArray) {
           const tx = await contract.mintBulk(mintDataArray, {
-            gasLimit: 8000000,
+            gasLimit: 9000000,
           });
 
           await tx.wait();
@@ -310,7 +310,7 @@ const Experience = () => {
                               }
                               accept=".jpg, .png"
                               required
-                              className="hidden"
+                              className="absolute bottom-4 opacity-0"
                               id="file-upload"
                             />
                             <div className="flex items-center gap-4">

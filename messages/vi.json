@@ -247,6 +247,7 @@
         "symbol": "Biểu tượng hiển thị",
         "quantily": "Tổng số chứng chỉ",
         "contract": "Địa chỉ hợp đồng",
+        "createdAt": "Thời gian tạo",
         "status": "Xác thực",
         "valueStatus": "Hoạt Động",
         "operetion": "Thao tác",
@@ -341,9 +342,9 @@
       "titleFullName": "Họ và tên",
       "placeholderFullName": "Họ và tên của bạn",
 
-      "titleCSV": "Thông tin CSV",
-      "subTitleCSV": "Định dạng tập tin XLSX của bạn phải được định dạng theo trường định dạng tập tin của Syncible để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành tập tin CSV và dán vào mẫu dưới đây",
-      "buttonUploadFileCSV": "Tải file .xlsx mẫu",
+      "titleCSV": "Thông tin tài liệu",
+      "subTitleCSV": "Tập tin XLSX của bạn phải được định dạng theo trường của Syncible để đảm bảo tính nhất quán. Sau khi đã định dạng tập tin, lưu thành tập tin XLSX và dán vào mẫu dưới đây",
+      "buttonUploadFileCSV": "Tải file mẫu",
       "downloadFileCSV": "Tải tệp"
     },
 

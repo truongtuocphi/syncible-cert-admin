@@ -248,6 +248,7 @@
         "quantily": "Quantity",
         "contract": "Contract address",
         "status": "Status",
+        "createdAt": "Create time",
         "valueStatus": "Verified",
         "operetion": "Operation",
         "noti_1": "Please connect your wallet to display results",
@@ -341,9 +342,9 @@
       "titleFullName": "Full name",
       "placeholderFullName": "Your full name",
 
-      "titleCSV": "CSV Information",
-      "subTitleCSV": "Your XLSX file format must be formatted according to Syncible's file format field for consistency. Once formatted, save the file as a CSV file and paste it into the template below",
-      "buttonUploadFileCSV": "Download sample .xlsx file",
+      "titleCSV": "File Information",
+      "subTitleCSV": "Your XLSX file format must be aligned to Syncible's file format field for consistency. Once formatted, save the file as a XLSX file and paste it into the button below",
+      "buttonUploadFileCSV": "Download sample file",
       "downloadFileCSV": "Choose file"
     },
 

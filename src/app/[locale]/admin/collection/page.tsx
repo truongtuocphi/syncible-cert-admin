@@ -43,7 +43,7 @@ import { CaretSortIcon } from '@radix-ui/react-icons';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
 
 export type Collection = {
-  id: string;
+  id?: string;
   displayName: string;
   contractName: string;
   contractSymbol: string;
@@ -92,9 +92,8 @@ const columns: ColumnDef<Collection>[] = [
         </Button>
       );
     },
-    cell: ({ row, table }) => {
-      const totalRows = table.getCoreRowModel().rows.length;
-      return <div>{totalRows - row.index}</div>;
+    cell: ({ row }) => {
+      return <div>{row.getValue('id')}</div>;
     },
   },
   {
@@ -198,7 +197,8 @@ export default function Collection() {
           console.log('collection', collection);
           if (collection.address === address) {
             collections.push({
-              id: childSnapshot.key || '',
+              // Replace id with the index later, so we can keep the original key here if needed
+              // id: childSnapshot.key || '', // Original id line, commented out
               displayName: collection.displayName,
               contractName: collection.contractName,
               contractSymbol: collection.contractSymbol,
@@ -209,13 +209,19 @@ export default function Collection() {
           }
         });
 
+        // Sort collections by createdAt date in descending order
         collections.sort((a, b) => {
           const dateA = new Date(a.createdAt || 0);
           const dateB = new Date(b.createdAt || 0);
           return dateB.getTime() - dateA.getTime();
         });
 
-        setData(collections);
+        const indexedCollections = collections.map((collection, index) => ({
+          ...collection,
+          id: (collections.length - index).toString(),
+        }));
+
+        setData(indexedCollections);
       }
       setIsLoading(false);
     };

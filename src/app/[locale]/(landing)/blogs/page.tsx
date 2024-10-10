@@ -14,6 +14,7 @@ import {
 } from '@/utils/fetchDataFromWordPress';
 import { BlogCardSkeleton } from '@/components/common/skeleton/Skeleton';
 import clsx from 'clsx';
+import { set } from 'date-fns';
 
 export default function Page() {
   const t = useTranslations('BlogListPage');
@@ -26,8 +27,8 @@ export default function Page() {
   const [loading, setLoading] = useState(true);
   const locale = useLocale();
   const [lastScrollY, setLastScrollY] = useState(0); // For scroll detection
-  const [isCategoryFilterVisible, setIsCategoryFilterVisible] = useState(true); // State to handle category filter visibility
-  const [isCategoryFilterSticky, setIsCategoryFilterSticky] = useState(false); // Handle when the category filter reaches the top
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>('up'); // State to handle category filter visibility
+  const [isCategoryFilterAtTop, setIsCategoryFilterAtTop] = useState(false); // Handle when the category filter reaches the top
   const categoryFilterRef = useRef<HTMLDivElement>(null); // Reference to category filter
 
   useEffect(() => {
@@ -93,36 +94,36 @@ export default function Page() {
     loadPosts();
   }, [currentPage, selectedCategory, locale]);
 
-
   // Scroll detection for category filter
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 
       const categoryFilterTop = categoryFilterRef.current?.getBoundingClientRect().top || 0;
+      console.log('categoryFilterTop:', categoryFilterTop);
       // Only trigger scroll behavior once the category filter reaches the top of the viewport
 
       if (window.innerWidth < 768) {
-        if (categoryFilterTop <= 0) {
-          setIsCategoryFilterSticky(true); // Trigger sticky behavior
-        } else {
-          setIsCategoryFilterSticky(false);
+        if (categoryFilterTop <= 0 && !isCategoryFilterAtTop) {
+          setIsCategoryFilterAtTop(true); // Trigger sticky behavior
+        } 
+        if (categoryFilterTop >= 73  && isCategoryFilterAtTop) {
+          
+          setIsCategoryFilterAtTop(false);
         }
 
-        if (isCategoryFilterSticky && isCategoryFilterVisible) {
+        if (isCategoryFilterAtTop) {
           if (currentScrollY > lastScrollY) {
-            setIsCategoryFilterVisible(false); // Scrolling down, return the filter to its origin postion
-
-            console.log('in scroll down', currentScrollY, lastScrollY, isCategoryFilterVisible);
-          }
-          else {
-            setIsCategoryFilterVisible(true); // Scrolling up, move the filter down by 72px
-            console.log('in scroll up', currentScrollY, lastScrollY, isCategoryFilterVisible);
+            setScrollDirection('down'); // Scrolling down, hide the filter
+          } else {
+            setScrollDirection('up'); // Scrolling up, show the filter
           }
         }
         setLastScrollY(currentScrollY);
-      } else {
-        setIsCategoryFilterVisible(true); // Always show filter on larger screens
+      }
+      else {
+        setIsCategoryFilterAtTop(false);
+        setScrollDirection(null);
       }
     };
 
@@ -130,7 +131,7 @@ export default function Page() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [lastScrollY,isCategoryFilterSticky]);
+  }, [lastScrollY, isCategoryFilterAtTop]);
 
   const handleNextPage = () => {
     if (currentPage < totalPages) {
@@ -150,7 +151,7 @@ export default function Page() {
   };
 
   return (
-    <div className="relative z-20 mt-24 flex grow justify-center md:mt-[8.25rem] lg:mt-40 xl:mt-44">
+    <div className="relative z-20 mt-20 flex grow justify-center md:mt-[8.25rem] lg:mt-40 xl:mt-44">
       <div className="relative flex h-full w-full max-w-[90rem] flex-col gap-8 sm:items-center sm:gap-0">
         <div className="flex flex-col gap-6 px-4 sm:items-center sm:gap-8 md:px-8 xl:px-32">
           <div className="text-[2.5rem] font-bold sm:text-5xl">{t('title')}</div>
@@ -158,17 +159,16 @@ export default function Page() {
             {t('text')}
           </div>
         </div>
-        {/* making a filter here by clicking on the categories */}
-        {/* <div className="relative h-full"> */}
+        {/* Filter category */}
         <div
           id="category-filter"
           ref={categoryFilterRef}
           className={clsx(
-            'sticky top-0 z-20 border-b border-[#CCCCCC] text-[#A2A3A9] transition-transform duration-300 ease-in-out sm:static sm:w-full sm:pt-16',
+            'sticky top-0 z-20 border-b border-[#CCCCCC] text-[#A2A3A9] transition-transform duration-300 ease-in-out sm:static sm:w-full sm:mt-16',
             {
-              'bg-white/50 backdrop-blur-[50px]': isCategoryFilterSticky, // blurred background when sticky
-              'translate-y-[72px]':isCategoryFilterSticky && isCategoryFilterVisible, // transition down when scrolling up
-              'translate-y-0': isCategoryFilterSticky && !isCategoryFilterVisible, // Stay at the top when scrolling down
+              'bg-white/50 backdrop-blur-[50px]': isCategoryFilterAtTop, // blurred background when sticky
+              'translate-y-[4.5rem]': isCategoryFilterAtTop && scrollDirection === 'up', // transition down when scrolling up
+              'translate-y-0': isCategoryFilterAtTop && scrollDirection === 'down', // Stay at the top when scrolling down
             }
           )}
         >
@@ -194,7 +194,6 @@ export default function Page() {
             ))}
           </div>
         </div>
-        {/* </div> */}
         <div className="w-full px-4 md:px-8 xl:px-32">
           <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 sm:pt-16 lg:grid-cols-3">
             {loading

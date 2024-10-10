@@ -10,12 +10,11 @@ import { montserrat } from '@/components/ui/fonts';
 export default function LandingLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className={`${montserrat.className} relative min-h-dvh flex flex-col gap-10`}>
-        <Navbar />
-        {/* <div className="z-20 flex h-full flex-grow flex-col items-center overflow-hidden"> */}
-        
+      <div className={`${montserrat.className} relative min-h-screen flex flex-col md:gap-10`}>
+        {/* <div className="relative h-[6.5rem]"> */}
+          <Navbar />
+        {/* </div> */}
         {children}
-          {/* </div>   */}
         <div className="relative mt-10 w-full">
           <Footer /> 
         </div>

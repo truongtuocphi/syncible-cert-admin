@@ -24,15 +24,13 @@ const Page = () => {
   const t = useTranslations('HomePage.title_section');
   return (
     <>
-      {/* <div className="relative min-h-screen overflow-hidden">       
-        <Navbar /> */}
       <div
         className={`${montserrat.className} relative z-20 flex flex-col items-center gap-10 overflow-hidden`}
       >
         <div className="w-full max-w-[90rem]">
           <div className="flex flex-col justify-center px-4 pb-4 sm:min-h-dvh md:px-8 md:pb-10 xl:px-32">
-            <div className="mt-24 flex h-full w-full flex-col justify-center md:mt-[8.25rem] lg:mt-40 lg:flex-row xl:mt-44">
-              <div className="flex items-center justify-center lg:basis-1/2">
+            <div className="flex h-full w-full flex-col justify-center mt-24 md:mt-[8.25rem] lg:flex-row">
+              <div className="flex items-center justify-center lg:basis-1/2 lg:pr-6">
                 <div className="flex min-h-[20rem] animate-swipe-up-fadein flex-col items-center justify-center gap-6 antialiased sm:gap-8 lg:h-[30rem] lg:items-start">
                   <div
                     className={`text-md col-span-1 w-full text-wrap text-left text-[2.5rem] font-bold leading-none sm:text-center lg:text-left lg:text-5xl lg:leading-[4rem]`}
@@ -112,45 +110,7 @@ const Page = () => {
           <SectionFAQ />
         </div>
         <SectionBlogs />
-        {/* <div className="relative w-full">
-            <Footer />
-          </div> */}
       </div>
-      {/* <div className="-z-20 absolute inset-0 flex w-full flex-col items-center overflow-hidden bg-brand-10">
-          <div className="relative mx-auto min-h-full w-full max-w-[90rem]">
-            <div className="absolute -left-[170%] -top-[15%] w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%]">
-              <LightBlueGradientEllipse className="h-full w-full" />
-            </div>
-            <div className=" absolute -right-[130%] top-1/2  w-[125rem] -translate-y-[50%] sm:-right-1/2 sm:w-[150%] sm:-translate-y-[70%]">
-              <LightBlueGradientEllipse className="h-full w-full" />
-            </div>
-            <div className="absolute -bottom-[10%] -left-[150%]  w-[125rem] sm:-bottom-1/2 sm:-left-1/2 sm:w-[150%] sm:-translate-y-[150%]">
-              <LightBlueGradientEllipse className="h-full w-full" />
-            </div>
-          </div>
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 top-0 -z-10 overflow-hidden">
-          <div className="hidden sm:block">
-            <Image
-              src={Background}
-              fill
-              alt="The background image with star-like shapes and a single curvy line that extends to the bottom of the image"
-              className="z-10 h-auto w-full object-cover object-top"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </div>
-          <div className="block sm:hidden">
-            <Image
-              src={BackgroundSmall}
-              fill
-              alt="The background image with star-like shapes and a single curvy line that extends to the bottom of the image"
-              className="z-0 h-auto w-full object-cover object-top"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            />
-          </div>
-        </div> */}
     </>
   );
 };

@@ -84,7 +84,7 @@ const Navbar = () => {
   return (
     <div
       className={clsx(
-        'fixed top-0 z-30 w-screen transition-transform duration-300 ease-in-out md:mt-6',
+        'fixed top-0 z-30 w-full transition-transform duration-300 ease-in-out md:mt-6',
         {
           'translate-y-0': isNavbarVisible,
           '-translate-y-full': !isNavbarVisible,

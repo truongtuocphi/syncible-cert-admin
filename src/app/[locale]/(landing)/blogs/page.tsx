@@ -100,7 +100,6 @@ export default function Page() {
       const currentScrollY = window.scrollY;
 
       const categoryFilterTop = categoryFilterRef.current?.getBoundingClientRect().top || 0;
-      console.log('categoryFilterTop:', categoryFilterTop);
       // Only trigger scroll behavior once the category filter reaches the top of the viewport
 
       if (window.innerWidth < 768) {

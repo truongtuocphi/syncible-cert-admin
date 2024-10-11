@@ -4,12 +4,12 @@
 import { useState } from 'react';
 
 import Papa from 'papaparse';
+import * as XLSX from 'xlsx';
 
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import getAcronym from '@/utils/getAcronym';
 import { BiFolderPlus } from 'react-icons/bi';
 import { useTranslations } from 'next-intl';
-import * as XLSX from 'xlsx';
 
 const headerURLPinata = process.env.NEXT_PUBLIC_HEADER_URL;
 
@@ -82,14 +82,20 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
         Papa.parse(file, {
           header: true,
           complete: (results) => {
-            const certificateData = results.data.map((data: any) => ({
-              certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
-              fullname: data.fullname,
-              gmail: data.gmail,
-            }));
+            const certificateData = results.data
+              .filter((data: any) => data.fullname && data.gmail) // Kiểm tra dữ liệu hợp lệ
+              .map((data: any) => ({
+                certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
+                fullname: data.fullname,
+                gmail: data.gmail,
+              }));
 
-            onCsvRead(certificateData);
-            setCsvData(certificateData);
+            if (certificateData.length === 0) {
+              alert('Không có dữ liệu hợp lệ trong file CSV!');
+            } else {
+              onCsvRead(certificateData);
+              setCsvData(certificateData);
+            }
           },
           error: () => {
             alert('Chuyển đổi file CSV thất bại!');
@@ -101,7 +107,7 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
         reader.onload = (e) => {
           const target = e.target;
           if (target && target.result) {
-            const data = new Uint8Array(e.target.result as ArrayBuffer);
+            const data = new Uint8Array(target.result as ArrayBuffer);
             const workbook = XLSX.read(data, { type: 'array' });
 
             const sheetName = workbook.SheetNames[0];
@@ -109,18 +115,31 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
 
             // Chuyển đổi sheet thành mảng JSON
             const excelData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+            console.log(excelData); // Kiểm tra dữ liệu Excel sau khi chuyển đổi
+
+            if (excelData.length <= 1) {
+              alert('File Excel không chứa dữ liệu hợp lệ!');
+              return;
+            }
 
             // Lấy dữ liệu từ cột fullname (A) và email (B)
-            const certificateData = excelData.slice(1).map((row: any) => ({
-              certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
-              fullname: row[0], // Cột A - fullname
-              email: row[1], // Cột B - email
-            }));
+            const certificateData = excelData
+              .slice(1) // Bỏ qua hàng header đầu tiên
+              .filter((row: any) => row[0] && row[1]) // Kiểm tra cột fullname và email không trống
+              .map((row: any) => ({
+                certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
+                fullname: row[0], // Cột A - fullname
+                email: row[1], // Cột B - email
+              }));
 
-            onCsvRead(certificateData);
-            setCsvData(certificateData);
+            if (certificateData.length === 0) {
+              alert('Không có dữ liệu hợp lệ trong file Excel!');
+            } else {
+              onCsvRead(certificateData);
+              setCsvData(certificateData);
+            }
           } else {
-            alert('Không thể đọc file!'); // Thông báo nếu không thể đọc file
+            alert('Không thể đọc file!');
           }
         };
         reader.readAsArrayBuffer(file);

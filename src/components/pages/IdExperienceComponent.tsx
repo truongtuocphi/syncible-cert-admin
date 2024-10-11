@@ -382,7 +382,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                                     {translationCollection('subContent_1')}
                                   </span>
                                 </li>
-                                <li className="mt-2 ">{t('subContent_2')}</li>
+                                <li className="mt-2 ">{translationCollection('subContent_2')}</li>
                               </ul>
                             </nav>
 

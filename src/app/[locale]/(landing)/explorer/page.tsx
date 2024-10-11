@@ -173,7 +173,7 @@ export default function Explorer() {
           </div>
         ) : data && data.mintData.length > 0 ? (
           data.mintData.length >= 2 ? (
-            <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 p-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 p-4 sm:grid-cols-2 lg:grid-cols-3 2xl:max-w-[1600px]">
               {data.mintData.map((item: any, index: any) => (
                 <Link
                   key={index}

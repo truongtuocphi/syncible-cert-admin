@@ -65,6 +65,7 @@ const fetchDataFirebase = async (
       if (nameCertificate) {
         for (const key in data) {
           const entry = data[key];
+          console.log('entry', entry);
 
           // Kiểm tra xem 'entry' có phải là object và có thuộc tính 'mintData'
           if (typeof entry === 'object' && entry !== null && 'mintData' in entry) {

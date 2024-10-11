@@ -14,7 +14,6 @@ import {
 } from '@/utils/fetchDataFromWordPress';
 import { BlogCardSkeleton } from '@/components/common/skeleton/Skeleton';
 import clsx from 'clsx';
-import { set } from 'date-fns';
 
 export default function Page() {
   const t = useTranslations('BlogListPage');
@@ -101,6 +100,7 @@ export default function Page() {
 
       const categoryFilterTop = categoryFilterRef.current?.getBoundingClientRect().top || 0;
       // Only trigger scroll behavior once the category filter reaches the top of the viewport
+      console.log(categoryFilterTop);
 
       if (window.innerWidth < 768) {
         if (categoryFilterTop <= 0 && !isCategoryFilterAtTop) {
@@ -150,8 +150,8 @@ export default function Page() {
   };
 
   return (
-    <div className="relative z-20 mt-20 flex grow justify-center md:mt-[8.25rem] lg:mt-40 xl:mt-44">
-      <div className="relative flex h-full w-full max-w-[90rem] flex-col gap-8 sm:items-center sm:gap-0">
+    <div className="relative z-20 mt-24 flex grow justify-center md:mt-[8.25rem] lg:mt-40 xl:mt-44">
+      <div className="relative flex h-full w-full max-w-[90rem] flex-col gap-8 sm:items-center">
         <div className="flex flex-col gap-6 px-4 sm:items-center sm:gap-8 md:px-8 xl:px-32">
           <div className="text-[2.5rem] font-bold sm:text-5xl">{t('title')}</div>
           <div className="max-w-4xl font-medium text-[#6C6D71] sm:text-center sm:text-lg">
@@ -163,7 +163,7 @@ export default function Page() {
           id="category-filter"
           ref={categoryFilterRef}
           className={clsx(
-            'sticky top-0 z-20 border-b border-[#CCCCCC] text-[#A2A3A9] transition-transform duration-300 ease-in-out sm:static sm:w-full sm:mt-16',
+            'sticky top-0 z-20 text-[#A2A3A9] transition-transform duration-300 ease-in-out md:static w-full md:px-8 xl:px-32',
             {
               'bg-white/50 backdrop-blur-[50px]': isCategoryFilterAtTop, // blurred background when sticky
               'translate-y-[4.5rem]': isCategoryFilterAtTop && scrollDirection === 'up', // transition down when scrolling up
@@ -171,10 +171,10 @@ export default function Page() {
             }
           )}
         >
-          <div className="flex space-x-4 overflow-x-auto px-4 font-semibold md:px-8 xl:px-32">
+          <div className="flex space-x-4 overflow-x-auto font-semibold border-b border-[#CCCCCC] px-4 md:px-0">
             <div
-              className={clsx('w-fit flex-shrink-0 cursor-pointer py-4 sm:pt-0', {
-                'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
+              className={clsx('w-fit flex-shrink-0 cursor-pointer py-4', {
+                'border-b-2 border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
               })}
               onClick={() => handleCategoryClick(null)}
             >
@@ -183,8 +183,8 @@ export default function Page() {
             {categories.map((category) => (
               <div
                 key={category.id}
-                className={clsx('w-fit flex-shrink-0 cursor-pointer py-4 sm:pt-0', {
-                  'border-b border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
+                className={clsx('w-fit flex-shrink-0 cursor-pointer py-4', {
+                  'border-b-2 border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === category.id,
                 })}
                 onClick={() => handleCategoryClick(category.id)}
               >

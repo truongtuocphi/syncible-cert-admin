@@ -3,7 +3,7 @@ import { createPublicClient, http } from 'viem';
 import { cookieStorage, createStorage } from 'wagmi';
 import { polygon, polygonAmoy, baseGoerli, base } from 'wagmi/chains';
 
-export const network: any[] =
+export const network: any =
   process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true' ? [polygon, base] : [polygonAmoy, baseGoerli];
 
 // export const decimals =
@@ -24,7 +24,7 @@ const metadata = {
 // Create wagmiConfig
 // const chains = [mainnet, sepolia] as const;
 export const config = defaultWagmiConfig({
-  chains: [polygon, base],
+  chains: [polygon],
   projectId,
   metadata,
   ssr: true,

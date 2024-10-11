@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useAccount, useChains } from 'wagmi';
 import { useTranslations } from 'next-intl';
+import { watchChainId } from '@wagmi/core';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -14,6 +15,8 @@ import { auth, db, ref, get } from '@/lib/firebase';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
 import Loading from '@/components/common/loading/Loading';
 import { onAuthStateChanged } from 'firebase/auth';
+import { config } from '@/config';
+import IconBase from '@/components/icons/IconBase';
 
 export default function Setting() {
   const { address, isConnected } = useAccount();
@@ -23,6 +26,7 @@ export default function Setting() {
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true); // Trạng thái loading
+  const [getChain, setGetChain] = useState<number | undefined>(undefined);
 
   const t = useTranslations('Dapp.setting');
 
@@ -55,9 +59,29 @@ export default function Setting() {
     return () => unsubscribe();
   }, []);
 
+  const unwatch = watchChainId(config, {
+    onChange(chainId) {
+      localStorage.setItem('chainId', chainId.toString());
+
+      setGetChain(chainId);
+      console.log('Chain ID changed!', chainId);
+    },
+  });
+
   useEffect(() => {
-    console.log('chain', chain);
-  }, [chain]);
+    // Cleanup function to unwatch when the component unmounts
+    return () => {
+      unwatch();
+    };
+  }, [unwatch]);
+
+  useEffect(() => {
+    const storedChainId = localStorage.getItem('chainId');
+    if (storedChainId) {
+      // Chuyển đổi sang số nếu có giá trị
+      setGetChain(Number(storedChainId));
+    }
+  }, []);
 
   // Nếu đang loading, hiển thị component Loading
   if (loading) {
@@ -170,8 +194,17 @@ export default function Setting() {
                 <div className="col-span-1 flex flex-col gap-2">
                   <div className="font-bold text-gray-700">{t('titleChain')}</div>
                   <div className="flex items-center gap-2">
-                    <IconPolygon width="24px" height="24px" />
-                    <div className="text-gray-400">Polygon</div>
+                    {getChain != 8453 ? (
+                      <>
+                        <IconPolygon width="24px" height="24px" />
+                        <div className="text-gray-400">Polygon</div>
+                      </>
+                    ) : (
+                      <>
+                        <IconBase width="24px" height="24px" />
+                        <div className="text-gray-400">Base</div>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">

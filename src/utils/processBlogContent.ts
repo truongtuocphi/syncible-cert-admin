@@ -15,12 +15,12 @@ export function addIdsToHeadings(html: string) {
   const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
 
   const headingClasses: Record<string, string> = {
-    h1: 'text-4xl font-bold my-4 scroll-mt-[9rem]',   
-    h2: 'text-3xl font-bold my-4 scroll-mt-[9rem]', 
-    h3: 'text-2xl font-bold my-3 scroll-mt-[9rem]',  
-    h4: 'text-xl font-semibold my-3 scroll-mt-[9rem]',   
-    h5: 'text-lg font-semibold my-2 scroll-mt-[9rem]',   
-    h6: 'text-base font-medium my-2 scroll-mt-[9rem]', 
+    h1: 'text-5xl font-bold my-4 scroll-mt-[9rem]',   
+    h2: 'text-4xl font-bold my-4 scroll-mt-[9rem]', 
+    h3: 'text-3xl font-bold my-3 scroll-mt-[9rem]',  
+    h4: 'text-2xl font-semibold my-3 scroll-mt-[9rem]',   
+    h5: 'text-xl font-semibold my-2 scroll-mt-[9rem]',   
+    h6: 'text-lg font-medium my-2 scroll-mt-[9rem]', 
   };
 
   headings.forEach((heading) => {
@@ -41,12 +41,13 @@ export function addIdsToHeadings(html: string) {
 }
 
 export function generateTOC(doc: Document) {
-  const toc: { id: string; text: string }[] = [];
+  const toc: { id: string; text: string, tagName: string }[] = [];
   const headings = doc.querySelectorAll('h1, h2, h3, h4, h5, h6');
   headings.forEach((heading) => {
     const id = heading.id;
     const text = heading.textContent || '';
-    toc.push({ id, text });
+    const tagName = heading.tagName.toLowerCase();
+    toc.push({ id, text, tagName });
   });
   return toc;
 }

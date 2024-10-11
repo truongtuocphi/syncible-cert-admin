@@ -171,7 +171,7 @@ export default function Page() {
             }
           )}
         >
-          <div className="flex space-x-4 overflow-x-auto font-semibold border-b border-[#CCCCCC] px-4 md:px-0">
+          <div className="flex space-x-4 overflow-x-auto no-scrollbar font-semibold border-b border-[#CCCCCC] px-4 md:px-0">
             <div
               className={clsx('w-fit flex-shrink-0 cursor-pointer py-4', {
                 'border-b-2 border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,

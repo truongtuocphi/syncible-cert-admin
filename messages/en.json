@@ -297,7 +297,15 @@
       "expiryDate": "Expiry date",
       "valueExpiryDate": "Does not expire",
       "certificateID": "Certificate ID",
-      "contractAddress": "Contract address"
+      "contractAddress": "Contract address",
+      "titleShare": "Add to LinkedIn profile",
+      "subtitle_1": "Add your certification to your",
+      "subtitle_2": "profile with 1 click",
+      "ButtonShareMyProfile": "Add to my profile",
+      "ButtonShare": "Share",
+      "titleContent": "No expiration date:",
+      "subContent_1": "Click 'this certification does not expire' on LinkedIn",
+      "subContent_2": "LinkedIn no longer shares profile updates to your network. Click the share button below to share your credential instead."
     },
 
     "createCollection": {

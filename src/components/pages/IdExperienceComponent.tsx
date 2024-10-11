@@ -275,10 +275,10 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         </div>
 
         {changeLayout ? (
-          <div className="grid grid-rows-2 grid-cols-1 gap-6 xl:grid-cols-12 xl:grid-rows-1">
+          <div className="grid grid-cols-1 grid-rows-2 gap-6 xl:grid-cols-12 xl:grid-rows-1">
             <div className="col-span-1 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-8">
               <div className="flex w-full flex-col items-start">
-                <h4 className="mb-4 text-lg lg:text-2xl  font-bold">{t('header')}</h4>
+                <h4 className="mb-4 text-lg font-bold  lg:text-2xl">{t('header')}</h4>
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">{t('location.title')}</p>
@@ -327,9 +327,9 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               </div>
             </div>
 
-            <div className="flex flex-col gap-8 col-span-1 h-fit rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-4">
+            <div className="col-span-1 flex h-fit flex-col gap-8 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-4">
               <div className="flex flex-col gap-1">
-                <div className="text-lg lg:text-2xl font-bold">{t('header_2')}</div>
+                <div className="text-lg font-bold lg:text-2xl">{t('header_2')}</div>
                 <div className="text-[#A2A3A9]">{t('label')}</div>
               </div>
               <div className="flex items-center justify-between gap-4">
@@ -348,11 +348,13 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                         <DialogContent className="sm:max-w-[576px] ">
                           <div>
                             <div className="text-center">
-                              <h1 className="text-4xl font-bold">Add to LinkedIn profile</h1>
+                              <h1 className="text-4xl font-bold">
+                                {translationCollection('titleShare')}
+                              </h1>
                               <p className="mt-3 text-base text-gray-500">
-                                Add your certification to your 
-                                <span className="font-bold text-black">LinkedIn</span> profile with
-                                1 click
+                                {translationCollection('subtitle_1')}
+                                <span className="font-bold text-black">LinkedIn</span> 
+                                {translationCollection('subtitle_2')}
                               </p>
                             </div>
 
@@ -369,21 +371,18 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                               }
                               className="mt-10 w-full rounded-full shadow-combinedShadow1"
                             >
-                              Add to my profile
+                              {translationCollection('ButtonShareMyProfile')}
                             </ButtonPrimary>
 
                             <nav className="list mt-10">
-                              <ul className="list-disc list-inside text-gray-400">
+                              <ul className="list-inside list-disc text-gray-400">
                                 <li className="mt-2">
-                                  No expiration date: 
+                                  {translationCollection('titleContent')} {' '}
                                   <span className="font-bold text-black">
-                                    Click 'this certification does not expire' on LinkedIn
+                                    {translationCollection('subContent_1')}
                                   </span>
                                 </li>
-                                <li className="mt-2 ">
-                                  LinkedIn no longer shares profile updates to your network. Click
-                                  the share button below to share your credential instead.
-                                </li>
+                                <li className="mt-2 ">{translationCollection('subContent_2')}</li>
                               </ul>
                             </nav>
 
@@ -397,7 +396,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                                 )
                               }
                             >
-                              Share
+                              {translationCollection('ButtonShare')}
                             </ButtonPrimary>
                           </div>
                         </DialogContent>
@@ -416,14 +415,14 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   </>
                 ))}
               </div>
-              <div className="flex items-center overflow-hidden rounded-xl bg-white border border-[#A2A3A9]">
+              <div className="flex items-center overflow-hidden rounded-xl border border-[#A2A3A9] bg-white">
                 <input
                   type="text"
                   value={linkWeb}
-                  className="p-3 grow border-r border-[#A2A3A9] text-ellipsis"
+                  className="grow text-ellipsis border-r border-[#A2A3A9] p-3"
                   disabled
                 />
-                <div className="text-center p-3">
+                <div className="p-3 text-center">
                   <CopyButton textToCopy={linkWeb} />
                 </div>
               </div>

@@ -24,6 +24,7 @@ export default function Explorer() {
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
   const t = useTranslations('ExplorerPage');
+
   const handleSearch = async () => {
     setLoading(true);
     setNotFound(false);
@@ -31,6 +32,7 @@ export default function Explorer() {
 
     if (idCertificate || nameCertificate) {
       const result = await fetchDataFirebase('mintData', idCertificate, nameCertificate);
+      console.log('result', result);
       setData(result);
       if (!result || result.mintData.length === 0) {
         setNotFound(true);
@@ -166,16 +168,34 @@ export default function Explorer() {
               </div>
             </div>
           </div>
-        ) : data ? (
-          <div className="flex h-full w-full flex-grow flex-col items-center justify-center gap-3 space-y-4 text-black md:mt-32">
-            <Link href={`/certificatedetail/${data.mintData[0][3]}`} className="w-[90%] md:w-1/2">
-              <CertificatePreview
-                previewImage={data.mintData[0][4][1]}
-                name={data.mintData[0][1]}
-                fontFamily={data.mintData[0].fontFamily}
-              />
-            </Link>
-          </div>
+        ) : data && data.mintData.length > 0 ? (
+          data.mintData.length >= 2 ? (
+            <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 p-4 sm:grid-cols-2 lg:grid-cols-3 2xl:max-w-[1600px]">
+              {data.mintData.map((item: any, index: any) => (
+                <Link
+                  key={index}
+                  href={`/certificatedetail/${item[3]}`}
+                  className="flex justify-center"
+                >
+                  <CertificatePreview
+                    previewImage={item[4][1]}
+                    name={item[1]}
+                    fontFamily={item.fontFamily}
+                  />
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <div className="flex h-full w-full flex-grow flex-col items-center justify-center gap-3 space-y-4 text-black md:mt-32">
+              <Link href={`/certificatedetail/${data.mintData[0][3]}`} className="w-[90%] md:w-1/2">
+                <CertificatePreview
+                  previewImage={data.mintData[0][4][1]}
+                  name={data.mintData[0][1]}
+                  fontFamily={data.mintData[0].fontFamily}
+                />
+              </Link>
+            </div>
+          )
         ) : (
           <div className="flex h-full w-full flex-grow items-center justify-center">
             <div className="flex flex-col items-center gap-2">
@@ -185,6 +205,21 @@ export default function Explorer() {
           </div>
         )}
       </div>
+      {/* </div> */}
+      {/* <div className="relative mt-10 w-full text-black">
+          <Footer />
+        </div>
+        <div className="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col items-center overflow-hidden">
+          <div className="relative -z-10 mx-auto h-full w-full max-w-[90rem]">
+            <div className="absolute -left-1/2 -top-1/2 -z-10 w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%] sm:-translate-x-[20%] sm:-translate-y-[50%]">
+              <LightBlueGradientEllipse className="h-full w-full" />
+            </div>
+            <div className="absolute -bottom-1/2 -right-1/2 -z-10 w-[125rem] sm:-translate-y-[20%] sm:translate-x-[20%]">
+              <LightBlueGradientEllipse className="h-full w-full" />
+            </div>
+          </div>
+        </div>
+      </div> */}
     </>
   );
 }

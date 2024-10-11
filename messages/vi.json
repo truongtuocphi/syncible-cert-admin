@@ -297,7 +297,15 @@
       "expiryDate": "Ngày hết hạn",
       "valueExpiryDate": "Vô thời hạn",
       "certificateID": "ID chứng chỉ",
-      "contractAddress": "Địa chỉ hợp đồng"
+      "contractAddress": "Địa chỉ hợp đồng",
+      "titleShare": "Thêm vào hồ sơ LinkedIn",
+      "subtitle_1": "Thêm chứng chỉ của bạn vào",
+      "subtitle_2": "hồ sơ với 1 cú nhấp chuột",
+      "ButtonShareMyProfile": "Thêm vào hồ sơ của tôi",
+      "ButtonShare": "Chia sẻ",
+      "titleContent": "Không có ngày hết hạn:",
+      "subContent_1": "Nhấp vào 'chứng chỉ này không hết hạn' trên LinkedIn",
+      "subContent_2": "LinkedIn không còn chia sẻ cập nhật hồ sơ đến mạng lưới của bạn. Nhấp vào nút chia sẻ bên dưới để chia sẻ chứng chỉ của bạn."
     },
 
     "createCollection": {

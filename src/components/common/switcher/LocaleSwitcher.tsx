@@ -77,7 +77,7 @@ export function LocaleCollapsible() {
           <div className="flex flex-col">
             {routing.locales.map((loc) => (
               <Link
-                href="/"
+                href={'/'}
                 locale={loc}
                 key={loc}
                 className="px-4 py-3 text-sm hover:text-[#2C2C2C] active:text-[#2C2C2C]"

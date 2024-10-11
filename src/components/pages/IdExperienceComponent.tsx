@@ -352,7 +352,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                                 {translationCollection('titleShare')}
                               </h1>
                               <p className="mt-3 text-base text-gray-500">
-                                {translationCollection('subtitle_1')}
+                                {translationCollection('subtitle_1')}{' '}
                                 <span className="font-bold text-black">LinkedIn</span> 
                                 {translationCollection('subtitle_2')}
                               </p>

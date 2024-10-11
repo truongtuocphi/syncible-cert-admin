@@ -63,9 +63,10 @@ const fetchDataFirebase = async (
 
       // Nếu không có idCertificate, tìm kiếm theo nameCertificate
       if (nameCertificate) {
+        let allNameFilteredData: any[] = []; // Khởi tạo mảng để chứa tất cả các kết quả trùng tên
+
         for (const key in data) {
           const entry = data[key];
-          console.log('entry', entry);
 
           // Kiểm tra xem 'entry' có phải là object và có thuộc tính 'mintData'
           if (typeof entry === 'object' && entry !== null && 'mintData' in entry) {
@@ -77,16 +78,19 @@ const fetchDataFirebase = async (
             );
 
             if (nameFilteredData.length > 0) {
-              return {
-                ...entryWithMintData,
-                mintData: nameFilteredData,
-              } as CollectionData;
+              allNameFilteredData = [...allNameFilteredData, ...nameFilteredData];
             }
           }
         }
 
-        console.log('No data found for this certificate name');
-        return null;
+        if (allNameFilteredData.length > 0) {
+          return {
+            mintData: allNameFilteredData, // Trả về toàn bộ các mục trùng tên
+          } as CollectionData;
+        } else {
+          console.log('No data found for this certificate name');
+          return null;
+        }
       }
 
       // Nếu không có điều kiện nào được đưa ra, trả về toàn bộ dữ liệu

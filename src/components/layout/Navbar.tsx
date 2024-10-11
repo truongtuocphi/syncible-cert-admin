@@ -92,8 +92,8 @@ const Navbar = () => {
       )}
     >
       <div className={`${montserrat.className} relative w-full`}>
-        <div className="flex flex-col items-center">
-          <div className="w-full md:px-8 xl:px-[6.5rem]">
+        <div className="flex flex-col items-center xl:px-16">
+          <div className="w-full md:px-8 xl:px-[2.5rem]">
             <div className="grid w-full grid-cols-12 items-center justify-items-center bg-white/50 p-4  backdrop-blur-[50px] md:rounded-3xl">
               <div className="col-span-6 justify-self-start md:col-span-4">
                 <Link href="/" className="">

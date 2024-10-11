@@ -134,6 +134,10 @@
       }
     }
   },
+  "InDevelopment": {
+    "header": "Under Development",
+    "content": "This page is currently under development. Please check back later."
+  },
   "ExplorerPage": {
     "header": "Find your certificate",
     "input_1": {

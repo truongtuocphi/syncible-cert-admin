@@ -28,6 +28,7 @@ const Page = () => {
         className={`${montserrat.className} relative z-20 flex flex-col items-center gap-10 overflow-hidden`}
       >
         <div className="w-full max-w-[90rem]">
+        {/* <div className="w-full"> */}
           <div className="flex flex-col justify-center px-4 pb-4 sm:min-h-dvh md:px-8 md:pb-10 xl:px-32">
             <div className="flex h-full w-full flex-col justify-center mt-24 md:mt-[8.25rem] lg:flex-row">
               <div className="flex items-center justify-center lg:basis-1/2 lg:pr-6">
@@ -104,6 +105,7 @@ const Page = () => {
         </div>
 
         <div className="relative z-20 flex max-w-[90rem] flex-col items-center gap-8 sm:gap-40">
+        {/* <div className="relative z-20 flex flex-col items-center gap-8 sm:gap-40"> */}
           <SectionAbout />
           <SectionWhatWeBelieve />
           <SectionOurVision />

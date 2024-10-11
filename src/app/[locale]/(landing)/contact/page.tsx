@@ -1,7 +1,10 @@
+import { useTranslations } from "next-intl";
+
 export default function ContactPage() {
+  const t = useTranslations('InDevelopment');
   return (
     <div className="flex flex-grow items-center justify-center">
-      This page is currently in development. Please check back later.
+      {t('content')}
     </div>
   );
 }

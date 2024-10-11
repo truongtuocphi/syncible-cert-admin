@@ -20,6 +20,7 @@ export default function LandingLayout({ children }: { children: React.ReactNode 
         </div>
         <div className="-z-20 absolute inset-0 flex w-full flex-col items-center overflow-hidden bg-brand-10">
           <div className="relative mx-auto min-h-full w-full max-w-[90rem]">
+          {/* <div className="relative mx-auto min-h-full w-full"> */}
             <div className="absolute -left-[170%] -top-[15%] w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>

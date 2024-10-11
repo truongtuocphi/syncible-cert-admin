@@ -134,6 +134,10 @@
       }
     }
   },
+  "InDevelopment": {
+    "header": "Trang đang được phát triển",
+    "content": "Chúng tôi đang cố gắng cập nhật nội dung mới nhất cho trang này. Xin hãy quay lại sau!"
+  },
   "ExplorerPage": {
     "header": "Tìm kiếm chứng chỉ của bạn",
     "input_1": {

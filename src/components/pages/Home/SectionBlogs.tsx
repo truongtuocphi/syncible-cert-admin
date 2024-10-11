@@ -74,6 +74,7 @@ export default function SectionBlogs() {
 
   return (
     <div className="w-full max-w-[90rem]" id="blogs">
+    {/* <div className="w-full" id="blogs"> */}
       <div className="flex flex-col items-center gap-8 px-4 py-[4.5rem] md:px-8 xl:px-32 xl:py-32 ">
         <div className="flex w-full items-center justify-between">
           <div className="text-[2rem] font-bold">{t('header')}</div>

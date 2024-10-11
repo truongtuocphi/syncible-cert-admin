@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useChains } from 'wagmi';
 import { useTranslations } from 'next-intl';
 
 import { Card, CardContent } from '@/components/ui/card';
@@ -13,10 +13,11 @@ import CopyButton from '@/components/common/coppyText/CopyButton';
 import { auth, db, ref, get } from '@/lib/firebase';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
 import Loading from '@/components/common/loading/Loading';
-import { onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
+import { onAuthStateChanged } from 'firebase/auth';
 
 export default function Setting() {
   const { address, isConnected } = useAccount();
+  const chain = useChains();
 
   const [image, setImage] = useState('');
   const [user, setUser] = useState<any>(null);
@@ -53,6 +54,10 @@ export default function Setting() {
     // Cleanup subscription khi component bị unmount
     return () => unsubscribe();
   }, []);
+
+  useEffect(() => {
+    console.log('chain', chain);
+  }, [chain]);
 
   // Nếu đang loading, hiển thị component Loading
   if (loading) {
@@ -111,7 +116,7 @@ export default function Setting() {
                         type="text"
                         placeholder={t('titleName')}
                         disabled
-                        value={userData?.last_name  + ' ' + userData?.fist_name}
+                        value={userData?.last_name + ' ' + userData?.fist_name}
                         className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
                       />
                     </div>

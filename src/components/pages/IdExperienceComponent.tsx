@@ -348,11 +348,10 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                         <DialogContent className="sm:max-w-[576px] ">
                           <div>
                             <div className="text-center">
-                              <h1 className="text-4xl font-bold">Add to LinkedIn profile</h1>
+                              <h1 className="text-4xl font-bold">{t('titleShare')}</h1>
                               <p className="mt-3 text-base text-gray-500">
-                                Add your certification to your 
-                                <span className="font-bold text-black">LinkedIn</span> profile with
-                                1 click
+                                {t('subtitle_1')}
+                                <span className="font-bold text-black">LinkedIn</span> {t('subtitle_2')}
                               </p>
                             </div>
 
@@ -369,20 +368,19 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                               }
                               className="mt-10 w-full rounded-full shadow-combinedShadow1"
                             >
-                              Add to my profile
+                              {t('ButtonShareMyProfile')}
                             </ButtonPrimary>
 
                             <nav className="list mt-10">
                               <ul className="list-disc list-inside text-gray-400">
                                 <li className="mt-2">
-                                  No expiration date: 
+                                 {t("titleContent")}
                                   <span className="font-bold text-black">
-                                    Click 'this certification does not expire' on LinkedIn
+                                    {t('subContent_1')}
                                   </span>
                                 </li>
                                 <li className="mt-2 ">
-                                  LinkedIn no longer shares profile updates to your network. Click
-                                  the share button below to share your credential instead.
+                                {t('subContent_2')}
                                 </li>
                               </ul>
                             </nav>
@@ -397,7 +395,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                                 )
                               }
                             >
-                              Share
+                              {t('ButtonShare')}
                             </ButtonPrimary>
                           </div>
                         </DialogContent>

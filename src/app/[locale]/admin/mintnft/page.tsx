@@ -175,7 +175,6 @@ const Experience = () => {
         }
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error minting NFTs:', error);
       alert('lỗi tạo chứng chỉ.');
       setLoadingButton(false);

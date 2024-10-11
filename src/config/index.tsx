@@ -1,9 +1,10 @@
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
 import { createPublicClient, http } from 'viem';
 import { cookieStorage, createStorage } from 'wagmi';
-import { polygon, polygonAmoy } from 'wagmi/chains';
+import { polygon, polygonAmoy, baseGoerli, base } from 'wagmi/chains';
 
-export const network = process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true' ? polygon : polygonAmoy;
+export const network: any =
+  process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true' ? [polygon, base] : [polygonAmoy, baseGoerli];
 
 // export const decimals =
 //   10 ** (process.env.NEXT_PUBLIC_TOKEN_DECIMAL ? +process.env.NEXT_PUBLIC_TOKEN_DECIMAL : 6);
@@ -23,7 +24,7 @@ const metadata = {
 // Create wagmiConfig
 // const chains = [mainnet, sepolia] as const;
 export const config = defaultWagmiConfig({
-  chains: [network],
+  chains: [polygon],
   projectId,
   metadata,
   ssr: true,
@@ -33,6 +34,6 @@ export const config = defaultWagmiConfig({
 });
 
 export const viemClient = createPublicClient({
-  chain: network,
+  chain: process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true' ? polygon : polygonAmoy,
   transport: http(),
 });

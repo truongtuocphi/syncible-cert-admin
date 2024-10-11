@@ -165,7 +165,7 @@ const Experience = () => {
 
         if (mintDataArray) {
           const tx = await contract.mintBulk(mintDataArray, {
-            gasLimit: 9000000,
+            gasLimit: 20000000,
           });
 
           await tx.wait();
@@ -175,7 +175,6 @@ const Experience = () => {
         }
       }
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.error('Error minting NFTs:', error);
       alert('lỗi tạo chứng chỉ.');
       setLoadingButton(false);
@@ -361,7 +360,6 @@ const Experience = () => {
                   <select
                     value={role}
                     onChange={(e) => setRole(e.target.value as 'Teacher' | 'Student')}
-                    required
                     className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   >
                     <option value="Teacher">Teacher</option>

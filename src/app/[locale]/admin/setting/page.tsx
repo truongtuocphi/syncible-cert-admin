@@ -1,8 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAccount } from 'wagmi';
+import { useAccount, useChains } from 'wagmi';
 import { useTranslations } from 'next-intl';
+import { watchChainId } from '@wagmi/core';
 
 import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -13,15 +14,19 @@ import CopyButton from '@/components/common/coppyText/CopyButton';
 import { auth, db, ref, get } from '@/lib/firebase';
 import convertToVietnamTime from '@/utils/convertToVietnamTime';
 import Loading from '@/components/common/loading/Loading';
-import { onAuthStateChanged } from 'firebase/auth'; // Import onAuthStateChanged
+import { onAuthStateChanged } from 'firebase/auth';
+import { config } from '@/config';
+import IconBase from '@/components/icons/IconBase';
 
 export default function Setting() {
   const { address, isConnected } = useAccount();
+  const chain = useChains();
 
   const [image, setImage] = useState('');
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true); // Trạng thái loading
+  const [getChain, setGetChain] = useState<number | undefined>(undefined);
 
   const t = useTranslations('Dapp.setting');
 
@@ -52,6 +57,30 @@ export default function Setting() {
 
     // Cleanup subscription khi component bị unmount
     return () => unsubscribe();
+  }, []);
+
+  const unwatch = watchChainId(config, {
+    onChange(chainId) {
+      localStorage.setItem('chainId', chainId.toString());
+
+      setGetChain(chainId);
+      console.log('Chain ID changed!', chainId);
+    },
+  });
+
+  useEffect(() => {
+    // Cleanup function to unwatch when the component unmounts
+    return () => {
+      unwatch();
+    };
+  }, [unwatch]);
+
+  useEffect(() => {
+    const storedChainId = localStorage.getItem('chainId');
+    if (storedChainId) {
+      // Chuyển đổi sang số nếu có giá trị
+      setGetChain(Number(storedChainId));
+    }
   }, []);
 
   // Nếu đang loading, hiển thị component Loading
@@ -111,7 +140,7 @@ export default function Setting() {
                         type="text"
                         placeholder={t('titleName')}
                         disabled
-                        value={userData?.last_name  + ' ' + userData?.fist_name}
+                        value={userData?.last_name + ' ' + userData?.fist_name}
                         className="mt-1 block w-full rounded-2xl border-[0.5px] border-gray-100 bg-gray-300 px-6 py-4 sm:text-base"
                       />
                     </div>
@@ -165,8 +194,17 @@ export default function Setting() {
                 <div className="col-span-1 flex flex-col gap-2">
                   <div className="font-bold text-gray-700">{t('titleChain')}</div>
                   <div className="flex items-center gap-2">
-                    <IconPolygon width="24px" height="24px" />
-                    <div className="text-gray-400">Polygon</div>
+                    {getChain != 8453 ? (
+                      <>
+                        <IconPolygon width="24px" height="24px" />
+                        <div className="text-gray-400">Polygon</div>
+                      </>
+                    ) : (
+                      <>
+                        <IconBase width="24px" height="24px" />
+                        <div className="text-gray-400">Base</div>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="col-span-1 flex flex-col gap-2">

@@ -39,7 +39,7 @@ const Certificate = ({
         const imageWidth = image.clientWidth;
         let adjustedFontSize = Math.max(20, imageWidth / 15);
 
-        adjustedFontSize *= 1.1;
+        adjustedFontSize *= 1.2;
 
         if (window.innerWidth >= 2560) {
           adjustedFontSize *= 0.9;

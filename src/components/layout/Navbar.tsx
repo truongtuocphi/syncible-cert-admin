@@ -9,7 +9,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import ArrowRightIcon from '@/assets/icons/arrow-badge-right.svg';
 import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
-import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 
 import SyncibleLogo from '/public/syncible-logo.svg';

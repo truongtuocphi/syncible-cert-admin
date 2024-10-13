@@ -205,11 +205,9 @@ const Experience = () => {
           });
           setSelectedContract(collections);
         } else {
-          // eslint-disable-next-line no-console
           console.log('No data available');
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching data:', error);
       }
     };

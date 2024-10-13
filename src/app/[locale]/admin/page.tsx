@@ -4,6 +4,7 @@ import { BiCustomize } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import { useTranslations } from 'next-intl';
 
+// list card home page admin
 const listCard = [
   {
     title: 'title',

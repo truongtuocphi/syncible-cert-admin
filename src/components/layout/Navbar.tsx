@@ -33,7 +33,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isNavbarVisible, setIsNavbarVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
-  
+
   useEffect(() => {
     const handleScroll = () => {
       if (window.innerWidth < 768) {
@@ -178,7 +178,7 @@ const Navbar = () => {
               </div>
               <div className="col-auto hidden justify-self-end md:col-span-4 lg:block">
                 <div className="flex items-center gap-3">
-                  <LocaleSelect />
+                  <LocaleSelect routerURL="/admin" />
                   <Link href={t('buttons.access.href')} target={'_blank'} className="h-fit">
                     <Button className="group flex w-[10rem] items-center rounded-[1.25rem] bg-primary-50 px-10 py-6 shadow-combinedShadow1 transition-all duration-500 hover:bg-primary-40">
                       <span className="relative inline-block text-base font-semibold transition-all duration-500 group-hover:pr-[25px]">

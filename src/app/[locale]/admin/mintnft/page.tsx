@@ -95,7 +95,6 @@ const Experience = () => {
         const imageUrl = await uploadImageToPinata(file);
         setImage(imageUrl);
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Failed to upload image', error);
       } finally {
         setLoading(false);
@@ -205,11 +204,9 @@ const Experience = () => {
           });
           setSelectedContract(collections);
         } else {
-          // eslint-disable-next-line no-console
           console.log('No data available');
         }
       } catch (error) {
-        // eslint-disable-next-line no-console
         console.error('Error fetching data:', error);
       }
     };

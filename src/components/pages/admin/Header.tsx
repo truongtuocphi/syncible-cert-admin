@@ -35,19 +35,19 @@ const Header = () => {
     return () => unsubscribe();
   }, [router]);
 
-  useEffect(() => {
-    const handleVisibilityChange = () => {
-      if (document.visibilityState === 'hidden' && isConnected) {
-        disconnect();
-      }
-    };
+  // useEffect(() => {
+  //   const handleVisibilityChange = () => {
+  //     if (document.visibilityState === 'hidden' && isConnected) {
+  //       disconnect();
+  //     }
+  //   };
 
-    window.addEventListener('visibilitychange', handleVisibilityChange);
+  //   window.addEventListener('visibilitychange', handleVisibilityChange);
 
-    return () => {
-      window.removeEventListener('visibilitychange', handleVisibilityChange);
-    };
-  }, [isConnected, disconnect]);
+  //   return () => {
+  //     window.removeEventListener('visibilitychange', handleVisibilityChange);
+  //   };
+  // }, [isConnected, disconnect]);
 
   return (
     <div className="fixed left-0 right-0 top-0 z-40 ml-64 flex items-center justify-end bg-bgPageAdmin p-6 py-3 text-black 2xl:ml-96">

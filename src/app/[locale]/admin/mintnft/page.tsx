@@ -22,6 +22,8 @@ import { GrCertificate } from 'react-icons/gr';
 import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
 import { useTranslations } from 'next-intl';
 import ABI from '@/contract/ABI.json';
+import pLimit from 'p-limit';
+import uploadMetadataWithRetry from '@/utils/uploadMetadataWithRetry';
 
 const Experience = () => {
   const pathname = useSearchParams();
@@ -48,6 +50,8 @@ const Experience = () => {
   const typePage = pathname.get('type');
 
   const t = useTranslations('Dapp.mintNFT');
+
+  const limit = pLimit(5);
 
   const handleDrop = (
     e: React.DragEvent<HTMLDivElement>,
@@ -115,44 +119,50 @@ const Experience = () => {
     }
 
     setLoadingButton(true);
+
     try {
       if (typeof window.ethereum !== 'undefined') {
         const provider = new ethers.BrowserProvider(window.ethereum);
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
+        // Upload metadata với giới hạn và retry
         const mintDataArray = await Promise.all(
           (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
             async (data) => {
-              const metadata = {
-                fullname: `Certificate for ${data.fullname}` || 'Default Name',
-                tokenURI: tokenLink || 'Default tokenLink',
-                attributes: [
-                  { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
-                  { trait_type: 'Role', value: role || 'NaN' },
-                  { trait_type: 'Date', value: issuedDate || 'NaN' },
-                  { trait_type: 'Template URL', value: bannerImage || 'NaN' },
-                  { trait_type: 'Font', value: fontFamily || 'NaN' },
-                  { trait_type: 'Font Size', value: fontSize || 'NaN' },
-                ],
-              };
+              return limit(async () => {
+                const metadata = {
+                  fullname: `Certificate for ${data.fullname}` || 'Default Name',
+                  tokenURI: tokenLink || 'Default tokenLink',
+                  attributes: [
+                    { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
+                    { trait_type: 'Role', value: role || 'NaN' },
+                    { trait_type: 'Date', value: issuedDate || 'NaN' },
+                    { trait_type: 'Template URL', value: bannerImage || 'NaN' },
+                    { trait_type: 'Font', value: fontFamily || 'NaN' },
+                    { trait_type: 'Font Size', value: fontSize || 'NaN' },
+                  ],
+                };
 
-              const tokenURI = await uploadMetadata(metadata);
-              if (tokenURI) {
-                setTokenLink(tokenURI);
-              }
+                // Upload metadata và xử lý retry nếu cần
+                const tokenURI = await uploadMetadataWithRetry(metadata, 3);
+                if (tokenURI) {
+                  setTokenLink(tokenURI);
+                }
 
-              return [
-                address,
-                data.fullname,
-                data.certificateNumber,
-                tokenURI,
-                [issuedDate, bannerImage],
-              ];
+                return [
+                  address,
+                  data.fullname,
+                  data.certificateNumber,
+                  tokenURI,
+                  [issuedDate, bannerImage],
+                ];
+              });
             }
           )
         );
 
+        // Kiểm tra và mint NFTs
         if (mintDataArray.length > 0) {
           const tx = await contract.mintBulk(mintDataArray, {
             gasLimit: 90000000,

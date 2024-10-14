@@ -163,8 +163,9 @@ const Experience = () => {
         );
 
         if (mintDataArray.length > 0) {
+          const finalGas = 9000000 * mintDataArray.length;
           const tx = await contract.mintBulk(mintDataArray, {
-            gasLimit: 90000000,
+            gasLimit: finalGas,
           });
 
           await tx.wait();

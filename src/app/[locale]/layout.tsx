@@ -38,7 +38,7 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  // const initialState = cookieToInitialState(config, headers()?.get('cookie'));
+  const initialState = cookieToInitialState(config, headers()?.get('cookie'));
   const messages = await getMessages();
 
   return (
@@ -49,7 +49,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className="min-h-screen">
+      <body className={`min-h-screen`}>
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <NextIntlClientProvider messages={messages}>
           {/* <Web3ModalProvider initialState={initialState}> */}

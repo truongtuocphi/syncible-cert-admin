@@ -98,6 +98,10 @@
   "BlogListPage": {
     "title": "Blogs",
     "text": "Browse our blog for tips, insights, and stories on engaging learners and growing your credentialing program.",
+    "not_found": {
+      "header": "No blogs found",
+      "content": "Can't find blogs with this category tag."
+    },
     "category": {
       "label": "Category",
       "all": {

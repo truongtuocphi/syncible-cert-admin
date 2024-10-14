@@ -105,9 +105,8 @@ export default function Page() {
       if (window.innerWidth < 768) {
         if (categoryFilterTop <= 0 && !isCategoryFilterAtTop) {
           setIsCategoryFilterAtTop(true); // Trigger sticky behavior
-        } 
-        if (categoryFilterTop >= 73  && isCategoryFilterAtTop) {
-          
+        }
+        if (categoryFilterTop >= 73 && isCategoryFilterAtTop) {
           setIsCategoryFilterAtTop(false);
         }
 
@@ -119,8 +118,7 @@ export default function Page() {
           }
         }
         setLastScrollY(currentScrollY);
-      }
-      else {
+      } else {
         setIsCategoryFilterAtTop(false);
         setScrollDirection(null);
       }
@@ -163,7 +161,7 @@ export default function Page() {
           id="category-filter"
           ref={categoryFilterRef}
           className={clsx(
-            'sticky top-0 z-20 text-[#A2A3A9] transition-transform duration-300 ease-in-out md:static w-full md:px-8 xl:px-32',
+            'sticky top-0 z-20 w-full text-[#A2A3A9] transition-transform duration-300 ease-in-out md:static md:px-8 xl:px-32',
             {
               'bg-white/50 backdrop-blur-[50px]': isCategoryFilterAtTop, // blurred background when sticky
               'translate-y-[4.5rem]': isCategoryFilterAtTop && scrollDirection === 'up', // transition down when scrolling up
@@ -171,7 +169,7 @@ export default function Page() {
             }
           )}
         >
-          <div className="flex space-x-4 overflow-x-auto no-scrollbar font-semibold border-b border-[#CCCCCC] px-4 md:px-0">
+          <div className="no-scrollbar flex space-x-4 overflow-x-auto border-b border-[#CCCCCC] px-4 font-semibold md:px-0">
             <div
               className={clsx('w-fit flex-shrink-0 cursor-pointer py-4', {
                 'border-b-2 border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,
@@ -193,34 +191,45 @@ export default function Page() {
             ))}
           </div>
         </div>
+        {/* Blogs list */}
         <div className="w-full px-4 md:px-8 xl:px-32">
-          <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 sm:pt-16 lg:grid-cols-3">
-            {loading
-              ? Array.from({ length: postsPerPage }, (_, index) => <BlogCardSkeleton key={index} />)
-              : posts.map((post: any, index: number | null | undefined) => (
+          {loading ? (
+            <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: postsPerPage }, (_, index) => (
+                <BlogCardSkeleton key={index} />
+              ))}
+            </div>
+          ) : posts.length > 0 ? (
+            <>
+              <div className="grid w-full grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                {posts.map((post: any, index: number | null | undefined) => (
                   <BlogCard key={index} entry={post} />
                 ))}
-          </div>
-          {/* Pagination controls */}
-          <div className="flex items-center justify-center gap-8 pt-8">
-            <Button
-              onClick={handlePrevPage}
-              disabled={currentPage === 1}
-              className="h-auto rounded-xl border-none bg-white p-3 shadow-combinedShadow2 hover:bg-white/50 disabled:cursor-not-allowed disabled:bg-white/50"
-            >
-              <ArrowNarrowLeft className="h-6 w-6" />
-            </Button>
-            <span className="font-medium text-[#A2A3A9]">
-              {t('pagination.label', { page: currentPage, totalPages: totalPages })}
-            </span>
-            <Button
-              onClick={handleNextPage}
-              disabled={currentPage === totalPages}
-              className="h-auto rounded-xl border-none bg-white p-3 shadow-combinedShadow2 hover:bg-white/50 disabled:cursor-not-allowed disabled:bg-white/50"
-            >
-              <ArrowNarrowRight className="h-6 w-6" />
-            </Button>
-          </div>
+              </div>
+              {/* Pagination controls */}
+              <div className="flex items-center justify-center gap-8 pt-8">
+                <Button
+                  onClick={handlePrevPage}
+                  disabled={currentPage === 1}
+                  className="h-auto rounded-xl border-none bg-white p-3 shadow-combinedShadow2 hover:bg-white/50 disabled:cursor-not-allowed disabled:bg-white/50"
+                >
+                  <ArrowNarrowLeft className="h-6 w-6" />
+                </Button>
+                <span className="font-medium text-[#A2A3A9]">
+                  {t('pagination.label', { page: currentPage, totalPages: totalPages })}
+                </span>
+                <Button
+                  onClick={handleNextPage}
+                  disabled={currentPage === totalPages}
+                  className="h-auto rounded-xl border-none bg-white p-3 shadow-combinedShadow2 hover:bg-white/50 disabled:cursor-not-allowed disabled:bg-white/50"
+                >
+                  <ArrowNarrowRight className="h-6 w-6" />
+                </Button>
+              </div>
+            </>
+          ) : (
+            <div className="flex justify-center">{t('not_found.content')}</div>
+          )}
         </div>
       </div>
     </div>

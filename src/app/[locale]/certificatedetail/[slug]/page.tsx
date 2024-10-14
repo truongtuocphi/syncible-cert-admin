@@ -9,8 +9,8 @@ export default function CertificateDetail({ params }: { params: { slug: string }
   return (
     <>
       <Navbar />
-      <div className="min-h-screen flex-col items-center bg-custom-blue-gradient pt-[6.5rem]">
-        <div className="mt-[1.375rem] px-4 md:px-8 sm:mt-16 lg:px-24 2xl:px-60">
+      <div className="min-h-screen flex flex-col items-center bg-custom-blue-gradient pt-[6.5rem]">
+        <div className="grow h-full mt-[1.375rem] px-4 md:px-8 sm:mt-16 lg:px-24 2xl:px-60">
           <IdExperienceComponent slugPost={slugPost} changeLayout={true} />
         </div>
         <div className="relative text-black">

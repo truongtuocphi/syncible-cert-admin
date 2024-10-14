@@ -9,6 +9,7 @@ import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
 import { useFormatter } from 'next-intl';
+import Loading from '@/components/common/loading/Loading';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
@@ -64,7 +65,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   }, [slug]);
 
   if (loading) {
-    return <div className="m-auto">{t('loading')}</div>;
+    return <div className="m-auto"><Loading/></div>;
   }
 
   if (notFoundError) {

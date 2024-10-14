@@ -98,6 +98,10 @@
   "BlogListPage": {
     "title": "Blogs",
     "text": "Tìm hiểu blog của chúng tôi về các mẹo, thông tin chi tiết và câu chuyện về việc thu hút người học và phát triển chương trình cấp chứng chỉ của bạn.",
+    "not_found": {
+      "header": "Không tìm thấy blog",
+      "content": "Không tìm thấy blog với thẻ danh mục này."
+    },
     "category": {
       "label": "Danh mục",
       "all": {

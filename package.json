@@ -47,7 +47,7 @@
     "@tanstack/react-query": "^5.32.0",
     "@tanstack/react-table": "^8.20.1",
     "@types/mdx": "^2.0.13",
-    "@wagmi/core": "^2.13.8",
+    "@wagmi/core": "^2.12.0",
     "@web3modal/wagmi": "^5.1.11",
     "axios": "^1.7.7",
     "base64-url": "^2.3.3",

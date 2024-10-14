@@ -236,7 +236,8 @@ const Experience = () => {
 
   useEffect(() => {
     const handleBeforeUnload = (event: { returnValue: string }) => {
-      const message = 'Are you sure you want to leave this page?';
+      const message =
+        'Are you sure you want to leave this page? Exiting now may cause errors, and you will need to return to the home page and start over.';
       event.returnValue = message;
       return message;
     };

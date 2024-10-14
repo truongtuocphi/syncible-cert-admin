@@ -35,18 +35,17 @@ const Header = () => {
     return () => unsubscribe();
   }, [router]);
 
-  // Auto-disconnect wallet on tab close or page refresh
   useEffect(() => {
-    const handleBeforeUnload = () => {
-      if (isConnected) {
-        disconnect(); // Disconnect the wallet when tab is closed
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden' && isConnected) {
+        disconnect();
       }
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('visibilitychange', handleVisibilityChange);
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
     };
   }, [isConnected, disconnect]);
 

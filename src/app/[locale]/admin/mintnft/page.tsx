@@ -1,13 +1,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import { ethers } from 'ethers';
 import Link from 'next/link';
 import { useSearchParams, useRouter } from 'next/navigation';
-
 import { useAccount } from 'wagmi';
-
 import { MintBulk } from '@/components/pages/admin/mint/MintBulk';
 import { MintSingleForm } from '@/components/pages/admin/mint/Mintsingle';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
@@ -15,21 +12,15 @@ import Loading from '@/components/common/loading/Loading';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import Modal from '@/components/pages/admin/Modal';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
-
 import { db, ref, get } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
-
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
-
 import { Collection } from '@/types/function';
-
 import { BiImageAdd } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import { FaArrowLeft, FaImage, FaTimes } from 'react-icons/fa';
-
 import { useTranslations } from 'next-intl';
-
 import ABI from '@/contract/ABI.json';
 
 const Experience = () => {

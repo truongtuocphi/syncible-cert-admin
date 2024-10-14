@@ -162,7 +162,6 @@ const Experience = () => {
           )
         );
 
-        // Kiểm tra và mint NFTs
         if (mintDataArray.length > 0) {
           const tx = await contract.mintBulk(mintDataArray, {
             gasLimit: 90000000,

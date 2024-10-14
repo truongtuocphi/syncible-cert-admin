@@ -4,7 +4,7 @@ import { cookieStorage, createStorage } from 'wagmi';
 import { polygon, polygonAmoy, baseGoerli, base } from 'wagmi/chains';
 
 export const network: any =
-  process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true' ? [polygon, base] : [polygonAmoy, baseGoerli];
+  process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true' ? [polygon] : [polygonAmoy];
 
 // export const decimals =
 //   10 ** (process.env.NEXT_PUBLIC_TOKEN_DECIMAL ? +process.env.NEXT_PUBLIC_TOKEN_DECIMAL : 6);
@@ -24,7 +24,7 @@ const metadata = {
 // Create wagmiConfig
 // const chains = [mainnet, sepolia] as const;
 export const config = defaultWagmiConfig({
-  chains: [polygon],
+  chains: network,
   projectId,
   metadata,
   ssr: true,

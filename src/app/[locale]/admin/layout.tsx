@@ -17,6 +17,9 @@ const AdminLayout = ({ children }: AdminLayoutProps) => {
   const cookie = headers().get('cookie') || '';
   const initialState = cookieToInitialState(config, cookie);
 
+  // Kiểm tra cấu trúc của initialState
+  console.log('Initial State:', initialState);
+
   return (
     <ClientSessionProvider>
       <Web3ModalProvider initialState={initialState}>

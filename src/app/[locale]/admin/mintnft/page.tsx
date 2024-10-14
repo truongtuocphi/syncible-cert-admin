@@ -51,7 +51,7 @@ const Experience = () => {
 
   const t = useTranslations('Dapp.mintNFT');
 
-  const limit = pLimit(5);
+  const limit = pLimit(10);
 
   const handleDrop = (
     e: React.DragEvent<HTMLDivElement>,

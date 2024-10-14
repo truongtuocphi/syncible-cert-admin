@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useWeb3Modal } from '@web3modal/wagmi/react';
 import { useRouter } from 'next/navigation';
 import { BiWallet } from 'react-icons/bi';
-import { useAccount } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import UserInfo from '@/components/pages/admin/UserInfo';
@@ -15,6 +15,7 @@ import { useTranslations } from 'next-intl';
 
 const Header = () => {
   const { open } = useWeb3Modal();
+  const { disconnect } = useDisconnect();
   const { address, isConnected } = useAccount();
 
   const [user, setUser] = useState<any>(null);
@@ -33,6 +34,20 @@ const Header = () => {
 
     return () => unsubscribe();
   }, [router]);
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'hidden' && isConnected) {
+        disconnect();
+      }
+    };
+
+    window.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [isConnected, disconnect]);
 
   return (
     <div className="fixed left-0 right-0 top-0 z-40 ml-64 flex items-center justify-end bg-bgPageAdmin p-6 py-3 text-black 2xl:ml-96">

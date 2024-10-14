@@ -5,15 +5,15 @@ import clsx from 'clsx';
 
 import { gsap } from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import ArrowRightIcon from '@/assets/icons/arrow-badge-right.svg';
 import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
-import { Sheet, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Link, usePathname, useRouter } from '@/i18n/routing';
 
 import SyncibleLogo from '/public/syncible-logo.svg';
-import { LocaleCollapsible, LocaleSelect } from '../common/switcher/LocaleSwitcher';
+import { LocaleCollapsible, LocaleSelect, LocaleSheet } from '../common/switcher/LocaleSwitcher';
 
 const scrollToTarget = (target: string) => {
   gsap.to(window, {
@@ -125,8 +125,7 @@ const Navbar = () => {
                     <div className="flex flex-col gap-6">
                       <div className="flex flex-col px-2 font-semibold text-[#A2A3A9]">
                         {links.map(({ label, href }) => (
-                          <div key={label}>
-                            {/* <SheetClose asChild> */}
+                          <div key={label}>                          
                             <Link
                               href={href}
                               className={clsx(
@@ -140,8 +139,8 @@ const Navbar = () => {
                             {/* </SheetClose> */}
                           </div>
                         ))}
-                        <div className="py-2">
-                          <LocaleCollapsible />
+                        <div className="py-4">
+                          <LocaleSheet />
                         </div>
                       </div>
                       <Link href={t('buttons.access.href')} target={'_blank'} className="z-0">
@@ -164,8 +163,8 @@ const Navbar = () => {
                         <Link
                           href={href}
                           className={clsx(
-                            'nav-link hover:text-[#2C2C2C] hover:underline',
-                            currentPath === href && 'text-[#2C2C2C]'
+                          'nav-link hover:text-[#2C2C2C] hover:underline',
+                          { 'text-[#2C2C2C]': currentPath === href }
                           )}
                           onClick={(e) => handleNavClick(e, href)}
                         >

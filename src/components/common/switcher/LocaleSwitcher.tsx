@@ -3,9 +3,12 @@ import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { routing, useRouter, usePathname, Link } from '@/i18n/routing';
-
+import { routing, useRouter, Link } from '@/i18n/routing';
+import { ChevronRightIcon, ChevronLeftIcon } from 'lucide-react';
 import GlobeIconSVG from '../../../../public/globe-svgrepo-com.svg';
+import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
+import SyncibleLogo from '/public/syncible-logo.svg';
+import clsx from 'clsx';
 
 interface LocaleSelectProps {
   routerURL?: string;
@@ -15,7 +18,6 @@ export function LocaleSelect({ routerURL = '/' }: LocaleSelectProps) {
   const t = useTranslations('Localization');
   const locale = useLocale() as 'en' | 'vi';
   const router = useRouter();
-  const pathname = usePathname();
 
   const handleLanguageChange = async (value: 'en' | 'vi') => {
     // router.replace(pathname, { locale: value });
@@ -88,6 +90,67 @@ export function LocaleCollapsible() {
           </div>
         </CollapsibleContent>
       </Collapsible>
+    </>
+  );
+}
+
+export function LocaleSheet() {
+  const t = useTranslations('Localization');
+  const locale = useLocale() as 'en' | 'vi';
+
+  return (
+    <>
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button
+            variant="link"
+            className="w-full justify-between p-0 text-base text-[#A2A3A9] hover:text-[#2C2C2C] hover:no-underline focus:no-underline"
+          >
+            {t('header')}
+            <div className="flex gap-2">
+              <div>{locale.toLocaleUpperCase()}</div>
+              <ChevronRightIcon className="h-6 w-6" />
+            </div>
+          </Button>
+        </SheetTrigger>
+        <SheetContent
+          side="right"
+          className="h-full w-full p-4 text-black"
+          aria-describedby="Navigation modal for Syncible landing page"
+        >
+          <SheetTitle className="pb-4">
+            <Link href="/" className="">
+              <div className="h-8 w-28 md:h-10 md:w-40">
+                <SyncibleLogo className="h-full w-full" />
+              </div>
+            </Link>
+          </SheetTitle>
+          {/* <SheetTitle>{t('header')}</SheetTitle> */}
+          <div className="flex flex-col px-3 font-semibold text-[#A2A3A9]">
+            <SheetClose asChild>
+            <div className="flex items-center gap-3 py-4 text-[#2C2C2C]">
+              <ChevronLeftIcon className="h-6 w-6" />
+              {t('header')}
+            </div>
+            </SheetClose>
+            {routing.locales.map((loc) => (
+              <div key={loc}>
+                <Link
+                  href={'/'}
+                  locale={loc}
+                  className={clsx(
+                  'flex w-full justify-between items-center',{
+                  'text-[#2C2C2C]': locale === loc}
+                  )}
+                >
+                  <div className="py-4">{t('label', { locale: loc })}</div>
+                  {locale === loc && <Check className="h-6 w-6" />}
+                </Link>
+              </div>
+            ))}
+          </div>
+        </SheetContent>
+      </Sheet>
     </>
   );
 }

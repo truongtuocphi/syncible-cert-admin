@@ -5,11 +5,7 @@ import type { Metadata } from 'next';
 import { headers } from 'next/headers';
 import NextTopLoader from 'nextjs-toploader';
 import { cookieToInitialState } from 'wagmi';
-
-import { inter } from '@/components/ui/fonts';
 import { config } from '@/config';
-import Web3ModalProvider from '@/context';
-
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import Favicon from './/favicon.ico';
@@ -39,7 +35,6 @@ export default async function RootLayout({
   children: React.ReactNode;
   params: { locale: string };
 }>) {
-  const initialState = cookieToInitialState(config, headers()?.get('cookie'));
   const messages = await getMessages();
 
   return (
@@ -50,7 +45,7 @@ export default async function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={`min-h-screen`}>
+      <body className="min-h-screen">
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <NextIntlClientProvider messages={messages}>
           <main>{children}</main>

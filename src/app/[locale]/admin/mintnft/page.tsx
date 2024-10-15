@@ -160,7 +160,6 @@ const Experience = () => {
           )
         );
 
-        // gaslimnit
         if (mintDataArray.length > 0) {
           const finalGas = 9000000 * mintDataArray.length;
           const tx = await contract.mintBulk(mintDataArray, {
@@ -214,9 +213,9 @@ const Experience = () => {
     fetchData();
   }, [address]);
 
+  // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
   useEffect(() => {
     if (selectedContract.length > 0) {
-      // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
       setcollectionContractAddress(selectedContract[0].contractAddress);
     }
   }, [selectedContract]);

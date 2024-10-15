@@ -144,7 +144,6 @@ const Experience = () => {
                   ],
                 };
 
-                // Upload metadata và xử lý retry nếu cần
                 const tokenURI = await uploadMetadataWithRetry(metadata, 3);
                 if (tokenURI) {
                   setTokenLink(tokenURI);
@@ -162,6 +161,7 @@ const Experience = () => {
           )
         );
 
+        // gaslimnit
         if (mintDataArray.length > 0) {
           const finalGas = 9000000 * mintDataArray.length;
           const tx = await contract.mintBulk(mintDataArray, {

@@ -386,7 +386,9 @@ const Experience = () => {
                     className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   >
                     {selectedContract.length === 0 ? (
-                      <option value="">{t('notiCertificate')}</option>
+                      <option value="">
+                        {!address ? t('notiCertificate_1') : t('notiCertificate_2')}
+                      </option>
                     ) : (
                       selectedContract.map((collection) => (
                         <option key={collection.id} value={collection.contractAddress}>

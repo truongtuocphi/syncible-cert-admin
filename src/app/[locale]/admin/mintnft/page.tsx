@@ -126,7 +126,6 @@ const Experience = () => {
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-        // Upload metadata với giới hạn và retry
         const mintDataArray = await Promise.all(
           (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
             async (data) => {

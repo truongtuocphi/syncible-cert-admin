@@ -1,15 +1,16 @@
 'use client';
+
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { fetchPostBySlug } from '@/utils/fetchDataFromWordPress';
 import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
+import { useFormatter } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
-import { useFormatter } from 'next-intl';
 import Loading from '@/components/common/loading/Loading';
+import Image from 'next/image';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');

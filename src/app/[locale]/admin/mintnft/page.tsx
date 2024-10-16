@@ -13,7 +13,6 @@ import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import Modal from '@/components/pages/admin/Modal';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import { db, ref, get } from '@/lib/firebase';
-import { uploadMetadata } from '@/lib/pinata';
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
 import { Collection } from '@/types/function';
@@ -161,7 +160,7 @@ const Experience = () => {
         );
 
         if (mintDataArray.length > 0) {
-          const finalGas = 9000000 * mintDataArray.length;
+          const finalGas = 10000000 * mintDataArray.length;
           const tx = await contract.mintBulk(mintDataArray, {
             gasLimit: finalGas,
           });

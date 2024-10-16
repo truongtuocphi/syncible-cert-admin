@@ -225,8 +225,6 @@ export default function Collection() {
           idTable: (collections.length - index).toString(),
         }));
 
-        console.log('indexedCollections', indexedCollections);
-
         setData(indexedCollections);
       }
       setIsLoading(false);

@@ -88,7 +88,7 @@ const CreateCollection: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!displayName || !contractName || !contractSymbol || !description) {
+    if (!displayName || !contractName || !contractSymbol) {
       alert('Please fill in all required fields.');
       return;
     }
@@ -322,7 +322,6 @@ const CreateCollection: React.FC = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   rows={4}
                   className="block w-full rounded-lg border px-4 py-2 focus:ring focus:ring-indigo-200"
-                  required
                 />
               </div>
             </div>

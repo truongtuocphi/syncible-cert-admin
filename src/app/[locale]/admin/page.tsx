@@ -4,6 +4,7 @@ import { BiCustomize } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import { useTranslations } from 'next-intl';
 
+//list card main page admin
 const listCard = [
   {
     title: 'title',
@@ -37,7 +38,7 @@ const HomeAdmin = () => {
         <h1 className="mb-3 text-3xl font-bold text-gray-700 2xl:text-4xl">{t('welcom.title')}</h1>
         <p className="text-sm font-semibold text-gray-500 2xl:text-base">{t('welcom.p')}</p>
       </div>
-      <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+      <div className="mt-8 grid max-w-7xl grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
         {listCard.map((item, index) => {
           return <Card data={item} numberIndex={index} key={index} />;
         })}

@@ -13,7 +13,6 @@ import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import Modal from '@/components/pages/admin/Modal';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
 import { db, ref, get } from '@/lib/firebase';
-import { uploadMetadata } from '@/lib/pinata';
 import { saveMintData } from '@/utils/saveMintData';
 import { uploadImageToPinata } from '@/utils/uploadImageToPinataContract';
 import { Collection } from '@/types/function';
@@ -45,7 +44,8 @@ const Experience = () => {
   const [loadingBanner, setLoadingBanner] = useState<boolean>(false);
   const [tokenLink, setTokenLink] = useState('');
   const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
-  const [fontSize, setFontSize] = useState<string>('40');
+
+  const fontSize = 40;
 
   const typePage = pathname.get('type');
 
@@ -126,7 +126,6 @@ const Experience = () => {
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-        // Upload metadata với giới hạn và retry
         const mintDataArray = await Promise.all(
           (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
             async (data) => {
@@ -144,7 +143,6 @@ const Experience = () => {
                   ],
                 };
 
-                // Upload metadata và xử lý retry nếu cần
                 const tokenURI = await uploadMetadataWithRetry(metadata, 3);
                 if (tokenURI) {
                   setTokenLink(tokenURI);
@@ -163,8 +161,9 @@ const Experience = () => {
         );
 
         if (mintDataArray.length > 0) {
+          const finalGas = 10000000 * mintDataArray.length;
           const tx = await contract.mintBulk(mintDataArray, {
-            gasLimit: 90000000,
+            gasLimit: finalGas,
           });
 
           await tx.wait();
@@ -214,9 +213,9 @@ const Experience = () => {
     fetchData();
   }, [address]);
 
+  // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
   useEffect(() => {
     if (selectedContract.length > 0) {
-      // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
       setcollectionContractAddress(selectedContract[0].contractAddress);
     }
   }, [selectedContract]);
@@ -386,7 +385,9 @@ const Experience = () => {
                     className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   >
                     {selectedContract.length === 0 ? (
-                      <option value="">{t('notiCertificate')}</option>
+                      <option value="">
+                        {!address ? t('notiCertificate_1') : t('notiCertificate_2')}
+                      </option>
                     ) : (
                       selectedContract.map((collection) => (
                         <option key={collection.id} value={collection.contractAddress}>
@@ -431,6 +432,11 @@ const Experience = () => {
                     <option value="Open Sans">Open Sans</option>
                     <option value="Playfair Display">Playfair Display</option>
                     <option value="Roboto">Roboto</option>
+                    <option value="Noto Serif Display">Noto Serif Display</option>
+                    <option value="Old Standard TT">Old Standard TT</option>
+                    <option value="Playball">Playball</option>
+                    <option value="Prata">Prata</option>
+                    <option value="Updock">Updock</option>
                   </select>
                 </div>
               </div>

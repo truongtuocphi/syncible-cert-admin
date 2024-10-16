@@ -286,7 +286,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">{t('dimensions')}</p>
-                    <p>500x300</p>
+                    <p>2000 × 1414 (px)</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <p className="font-bold">{t('date')}</p>
@@ -440,7 +440,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                 </div>
                 <div className="flex flex-col gap-2">
                   <p className="font-bold">{translationCollection('Dymension')}</p>
-                  <p> 500x300</p>
+                  <p>2000 × 1414 (px)</p>
                 </div>
                 <div className="flex flex-col gap-2">
                   <p className="font-bold">{translationCollection('issueDate')}</p>

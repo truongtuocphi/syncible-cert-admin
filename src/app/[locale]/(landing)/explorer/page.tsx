@@ -100,7 +100,7 @@ export default function Explorer() {
                 </div>
                 <ButtonPrimary
                   onClick={handleSearchforIdCert}
-                  className="px-5 py-3 font-bold shadow-combinedShadow1"
+                  className="px-5 py-3 font-bold shadow-combinedShadow1 focus-visible:ring-0"
                 >
                   {t('search_button.label')}
                 </ButtonPrimary>
@@ -118,7 +118,7 @@ export default function Explorer() {
                 </div>
                 <ButtonPrimary
                   onClick={handleSearchforName}
-                  className="px-5 py-3 font-bold shadow-combinedShadow1"
+                  className="px-5 py-3 font-bold shadow-combinedShadow1 focus-visible:ring-0"
                 >
                   {t('search_button.label')}
                 </ButtonPrimary>
@@ -146,7 +146,7 @@ export default function Explorer() {
               </div>
               <ButtonPrimary
                 onClick={handleSearch}
-                className="rounded-[1.25rem] px-5 py-3 font-bold"
+                className="rounded-[1.25rem] px-5 py-3 font-bold focus-visible:ring-0"
               >
                 {t('search_button.label')}
               </ButtonPrimary>

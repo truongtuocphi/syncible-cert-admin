@@ -3,7 +3,7 @@ import Autoplay from 'embla-carousel-autoplay';
 import { useTranslations, useLocale } from 'next-intl';
 
 import ArrowNarrowRight from '@/assets/icons/arrow-narrow-right.svg';
-import BlogCard from '@/components/common/card/BlogCard';
+import BlogCard from '@/components/pages/Home/Blogs/card';
 import {
   Carousel,
   CarouselContent,
@@ -14,8 +14,7 @@ import {
 import { Link } from '@/i18n/routing';
 import { useEffect, useState } from 'react';
 import { fetchDataFromWP } from '@/utils/fetchDataFromWordPress';
-import Loading from '@/components/common/loading/Loading';
-import { BlogCardSkeleton } from '@/components/common/skeleton/Skeleton';
+import { BlogCardSkeleton } from '@/components/pages/Home/Blogs/skeleton';
 
 export default function SectionBlogs() {
   const t = useTranslations('HomePage.blogs_section');

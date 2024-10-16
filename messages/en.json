@@ -93,6 +93,35 @@
           }
         }
       }
+    }, 
+    "contact_form": {
+      "header": "Contact Us",
+      "description": "Tell us what we can help you",
+      "form": {
+        "name": {
+          "label": "Full name",
+          "placeholder": "Your name"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Enter your email"
+        },
+        "phone": {
+          "label": "Phone number",
+          "placeholder": "000 000 000"
+        },
+        "company": {
+          "label": "Company or institution name",
+          "placeholder": "Your company or organization name"
+        },
+        "message": {
+          "label": "Message",
+          "placeholder": "Type your message here"
+        },
+        "submit_button": {
+          "label": "Submit"
+        }
+      }
     }
   },
   "BlogListPage": {

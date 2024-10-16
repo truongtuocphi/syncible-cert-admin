@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { fetchPostBySlug } from '@/utils/fetchDataFromWordPress';
 import { addIdsToHeadings, generateTOC } from '@/utils/processBlogContent';
 import { Link } from '@/i18n/routing';
-import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
+import BlogBreadcrumb from '@/components/pages/Home/Blogs/breadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
 import { useFormatter } from 'next-intl';
@@ -95,7 +95,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   return (
     <div className="flex h-full w-full justify-center pt-24 md:pt-[8.25rem] lg:pt-40 xl:pt-44">
       <div className="flex flex-col gap-10 px-4 pb-4 md:px-8 md:pb-10 xl:px-32">
-        <Breadcrumb items={breadcrumbItems} />
+        <BlogBreadcrumb items={breadcrumbItems} />
         <div className="flex flex-col items-center gap-10">
           <div className="sm:text-center text-2xl font-bold md:text-3xl lg:text-5xl">
             {blogContent.title.rendered}

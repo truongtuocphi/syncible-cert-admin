@@ -10,7 +10,7 @@ interface BreadcrumbProps {
   items: breadcrumbItems[];
 }
 
-export default function Breadcrumb({ items }: BreadcrumbProps) {
+export default function BlogBreadcrumb({ items }: BreadcrumbProps) {
   return (
     <nav aria-label="breadcrumb">
       <ol className="flex items-center gap-2 text-sm text-[#A2A3A9]">

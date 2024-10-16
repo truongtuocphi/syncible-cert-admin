@@ -2,17 +2,15 @@
 
 import { useTranslations, useLocale } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
-import BlogCard from '@/components/common/card/BlogCard';
-import { Button } from '@/components/ui/button';
-import ArrowNarrowLeft from '@/assets/icons/arrow-narrow-left.svg';
-import ArrowNarrowRight from '@/assets/icons/arrow-narrow-right.svg';
+import BlogCard from '@/components/pages/Home/Blogs/card';
+import BlogPagination from '@/components/pages/Home/Blogs/pagination';
+import { BlogCardSkeleton } from '@/components/pages/Home/Blogs/skeleton';
 import {
   fetchCategories,
   fetchPosts,
   fetchAuthorById,
   fetchMediaById,
 } from '@/utils/fetchDataFromWordPress';
-import { BlogCardSkeleton } from '@/components/common/skeleton/Skeleton';
 import clsx from 'clsx';
 
 export default function Page() {
@@ -207,25 +205,13 @@ export default function Page() {
                 ))}
               </div>
               {/* Pagination controls */}
-              <div className="flex items-center justify-center gap-8 pt-8">
-                <Button
-                  onClick={handlePrevPage}
-                  disabled={currentPage === 1}
-                  className="h-auto rounded-xl border-none bg-white p-3 shadow-combinedShadow2 hover:bg-white/50 disabled:cursor-not-allowed disabled:bg-white/50"
-                >
-                  <ArrowNarrowLeft className="h-6 w-6" />
-                </Button>
-                <span className="font-medium text-[#A2A3A9]">
-                  {t('pagination.label', { page: currentPage, totalPages: totalPages })}
-                </span>
-                <Button
-                  onClick={handleNextPage}
-                  disabled={currentPage === totalPages}
-                  className="h-auto rounded-xl border-none bg-white p-3 shadow-combinedShadow2 hover:bg-white/50 disabled:cursor-not-allowed disabled:bg-white/50"
-                >
-                  <ArrowNarrowRight className="h-6 w-6" />
-                </Button>
-              </div>
+              <BlogPagination
+                currentPage={currentPage}
+                totalPages={totalPages}
+                handlePrevPage={handlePrevPage}
+                handleNextPage={handleNextPage}
+                t={t}
+              />
             </>
           ) : (
             <div className="flex justify-center">{t('not_found.content')}</div>

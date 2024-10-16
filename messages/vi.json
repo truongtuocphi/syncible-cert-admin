@@ -93,6 +93,35 @@
           }
         }
       }
+    },
+    "contact_form": {
+      "header": "Liên hệ với chúng tôi",
+      "description": "Hãy cho chúng tôi biết bạn cần giúp gì",
+      "form": {
+        "name": {
+          "label": "Họ và tên",
+          "placeholder": "Tên của bạn"
+        },
+        "email": {
+          "label": "Email",
+          "placeholder": "Nhập email của bạn"
+        },
+        "phone": {
+          "label": "Số điện thoại",
+          "placeholder": "000 000 000"
+        },
+        "company": {
+          "label": "Tên công ty hoặc tổ chức",
+          "placeholder": "Tên công ty hoặc tổ chức của bạn"
+        },
+        "message": {
+          "label": "Tin nhắn",
+          "placeholder": "Nhập tin nhắn của bạn tại đây"
+        },
+        "submit_button": {
+          "label": "Gửi"
+        }
+      }
     }
   },
   "BlogListPage": {
@@ -108,7 +137,7 @@
         "label": "Tất cả"
       }
     },
-    "pagination" : {
+    "pagination": {
       "label": "Trang {page} của {totalPages}"
     }
   },
@@ -118,14 +147,14 @@
     "table_of_contents": {
       "label": "Mục lục"
     },
-    "blog_info" : {
+    "blog_info": {
       "date_created": {
-        "label" : "Ngày tạo:",
-        "value" : "2024-01-01"
+        "label": "Ngày tạo:",
+        "value": "2024-01-01"
       },
-      "read_time": { 
-        "label" : "Thời gian đọc:",
-        "value" : "{read_time, plural, =0 {Ít hơn một phút} =1 {1 phút} other {# phút}}"
+      "read_time": {
+        "label": "Thời gian đọc:",
+        "value": "{read_time, plural, =0 {Ít hơn một phút} =1 {1 phút} other {# phút}}"
       }
     },
     "category": {
@@ -265,8 +294,8 @@
         "buttonPrevious": "Kế tiếp"
       },
 
-       "alert_1": "Tất cả đã được xóa thành công",
-       "alert_2": "Đã xảy ra lỗi khi xóa dữ liệu"
+      "alert_1": "Tất cả đã được xóa thành công",
+      "alert_2": "Đã xảy ra lỗi khi xóa dữ liệu"
     },
 
     "contractDetail": {

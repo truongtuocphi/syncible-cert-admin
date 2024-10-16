@@ -24,3 +24,11 @@ interface Category {
 interface Media {
   source_url: string;
 }
+
+interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  handlePrevPage: () => void;
+  handleNextPage: () => void;
+  t: (key: string, params?: any) => string; // Translation function
+}

@@ -88,7 +88,7 @@ const CreateCollection: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!displayName || !contractName || !contractSymbol || !description) {
+    if (!displayName || !contractName || !contractSymbol) {
       alert('Please fill in all required fields.');
       return;
     }

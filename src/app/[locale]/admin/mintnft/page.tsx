@@ -44,7 +44,8 @@ const Experience = () => {
   const [loadingBanner, setLoadingBanner] = useState<boolean>(false);
   const [tokenLink, setTokenLink] = useState('');
   const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
-  const [fontSize, setFontSize] = useState<string>('40');
+
+  const fontSize = 40;
 
   const typePage = pathname.get('type');
 

@@ -160,7 +160,9 @@ export default function Page({ params }: { params: { slug: string } }) {
               <div className="flex items-center justify-between">
                 <div className="flex w-1/2 flex-col gap-1">
                   <h2 className="text-lg font-bold text-gray-700">{t('describe')}</h2>
-                  <p className="pr-4 text-sm font-semibold text-gray-500">{data.description}</p>
+                  <p className="pr-4 text-sm font-semibold text-gray-500">
+                    {data.description || ''}
+                  </p>
                 </div>
                 <div className="flex w-1/2 flex-col gap-1">
                   <div className="flex flex-col gap-1">

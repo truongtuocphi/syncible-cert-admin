@@ -322,7 +322,6 @@ const CreateCollection: React.FC = () => {
                   onChange={(e) => setDescription(e.target.value)}
                   rows={4}
                   className="block w-full rounded-lg border px-4 py-2 focus:ring focus:ring-indigo-200"
-                  required
                 />
               </div>
             </div>

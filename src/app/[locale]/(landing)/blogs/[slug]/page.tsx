@@ -9,6 +9,7 @@ import Breadcrumb from '@/components/common/breadcrumb/BlogBreadcrumb';
 import AuthorProfile from '@/components/common/miscellaneus/AuthorProfile';
 import TableOfContent from '@/components/common/miscellaneus/TableOfContent';
 import { useFormatter } from 'next-intl';
+import Loading from '@/components/common/loading/Loading';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
   const t = useTranslations('BlogPage');
@@ -64,7 +65,12 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   }, [slug]);
 
   if (loading) {
-    return <div className="m-auto">{t('loading')}</div>;
+    // return <div className="m-auto">{t('loading')}</div>;
+    return (
+      <div className="m-auto">
+        <Loading />
+      </div>
+    );
   }
 
   if (notFoundError) {
@@ -88,7 +94,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const dateCreated = format.dateTime(new Date(blogContent.date), {
     year: 'numeric',
     month: 'long',
-    day: 'numeric'
+    day: 'numeric',
   });
 
   return (
@@ -96,7 +102,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
       <div className="flex flex-col gap-10 px-4 pb-4 md:px-8 md:pb-10 xl:px-32">
         <Breadcrumb items={breadcrumbItems} />
         <div className="flex flex-col items-center gap-10">
-          <div className="sm:text-center text-2xl font-bold md:text-3xl lg:text-5xl">
+          <div className="text-2xl font-bold sm:text-center md:text-3xl lg:text-5xl">
             {blogContent.title.rendered}
           </div>
           <div className="relative h-full w-full overflow-hidden rounded-xl sm:rounded-[2rem]">
@@ -181,7 +187,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                 {categories.length > 0 && (
                   <div className="mt-8 flex items-center gap-4">
                     <div className="text-xl font-bold">{t('category.label')}</div>
-                    <div className="flex flex-wrap h-full items-center gap-4">
+                    <div className="flex h-full flex-wrap items-center gap-4">
                       {categories.map((category) => (
                         <div key={category.id}>
                           <Link

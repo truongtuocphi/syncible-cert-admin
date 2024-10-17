@@ -105,7 +105,8 @@
       "titleInputCompany": "Tên công ty hoặc tổ chức*",
       "placeInputCompany": "Tên công ty hoặc tổ chức của bạn",
       "titleInputMess": "Vui lòng mô tả kế hoạch của bạn khi sử dụng nền tảng của chúng tôi",
-      "placeInputMess": "Nhập tin nhắn của bạn vào đây"
+      "placeInputMess": "Nhập tin nhắn của bạn vào đây",
+      "noti": "Congratulations, you have submitted successfully."
     }
   },
   "BlogListPage": {

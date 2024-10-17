@@ -185,9 +185,12 @@ const Page = () => {
                         ) : (
                           <DialogContent className="!rounded-3xl sm:max-w-[576px]">
                             <DialogHeader className="mt-16">
-                              <DialogTitle className="text-center text-4xl">Contact us</DialogTitle>
+                              <DialogTitle className="text-center text-4xl">
+                                {' '}
+                                {transContact('title')}
+                              </DialogTitle>
                               <DialogDescription className="text-center text-lg">
-                                Congratulations, you have submitted successfully.
+                                {transContact('noti')}
                               </DialogDescription>
                             </DialogHeader>
                             <div className="mt-10 flex w-full items-center justify-center">

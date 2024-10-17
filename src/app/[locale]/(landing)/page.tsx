@@ -134,6 +134,7 @@ const Page = () => {
                                 country={'vn'}
                                 value={phone}
                                 onChange={handleChange}
+                                specialLabel=""
                                 inputStyle={{
                                   border: '1px solid #A2A3A9',
                                   borderRadius: '20px',

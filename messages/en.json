@@ -96,7 +96,7 @@
     },
     "contact": {
       "title": "Contact us",
-      "subtite": "Tell us what we can help you",
+      "subtitle": "Tell us what we can help you",
       "titleInputFullName": "Full name*",
       "placeInputFullname": "Your full name",
       "titleInputEmail": "Email",

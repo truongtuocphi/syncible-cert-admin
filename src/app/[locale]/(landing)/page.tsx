@@ -13,7 +13,6 @@ import SectionBlogs from '@/components/pages/Home/SectionBlogs';
 
 import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
-import { Link } from '@/i18n/routing';
 
 import BannerCertificate from '../../../../public/cert_example.png';
 import EthereumLogoSVG from '../../../../public/ethereum-logo.svg';
@@ -35,7 +34,6 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/material.css';
 import '../../../style/phoneInput.css';
 import imageSuccessfully from '../../../../public/successfully.png';
-import { ScrollArea } from '@/components/ui/scroll-area';
 
 const Page = () => {
   const [phone, setPhone] = useState('');

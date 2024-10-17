@@ -99,12 +99,12 @@
       "subtitle": "Tell us what we can help you",
       "titleInputFullName": "Full name*",
       "placeInputFullname": "Your full name",
-      "titleInputEmail": "Email",
+      "titleInputEmail": "Email*",
       "placeInputEmail": "Your email",
       "titleInputPhone": "Phone number*",
       "titleInputCompany": "Company or institution name*",
       "placeInputCompany": "Your company or organization name",
-      "titleInputMess": "Please describe your plan for using our platform",
+      "titleInputMess": "Please describe your plan for using our platform*",
       "placeInputMess": "Type your message here",
       "noti": "Congratulations, you have submitted successfully."
     }

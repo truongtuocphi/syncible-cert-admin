@@ -15,7 +15,6 @@ import { useForm } from 'react-hook-form';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -25,20 +24,12 @@ import { Textarea } from '@/components/ui/textarea';
 import { z } from 'zod';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { useState } from 'react';
-import { PhoneInput } from './phoneInput';
-import { isValidPhoneNumber } from "react-phone-number-input";
-import { toast } from "@/components/ui/use-toast";
-
-const formSchema = z.object({
-  name: z
-    .string()
-    .min(1)
-    .regex(/^[a-zA-Z\s]+$/, { message: 'Name must contain only letters and spaces' }),
-  email: z.string().min(1).email(),
-  phone: z.string().refine(isValidPhoneNumber, { message: "Invalid phone number" }),
-  company: z.string().min(1),
-  message: z.string(),
-});
+// import { PhoneInput } from './phoneInput';
+import PhoneInput from 'react-phone-input-2';
+import { isValidPhoneNumber } from 'react-phone-number-input';
+import { toast } from '@/components/ui/use-toast';
+import './contact.css';
+import 'react-phone-input-2/lib/material.css';
 
 export function ContactForm({
   isOpen,
@@ -47,7 +38,19 @@ export function ContactForm({
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }) {
+
   const t = useTranslations('HomePage.contact_form');
+  const formSchema = z.object({
+    name: z
+      .string()
+      .min(1, {message: t('form.error.name.required')})
+      .regex(/^[a-zA-Z\s]+$/, { message: t('form.error.name.invalid') }),
+    email: z.string().min(1, {message: t('form.error.email.required')}).email({message: t('form.error.email.invalid')}),
+    phone: z.string(),
+    company: z.string().min(1, {message: t('form.error.company.required')}),
+    message: z.string(),
+  });
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -61,8 +64,9 @@ export function ContactForm({
   const [value, setValue] = useState('');
 
   function handleSubmit(data: z.infer<typeof formSchema>) {
+    console.log(data);
     toast({
-      title: "You submitted the following values:",
+      title: 'You submitted the following values:',
       description: (
         <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
@@ -73,8 +77,9 @@ export function ContactForm({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      {/* <ScrollArea className="overflow-y-auto"> */}
       <DialogContent
-        className={`${montserrat.className} gap-10 p-10 px-6 text-[#2C2C2C] sm:max-w-[44%]`}
+        className={`${montserrat.className} md:no-scrollbar max-h-screen w-full gap-10 overflow-y-scroll p-10 px-6 text-[#2C2C2C] md:max-w-[44%]`}
       >
         <DialogHeader className="sm:text-center">
           <DialogTitle className="text-[2rem] font-bold">{t('header')}</DialogTitle>
@@ -130,15 +135,30 @@ export function ContactForm({
                       {...field}
                       className="h-auto rounded-[1.25rem] border-[#A2A3A9] p-4 placeholder:text-[#A2A3A9] focus-visible:ring-1 focus-visible:ring-offset-0"
                     /> */}
-                    <PhoneInput
+                    {/* <PhoneInput
                       placeholder={t('form.phone.placeholder')}
                       {...field}
                       defaultCountry='VN'
-                      international
-                      value={value}
-                      onChange={setValue}
-                      limitMaxLength={true}
+                      /> */}
+                    <div className="relative rounded-[1.25rem] border border-[#A2A3A9]">
+                      <PhoneInput
+                        country={'vn'}
+                        regions={['america', 'europe', 'asia', 'oceania', 'africa']}
+                        containerClass="flex antialiased flex-row-reverse gap-2 placeholder:text-[#A2A3A9] p-4"
+                        specialLabel=""
+                        enableSearch
+                        searchClass="antialiased"
+                        buttonClass="p-2"
+                        inputProps={{
+                          name: 'phone',
+                          required: true,
+                          autoFocus: true,
+                          placeholder: t('form.phone.placeholder'),
+                          className: 'w-full antialiased',
+                        }}
+                        {...field}
                       />
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -184,6 +204,7 @@ export function ContactForm({
           </form>
         </Form>
       </DialogContent>
+      {/* </ScrollArea> */}
     </Dialog>
   );
 }

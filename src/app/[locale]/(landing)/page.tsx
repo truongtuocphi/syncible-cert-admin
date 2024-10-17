@@ -11,15 +11,12 @@ import SectionWhatWeBelieve from '@/components/pages/Home/SectionWhatWeBelieve';
 import SectionFAQ from '@/components/pages/Home/SectionFAQ';
 import SectionBlogs from '@/components/pages/Home/SectionBlogs';
 
-import { Button } from '@/components/ui/button';
 import { montserrat } from '@/components/ui/fonts';
-import { Link } from '@/i18n/routing';
 import ContactButton from '@/components/pages/Home/Contact/button';
 
 import BannerCertificate from '../../../../public/cert_example.png';
 import EthereumLogoSVG from '../../../../public/ethereum-logo.svg';
 import PolygonLogoSVG from '../../../../public/polygon-logo.svg';
-
 
 const Page = () => {
   const t = useTranslations('HomePage.title_section');
@@ -43,7 +40,6 @@ const Page = () => {
                     {t('label_2')}
                   </div>
                   <div className="w-full self-center sm:w-auto lg:self-start">
-                    
                     <ContactButton label={t('contact_button.label')}/>
                   </div>
                 </div>

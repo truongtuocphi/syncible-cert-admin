@@ -1,0 +1,34 @@
+.react-tel-input {
+    position: static !important;
+    
+}
+
+.react-tel-input .flag-dropdown {
+    position: static !important;
+}
+
+.react-tel-input .selected-flag {
+    padding-left: 0 !important;
+    /* width: 52px !important; */
+    padding: 0 4px 0 0 !important;
+    border-right: 1px solid #CCCCCC !important;
+}
+
+.react-tel-input .country-list {
+    top: 3.5rem !important;
+    border-radius: 1.25rem !important;
+    overflow-x: hidden !important;
+}
+
+.react-tel-input input:focus-visible {
+    outline: none !important;
+}
+
+.react-tel-input .country-list .search {
+    padding: 16px 10px 10px 16px !important;
+}
+
+.react-tel-input .country-list .search .search-box{
+    padding: 6px 6px 6px 6px !important;
+    margin-left: 0;
+}

@@ -120,6 +120,24 @@
         },
         "submit_button": {
           "label": "Gửi"
+        },
+        "error": {
+          "name": {
+            "required": "Vui lòng nhập tên của bạn",
+            "invalid": "Vui lòng nhập tên hợp lệ không có ký tự đặc biệt"
+          },
+          "email": {
+            "required": "Vui lòng nhập email của bạn",
+            "invalid": "Vui lòng nhập địa chỉ email hợp lệ"
+          },
+          "phone": {
+            "required": "Vui lòng nhập số điện thoại của bạn",
+            "invalid": "Vui lòng nhập số điện thoại hợp lệ"
+          },
+          "company": {
+            "required": "Vui lòng nhập tên công ty hoặc tổ chức của bạn",
+            "invalid": "Vui lòng nhập tên công ty hoặc tổ chức hợp lệ"
+          }
         }
       }
     }

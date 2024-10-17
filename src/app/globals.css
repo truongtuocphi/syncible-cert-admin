@@ -146,3 +146,20 @@ a img.aligncenter {
     scrollbar-width: none; /* Firefox */
   }
 }
+
+/* contact form */
+/* Ẩn thanh cuộn trên Chrome, Edge, và Safari */
+.scrollable-content::-webkit-scrollbar {
+  width: 0; /* Đặt độ rộng của thanh cuộn thành 0 để ẩn */
+  height: 0;
+}
+
+/* Ẩn thanh cuộn trên Firefox */
+.scrollable-content {
+  scrollbar-width: none; /* Ẩn thanh cuộn trên Firefox */
+}
+
+/* Ẩn thanh cuộn trên IE và Edge */
+.scrollable-content {
+  -ms-overflow-style: none; /* Ẩn thanh cuộn trên IE và Edge */
+}

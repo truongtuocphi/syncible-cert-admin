@@ -42,6 +42,7 @@ const Page = () => {
   const [state, handleSubmit] = useForm('mkgnnqbd');
 
   const t = useTranslations('HomePage.title_section');
+  const transContact = useTranslations('HomePage.contact');
 
   const handleChange = (value: string) => {
     setPhone(value);
@@ -114,37 +115,45 @@ const Page = () => {
                       </DialogTrigger>
                       <DialogContent className="scrollable-content h-full w-screen overflow-y-auto !rounded-none pb-0 md:!rounded-3xl lg:h-[95%] lg:max-w-[576px]">
                         <DialogHeader className="mt-16">
-                          <DialogTitle className="text-center text-4xl">Contact us</DialogTitle>
+                          <DialogTitle className="text-center text-4xl">
+                            {transContact('title')}
+                          </DialogTitle>
                           <DialogDescription className="text-center text-lg">
-                            Tell us what we can help you
+                            {transContact('subtitle')}
                           </DialogDescription>
                         </DialogHeader>
                         {!state.succeeded ? (
                           <form onSubmit={handleSubmit} className="h-fit space-y-5">
                             <div className="space-y-2">
-                              <label className="font-bold text-gray-900">Full name*</label>
+                              <label className="font-bold text-gray-900">
+                                {transContact('titleInputFullName')}
+                              </label>
                               <input
                                 id="full-name"
                                 name="fullname"
                                 type="text"
                                 className="block w-full rounded-3xl border-[1px] border-gray-400 p-4"
-                                placeholder="Your full name"
+                                placeholder={transContact('placeInputFullname')}
                                 required
                               />
                             </div>
                             <div className="space-y-2">
-                              <label className="font-bold text-gray-900">Email*</label>
+                              <label className="font-bold text-gray-900">
+                                {transContact('titleInputEmail')}
+                              </label>
                               <input
                                 id="email"
                                 name="email"
                                 type="email"
                                 className="block w-full rounded-3xl border-[1px] border-gray-400 p-4"
-                                placeholder="Your email"
+                                placeholder={transContact('placeInputEmail')}
                                 required
                               />
                             </div>
                             <div className="space-y-2">
-                              <label className="font-bold text-gray-900">Phone number*</label>
+                              <label className="font-bold text-gray-900">
+                                {transContact('titleInputPhone')}
+                              </label>
                               <PhoneInput
                                 country={'vn'}
                                 value={phone}
@@ -161,27 +170,27 @@ const Page = () => {
                             </div>
                             <div className="space-y-2">
                               <label className="font-bold text-gray-900">
-                                Company or institution name*
+                                {transContact('titleInputCompany')}
                               </label>
                               <input
                                 id="company"
                                 name="company"
                                 type="text"
                                 className="block w-full rounded-3xl border-[1px] border-gray-400 p-4"
-                                placeholder="Your company or organization name"
+                                placeholder={transContact('placeInputCompany')}
                                 required
                               />
                             </div>
                             <div className="space-y-2">
                               <label className="font-bold text-gray-900">
-                                Please describe your plan for using our platform
+                                {transContact('titleInputMess')}
                               </label>
                               <textarea
                                 id="message"
                                 name="message"
                                 rows={6}
                                 className="block w-full rounded-3xl border-[1px] border-gray-400 p-4"
-                                placeholder="Type your message here"
+                                placeholder={transContact('placeInputMess')}
                                 required
                               />
                             </div>

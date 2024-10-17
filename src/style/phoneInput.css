@@ -1,0 +1,22 @@
+.country-list {
+  margin: 0 0 10px -1px !important;
+}
+
+.country-list .search {
+  top: 0px !important;
+  padding: 0px !important;
+  padding: 10px 5px 10px 5px !important;
+  background-color: white !important;
+}
+.country-list .search .search-box {
+  border: 1px solid #ccc; /* Viền cho ô tìm kiếm */
+  border-radius: 20px; /* Bo tròn góc cho ô tìm kiếm */
+  padding: 10px; /* Padding cho ô tìm kiếm */
+  width: 100%; /* Đảm bảo ô tìm kiếm chiếm 100% chiều rộng */
+  font-size: 14px; /* Kích thước chữ cho ô tìm kiếm */
+  margin: 0;
+}
+
+.react-tel-input .special-label {
+  display: none;
+}

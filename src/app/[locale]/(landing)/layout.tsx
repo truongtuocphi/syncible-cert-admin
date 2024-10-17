@@ -1,4 +1,4 @@
-import { Link } from '@/i18n/routing';
+// import { Link } from '@/i18n/routing';
 import Navbar from '@/components/layout/Navbar';
 import Image from 'next/image';
 import Background from '../../../../public/DoraBG.png';
@@ -10,17 +10,17 @@ import { montserrat } from '@/components/ui/fonts';
 export default function LandingLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <div className={`${montserrat.className} relative min-h-screen flex flex-col md:gap-10`}>
+      <div className={`${montserrat.className} relative flex min-h-screen flex-col md:gap-10`}>
         {/* <div className="relative h-[6.5rem]"> */}
-          <Navbar />
+        <Navbar />
         {/* </div> */}
         {children}
         <div className="relative mt-10 w-full">
-          <Footer /> 
+          <Footer />
         </div>
-        <div className="-z-20 absolute inset-0 flex w-full flex-col items-center overflow-hidden bg-brand-10">
+        <div className="absolute inset-0 -z-20 flex w-full flex-col items-center overflow-hidden bg-brand-10">
           <div className="relative mx-auto min-h-full w-full max-w-[90rem]">
-          {/* <div className="relative mx-auto min-h-full w-full"> */}
+            {/* <div className="relative mx-auto min-h-full w-full"> */}
             <div className="absolute -left-[170%] -top-[15%] w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%]">
               <LightBlueGradientEllipse className="h-full w-full" />
             </div>

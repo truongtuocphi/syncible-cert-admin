@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
@@ -19,16 +19,18 @@ import EthereumLogoSVG from '../../../../public/ethereum-logo.svg';
 import PolygonLogoSVG from '../../../../public/polygon-logo.svg';
 
 const Page = () => {
+
   const t = useTranslations('HomePage.title_section');
+  
   return (
     <>
       <div
         className={`${montserrat.className} relative z-20 flex flex-col items-center gap-10 overflow-hidden`}
       >
         <div className="w-full max-w-[90rem]">
-        {/* <div className="w-full"> */}
+          {/* <div className="w-full"> */}
           <div className="flex flex-col justify-center px-4 pb-4 sm:min-h-dvh md:px-8 md:pb-10 xl:px-32">
-            <div className="flex h-full w-full flex-col justify-center mt-24 md:mt-[8.25rem] lg:flex-row">
+            <div className="mt-24 flex h-full w-full flex-col justify-center md:mt-[8.25rem] lg:flex-row">
               <div className="flex items-center justify-center lg:basis-1/2 lg:pr-6">
                 <div className="flex min-h-[20rem] animate-swipe-up-fadein flex-col items-center justify-center gap-6 antialiased sm:gap-8 lg:h-[30rem] lg:items-start">
                   <div
@@ -79,7 +81,7 @@ const Page = () => {
         </div>
 
         <div className="relative z-20 flex max-w-[90rem] flex-col items-center gap-8 sm:gap-40">
-        {/* <div className="relative z-20 flex flex-col items-center gap-8 sm:gap-40"> */}
+          {/* <div className="relative z-20 flex flex-col items-center gap-8 sm:gap-40"> */}
           <SectionAbout />
           <SectionWhatWeBelieve />
           <SectionOurVision />

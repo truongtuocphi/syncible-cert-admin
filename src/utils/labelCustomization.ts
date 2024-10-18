@@ -1,6 +1,6 @@
 import { useTranslations } from 'next-intl';
 
-export function getCustomLabel (path: string) {
+export function useCustomLabel (path: string) {
   const t = useTranslations('breadcrumb');
 
   switch (path) {

@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { MdNavigateNext } from 'react-icons/md';
 
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
-import { getCustomLabel } from '@/utils/labelCustomization';
+import { useCustomLabel } from '@/utils/labelCustomization';
 
 interface propData {
   displayName?: string;
@@ -36,7 +36,7 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
             const href = `/${paths.slice(0, index + 1).join('/')}`;
 
             // Call `useCustomLabel` individually here, outside of any callback functions
-            let label = getCustomLabel(path);
+            let label = useCustomLabel(path);
 
             // Handle specific conditions for path lengths
             if (path.length === 42) {

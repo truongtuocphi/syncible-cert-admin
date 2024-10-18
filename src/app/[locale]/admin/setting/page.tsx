@@ -25,7 +25,7 @@ export default function Setting() {
   const [image, setImage] = useState('');
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<any>(null);
-  const [loading, setLoading] = useState(true); // Trạng thái loading
+  const [loading, setLoading] = useState(true);
   const [getChain, setGetChain] = useState<number | undefined>(undefined);
 
   const t = useTranslations('Dapp.setting');

@@ -39,7 +39,7 @@ export default function Setting() {
         get(userRef)
           .then((snapshot) => {
             if (snapshot.exists()) {
-              setUserData(snapshot.val()); // Lưu thông tin người dùng từ DB vào state
+              setUserData(snapshot.val());
             } else {
               console.log('No data available');
             }
@@ -48,14 +48,13 @@ export default function Setting() {
             console.error('Error fetching user data:', error);
           })
           .finally(() => {
-            setLoading(false); // Sau khi hoàn thành quá trình lấy dữ liệu, tắt trạng thái loading
+            setLoading(false);
           });
       } else {
-        setLoading(false); // Nếu không có người dùng, tắt trạng thái loading
+        setLoading(false);
       }
     });
 
-    // Cleanup subscription khi component bị unmount
     return () => unsubscribe();
   }, []);
 

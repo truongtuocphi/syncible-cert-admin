@@ -19,7 +19,7 @@ const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
   const t = useTranslations('Dapp.collectionCertificate');
 
   const searchParams = useSearchParams();
-  const someQueryParam = searchParams.get('nameCollection');
+  const someQueryParam = searchParams ? searchParams.get('nameCollection') : null;
 
   const handleDataContract = (data: any) => {
     setDataContract(data);

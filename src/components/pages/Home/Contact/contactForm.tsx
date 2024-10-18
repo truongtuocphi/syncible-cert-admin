@@ -76,16 +76,16 @@ export function ContactForm({
           setSuccessDialogOpen(true);
           setIsOpen(false);
           form.reset();
-          console.log('Email sent:', response.data);
+          // console.log('Email sent:', response.data);
           // Optionally show a success toast or message
         } else {
-          console.error('Error sending email:', response.statusText);
+          // console.error('Error sending email:', response.statusText);
           // Optionally show an error toast or message
           toast({ title: 'Error', description: response.statusText || 'Error sending email' });
         }
       })
       .catch((error) => {
-        console.error('Error submitting form:', error);
+        // console.error('Error submitting form:', error);
         // Optionally show an error toast or message
         const errorMessage = error.response?.data?.message || error.message || 'Error sending email'
         toast({ title: 'Error', description: errorMessage });
@@ -95,7 +95,6 @@ export function ContactForm({
   return (
     <>
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
-        {/* <ScrollArea className="overflow-y-auto"> */}
         <DialogContent
           className={`${montserrat.className} md:no-scrollbar max-h-screen w-full gap-10 overflow-y-scroll p-10 px-6 text-[#2C2C2C] lg:max-w-[44%]`}
         >
@@ -148,11 +147,6 @@ export function ContactForm({
                   <FormItem>
                     <FormLabel className="font-bold">{t('form.phone.label')}*</FormLabel>
                     <FormControl>
-                      {/* <Input
-                      placeholder={t('form.phone.placeholder')}
-                      {...field}
-                      className="h-auto rounded-[1.25rem] border-[#A2A3A9] p-4 placeholder:text-[#A2A3A9] focus-visible:ring-1 focus-visible:ring-offset-0"
-                    /> */}
                       {/* <PhoneInput
                       placeholder={t('form.phone.placeholder')}
                       {...field}

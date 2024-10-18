@@ -7,7 +7,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   const { name, email, phone, company, message } = req.body;
-  console.log('Contact form data:', req.body);
+  // console.log('Contact form data:', req.body);
 
   // Create transporter using your email service credentials
   const transporter = nodemailer.createTransport({

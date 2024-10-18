@@ -139,6 +139,11 @@
             "invalid": "Vui lòng nhập tên công ty hoặc tổ chức hợp lệ"
           },
             "country_not_found": "Không tìm thấy quốc gia nào"
+        },
+        "success": {
+          "header": "Cảm ơn bạn đã liên hệ với chúng tôi!",
+          "content": "Chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất.",
+          "button": "Trở về trang chủ"
         }
       }
     }

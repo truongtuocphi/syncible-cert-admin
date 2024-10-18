@@ -28,6 +28,10 @@ import PhoneInput from 'react-phone-input-2';
 import './contact.css';
 import 'react-phone-input-2/lib/material.css';
 import axios from 'axios';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
+import SuccessIcon from '../../../../../public/success_contact_sent.svg';
+
 
 export function ContactForm({
   isOpen,
@@ -36,7 +40,8 @@ export function ContactForm({
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
 }) {
-
+  const [successDialogOpen, setSuccessDialogOpen] = useState(false);
+  const { toast } = useToast()
   const t = useTranslations('HomePage.contact_form');
   const formSchema = z.object({
     name: z
@@ -65,21 +70,26 @@ export function ContactForm({
     .then((response) => {
       if (response.status === 200) {
         // Email sent successfully
-        console.log('Email sent:', response.data);
+        setSuccessDialogOpen(true);
+        form.reset();
+        // console.log('Email sent:', response.data);
         // Optionally show a success toast or message
       } else {
-        console.error('Error sending email:', response.statusText);
+        // console.error('Error sending email:', response.statusText);
         // Optionally show an error toast or message
+        toast({title: 'Error', description: response.statusText})
       }
     })
     .catch((error) => {
-      console.error('Error submitting form:', error);
+      // console.error('Error submitting form:', error);
       // Optionally show an error toast or message
+      toast({title: 'Error', description: error})
     });
     
   }
 
   return (
+    <>
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       {/* <ScrollArea className="overflow-y-auto"> */}
       <DialogContent
@@ -210,5 +220,23 @@ export function ContactForm({
       </DialogContent>
       {/* </ScrollArea> */}
     </Dialog>
+    {/* Success Dialog */}
+    <Dialog open={successDialogOpen} onOpenChange={setSuccessDialogOpen}>
+        <DialogContent className="max-w-md text-center">
+          <DialogHeader>
+            <DialogTitle>{t('form.success.header')}</DialogTitle>
+            <DialogDescription>
+              {t('form.success.content')}
+            </DialogDescription>
+          </DialogHeader>
+          <div>
+            <SuccessIcon className="w-32 h-32 md:w-auto md:h-auto mx-auto" />
+          </div>
+          <ButtonPrimary onClick={() => setSuccessDialogOpen(false)} className="focus-visible:outline-none focus-visible:ring-0">
+            {t('form.success.button')}
+          </ButtonPrimary>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 }

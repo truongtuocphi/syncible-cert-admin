@@ -8,6 +8,7 @@ import { config } from '@/config';
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
 import Favicon from './/favicon.ico';
+import { Toaster } from '@/components/ui/toaster';
 
 export const metadata: Metadata = {
   title: 'Syncible | Tokenized Academic Certificate on Blockchain',
@@ -48,6 +49,7 @@ export default async function RootLayout({
         <NextTopLoader showSpinner={false} color="#3FA2F6" />
         <NextIntlClientProvider messages={messages}>
           <main>{children}</main>
+          <Toaster />
         </NextIntlClientProvider>
       </body>
     </html>

@@ -139,6 +139,11 @@
             "invalid": "Please enter a valid company or institution name"
           },
           "country_not_found": "No countries found"
+        },
+        "success": {
+          "header": "Thank you for contacting us!",
+          "content": "We will get back to you as soon as possible.",
+          "button": "Close"
         }
       }
     }

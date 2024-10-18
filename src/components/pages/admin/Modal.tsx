@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+
 import Image from 'next/image';
-import { IoClose } from 'react-icons/io5';
 import { useRouter } from 'next/navigation';
 import { useTranslations, useLocale } from 'next-intl';
+import { IoClose } from 'react-icons/io5';
 
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 

@@ -1,6 +1,5 @@
 .react-tel-input {
     position: static !important;
-    
 }
 
 .react-tel-input .flag-dropdown {
@@ -25,10 +24,37 @@
 }
 
 .react-tel-input .country-list .search {
-    padding: 16px 10px 10px 16px !important;
+    padding: 10px 12px 10px 12px !important;
+    width: 100% !important;
+    display: flex !important;
+
 }
 
-.react-tel-input .country-list .search .search-box{
+.react-tel-input .country-list .search .search-box {
     padding: 6px 6px 6px 6px !important;
+    width: 100% !important;
     margin-left: 0;
+    border-top: 1px solid #A2A3A9 !important;
+    border-right: 1px solid #A2A3A9 !important;
+    border-bottom: 1px solid #A2A3A9 !important;
+    border-left: none !important;
+    border-top-right-radius: 1.25rem !important;
+    border-bottom-right-radius: 1.25rem !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+.react-tel-input .country-list .search .search-emoji {
+    max-height: 32px !important;
+    height: 100% !important;
+    max-width: 32px !important;
+    width: 100% !important;
+    display: inline-block !important;
+    border-top: 1px solid #A2A3A9 !important;
+    border-bottom: 1px solid #A2A3A9 !important;
+    border-left: 1px solid #A2A3A9 !important;
+    border-top-left-radius: 1.25rem !important;
+    border-bottom-left-radius: 1.25rem !important;
+    padding: 4px 0 !important;
+    padding-left: 10px !important;
 }

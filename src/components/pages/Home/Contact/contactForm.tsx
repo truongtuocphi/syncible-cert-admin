@@ -23,13 +23,11 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { z } from 'zod';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
-import { useState } from 'react';
 // import { PhoneInput } from './phoneInput';
 import PhoneInput from 'react-phone-input-2';
-import { isValidPhoneNumber } from 'react-phone-number-input';
-import { toast } from '@/components/ui/use-toast';
 import './contact.css';
 import 'react-phone-input-2/lib/material.css';
+import axios from 'axios';
 
 export function ContactForm({
   isOpen,
@@ -61,25 +59,31 @@ export function ContactForm({
       message: '',
     },
   });
-  const [value, setValue] = useState('');
 
   function handleSubmit(data: z.infer<typeof formSchema>) {
-    console.log(data);
-    toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      ),
+    axios.post('/api/contact', data)
+    .then((response) => {
+      if (response.status === 200) {
+        // Email sent successfully
+        console.log('Email sent:', response.data);
+        // Optionally show a success toast or message
+      } else {
+        console.error('Error sending email:', response.statusText);
+        // Optionally show an error toast or message
+      }
+    })
+    .catch((error) => {
+      console.error('Error submitting form:', error);
+      // Optionally show an error toast or message
     });
+    
   }
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       {/* <ScrollArea className="overflow-y-auto"> */}
       <DialogContent
-        className={`${montserrat.className} md:no-scrollbar max-h-screen w-full gap-10 overflow-y-scroll p-10 px-6 text-[#2C2C2C] md:max-w-[44%]`}
+        className={`${montserrat.className} md:no-scrollbar max-h-screen w-full gap-10 overflow-y-scroll p-10 px-6 text-[#2C2C2C] lg:max-w-[44%]`}
       >
         <DialogHeader className="sm:text-center">
           <DialogTitle className="text-[2rem] font-bold">{t('header')}</DialogTitle>
@@ -146,15 +150,15 @@ export function ContactForm({
                         regions={['america', 'europe', 'asia', 'oceania', 'africa']}
                         containerClass="flex antialiased flex-row-reverse gap-2 placeholder:text-[#A2A3A9] p-4"
                         specialLabel=""
+                        searchNotFound={t('form.error.country_not_found')}
                         enableSearch
-                        searchClass="antialiased"
                         buttonClass="p-2"
                         inputProps={{
                           name: 'phone',
                           required: true,
                           autoFocus: true,
                           placeholder: t('form.phone.placeholder'),
-                          className: 'w-full antialiased',
+                          className: 'w-full',
                         }}
                         {...field}
                       />

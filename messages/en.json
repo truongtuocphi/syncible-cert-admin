@@ -137,7 +137,8 @@
           "company": {
             "required": "Please enter your company or institution name",
             "invalid": "Please enter a valid company or institution name"
-          }
+          },
+          "country_not_found": "No countries found"
         }
       }
     }

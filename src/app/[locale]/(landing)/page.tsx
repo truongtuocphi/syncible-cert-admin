@@ -31,9 +31,11 @@ import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import { useForm, ValidationError } from '@formspree/react';
 
 import PhoneInput from 'react-phone-input-2';
+
+import imageSuccessfully from '../../../../public/successfully.png';
+
 import 'react-phone-input-2/lib/material.css';
 import '../../../style/phoneInput.css';
-import imageSuccessfully from '../../../../public/successfully.png';
 
 const Page = () => {
   const [phone, setPhone] = useState('');

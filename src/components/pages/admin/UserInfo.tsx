@@ -5,11 +5,13 @@ import React, { useState, useEffect } from 'react';
 import { signOut } from 'firebase/auth';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useLocale, useTranslations } from 'next-intl';
 import { BiUser } from 'react-icons/bi';
-import { FaUser } from 'react-icons/fa';
-import { BiGlobe } from 'react-icons/bi';
-import { FaChevronDown } from 'react-icons/fa';
+import { BiCheck } from 'react-icons/bi';
 import { BiLogOut } from 'react-icons/bi';
+import { BiGlobe } from 'react-icons/bi';
+import { FaUser } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -20,11 +22,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { auth, db, onAuthStateChanged } from '@/lib/firebase';
 import { routing, usePathname, Link } from '@/i18n/routing';
-import { useLocale, useTranslations } from 'next-intl';
-import { BiCheck } from 'react-icons/bi';
-import { ref, get, child } from 'firebase/database';
+import { auth } from '@/lib/firebase';
 import fetchDataByUid from '@/utils/fetchDataByUID';
 
 interface UserInfoProps {

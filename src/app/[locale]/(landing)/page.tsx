@@ -2,22 +2,19 @@
 
 import React, { useState } from 'react';
 
+import { useForm, ValidationError } from '@formspree/react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import PhoneInput from 'react-phone-input-2';
 
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import SuccessfullFormContact from '@/components/icons/SuccessfullFormContact';
 import SectionAbout from '@/components/pages/Home/SectionAbout';
+import SectionBlogs from '@/components/pages/Home/SectionBlogs';
+import SectionFAQ from '@/components/pages/Home/SectionFAQ';
 import SectionOurVision from '@/components/pages/Home/SectionOurVision';
 import SectionWhatWeBelieve from '@/components/pages/Home/SectionWhatWeBelieve';
-import SectionFAQ from '@/components/pages/Home/SectionFAQ';
-import SectionBlogs from '@/components/pages/Home/SectionBlogs';
-
 import { Button } from '@/components/ui/button';
-import { montserrat } from '@/components/ui/fonts';
-
-import BannerCertificate from '../../../../public/cert_example.png';
-import EthereumLogoSVG from '../../../../public/ethereum-logo.svg';
-import PolygonLogoSVG from '../../../../public/polygon-logo.svg';
-
 import {
   Dialog,
   DialogContent,
@@ -26,15 +23,14 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import { montserrat } from '@/components/ui/fonts';
 
-import { useForm, ValidationError } from '@formspree/react';
-
-import PhoneInput from 'react-phone-input-2';
+import BannerCertificate from '../../../../public/cert_example.png';
+import EthereumLogoSVG from '../../../../public/ethereum-logo.svg';
+import PolygonLogoSVG from '../../../../public/polygon-logo.svg';
 
 import 'react-phone-input-2/lib/material.css';
 import '../../../style/phoneInput.css';
-import SuccessfullFormContact from '@/components/icons/SuccessfullFormContact';
 import { useRouter } from '@/i18n/routing';
 
 const Page = () => {

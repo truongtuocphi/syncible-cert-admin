@@ -47,7 +47,7 @@ const Experience = () => {
 
   const fontSize = 40;
 
-  const typePage = pathname.get('type');
+  const typePage = pathname?.get('type');
 
   const t = useTranslations('Dapp.mintNFT');
 

@@ -32,7 +32,6 @@ import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 import SuccessIcon from '../../../../../public/success_contact_sent.svg';
 
-
 export function ContactForm({
   isOpen,
   setIsOpen,
@@ -71,6 +70,7 @@ export function ContactForm({
       if (response.status === 200) {
         // Email sent successfully
         setSuccessDialogOpen(true);
+        setIsOpen(false);
         form.reset();
         // console.log('Email sent:', response.data);
         // Optionally show a success toast or message
@@ -222,15 +222,15 @@ export function ContactForm({
     </Dialog>
     {/* Success Dialog */}
     <Dialog open={successDialogOpen} onOpenChange={setSuccessDialogOpen}>
-        <DialogContent className="max-w-md text-center">
+        <DialogContent className={`${montserrat.className } max-w-md text-center`}>
           <DialogHeader>
-            <DialogTitle>{t('form.success.header')}</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-center font-bold text-[2rem] text-[#2C2C2C]">{t('form.success.header')}</DialogTitle>
+            <DialogDescription className="text-center">
               {t('form.success.content')}
             </DialogDescription>
           </DialogHeader>
           <div>
-            <SuccessIcon className="w-32 h-32 md:w-auto md:h-auto mx-auto" />
+            <SuccessIcon className="w-32 h-32 md:w-48 md:h-48 mx-auto" />
           </div>
           <ButtonPrimary onClick={() => setSuccessDialogOpen(false)} className="focus-visible:outline-none focus-visible:ring-0">
             {t('form.success.button')}

@@ -32,13 +32,13 @@ import { useForm, ValidationError } from '@formspree/react';
 
 import PhoneInput from 'react-phone-input-2';
 
-import imageSuccessfully from '../../../../public/successfully.png';
-
 import 'react-phone-input-2/lib/material.css';
 import '../../../style/phoneInput.css';
 import SuccessfullFormContact from '@/components/icons/SuccessfullFormContact';
+import { useRouter } from '@/i18n/routing';
 
 const Page = () => {
+  const router = useRouter();
   const [phone, setPhone] = useState('');
   const [state, handleSubmit] = useForm('meoqqdvg');
 

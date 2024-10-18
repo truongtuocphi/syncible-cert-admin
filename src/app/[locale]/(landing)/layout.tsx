@@ -1,4 +1,3 @@
-// import { Link } from '@/i18n/routing';
 import Navbar from '@/components/layout/Navbar';
 import Image from 'next/image';
 import Background from '../../../../public/DoraBG.png';

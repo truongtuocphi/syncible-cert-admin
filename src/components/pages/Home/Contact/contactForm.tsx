@@ -76,16 +76,16 @@ export function ContactForm({
           setSuccessDialogOpen(true);
           setIsOpen(false);
           form.reset();
-          // console.log('Email sent:', response.data);
+          console.log('Email sent:', response.data);
           // Optionally show a success toast or message
         } else {
-          // console.error('Error sending email:', response.statusText);
+          console.error('Error sending email:', response.statusText);
           // Optionally show an error toast or message
           toast({ title: 'Error', description: response.statusText || 'Error sending email' });
         }
       })
       .catch((error) => {
-        // console.error('Error submitting form:', error);
+        console.error('Error submitting form:', error);
         // Optionally show an error toast or message
         const errorMessage = error.response?.data?.message || error.message || 'Error sending email'
         toast({ title: 'Error', description: errorMessage });

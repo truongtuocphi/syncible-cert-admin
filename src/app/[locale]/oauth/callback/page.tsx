@@ -21,7 +21,7 @@ const Page = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const code = searchParams?.get('code') || '';
-  const state = searchParams.get('state') || '';
+  const state = searchParams?.get('state') || '';
 
   const [accessToken, setAccessToken] = useState('');
 

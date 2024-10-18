@@ -20,15 +20,7 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
   const isAdminMintNFTPath = pathname === '/admin/mintnft';
 
   // Generate labels for each path
-  const labels = paths.map((path, index) => {
-    if (path.length === 42) {
-      return displayName || 'Loading...';
-    } else if (path.length === 46 && nameCertificate) {
-      return nameCertificate || 'Loading...';
-    } else {
-      return useCustomLabel(path);
-    }
-  });
+  const labels = paths.map((path) => useCustomLabel(path));
 
   const breadcrumbItems = paths
     .filter((path, index) => {
@@ -39,7 +31,18 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
     })
     .map((path, index) => {
       const href = `/${paths.slice(0, index + 1).join('/')}`;
-      const label = labels[index]; // Use pre-generated labels
+      let label = '';
+
+      if (path.length === 42) {
+        label = displayName || 'Loading...';
+      }
+
+      if (path.length === 46 && nameCertificate) {
+        label = nameCertificate || 'Loading...';
+      } else {
+        // Use the pre-calculated label for each path
+        label = labels[index];
+      }
       const truncatedLabel = label.length > 41 ? `${displayName}` : label;
 
       return { label: truncatedLabel, href };

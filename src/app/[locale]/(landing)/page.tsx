@@ -3,13 +3,15 @@
 import React from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import PhoneInput from 'react-phone-input-2';
 
+import ButtonPrimary from '@/components/common/button/ButtonPrimary';
+import SuccessfullFormContact from '@/components/icons/SuccessfullFormContact';
 import SectionAbout from '@/components/pages/Home/SectionAbout';
+import SectionBlogs from '@/components/pages/Home/SectionBlogs';
+import SectionFAQ from '@/components/pages/Home/SectionFAQ';
 import SectionOurVision from '@/components/pages/Home/SectionOurVision';
 import SectionWhatWeBelieve from '@/components/pages/Home/SectionWhatWeBelieve';
-import SectionFAQ from '@/components/pages/Home/SectionFAQ';
-import SectionBlogs from '@/components/pages/Home/SectionBlogs';
-
 import { montserrat } from '@/components/ui/fonts';
 import ContactButton from '@/components/pages/Home/Contact/button';
 

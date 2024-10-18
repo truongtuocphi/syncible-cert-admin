@@ -176,7 +176,7 @@ const Page = () => {
                               disabled={state.submitting}
                               className="w-full"
                             >
-                              Submit
+                              {transContact('button')}
                             </ButtonPrimary>
                             <div className="text-red">
                               <ValidationError errors={state.errors} />

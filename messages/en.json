@@ -106,7 +106,8 @@
       "placeInputCompany": "Your company or organization name",
       "titleInputMess": "Please describe your plan for using our platform*",
       "placeInputMess": "Type your message here",
-      "noti": "Congratulations, you have submitted successfully."
+      "noti": "Congratulations, you have submitted successfully.",
+      "button": "Submit"
     }
   },
   "BlogListPage": {

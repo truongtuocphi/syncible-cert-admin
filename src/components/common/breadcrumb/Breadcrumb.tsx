@@ -5,7 +5,6 @@ import { usePathname } from 'next/navigation';
 import { MdNavigateNext } from 'react-icons/md';
 
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
-import { useCustomLabel } from '@/utils/labelCustomization';
 import { useTranslations } from 'next-intl';
 
 interface propData {

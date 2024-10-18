@@ -31,10 +31,8 @@ import PolygonLogoSVG from '../../../../public/polygon-logo.svg';
 
 import 'react-phone-input-2/lib/material.css';
 import '../../../style/phoneInput.css';
-import { useRouter } from '@/i18n/routing';
 
 const Page = () => {
-  const router = useRouter();
   const [phone, setPhone] = useState('');
   const [state, handleSubmit] = useForm('meoqqdvg');
 

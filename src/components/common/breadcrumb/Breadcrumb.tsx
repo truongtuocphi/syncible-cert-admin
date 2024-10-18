@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { MdNavigateNext } from 'react-icons/md';
 
 import capitalizeFirstLetter from '@/utils/capitalizeFirstLetter';
-import getCustomLabel from '@/utils/labelCustomization';
+import useCustomLabel from '@/utils/labelCustomization';
 
 interface propData {
   displayName?: string;
@@ -15,7 +15,7 @@ interface propData {
 const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
   const pathname = usePathname();
 
-  const paths = pathname.split('/').filter((path) => path);
+  const paths = pathname ? pathname.split('/').filter((path) => path) : [];
 
   const isAdminMintNFTPath = pathname === '/admin/mintnft';
 
@@ -38,7 +38,7 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
       if (path.length === 46 && nameCertificate) {
         label = nameCertificate || 'Loading...';
       } else {
-        label = getCustomLabel(path);
+        label = useCustomLabel(path);
       }
 
       const truncatedLabel = label.length > 41 ? `${displayName}` : label;

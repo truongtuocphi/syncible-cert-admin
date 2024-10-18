@@ -79,4 +79,5 @@ const Breadcrumb = ({ displayName, nameCertificate }: propData) => {
   );
 };
 
+
 export default Breadcrumb;

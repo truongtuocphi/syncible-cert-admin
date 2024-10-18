@@ -36,6 +36,7 @@ import imageSuccessfully from '../../../../public/successfully.png';
 
 import 'react-phone-input-2/lib/material.css';
 import '../../../style/phoneInput.css';
+import SuccessfullFormContact from '@/components/icons/SuccessfullFormContact';
 
 const Page = () => {
   const [phone, setPhone] = useState('');
@@ -136,7 +137,6 @@ const Page = () => {
                                 country={'vn'}
                                 value={phone}
                                 onChange={handleChange}
-                                specialLabel=""
                                 inputStyle={{
                                   border: '1px solid #A2A3A9',
                                   borderRadius: '20px',
@@ -196,11 +196,7 @@ const Page = () => {
                               </DialogDescription>
                             </DialogHeader>
                             <div className="mt-10 flex w-full items-center justify-center">
-                              <Image
-                                src={imageSuccessfully}
-                                alt="image succesfully"
-                                className="h-[80%] w-[60%]"
-                              />
+                              <SuccessfullFormContact />
                             </div>
                           </DialogContent>
                         )}

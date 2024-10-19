@@ -46,11 +46,8 @@ const Experience = () => {
   const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
 
   const fontSize = 40;
-
   const typePage = pathname.get('type');
-
   const t = useTranslations('Dapp.mintNFT');
-
   const limit = pLimit(5);
 
   const handleDrop = (

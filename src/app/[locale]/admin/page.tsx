@@ -4,6 +4,7 @@ import { BiCustomize } from 'react-icons/bi';
 import { GrCertificate } from 'react-icons/gr';
 import { useTranslations } from 'next-intl';
 
+//Custom, Mint, collection
 const listCard = [
   {
     title: 'title',

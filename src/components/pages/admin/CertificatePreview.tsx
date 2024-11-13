@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 // import { QRCode } from 'react-qrcode-logo';
 import { usePathname } from 'next/navigation';
 import { QRCodeSVG } from 'qrcode.react';
-import { useRouter } from 'next/navigation';
 
 const Certificate = ({
   previewImage,

@@ -69,7 +69,7 @@ const Certificate = ({
   const finalFontSize = `${userFontSize}px`;
 
   return (
-    <div className="picture-cert relative h-full w-full">
+    <div className="relative h-full w-full">
       {/* Image */}
       <img
         id="certificate-image"
@@ -78,7 +78,7 @@ const Certificate = ({
         className="h-full w-full object-cover shadow-combinedShadow2"
       />
       {/* Name */}
-      <div className="absolute inset-0 flex items-center justify-center">
+      <div className="textName absolute inset-0 flex items-center justify-center">
         <h1
           // className="font-semibold"
           style={{

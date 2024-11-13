@@ -233,6 +233,15 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     const elements = document.querySelectorAll('.picture-cert');
 
     elements.forEach((element, index) => {
+      // Tìm các phần tử chứa văn bản trong .picture-cert (giả sử là các phần tử con của nó)
+      const textElements = element.querySelectorAll('.textName'); // Giả sử các phần tử chữ có class là .text
+
+      // Dịch chuyển các phần tử chứa chữ lên một chút
+      textElements.forEach((textElement) => {
+        const htmlTextElement = textElement as HTMLElement; // Cast phần tử sang HTMLElement
+        htmlTextElement.style.transform = 'translateY(-10px)'; // Dịch chuyển lên 10px (hoặc giá trị bạn muốn)
+      });
+
       // Cấu hình html2canvas với useCORS để tải các hình ảnh nền đúng cách
       html2canvas(element as HTMLElement, {
         useCORS: true, // Bật CORS nếu hình ảnh từ nguồn khác
@@ -244,6 +253,12 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         link.href = imageUrl;
         link.download = `certificate_image_${index + 1}.png`;
         link.click();
+
+        // Sau khi tải xong, có thể bỏ thuộc tính transform để khôi phục vị trí ban đầu
+        textElements.forEach((textElement) => {
+          const htmlTextElement = textElement as HTMLElement;
+          htmlTextElement.style.transform = ''; // Khôi phục lại vị trí ban đầu
+        });
       });
     });
   };
@@ -271,7 +286,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
       </head>
       <div className="mt-5 w-full px-0 sm:px-4">
         <div className="flex flex-col items-center justify-center md:flex-row">
-          <div className="w-full sm:w-2/3">
+          <div className="picture-cert w-full sm:w-2/3">
             <CertificatePreview
               previewImage={templateURL}
               name={name?.split('Certificate for')[1]?.trim()}

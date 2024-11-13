@@ -89,7 +89,7 @@ const Certificate = ({
           {name}
         </h1>
       </div>
-      <div className="absolute right-5 top-1/2 -translate-y-1/2 transform lg:right-10">
+      <div className="absolute right-5 top-1/2 -translate-y-1/2 transform xl:right-12">
         <div className="flex flex-col items-center gap-2">
           {pathname?.includes('/certificatedetail') && (
             <>

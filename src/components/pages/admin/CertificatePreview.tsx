@@ -93,7 +93,7 @@ const Certificate = ({
         <div className="flex flex-col items-center gap-2">
           {pathname?.includes('/certificatedetail') && (
             <>
-              <QRCodeSVG value={window.location.href} size={userFontSize + 30} fgColor="#02bd02" />
+              <QRCodeSVG value={window.location.href} size={userFontSize + 20} fgColor="#02bd02" />
               <p className="text-xs text-gray-500">NFT Check</p>
             </>
           )}

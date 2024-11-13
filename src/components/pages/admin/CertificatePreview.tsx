@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 // import { QRCode } from 'react-qrcode-logo';
+import { usePathname } from 'next/navigation';
 import { QRCodeSVG } from 'qrcode.react';
 import { useRouter } from 'next/navigation';
 
@@ -12,7 +13,7 @@ const Certificate = ({
   fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
   fontSizeMint = 40,
 }: any) => {
-  const router = useRouter();
+  const pathname = usePathname();
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
 
   useEffect(() => {
@@ -91,8 +92,12 @@ const Certificate = ({
       </div>
       <div className="absolute right-5 top-1/2 -translate-y-1/2 transform lg:right-10">
         <div className="flex flex-col items-center gap-2">
-          <QRCodeSVG value={window.location.href} size={userFontSize + 30} fgColor="#02bd02" />
-          <p className="text-xs text-gray-500">NFT Check</p>
+          {pathname?.includes('/certificatedetail') && (
+            <>
+              <QRCodeSVG value={window.location.href} size={userFontSize + 30} fgColor="#02bd02" />
+              <p className="text-xs text-gray-500">NFT Check</p>
+            </>
+          )}
         </div>
       </div>
     </div>

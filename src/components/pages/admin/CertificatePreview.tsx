@@ -14,6 +14,7 @@ const Certificate = ({
 }: any) => {
   const pathname = usePathname();
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
+  const [qrSize, setQRSize] = useState(fontSize.base);
 
   useEffect(() => {
     const isMintNFTPage = window.location.pathname.includes('mintnft');
@@ -23,6 +24,7 @@ const Certificate = ({
       let newFontSize = fontSize.base;
 
       const screenWidth = window.innerWidth;
+      let sizeQR = screenWidth > 500 ? 20 : 10;
 
       // Áp dụng logic nếu là trang mintnft
       if (isMintNFTPage) {
@@ -52,6 +54,7 @@ const Certificate = ({
         // Áp dụng fontSizeMint cho trang mintnft nếu có
         const fontsizeMintNFT = adjustedFontSize;
         setUserFontSize(isMintNFTPage ? fontsizeMintNFT : adjustedFontSize);
+        setQRSize(userFontSize + sizeQR);
       } else {
         // Nếu không có hình ảnh, đặt giá trị fontSize mới
         setUserFontSize(newFontSize);
@@ -89,13 +92,10 @@ const Certificate = ({
           {name}
         </h1>
       </div>
-      <div className="absolute right-5 top-1/2 -translate-y-1/2 transform xl:right-12">
-        <div className="flex flex-col items-center gap-2">
+      <div className={`absolute right-3 top-1/2 -translate-y-1/2 transform sm:right-8 lg:right-12`}>
+        <div className="flex flex-col items-center gap-1">
           {pathname?.includes('/certificatedetail') && (
-            <>
-              <QRCodeSVG value={window.location.href} size={userFontSize + 20} fgColor="#02bd02" />
-              <p className="text-xs text-gray-500">NFT Check</p>
-            </>
+            <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />
           )}
         </div>
       </div>

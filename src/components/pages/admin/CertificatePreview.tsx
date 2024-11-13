@@ -1,6 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+// import { QRCode } from 'react-qrcode-logo';
+import { QRCodeSVG } from 'qrcode.react';
+import { useRouter } from 'next/navigation';
 
 const Certificate = ({
   previewImage,
@@ -9,6 +12,7 @@ const Certificate = ({
   fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
   fontSizeMint = 40,
 }: any) => {
+  const router = useRouter();
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
 
   useEffect(() => {
@@ -37,7 +41,7 @@ const Certificate = ({
       // Điều chỉnh kích thước font theo kích thước hình ảnh (nếu có)
       if (image) {
         const imageWidth = image.clientWidth;
-        let adjustedFontSize = Math.max(20, imageWidth / 15);
+        let adjustedFontSize = Math.max(20, imageWidth / 25);
 
         adjustedFontSize *= 1.2;
 
@@ -65,7 +69,7 @@ const Certificate = ({
   const finalFontSize = `${userFontSize}px`;
 
   return (
-    <div className="relative h-full w-full">
+    <div className="picture-cert relative h-full w-full">
       {/* Image */}
       <img
         id="certificate-image"
@@ -84,6 +88,12 @@ const Certificate = ({
         >
           {name}
         </h1>
+      </div>
+      <div className="absolute right-5 top-1/2 -translate-y-1/2 transform lg:right-10">
+        <div className="flex flex-col items-center gap-2">
+          <QRCodeSVG value={window.location.href} size={userFontSize + 30} fgColor="#02bd02" />
+          <p className="text-xs text-gray-500">NFT Check</p>
+        </div>
       </div>
     </div>
   );

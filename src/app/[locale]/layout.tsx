@@ -41,7 +41,7 @@ export default async function RootLayout({
     <html lang={locale}>
       <head>
         <link
-          href="https://fonts.googleapis.com/css2?family=Crimson+Text:wght@700&family=Dancing+Script:wght@700&family=EB+Garamond:wght@700&family=Great+Vibes&family=MonteCarlo&family=Montserrat:wght@600&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@400&family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=Playball:wght@400&family=Prata&family=Updock&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Dancing+Script:wght@400..700&family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Great+Vibes&family=MonteCarlo&family=Montserrat:wght@600&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:wght@400&family=Noto+Serif+Display:ital,wght@0,100..900;1,100..900&family=Old+Standard+TT:wght@600&family=Playball:wght@400&family=Prata:wght@400&family=Updock:wght@400&display=swap"
           rel="stylesheet"
         />
       </head>

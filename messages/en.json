@@ -119,7 +119,7 @@
         "label": "All"
       }
     },
-    "pagination" : {
+    "pagination": {
       "label": "Page {page} of {totalPages}"
     }
   },
@@ -129,14 +129,14 @@
     "table_of_contents": {
       "label": "Table of Contents"
     },
-    "blog_info" : {
+    "blog_info": {
       "date_created": {
-        "label" : "Date Created:",
-        "value" : "2024-01-01"
+        "label": "Date Created:",
+        "value": "2024-01-01"
       },
-      "read_time": { 
-        "label" : "Read Time:",
-        "value" : "{read_time, plural, =0 {Less than a minute} =1 {1 minute} other {# minutes}}"
+      "read_time": {
+        "label": "Read Time:",
+        "value": "{read_time, plural, =0 {Less than a minute} =1 {1 minute} other {# minutes}}"
       }
     },
     "category": {
@@ -316,6 +316,8 @@
       "titleShare": "Add to LinkedIn profile",
       "subtitle_1": "Add your certification to your",
       "subtitle_2": "profile with 1 click",
+      "titleDownLoad": "Download certificate",
+      "buttonDownLoad": "Download",
       "ButtonShareMyProfile": "Add to my profile",
       "ButtonShare": "Share",
       "titleContent": "No expiration date:",

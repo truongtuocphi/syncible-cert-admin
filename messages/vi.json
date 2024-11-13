@@ -119,7 +119,7 @@
         "label": "Tất cả"
       }
     },
-    "pagination" : {
+    "pagination": {
       "label": "Trang {page} của {totalPages}"
     }
   },
@@ -129,14 +129,14 @@
     "table_of_contents": {
       "label": "Mục lục"
     },
-    "blog_info" : {
+    "blog_info": {
       "date_created": {
-        "label" : "Ngày tạo:",
-        "value" : "2024-01-01"
+        "label": "Ngày tạo:",
+        "value": "2024-01-01"
       },
-      "read_time": { 
-        "label" : "Thời gian đọc:",
-        "value" : "{read_time, plural, =0 {Ít hơn một phút} =1 {1 phút} other {# phút}}"
+      "read_time": {
+        "label": "Thời gian đọc:",
+        "value": "{read_time, plural, =0 {Ít hơn một phút} =1 {1 phút} other {# phút}}"
       }
     },
     "category": {
@@ -276,8 +276,8 @@
         "buttonPrevious": "Kế tiếp"
       },
 
-       "alert_1": "Tất cả đã được xóa thành công",
-       "alert_2": "Đã xảy ra lỗi khi xóa dữ liệu"
+      "alert_1": "Tất cả đã được xóa thành công",
+      "alert_2": "Đã xảy ra lỗi khi xóa dữ liệu"
     },
 
     "contractDetail": {
@@ -316,6 +316,8 @@
       "titleShare": "Thêm vào hồ sơ LinkedIn",
       "subtitle_1": "Thêm chứng chỉ của bạn vào",
       "subtitle_2": "hồ sơ với 1 cú nhấp chuột",
+      "titleDownLoad": "Tải chứng chỉ xuống",
+      "buttonDownLoad": "Tải xuống",
       "ButtonShareMyProfile": "Thêm vào hồ sơ của tôi",
       "ButtonShare": "Chia sẻ",
       "titleContent": "Không có ngày hết hạn:",

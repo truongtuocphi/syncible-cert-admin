@@ -358,9 +358,14 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
             <div className="col-span-1 space-y-4 xl:col-span-4">
               <div className="flex h-fit flex-col gap-8 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-4">
                 <div className="flex flex-col gap-1">
-                  <div className="text-lg font-bold lg:text-2xl">Download credential</div>
+                  <div className="text-lg font-bold lg:text-2xl">
+                    {translationCollection('titleDownLoad')}
+                  </div>
                 </div>
-                <ButtonPrimary onClick={() => downloadImageByClass()}>Download</ButtonPrimary>
+                <ButtonPrimary onClick={() => downloadImageByClass()}>
+                  {' '}
+                  {translationCollection('buttonDownLoad')}
+                </ButtonPrimary>
               </div>
               <div className="flex h-fit flex-col gap-8 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-4">
                 <div className="flex flex-col gap-1">

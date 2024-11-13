@@ -76,7 +76,7 @@ const Certificate = ({
       {/* Name */}
       <div className="absolute inset-0 flex items-center justify-center">
         <h1
-          className="font-bold"
+          // className="font-semibold"
           style={{
             fontFamily: fontFamily,
             fontSize: finalFontSize,

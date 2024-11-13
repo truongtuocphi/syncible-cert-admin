@@ -92,7 +92,7 @@ const Certificate = ({
           {name}
         </h1>
       </div>
-      <div className={`absolute right-3 top-1/2 -translate-y-1/2 transform sm:right-8 lg:right-12`}>
+      <div className={`absolute right-5 top-1/2 -translate-y-1/2 transform sm:right-8 lg:right-12`}>
         <div className="flex flex-col items-center gap-1">
           {pathname?.includes('/certificatedetail') && (
             <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />

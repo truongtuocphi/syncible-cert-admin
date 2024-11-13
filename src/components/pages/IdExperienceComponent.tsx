@@ -233,20 +233,17 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     const elements = document.querySelectorAll('.picture-cert');
 
     elements.forEach((element, index) => {
-      // Tìm các phần tử chứa văn bản trong .picture-cert (giả sử là các phần tử con của nó)
-      const textElements = element.querySelectorAll('.textName'); // Giả sử các phần tử chữ có class là .text
+      const textElements = element.querySelectorAll('.textName');
 
-      // Dịch chuyển các phần tử chứa chữ lên một chút
       textElements.forEach((textElement) => {
-        const htmlTextElement = textElement as HTMLElement; // Cast phần tử sang HTMLElement
-        htmlTextElement.style.transform = 'translateY(-10px)'; // Dịch chuyển lên 10px (hoặc giá trị bạn muốn)
+        const htmlTextElement = textElement as HTMLElement;
+        htmlTextElement.style.transform = 'translateY(-15px)';
       });
 
-      // Cấu hình html2canvas với useCORS để tải các hình ảnh nền đúng cách
       html2canvas(element as HTMLElement, {
-        useCORS: true, // Bật CORS nếu hình ảnh từ nguồn khác
-        allowTaint: true, // Cho phép vẽ hình ảnh có chứa các phần tử bị tainted
-        backgroundColor: null, // Đảm bảo không có nền trắng
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: null,
       }).then((canvas) => {
         const imageUrl = canvas.toDataURL('image/png');
         const link = document.createElement('a');
@@ -254,10 +251,9 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         link.download = `certificate_image_${index + 1}.png`;
         link.click();
 
-        // Sau khi tải xong, có thể bỏ thuộc tính transform để khôi phục vị trí ban đầu
         textElements.forEach((textElement) => {
           const htmlTextElement = textElement as HTMLElement;
-          htmlTextElement.style.transform = ''; // Khôi phục lại vị trí ban đầu
+          htmlTextElement.style.transform = '';
         });
       });
     });

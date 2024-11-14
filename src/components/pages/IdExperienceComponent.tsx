@@ -270,7 +270,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
 
       textElements.forEach((textElement) => {
         const htmlTextElement = textElement as HTMLElement;
-        htmlTextElement.style.transform = 'translateY(-15px)';
+        htmlTextElement.style.transform = 'translateY(-5px)';
       });
 
       html2canvas(element as HTMLElement, {

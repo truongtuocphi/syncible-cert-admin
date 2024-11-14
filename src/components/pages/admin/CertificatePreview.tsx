@@ -12,7 +12,6 @@ const Certificate = ({
   fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
   fontSizeMint = 40,
 }: any) => {
-  const pathname = usePathname();
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
   const [rightPosition, setRightPosition] = useState(0);
   const [qrSize, setQRSize] = useState(0);
@@ -23,15 +22,11 @@ const Certificate = ({
     const handleResize = () => {
       const image = document.getElementById('certificate-image');
       let newFontSize = fontSize.base;
-
       const screenWidth = window.innerWidth;
-      let sizeQR = screenWidth > 500 ? 20 : 10;
 
-      // Áp dụng logic nếu là trang mintnft
       if (isMintNFTPage) {
-        newFontSize = fontSizeMint; // Áp dụng fontSizeMint cho trang mintnft
+        newFontSize = fontSizeMint;
       } else {
-        // Áp dụng fontSize cho các trang khác
         if (screenWidth >= 3840) newFontSize = fontSize.xl + 25;
         else if (screenWidth >= 2560) newFontSize = fontSize.lg + 35;
         else if (screenWidth >= 1280) newFontSize = fontSize.lg - 15;
@@ -41,12 +36,11 @@ const Certificate = ({
         else if (screenWidth <= 500) newFontSize = fontSize.base - 25;
       }
 
-      // Điều chỉnh kích thước font theo kích thước hình ảnh (nếu có)
       if (image) {
         const imageWidth = image.clientWidth;
         let adjustedFontSize = Math.max(20, imageWidth / 25);
-        let adjustedQRCode = Math.max(10, imageWidth / 20);
-        let rightPosition = Math.max(10, imageWidth / 20);
+        let adjustedQRCode = Math.max(25, imageWidth / 15);
+        let rightPosition = Math.max(25, imageWidth / 20);
 
         adjustedFontSize *= 1.2;
 
@@ -54,19 +48,17 @@ const Certificate = ({
           adjustedFontSize *= 0.9;
         }
 
-        // Áp dụng fontSizeMint cho trang mintnft nếu có
         const fontsizeMintNFT = adjustedFontSize;
         setUserFontSize(isMintNFTPage ? fontsizeMintNFT : adjustedFontSize);
         setQRSize(adjustedQRCode);
         setRightPosition(rightPosition);
       } else {
-        // Nếu không có hình ảnh, đặt giá trị fontSize mới
         setUserFontSize(newFontSize);
       }
     };
 
     window.addEventListener('resize', handleResize);
-    handleResize(); // Set initial font size on mount
+    handleResize();
 
     return () => {
       window.removeEventListener('resize', handleResize);

@@ -293,7 +293,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
           ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
 
           // Convert to image and download
-          const imageUrl = scaledCanvas.toDataURL('image/jpeg', 0.9);
+          const imageUrl = scaledCanvas.toDataURL('image/jpeg', 1);
           const link = document.createElement('a');
           link.href = imageUrl;
           link.download = `certificate_image_${index + 1}.jpeg`;

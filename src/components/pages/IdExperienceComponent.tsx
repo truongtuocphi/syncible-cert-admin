@@ -229,8 +229,40 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     window.open(`${baseUrl}&${params.toString()}`, '_blank');
   }
 
+  // const downloadImageByClass = () => {
+  //   const elements = document.querySelectorAll('.picture-cert');
+
+  //   elements.forEach((element, index) => {
+  //     const textElements = element.querySelectorAll('.textName');
+
+  //     textElements.forEach((textElement) => {
+  //       const htmlTextElement = textElement as HTMLElement;
+  //       htmlTextElement.style.transform = 'translateY(-15px)';
+  //     });
+
+  //     html2canvas(element as HTMLElement, {
+  //       useCORS: true,
+  //       allowTaint: true,
+  //       backgroundColor: null,
+  //     }).then((canvas) => {
+  //       const imageUrl = canvas.toDataURL('image/png');
+  //       const link = document.createElement('a');
+  //       link.href = imageUrl;
+  //       link.download = `certificate_image_${index + 1}.png`;
+  //       link.click();
+
+  //       textElements.forEach((textElement) => {
+  //         const htmlTextElement = textElement as HTMLElement;
+  //         htmlTextElement.style.transform = '';
+  //       });
+  //     });
+  //   });
+  // };
+
   const downloadImageByClass = () => {
     const elements = document.querySelectorAll('.picture-cert');
+    const targetWidth = 900;
+    const targetHeight = 650;
 
     elements.forEach((element, index) => {
       const textElements = element.querySelectorAll('.textName');
@@ -245,12 +277,32 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         allowTaint: true,
         backgroundColor: null,
       }).then((canvas) => {
-        const imageUrl = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.href = imageUrl;
-        link.download = `certificate_image_${index + 1}.png`;
-        link.click();
+        // Create a new canvas with target dimensions
+        const scaledCanvas = document.createElement('canvas');
+        scaledCanvas.width = targetWidth;
+        scaledCanvas.height = targetHeight;
+        const ctx = scaledCanvas.getContext('2d');
 
+        if (ctx) {
+          // Enable image smoothing for better quality
+          ctx.imageSmoothingEnabled = true;
+          ctx.imageSmoothingQuality = 'high';
+
+          // Draw the original canvas onto the new canvas with scaling
+          ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
+
+          // Convert to image and download
+          const imageUrl = scaledCanvas.toDataURL('image/png', 1.0);
+          const link = document.createElement('a');
+          link.href = imageUrl;
+          link.download = `certificate_image_${index + 1}.png`;
+          link.click();
+
+          // Clean up
+          scaledCanvas.remove();
+        }
+
+        // Reset text element transforms
         textElements.forEach((textElement) => {
           const htmlTextElement = textElement as HTMLElement;
           htmlTextElement.style.transform = '';
@@ -282,7 +334,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
       </head>
       <div className="mt-5 w-full px-0 sm:px-4">
         <div className="flex flex-col items-center justify-center md:flex-row">
-          <div className="picture-cert w-full sm:w-2/3">
+          <div className="w-full sm:w-2/3">
             <CertificatePreview
               previewImage={templateURL}
               name={name?.split('Certificate for')[1]?.trim()}

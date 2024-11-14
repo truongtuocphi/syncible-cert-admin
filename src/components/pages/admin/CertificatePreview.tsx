@@ -68,8 +68,7 @@ const Certificate = ({
   const finalFontSize = `${userFontSize}px`;
 
   return (
-    <div className="relative h-full w-full">
-      {/* Image */}
+    <div className="picture-cert relative h-full w-full">
       <img
         id="certificate-image"
         src={previewImage}

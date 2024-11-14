@@ -4,17 +4,32 @@ import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { QRCodeSVG } from 'qrcode.react';
 
-const Certificate = ({
+interface CertificateProps {
+  previewImage: string;
+  name: string;
+  fontFamily?: string;
+  fontSize?: {
+    base: number;
+    sm: number;
+    md: number;
+    lg: number;
+    xl: number;
+  };
+  fontSizeMint?: number;
+}
+
+const Certificate: React.FC<CertificateProps> = ({
   previewImage,
   name,
   fontFamily = 'Dancing Script',
   fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
   fontSizeMint = 40,
-}: any) => {
+}) => {
   const pathname = usePathname();
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
   const [rightPosition, setRightPosition] = useState(0);
   const [qrSize, setQRSize] = useState(0);
+  const [isImageLoaded, setIsImageLoaded] = useState(false);
 
   useEffect(() => {
     const isMintNFTPage = window.location.pathname.includes('mintnft');
@@ -41,8 +56,6 @@ const Certificate = ({
         let adjustedFontSize = Math.max(20, imageWidth / 22);
         let adjustedQRCode = Math.max(25, imageWidth / 15);
         let rightPosition = Math.max(10, imageWidth / 20);
-
-        // adjustedFontSize *= 1.2;
 
         if (window.innerWidth >= 2560) {
           adjustedFontSize *= 0.9;
@@ -74,30 +87,32 @@ const Certificate = ({
         src={previewImage}
         alt="Certificate_Image"
         className="h-full w-full object-cover shadow-combinedShadow2"
+        onLoad={() => setIsImageLoaded(true)}
       />
-      {/* Name */}
-      <div className="textName absolute inset-0 flex items-center justify-center">
-        <h1
-          // className="font-semibold"
-          style={{
-            fontFamily: fontFamily,
-            fontSize: finalFontSize,
-          }}
-        >
-          {name}
-        </h1>
-      </div>
-      <div
-        className={`absolute top-1/2 -translate-y-1/2 transform`}
-        style={{ right: `${rightPosition}px` }}
-      >
-        <div className="flex flex-col items-center gap-1">
-          {(pathname?.includes('/certificatedetail') || pathname?.includes('/explorer')) && (
-            <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />
-          )}
-          {/* <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" /> */}
-        </div>
-      </div>
+      {isImageLoaded && (
+        <>
+          <div className="textName absolute inset-0 flex items-center justify-center">
+            <h1
+              style={{
+                fontFamily: fontFamily,
+                fontSize: finalFontSize,
+              }}
+            >
+              {name}
+            </h1>
+          </div>
+          <div
+            className="absolute top-1/2 -translate-y-1/2 transform"
+            style={{ right: `${rightPosition}px` }}
+          >
+            <div className="flex flex-col items-center gap-1">
+              {(pathname?.includes('/certificatedetail') || pathname?.includes('/explorer')) && (
+                <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />
+              )}
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

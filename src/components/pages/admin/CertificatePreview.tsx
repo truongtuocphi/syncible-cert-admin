@@ -15,7 +15,7 @@ const Certificate = ({
   const pathname = usePathname();
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
   const [rightPosition, setRightPosition] = useState(0);
-  const [qrSize, setQRSize] = useState(fontSize.base);
+  const [qrSize, setQRSize] = useState(0);
 
   useEffect(() => {
     const isMintNFTPage = window.location.pathname.includes('mintnft');
@@ -45,7 +45,7 @@ const Certificate = ({
       if (image) {
         const imageWidth = image.clientWidth;
         let adjustedFontSize = Math.max(20, imageWidth / 25);
-        let adjustedQRCode = Math.max(10, imageWidth / 15);
+        let adjustedQRCode = Math.max(10, imageWidth / 20);
         let rightPosition = Math.max(10, imageWidth / 20);
 
         adjustedFontSize *= 1.2;
@@ -101,9 +101,10 @@ const Certificate = ({
         style={{ right: `${rightPosition}px` }}
       >
         <div className="flex flex-col items-center gap-1">
-          {pathname?.includes('/certificatedetail') && (
+          {/* {pathname?.includes('/certificatedetail') && (
             <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />
-          )}
+          )} */}
+          <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />
         </div>
       </div>
     </div>

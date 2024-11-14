@@ -303,7 +303,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         </div>
 
         {changeLayout ? (
-          <div className="grid grid-cols-1 gap-6 xl:grid-cols-12 xl:grid-rows-2">
+          <div className="grid grid-cols-1 gap-6 xl:grid-cols-12">
             <div className="order-2 col-span-1 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:order-none xl:col-span-8">
               <div className="flex w-full flex-col items-start">
                 <h4 className="mb-4 text-lg font-bold  lg:text-2xl">{t('header')}</h4>

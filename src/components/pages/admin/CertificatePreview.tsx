@@ -14,6 +14,7 @@ const Certificate = ({
 }: any) => {
   const pathname = usePathname();
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
+  const [rightPosition, setRightPosition] = useState(0);
   const [qrSize, setQRSize] = useState(fontSize.base);
 
   useEffect(() => {
@@ -44,6 +45,8 @@ const Certificate = ({
       if (image) {
         const imageWidth = image.clientWidth;
         let adjustedFontSize = Math.max(20, imageWidth / 25);
+        let adjustedQRCode = Math.max(10, imageWidth / 15);
+        let rightPosition = Math.max(10, imageWidth / 20);
 
         adjustedFontSize *= 1.2;
 
@@ -54,7 +57,8 @@ const Certificate = ({
         // Áp dụng fontSizeMint cho trang mintnft nếu có
         const fontsizeMintNFT = adjustedFontSize;
         setUserFontSize(isMintNFTPage ? fontsizeMintNFT : adjustedFontSize);
-        setQRSize(userFontSize + sizeQR);
+        setQRSize(adjustedQRCode);
+        setRightPosition(rightPosition);
       } else {
         // Nếu không có hình ảnh, đặt giá trị fontSize mới
         setUserFontSize(newFontSize);
@@ -92,7 +96,10 @@ const Certificate = ({
           {name}
         </h1>
       </div>
-      <div className={`absolute right-5 top-1/2 -translate-y-1/2 transform sm:right-8 lg:right-12`}>
+      <div
+        className={`absolute top-1/2 -translate-y-1/2 transform`}
+        style={{ right: `${rightPosition}px` }}
+      >
         <div className="flex flex-col items-center gap-1">
           {pathname?.includes('/certificatedetail') && (
             <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />

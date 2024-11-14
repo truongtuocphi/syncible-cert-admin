@@ -20,7 +20,6 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ButtonPrimary from '../common/button/ButtonPrimary';
 import html2canvas from 'html2canvas';
 import { useTranslations } from 'next-intl';
-import axios from 'axios';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
 
@@ -270,7 +269,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
 
       textElements.forEach((textElement) => {
         const htmlTextElement = textElement as HTMLElement;
-        htmlTextElement.style.transform = 'translateY(-8px)';
+        htmlTextElement.style.transform = 'translateY(-9px)';
       });
 
       html2canvas(element as HTMLElement, {
@@ -278,32 +277,26 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         allowTaint: true,
         backgroundColor: null,
       }).then((canvas) => {
-        // Create a new canvas with target dimensions
         const scaledCanvas = document.createElement('canvas');
         scaledCanvas.width = targetWidth;
         scaledCanvas.height = targetHeight;
         const ctx = scaledCanvas.getContext('2d');
 
         if (ctx) {
-          // Enable image smoothing for better quality
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
 
-          // Draw the original canvas onto the new canvas with scaling
           ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
 
-          // Convert to image and download
           const imageUrl = scaledCanvas.toDataURL('image/jpeg', 1);
           const link = document.createElement('a');
           link.href = imageUrl;
           link.download = `certificate_image_${index + 1}.jpeg`;
           link.click();
 
-          // Clean up
           scaledCanvas.remove();
         }
 
-        // Reset text element transforms
         textElements.forEach((textElement) => {
           const htmlTextElement = textElement as HTMLElement;
           htmlTextElement.style.transform = '';

@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-// import { QRCode } from 'react-qrcode-logo';
 import { usePathname } from 'next/navigation';
 import { QRCodeSVG } from 'qrcode.react';
 

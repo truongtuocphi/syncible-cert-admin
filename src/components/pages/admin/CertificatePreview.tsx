@@ -40,7 +40,7 @@ const Certificate = ({
         const imageWidth = image.clientWidth;
         let adjustedFontSize = Math.max(20, imageWidth / 22);
         let adjustedQRCode = Math.max(25, imageWidth / 15);
-        let rightPosition = Math.max(25, imageWidth / 20);
+        let rightPosition = Math.max(10, imageWidth / 20);
 
         // adjustedFontSize *= 1.2;
 

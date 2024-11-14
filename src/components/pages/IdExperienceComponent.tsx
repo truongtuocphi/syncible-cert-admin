@@ -303,8 +303,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         </div>
 
         {changeLayout ? (
-          <div className="grid grid-cols-1 grid-rows-2 gap-6 xl:grid-cols-12 xl:grid-rows-1">
-            <div className="col-span-1 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-8">
+          <div className="grid grid-cols-1 gap-6 xl:grid-cols-12 xl:grid-rows-2">
+            <div className="order-2 col-span-1 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:order-none xl:col-span-8">
               <div className="flex w-full flex-col items-start">
                 <h4 className="mb-4 text-lg font-bold  lg:text-2xl">{t('header')}</h4>
                 <div className="space-y-4">
@@ -355,7 +355,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               </div>
             </div>
 
-            <div className="col-span-1 space-y-4 xl:col-span-4">
+            <div className="order-1 col-span-1 space-y-4 xl:order-none xl:col-span-4">
               <div className="flex h-fit flex-col gap-8 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-4">
                 <div className="flex flex-col gap-1">
                   <div className="text-lg font-bold lg:text-2xl">

@@ -38,11 +38,11 @@ const Certificate = ({
 
       if (image) {
         const imageWidth = image.clientWidth;
-        let adjustedFontSize = Math.max(20, imageWidth / 25);
+        let adjustedFontSize = Math.max(20, imageWidth / 22);
         let adjustedQRCode = Math.max(25, imageWidth / 15);
         let rightPosition = Math.max(25, imageWidth / 20);
 
-        adjustedFontSize *= 1.2;
+        // adjustedFontSize *= 1.2;
 
         if (window.innerWidth >= 2560) {
           adjustedFontSize *= 0.9;

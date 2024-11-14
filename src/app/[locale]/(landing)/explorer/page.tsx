@@ -205,21 +205,6 @@ export default function Explorer() {
           </div>
         )}
       </div>
-      {/* </div> */}
-      {/* <div className="relative mt-10 w-full text-black">
-          <Footer />
-        </div>
-        <div className="absolute bottom-0 left-0 right-0 top-0 flex h-full w-full flex-col items-center overflow-hidden">
-          <div className="relative -z-10 mx-auto h-full w-full max-w-[90rem]">
-            <div className="absolute -left-1/2 -top-1/2 -z-10 w-[125rem] sm:-top-[5%] sm:left-[-40%] sm:w-[150%] sm:-translate-x-[20%] sm:-translate-y-[50%]">
-              <LightBlueGradientEllipse className="h-full w-full" />
-            </div>
-            <div className="absolute -bottom-1/2 -right-1/2 -z-10 w-[125rem] sm:-translate-y-[20%] sm:translate-x-[20%]">
-              <LightBlueGradientEllipse className="h-full w-full" />
-            </div>
-          </div>
-        </div>
-      </div> */}
     </>
   );
 }

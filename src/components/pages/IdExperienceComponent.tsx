@@ -328,7 +328,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
       </head>
       <div className="mt-5 w-full px-0 sm:px-4">
         <div className="flex flex-col items-center justify-center md:flex-row">
-          <div className="w-full sm:w-2/3">
+          <div className="w-full sm:w-[80%]">
             <CertificatePreview
               previewImage={templateURL}
               name={name?.split('Certificate for')[1]?.trim()}

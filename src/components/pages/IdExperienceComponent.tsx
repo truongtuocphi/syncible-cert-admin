@@ -20,6 +20,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ButtonPrimary from '../common/button/ButtonPrimary';
 import html2canvas from 'html2canvas';
 import { useTranslations } from 'next-intl';
+import axios from 'axios';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
 
@@ -261,8 +262,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
 
   const downloadImageByClass = () => {
     const elements = document.querySelectorAll('.picture-cert');
-    const targetWidth = 900;
-    const targetHeight = 650;
+    const targetWidth = 2000;
+    const targetHeight = 1404;
 
     elements.forEach((element, index) => {
       const textElements = element.querySelectorAll('.textName');
@@ -292,7 +293,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
           ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
 
           // Convert to image and download
-          const imageUrl = scaledCanvas.toDataURL('image/png', 1.0);
+          const imageUrl = scaledCanvas.toDataURL('image/png', 5.0);
           const link = document.createElement('a');
           link.href = imageUrl;
           link.download = `certificate_image_${index + 1}.png`;

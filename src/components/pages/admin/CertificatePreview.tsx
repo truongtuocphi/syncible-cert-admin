@@ -11,6 +11,7 @@ const Certificate = ({
   fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
   fontSizeMint = 40,
 }: any) => {
+  const pathname = usePathname();
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
   const [rightPosition, setRightPosition] = useState(0);
   const [qrSize, setQRSize] = useState(0);
@@ -92,10 +93,10 @@ const Certificate = ({
         style={{ right: `${rightPosition}px` }}
       >
         <div className="flex flex-col items-center gap-1">
-          {/* {pathname?.includes('/certificatedetail') && (
+          {(pathname?.includes('/certificatedetail') || pathname?.includes('/explorer')) && (
             <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />
-          )} */}
-          <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />
+          )}
+          {/* <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" /> */}
         </div>
       </div>
     </div>

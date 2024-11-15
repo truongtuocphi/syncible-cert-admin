@@ -43,7 +43,7 @@ interface UserInfo {
 const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [dataUser, setDataUser] = useState<UserInfo | null>(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   const router = useRouter();
 
@@ -58,7 +58,7 @@ const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
     const fetchData = async () => {
       const data = await fetchDataByUid(user.uid);
       setDataUser(data);
-      setLoading(false);
+      // setLoading(false);
     };
 
     fetchData();

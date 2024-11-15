@@ -15,7 +15,6 @@ import { useTranslations } from 'next-intl';
 
 const Header = () => {
   const { open } = useWeb3Modal();
-  const { disconnect } = useDisconnect();
   const { address, isConnected } = useAccount();
 
   const [user, setUser] = useState<any>(null);

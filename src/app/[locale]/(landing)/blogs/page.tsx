@@ -16,19 +16,19 @@ import { BlogCardSkeleton } from '@/components/common/skeleton/Skeleton';
 import clsx from 'clsx';
 
 export default function Page() {
+  const postsPerPage = 9;
+  const locale = useLocale();
   const t = useTranslations('BlogListPage');
+  const categoryFilterRef = useRef<HTMLDivElement>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>(1);
-  const postsPerPage = 9;
   const [categories, setCategories] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [posts, setPosts] = useState<ArticleEntry[]>([]);
   const [loading, setLoading] = useState(true);
-  const locale = useLocale();
   const [lastScrollY, setLastScrollY] = useState(0);
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>('up');
   const [isCategoryFilterAtTop, setIsCategoryFilterAtTop] = useState(false);
-  const categoryFilterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function loadCategories() {

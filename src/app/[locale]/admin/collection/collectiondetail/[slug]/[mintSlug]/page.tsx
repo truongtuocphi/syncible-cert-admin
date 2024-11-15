@@ -45,7 +45,7 @@ const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
       </div>
       <div className="flex items-center gap-2">
         <Link href={`/admin/collection/collectiondetail/${dataContract}`}>
-          <ButtonPrimary className="rounded-lg bg-blue-500">
+          <ButtonPrimary className="rounded-lg">
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
         </Link>

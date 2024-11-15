@@ -20,6 +20,7 @@ export default function Page() {
   const locale = useLocale();
   const t = useTranslations('BlogListPage');
   const categoryFilterRef = useRef<HTMLDivElement>(null);
+
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState<number>(1);
   const [categories, setCategories] = useState<any[]>([]);
@@ -58,26 +59,23 @@ export default function Page() {
 
         const mappedPosts = await Promise.all(
           data.map(async (post: any) => {
-            // Fetch featured media (banner image) if available
             let bannerImg = '/SyncibleSmallerBanner.png';
             if (post.featured_media) {
               const mediaResponse = await fetchMediaById(post.featured_media);
-              bannerImg = mediaResponse.source_url || bannerImg; // Ensure a default empty string if no image
+              bannerImg = mediaResponse.source_url || bannerImg;
             }
 
-            // Fetch author details
             const authorResponse = await fetchAuthorById(post.author);
             const author = {
               name: authorResponse.name,
-              avatar_url: authorResponse.avatar_urls['96'], // Use the 96px avatar size
-              description: authorResponse.description, // Assuming a default position; you could add a custom field for this
+              avatar_url: authorResponse.avatar_urls['96'],
+              description: authorResponse.description,
             };
 
-            // Map to your ArticleEntry structure
             return {
               title: post.title.rendered,
               link: `/blogs/${post.slug}`,
-              bannerImg: bannerImg || '/SyncibleSmallerBanner.png', // Use a default image if no banner
+              bannerImg: bannerImg || '/SyncibleSmallerBanner.png',
               author: author,
             };
           })

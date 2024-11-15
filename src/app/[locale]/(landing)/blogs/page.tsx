@@ -25,10 +25,10 @@ export default function Page() {
   const [posts, setPosts] = useState<ArticleEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const locale = useLocale();
-  const [lastScrollY, setLastScrollY] = useState(0); // For scroll detection
-  const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>('up'); // State to handle category filter visibility
-  const [isCategoryFilterAtTop, setIsCategoryFilterAtTop] = useState(false); // Handle when the category filter reaches the top
-  const categoryFilterRef = useRef<HTMLDivElement>(null); // Reference to category filter
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>('up');
+  const [isCategoryFilterAtTop, setIsCategoryFilterAtTop] = useState(false);
+  const categoryFilterRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     async function loadCategories() {
@@ -105,9 +105,8 @@ export default function Page() {
       if (window.innerWidth < 768) {
         if (categoryFilterTop <= 0 && !isCategoryFilterAtTop) {
           setIsCategoryFilterAtTop(true); // Trigger sticky behavior
-        } 
-        if (categoryFilterTop >= 73  && isCategoryFilterAtTop) {
-          
+        }
+        if (categoryFilterTop >= 73 && isCategoryFilterAtTop) {
           setIsCategoryFilterAtTop(false);
         }
 
@@ -119,8 +118,7 @@ export default function Page() {
           }
         }
         setLastScrollY(currentScrollY);
-      }
-      else {
+      } else {
         setIsCategoryFilterAtTop(false);
         setScrollDirection(null);
       }
@@ -163,7 +161,7 @@ export default function Page() {
           id="category-filter"
           ref={categoryFilterRef}
           className={clsx(
-            'sticky top-0 z-20 text-[#A2A3A9] transition-transform duration-300 ease-in-out md:static w-full md:px-8 xl:px-32',
+            'sticky top-0 z-20 w-full text-[#A2A3A9] transition-transform duration-300 ease-in-out md:static md:px-8 xl:px-32',
             {
               'bg-white/50 backdrop-blur-[50px]': isCategoryFilterAtTop, // blurred background when sticky
               'translate-y-[4.5rem]': isCategoryFilterAtTop && scrollDirection === 'up', // transition down when scrolling up
@@ -171,7 +169,7 @@ export default function Page() {
             }
           )}
         >
-          <div className="flex space-x-4 overflow-x-auto no-scrollbar font-semibold border-b border-[#CCCCCC] px-4 md:px-0">
+          <div className="no-scrollbar flex space-x-4 overflow-x-auto border-b border-[#CCCCCC] px-4 font-semibold md:px-0">
             <div
               className={clsx('w-fit flex-shrink-0 cursor-pointer py-4', {
                 'border-b-2 border-[#2C2C2C] text-[#2C2C2C]': selectedCategory === null,

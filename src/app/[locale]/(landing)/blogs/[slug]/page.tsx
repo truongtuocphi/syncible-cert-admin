@@ -142,6 +142,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                   </div>
                 </div>
               </div>
+
               {/* Render table content */}
               <div
                 id="table-content"
@@ -178,6 +179,7 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
                   </div>
                 </div>
               </div>
+
               {/* Render blog content */}
               <div
                 id="content-section"

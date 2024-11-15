@@ -14,11 +14,7 @@ import ABI from '@/contract/ABI.json';
 import { db, ref, get, onAuthStateChanged, auth } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
 import { Folder } from '@/types/variable';
-import configDate from '@/utils/configDate';
 import getAcronym from '@/utils/getAcronym';
-import { saveMintData } from '@/utils/saveMintData';
-
-import CertificatePreview from '../admin/CertificatePreview';
 
 interface Collection {
   id: string;

@@ -55,7 +55,7 @@ const Certificate: React.FC<CertificateProps> = ({
         const imageWidth = image.clientWidth;
         let adjustedFontSize = Math.max(20, imageWidth / 22);
         let adjustedQRCode = Math.max(25, imageWidth / 15);
-        let rightPosition = Math.max(10, imageWidth / 20);
+        let rightPosition = Math.max(10, imageWidth / 9);
 
         if (window.innerWidth >= 2560) {
           adjustedFontSize *= 0.9;
@@ -102,12 +102,12 @@ const Certificate: React.FC<CertificateProps> = ({
             </h1>
           </div>
           <div
-            className="absolute top-1/2 -translate-y-1/2 transform"
+            className="absolute top-[35%] -translate-y-1/2 transform"
             style={{ right: `${rightPosition}px` }}
           >
             <div className="flex flex-col items-center gap-1">
               {(pathname?.includes('/certificatedetail') || pathname?.includes('/explorer')) && (
-                <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#02bd02" />
+                <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#14203a" />
               )}
             </div>
           </div>

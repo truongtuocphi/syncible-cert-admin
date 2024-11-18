@@ -10,7 +10,6 @@ import { useRouter } from 'next/navigation';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { IoIosArrowBack } from 'react-icons/io';
 
-import { GoogleIcon } from '@/assets/icons';
 import { auth, db, set, ref } from '@/lib/firebase';
 import { signInWithPopup, provider } from '@/lib/firebase';
 import { IoIosArrowRoundBack } from 'react-icons/io';

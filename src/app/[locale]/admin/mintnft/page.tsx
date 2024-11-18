@@ -29,20 +29,20 @@ const Experience = () => {
   const router = useRouter();
   const { address } = useAccount();
 
-  const [isModalOpen, setIsModalOpen] = useState(true);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
   const [bannerImage, setBannerImage] = useState<string | null>(null);
   const [fileBannerImage, setFileBannerImage] = useState<string>('');
   const [role, setRole] = useState<'Teacher' | 'Student'>('Student');
-  const [issuedDate, setIssuedDate] = useState('');
+  const [issuedDate, setIssuedDate] = useState<string>('');
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
-  const [collectionContractAddress, setcollectionContractAddress] = useState('');
+  const [collectionContractAddress, setcollectionContractAddress] = useState<string>('');
   const [csvDataFromChild, setCsvDataFromChild] = useState<any[]>([]);
   const [dataFromMintSingle, setDataFromMintSingle] = useState<any[]>([]);
   const [coppyCsvDataFromChild, setCoppyCsvDataFromChild] = useState<any[]>([]);
-  const [loadingButton, setLoadingButton] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loadingButton, setLoadingButton] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [loadingBanner, setLoadingBanner] = useState<boolean>(false);
-  const [tokenLink, setTokenLink] = useState('');
+  const [tokenLink, setTokenLink] = useState<string>('');
   const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
 
   const fontSize = 40;

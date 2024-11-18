@@ -5,10 +5,8 @@ import { useEffect, useState } from 'react';
 import { setPersistence } from 'firebase/auth';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaArrowLeft } from 'react-icons/fa';
 
-import { GoogleIcon } from '@/assets/icons';
-import Loading from '@/components/common/loading/Loading';
 import {
   auth,
   signInWithEmailAndPassword,
@@ -18,7 +16,6 @@ import {
   browserSessionPersistence,
 } from '@/lib/firebase';
 import Link from 'next/link';
-import { IoIosArrowRoundBack } from 'react-icons/io';
 import base64url from 'base64-url';
 import { sha256 } from '@noble/hashes/sha256';
 import { v4 as uuid } from 'uuid';
@@ -60,13 +57,10 @@ export default function Login() {
       await setPersistence(auth, browserSessionPersistence);
       await signInWithEmailAndPassword(auth, email, password);
     } catch (error: any) {
-      // Chuyển `error` thành kiểu `any` để có thể truy cập thông tin lỗi chi tiết
       setLoading(false);
 
-      // Log chi tiết lỗi ra console để dễ dàng kiểm tra
       console.error('Login error:', error);
 
-      // Hiển thị thông báo lỗi chi tiết dựa trên mã lỗi từ Firebase
       if (error.code === 'auth/wrong-password') {
         setError('Incorrect password.');
       } else if (error.code === 'auth/user-not-found') {

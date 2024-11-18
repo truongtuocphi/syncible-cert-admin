@@ -24,6 +24,24 @@ import ABI from '@/contract/ABI.json';
 import pLimit from 'p-limit';
 import uploadMetadataWithRetry from '@/utils/uploadMetadataWithRetry';
 
+const fontOptions: string[] = [
+  'MonteCarlo',
+  'Noto Serif',
+  'Crimson Text',
+  'Great Vibes',
+  'Dancing Script',
+  'EB Garamond',
+  'Montserrat',
+  'Open Sans',
+  'Playfair Display',
+  'Roboto',
+  'Noto Serif Display',
+  'Old Standard TT',
+  'Playball',
+  'Prata',
+  'Updock',
+];
+
 const Experience = () => {
   const pathname = useSearchParams();
   const router = useRouter();
@@ -210,7 +228,6 @@ const Experience = () => {
     fetchData();
   }, [address]);
 
-  // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
   useEffect(() => {
     if (selectedContract.length > 0) {
       setcollectionContractAddress(selectedContract[0].contractAddress);
@@ -419,21 +436,11 @@ const Experience = () => {
                     required
                     className="mt-1 block w-1/2 rounded-2xl border border-gray-300 px-2 py-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-base"
                   >
-                    <option value="MonteCarlo">MonteCarlo</option>
-                    <option value="Noto Serif">Noto Serif</option>
-                    <option value="Crimson Text">Crimson Text</option>
-                    <option value="Great Vibes">Great Vibes</option>
-                    <option value="Dancing Script">Dancing Script</option>
-                    <option value="EB Garamond">EB Garamond</option>
-                    <option value="Montserrat">Montserrat</option>
-                    <option value="Open Sans">Open Sans</option>
-                    <option value="Playfair Display">Playfair Display</option>
-                    <option value="Roboto">Roboto</option>
-                    <option value="Noto Serif Display">Noto Serif Display</option>
-                    <option value="Old Standard TT">Old Standard TT</option>
-                    <option value="Playball">Playball</option>
-                    <option value="Prata">Prata</option>
-                    <option value="Updock">Updock</option>
+                    {fontOptions.map((font) => (
+                      <option key={font} value={font}>
+                        {font}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>

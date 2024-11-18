@@ -121,23 +121,20 @@ const Experience = () => {
     setCoppyCsvDataFromChild([]);
   };
 
-  const calculateGasLimit = (
-    mintCount: number,
-    estimateGasPerMint: number,
-    bufferMultiplier: number
-  ) => {
-    // Calculate base gas
-    const baseGas = estimateGasPerMint * mintCount;
+  // const calculateGasLimit = (
+  //   mintCount: number,
+  //   estimateGasPerMint: number,
+  //   bufferMultiplier: number
+  // ) => {
+  //   const baseGas = estimateGasPerMint * mintCount;
 
-    // Add buffer and potential overhead
-    const gasWithBuffer = Math.ceil(baseGas * bufferMultiplier);
+  //   const gasWithBuffer = Math.ceil(baseGas * bufferMultiplier);
 
-    // Set reasonable minimum and maximum
-    const minGas = 100000;
-    const maxGas = 15000000;
+  //   const minGas = 100000;
+  //   const maxGas = 15000000;
 
-    return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
-  };
+  //   return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
+  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -194,15 +191,15 @@ const Experience = () => {
         );
 
         if (mintDataArray.length > 0) {
-          // const finalGas = 10000000 * mintDataArray.length;
-          // const tx = await contract.mintBulk(mintDataArray, {
-          //   gasLimit: finalGas,
-          // });
-          const estimateGasPerMint = 300000; // Base gas estimate for a single mint
-          const bufferMultiplier = 1.2; // Add 20% buffer for safety
+          const finalGas = 10000000 * mintDataArray.length;
           const tx = await contract.mintBulk(mintDataArray, {
-            gasLimit: calculateGasLimit(mintDataArray.length, estimateGasPerMint, bufferMultiplier),
+            gasLimit: finalGas,
           });
+          // const estimateGasPerMint = 300000;
+          // const bufferMultiplier = 1.2;
+          // const tx = await contract.mintBulk(mintDataArray, {
+          //   gasLimit: calculateGasLimit(mintDataArray.length, estimateGasPerMint, bufferMultiplier),
+          // });
 
           await tx.wait();
           alert('Chứng chỉ được tạo thành công!');

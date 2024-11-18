@@ -1,14 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
-
+import { useSearchParams } from 'next/navigation';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import IdExperienceComponent from '@/components/pages/IdExperienceComponent';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
-import { useSearchParams } from 'next/navigation';
-import { useTranslations } from 'next-intl';
 
 const IdExperience = ({ params }: { params: { mintSlug: string } }) => {
   const [dataContract, setDataContract] = useState(null);

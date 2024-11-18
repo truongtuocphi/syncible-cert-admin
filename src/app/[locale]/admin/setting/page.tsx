@@ -68,7 +68,6 @@ export default function Setting() {
   });
 
   useEffect(() => {
-    // Cleanup function to unwatch when the component unmounts
     return () => {
       unwatch();
     };
@@ -77,17 +76,14 @@ export default function Setting() {
   useEffect(() => {
     const storedChainId = localStorage.getItem('chainId');
     if (storedChainId) {
-      // Chuyển đổi sang số nếu có giá trị
       setGetChain(Number(storedChainId));
     }
   }, []);
 
-  // Nếu đang loading, hiển thị component Loading
   if (loading) {
     return <Loading />;
   }
 
-  // Nếu userData không tồn tại sau khi đã load xong, hiển thị thông báo
   if (!userData) {
     return <div>No user data available</div>;
   }

@@ -1,11 +1,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowLeft } from 'react-icons/fa';
-
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Loading from '@/components/common/loading/Loading';
 import ContractData from '@/components/pages/admin/ContractData';
@@ -94,7 +92,6 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
                 <span className="text-base font-bold text-black">{itemsCount} </span>
                 <span className="text-base text-gray-600">{t('titleItem')}</span>
               </div>
-
               <div className="text-center">
                 <span className="text-base font-bold text-black">1 </span>
                 <span className="text-base text-gray-600">{t('titleOwner')}</span>
@@ -103,7 +100,6 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
             <p className="mt-4 text-base text-gray-600">{data.description}</p>
           </div>
         </div>
-
         <div className="mt-6 flex h-fit w-full items-center justify-center">
           <ContractData
             collectionContractAddress={slugPost}

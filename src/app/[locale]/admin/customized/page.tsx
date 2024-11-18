@@ -110,30 +110,10 @@ const editorDefaults = getEditorDefaults({
       // });
       imageState.annotation = imageState.annotation.filter((_: any, index: any) => index !== 0);
 
-      // Return updated image state
       return imageState;
     },
   },
 });
-
-// const editorDefaults = {
-//   utils: ['crop', 'filter', 'finetune', 'sticker', 'annotate'],
-//   imageReader: createDefaultImageReader(),
-//   imageWriter: createDefaultImageWriter(),
-//   shapePreprocessor: createDefaultShapePreprocessor(),
-//   ...plugin_filter_defaults,
-//   ...plugin_sticker_locale_en_gb,
-//   ...plugin_annotate,
-//   ...markup_editor_defaults,
-//   locale: {
-//     ...LocaleCore,
-//     ...LocaleCrop,
-//     ...LocaleFilter,
-//     ...LocaleAnnotate,
-//     ...LocaleSticker,
-//     ...LocaleMarkupEditor,
-//   },
-// };
 
 export default function DefineTemplate() {
   const [result, setResult] = useState('');

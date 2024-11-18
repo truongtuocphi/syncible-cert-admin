@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-page-custom-font */
 import '../globals.css';
 import 'react-toastify/dist/ReactToastify.css';
 import type { Metadata } from 'next';
@@ -8,7 +7,7 @@ import { inter } from '@/components/ui/fonts';
 
 import { getMessages } from 'next-intl/server';
 import { NextIntlClientProvider } from 'next-intl';
-import Favicon from './/favicon.ico';
+import Favicon from './favicon.ico';
 
 export const metadata: Metadata = {
   title: 'Syncible | Tokenized Academic Certificate on Blockchain',

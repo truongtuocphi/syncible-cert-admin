@@ -50,7 +50,7 @@ export default function CollectionDetail({ params }: { params: { slug: string } 
       </div>
       <div className="flex items-center gap-2">
         <Link href={`/admin/collection/`}>
-          <ButtonPrimary className="rounded-lg py-2">
+          <ButtonPrimary className="rounded-lg px-3 py-2">
             <FaArrowLeft className="text-xl text-white" />
           </ButtonPrimary>
         </Link>

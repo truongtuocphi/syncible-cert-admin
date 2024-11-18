@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { setPersistence } from 'firebase/auth';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 import { GoogleIcon } from '@/assets/icons';
 import Loading from '@/components/common/loading/Loading';
@@ -225,13 +225,19 @@ export default function Login() {
             </div>
           </div> */}
 
-          <Image
-            src="/SyncibleAdmin.png"
-            style={{ width: '110px', height: 'auto' }}
-            alt="logo"
-            width={110}
-            height={30}
-          />
+          <div className="flex items-center justify-between p-4 lg:p-0">
+            <Image
+              src="/SyncibleAdmin.png"
+              style={{ width: '110px', height: 'auto' }}
+              alt="logo"
+              width={110}
+              height={30}
+            />
+            <Link href="/" className="flex items-center gap-2">
+              <FaArrowLeft />
+              Back
+            </Link>
+          </div>
           <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="flex flex-col gap-3 text-center">
               <h2 className="text-3xl font-bold">Sign in to Syncible!</h2>

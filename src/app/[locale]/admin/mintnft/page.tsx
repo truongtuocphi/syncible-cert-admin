@@ -121,6 +121,24 @@ const Experience = () => {
     setCoppyCsvDataFromChild([]);
   };
 
+  const calculateGasLimit = (
+    mintCount: number,
+    estimateGasPerMint: number,
+    bufferMultiplier: number
+  ) => {
+    // Calculate base gas
+    const baseGas = estimateGasPerMint * mintCount;
+
+    // Add buffer and potential overhead
+    const gasWithBuffer = Math.ceil(baseGas * bufferMultiplier);
+
+    // Set reasonable minimum and maximum
+    const minGas = 100000;
+    const maxGas = 15000000;
+
+    return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!address) {
@@ -176,9 +194,14 @@ const Experience = () => {
         );
 
         if (mintDataArray.length > 0) {
-          const finalGas = 10000000 * mintDataArray.length;
+          // const finalGas = 10000000 * mintDataArray.length;
+          // const tx = await contract.mintBulk(mintDataArray, {
+          //   gasLimit: finalGas,
+          // });
+          const estimateGasPerMint = 300000; // Base gas estimate for a single mint
+          const bufferMultiplier = 1.2; // Add 20% buffer for safety
           const tx = await contract.mintBulk(mintDataArray, {
-            gasLimit: finalGas,
+            gasLimit: calculateGasLimit(mintDataArray.length, estimateGasPerMint, bufferMultiplier),
           });
 
           await tx.wait();

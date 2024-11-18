@@ -33,7 +33,6 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  //login
   const [codeVerifier, setCodeVerifier] = useState('');
   const [codeChallenge, setCodeChallenge] = useState('');
   const clientId = process.env.NEXT_PUBLIC_ID_BASAL;

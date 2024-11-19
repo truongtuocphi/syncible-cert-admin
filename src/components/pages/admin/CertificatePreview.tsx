@@ -8,6 +8,7 @@ interface CertificateProps {
   previewImage: string;
   name: string;
   fontFamily?: string;
+  IdentifierPinata?: string;
   fontSize?: {
     base: number;
     sm: number;
@@ -23,6 +24,7 @@ const Certificate = (props: CertificateProps) => {
     previewImage,
     name,
     fontFamily = 'Dancing Script',
+    IdentifierPinata,
     fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
     fontSizeMint = 40,
   } = props;
@@ -109,7 +111,15 @@ const Certificate = (props: CertificateProps) => {
           >
             <div className="flex flex-col items-center gap-1">
               {(pathname?.includes('/certificatedetail') || pathname?.includes('/explorer')) && (
-                <QRCodeSVG value={window.location.href} size={qrSize} fgColor="#14203a" />
+                <QRCodeSVG
+                  value={
+                    IdentifierPinata
+                      ? `https://www.syncible.io/en/certificatedetail/${IdentifierPinata}`
+                      : window.location.pathname
+                  }
+                  size={qrSize}
+                  fgColor="#14203a"
+                />
               )}
             </div>
           </div>

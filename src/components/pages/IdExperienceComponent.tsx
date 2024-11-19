@@ -311,21 +311,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
 
   return (
     <>
-      <head>
-        <title>Nền Tảng Chứng Chỉ NFT Syncible</title>
-        <meta property="og:title" content={'Nền Tảng Chứng Chỉ NFT Syncible'} />
-        <meta
-          property="og:description"
-          content={'website cung cấp Chứng Chỉ NFT được Syncible phát hành'}
-        />
-        <meta
-          property="og:image"
-          content={
-            'https://gateway.pinata.cloud/ipfs/QmVQUxa7ERzgnpqhFzXo9SyUKGs3wEieDLBaqpgig7fP7J'
-          }
-        />
-        <meta property="og:url" content={`${linkWeb}/${slugPost}`} />
-      </head>
       <div className="mt-5 w-full px-0 sm:px-4">
         <div className="flex flex-col items-center justify-center md:flex-row">
           <div className="w-full sm:w-[80%]">

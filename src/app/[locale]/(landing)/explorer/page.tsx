@@ -181,6 +181,7 @@ export default function Explorer() {
                     previewImage={item[4][1]}
                     name={item[1]}
                     fontFamily={item.fontFamily}
+                    IdentifierPinata={item[3]}
                   />
                 </Link>
               ))}
@@ -192,6 +193,7 @@ export default function Explorer() {
                   previewImage={data.mintData[0][4][1]}
                   name={data.mintData[0][1]}
                   fontFamily={data.mintData[0].fontFamily}
+                  IdentifierPinata={data.mintData[0][3]}
                 />
               </Link>
             </div>

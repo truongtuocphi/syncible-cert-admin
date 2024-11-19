@@ -161,11 +161,10 @@ export default function FileStorage() {
                       required
                     />
                   </div>
-                  <ButtonPrimary type="submit">Create folder</ButtonPrimary>
+                  <ButtonPrimary type="submit">Create Folder</ButtonPrimary>
                 </form>
               </DialogContent>
             </Dialog>
-
             <button
               onClick={toggleDeleteMode}
               className={`rounded-full px-4 py-2 text-white ${isDeleteMode ? 'bg-gray-500' : 'bg-red-500'}`}

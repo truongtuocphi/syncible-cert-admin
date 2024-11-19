@@ -17,12 +17,10 @@ if (!projectId) throw new Error('Project ID is not defined');
 const metadata = {
   name: 'Basalwallet',
   description: 'Basalwallet',
-  url: '', // origin must match your domain & subdomain
+  url: '',
   icons: [],
 };
 
-// Create wagmiConfig
-// const chains = [mainnet, sepolia] as const;
 export const config = defaultWagmiConfig({
   chains: network,
   projectId,

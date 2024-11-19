@@ -159,7 +159,6 @@ const Experience = () => {
                 };
 
                 const tokenURI = await uploadMetadataWithRetry(metadata, 3);
-                // const tokenURI = '';
                 if (tokenURI) {
                   setTokenLink(tokenURI);
                 }

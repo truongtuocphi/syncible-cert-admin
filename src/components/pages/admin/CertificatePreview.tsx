@@ -18,13 +18,15 @@ interface CertificateProps {
   fontSizeMint?: number;
 }
 
-const Certificate: React.FC<CertificateProps> = ({
-  previewImage,
-  name,
-  fontFamily = 'Dancing Script',
-  fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
-  fontSizeMint = 40,
-}) => {
+const Certificate = (props: CertificateProps) => {
+  const {
+    previewImage,
+    name,
+    fontFamily = 'Dancing Script',
+    fontSize = { base: 40, sm: 45, md: 50, lg: 55, xl: 60 },
+    fontSizeMint = 40,
+  } = props;
+
   const pathname = usePathname();
   const [userFontSize, setUserFontSize] = useState(fontSize.base);
   const [rightPosition, setRightPosition] = useState(0);

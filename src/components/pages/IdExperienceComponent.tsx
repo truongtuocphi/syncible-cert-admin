@@ -229,36 +229,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     window.open(`${baseUrl}&${params.toString()}`, '_blank');
   }
 
-  // const downloadImageByClass = () => {
-  //   const elements = document.querySelectorAll('.picture-cert');
-
-  //   elements.forEach((element, index) => {
-  //     const textElements = element.querySelectorAll('.textName');
-
-  //     textElements.forEach((textElement) => {
-  //       const htmlTextElement = textElement as HTMLElement;
-  //       htmlTextElement.style.transform = 'translateY(-15px)';
-  //     });
-
-  //     html2canvas(element as HTMLElement, {
-  //       useCORS: true,
-  //       allowTaint: true,
-  //       backgroundColor: null,
-  //     }).then((canvas) => {
-  //       const imageUrl = canvas.toDataURL('image/png');
-  //       const link = document.createElement('a');
-  //       link.href = imageUrl;
-  //       link.download = `certificate_image_${index + 1}.png`;
-  //       link.click();
-
-  //       textElements.forEach((textElement) => {
-  //         const htmlTextElement = textElement as HTMLElement;
-  //         htmlTextElement.style.transform = '';
-  //       });
-  //     });
-  //   });
-  // };
-
   const downloadImageByClass = () => {
     const elements = document.querySelectorAll('.picture-cert');
     const targetWidth = 2000;
@@ -332,7 +302,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
             </p>
           </div>
         </div>
-
         {changeLayout ? (
           <div className="grid grid-cols-1 gap-6 xl:grid-cols-12">
             <div className="order-2 col-span-1 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:order-none xl:col-span-8">
@@ -499,107 +468,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
                 </div>
               </div>
             </div>
-
-            {/* <div className="col-span-1 flex h-fit flex-col gap-8 rounded-3xl border-[1px] border-[#F0F0F0] bg-white/50 p-6 backdrop-blur-2xl xl:col-span-4">
-              <div className="flex flex-col gap-1">
-                <div className="text-lg font-bold lg:text-2xl">{t('header_2')}</div>
-                <div className="text-[#A2A3A9]">{t('label')}</div>
-              </div>
-              <div className="flex items-center justify-between gap-4">
-                {listSocialMedia.map((social, index) => (
-                  <>
-                    {index === 0 ? (
-                      <Dialog>
-                        <DialogTrigger asChild>
-                          <div
-                            className="flex flex-grow cursor-pointer justify-center rounded-xl p-3 shadow-combinedShadow2"
-                            key={index}
-                          >
-                            {social.icon}
-                          </div>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-[576px] ">
-                          <div>
-                            <div className="text-center">
-                              <h1 className="text-4xl font-bold">
-                                {translationCollection('titleShare')}
-                              </h1>
-                              <p className="mt-3 text-base text-gray-500">
-                                {translationCollection('subtitle_1')}{' '}
-                                <span className="font-bold text-black">LinkedIn</span> 
-                                {translationCollection('subtitle_2')}
-                              </p>
-                            </div>
-
-                            <ButtonPrimary
-                              onClick={() =>
-                                generateLinkedInCertificationLink(
-                                  'Certificate',
-                                  'Syncible',
-                                  date,
-                                  date,
-                                  certificateID,
-                                  linkWeb
-                                )
-                              }
-                              className="mt-10 w-full rounded-full shadow-combinedShadow1"
-                            >
-                              {translationCollection('ButtonShareMyProfile')}
-                            </ButtonPrimary>
-
-                            <nav className="list mt-10">
-                              <ul className="list-inside list-disc text-gray-400">
-                                <li className="mt-2">
-                                  {translationCollection('titleContent')}{' '}
-                                  <span className="font-bold text-black">
-                                    {translationCollection('subContent_1')}{' '}
-                                  </span>
-                                </li>
-                                <li className="mt-2 ">{translationCollection('subContent_2')}</li>
-                              </ul>
-                            </nav>
-
-                            <ButtonPrimary
-                              className="mt-10 w-full rounded-full shadow-combinedShadow1"
-                              onClick={() =>
-                                shareOnLinkedIn(
-                                  'Chứng chỉ blockchain',
-                                  'Chứng chỉ về blockchain được cấp bởi tổ chức Syncible',
-                                  linkWeb
-                                )
-                              }
-                            >
-                              {translationCollection('ButtonShare')}
-                            </ButtonPrimary>
-                          </div>
-                        </DialogContent>
-                      </Dialog>
-                    ) : (
-                      <Link
-                        href={`${social.url}${linkWeb}`}
-                        className="flex flex-grow justify-center rounded-xl p-3 shadow-combinedShadow2"
-                        target={'_blank'}
-                      >
-                        <div className="" key={index}>
-                          {social.icon}
-                        </div>
-                      </Link>
-                    )}
-                  </>
-                ))}
-              </div>
-              <div className="flex items-center overflow-hidden rounded-xl border border-[#A2A3A9] bg-white">
-                <input
-                  type="text"
-                  value={linkWeb}
-                  className="grow text-ellipsis border-r border-[#A2A3A9] p-3"
-                  disabled
-                />
-                <div className="p-3 text-center">
-                  <CopyButton textToCopy={linkWeb} />
-                </div>
-              </div>
-            </div> */}
           </div>
         ) : (
           <div className="mt-6 flex flex-col justify-between gap-8 rounded-3xl bg-white p-6 md:flex-row">

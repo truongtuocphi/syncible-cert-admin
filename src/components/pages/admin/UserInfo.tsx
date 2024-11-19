@@ -40,7 +40,8 @@ interface UserInfo {
   avatar?: string;
 }
 
-const UserInfo: React.FC<UserInfoProps> = ({ user }) => {
+const UserInfo = (props: UserInfoProps) => {
+  const { user } = props;
   const [isLanguageOpen, setIsLanguageOpen] = useState(false);
   const [dataUser, setDataUser] = useState<UserInfo | null>(null);
   // const [loading, setLoading] = useState(true);

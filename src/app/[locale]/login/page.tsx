@@ -227,10 +227,10 @@ export default function Login() {
               width={110}
               height={30}
             />
-            <Link href="/" className="flex items-center gap-2">
+            {/* <Link href="/" className="flex items-center gap-2">
               <FaArrowLeft />
               Back
-            </Link>
+            </Link> */}
           </div>
           <div className="flex h-full w-full flex-col items-center justify-center">
             <div className="flex flex-col gap-3 text-center">

@@ -96,7 +96,7 @@ const Experience = () => {
     setImage: React.Dispatch<React.SetStateAction<string | null>>,
     setLoading: React.Dispatch<React.SetStateAction<boolean>>
   ) => {
-    const file = e.target.files?.[0];
+    const file = e.target?.files?.[0];
 
     if (file) {
       setLoading(true);
@@ -120,21 +120,6 @@ const Experience = () => {
     setDataFromMintSingle(data);
     setCoppyCsvDataFromChild([]);
   };
-
-  // const calculateGasLimit = (
-  //   mintCount: number,
-  //   estimateGasPerMint: number,
-  //   bufferMultiplier: number
-  // ) => {
-  //   const baseGas = estimateGasPerMint * mintCount;
-
-  //   const gasWithBuffer = Math.ceil(baseGas * bufferMultiplier);
-
-  //   const minGas = 100000;
-  //   const maxGas = 15000000;
-
-  //   return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
-  // };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -174,6 +159,7 @@ const Experience = () => {
                 };
 
                 const tokenURI = await uploadMetadataWithRetry(metadata, 3);
+                // const tokenURI = '';
                 if (tokenURI) {
                   setTokenLink(tokenURI);
                 }
@@ -215,6 +201,21 @@ const Experience = () => {
       setLoading(false);
     }
   };
+
+  // const calculateGasLimit = (
+  //   mintCount: number,
+  //   estimateGasPerMint: number,
+  //   bufferMultiplier: number
+  // ) => {
+  //   const baseGas = estimateGasPerMint * mintCount;
+
+  //   const gasWithBuffer = Math.ceil(baseGas * bufferMultiplier);
+
+  //   const minGas = 100000;
+  //   const maxGas = 15000000;
+
+  //   return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
+  // };
 
   useEffect(() => {
     if (!address) return;

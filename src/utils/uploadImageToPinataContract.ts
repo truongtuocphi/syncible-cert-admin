@@ -1,9 +1,9 @@
-import Pinata from '@pinata/sdk';
+// import Pinata from '@pinata/sdk';
 
-const pinata = new Pinata(
-  process.env.NEXT_PUBLIC_PINATA_API_KEY,
-  process.env.NEXT_PUBLIC_PINATA_SECRET_API_KEY
-);
+// const pinata = new Pinata(
+//   process.env.NEXT_PUBLIC_PINATA_API_KEY,
+//   process.env.NEXT_PUBLIC_PINATA_SECRET_API_KEY
+// );
 
 /**
  * Hàm upload ảnh lên Pinata

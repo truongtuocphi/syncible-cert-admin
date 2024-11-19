@@ -1,10 +1,10 @@
 /* eslint-disable no-console */
-import PinataClient from '@pinata/sdk';
+// import PinataClient from '@pinata/sdk';
 
-const pinata = new PinataClient(
-  process.env.NEXT_PUBLIC_PINATA_API_KEY as string,
-  process.env.NEXT_PUBLIC_PINATA_SECRET_API_KEY as string
-);
+// const pinata = new PinataClient(
+//   process.env.NEXT_PUBLIC_PINATA_API_KEY as string,
+//   process.env.NEXT_PUBLIC_PINATA_SECRET_API_KEY as string
+// );
 
 export const uploadImageToPinata = async (file: File) => {
   try {

@@ -1,7 +1,7 @@
 import { defaultWagmiConfig } from '@web3modal/wagmi/react/config';
 import { createPublicClient, http } from 'viem';
 import { cookieStorage, createStorage } from 'wagmi';
-import { polygon, polygonAmoy, baseGoerli, base } from 'wagmi/chains';
+import { polygon, polygonAmoy } from 'wagmi/chains';
 
 export const network: any =
   process.env.NEXT_PUBLIC_IS_PRODUCTION === 'true' ? [polygon] : [polygonAmoy];

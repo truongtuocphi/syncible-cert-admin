@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import Link from 'next/link';
 import { BiSolidCommentError } from 'react-icons/bi';
@@ -77,6 +77,50 @@ export default function Explorer() {
     }
     setLoading(false);
   };
+
+  useEffect(() => {
+    const handleKeyDown = (e: {
+      key: string;
+      preventDefault: () => void;
+      ctrlKey: boolean;
+      metaKey: boolean;
+      shiftKey: boolean;
+    }) => {
+      if (e.key === 'F12') {
+        e.preventDefault();
+      }
+
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+      }
+    };
+
+    const handleContextMenu = (e: { preventDefault: () => void }) => {
+      e.preventDefault();
+    };
+
+    const detectDevTools = () => {
+      const threshold = 160;
+      if (
+        window.outerHeight - window.innerHeight > threshold ||
+        window.outerWidth - window.innerWidth > threshold
+      ) {
+        alert('DevTools detected! Please close DevTools to continue browsing.');
+        window.location.href = 'about:blank';
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('contextmenu', handleContextMenu);
+
+    const interval = setInterval(detectDevTools, 1000);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('contextmenu', handleContextMenu);
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <>

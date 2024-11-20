@@ -20,7 +20,7 @@ const scrollToTarget = (target: string) => {
     duration: 1.5,
     scrollTo: {
       y: target,
-      autoKill: true, // Automatically stops if the user interacts
+      autoKill: true,
     },
     ease: 'power3.inOut',
   });

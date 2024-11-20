@@ -20,9 +20,7 @@ import IconBase from '@/components/icons/IconBase';
 
 export default function Setting() {
   const { address, isConnected } = useAccount();
-  const chain = useChains();
 
-  const [image, setImage] = useState('');
   const [user, setUser] = useState<any>(null);
   const [userData, setUserData] = useState<any>(null);
   const [loading, setLoading] = useState(true);

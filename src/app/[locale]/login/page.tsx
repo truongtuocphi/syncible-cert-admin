@@ -5,7 +5,6 @@ import { useEffect, useState } from 'react';
 import { setPersistence } from 'firebase/auth';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { FaArrowLeft } from 'react-icons/fa';
 
 import {
   auth,
@@ -15,7 +14,6 @@ import {
   provider,
   browserSessionPersistence,
 } from '@/lib/firebase';
-import Link from 'next/link';
 import base64url from 'base64-url';
 import { sha256 } from '@noble/hashes/sha256';
 import { v4 as uuid } from 'uuid';

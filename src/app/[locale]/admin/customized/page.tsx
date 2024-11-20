@@ -105,9 +105,6 @@ const predefinedTemplates = [
 const editorDefaults = getEditorDefaults({
   imageWriter: {
     preprocessImageState: (imageState: any) => {
-      // imageState.annotation = imageState.annotation.filter((shape: any) => {
-      //   return (shape.disableErase = false);
-      // });
       imageState.annotation = imageState.annotation.filter((_: any, index: any) => index !== 0);
 
       return imageState;

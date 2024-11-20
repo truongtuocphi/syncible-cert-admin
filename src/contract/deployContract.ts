@@ -19,10 +19,12 @@ const deployContract = async (displayName: string, address: any, contractSymbol:
   const bytecode = bytecodeJson.bytecode;
   const factory = new ethers.ContractFactory(abi, bytecode, await signer);
 
-  const contract = await factory.deploy({
-    gasPrice: ethers.parseUnits('100', 'gwei'),
-    gasLimit: 9000000,
-  });
+  const contract = await factory.deploy();
+
+  //   const contract = await factory.deploy({
+  //     gasPrice: ethers.parseUnits('100', 'gwei'),
+  //     gasLimit: 9000000,
+  //   });
 
   const receipt = await contract.deploymentTransaction()?.wait();
   if (!receipt) {

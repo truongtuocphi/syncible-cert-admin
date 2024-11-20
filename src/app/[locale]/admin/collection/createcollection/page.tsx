@@ -13,9 +13,6 @@ import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import deployContract from '@/contract/deployContract';
 import { db } from '@/lib/firebase';
 import Breadcrumb from '@/components/common/breadcrumb/Breadcrumb';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { IoMdHelpCircleOutline } from 'react-icons/io';
-import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 
 const CreateCollection: React.FC = () => {

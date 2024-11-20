@@ -25,7 +25,6 @@ const Page = () => {
 
   const [accessToken, setAccessToken] = useState('');
 
-  // Hàm lấy Access Token
   const handleGetAccessToken = async () => {
     try {
       const storedState = localStorage.getItem('state');
@@ -69,14 +68,12 @@ const Page = () => {
 
       const { avatar, first_name, last_name } = userInfoData.data;
 
-      // Cập nhật dữ liệu người dùng trong Firebase
       updateUserDataInFirebase({
         avatar,
         first_name,
         last_name,
       });
 
-      // Kiểm tra xem user đã tồn tại trong Realtime Database chưa
       await checkAndRegisterUser(userInfoData);
     } catch (error) {
       alert('Failed to fetch user info');
@@ -100,16 +97,13 @@ const Page = () => {
     }
   };
 
-  // Hàm kiểm tra và đăng ký người dùng
   const checkAndRegisterUser = async (userInfoData: any) => {
     const user = auth.currentUser;
     const userRef = ref(db, 'users/' + user?.uid);
 
-    // Kiểm tra xem người dùng đã tồn tại trong database chưa
     const snapshot = await get(userRef);
 
     if (!snapshot.exists()) {
-      // Nếu người dùng chưa tồn tại trong cơ sở dữ liệu, thực hiện đăng ký
       const email = userInfoData?.data?.email;
       const password = 'defaultPassword';
 
@@ -137,7 +131,6 @@ const Page = () => {
         const firebaseError = err as FirebaseError;
 
         if (firebaseError.code === 'auth/email-already-in-use') {
-          // Nếu email đã tồn tại, thực hiện đăng nhập
           try {
             await setPersistence(auth, browserSessionPersistence);
             await signInWithEmailAndPassword(auth, email, password);
@@ -170,7 +163,6 @@ const Page = () => {
     handleGetAccessToken();
   }, []);
 
-  // Khi Access Token có giá trị, gọi hàm lấy thông tin user
   useEffect(() => {
     if (accessToken) {
       handleGetUserInfo(accessToken);

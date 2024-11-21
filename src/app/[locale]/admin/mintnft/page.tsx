@@ -180,6 +180,7 @@ const Experience = () => {
           const tx = await contract.mintBulk(mintDataArray, {
             gasLimit: finalGas,
           });
+
           // const estimateGasPerMint = 300000;
           // const bufferMultiplier = 1.2;
           // const tx = await contract.mintBulk(mintDataArray, {

@@ -1,8 +1,6 @@
 import { ReactNode } from 'react';
-
 import { headers } from 'next/headers';
 import { cookieToInitialState } from 'wagmi';
-
 import ClientSessionProvider from '@/components/layout/ClientSessionProvider';
 import Header from '@/components/pages/admin/Header';
 import Sidebar from '@/components/pages/admin/Sidebar';

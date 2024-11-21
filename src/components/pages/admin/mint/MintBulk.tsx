@@ -49,29 +49,6 @@ export const MintBulk = ({ DataIssuedDate, DataRole, onCsvRead }: MintBulkProps)
     }
   };
 
-  // const handleCSVChange = (event: any) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     setFileNameCSV(file.name);
-  //     Papa.parse<string>(file, {
-  //       header: true,
-  //       complete: (results) => {
-  //         const certificateData: CertificateData[] = results.data.map((data: any) => ({
-  //           certificateNumber: generateCertificateNumber(DataIssuedDate, DataRole),
-  //           fullname: data.fullname,
-  //           gmail: data.gmail,
-  //         }));
-
-  //         onCsvRead(certificateData);
-  //         setCsvData(certificateData);
-  //       },
-  //       error: () => {
-  //         alert('Chuyển đổi file CSV thất bại!');
-  //       },
-  //     });
-  //   }
-  // };
-
   const handleCSVChange = (event: any) => {
     const file = event.target.files[0];
     if (file) {

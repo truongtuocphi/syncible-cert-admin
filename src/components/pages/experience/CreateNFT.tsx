@@ -73,7 +73,6 @@ const CreateNFT = () => {
 
   useEffect(() => {
     if (selectedContract.length > 0) {
-      // Lấy địa chỉ hợp đồng đầu tiên trong selectedContract
       setcollectionContractAddress(selectedContract[0].contractAddress);
     }
   }, [selectedContract]);
@@ -132,7 +131,6 @@ const CreateNFT = () => {
     if (e.target.files) {
       setCsvFile(e.target.files[0]);
 
-      // Parse CSV file
       Papa.parse(e.target.files[0], {
         header: true,
         complete: (results) => {

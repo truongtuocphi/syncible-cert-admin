@@ -98,7 +98,6 @@ const CreateNFT = () => {
           const collections: Collection[] = [];
           snapshot.forEach((childSnapshot) => {
             const collection = childSnapshot.val();
-            // Kiểm tra nếu địa chỉ ví của người dùng khớp với địa chỉ trong dữ liệu Firebase
             if (collection.address === address) {
               collections.push({
                 id: childSnapshot.key || '',

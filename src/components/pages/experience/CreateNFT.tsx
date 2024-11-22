@@ -9,7 +9,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Papa from 'papaparse';
 import { useAccount } from 'wagmi';
-
 import ABI from '@/contract/ABI.json';
 import { db, ref, get, onAuthStateChanged, auth } from '@/lib/firebase';
 import { uploadMetadata } from '@/lib/pinata';
@@ -45,10 +44,8 @@ if (!headerURL) {
 const CreateNFT = () => {
   const router = useRouter();
   const { address } = useAccount();
-
   const [selectedContract, setSelectedContract] = useState<Collection[]>([]);
   const [collectionContractAddress, setcollectionContractAddress] = useState('');
-
   const [fullName, setFullName] = useState('');
   const [csvFile, setCsvFile] = useState<File | null>(null);
   const [certificateNumber, setCertificateNumber] = useState('');
@@ -57,11 +54,9 @@ const CreateNFT = () => {
   const [blockchain, setBlockchain] = useState<'Polygon' | 'Ethereum'>('Polygon');
   const [role, setRole] = useState<'Teacher' | 'Student'>('Student');
   const [tokenLink, setTokenLink] = useState('');
-
   const [csvData, setCsvData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
   const [loadingButton, setLoadingButton] = useState(false);
-
   const [user, setUser] = useState<User | null>(null);
   const [folders, setFolders] = useState<Folder[]>([]);
   const [selectedFolder, setSelectedFolder] = useState<string>('');

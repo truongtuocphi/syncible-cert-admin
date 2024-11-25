@@ -4,12 +4,13 @@ import { useState, useEffect, Key } from 'react';
 
 export default function TableOfContent({ headings }: { headings: any }) {
   const [activeId, setActiveId] = useState<string | null>(null);
-  const [baseHeadingLevel, setBaseHeadingLevel] = useState<number | null>(null); // Track the smallest heading level
+  const [baseHeadingLevel, setBaseHeadingLevel] = useState<number | null>(null);
 
   useEffect(() => {
-    // Determine the base heading level (the smallest level, e.g., h2 or h3)
     if (headings.length > 0) {
-      const smallestHeading = Math.min(...headings.map((heading: any) => parseInt(heading.tagName[1])));
+      const smallestHeading = Math.min(
+        ...headings.map((heading: any) => parseInt(heading.tagName[1]))
+      );
       setBaseHeadingLevel(smallestHeading);
     }
   }, [headings]);
@@ -20,7 +21,7 @@ export default function TableOfContent({ headings }: { headings: any }) {
         const element = document.getElementById(heading.id);
         if (element) {
           const rect = element.getBoundingClientRect();
-          const isVisible = rect.top >= 0 && rect.top <= window.innerHeight / 4; // Check if the element is within one fourth of the screen
+          const isVisible = rect.top >= 0 && rect.top <= window.innerHeight / 4;
 
           if (isVisible) {
             setActiveId(heading.id);
@@ -30,8 +31,7 @@ export default function TableOfContent({ headings }: { headings: any }) {
     };
 
     window.addEventListener('scroll', handleScroll);
-    
-    // Initial check on mount in case some headings are in view initially
+
     handleScroll();
 
     return () => {
@@ -40,14 +40,14 @@ export default function TableOfContent({ headings }: { headings: any }) {
   }, [headings]);
 
   const getIndentation = (tagName: string) => {
-    const headingLevel = parseInt(tagName[1]); // Extract the number from tag name (e.g., 2 for h2)
+    const headingLevel = parseInt(tagName[1]);
     if (baseHeadingLevel !== null) {
-      const levelDifference = headingLevel - baseHeadingLevel; // Calculate the difference in levels
-      return `ml-${levelDifference * 1}`; // Indent by 4 units per level difference
+      const levelDifference = headingLevel - baseHeadingLevel;
+      return `ml-${levelDifference * 1}`;
     }
-    return 'ml-0'; // Default no indentation
+    return 'ml-0';
   };
-  
+
   //text size corresponding to the heading tag
   const getTextSize = (tagName: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6') => {
     const sizeMap = {
@@ -58,7 +58,7 @@ export default function TableOfContent({ headings }: { headings: any }) {
       h5: 'text-[16px]', // 16px for h5
       h6: 'text-[16px]', // 16px for h6
     };
-    return sizeMap[tagName] || 'text-[16px]'; // Default to 16px if tag not found
+    return sizeMap[tagName] || 'text-[16px]';
   };
 
   return (
@@ -70,8 +70,8 @@ export default function TableOfContent({ headings }: { headings: any }) {
             href={`#${heading.id}`}
             className={clsx(
               'hover:text-[#2C2C2C] hover:no-underline focus:no-underline',
-              activeId === heading.id ? 'text-[#2C2C2C] font-bold' : 'text-[#A2A3A9] font-medium',
-              getTextSize(heading.tagName),
+              activeId === heading.id ? 'font-bold text-[#2C2C2C]' : 'font-medium text-[#A2A3A9]',
+              getTextSize(heading.tagName)
             )}
             onClick={(e) => {
               e.preventDefault();

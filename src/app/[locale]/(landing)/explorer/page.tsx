@@ -78,6 +78,12 @@ export default function Explorer() {
     setLoading(false);
   };
 
+  const handleEnterKey = (event: { key: string }) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   useEffect(() => {
     const handleKeyDown = (e: {
       key: string;
@@ -179,6 +185,7 @@ export default function Explorer() {
                   value={idCertificate}
                   onChange={(e) => setIdCertificate(e.target.value)}
                   className="w-full border-r border-[#CCCCCC] pr-5 text-black outline-none"
+                  onKeyDown={handleEnterKey}
                 />
                 <input
                   type="text"
@@ -186,6 +193,7 @@ export default function Explorer() {
                   value={nameCertificate}
                   onChange={(e) => setNameCertificate(e.target.value)}
                   className="w-full text-black outline-none"
+                  onKeyDown={handleEnterKey}
                 />
               </div>
               <ButtonPrimary

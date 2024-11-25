@@ -254,8 +254,6 @@ const CreateNFT = () => {
         await tx.wait();
         alert('NFTs minted successfully!');
         setLoading(true);
-
-        // await saveMintData(mintDataArray, collectionContractAddress);
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Error minting NFTs:', error);

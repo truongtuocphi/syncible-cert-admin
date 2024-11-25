@@ -13,9 +13,7 @@ import Loading from '@/components/common/loading/Loading';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { CollectionData } from '@/types/function';
 import fetchDataFirebase from '@/utils/featDataFirebase';
-// import LightBlueGradientEllipse from '../../../../public/Ellipse_1.svg';
 import SearchIcon from '../../../../../public/outline-magifier.svg';
-// import { montserrat } from '@/components/ui/fonts';
 
 export default function Explorer() {
   const [idCertificate, setIdCertificate] = useState<string>('');

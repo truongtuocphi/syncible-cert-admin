@@ -17,16 +17,16 @@ export default function SectionAbout() {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: leftRef.current, // Use one trigger for both animations
-          start: 'top 80%', // Animation starts when top of the section is 80% of the viewport
+          trigger: leftRef.current,
+          start: 'top 80%',
           toggleActions: 'play none none reverse',
           markers: false,
         },
       });
-      // Left animation (moving from left)
+
       tl.fromTo(
         leftRef.current,
-        { opacity: 0, x: -100 }, // Move from the left
+        { opacity: 0, x: -100 },
         {
           opacity: 1,
           x: 0,
@@ -34,17 +34,17 @@ export default function SectionAbout() {
           ease: 'power3.out',
         }
       );
-      // Right animation (moving from right), delayed by 0.5s
+
       tl.fromTo(
         rightRef.current,
-        { opacity: 0, x: 100 }, // Move from the right
+        { opacity: 0, x: 100 },
         {
           opacity: 1,
           x: 0,
           duration: 1.5,
           ease: 'power3.out',
         },
-        '-=1' // This ensures a delay of 0.5s after the left animation starts (1.5s duration minus 1 second)
+        '-=1'
       );
     }
   }, []);

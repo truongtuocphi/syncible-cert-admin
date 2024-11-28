@@ -32,7 +32,6 @@ export default function SectionOurVision() {
           ease: 'power3.out',
         }
       );
-      // Left animation (moving from left), delayed by 0.5s
       tl.fromTo(
         leftRef.current,
         { opacity: 0, x: -100 }, // Move from the left

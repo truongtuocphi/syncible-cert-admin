@@ -41,7 +41,7 @@ export default function SectionOurVision() {
           duration: 1.5,
           ease: 'power3.out',
         },
-        '-=1' // This ensures a delay of 0.5s after the left animation starts (1.5s duration minus 1 second)
+        '-=1'
       );
     }
   }, []);

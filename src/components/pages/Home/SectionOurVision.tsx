@@ -16,13 +16,12 @@ export default function SectionOurVision() {
 
       const tl = gsap.timeline({
         scrollTrigger: {
-          trigger: leftRef.current, // Use one trigger for both animations
-          start: 'top 80%', // Animation starts when top of the section is 80% of the viewport
+          trigger: leftRef.current,
+          start: 'top 80%',
           toggleActions: 'play none none reverse',
           markers: false,
         },
       });
-      // Right animation (moving from right)
       tl.fromTo(
         rightRef.current,
         { opacity: 0, x: 100 }, // Move from the right

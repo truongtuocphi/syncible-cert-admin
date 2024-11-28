@@ -13,8 +13,8 @@ import Loading from '@/components/common/loading/Loading';
 import Image from 'next/image';
 
 export default function BlogPage({ params }: { params: { slug: string } }) {
-  const t = useTranslations('BlogPage');
   const { slug } = params;
+
   const [notFoundError, setNotFoundError] = useState(false);
   const [author, setAuthor] = useState<Author | null>(null);
   const [blogContent, setBlogContent] = useState<any>(null);
@@ -22,7 +22,9 @@ export default function BlogPage({ params }: { params: { slug: string } }) {
   const [categories, setCategories] = useState<Category[]>([]);
   const [bannerImg, setBannerImg] = useState<string | null>(null);
   const [toc, setToc] = useState<any[]>([]);
+
   const format = useFormatter();
+  const t = useTranslations('BlogPage');
 
   useEffect(() => {
     async function fetchBlogContent(slug: string) {

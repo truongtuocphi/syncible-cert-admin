@@ -24,7 +24,7 @@ export default function SectionOurVision() {
       });
       tl.fromTo(
         rightRef.current,
-        { opacity: 0, x: 100 }, // Move from the right
+        { opacity: 0, x: 100 },
         {
           opacity: 1,
           x: 0,

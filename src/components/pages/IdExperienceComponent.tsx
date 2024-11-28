@@ -69,14 +69,11 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
   const [linkWeb, setLinkWeb] = useState<string>('');
-
   const [name, setName] = useState('');
-  const [certificateID, setCertificateID] = useState('');
   const [date, setDate] = useState('');
-  const [blockchainType, setBlockchainType] = useState('Polygon');
+  const [certificateID, setCertificateID] = useState('');
   const [templateURL, setTemplateURL] = useState('');
   const [fontFamily, setFontFamily] = useState<string>('');
-  const [fontSize, setFontSize] = useState<string>('');
 
   const t = useTranslations('IdExperienceComponent');
   const translationCollection = useTranslations('Dapp.collectionCertificate');
@@ -110,12 +107,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
           (attr: { trait_type: string }) => attr.trait_type == 'Font'
         ).value;
 
-        const fontSize = attributes.find(
-          (attr: { trait_type: string }) => attr.trait_type == 'Font Size'
-        ).value;
-
         fontAtribute && setFontFamily(fontAtribute);
-        fontSize && setFontSize(fontSize);
 
         setCertificateID(replaceData(getCertificateID, getDate));
 
@@ -123,10 +115,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
           attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Template URL').value
         );
         setDate(attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Date').value);
-        setBlockchainType(
-          attributes.find((attr: { trait_type: string }) => attr.trait_type == 'Blockchain Type')
-            .value
-        );
       } catch (error) {
         // eslint-disable-next-line no-console
         console.error('Fetch error:', error);

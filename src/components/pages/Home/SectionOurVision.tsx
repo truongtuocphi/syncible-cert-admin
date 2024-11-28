@@ -10,6 +10,7 @@ export default function SectionOurVision() {
   const leftRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
   const t = useTranslations('HomePage.vision_section');
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       gsap.registerPlugin(ScrollTrigger);
@@ -45,6 +46,7 @@ export default function SectionOurVision() {
       );
     }
   }, []);
+
   return (
     <div className="md:px-8 md:py-8 xl:px-16 xl:py-16" id="about">
       <div className="flex flex-col items-center gap-20 rounded-b-[2.5rem] border-b-2 border-white bg-gradient-to-t from-white/50 px-4 py-[4rem] sm:rounded-b-[6.25rem] sm:px-16 sm:py-28 lg:flex-row">

@@ -4,7 +4,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import OurVision from '../../../../public/OurVision.svg';
 
 export default function SectionOurVision() {
   const leftRef = useRef<HTMLDivElement>(null);

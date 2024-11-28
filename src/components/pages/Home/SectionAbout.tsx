@@ -61,14 +61,6 @@ export default function SectionAbout() {
           </div>
         </div>
         <div ref={rightRef} className="h-full w-full basis-1/2">
-          {/* <Image
-            src="/img01.png"
-            alt="Image with 2 hands shaking"
-            fill
-            sizes="100vw"
-            className="h-[110%]  object-cover"
-            priority
-          /> */}
           <AboutUsSVG className="h-full w-full" />
         </div>
       </div>

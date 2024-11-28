@@ -1,9 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-
 import { gsap } from 'gsap';
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-
 import SyncibleLogoOnly from '../../../../public/SyncileLogoOnly.svg';
 import WeBelieveSVG from '../../../../public/WeBelieve.svg';
 
@@ -12,6 +9,7 @@ export default function SectionWhatWeBelieve() {
   const logoRef1 = useRef<HTMLDivElement>(null);
   const logoRef2 = useRef<HTMLDivElement>(null);
   const logoRef3 = useRef<HTMLDivElement>(null);
+
   const t = useTranslations('HomePage.believe_section');
 
   useEffect(() => {

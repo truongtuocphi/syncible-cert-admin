@@ -2,12 +2,10 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
 import Link from 'next/link';
 import { BiSolidCommentError } from 'react-icons/bi';
 import { HiTemplate } from 'react-icons/hi';
 import { useTranslations } from 'next-intl';
-
 import ButtonPrimary from '@/components/common/button/ButtonPrimary';
 import Loading from '@/components/common/loading/Loading';
 import CertificatePreview from '@/components/pages/admin/CertificatePreview';

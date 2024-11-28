@@ -26,7 +26,7 @@ export default function SectionWhatWeBelieve() {
           ease: 'power3.out',
           scrollTrigger: {
             trigger: ref.current,
-            start: 'top 80%', // Start animation when top of section is 50% of the viewport
+            start: 'top 80%',
             toggleActions: 'play none none reverse', // Trigger animation on scroll
             markers: false,
           },
@@ -81,8 +81,8 @@ export default function SectionWhatWeBelieve() {
     }
   }, []);
   return (
-    <div ref={ref} className="xl:px-16 w-full">
-      <div  className="px-4 py-[3.125rem] md:px-8 md:py-0 xl:px-[2.5rem]">
+    <div ref={ref} className="w-full xl:px-16">
+      <div className="px-4 py-[3.125rem] md:px-8 md:py-0 xl:px-[2.5rem]">
         <div className="relative">
           <div className="absolute left-0 right-0 top-0 z-0 h-full w-full md:px-6 md:py-6">
             <div className="relative h-full w-full">

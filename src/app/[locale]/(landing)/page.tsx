@@ -226,7 +226,6 @@ const Page = () => {
           </div>
         </div>
       </div>
-
       <div className="relative z-20 flex max-w-[90rem] flex-col items-center gap-8 sm:gap-40">
         <SectionAbout />
         <SectionWhatWeBelieve />

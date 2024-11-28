@@ -21,6 +21,7 @@ export default function Explorer() {
   const [data, setData] = useState<CollectionData | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [notFound, setNotFound] = useState<boolean>(false);
+
   const t = useTranslations('ExplorerPage');
 
   const handleSearch = async () => {

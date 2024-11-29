@@ -124,6 +124,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     fetchData();
   }, [slugPost]);
 
+  // Trong useEffect fetch data từ Firebase
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -133,10 +134,17 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         if (snapshot.exists()) {
           const dataFromFirebase = snapshot.val();
           const matchingData = Object.values(dataFromFirebase)
-            .filter((item: any) => item.mintData.some((child: any) => child[3] === slugPost))
+            .filter(
+              (item: any) =>
+                // Thêm kiểm tra null/undefined cho mintData
+                item &&
+                item.mintData &&
+                Array.isArray(item.mintData) &&
+                item.mintData.some((child: any) => child && child[3] === slugPost)
+            )
             .map((item: any) => item.collectionContractAddress);
 
-          if (matchingData) {
+          if (matchingData && matchingData.length > 0) {
             setDataContract(matchingData);
           } else {
             setError('No matching data found.');
@@ -145,6 +153,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
           setError('No data available in Firebase.');
         }
       } catch (err: any) {
+        console.error('Firebase error:', err);
         setError(err.message || 'An error occurred while fetching data from Firebase.');
       } finally {
         setLoading(false);
@@ -267,6 +276,8 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
+  console.log('asdg', data);
+
   return (
     <>
       <div className="mt-5 w-full px-0 sm:px-4">
@@ -276,6 +287,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
               previewImage={templateURL}
               name={name?.split('Certificate for')[1]?.trim()}
               fontFamily={fontFamily}
+              IdentifierPinata={slugPost}
             />
           </div>
         </div>

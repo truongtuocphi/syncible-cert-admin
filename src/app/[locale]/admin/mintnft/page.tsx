@@ -121,6 +121,21 @@ const Experience = () => {
     setCoppyCsvDataFromChild([]);
   };
 
+  const calculateGasLimit = (mintCount: any, baseGasPerMint = 300000) => {
+    // Gas cơ bản cho mỗi lần mint
+    const baseGas = baseGasPerMint * mintCount;
+
+    // Thêm 20% buffer để đảm bảo giao dịch không bị fail
+    const gasWithBuffer = Math.ceil(baseGas * 1.2);
+
+    // Giới hạn gas tối thiểu và tối đa
+    const minGas = 100000;
+    const maxGas = 15000000;
+
+    // Đảm bảo gas nằm trong khoảng hợp lý
+    return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!address) {
@@ -176,16 +191,12 @@ const Experience = () => {
         );
 
         if (mintDataArray.length > 0) {
-          const finalGas = 10000000 * mintDataArray.length;
+          const gasLimit = calculateGasLimit(mintDataArray.length);
+          // const finalGas = 10000000 * mintDataArray.length;
           const tx = await contract.mintBulk(mintDataArray, {
-            gasLimit: finalGas,
+            // gasLimit: finalGas,
+            gasLimit: gasLimit,
           });
-
-          // const estimateGasPerMint = 300000;
-          // const bufferMultiplier = 1.2;
-          // const tx = await contract.mintBulk(mintDataArray, {
-          //   gasLimit: calculateGasLimit(mintDataArray.length, estimateGasPerMint, bufferMultiplier),
-          // });
 
           await tx.wait();
           alert('Chứng chỉ được tạo thành công!');

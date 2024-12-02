@@ -276,8 +276,6 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   if (loading) return <Loading />;
   if (error) return <p>{error}</p>;
 
-  console.log('asdg', data);
-
   return (
     <>
       <div className="mt-5 w-full px-0 sm:px-4">

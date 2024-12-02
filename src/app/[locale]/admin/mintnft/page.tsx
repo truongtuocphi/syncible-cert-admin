@@ -122,17 +122,13 @@ const Experience = () => {
   };
 
   const calculateGasLimit = (mintCount: any, baseGasPerMint = 300000) => {
-    // Gas cơ bản cho mỗi lần mint
     const baseGas = baseGasPerMint * mintCount;
 
-    // Thêm 20% buffer để đảm bảo giao dịch không bị fail
     const gasWithBuffer = Math.ceil(baseGas * 1.2);
 
-    // Giới hạn gas tối thiểu và tối đa
     const minGas = 100000;
     const maxGas = 15000000;
 
-    // Đảm bảo gas nằm trong khoảng hợp lý
     return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
   };
 

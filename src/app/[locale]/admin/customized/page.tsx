@@ -47,7 +47,7 @@ import { useTranslations } from 'next-intl';
 
 setPlugins(plugin_crop, plugin_filter, plugin_annotate, plugin_sticker);
 
-const headerURL = 'https://fuchsia-fancy-orangutan-869.mypinata.cloud/ipfs';
+const headerURL = 'https://purple-sophisticated-vole-607.mypinata.cloud/ipfs';
 
 const predefinedTemplates = [
   {

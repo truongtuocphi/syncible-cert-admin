@@ -57,7 +57,7 @@ const Certificate = (props: CertificateProps) => {
 
       if (image) {
         const imageWidth = image.clientWidth;
-        let adjustedFontSize = Math.max(20, imageWidth / 22);
+        let adjustedFontSize = Math.max(20, imageWidth / 18);
         let adjustedQRCode = Math.max(25, imageWidth / 15);
         let rightPosition = Math.max(10, imageWidth / 9);
 

@@ -66,6 +66,11 @@ const predefinedTemplates = [
     name: 'Certificate 3',
   },
   {
+    id: 4,
+    imageUrl: 'QmPp9J3sYw4pcSU1qPYnTpAFGbwyUWFkUDtAF1Cb8hU2ao',
+    name: 'Certificate 4',
+  },
+  {
     id: 5,
     imageUrl: 'QmbNVR9u4KPxu5DygVLpR18bRo1Ar2b47waUNFykgZRz3P',
     name: 'Certificate 5',

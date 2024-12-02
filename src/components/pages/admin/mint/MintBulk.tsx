@@ -2,10 +2,8 @@
 'use client';
 
 import { useState } from 'react';
-
 import Papa from 'papaparse';
 import * as XLSX from 'xlsx';
-
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import getAcronym from '@/utils/getAcronym';
 import { BiFolderPlus } from 'react-icons/bi';

@@ -209,21 +209,6 @@ const Experience = () => {
     }
   };
 
-  // const calculateGasLimit = (
-  //   mintCount: number,
-  //   estimateGasPerMint: number,
-  //   bufferMultiplier: number
-  // ) => {
-  //   const baseGas = estimateGasPerMint * mintCount;
-
-  //   const gasWithBuffer = Math.ceil(baseGas * bufferMultiplier);
-
-  //   const minGas = 100000;
-  //   const maxGas = 15000000;
-
-  //   return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
-  // };
-
   useEffect(() => {
     if (!address) return;
 

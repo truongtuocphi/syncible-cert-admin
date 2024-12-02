@@ -121,30 +121,16 @@ const Experience = () => {
     setCoppyCsvDataFromChild([]);
   };
 
-  const calculateGasLimit = (mintCount: number, baseGasPerMint = 250000) => {
-    // Giảm gas cơ bản xuống 250000 thay vì 300000
+  const calculateGasLimit = (mintCount: any, baseGasPerMint = 300000) => {
     const baseGas = baseGasPerMint * mintCount;
 
-    // Tính toán buffer dựa trên số lượng mint
-    let bufferMultiplier = 1.2; // Mặc định 20% buffer
-    if (mintCount > 50) {
-      bufferMultiplier = 1.15; // 15% buffer cho số lượng lớn
-    }
-    if (mintCount > 100) {
-      bufferMultiplier = 1.1; // 10% buffer cho số lượng rất lớn
-    }
+    const gasWithBuffer = Math.ceil(baseGas * 1.2);
 
-    const gasWithBuffer = Math.ceil(baseGas * bufferMultiplier);
-
-    // Điều chỉnh min/max gas limit
     const minGas = 100000;
-    const maxGas = 15000000; // Giữ nguyên max gas
+    const maxGas = 15000000;
 
     return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
   };
-
-  const BATCH_SIZE = 30; // Số lượng NFT tối đa trong một lần mint
-  const DELAY_BETWEEN_BATCHES = 2000; // Delay 2 giây giữa các batch
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -166,20 +152,9 @@ const Experience = () => {
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
-        // Lấy toàn bộ data cần mint
-        const allData =
-          coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle;
-        const totalBatches = Math.ceil(allData.length / BATCH_SIZE);
-
-        for (let batchIndex = 0; batchIndex < totalBatches; batchIndex++) {
-          // Lấy data cho batch hiện tại
-          const start = batchIndex * BATCH_SIZE;
-          const end = Math.min(start + BATCH_SIZE, allData.length);
-          const currentBatchData = allData.slice(start, end);
-
-          // Xử lý metadata cho batch hiện tại
-          const mintDataArray = await Promise.all(
-            currentBatchData.map(async (data) => {
+        const mintDataArray = await Promise.all(
+          (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
+            async (data) => {
               return limit(async () => {
                 const metadata = {
                   fullname: `Certificate for ${data.fullname}` || 'Default Name',
@@ -207,130 +182,30 @@ const Experience = () => {
                   [issuedDate, bannerImage],
                 ];
               });
-            })
-          );
-
-          if (mintDataArray.length > 0) {
-            // Tính gas limit cho batch hiện tại
-            const gasLimit = calculateGasLimit(mintDataArray.length);
-
-            // Thực hiện mint cho batch
-            const tx = await contract.mintBulk(mintDataArray, {
-              gasLimit: gasLimit,
-            });
-
-            await tx.wait();
-
-            // Lưu data đã mint
-            await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
-
-            // Log tiến độ
-            console.log(`Completed batch ${batchIndex + 1}/${totalBatches}`);
-
-            // Delay trước batch tiếp theo nếu không phải batch cuối
-            if (batchIndex < totalBatches - 1) {
-              await new Promise((resolve) => setTimeout(resolve, DELAY_BETWEEN_BATCHES));
             }
-          }
-        }
+          )
+        );
 
-        alert('Tất cả chứng chỉ đã được tạo thành công!');
-        setLoading(true);
+        if (mintDataArray.length > 0) {
+          const gasLimit = calculateGasLimit(mintDataArray.length);
+          const tx = await contract.mintBulk(mintDataArray, {
+            gasLimit: gasLimit,
+          });
+
+          await tx.wait();
+          alert('Chứng chỉ được tạo thành công!');
+          setLoading(true);
+          await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
+        }
       }
     } catch (error) {
       console.error('Error minting NFTs:', error);
-      alert('Lỗi tạo chứng chỉ.');
-    } finally {
+      alert('lỗi tạo chứng chỉ.');
       setLoadingButton(false);
+    } finally {
       setLoading(false);
     }
   };
-
-  // const calculateGasLimit = (mintCount: any, baseGasPerMint = 300000) => {
-  //   const baseGas = baseGasPerMint * mintCount;
-
-  //   const gasWithBuffer = Math.ceil(baseGas * 1.2);
-
-  //   const minGas = 100000;
-  //   const maxGas = 15000000;
-
-  //   return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
-  // };
-
-  // const handleSubmit = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   if (!address) {
-  //     alert('Please connect your wallet.');
-  //     return;
-  //   }
-
-  //   if (typeof window.ethereum === 'undefined') {
-  //     alert('Please install a wallet like MetaMask.');
-  //     return;
-  //   }
-
-  //   setLoadingButton(true);
-
-  //   try {
-  //     if (typeof window.ethereum !== 'undefined') {
-  //       const provider = new ethers.BrowserProvider(window.ethereum);
-  //       const signer = await provider.getSigner();
-  //       const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
-
-  //       const mintDataArray = await Promise.all(
-  //         (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
-  //           async (data) => {
-  //             return limit(async () => {
-  //               const metadata = {
-  //                 fullname: `Certificate for ${data.fullname}` || 'Default Name',
-  //                 tokenURI: tokenLink || 'Default tokenLink',
-  //                 attributes: [
-  //                   { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
-  //                   { trait_type: 'Role', value: role || 'NaN' },
-  //                   { trait_type: 'Date', value: issuedDate || 'NaN' },
-  //                   { trait_type: 'Template URL', value: bannerImage || 'NaN' },
-  //                   { trait_type: 'Font', value: fontFamily || 'NaN' },
-  //                   { trait_type: 'Font Size', value: fontSize || 'NaN' },
-  //                 ],
-  //               };
-
-  //               const tokenURI = await uploadMetadataWithRetry(metadata, 3);
-  //               if (tokenURI) {
-  //                 setTokenLink(tokenURI);
-  //               }
-
-  //               return [
-  //                 address,
-  //                 data.fullname,
-  //                 data.certificateNumber,
-  //                 tokenURI,
-  //                 [issuedDate, bannerImage],
-  //               ];
-  //             });
-  //           }
-  //         )
-  //       );
-
-  //       if (mintDataArray.length > 0) {
-  //         const gasLimit = calculateGasLimit(mintDataArray.length);
-  //         const tx = await contract.mintBulk(mintDataArray, {
-  //           gasLimit: gasLimit,
-  //         });
-
-  //         await tx.wait();
-  //         alert('Chứng chỉ được tạo thành công!');
-  //         setLoading(true);
-  //         await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
-  //       }
-  //     }
-  //   } catch (error) {
-  //     console.error('Error minting NFTs:', error);
-  //     alert('lỗi tạo chứng chỉ.');
-  //     setLoadingButton(false);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   useEffect(() => {
     if (!address) return;

@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import { BiSolidCommentError } from 'react-icons/bi';
 import { HiTemplate } from 'react-icons/hi';
@@ -12,6 +12,7 @@ import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { CollectionData } from '@/types/function';
 import fetchDataFirebase from '@/utils/featDataFirebase';
 import SearchIcon from '../../../../../public/outline-magifier.svg';
+import { usePreventDevTools } from '@/hooks/usePreventDevTools';
 
 export default function Explorer() {
   const [idCertificate, setIdCertificate] = useState<string>('');
@@ -21,6 +22,8 @@ export default function Explorer() {
   const [notFound, setNotFound] = useState<boolean>(false);
 
   const t = useTranslations('ExplorerPage');
+
+  // usePreventDevTools();
 
   const handleSearch = async () => {
     setLoading(true);
@@ -80,50 +83,6 @@ export default function Explorer() {
       handleSearch();
     }
   };
-
-  // useEffect(() => {
-  //   const handleKeyDown = (e: {
-  //     key: string;
-  //     preventDefault: () => void;
-  //     ctrlKey: boolean;
-  //     metaKey: boolean;
-  //     shiftKey: boolean;
-  //   }) => {
-  //     if (e.key === 'F12') {
-  //       e.preventDefault();
-  //     }
-
-  //     if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') {
-  //       e.preventDefault();
-  //     }
-  //   };
-
-  //   const handleContextMenu = (e: { preventDefault: () => void }) => {
-  //     e.preventDefault();
-  //   };
-
-  //   const detectDevTools = () => {
-  //     const threshold = 160;
-  //     if (
-  //       window.outerHeight - window.innerHeight > threshold ||
-  //       window.outerWidth - window.innerWidth > threshold
-  //     ) {
-  //       alert('DevTools detected! Please close DevTools to continue browsing.');
-  //       window.location.href = 'about:blank';
-  //     }
-  //   };
-
-  //   document.addEventListener('keydown', handleKeyDown);
-  //   document.addEventListener('contextmenu', handleContextMenu);
-
-  //   const interval = setInterval(detectDevTools, 1000);
-
-  //   return () => {
-  //     document.removeEventListener('keydown', handleKeyDown);
-  //     document.removeEventListener('contextmenu', handleContextMenu);
-  //     clearInterval(interval);
-  //   };
-  // }, []);
 
   return (
     <>
@@ -248,7 +207,7 @@ export default function Explorer() {
             </div>
           )
         ) : (
-          <div className="flex h-full w-full flex-grow items-center justify-center">
+          <div className="flex h-screen w-full flex-grow items-center justify-center">
             <div className="flex flex-col items-center gap-2">
               <HiTemplate className="text-7xl text-gray-700" />
               <div className="text-lg font-semibold text-gray-700">{t('result.initial.label')}</div>

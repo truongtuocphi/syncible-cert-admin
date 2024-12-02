@@ -12,7 +12,6 @@ import CertificatePreview from '@/components/pages/admin/CertificatePreview';
 import { CollectionData } from '@/types/function';
 import fetchDataFirebase from '@/utils/featDataFirebase';
 import SearchIcon from '../../../../../public/outline-magifier.svg';
-import { usePreventDevTools } from '@/hooks/usePreventDevTools';
 
 export default function Explorer() {
   const [idCertificate, setIdCertificate] = useState<string>('');
@@ -22,8 +21,6 @@ export default function Explorer() {
   const [notFound, setNotFound] = useState<boolean>(false);
 
   const t = useTranslations('ExplorerPage');
-
-  // usePreventDevTools();
 
   const handleSearch = async () => {
     setLoading(true);

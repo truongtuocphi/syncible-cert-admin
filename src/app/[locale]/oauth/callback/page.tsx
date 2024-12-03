@@ -134,7 +134,7 @@ const Page = () => {
           try {
             await setPersistence(auth, browserSessionPersistence);
             await signInWithEmailAndPassword(auth, email, password);
-            console.log('Login successful!');
+            // console.log('Login successful!');
             await router.push('/admin');
           } catch (loginError) {
             await router.push('/login');

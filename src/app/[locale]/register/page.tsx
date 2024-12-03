@@ -131,6 +131,7 @@ export default function Register() {
     }
   };
 
+  // login with google
   const handleGoogleSignIn = async () => {
     setLoading(true);
     try {

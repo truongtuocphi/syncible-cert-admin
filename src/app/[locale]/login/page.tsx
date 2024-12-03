@@ -21,21 +21,21 @@ import { randomBytes } from 'crypto';
 import BasalIcon from '@/components/icons/BasalIcon';
 
 export default function Login() {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
-  const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [showPassword, setShowPassword] = useState(false);
+  // const [email, setEmail] = useState<string>('');
+  // const [password, setPassword] = useState<string>('');
+  // const [error, setError] = useState<string | null>(null);
+  // const [loading, setLoading] = useState<boolean>(false);
+  // const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
 
-  const [codeVerifier, setCodeVerifier] = useState('');
+  // const [codeVerifier, setCodeVerifier] = useState('');
   const [codeChallenge, setCodeChallenge] = useState('');
   const clientId = process.env.NEXT_PUBLIC_ID_BASAL;
   const redirectUri = process.env.NEXT_PUBLIC_URL_BASAL;
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
+  // const togglePasswordVisibility = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -46,49 +46,49 @@ export default function Login() {
     return () => unsubscribe();
   }, [router]);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
+  // const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   setError('');
 
-    try {
-      await setPersistence(auth, browserSessionPersistence);
-      await signInWithEmailAndPassword(auth, email, password);
-    } catch (error: any) {
-      setLoading(false);
+  //   try {
+  //     await setPersistence(auth, browserSessionPersistence);
+  //     await signInWithEmailAndPassword(auth, email, password);
+  //   } catch (error: any) {
+  //     setLoading(false);
 
-      console.error('Login error:', error);
+  //     console.error('Login error:', error);
 
-      if (error.code === 'auth/wrong-password') {
-        setError('Incorrect password.');
-      } else if (error.code === 'auth/user-not-found') {
-        setError('Account does not exist.');
-      } else if (error.code === 'auth/invalid-email') {
-        setError('Invalid email.');
-      } else {
-        setError('Login failed. Please try again.');
-      }
-    }
-  };
+  //     if (error.code === 'auth/wrong-password') {
+  //       setError('Incorrect password.');
+  //     } else if (error.code === 'auth/user-not-found') {
+  //       setError('Account does not exist.');
+  //     } else if (error.code === 'auth/invalid-email') {
+  //       setError('Invalid email.');
+  //     } else {
+  //       setError('Login failed. Please try again.');
+  //     }
+  //   }
+  // };
 
   //login with google
-  const handleGoogleSignIn = async () => {
-    setLoading(true);
-    try {
-      await setPersistence(auth, browserSessionPersistence);
-      await signInWithPopup(auth, provider);
-    } catch (error) {
-      setLoading(false);
-      setError('Failed to sign in with Google.');
-    }
-  };
+  // const handleGoogleSignIn = async () => {
+  //   setLoading(true);
+  //   try {
+  //     await setPersistence(auth, browserSessionPersistence);
+  //     await signInWithPopup(auth, provider);
+  //   } catch (error) {
+  //     setLoading(false);
+  //     setError('Failed to sign in with Google.');
+  //   }
+  // };
 
-  //login with basel
+  //create code challenge Basal
   const handleCreateCode = () => {
     const codeVerifier = uuid();
     const codeChallenge = base64url.escape(Buffer.from(sha256(codeVerifier)).toString('base64'));
     localStorage.setItem('codeVerifier', codeVerifier);
-    setCodeVerifier(codeVerifier);
+    // setCodeVerifier(codeVerifier);
     setCodeChallenge(codeChallenge);
   };
 
@@ -96,6 +96,7 @@ export default function Login() {
     handleCreateCode();
   }, []);
 
+  //login with basal
   const handleLoginWithBasal = async () => {
     if (!codeChallenge) {
       console.error('Code challenge chưa sẵn sàng!');

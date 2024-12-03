@@ -159,7 +159,7 @@ export default function Explorer() {
           </div>
         </div>
 
-        {/* Show data */}
+        {/* Show certificate */}
         {loading ? (
           <div className="flex w-full items-center justify-center">
             <Loading />

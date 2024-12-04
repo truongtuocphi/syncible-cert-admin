@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useAccount, useChains } from 'wagmi';
+import { useAccount } from 'wagmi';
 import { useTranslations } from 'next-intl';
 import { watchChainId } from '@wagmi/core';
 

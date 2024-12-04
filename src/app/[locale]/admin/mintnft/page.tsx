@@ -251,6 +251,7 @@ const Experience = () => {
         if (successfulMints.length > 0) {
           await saveMintData(successfulMints, collectionContractAddress, fontSize, fontFamily);
           alert(`Đã mint thành công ${successfulMints.length} chứng chỉ NFT!`);
+          router.push('/admin/collection');
         }
 
         // Thông báo nếu có mint thất bại

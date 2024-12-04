@@ -133,7 +133,7 @@ const Experience = () => {
   //   return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
   // };
 
-  const BATCH_SIZE = 35; // Số lượng NFT tối đa trong mỗi đợt mint
+  const BATCH_SIZE = 35;
   const RETRY_ATTEMPTS = 3;
 
   const calculateGasLimit = (mintCount: number, baseGasPerMint = 300000) => {

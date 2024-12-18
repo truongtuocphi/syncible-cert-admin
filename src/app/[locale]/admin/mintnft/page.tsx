@@ -62,6 +62,7 @@ const Experience = () => {
   const [loadingBanner, setLoadingBanner] = useState<boolean>(false);
   const [tokenLink, setTokenLink] = useState<string>('');
   const [fontFamily, setFontFamily] = useState<string>('Dancing Script');
+  const [progress, setProgress] = useState(0);
 
   const fontSize = 40;
   const typePage = pathname.get('type');
@@ -121,15 +122,44 @@ const Experience = () => {
     setCoppyCsvDataFromChild([]);
   };
 
-  const calculateGasLimit = (mintCount: any, baseGasPerMint = 300000) => {
+  // const calculateGasLimit = (mintCount: any, baseGasPerMint = 300000) => {
+  //   const baseGas = baseGasPerMint * mintCount;
+
+  //   const gasWithBuffer = Math.ceil(baseGas * 1.2);
+
+  //   const minGas = 100000;
+  //   const maxGas = 15000000;
+
+  //   return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
+  // };
+
+  const BATCH_SIZE = 35;
+  const RETRY_ATTEMPTS = 3;
+
+  const calculateGasLimit = (mintCount: number, baseGasPerMint = 300000) => {
     const baseGas = baseGasPerMint * mintCount;
-
     const gasWithBuffer = Math.ceil(baseGas * 1.2);
-
     const minGas = 100000;
     const maxGas = 15000000;
-
     return Math.min(Math.max(gasWithBuffer, minGas), maxGas);
+  };
+
+  const processBatch = async (
+    contract: ethers.Contract,
+    mintDataArray: any[],
+    startIndex: number,
+    batchSize: number
+  ) => {
+    const endIndex = Math.min(startIndex + batchSize, mintDataArray.length);
+    const batchData = mintDataArray.slice(startIndex, endIndex);
+    const gasLimit = calculateGasLimit(batchData.length);
+
+    const tx = await contract.mintBulk(batchData, {
+      gasLimit: gasLimit,
+    });
+
+    await tx.wait();
+    return endIndex;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -145,6 +175,8 @@ const Experience = () => {
     }
 
     setLoadingButton(true);
+    const successfulMints: any[] = [];
+    const failedMints: any[] = [];
 
     try {
       if (typeof window.ethereum !== 'undefined') {
@@ -152,6 +184,7 @@ const Experience = () => {
         const signer = await provider.getSigner();
         const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
 
+        // Chuẩn bị metadata cho tất cả NFT
         const mintDataArray = await Promise.all(
           (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
             async (data) => {
@@ -169,7 +202,7 @@ const Experience = () => {
                   ],
                 };
 
-                const tokenURI = await uploadMetadataWithRetry(metadata, 3);
+                const tokenURI = await uploadMetadataWithRetry(metadata, RETRY_ATTEMPTS);
                 if (tokenURI) {
                   setTokenLink(tokenURI);
                 }
@@ -186,26 +219,129 @@ const Experience = () => {
           )
         );
 
-        if (mintDataArray.length > 0) {
-          const gasLimit = calculateGasLimit(mintDataArray.length);
-          const tx = await contract.mintBulk(mintDataArray, {
-            gasLimit: gasLimit,
-          });
+        // Xử lý mint theo batch
+        let processedCount = 0;
+        const totalNFTs = mintDataArray.length;
 
-          await tx.wait();
-          alert('Chứng chỉ được tạo thành công!');
-          setLoading(true);
-          await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
+        while (processedCount < totalNFTs) {
+          try {
+            const newProcessedCount = await processBatch(
+              contract,
+              mintDataArray,
+              processedCount,
+              BATCH_SIZE
+            );
+
+            // Lưu các mint thành công
+            successfulMints.push(...mintDataArray.slice(processedCount, newProcessedCount));
+            processedCount = newProcessedCount;
+
+            // Cập nhật tiến độ
+            const progress = Math.round((processedCount / totalNFTs) * 100);
+            setProgress(progress);
+          } catch (error) {
+            console.error(`Batch mint error at index ${processedCount}:`, error);
+            // Lưu các mint thất bại để thử lại sau
+            failedMints.push(...mintDataArray.slice(processedCount, processedCount + BATCH_SIZE));
+            processedCount += BATCH_SIZE;
+          }
+        }
+
+        // Lưu dữ liệu các NFT đã mint thành công
+        if (successfulMints.length > 0) {
+          await saveMintData(successfulMints, collectionContractAddress, fontSize, fontFamily);
+          alert(`Đã mint thành công ${successfulMints.length} chứng chỉ NFT!`);
+          router.push('/admin/collection');
+        }
+
+        // Thông báo nếu có mint thất bại
+        if (failedMints.length > 0) {
+          alert(`${failedMints.length} chứng chỉ NFT mint không thành công. Vui lòng thử lại sau.`);
         }
       }
     } catch (error) {
-      console.error('Error minting NFTs:', error);
-      alert('lỗi tạo chứng chỉ.');
-      setLoadingButton(false);
+      console.error('Error in mint process:', error);
+      alert('Có lỗi xảy ra trong quá trình tạo chứng chỉ.');
     } finally {
+      setLoadingButton(false);
       setLoading(false);
     }
   };
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (!address) {
+  //     alert('Please connect your wallet.');
+  //     return;
+  //   }
+
+  //   if (typeof window.ethereum === 'undefined') {
+  //     alert('Please install a wallet like MetaMask.');
+  //     return;
+  //   }
+
+  //   setLoadingButton(true);
+
+  //   try {
+  //     if (typeof window.ethereum !== 'undefined') {
+  //       const provider = new ethers.BrowserProvider(window.ethereum);
+  //       const signer = await provider.getSigner();
+  //       const contract = new ethers.Contract(collectionContractAddress, ABI, signer);
+
+  //       const mintDataArray = await Promise.all(
+  //         (coppyCsvDataFromChild.length > 0 ? coppyCsvDataFromChild : dataFromMintSingle).map(
+  //           async (data) => {
+  //             return limit(async () => {
+  //               const metadata = {
+  //                 fullname: `Certificate for ${data.fullname}` || 'Default Name',
+  //                 tokenURI: tokenLink || 'Default tokenLink',
+  //                 attributes: [
+  //                   { trait_type: 'Certificate ID', value: data.certificateNumber || 'NaN' },
+  //                   { trait_type: 'Role', value: role || 'NaN' },
+  //                   { trait_type: 'Date', value: issuedDate || 'NaN' },
+  //                   { trait_type: 'Template URL', value: bannerImage || 'NaN' },
+  //                   { trait_type: 'Font', value: fontFamily || 'NaN' },
+  //                   { trait_type: 'Font Size', value: fontSize || 'NaN' },
+  //                 ],
+  //               };
+
+  //               const tokenURI = await uploadMetadataWithRetry(metadata, 3);
+  //               if (tokenURI) {
+  //                 setTokenLink(tokenURI);
+  //               }
+
+  //               return [
+  //                 address,
+  //                 data.fullname,
+  //                 data.certificateNumber,
+  //                 tokenURI,
+  //                 [issuedDate, bannerImage],
+  //               ];
+  //             });
+  //           }
+  //         )
+  //       );
+
+  //       if (mintDataArray.length > 0) {
+  //         const gasLimit = calculateGasLimit(mintDataArray.length);
+  //         const tx = await contract.mintBulk(mintDataArray, {
+  //           gasLimit: gasLimit,
+  //         });
+
+  //         await tx.wait();
+  //         alert('Chứng chỉ được tạo thành công!');
+  //         setLoading(true);
+  //         await saveMintData(mintDataArray, collectionContractAddress, fontSize, fontFamily);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error('Error minting NFTs:', error);
+  //     alert('lỗi tạo chứng chỉ.');
+  //     setLoadingButton(false);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   useEffect(() => {
     if (!address) return;
@@ -471,7 +607,7 @@ const Experience = () => {
                 >
                   <GrCertificate className="text-lg text-white" />
                   {loadingButton
-                    ? `${t('ButtonSubmitLoading')}`
+                    ? `${t('ButtonSubmitLoading')} ${progress}%`
                     : `${t('ButtonCreateCertificate')}`}
                 </ButtonPrimary>
               </div>

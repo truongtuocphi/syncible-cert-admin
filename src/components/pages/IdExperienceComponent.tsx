@@ -20,6 +20,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ButtonPrimary from '../common/button/ButtonPrimary';
 import html2canvas from 'html2canvas';
 import { useTranslations } from 'next-intl';
+import { jsPDF } from 'jspdf';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
 
@@ -250,17 +251,36 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
         const ctx = scaledCanvas.getContext('2d');
 
         if (ctx) {
+          // Enable image smoothing
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
 
+          // Draw the image onto the canvas
           ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
 
+          // Convert the canvas to JPEG image data (this is used for adding it to the PDF)
           const imageUrl = scaledCanvas.toDataURL('image/jpeg', 1);
-          const link = document.createElement('a');
-          link.href = imageUrl;
-          link.download = `certificate_image_${index + 1}.jpeg`;
-          link.click();
 
+          // Create a new jsPDF instance
+          const pdf = new jsPDF();
+
+          const pdfWidth = 210; // A4 width in mm
+          const pdfHeight = 297; // A4 height in mm
+
+          // Tính toán tỷ lệ để hình ảnh vừa với kích thước trang
+          const scaleFactor = Math.min(pdfWidth / targetWidth, pdfHeight / targetHeight);
+
+          // Tính toán kích thước mới cho hình ảnh
+          const newWidth = targetWidth * scaleFactor;
+          const newHeight = targetHeight * scaleFactor;
+
+          // Add the image from the canvas to the PDF (you can adjust the positioning and size)
+          pdf.addImage(imageUrl, 'JPEG', 0, 0, newWidth, newHeight); // Adjust the dimensions as needed
+
+          // Save the PDF file
+          pdf.save(`certificate_image_${index + 1}.pdf`);
+
+          // Clean up (remove the scaled canvas)
           scaledCanvas.remove();
         }
 

@@ -20,6 +20,7 @@ import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 import ButtonPrimary from '../common/button/ButtonPrimary';
 import html2canvas from 'html2canvas';
 import { useTranslations } from 'next-intl';
+import jsPDF from 'jspdf';
 
 const headerURL = process.env.NEXT_PUBLIC_HEADER_URL || '';
 
@@ -226,91 +227,193 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     window.open(`${baseUrl}&${params.toString()}`, '_blank');
   }
 
+  // const downloadImageByClass = async () => {
+  //   const elements = document.querySelectorAll('.picture-cert');
+  //   const targetWidth = 2000;
+  //   const targetHeight = 1404;
+
+  //   // Thêm các options cho html2canvas để cải thiện chất lượng
+  //   const html2canvasOptions = {
+  //     useCORS: true,
+  //     allowTaint: true,
+  //     backgroundColor: null,
+  //     scale: 2, // Tăng scale để cải thiện chất lượng
+  //     logging: false,
+  //     imageTimeout: 0,
+  //   };
+
+  //   for (let index = 0; index < elements.length; index++) {
+  //     const element = elements[index];
+  //     const textElements = element.querySelectorAll('.textName');
+
+  //     // Áp dụng transform
+  //     textElements.forEach((textElement) => {
+  //       (textElement as HTMLElement).style.transform = 'translateY(-25px)';
+  //     });
+
+  //     try {
+  //       const canvas = await html2canvas(element as HTMLElement, html2canvasOptions);
+
+  //       // Tạo canvas mới với kích thước mục tiêu
+  //       const scaledCanvas = document.createElement('canvas');
+  //       scaledCanvas.width = targetWidth;
+  //       scaledCanvas.height = targetHeight;
+  //       const ctx = scaledCanvas.getContext('2d');
+
+  //       if (ctx) {
+  //         // Áp dụng các thuộc tính làm mịn
+  //         ctx.imageSmoothingEnabled = true;
+  //         ctx.imageSmoothingQuality = 'high';
+
+  //         // Áp dụng sharpen filter
+  //         ctx.filter = 'contrast(1.1) saturate(1.1)';
+
+  //         // Vẽ ảnh với kích thước mới
+  //         ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
+
+  //         // Tạo và tải ảnh với chất lượng cao nhất
+  //         const imageUrl = scaledCanvas.toDataURL('image/jpeg', 1.0);
+  //         const link = document.createElement('a');
+  //         link.href = imageUrl;
+  //         link.download = `${name?.split('Certificate for')[1]?.trim()}_${index + 1}.jpeg`;
+  //         link.click();
+
+  //         // Giải phóng bộ nhớ
+  //         scaledCanvas.remove();
+  //       }
+  //     } catch (error) {
+  //       console.error(`Error processing image ${index + 1}:`, error);
+  //     } finally {
+  //       // Reset transform
+  //       textElements.forEach((textElement) => {
+  //         (textElement as HTMLElement).style.transform = '';
+  //       });
+  //     }
+  //   }
+  // };
+
+  // Hàm tải xuống dưới dạng hình ảnh
+  // const downloadImageByClass = async () => {
+  //   const elements = document.querySelectorAll('.picture-cert');
+  //   const targetWidth = 2000;
+  //   const targetHeight = 1404;
+
+  //   const html2canvasOptions = {
+  //     useCORS: true,
+  //     allowTaint: true,
+  //     backgroundColor: null,
+  //     scale: 2,
+  //     logging: false,
+  //     imageTimeout: 0,
+  //   };
+
+  //   for (let index = 0; index < elements.length; index++) {
+  //     const element = elements[index];
+  //     const textElements = element.querySelectorAll('.textName');
+
+  //     textElements.forEach((textElement) => {
+  //       (textElement as HTMLElement).style.transform = 'translateY(-25px)';
+  //     });
+
+  //     try {
+  //       const canvas = await html2canvas(element as HTMLElement, html2canvasOptions);
+  //       const scaledCanvas = document.createElement('canvas');
+  //       scaledCanvas.width = targetWidth;
+  //       scaledCanvas.height = targetHeight;
+  //       const ctx = scaledCanvas.getContext('2d');
+
+  //       if (ctx) {
+  //         ctx.imageSmoothingEnabled = true;
+  //         ctx.imageSmoothingQuality = 'high';
+  //         ctx.filter = 'contrast(1.1) saturate(1.1)';
+  //         ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
+
+  //         const imageUrl = scaledCanvas.toDataURL('image/jpeg', 1.0);
+  //         const link = document.createElement('a');
+  //         link.href = imageUrl;
+  //         link.download = `${name?.split('Certificate for')[1]?.trim()}_${index + 1}.jpeg`;
+  //         link.click();
+
+  //         scaledCanvas.remove();
+  //       }
+  //     } catch (error) {
+  //       console.error(`Error processing image ${index + 1}:`, error);
+  //     } finally {
+  //       textElements.forEach((textElement) => {
+  //         (textElement as HTMLElement).style.transform = '';
+  //       });
+  //     }
+  //   }
+  // };
+
+  // Hàm tải xuống dưới dạng PDF
   const downloadImageByClass = async () => {
     const elements = document.querySelectorAll('.picture-cert');
     const targetWidth = 2000;
     const targetHeight = 1404;
 
-    // Thêm các options cho html2canvas để cải thiện chất lượng
     const html2canvasOptions = {
       useCORS: true,
       allowTaint: true,
       backgroundColor: null,
-      scale: 2, // Tăng scale để cải thiện chất lượng
+      scale: 2,
       logging: false,
       imageTimeout: 0,
     };
+
+    const pdf = new jsPDF({
+      orientation: 'landscape',
+      unit: 'px',
+      format: [targetWidth, targetHeight],
+    });
 
     for (let index = 0; index < elements.length; index++) {
       const element = elements[index];
       const textElements = element.querySelectorAll('.textName');
 
-      // Áp dụng transform
       textElements.forEach((textElement) => {
         (textElement as HTMLElement).style.transform = 'translateY(-25px)';
       });
 
       try {
         const canvas = await html2canvas(element as HTMLElement, html2canvasOptions);
-
-        // Tạo canvas mới với kích thước mục tiêu
         const scaledCanvas = document.createElement('canvas');
         scaledCanvas.width = targetWidth;
         scaledCanvas.height = targetHeight;
         const ctx = scaledCanvas.getContext('2d');
 
         if (ctx) {
-          // Áp dụng các thuộc tính làm mịn
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
-
-          // Áp dụng sharpen filter
           ctx.filter = 'contrast(1.1) saturate(1.1)';
-
-          // Vẽ ảnh với kích thước mới
           ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
 
-          // Tạo và tải ảnh với chất lượng cao nhất
-          const imageUrl = scaledCanvas.toDataURL('image/jpeg', 1.0);
-          const link = document.createElement('a');
-          link.href = imageUrl;
-          link.download = `${name?.split('Certificate for')[1]?.trim()}_${index + 1}.jpeg`;
-          link.click();
+          const imgData = scaledCanvas.toDataURL('image/jpeg', 1.0);
 
-          // Giải phóng bộ nhớ
+          if (index > 0) {
+            pdf.addPage();
+          }
+
+          pdf.addImage(imgData, 'JPEG', 0, 0, targetWidth, targetHeight, '', 'FAST');
           scaledCanvas.remove();
         }
       } catch (error) {
         console.error(`Error processing image ${index + 1}:`, error);
       } finally {
-        // Reset transform
         textElements.forEach((textElement) => {
           (textElement as HTMLElement).style.transform = '';
         });
       }
     }
+
+    try {
+      const fileName = name?.split('Certificate for')[1]?.trim() || 'certificates';
+      pdf.save(`${fileName}.pdf`);
+    } catch (error) {
+      console.error('Error saving PDF:', error);
+      pdf.save('certificates.pdf');
+    }
   };
-
-  // Thêm hàm utility để tối ưu hóa chất lượng ảnh
-  // const optimizeImage = (canvas: HTMLCanvasElement): HTMLCanvasElement => {
-  //   const ctx = canvas.getContext('2d');
-  //   if (ctx) {
-  //     // Áp dụng sharpen filter
-  //     ctx.filter = 'contrast(1.1) saturate(1.1)';
-
-  //     // Vẽ lại ảnh với filter mới
-  //     const tempCanvas = document.createElement('canvas');
-  //     tempCanvas.width = canvas.width;
-  //     tempCanvas.height = canvas.height;
-  //     const tempCtx = tempCanvas.getContext('2d');
-  //     if (tempCtx) {
-  //       tempCtx.drawImage(canvas, 0, 0);
-  //       ctx.drawImage(tempCanvas, 0, 0);
-  //     }
-  //     tempCanvas.remove();
-  //   }
-  //   return canvas;
-  // };
 
   if (!data) return <Loading />;
   if (loading) return <Loading />;

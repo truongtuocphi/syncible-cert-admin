@@ -226,50 +226,90 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
     window.open(`${baseUrl}&${params.toString()}`, '_blank');
   }
 
-  const downloadImageByClass = () => {
+  const downloadImageByClass = async () => {
     const elements = document.querySelectorAll('.picture-cert');
     const targetWidth = 2000;
     const targetHeight = 1404;
 
-    elements.forEach((element, index) => {
+    // Thêm các options cho html2canvas để cải thiện chất lượng
+    const html2canvasOptions = {
+      useCORS: true,
+      allowTaint: true,
+      backgroundColor: null,
+      scale: 2, // Tăng scale để cải thiện chất lượng
+      logging: false,
+      imageTimeout: 0,
+    };
+
+    for (let index = 0; index < elements.length; index++) {
+      const element = elements[index];
       const textElements = element.querySelectorAll('.textName');
 
+      // Áp dụng transform
       textElements.forEach((textElement) => {
-        const htmlTextElement = textElement as HTMLElement;
-        htmlTextElement.style.transform = 'translateY(-25px)';
+        (textElement as HTMLElement).style.transform = 'translateY(-25px)';
       });
 
-      html2canvas(element as HTMLElement, {
-        useCORS: true,
-        allowTaint: true,
-        backgroundColor: null,
-      }).then((canvas) => {
+      try {
+        const canvas = await html2canvas(element as HTMLElement, html2canvasOptions);
+
+        // Tạo canvas mới với kích thước mục tiêu
         const scaledCanvas = document.createElement('canvas');
         scaledCanvas.width = targetWidth;
         scaledCanvas.height = targetHeight;
         const ctx = scaledCanvas.getContext('2d');
 
         if (ctx) {
+          // Áp dụng các thuộc tính làm mịn
           ctx.imageSmoothingEnabled = true;
           ctx.imageSmoothingQuality = 'high';
 
+          // Áp dụng sharpen filter
+          ctx.filter = 'contrast(1.1) saturate(1.1)';
+
+          // Vẽ ảnh với kích thước mới
           ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
 
-          const imageUrl = scaledCanvas.toDataURL('image/jpeg', 1);
+          // Tạo và tải ảnh với chất lượng cao nhất
+          const imageUrl = scaledCanvas.toDataURL('image/jpeg', 1.0);
           const link = document.createElement('a');
           link.href = imageUrl;
           link.download = `certificate_image_${index + 1}.jpeg`;
           link.click();
 
+          // Giải phóng bộ nhớ
           scaledCanvas.remove();
         }
-
+      } catch (error) {
+        console.error(`Error processing image ${index + 1}:`, error);
+      } finally {
+        // Reset transform
         textElements.forEach((textElement) => {
-          const htmlTextElement = textElement as HTMLElement;
-          htmlTextElement.style.transform = '';
+          (textElement as HTMLElement).style.transform = '';
         });
-      });
-    });
+      }
+    }
+  };
+
+  // Thêm hàm utility để tối ưu hóa chất lượng ảnh
+  const optimizeImage = (canvas: HTMLCanvasElement): HTMLCanvasElement => {
+    const ctx = canvas.getContext('2d');
+    if (ctx) {
+      // Áp dụng sharpen filter
+      ctx.filter = 'contrast(1.1) saturate(1.1)';
+
+      // Vẽ lại ảnh với filter mới
+      const tempCanvas = document.createElement('canvas');
+      tempCanvas.width = canvas.width;
+      tempCanvas.height = canvas.height;
+      const tempCtx = tempCanvas.getContext('2d');
+      if (tempCtx) {
+        tempCtx.drawImage(canvas, 0, 0);
+        ctx.drawImage(tempCanvas, 0, 0);
+      }
+      tempCanvas.remove();
+    }
+    return canvas;
   };
 
   if (!data) return <Loading />;

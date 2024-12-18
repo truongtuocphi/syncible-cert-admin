@@ -274,7 +274,7 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
           const imageUrl = scaledCanvas.toDataURL('image/jpeg', 1.0);
           const link = document.createElement('a');
           link.href = imageUrl;
-          link.download = `certificate_image_${index + 1}.jpeg`;
+          link.download = `${name?.split('Certificate for')[1]?.trim()}_${index + 1}.jpeg`;
           link.click();
 
           // Giải phóng bộ nhớ
@@ -292,25 +292,25 @@ const IdExperienceComponent: React.FC<IdExperienceProps> = ({
   };
 
   // Thêm hàm utility để tối ưu hóa chất lượng ảnh
-  const optimizeImage = (canvas: HTMLCanvasElement): HTMLCanvasElement => {
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      // Áp dụng sharpen filter
-      ctx.filter = 'contrast(1.1) saturate(1.1)';
+  // const optimizeImage = (canvas: HTMLCanvasElement): HTMLCanvasElement => {
+  //   const ctx = canvas.getContext('2d');
+  //   if (ctx) {
+  //     // Áp dụng sharpen filter
+  //     ctx.filter = 'contrast(1.1) saturate(1.1)';
 
-      // Vẽ lại ảnh với filter mới
-      const tempCanvas = document.createElement('canvas');
-      tempCanvas.width = canvas.width;
-      tempCanvas.height = canvas.height;
-      const tempCtx = tempCanvas.getContext('2d');
-      if (tempCtx) {
-        tempCtx.drawImage(canvas, 0, 0);
-        ctx.drawImage(tempCanvas, 0, 0);
-      }
-      tempCanvas.remove();
-    }
-    return canvas;
-  };
+  //     // Vẽ lại ảnh với filter mới
+  //     const tempCanvas = document.createElement('canvas');
+  //     tempCanvas.width = canvas.width;
+  //     tempCanvas.height = canvas.height;
+  //     const tempCtx = tempCanvas.getContext('2d');
+  //     if (tempCtx) {
+  //       tempCtx.drawImage(canvas, 0, 0);
+  //       ctx.drawImage(tempCanvas, 0, 0);
+  //     }
+  //     tempCanvas.remove();
+  //   }
+  //   return canvas;
+  // };
 
   if (!data) return <Loading />;
   if (loading) return <Loading />;
